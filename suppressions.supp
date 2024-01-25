@@ -1,0 +1,6 @@
+{
+   readline suppression
+   Memcheck:Leak
+   src/main.c:31
+   malloc
+}
