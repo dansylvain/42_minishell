@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/01/25 09:28:44 by dan              ###   ########.fr       */
+/*   Updated: 2024/01/25 10:16:10 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	prompt_loop(t_Data *data, char *envp[])
 		if (command == NULL)
 			return (0);
 		if (command_is_builtin(command, data) == 0)
-			return (free(command), close_minishell(data), 1);
+			return (free(command), 0);
 		if (command)
 			free(command);
 	}
@@ -108,13 +108,16 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 	envp_tab = (char **)ft_calloc((i + 1), sizeof(char *));
 	if (envp_tab == NULL)
 		return (NULL);
-	envp_tab[i] = NULL;
-	while (--i >= 0)
+	i = 0;
+	while (envp[i])
 	{
 		envp_tab[i] = (char *)ft_calloc((ft_strlen(envp[i]) + 1), sizeof(char));
-		if (envp_tab == NULL)
+		if (envp_tab[i] == NULL)
 			return (NULL);
-		envp_tab[i] = envp[i];
+		// envp_tab[i] = envp[i];
+		ft_strlcpy(envp_tab[i], envp[i], ft_strlen(envp[i]));
+		i++;
 	}
+	envp_tab[i] = NULL;
 	return (envp_tab);
 }
