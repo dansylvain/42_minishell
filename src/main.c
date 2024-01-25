@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/01/25 09:09:43 by dan              ###   ########.fr       */
+/*   Updated: 2024/01/25 09:28:44 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	prompt_loop(t_Data *data, char *envp[])
 			add_history(command);
 		}
 		if (command == NULL)
-			return (free(command), close_minishell(data), 1);
+			return (0);
 		if (command_is_builtin(command, data) == 0)
 			return (free(command), close_minishell(data), 1);
 		if (command)
