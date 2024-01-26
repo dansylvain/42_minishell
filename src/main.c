@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/01/26 17:55:09 by dan              ###   ########.fr       */
+/*   Updated: 2024/01/26 18:11:04 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	prompt_loop(t_Data *data, char *envp[])
 			add_history(command);
 		}
 		if (command == NULL)
-			return (0);
+			return (ft_printf("exit\n"), 0);
 		if (command_is_builtin(command, data, envp) == 0)
 			return (free(command), 0);
 		if (command)
@@ -90,7 +90,6 @@ int	command_is_builtin(char *command, t_Data *data, char *envp[])
 	cmd[0] = command;
 	cmd[1] = NULL;
 	command_tab = NULL;
-	ft_printf("command_is_builtin\n");
 	command_tab = parse_cmd(cmd, data->envp);
 	if (!command_tab)
 		return (1);

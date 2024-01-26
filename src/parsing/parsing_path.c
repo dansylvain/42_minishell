@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/01/26 17:54:42 by seblin           ###   ########.fr       */
+/*   Updated: 2024/01/26 18:09:48 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ char	**parse_cmd(char *argv[], char *envp[])
 	char	**split_arg;
 	char	*env_find;
 
+	if (!**argv)
+		return (NULL);
 	env_find = search_path(envp);
 	if (!env_find)
 	{
