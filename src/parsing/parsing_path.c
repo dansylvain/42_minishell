@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/01/26 08:39:41 by seblin           ###   ########.fr       */
+/*   Updated: 2024/01/26 17:25:30 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	**parse_cmd(char *argv[], char *envp[])
 		exit(1);
 	}
 	split_arg = create_ast(*argv);
-	if (!try_paths(split_arg, env_find))
+	if (!try_paths(split_arg, env_find) && ft_strcmp(*split_arg, "cd"))
 	{
 		perror(*split_arg);
 		free_ptr_arr(split_arg);
