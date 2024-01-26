@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 14:53:17 by dan               #+#    #+#             */
-/*   Updated: 2024/01/26 15:23:20 by dan              ###   ########.fr       */
+/*   Updated: 2024/01/26 15:37:32 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_itoa(int n);
+int		ft_isspace(int c);
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s);
 char	*ft_strchr(const char *s, int c);
