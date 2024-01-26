@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 07:30:24 by dsylvain          #+#    #+#              #
-#    Updated: 2024/01/26 15:39:26 by dan              ###   ########.fr        #
+#    Updated: 2024/01/26 17:30:13 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRC =		ft_atoi.c \
 			ft_putchar_fd.c \
 			ft_putnbr_fd.c \
 			ft_putstr_fd.c \
+			ft_strcmp.c \
 
 SRC_BONUS = ft_lstnew_bonus.c \
 			ft_lstadd_front_bonus.c \

@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/01/26 17:03:21 by dan              ###   ########.fr       */
+/*   Updated: 2024/01/26 17:34:29 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ int	command_is_builtin(char *command, t_Data *data, char *envp[])
 		return (free(command_tab), 1);
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 4]), "echo", 5))
 		exec_echo(command_tab);
-	if (!ft_strncmp(command_tab[0], "unset", 6))
+	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 5]), "unset", 6))
 		exec_unset(data->envp, command_tab);
-	if (!ft_strncmp(command_tab[0], "export", 7))
+	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 6]), "export", 7))
 		exec_export(command_tab, data);
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 3]), "env", 4))
 		exec_env(data->envp, command_tab);
@@ -107,7 +107,7 @@ int	command_is_builtin(char *command, t_Data *data, char *envp[])
 		exec_pwd();
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 2]), "cd", 3))
 		exec_cd(command_tab);
-	if (!ft_strncmp(command_tab[0], "exit", 5))
+	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 4]), "exit", 5))
 		return (free_command_tab(command_tab), 0);
 	free_command_tab(command_tab);
 	return (1);
