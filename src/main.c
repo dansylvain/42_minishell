@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/01/26 16:23:26 by dan              ###   ########.fr       */
+/*   Updated: 2024/01/26 17:03:21 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	main(int argc, char **argv, char *envp[])
 	if (data == NULL)
 		return (display_error("Error\n"), free_data(data), 255);
 	data->envp = duplicate_envp(data, envp);
-	ft_printf("%s\n", data->envp[0]);
 
 	if (!data->envp)
 		return (display_error("Error\n"), free_data(data), 255);
@@ -57,24 +56,23 @@ int	main(int argc, char **argv, char *envp[])
  *========================================================================**/
 int	prompt_loop(t_Data *data, char *envp[])
 {
-	char	**command_tab;
+	char	*command;
 	char	*prompt;
 
-	//command_tab[1] = NULL;
-	command_tab = ft_calloc (10, sizeof(char *));
+	command = NULL;
 	while (1)
 	{
-		command_tab[0] = readline("minishell> ");
-		if (command_tab[0] && *command_tab[0])
+		command = readline("minishell> ");
+		if (command && *command)
 		{
-			add_history(command_tab[0]);
+			add_history(command);
 		}
-		if (command_tab[0] == NULL)
+		if (command == NULL)
 			return (0);
-		if (command_is_builtin(command_tab[0], data, envp) == 0)
-			return (free(command_tab[0]), 0);
-		if (command_tab[0])
-			free(command_tab[0]);
+		if (command_is_builtin(command, data, envp) == 0)
+			return (free(command), 0);
+		if (command)
+			free(command);
 	}
 	return (1);
 }
@@ -92,24 +90,22 @@ int	command_is_builtin(char *command, t_Data *data, char *envp[])
 	cmd[0] = command;
 	cmd[1] = NULL;
 	command_tab = NULL;
-	// command_tab = ft_split(command, ' ');
 	command_tab = parse_cmd(cmd, data->envp);
-	ft_printf("parse_com executed\n");
 	if (!command_tab)
 		return (1);
 	if (!command_tab[0])
 		return (free(command_tab), 1);
-	if (!ft_strncmp(command_tab[0], "/usr/bin/echo", 5))
+	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 4]), "echo", 5))
 		exec_echo(command_tab);
 	if (!ft_strncmp(command_tab[0], "unset", 6))
 		exec_unset(data->envp, command_tab);
 	if (!ft_strncmp(command_tab[0], "export", 7))
 		exec_export(command_tab, data);
-	if (!ft_strncmp(command_tab[0], "env", 4))
+	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 3]), "env", 4))
 		exec_env(data->envp, command_tab);
-	if (!ft_strncmp(command_tab[0], "pwd", 4))
+	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 3]), "pwd", 4))
 		exec_pwd();
-	if (!ft_strncmp(command_tab[0], "cd", 3))
+	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 2]), "cd", 3))
 		exec_cd(command_tab);
 	if (!ft_strncmp(command_tab[0], "exit", 5))
 		return (free_command_tab(command_tab), 0);
@@ -122,7 +118,6 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 	char	**envp_tab;
 	int		i;
 
-	ft_printf("entering duplicate_envp\n");
 	i = 0;
 	while (envp[i])
 		i++;
@@ -135,7 +130,6 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 		envp_tab[i] = (char *)ft_calloc((ft_strlen(envp[i]) + 1), sizeof(char));
 		if (envp_tab[i] == NULL)
 			return (NULL);
-		// envp_tab[i] = envp[i];
 		ft_strlcpy(envp_tab[i], envp[i], ft_strlen(envp[i]) + 1);
 		i++;
 	}
