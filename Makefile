@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/01/24 09:09:01 by dan              ###   ########.fr        #
+#    Updated: 2024/01/26 15:02:14 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,13 @@ SRC =	src/main.c \
 		src/exec_echo.c \
 		src/exec_unset.c \
 		src/exec_export.c \
+		src/parsing/parsing_build.c \
+		src/parsing/parsing_invrt.c \
+		src/parsing/parsing_path.c \
+		src/parsing/parsing_qute.c \
+		src/parsing/parsing_spce.c \
+		src/parsing/parsing_utils.c \
+		
 
 OBJ = $(SRC:.c=.o)
 
