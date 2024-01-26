@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/01/26 15:02:14 by dan              ###   ########.fr        #
+#    Updated: 2024/01/26 15:19:30 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 
 RLFLAGS = -lreadline -lhistory -I/usr/include/readline
 
-CFLAGS = -g $(RLFLAGS)
+CFLAGS = -g $(RLFLAGS) -Iincludes/parsing
 # -Wall -Wextra -Werror
 
 # Directories

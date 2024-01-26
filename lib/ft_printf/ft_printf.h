@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 12:51:10 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/11/03 10:17:05 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:30:21 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int		get_nbr_str_len(long int n);
 void	declare_func_ptr(t_func_ptr *func_ptr);
 int		ft_printf(const char *str, ...);
 int		get_index(char c);
-int		ft_putchar_fd(char c, int fd);
-int		ft_putstr_fd(char *s, int fd);
-int		ft_putnbr_fd(int n, int fd);
-int		ft_putunbr_fd(unsigned int n, int fd);
+int		ft_printf_putchar_fd(char c, int fd);
+int		ft_printf_putstr_fd(char *s, int fd);
+int		ft_printf_putnbr_fd(int n, int fd);
+int		ft_printf_putunbr_fd(unsigned int n, int fd);
 int		ft_put_hex(unsigned long n, int fd, char case_type);
 int		handle_c(va_list args);
 int		handle_s(va_list args);

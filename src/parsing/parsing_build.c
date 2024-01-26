@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_build.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:08:19 by svidot            #+#    #+#             */
-/*   Updated: 2024/01/26 08:36:08 by seblin           ###   ########.fr       */
+/*   Updated: 2024/01/26 15:21:30 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	**create_ast(char *argv)
 	t_ast_nde	*invrt_sib;
 	t_ast_nde	*spce_sib;
 
-	qute_sib = set_quote_nde(argv, fd_file);
+	qute_sib = set_quote_nde(argv);
 	invrt_sib = filter_wrapper_invrt(argv, qute_sib, invert_node);
 	spce_sib = filter_wrapper_spce(invrt_sib, set_space_nde);
 	clean_quotes("null", qute_sib);

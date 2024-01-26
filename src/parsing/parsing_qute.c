@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_qute.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:08:19 by svidot            #+#    #+#             */
-/*   Updated: 2024/01/26 08:39:13 by seblin           ###   ########.fr       */
+/*   Updated: 2024/01/26 15:24:01 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ t_ast_nde	*set_quote_nde(char *argv, int fd_file[])
 		if (*argv == '\'')
 		{
 			qute_nde = create_node(SQUTE);
-			set_squte_nde(qute_nde, qute_sibling_sav, &argv, fd_file);
+			set_squte_nde(qute_nde, qute_sibling_sav, &argv);
 			add_sibling(qute_nde, &qute_sibling, &qute_sibling_sav);
 		}
 		else if (*argv == '\"')
 		{
 			qute_nde = create_node(DQUTE);
-			set_dqute_nde(qute_nde, qute_sibling_sav, &argv, fd_file);
+			set_dqute_nde(qute_nde, qute_sibling_sav, &argv);
 			add_sibling(qute_nde, &qute_sibling, &qute_sibling_sav);
 		}
 		argv++;

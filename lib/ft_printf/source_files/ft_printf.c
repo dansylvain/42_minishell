@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 06:43:39 by dsylvain          #+#    #+#             */
-/*   Updated: 2023/11/11 15:00:57 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:30:49 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_printf(const char *str, ...)
 			str++;
 		}
 		else
-			char_printed += ft_putchar_fd(*str, 1);
+			char_printed += ft_printf_putchar_fd(*str, 1);
 		str++;
 	}
 	va_end(args);
