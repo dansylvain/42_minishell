@@ -6,22 +6,12 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/01/25 19:20:18 by dan              ###   ########.fr       */
+/*   Updated: 2024/01/26 09:46:04 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/**========================================================================
- *                             COMMENTS POLICY
- *! signal info at the end of a function's comment block 
- *! signal info in the main comment bloc
- *! add your name at the beggining of a comment
- *---
- *
- *
- *
- *========================================================================**/
 /**========================================================================
  *                           main.c
  *? rl_catch_signals is a global variable (from readline lib)
