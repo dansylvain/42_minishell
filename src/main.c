@@ -6,11 +6,12 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/01/26 11:06:06 by dan              ###   ########.fr       */
+/*   Updated: 2024/01/26 16:23:26 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+char **parse_cmd(char **command, char **env);
 
 /**========================================================================
  *                             COMMENTS POLICY
@@ -35,6 +36,8 @@ int	main(int argc, char **argv, char *envp[])
 	if (data == NULL)
 		return (display_error("Error\n"), free_data(data), 255);
 	data->envp = duplicate_envp(data, envp);
+	ft_printf("%s\n", data->envp[0]);
+
 	if (!data->envp)
 		return (display_error("Error\n"), free_data(data), 255);
 	rl_catch_signals = 0;
@@ -54,22 +57,24 @@ int	main(int argc, char **argv, char *envp[])
  *========================================================================**/
 int	prompt_loop(t_Data *data, char *envp[])
 {
-	char	*command;
+	char	**command_tab;
 	char	*prompt;
 
+	//command_tab[1] = NULL;
+	command_tab = ft_calloc (10, sizeof(char *));
 	while (1)
 	{
-		command = readline("minishell> ");
-		if (command && *command)
+		command_tab[0] = readline("minishell> ");
+		if (command_tab[0] && *command_tab[0])
 		{
-			add_history(command);
+			add_history(command_tab[0]);
 		}
-		if (command == NULL)
+		if (command_tab[0] == NULL)
 			return (0);
-		if (command_is_builtin(command, data) == 0)
-			return (free(command), 0);
-		if (command)
-			free(command);
+		if (command_is_builtin(command_tab[0], data, envp) == 0)
+			return (free(command_tab[0]), 0);
+		if (command_tab[0])
+			free(command_tab[0]);
 	}
 	return (1);
 }
@@ -79,17 +84,22 @@ int	prompt_loop(t_Data *data, char *envp[])
  * exit builtin implemented without extern function
  * 0 is returned, and the data struct is freed in calling function
  *========================================================================**/
-int	command_is_builtin(char *command, t_Data *data)
+int	command_is_builtin(char *command, t_Data *data, char *envp[])
 {
 	char	**command_tab;
-
+	char	*cmd[2];
+	
+	cmd[0] = command;
+	cmd[1] = NULL;
 	command_tab = NULL;
-	command_tab = ft_split(command, ' ');
+	// command_tab = ft_split(command, ' ');
+	command_tab = parse_cmd(cmd, data->envp);
+	ft_printf("parse_com executed\n");
 	if (!command_tab)
 		return (1);
 	if (!command_tab[0])
 		return (free(command_tab), 1);
-	if (!ft_strncmp(command_tab[0], "echo", 5))
+	if (!ft_strncmp(command_tab[0], "/usr/bin/echo", 5))
 		exec_echo(command_tab);
 	if (!ft_strncmp(command_tab[0], "unset", 6))
 		exec_unset(data->envp, command_tab);
@@ -112,6 +122,7 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 	char	**envp_tab;
 	int		i;
 
+	ft_printf("entering duplicate_envp\n");
 	i = 0;
 	while (envp[i])
 		i++;
@@ -125,9 +136,10 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 		if (envp_tab[i] == NULL)
 			return (NULL);
 		// envp_tab[i] = envp[i];
-		ft_strlcpy(envp_tab[i], envp[i], ft_strlen(envp[i]));
+		ft_strlcpy(envp_tab[i], envp[i], ft_strlen(envp[i]) + 1);
 		i++;
 	}
+
 	envp_tab[i] = NULL;
 	return (envp_tab);
 }
