@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 07:30:24 by dsylvain          #+#    #+#              #
-#    Updated: 2024/01/26 15:38:11 by dan              ###   ########.fr        #
+#    Updated: 2024/01/26 15:39:26 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,10 +47,10 @@ SRC =		ft_atoi.c \
 			ft_tolower.c \
 			ft_toupper.c \
 			ft_isspace.c \
-			# ft_putendl_fd.c \
-			# ft_putchar_fd.c \
-			# ft_putnbr_fd.c \
-			# ft_putstr_fd.c \
+			ft_putendl_fd.c \
+			ft_putchar_fd.c \
+			ft_putnbr_fd.c \
+			ft_putstr_fd.c \
 
 SRC_BONUS = ft_lstnew_bonus.c \
 			ft_lstadd_front_bonus.c \
