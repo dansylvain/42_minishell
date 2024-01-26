@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 14:53:17 by dan               #+#    #+#             */
-/*   Updated: 2023/12/13 08:49:50 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:35:59 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	*ft_memset(void *s, int c, size_t n);
 // void	ft_putnbr_fd(int n, int fd);
 // void	ft_putstr_fd(char *s, int fd);
 char	*ft_itoa(int n);
+int		ft_isspace(int c);
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s);
 char	*ft_strchr(const char *s, int c);
