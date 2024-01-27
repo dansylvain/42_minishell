@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/01/26 18:09:48 by dan              ###   ########.fr       */
+/*   Updated: 2024/01/27 20:12:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,10 @@ static char	*try_paths(char **split_arg, char *env_find)
 	return (cmd);
 }
 
-static char	*search_path(char *envp[])
+static char	*search_env_var(char *envp[], char *env_to_find)
 {
-	char	*env_to_find;
 	char	*env_find;
 
-	env_to_find = "PATH=";
 	env_find = NULL;
 	while (*envp)
 	{
@@ -72,7 +70,7 @@ char	**parse_cmd(char *argv[], char *envp[])
 
 	if (!**argv)
 		return (NULL);
-	env_find = search_path(envp);
+	env_find = search_env_var(envp, "PATH=");
 	if (!env_find)
 	{
 		ft_putstr_fd("env PATH not found.\n", 2);
