@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/01/26 18:11:04 by dan              ###   ########.fr       */
+/*   Updated: 2024/01/27 09:30:00 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@ char **parse_cmd(char **command, char **env);
 
 /**========================================================================
  *                             COMMENTS POLICY
- *! signal info at the end of a function's comment block 
- *! signal info in the main comment bloc
- *! add your name at the beggining of a comment
+ *? signal info at the end of a function's comment block 
+ *? signal info in the main comment bloc
+ *? add your name at the beggining of a comment
  *---
  *
- *
- *
+ *! used : "valgrind --leak-check=full --show-leak-kinds=all ./minishell"
+ *! Valgrind me signale un probleme lorsque j'execute la commande 'cd'
+ *! erreur renvoie a de ft_strncmp dans fonction command_is_builtin
+ *! mais également malloc/ft_calloc dans parsing_build
  *========================================================================**/
 /**========================================================================
  *                           main.c
@@ -106,7 +108,10 @@ int	command_is_builtin(char *command, t_Data *data, char *envp[])
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 3]), "pwd", 4))
 		exec_pwd();
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 2]), "cd", 3))
+	{
+		ft_printf("command_tab[0]: %s\n", command_tab[0]);
 		exec_cd(command_tab);
+	}
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 4]), "exit", 5))
 		return (free_command_tab(command_tab), 0);
 	free_command_tab(command_tab);

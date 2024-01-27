@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   exec_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 19:12:50 by dan               #+#    #+#             */
-/*   Updated: 2024/01/23 15:59:02 by dan              ###   ########.fr       */
+/*   Created: 2024/01/22 18:46:30 by dan               #+#    #+#             */
+/*   Updated: 2024/01/27 09:14:44 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	exec_pwd(void)
+void	exec_env(char **envp, char **command_tab)
 {
-	char	buffer[1024];
+	int	i;
 
-	if (getcwd(buffer, sizeof(buffer)) != NULL)
+	if (command_tab[1] != NULL)
 	{
-		printf("%s\n", buffer);
+		ft_printf("env: ‘%s’: No such file or directory\n", command_tab[1]);
+		return ;
 	}
 	else
 	{
-		perror("getcwd");
+		i = 0;
+		while (envp[i])
+			ft_printf("%s\n", envp[i++]);
 	}
 }
