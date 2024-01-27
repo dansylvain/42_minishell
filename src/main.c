@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/01/26 18:11:04 by dan              ###   ########.fr       */
+/*   Updated: 2024/01/27 20:56:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ char **parse_cmd(char **command, char **env);
  *                           main.c
  *? rl_catch_signals is a global variable (from readline lib)
  *? it is used to ignore SIGQUILL (see handle_signals.c)
+ 
+ *! seb alert! ligne 40, ne pas free_data(data), car par definition,
+ *! si on est la c'est que data est NULL
 *========================================================================**/
 int	main(int argc, char **argv, char *envp[])
 {
