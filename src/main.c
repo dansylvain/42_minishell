@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/01/27 20:56:18 by marvin           ###   ########.fr       */
+/*   Updated: 2024/01/28 21:57:25 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 char **parse_cmd(char **command, char **env);
-
+void	tmpmain();
 /**========================================================================
  *                             COMMENTS POLICY
  *! signal info at the end of a function's comment block 
@@ -29,12 +29,12 @@ char **parse_cmd(char **command, char **env);
  *? it is used to ignore SIGQUILL (see handle_signals.c)
  
  *! seb alert! ligne 40, ne pas free_data(data), car par definition,
- *! si on est la c'est que data est NULL
+ *! si on est la c'est que data est deja NULL
 *========================================================================**/
 int	main(int argc, char **argv, char *envp[])
 {
 	t_Data	*data;
-
+	
 	data = (t_Data *)malloc(sizeof(t_Data));
 	if (data == NULL)
 		return (display_error("Error\n"), free_data(data), 255);
