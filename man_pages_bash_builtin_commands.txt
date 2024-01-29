@@ -1,0 +1,84 @@
+man pages about bash builtin commands
+
+
+cd [-L|[-P [-e]] [-@]] [dir]
+============================
+Change the current directory to dir. If dir is not supplied, the value of the HOME shell variable is the default. Any additional arguments following dir are ignored.
+
+The variable CDPATH defines the search path for the directory containing dir: each directory name in CDPATH is searched for dir. Alternative directory names in CDPATH are separated by a colon (:). A null directory name in CDPATH is the same as the current directory, i.e., ``.''. If dir begins with a slash (/), then CDPATH is not used.
+
+The -P option causes cd to use the physical directory structure by resolving symbolic links while traversing dir and before processing instances of .. in dir (see also the -P option to the set builtin command); the -L option forces symbolic links to be followed by resolving the link after processing instances of .. in dir.
+
+If .. appears in dir, it is processed by removing the immediately previous pathname component from dir, back to a slash or the beginning of dir. If the -e option is supplied with -P, and the current working directory cannot be successfully determined after a successful directory change, cd will return an unsuccessful status.
+
+On systems that support it, the -@ option presents the extended attributes associated with a file as a directory.
+
+An argument of - is converted to $OLDPWD before the directory change is attempted. If a non-empty directory name from CDPATH is used, or if - is the first argument, and the directory change is successful, the absolute pathname of the new working directory is written to the standard output.
+
+The return value is true if the directory was successfully changed; false otherwise.
+
+
+
+echo [-neE] [arg ...]
+=====================
+Output the arguments, separated by spaces, followed by a newline. The return status is 0 unless a write error occurs. If -n is specified, the trailing newline is suppressed. If the -e option is given, interpretation of the following backslash-escaped characters is enabled. The -E option disables the interpretation of these escape characters, even on systems where they are interpreted by default.
+
+The xpg_echo shell option may be used to dynamically determine whether or not echo expands these escape characters by default. echo does not interpret -- to mean the end of options.
+
+echo interprets the following escape sequences:
+\a     alert (bell)
+\b     backspace
+\c     suppress further output
+\e, \E  an escape character
+\f     form feed
+\n     new line
+\r     carriage return
+\t     horizontal tab
+\v     vertical tab
+\\     backslash
+\0nnn  the eight-bit character whose value is the octal value nnn (zero to three octal digits)
+\xHH   the eight-bit character whose value is the hexadecimal value HH (one or two hex digits)
+\uHHHH the Unicode (ISO/IEC 10646) character whose value is the hexadecimal value HHHH (one to four hex digits)
+\UHHHHHHHH
+       the Unicode (ISO/IEC 10646) character whose value is the hexadecimal value HHHHHHHH (one to eight hex digits)
+
+
+
+exit [n]
+========
+Cause  the  shell  to  exit with a status of n.  If n is omitted, the exit status is that of the last command executed.  A trap on EXIT is executed before the shell terminates.
+
+
+
+export [-fn] [name[=word]] ...
+export -p
+==============================
+The supplied names are marked for automatic export to the environment of subsequently executed commands. If the -f option is given, the names refer to functions. If no names are given, or if the -p option is supplied, a list of names of all exported variables is printed.
+
+The -n option causes the export property to be removed from each name. If a variable name is followed by =word, the value of the variable is set to word.
+
+export returns an exit status of 0 unless an invalid option is encountered, one of the names is not a valid shell variable name, or -f is supplied with a name that is not a function.
+
+
+
+
+pwd [-LP]
+=========
+Print the absolute pathname of the current working directory. The pathname printed contains no symbolic links if the -P option is supplied or the -o physical option to the set builtin command is enabled. If the -L option is used, the pathname printed may contain symbolic links.
+
+The return status is 0 unless an error occurs while reading the name of the current directory or an invalid option is supplied.
+
+
+
+unset [-fv] [-n] [name ...]
+===========================
+For each name, remove the corresponding variable or function. If the -v option is given, each name refers to a shell variable, and that variable is removed. Read-only variables may not be unset. If -f is specified, each name refers to a shell function, and the function definition is removed.
+
+If the -n option is supplied, and name is a variable with the nameref attribute, name will be unset rather than the variable it references. -n has no effect if the -f option is supplied.
+
+If no options are supplied, each name refers to a variable; if there is no variable by that name, a function with that name, if any, is unset. Each unset variable or function is removed from the environment passed to subsequent commands.
+
+If any of BASH_ALIASES, BASH_ARGV0, BASH_CMDS, BASH_COMMAND, BASH_SUBSHELL, BASHPID, COMP_WORDBREAKS, DIRSTACK, EPOCHREALTIME, EPOCHSECONDS, FUNCNAME, GROUPS, HISTCMD, LINENO, RANDOM, SECONDS, or SRANDOM are unset, they lose their special properties, even if they are subsequently reset.
+
+The exit status is true unless a name is readonly.
+

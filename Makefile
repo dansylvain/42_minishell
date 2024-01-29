@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
+#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/01/28 20:05:45 by seblin           ###   ########.fr        #
+#    Updated: 2024/01/29 09:26:13 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,12 +36,12 @@ LIBS = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf -L$(GET_NEXT_LINE_DIR) 
 SRC =	src/main.c \
 		src/utils.c \
 		src/handle_signals.c \
-		src/exec_env.c \
-		src/exec_pwd.c \
-		src/exec_cd.c \
-		src/exec_echo.c \
-		src/exec_unset.c \
-		src/exec_export.c \
+		src/builtins/exec_env.c \
+		src/builtins/exec_pwd.c \
+		src/builtins/exec_cd.c \
+		src/builtins/exec_echo.c \
+		src/builtins/exec_unset.c \
+		src/builtins/exec_export.c \
 		src/parsing/parsing_build.c \
 		src/parsing/parsing_invrt.c \
 		src/parsing/parsing_path.c \
