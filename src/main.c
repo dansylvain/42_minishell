@@ -6,13 +6,13 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/01/28 21:57:25 by seblin           ###   ########.fr       */
+/*   Updated: 2024/01/28 22:07:51 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 char **parse_cmd(char **command, char **env);
-void	tmpmain();
+void	tmp_main();
 /**========================================================================
  *                             COMMENTS POLICY
  *! signal info at the end of a function's comment block 
@@ -34,7 +34,7 @@ void	tmpmain();
 int	main(int argc, char **argv, char *envp[])
 {
 	t_Data	*data;
-	
+	tmp_main(); return 0;
 	data = (t_Data *)malloc(sizeof(t_Data));
 	if (data == NULL)
 		return (display_error("Error\n"), free_data(data), 255);

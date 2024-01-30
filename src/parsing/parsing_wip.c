@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 16:18:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/01/28 21:55:29 by seblin           ###   ########.fr       */
+/*   Updated: 2024/01/30 13:45:58 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ static int set_qute_nde(t_ast_nde *qute_nde, char qute,
 	{
 		if (is_qute(*str, qute))
 		{		
-			qute_nde->end = *str;
-			(*str)++;
+			qute_nde->end = (*str)++;		
 			break ;
 		}		
 	}
@@ -94,7 +93,7 @@ static t_ast_nde	*set_quote_sib(char *str)
 	return (qute_sibling_sav);
 }
 
-void	print_ast_sib(t_ast_nde *sib)
+void	print_qute_sib(t_ast_nde *sib)
 {
 	int	i;	
 	int	color;
@@ -114,14 +113,62 @@ void	print_ast_sib(t_ast_nde *sib)
 	}
 	printf("\n");
 }
+t_ast_nde	*filter_wrapper_spce2(t_ast_nde *node,
+									t_ast_nde *(*filter)(t_ast_nde *node))
+{
+	t_ast_nde	*res_nde;
+	t_ast_nde	*res_sibling;
+	t_ast_nde	*res_sibling_sav;
 
+	res_sibling_sav = NULL;
+	while (node)
+	{
+		if (node->token == NONE)
+		{			
+			res_nde = filter(node);
+			if (res_nde)
+			{
+				add_sibling(res_nde, &res_sibling, &res_sibling_sav);				
+				continue;
+			}
+		}
+		node = node->sibling;
+	}
+	return (res_sibling_sav);
+}
+
+void	print_spce_sib(t_ast_nde *sib)
+{
+	int	i;	
+	int	color;
+	
+	while (sib)
+	{
+		if (sib->token == NONE)
+			color = 32;
+		else if (sib->token == SQUTE)
+			color = 31;
+		else if (sib->token == DQUTE)
+			color = 34;
+		i = 0;
+		while (sib->start + i <= sib->end)
+			printf("\033[%dm%c\033[0m", color, sib->start[i++]);		
+		sib = sib->sibling;
+	}
+	printf("\n");
+}
+#include "parsing_spce.h"
 static char	**create_ast(char *str)
 {
 	char		**ast_res;
 	t_ast_nde	*qute_sib;
+	t_ast_nde	*spce_sib;
+	t_ast_nde	*parnths_sib;
 	
 	qute_sib = set_quote_sib(str);
-	print_ast_sib(qute_sib);
+	print_qute_sib(qute_sib);
+	spce_sib = filter_wrapper_spce2(qute_sib, set_space_nde);
+	print_spce_sib(qute_sib);
 	free_sib(qute_sib);
 	return (ast_res);
 }
@@ -135,7 +182,7 @@ char	*parse(char *str)
 }
 int	tmp_main(void)
 {
-	char *str = " 'e\"s't \"'m\"oi' bie'";
+	char *str = "x'e\"s't \"\"ju\"'m\"oi' bie'n";
 	parse(str);
 	return(0);
 }
