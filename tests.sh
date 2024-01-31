@@ -36,7 +36,7 @@ run_minishell "echo -n \"saperlotte!\"      cornejilouille."
 
 # Comparaison avec fichier de référence
 
-if diff -u $OUTPUT_FILE $CORRECT_OUTPUT_FILE > $DIFF_FILE; then
+if diff -u $OUTPUT_FILE $CORRECT_OUTPUT_FILE; then
     echo "Les tests ont réussi! Fichier de sortie identique au fichier de référence."
 else
     echo "Les tests ont échoué. Différences enregistrées dans : $DIFF_FILE"
