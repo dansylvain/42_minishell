@@ -22,19 +22,42 @@ run_minishell() {
         if [ -n "$2" ]; then
             echo "$2"
         fi
+		if [ -n "$3" ]; then
+            echo "$3"
+        fi
     } | $MINISHELL >> $OUTPUT_FILE 2>&1
     echo "-----------------------" >> $OUTPUT_FILE
     echo "" >> $OUTPUT_FILE  # Ajoute une ligne vide entre chaque série de tests
 }
 
 # Commandes à tester
+# BUILTINS: cd & pwd
 run_minishell "cd" "pwd"
 run_minishell "cd /"  "pwd"
 run_minishell "cd chemin/inexistant"  "pwd"
 run_minishell "cd src/builtins"  "pwd"
 run_minishell "cd .."  "pwd"
+run_minishell "pwd"
+run_minishell "pwd blabla"
+run_minishell "'pwd' blabla"
 
+# BUILTINS: echo
+run_minishell 'echo "Hello, World!"'
+run_minishell 'echo '\''Single quotes'\'''
+run_minishell "echo 'Single quotes'"
+run_minishell 'echo -n "No newline"'
+run_minishell "echo -n 'No newline'"
+run_minishell 'echo -n "With space at the end"   '
+run_minishell 'echo -n "With space at the end"   "Another argument"'
+run_minishell 'echo -n "With space at the end"   '\''Single quotes'\'''
 
+# BUILTINS: unset
+run_minishell "env" "unset SHELL" "env"
+run_minishell "env" "unset _" "env"
+run_minishell "env" "unset OLDPWD" "env"
+
+# BUILTINS: export
+run_minishell "export"
 
 # Comparaison avec fichier de référence
 
