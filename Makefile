@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/01/28 20:05:45 by seblin           ###   ########.fr        #
+#    Updated: 2024/01/31 17:25:05 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ SRC =	src/main.c \
 		src/parsing/parsing_spce.c \
 		src/parsing/parsing_utils.c \
 		src/parsing/parsing_wip.c \
-		
+		src/parsing/parsing_wip3.c \
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 10:03:27 by svidot            #+#    #+#             */
-/*   Updated: 2024/01/28 16:41:51 by seblin           ###   ########.fr       */
+/*   Updated: 2024/01/31 17:22:45 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ typedef enum e_tok
 	NONE,
 	INVRT,
 	SQUTE,
+	IN_SQUTE,
 	DQUTE,
+	IN_DQUTE,
 	SPACE,
 	CMD,
 	ARG_CMD,

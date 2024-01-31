@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 16:18:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/01/31 08:34:23 by seblin           ###   ########.fr       */
+/*   Updated: 2024/01/31 14:05:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,21 +165,30 @@ t_ast_nde	*filter_wrapper_spce2(t_ast_nde *node,
 	t_ast_nde	*res_sibling;
 	t_ast_nde	*res_sibling_sav;
 
-	res_sibling_sav = NULL;
+	res_sibling_sav = NULL;	
 	while (node)
 	{
-		//if (node->token == NONE)
-		//{			
+		if (node->token == NONE)
+		{			
 			res_nde = filter(node);
 			if (res_nde)
 			{
 				add_sibling(res_nde, &res_sibling, &res_sibling_sav);				
-				//continue;
+				//continue ;
+				printf("yep\n");	
 			}
 			else
-				node = node->sibling;
-		//}
-		//node = node->sibling;
+			{				
+				printf("youpi\n");	
+				node = node->sibling;					
+			}
+		}
+		else
+		{
+			//add_sibling(node, &res_sibling, &res_sibling_sav);
+			node = node->sibling;		
+			printf("salut\n");	
+		}
 	}
 	return (res_sibling_sav);
 }
