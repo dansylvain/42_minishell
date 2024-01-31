@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 16:18:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/01/30 13:45:58 by seblin           ###   ########.fr       */
+/*   Updated: 2024/01/31 08:34:23 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	set_other_nde(t_ast_nde *other, char **str)
 	}	
 }
 
-static int set_qute_nde(t_ast_nde *qute_nde, char qute,
+static int set_qute_nde2(t_ast_nde *qute_nde, char qute,
 	t_ast_nde *sibling_sav, char **str)
 {
 	qute_nde->start = *str;
@@ -66,11 +66,11 @@ static void	link_qute_node(t_tok tok, char qute, t_ast_nde **qute_sibling,
 	t_ast_nde	*new_nde;
 
 	new_nde = create_node(tok);
-	set_qute_nde(new_nde, qute, *qute_sibling_sav, str); 	
+	set_qute_nde2(new_nde, qute, *qute_sibling_sav, str); 	
 	add_sibling(new_nde, qute_sibling, qute_sibling_sav);
 }
 
-static t_ast_nde	*set_quote_sib(char *str)
+static t_ast_nde	*set_qute_sib(char *str)
 {
 	t_ast_nde	*qute_sibling_sav;
 	t_ast_nde	*qute_sibling;
@@ -97,22 +97,67 @@ void	print_qute_sib(t_ast_nde *sib)
 {
 	int	i;	
 	int	color;
+	int	back_color;
 	
 	while (sib)
 	{
 		if (sib->token == NONE)
+		{
 			color = 32;
+			back_color = 41;	
+		}
 		else if (sib->token == SQUTE)
+		{
 			color = 31;
+			back_color = 40;	
+		}
 		else if (sib->token == DQUTE)
+		{
 			color = 34;
+			back_color = 45;	
+		}
 		i = 0;
 		while (sib->start + i <= sib->end)
-			printf("\033[%dm%c\033[0m", color, sib->start[i++]);		
-		sib = sib->sibling;
+			printf("\033[%d;%dm%c\033[0m", color, back_color, sib->start[i++]);		
+		sib = sib->sibling;		
 	}
 	printf("\n");
 }
+
+static void	*free_spce_nde_if_empty2(t_ast_nde *spce_nde, int *flag)
+{
+	if (!spce_nde->start)
+	{
+		*flag = 0;
+		free(spce_nde);
+	}
+	return (NULL);
+}
+
+t_ast_nde	*set_space_nde2(t_ast_nde *node)
+{
+	static t_ast_nde	*spce_nde;
+	static int			flag;
+
+	if (!flag)
+		spce_nde = create_node(SPACE);
+	while (node->start <= node->end && ft_isspace(*node->start))
+		node->start++;
+	while (node->start <= node->end && !ft_isspace(*node->start))
+	{
+		if (!spce_nde->start)
+			spce_nde->start = node->start;
+		spce_nde->end = node->start++;
+	}
+	if (spce_nde->start && (node->start <= node->end || !*node->start))
+	{
+		flag = 0;
+		return (spce_nde);
+	}
+	flag = 1;
+	return (free_spce_nde_if_empty2(spce_nde, &flag));
+}
+
 t_ast_nde	*filter_wrapper_spce2(t_ast_nde *node,
 									t_ast_nde *(*filter)(t_ast_nde *node))
 {
@@ -123,16 +168,18 @@ t_ast_nde	*filter_wrapper_spce2(t_ast_nde *node,
 	res_sibling_sav = NULL;
 	while (node)
 	{
-		if (node->token == NONE)
-		{			
+		//if (node->token == NONE)
+		//{			
 			res_nde = filter(node);
 			if (res_nde)
 			{
 				add_sibling(res_nde, &res_sibling, &res_sibling_sav);				
-				continue;
+				//continue;
 			}
-		}
-		node = node->sibling;
+			else
+				node = node->sibling;
+		//}
+		//node = node->sibling;
 	}
 	return (res_sibling_sav);
 }
@@ -142,22 +189,19 @@ void	print_spce_sib(t_ast_nde *sib)
 	int	i;	
 	int	color;
 	
+	color = 31;
 	while (sib)
-	{
-		if (sib->token == NONE)
-			color = 32;
-		else if (sib->token == SQUTE)
-			color = 31;
-		else if (sib->token == DQUTE)
-			color = 34;
+	{		
 		i = 0;
 		while (sib->start + i <= sib->end)
-			printf("\033[%dm%c\033[0m", color, sib->start[i++]);		
+			printf("\033[%dm%c\033[0m", color, sib->start[i++]);
+		color = (color - 31 + 1) % 7 + 31;	
 		sib = sib->sibling;
 	}
 	printf("\n");
 }
 #include "parsing_spce.h"
+#include "parsing_qute.h"
 static char	**create_ast(char *str)
 {
 	char		**ast_res;
@@ -165,10 +209,10 @@ static char	**create_ast(char *str)
 	t_ast_nde	*spce_sib;
 	t_ast_nde	*parnths_sib;
 	
-	qute_sib = set_quote_sib(str);
+	qute_sib = set_qute_sib(str);
 	print_qute_sib(qute_sib);
-	spce_sib = filter_wrapper_spce2(qute_sib, set_space_nde);
-	print_spce_sib(qute_sib);
+	spce_sib = filter_wrapper_spce2(qute_sib, set_space_nde2);
+	print_spce_sib(spce_sib);
 	free_sib(qute_sib);
 	return (ast_res);
 }
@@ -182,7 +226,9 @@ char	*parse(char *str)
 }
 int	tmp_main(void)
 {
-	char *str = "x'e\"s't \"\"ju\"'m\"oi' bie'n";
+	//char *str = "x'e \"s 't \"\"ju\"' m\"oi' bie '   n ";
+	char *str = "x 'e \"s '  t \"\"ju\"' m\"oi' bie '   n ";
+	printf("%s\n", str);
 	parse(str);
 	return(0);
 }
