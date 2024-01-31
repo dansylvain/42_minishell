@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/01/31 17:57:21 by seblin           ###   ########.fr       */
+/*   Updated: 2024/01/31 19:33:18 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ char	*parse3(char *str)
 int	tmp_main3(void)
 {
 	//char *str = "x'e \"s 't \"\"ju\"' m\"oi' bie '   n ";
-	char *str = "x 'e \"s '  t \"\"ju\"' m\"oi' bie '   n ";
+	char *str = "'x ''e \"s '  t \"\"j|u\"' m\"oi' bie '   n \" \"";
 	printf("%s\n", str);
 	parse3(str);
 	return(0);
