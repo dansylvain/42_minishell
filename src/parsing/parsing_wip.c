@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_wip.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 16:18:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/01/28 21:55:29 by seblin           ###   ########.fr       */
+/*   Updated: 2024/01/31 17:08:36 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,9 @@ char	*parse(char *str)
 	create_ast(str);
 	return ("ok");
 }
-int	tmp_main(void)
-{
-	char *str = " 'e\"s't \"'m\"oi' bie'";
-	parse(str);
-	return(0);
-}
+// int	tmp_main(void)
+// {
+// 	char *str = " 'e\"s't \"'m\"oi' bie'";
+// 	parse(str);
+// 	return(0);
+// }

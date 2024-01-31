@@ -6,13 +6,13 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/01/29 09:26:49 by dan              ###   ########.fr       */
+/*   Updated: 2024/01/31 17:10:16 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 char **parse_cmd(char **command, char **env);
-void	tmpmain();
+// void	tmpmain();
 /**========================================================================
  *                             COMMENTS POLICY
  *? signal info at the end of a function's comment block 
@@ -111,10 +111,7 @@ int	command_is_builtin(char *command, t_Data *data, char *envp[])
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 3]), "pwd", 4))
 		exec_pwd();
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 2]), "cd", 3))
-	{
-		ft_printf("command_tab[0]: %s\n", command_tab[0]);
 		exec_cd(command_tab);
-	}
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 4]), "exit", 5))
 		return (free_command_tab(command_tab), 0);
 	free_command_tab(command_tab);

@@ -19,24 +19,26 @@ run_minishell() {
     echo "Commande: $1" >> $OUTPUT_FILE
     {
         echo "$1"
+        if [ -n "$2" ]; then
+            echo "$2"
+        fi
     } | $MINISHELL >> $OUTPUT_FILE 2>&1
     echo "-----------------------" >> $OUTPUT_FILE
+    echo "" >> $OUTPUT_FILE  # Ajoute une ligne vide entre chaque série de tests
 }
 
 # Commandes à tester
-run_minishell "echo Allo Allo, monsieur l'ordinateur"
-run_minishell "cd"
-run_minishell "pwd"
-run_minishell "env"
-run_minishell "export"
-run_minishell "echo -n \"saperlotte!\"      cornejilouille."
-
+run_minishell "cd" "pwd"
+run_minishell "cd /"  "pwd"
+run_minishell "cd chemin/inexistant"  "pwd"
+run_minishell "cd src/builtins"  "pwd"
+run_minishell "cd .."  "pwd"
 
 
 
 # Comparaison avec fichier de référence
 
-if diff -u $OUTPUT_FILE $CORRECT_OUTPUT_FILE; then
+if diff -u $OUTPUT_FILE $CORRECT_OUTPUT_FILE >> $DIFF_FILE; then
     echo "Les tests ont réussi! Fichier de sortie identique au fichier de référence."
 else
     echo "Les tests ont échoué. Différences enregistrées dans : $DIFF_FILE"
