@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/01/31 19:33:18 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/01 21:15:53 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,23 @@ static t_ast_nde	*set_qute_sib3(char *str)
 	return (qute_sibling_sav);
 }
 
+void	print_sib(t_ast_nde *sib)
+{
+	int	i;	
+	int	color;
+	
+	color = 31;
+	while (sib)
+	{		
+		i = 0;
+		while (sib->start + i <= sib->end)
+			printf("\033[%dm%c\033[0m", color, sib->start[i++]);
+		color = (color - 31 + 1) % 7 + 31;	
+		sib = sib->sibling;
+	}
+	printf("\n");
+}
+
 void	print_qute_sib3(t_ast_nde *sib)
 {
 	int	i;	
@@ -128,17 +145,88 @@ void	print_qute_sib3(t_ast_nde *sib)
 	}
 	printf("\n");
 }
+t_ast_nde	*copy_node(t_ast_nde *node)
+{
+	t_ast_nde	*new_node;
+	
+	new_node = create_node(node->token);
+	if (!new_node)
+		return (NULL);
+	new_node->start = node->start;
+	new_node->end = node->end;
+	return (new_node);	
+}
+
+static t_ast_nde	*set_pipe_sib(t_ast_nde *sib)
+{
+	t_ast_nde	*pip_sib_sav;
+	t_ast_nde	*pip_sib;
+	t_ast_nde	*pip_nde;
+	t_ast_nde	*raw_nde;
+	t_ast_nde	*raw_nde_sav;	
+	char *tmp_sib_start;
+
+	pip_sib_sav = NULL;
+	while (sib)
+	{
+		if (sib->token == SQUTE || sib->token == IN_SQUTE
+			|| sib->token == DQUTE || sib->token == IN_DQUTE)
+		{
+			if (!raw_nde)
+			{				
+				raw_nde = create_node(NONE);
+				raw_nde->start = sib->start;
+				raw_nde->end = sib->end;
+				raw_nde->child = copy_node(sib);
+			}
+			else
+			{
+				raw_nde->end = sib->end;
+				add_sibling(copy_node(sib), &raw_nde, &raw_nde_sav);
+			}
+		}
+		else 
+		{
+			tmp_sib_start = sib->start;
+			while (sib->start <= sib->end)
+			{printf("truc %s\n", sib->start);
+				if (*sib->start == '|')				
+				{
+					pip_nde = create_node(PIPE);
+					pip_nde->start = sib->start;
+					pip_nde->end = sib->end;
+					if (raw_nde)
+					{
+						add_sibling(raw_nde, &pip_sib, &pip_sib_sav);
+						raw_nde = NULL;	
+					}
+					add_sibling(pip_nde, &pip_sib, &pip_sib_sav);
+				}
+				else 
+				{
+					;	
+				}
+				sib->start++;
+			}
+			sib->start = tmp_sib_start;
+		}
+		sib = sib->sibling;
+	}
+	return (pip_sib_sav);
+}
 
 static char	**create_ast3(char *str)
 {
 	char		**ast_res;
 	t_ast_nde	*qute_sib;
 	t_ast_nde	*spce_sib;
+	t_ast_nde	*pip_sib;
 	t_ast_nde	*parnths_sib;
 	
 	qute_sib = set_qute_sib3(str);
 	print_qute_sib3(qute_sib);
-
+	pip_sib = set_pipe_sib(qute_sib);
+	print_sib(pip_sib);
 	free_sib(qute_sib);
 	return (ast_res);
 }
@@ -152,7 +240,7 @@ char	*parse3(char *str)
 int	tmp_main3(void)
 {
 	//char *str = "x'e \"s 't \"\"ju\"' m\"oi' bie '   n ";
-	char *str = "'x ''e \"s '  t \"\"j|u\"' m\"oi' bie '   n \" \"";
+	char *str = "  cat <file1|\"rev\"|ca't' |grep -n \" cmd1 | cmd2\"| >file2 cut -d':' -f1 ";
 	printf("%s\n", str);
 	parse3(str);
 	return(0);
