@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/01 13:03:57 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/01 13:58:09 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,16 @@ char **parse_cmd(char **command, char **env);
  *? signal info in the main comment bloc
  *? add your name at the beggining of a comment
  *---
- *! lors du parsing, si une commande n'est pas trouvée, l'algo de parsing
+ *! dan: 1: lors du parsing, si une commande n'est pas trouvée, l'algo de parsing
  *! quitte le programme => l'application est fermée
  *! erreur renvoyée par minishell: "pouetpouet: No such file or directory"
+ 
+ *! dan: 2: lors de l'execution de cd, export, unset, exit,
+ *! probleme valgrind au niveau de parsing
+ *! REMARQUE: command_tab[0] n'est pas un path, mais le nom de la commande seul!
+ *TODO finish builtin export
+ *TODO fix memory leaks export
+ *TODO fix memory leaks unset
  *========================================================================**/
 /**========================================================================
  *                           main.c
@@ -93,6 +100,7 @@ int	command_is_builtin(char *command, t_Data *data, char *envp[])
 	command_tab = parse_cmd(cmd, data->envp_tab);
 	if (!command_tab)
 		return (1);
+	// ft_printf("command_tab: %s\n", command_tab[0]);
 	if (!command_tab[0])
 		return (free(command_tab), 1);
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 4]), "echo", 5))
@@ -108,7 +116,7 @@ int	command_is_builtin(char *command, t_Data *data, char *envp[])
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 2]), "cd", 3))
 		exec_cd(command_tab);
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 4]), "exit", 5))
-		return (free_command_tab(command_tab), 0);
+		return (ft_printf("exit\n"), free_command_tab(command_tab), 0);
 	free_command_tab(command_tab);
 	return (1);
 }
