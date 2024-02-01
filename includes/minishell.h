@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/01 12:56:02 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/01 16:21:47 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct t_Data
 {
 	char	**envp_tab;
 }	t_Data;
+
+#define ENVP_TAB_SIZE 200
 
 void	handle_signals(void);
 int		prompt_loop(t_Data *data, char *envp[]);

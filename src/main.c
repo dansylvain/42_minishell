@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/01 13:58:09 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/01 16:21:30 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int	command_is_builtin(char *command, t_Data *data, char *envp[])
 	cmd[1] = NULL;
 	command_tab = NULL;
 	command_tab = parse_cmd(cmd, data->envp_tab);
+	ft_printf("%s\n", command_tab[0]);
 	if (!command_tab)
 		return (1);
 	// ft_printf("command_tab: %s\n", command_tab[0]);
@@ -126,10 +127,7 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 	char	**envp_tab;
 	int		i;
 
-	i = 0;
-	while (envp[i])
-		i++;
-	envp_tab = (char **)ft_calloc((i + 1), sizeof(char *));
+	envp_tab = (char **)ft_calloc(ENVP_TAB_SIZE, sizeof(char *));
 	if (envp_tab == NULL)
 		return (NULL);
 	i = 0;
