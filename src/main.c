@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/01/31 17:10:16 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/01 13:03:57 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,14 @@ char **parse_cmd(char **command, char **env);
  *? signal info in the main comment bloc
  *? add your name at the beggining of a comment
  *---
- *
- *! used : "valgrind --leak-check=full --show-leak-kinds=all ./minishell"
- *! Valgrind me signale un probleme lorsque j'execute la commande 'cd'
- *! erreur renvoie a de ft_strncmp dans fonction command_is_builtin
- *! mais également malloc/ft_calloc dans parsing_build
+ *! lors du parsing, si une commande n'est pas trouvée, l'algo de parsing
+ *! quitte le programme => l'application est fermée
+ *! erreur renvoyée par minishell: "pouetpouet: No such file or directory"
  *========================================================================**/
 /**========================================================================
  *                           main.c
  *? rl_catch_signals is a global variable (from readline lib)
  *? it is used to ignore SIGQUILL (see handle_signals.c)
- 
- *! seb alert! ligne 40, ne pas free_data(data), car par definition,
- *! si on est la c'est que data est deja NULL
 *========================================================================**/
 int	main(int argc, char **argv, char *envp[])
 {
@@ -40,9 +35,9 @@ int	main(int argc, char **argv, char *envp[])
 	data = (t_Data *)malloc(sizeof(t_Data));
 	if (data == NULL)
 		return (display_error("Error\n"), free_data(data), 255);
-	data->envp = duplicate_envp(data, envp);
+	data->envp_tab = duplicate_envp(data, envp);
 
-	if (!data->envp)
+	if (!data->envp_tab)
 		return (display_error("Error\n"), free_data(data), 255);
 	rl_catch_signals = 0;
 	if (argc != 1)
@@ -95,7 +90,7 @@ int	command_is_builtin(char *command, t_Data *data, char *envp[])
 	cmd[0] = command;
 	cmd[1] = NULL;
 	command_tab = NULL;
-	command_tab = parse_cmd(cmd, data->envp);
+	command_tab = parse_cmd(cmd, data->envp_tab);
 	if (!command_tab)
 		return (1);
 	if (!command_tab[0])
@@ -103,11 +98,11 @@ int	command_is_builtin(char *command, t_Data *data, char *envp[])
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 4]), "echo", 5))
 		exec_echo(command_tab);
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 5]), "unset", 6))
-		exec_unset(data->envp, command_tab);
+		exec_unset(data->envp_tab, command_tab);
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 6]), "export", 7))
 		exec_export(command_tab, data);
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 3]), "env", 4))
-		exec_env(data->envp, command_tab);
+		exec_env(data->envp_tab, command_tab);
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 3]), "pwd", 4))
 		exec_pwd();
 	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 2]), "cd", 3))
@@ -138,7 +133,6 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 		ft_strlcpy(envp_tab[i], envp[i], ft_strlen(envp[i]) + 1);
 		i++;
 	}
-
 	envp_tab[i] = NULL;
 	return (envp_tab);
 }

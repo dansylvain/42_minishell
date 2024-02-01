@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/01/27 09:14:48 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/01 12:57:53 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	exec_export(char **command_tab, t_Data *data)
 	char envp_export_tab[100][500];
 	char **temp_envp;
 	
-	temp_envp = duplicate_envp(data, data->envp);
+	temp_envp = duplicate_envp(data, data->envp_tab);
 	if (temp_envp == NULL)
 		return (0);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:22:52 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/01/25 09:52:27 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/01 12:57:37 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	close_minishell(t_Data *data)
  *========================================================================**/
 void	free_data(t_Data *data)
 {
-	if (data->envp)
-		free_command_tab(data->envp);
+	if (data->envp_tab)
+		free_command_tab(data->envp_tab);
 	if (data)
 		free(data);
 }
