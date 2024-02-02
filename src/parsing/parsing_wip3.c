@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/02 12:47:03 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/02 14:16:36 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ void	error_detector(char *pipe, char *start, char *end)
 }
 
 t_ast_nde	*create_pipe(char *start, char *end, char *pipe)
-{
+{	
 	t_ast_nde	*raw_lft;
 	t_ast_nde	*raw_rght;
 	t_ast_nde	*pipe_nde;
@@ -204,28 +204,33 @@ t_ast_nde	*create_pipe(char *start, char *end, char *pipe)
 	raw_lft->end = pipe - 1;
 	raw_rght = create_node(RAW);
 	raw_rght->start = pipe + 1;
-	raw_rght->end = end;
+	raw_rght->end = end;	
 	pipe_nde = create_node(PIPE);
 	pipe_nde->start = pipe;
 	pipe_nde->end = pipe;
+	raw_lft->sibling = raw_rght;
+	pipe_nde->child = raw_lft;	
+	return (pipe_nde);
 }
 
 static t_ast_nde	*set_pipe(const t_ast_nde *const node)
-{
+{	
 	t_ast_nde	*sib;
 	char		*start;
 	char		*end;
 	char		*pipe;
 
 	sib = node->child;
-	start = sib->start;
-	end = sib_last(sib)->end;
-	pipe = search_pipe(sib);
+	start = node->start;
+	end = node->end;
+	pipe = search_pipe(sib);    // gestion des double quotes, simple qute, 
 	if (pipe)
 	{
 		error_detector(pipe, start, end);
-		create
+		sib->child = create_pipe(start, end, pipe);	
+		set_pipe(sib->child->child);
 	}
+	return 
 }
 // static t_ast_nde	*set_pipe_sib(t_ast_nde *sib)
 // {
