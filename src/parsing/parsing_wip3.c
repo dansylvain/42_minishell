@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/01 21:15:53 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/02 12:47:03 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "stdio.h"
 #include "parsing_spce.h"
 #include "parsing_qute.h"
+
+#define RAW NONE
 
 static int	is_raw3(char *str)
 {
@@ -157,63 +159,131 @@ t_ast_nde	*copy_node(t_ast_nde *node)
 	return (new_node);	
 }
 
-static t_ast_nde	*set_pipe_sib(t_ast_nde *sib)
-{
-	t_ast_nde	*pip_sib_sav;
-	t_ast_nde	*pip_sib;
-	t_ast_nde	*pip_nde;
-	t_ast_nde	*raw_nde;
-	t_ast_nde	*raw_nde_sav;	
-	char *tmp_sib_start;
+t_ast_nde	*sib_last(const t_ast_nde *sib)
+{	
+	while (sib && sib->sibling)		
+		sib = sib->sibling; 
+	return (sib);
+}
 
-	pip_sib_sav = NULL;
+char	*search_pipe(const t_ast_nde *sib)
+{
+	char	*pipe;
+	char	*start;
+	
+	start = sib->start;
+	pipe = NULL;
 	while (sib)
 	{
-		if (sib->token == SQUTE || sib->token == IN_SQUTE
-			|| sib->token == DQUTE || sib->token == IN_DQUTE)
+		while (sib->token == RAW && start <= sib->end)
 		{
-			if (!raw_nde)
-			{				
-				raw_nde = create_node(NONE);
-				raw_nde->start = sib->start;
-				raw_nde->end = sib->end;
-				raw_nde->child = copy_node(sib);
-			}
-			else
-			{
-				raw_nde->end = sib->end;
-				add_sibling(copy_node(sib), &raw_nde, &raw_nde_sav);
-			}
-		}
-		else 
-		{
-			tmp_sib_start = sib->start;
-			while (sib->start <= sib->end)
-			{printf("truc %s\n", sib->start);
-				if (*sib->start == '|')				
-				{
-					pip_nde = create_node(PIPE);
-					pip_nde->start = sib->start;
-					pip_nde->end = sib->end;
-					if (raw_nde)
-					{
-						add_sibling(raw_nde, &pip_sib, &pip_sib_sav);
-						raw_nde = NULL;	
-					}
-					add_sibling(pip_nde, &pip_sib, &pip_sib_sav);
-				}
-				else 
-				{
-					;	
-				}
-				sib->start++;
-			}
-			sib->start = tmp_sib_start;
+			if (start - 1 != '\\' && start == '|')
+				pipe = start;
+			start++;
 		}
 		sib = sib->sibling;
 	}
-	return (pip_sib_sav);
+	return (pipe);
 }
+void	error_detector(char *pipe, char *start, char *end)
+{
+	if (pipe == start)
+		ft_printf("pipe left operande missing.");
+	if (pipe == end)
+		ft_printf("pipe right operande missing.");
+}
+
+t_ast_nde	*create_pipe(char *start, char *end, char *pipe)
+{
+	t_ast_nde	*raw_lft;
+	t_ast_nde	*raw_rght;
+	t_ast_nde	*pipe_nde;
+
+	raw_lft = create_node(RAW);
+	raw_lft->start = start;
+	raw_lft->end = pipe - 1;
+	raw_rght = create_node(RAW);
+	raw_rght->start = pipe + 1;
+	raw_rght->end = end;
+	pipe_nde = create_node(PIPE);
+	pipe_nde->start = pipe;
+	pipe_nde->end = pipe;
+}
+
+static t_ast_nde	*set_pipe(const t_ast_nde *const node)
+{
+	t_ast_nde	*sib;
+	char		*start;
+	char		*end;
+	char		*pipe;
+
+	sib = node->child;
+	start = sib->start;
+	end = sib_last(sib)->end;
+	pipe = search_pipe(sib);
+	if (pipe)
+	{
+		error_detector(pipe, start, end);
+		create
+	}
+}
+// static t_ast_nde	*set_pipe_sib(t_ast_nde *sib)
+// {
+// 	t_ast_nde	*pip_sib_sav;
+// 	t_ast_nde	*pip_sib;
+// 	t_ast_nde	*pip_nde;
+// 	t_ast_nde	*raw_nde;
+// 	t_ast_nde	*raw_nde_sav;	
+// 	char *tmp_sib_start;
+
+// 	pip_sib_sav = NULL;
+// 	while (sib)
+// 	{
+// 		if (sib->token == SQUTE || sib->token == IN_SQUTE
+// 			|| sib->token == DQUTE || sib->token == IN_DQUTE)
+// 		{
+// 			if (!raw_nde)
+// 			{				
+// 				raw_nde = create_node(NONE);
+// 				raw_nde->start = sib->start;
+// 				raw_nde->end = sib->end;
+// 				raw_nde->child = copy_node(sib);
+// 			}
+// 			else
+// 			{
+// 				raw_nde->end = sib->end;
+// 				add_sibling(copy_node(sib), &raw_nde, &raw_nde_sav);
+// 			}
+// 		}
+// 		else 
+// 		{
+// 			tmp_sib_start = sib->start;
+// 			while (sib->start <= sib->end)
+// 			{printf("truc %s\n", sib->start);
+// 				if (*sib->start == '|')				
+// 				{
+// 					pip_nde = create_node(PIPE);
+// 					pip_nde->start = sib->start;
+// 					pip_nde->end = sib->end;
+// 					if (raw_nde)
+// 					{
+// 						add_sibling(raw_nde, &pip_sib, &pip_sib_sav);
+// 						raw_nde = NULL;	
+// 					}
+// 					add_sibling(pip_nde, &pip_sib, &pip_sib_sav);
+// 				}
+// 				else 
+// 				{
+// 					;	
+// 				}
+// 				sib->start++;
+// 			}
+// 			sib->start = tmp_sib_start;
+// 		}
+// 		sib = sib->sibling;
+// 	}
+// 	return (pip_sib_sav);
+// }
 
 static char	**create_ast3(char *str)
 {
