@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/02 21:24:34 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/02 22:17:38 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,13 @@ void	print_sib42(t_ast_nde *sib)
 {
 	int	i;	
 	int	back_color;
-	const t_ast_nde *sib_sav = sib;
+	const t_ast_nde *sib_sav;
 	printf("laaaa.\n");
 	back_color = 41; 
 	
 	while (sib)
-	{		
+	{	
+		sib_sav = sib;
 		while (sib)
 		{	
 			i = 0;
@@ -126,7 +127,7 @@ void	print_sib42(t_ast_nde *sib)
 			sib = sib->sibling;
 		}
 		sib = sib_sav->child;
-	printf("\n");
+		printf("f\n");
 	}
 	//if (sib_sav->child)
 		
@@ -237,11 +238,11 @@ t_ast_nde	*fill_child(t_ast_nde *sib)
 	const t_ast_nde	*const pipe = sib->child;
 	t_ast_nde	*raw_lft;
 	t_ast_nde	*raw_rght;
-	t_ast_nde	*raw_lft_sav;
-	t_ast_nde	*raw_rght_sav;
+	t_ast_nde	*raw_lft_child_sav;
+	t_ast_nde	*raw_rght_child_sav;
 	
-	raw_lft_sav = NULL;
-	raw_rght_sav = NULL;
+	raw_lft_child_sav = NULL;
+	raw_rght_child_sav = NULL;
 	raw_lft = pipe->child;
 	raw_rght = raw_lft->sibling;
 	while (sib)
@@ -250,12 +251,22 @@ t_ast_nde	*fill_child(t_ast_nde *sib)
  			|| sib->token == DQUTE || sib->token == IN_DQUTE)
 		{
 			if 	(sib->end < pipe->start)
-				add_sibling(copy_node(sib), &raw_lft->child, &raw_lft->child) ;				
+				add_sibling(copy_node(sib), &raw_lft->child, &raw_lft_child_sav);				
 			else if (sib->start > pipe->start)
-				add_sibling(copy_node(sib), &raw_rght->child, &raw_rght->child) ;	
-		}			
+				add_sibling(copy_node(sib), &raw_rght->child, &raw_rght_child_sav );	
+		}
+		else
+		{
+			if 	(sib->end < pipe->start)
+				add_sibling(copy_node(sib), &raw_lft->child, &raw_lft_child_sav);				
+			else if (sib->start > pipe->start)
+				add_sibling(copy_node(sib), &raw_rght->child, &raw_rght_child_sav );						
+		}		
 		sib = sib->sibling;
 	}
+	raw_lft->child = raw_lft_child_sav;
+	raw_rght->child = raw_rght_child_sav;
+	
 }
 
 static t_ast_nde	*set_pipe(t_ast_nde *node)
