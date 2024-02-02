@@ -6,12 +6,13 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/01 16:21:30 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/02 08:25:15 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-char **parse_cmd(char **command, char **env);
+
+char	**parse_cmd(char **command, char **env);
 // void	tmpmain();
 /**========================================================================
  *                             COMMENTS POLICY
@@ -25,11 +26,12 @@ char **parse_cmd(char **command, char **env);
  
  *! dan: 2: lors de l'execution de cd, export, unset, exit,
  *! probleme valgrind au niveau de parsing
- *! REMARQUE: command_tab[0] n'est pas un path, mais le nom de la commande seul!
+ *! REMARQUE: cmd_tab[0] n'est pas un path, mais le nom de la commande seul!
  *TODO finish builtin export
  *TODO fix memory leaks export
  *TODO fix memory leaks unset
  *========================================================================**/
+
 /**========================================================================
  *                           main.c
  *? rl_catch_signals is a global variable (from readline lib)
@@ -38,12 +40,11 @@ char **parse_cmd(char **command, char **env);
 int	main(int argc, char **argv, char *envp[])
 {
 	t_Data	*data;
-	
+
 	data = (t_Data *)malloc(sizeof(t_Data));
 	if (data == NULL)
 		return (display_error("Error\n"), free_data(data), 255);
 	data->envp_tab = duplicate_envp(data, envp);
-
 	if (!data->envp_tab)
 		return (display_error("Error\n"), free_data(data), 255);
 	rl_catch_signals = 0;
@@ -91,34 +92,33 @@ int	prompt_loop(t_Data *data, char *envp[])
  *========================================================================**/
 int	command_is_builtin(char *command, t_Data *data, char *envp[])
 {
-	char	**command_tab;
+	char	**cmd_tab;
 	char	*cmd[2];
-	
+
 	cmd[0] = command;
 	cmd[1] = NULL;
-	command_tab = NULL;
-	command_tab = parse_cmd(cmd, data->envp_tab);
-	ft_printf("%s\n", command_tab[0]);
-	if (!command_tab)
+	cmd_tab = NULL;
+	cmd_tab = parse_cmd(cmd, data->envp_tab);
+	ft_printf("%s\n", cmd_tab[0]);
+	if (!cmd_tab)
 		return (1);
-	// ft_printf("command_tab: %s\n", command_tab[0]);
-	if (!command_tab[0])
-		return (free(command_tab), 1);
-	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 4]), "echo", 5))
-		exec_echo(command_tab);
-	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 5]), "unset", 6))
-		exec_unset(data->envp_tab, command_tab);
-	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 6]), "export", 7))
-		exec_export(command_tab, data);
-	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 3]), "env", 4))
-		exec_env(data->envp_tab, command_tab);
-	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 3]), "pwd", 4))
+	if (!cmd_tab[0])
+		return (free(cmd_tab), 1);
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "echo", 5))
+		exec_echo(cmd_tab);
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 5]), "unset", 6))
+		exec_unset(data->envp_tab, cmd_tab);
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 6]), "export", 7))
+		exec_export(cmd_tab, data);
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "env", 4))
+		exec_env(data->envp_tab, cmd_tab);
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "pwd", 4))
 		exec_pwd();
-	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 2]), "cd", 3))
-		exec_cd(command_tab);
-	if (!ft_strncmp(&(command_tab[0][ft_strlen(command_tab[0]) - 4]), "exit", 5))
-		return (ft_printf("exit\n"), free_command_tab(command_tab), 0);
-	free_command_tab(command_tab);
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 2]), "cd", 3))
+		exec_cd(cmd_tab);
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "exit", 5))
+		return (ft_printf("exit\n"), free_command_tab(cmd_tab), 0);
+	free_command_tab(cmd_tab);
 	return (1);
 }
 
