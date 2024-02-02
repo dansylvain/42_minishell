@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/01/31 17:25:05 by seblin           ###   ########.fr        #
+#    Updated: 2024/02/02 16:06:36 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ $(GET_NEXT_LINE):
 
 %.o: %.c
 	@printf "%-80s" $<
-	@{ $(CC) $(CFLAGS) -I$(LIBFT_DIR) -I/usr/include -O3 -c $< -o $@; } 2>&1 || \
+	@{ $(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I/usr/include -O3 -c $< -o $@; } 2>&1 || \
 		(echo "\033[0;31mCompilation of $< failed\033[0m"; exit 1)
 	@echo "\033[0;32mcompiled\033[0m"
 

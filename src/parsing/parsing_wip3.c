@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/02 14:16:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/02 21:24:34 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "stdio.h"
 #include "parsing_spce.h"
 #include "parsing_qute.h"
+#include "ft_printf.h"
 
 #define RAW NONE
 
@@ -106,20 +107,37 @@ static t_ast_nde	*set_qute_sib3(char *str)
 	return (qute_sibling_sav);
 }
 
-void	print_sib(t_ast_nde *sib)
+void	print_sib42(t_ast_nde *sib)
 {
 	int	i;	
-	int	color;
+	int	back_color;
+	const t_ast_nde *sib_sav = sib;
+	printf("laaaa.\n");
+	back_color = 41; 
 	
-	color = 31;
 	while (sib)
 	{		
-		i = 0;
-		while (sib->start + i <= sib->end)
-			printf("\033[%dm%c\033[0m", color, sib->start[i++]);
-		color = (color - 31 + 1) % 7 + 31;	
-		sib = sib->sibling;
+		while (sib)
+		{	
+			i = 0;
+			while (sib->start + i <= sib->end)
+				printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);
+			back_color = (back_color - 41 + 1) % 7 + 41;	
+			sib = sib->sibling;
+		}
+		sib = sib_sav->child;
+	printf("\n");
 	}
+	//if (sib_sav->child)
+		
+	// while (sib)
+	// {	
+	// 	i = 0;
+	// 	while (sib->start + i <= sib->end)
+	// 		printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);
+	// 	back_color = (back_color - 41 + 1) % 7 + 41;	
+	// 	sib = sib->sibling;
+	// }
 	printf("\n");
 }
 
@@ -159,7 +177,7 @@ t_ast_nde	*copy_node(t_ast_nde *node)
 	return (new_node);	
 }
 
-t_ast_nde	*sib_last(const t_ast_nde *sib)
+t_ast_nde	*sib_last(t_ast_nde *sib)
 {	
 	while (sib && sib->sibling)		
 		sib = sib->sibling; 
@@ -170,14 +188,15 @@ char	*search_pipe(const t_ast_nde *sib)
 {
 	char	*pipe;
 	char	*start;
-	
-	start = sib->start;
+ft_printf("END. %s", pipe);
+	if (sib)
+		start = sib->start;	ft_printf("STOP. %s", pipe);
 	pipe = NULL;
 	while (sib)
-	{
+	{//ft_printf("pipe left operande missing.");
 		while (sib->token == RAW && start <= sib->end)
 		{
-			if (start - 1 != '\\' && start == '|')
+			if (*(start - 1) != '\\' && *start == '|')
 				pipe = start;
 			start++;
 		}
@@ -185,7 +204,7 @@ char	*search_pipe(const t_ast_nde *sib)
 	}
 	return (pipe);
 }
-void	error_detector(char *pipe, char *start, char *end)
+void	error_detector(const char *const pipe, const char *const start, const char *const end)
 {
 	if (pipe == start)
 		ft_printf("pipe left operande missing.");
@@ -195,7 +214,7 @@ void	error_detector(char *pipe, char *start, char *end)
 
 t_ast_nde	*create_pipe(char *start, char *end, char *pipe)
 {	
-	t_ast_nde	*raw_lft;
+	t_ast_nde	*raw_lft; 
 	t_ast_nde	*raw_rght;
 	t_ast_nde	*pipe_nde;
 
@@ -213,24 +232,51 @@ t_ast_nde	*create_pipe(char *start, char *end, char *pipe)
 	return (pipe_nde);
 }
 
-static t_ast_nde	*set_pipe(const t_ast_nde *const node)
-{	
-	t_ast_nde	*sib;
-	char		*start;
-	char		*end;
-	char		*pipe;
+t_ast_nde	*fill_child(t_ast_nde *sib)
+{
+	const t_ast_nde	*const pipe = sib->child;
+	t_ast_nde	*raw_lft;
+	t_ast_nde	*raw_rght;
+	t_ast_nde	*raw_lft_sav;
+	t_ast_nde	*raw_rght_sav;
+	
+	raw_lft_sav = NULL;
+	raw_rght_sav = NULL;
+	raw_lft = pipe->child;
+	raw_rght = raw_lft->sibling;
+	while (sib)
+	{
+		if (sib->token == SQUTE || sib->token == IN_SQUTE
+ 			|| sib->token == DQUTE || sib->token == IN_DQUTE)
+		{
+			if 	(sib->end < pipe->start)
+				add_sibling(copy_node(sib), &raw_lft->child, &raw_lft->child) ;				
+			else if (sib->start > pipe->start)
+				add_sibling(copy_node(sib), &raw_rght->child, &raw_rght->child) ;	
+		}			
+		sib = sib->sibling;
+	}
+}
 
-	sib = node->child;
+static t_ast_nde	*set_pipe(t_ast_nde *node)
+{
+	t_ast_nde *sib = node->child;
+	char 	*start;
+	char 	*end;
+	char	*pipe;
+	
 	start = node->start;
-	end = node->end;
-	pipe = search_pipe(sib);    // gestion des double quotes, simple qute, 
+	end = node->end;	
+	pipe = search_pipe(sib);    // gestion des double quotes, simple qute, 	
 	if (pipe)
 	{
 		error_detector(pipe, start, end);
-		sib->child = create_pipe(start, end, pipe);	
+		sib->child = create_pipe(start, end, pipe);
+		fill_child(sib);
 		set_pipe(sib->child->child);
+		return (sib->child->child);
 	}
-	return 
+	return (sib);
 }
 // static t_ast_nde	*set_pipe_sib(t_ast_nde *sib)
 // {
@@ -297,12 +343,18 @@ static char	**create_ast3(char *str)
 	t_ast_nde	*spce_sib;
 	t_ast_nde	*pip_sib;
 	t_ast_nde	*parnths_sib;
+	t_ast_nde	*base;
 	
 	qute_sib = set_qute_sib3(str);
 	print_qute_sib3(qute_sib);
-	pip_sib = set_pipe_sib(qute_sib);
-	print_sib(pip_sib);
-	free_sib(qute_sib);
+	base = create_node(NONE);
+	base->start = qute_sib->start;
+	base->end = sib_last(qute_sib)->end;
+	base->child = qute_sib;
+	pip_sib = set_pipe(base);
+	printf("truc\n");
+	print_sib42(pip_sib);
+	//free_sib(qute_sib);
 	return (ast_res);
 }
 char	*parse3(char *str)
