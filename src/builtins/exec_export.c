@@ -6,22 +6,21 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/02 08:24:31 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/02 12:00:32 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 void	display_export_tab(t_Data *data);
-int	exec_export(char **command_tab, t_Data *data);
-int	is_valid_var(char *export_arg);
-
+int		exec_export(char **command_tab, t_Data *data);
+int		is_valid_var(char *export_arg);
 
 int	exec_export(char **command_tab, t_Data *data)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	if (command_tab[1] == NULL)
 		display_export_tab(data);
 	i = 1;
@@ -32,10 +31,12 @@ int	exec_export(char **command_tab, t_Data *data)
 			j = 0;
 			while (data->envp_tab[j])
 				j++;
-			data->envp_tab[j] = (char *)ft_calloc((ft_strlen(command_tab[i]) + 1), sizeof(char));
+			data->envp_tab[j] = (char *)
+				ft_calloc((ft_strlen(command_tab[i]) + 1), sizeof(char));
 			if (data->envp_tab[j] == NULL)
 				return (0);
-			ft_strlcpy(data->envp_tab[j], command_tab[i], ft_strlen(command_tab[i]) + 1);
+			ft_strlcpy(data->envp_tab[j], command_tab[i],
+				ft_strlen(command_tab[i]) + 1);
 			data->envp_tab[j + 1] = NULL;
 		}
 		i++;
@@ -44,7 +45,7 @@ int	exec_export(char **command_tab, t_Data *data)
 
 int	is_valid_var(char *export_arg)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (export_arg[i])
@@ -58,26 +59,24 @@ int	is_valid_var(char *export_arg)
 
 void	display_export_tab(t_Data *data)
 {
-	int	i;
-	int j;
-	int k;
-	char export_tab[100][500];
-	int equal_was_done;
-	char temp[500];
-	
+	int		i;
+	int		j;
+	int		k;
+	char	export_tab[100][500];
+	int		equal_was_done;
+	char	temp[500];
+
 	i = 0;
 	while (i < 100)
 		ft_bzero(export_tab[i++], 500);
 	i = 0;
 	while (data->envp_tab[i])
 	{
-		// if (data->envp_tab[i][0] == '_')
-		// 	break;
 		ft_strlcpy(export_tab[i], "declare -x ", 12);
 		j = 0;
 		k = 11;
 		equal_was_done = 0;
-		while(data->envp_tab[i][j])
+		while (data->envp_tab[i][j])
 		{
 			export_tab[i][k] = data->envp_tab[i][j];
 			if (data->envp_tab[i][j] == '=' && equal_was_done == 0)
@@ -112,7 +111,3 @@ void	display_export_tab(t_Data *data)
 		i++;
 	}
 }
-
-
-
-

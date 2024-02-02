@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/02 08:25:15 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/02 12:01:03 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	command_is_builtin(char *command, t_Data *data, char *envp[])
 	cmd[1] = NULL;
 	cmd_tab = NULL;
 	cmd_tab = parse_cmd(cmd, data->envp_tab);
-	ft_printf("%s\n", cmd_tab[0]);
 	if (!cmd_tab)
 		return (1);
 	if (!cmd_tab[0])
