@@ -6,13 +6,13 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/02 12:00:32 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/02 14:18:17 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	display_export_tab(t_Data *data);
+void	create_export_tab(t_Data *data);
 int		exec_export(char **command_tab, t_Data *data);
 int		is_valid_var(char *export_arg);
 
@@ -22,7 +22,7 @@ int	exec_export(char **command_tab, t_Data *data)
 	int	j;
 
 	if (command_tab[1] == NULL)
-		display_export_tab(data);
+		create_export_tab(data);
 	i = 1;
 	while (command_tab[i])
 	{
@@ -57,40 +57,12 @@ int	is_valid_var(char *export_arg)
 	return (0);
 }
 
-void	display_export_tab(t_Data *data)
+void	bubble_sort_and_create_export_tab(char export_tab[][500])
 {
 	int		i;
-	int		j;
-	int		k;
-	char	export_tab[100][500];
-	int		equal_was_done;
 	char	temp[500];
 
-	i = 0;
-	while (i < 100)
-		ft_bzero(export_tab[i++], 500);
-	i = 0;
-	while (data->envp_tab[i])
-	{
-		ft_strlcpy(export_tab[i], "declare -x ", 12);
-		j = 0;
-		k = 11;
-		equal_was_done = 0;
-		while (data->envp_tab[i][j])
-		{
-			export_tab[i][k] = data->envp_tab[i][j];
-			if (data->envp_tab[i][j] == '=' && equal_was_done == 0)
-			{
-				equal_was_done = 1;
-				export_tab[i][k++ + 1] = '"';
-			}
-			j++;
-			k++;
-		}
-		export_tab[i][k++] = '"';
-		export_tab[i][k] = '\0';
-		i++;
-	}
+	ft_bzero(temp, 500);
 	i = 0;
 	while (export_tab[i][0] && export_tab[i + 1][0])
 	{
@@ -110,4 +82,48 @@ void	display_export_tab(t_Data *data)
 			ft_printf("%s\n", export_tab[i]);
 		i++;
 	}
+}
+
+void	format_vars_for_export_tab(t_Data *data, char export_tab[][500], int *i)
+{
+	int	j;
+	int	k;
+	int	equal_was_done;
+
+	equal_was_done = 0;
+	k = 11;
+	j = 0;
+	while (data->envp_tab[*i][j])
+	{
+		export_tab[*i][k] = data->envp_tab[*i][j];
+		if (data->envp_tab[*i][j] == '=' && equal_was_done == 0)
+		{
+			equal_was_done = 1;
+			export_tab[*i][k++ + 1] = '"';
+		}
+		j++;
+		k++;
+	}
+	export_tab[*i][k++] = '"';
+	export_tab[*i][k] = '\0';
+}
+
+void	create_export_tab(t_Data *data)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	export_tab[100][500];
+
+	i = 0;
+	while (i < 100)
+		ft_bzero(export_tab[i++], 500);
+	i = 0;
+	while (data->envp_tab[i])
+	{
+		ft_strlcpy(export_tab[i], "declare -x ", 12);
+		format_vars_for_export_tab(data, export_tab, &i);
+		i++;
+	}
+	bubble_sort_and_create_export_tab(export_tab);
 }
