@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/01/29 09:26:13 by dan              ###   ########.fr        #
+#    Updated: 2024/02/02 18:30:02 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ SRC =	src/main.c \
 		src/parsing/parsing_spce.c \
 		src/parsing/parsing_utils.c \
 		src/parsing/parsing_wip.c \
+		src/test_file.c \
+		
 		
 
 OBJ = $(SRC:.c=.o)
