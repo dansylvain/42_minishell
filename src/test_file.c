@@ -3,7 +3,6 @@
 
 /**========================================================================
 //? function NOT tested
-//? used new func ft_strndup, NOT tested either...
 //? check wether or not to add +1 when creating string with ft_strndup
  *========================================================================**/
 char	**create_command_tab(t_ast_nde *node)
