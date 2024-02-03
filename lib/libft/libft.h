@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 14:53:17 by dan               #+#    #+#             */
-/*   Updated: 2024/01/26 17:30:46 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/03 07:46:34 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	*ft_itoa(int n);
 int		ft_isspace(int c);
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s);
+char	*ft_strndup(const char *s, size_t len);
 char	*ft_strchr(const char *s, int c);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strjoin(char const *s1, char const *s2);
