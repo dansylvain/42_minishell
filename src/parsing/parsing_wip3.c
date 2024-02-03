@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/02 22:17:38 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/03 07:40:55 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,10 @@ void	print_sib42(t_ast_nde *sib)
 	int	i;	
 	int	back_color;
 	const t_ast_nde *sib_sav;
-	printf("laaaa.\n");
+	t_ast_nde *sib_sav2;
+		printf("deb\n");
 	back_color = 41; 
-	
+	sib_sav2 = sib;	
 	while (sib)
 	{	
 		sib_sav = sib;
@@ -123,23 +124,44 @@ void	print_sib42(t_ast_nde *sib)
 			i = 0;
 			while (sib->start + i <= sib->end)
 				printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);
-			back_color = (back_color - 41 + 1) % 7 + 41;	
+			back_color = (back_color - 41 + 1) % 7 + 41;
 			sib = sib->sibling;
 		}
+		if (sib_sav && sib_sav->token == PIPE)
+		{
+			printf("right\n");
+			t_ast_nde *tmp = sib_sav->child->sibling->child;
+			while (tmp)
+			{	
+				i = 0;
+				while (tmp->start + i <= tmp->end)
+					printf("\033[%dm%c\033[0m", back_color, tmp->start[i++]);
+				back_color = (back_color - 41 + 1) % 7 + 41;	
+				tmp = tmp->sibling;				
+			}
+			printf("\n");
+		}		
 		sib = sib_sav->child;
+		
 		printf("f\n");
 	}
-	//if (sib_sav->child)
-		
+	printf("\n");
+	// sib = sib_sav2;
 	// while (sib)
 	// {	
-	// 	i = 0;
-	// 	while (sib->start + i <= sib->end)
-	// 		printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);
-	// 	back_color = (back_color - 41 + 1) % 7 + 41;	
-	// 	sib = sib->sibling;
+	// 	sib_sav2 = sib;
+	// 	while (sib)
+	// 	{	
+	// 		i = 0;
+	// 		while (sib->start + i <= sib->end)
+	// 			printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);
+	// 		back_color = (back_color - 41 + 1) % 7 + 41;	
+	// 		sib = sib->sibling;
+	// 	}
+	// 	//if (sib_sav2->child)
+	// 	sib = sib_sav2->child;
+	// 	printf("f\n");
 	// }
-	printf("\n");
 }
 
 void	print_qute_sib3(t_ast_nde *sib)
@@ -240,7 +262,7 @@ t_ast_nde	*fill_child(t_ast_nde *sib)
 	t_ast_nde	*raw_rght;
 	t_ast_nde	*raw_lft_child_sav;
 	t_ast_nde	*raw_rght_child_sav;
-	
+	t_ast_nde	*raw_overlap;
 	raw_lft_child_sav = NULL;
 	raw_rght_child_sav = NULL;
 	raw_lft = pipe->child;
@@ -260,7 +282,22 @@ t_ast_nde	*fill_child(t_ast_nde *sib)
 			if 	(sib->end < pipe->start)
 				add_sibling(copy_node(sib), &raw_lft->child, &raw_lft_child_sav);				
 			else if (sib->start > pipe->start)
-				add_sibling(copy_node(sib), &raw_rght->child, &raw_rght_child_sav );						
+				add_sibling(copy_node(sib), &raw_rght->child, &raw_rght_child_sav );
+			else if (sib->start <= pipe->start && sib->end >= pipe->start)
+			{
+				if (sib->start < pipe->start)
+				{
+					raw_overlap = copy_node(sib);
+					raw_overlap->end = pipe->start - 1;
+					add_sibling(raw_overlap, &raw_lft->child, &raw_lft_child_sav);					
+				}
+				if (sib->end > pipe->start)
+				{					
+					raw_overlap = copy_node(sib);
+					raw_overlap->start = pipe->start + 1;
+					add_sibling(raw_overlap, &raw_rght->child, &raw_rght_child_sav);
+				}
+			}			
 		}		
 		sib = sib->sibling;
 	}
@@ -378,7 +415,7 @@ char	*parse3(char *str)
 int	tmp_main3(void)
 {
 	//char *str = "x'e \"s 't \"\"ju\"' m\"oi' bie '   n ";
-	char *str = "  cat <file1|\"rev\"|ca't' |grep -n \" cmd1 | cmd2\"| >file2 cut -d':' -f1 ";
+	char *str = "  cat <file1|\"rev\"|ca't'e |grep -n \" cmd1 | cmd2\"| >file2 cut -d':' -f1 ";
 	printf("%s\n", str);
 	parse3(str);
 	return(0);
