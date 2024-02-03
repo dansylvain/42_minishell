@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_wip3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/03 07:40:55 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/03 08:47:25 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,12 +211,12 @@ char	*search_pipe(const t_ast_nde *sib)
 {
 	char	*pipe;
 	char	*start;
-ft_printf("END. %s", pipe);
+
 	if (sib)
-		start = sib->start;	ft_printf("STOP. %s", pipe);
+		start = sib->start;	
 	pipe = NULL;
 	while (sib)
-	{//ft_printf("pipe left operande missing.");
+	{
 		while (sib->token == RAW && start <= sib->end)
 		{
 			if (*(start - 1) != '\\' && *start == '|')
@@ -322,7 +322,7 @@ static t_ast_nde	*set_pipe(t_ast_nde *node)
 		sib->child = create_pipe(start, end, pipe);
 		fill_child(sib);
 		set_pipe(sib->child->child);
-		return (sib->child->child);
+		//return (sib->child->child);
 	}
 	return (sib);
 }
@@ -399,8 +399,7 @@ static char	**create_ast3(char *str)
 	base->start = qute_sib->start;
 	base->end = sib_last(qute_sib)->end;
 	base->child = qute_sib;
-	pip_sib = set_pipe(base);
-	printf("truc\n");
+	pip_sib = set_pipe(base);	
 	print_sib42(pip_sib);
 	//free_sib(qute_sib);
 	return (ast_res);
