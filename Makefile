@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
+#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/03 18:34:10 by dan              ###   ########.fr        #
+#    Updated: 2024/02/03 19:31:21 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 
 RLFLAGS = -lreadline -lhistory -I/usr/include/readline
 
-CFLAGS = -g $(RLFLAGS) -Iincludes/parsing
+CFLAGS = -g $(RLFLAGS) -Iincludes/parsing -Iincludes
 # -Wall -Wextra -Werror
 
 # Directories
@@ -53,7 +53,9 @@ SRC =	src/main.c \
 		src/parsing/parsing_minishell/parsing_pipe.c \
 		src/parsing/parsing_minishell/parsing_utils.c \
 		src/parsing/parsing_minishell/parsing_test.c \
-
+		src/pipex/pipex.c \
+		src/pipex/setup.c \
+		
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
