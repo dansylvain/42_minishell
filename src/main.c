@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/02 14:18:48 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/03 15:01:16 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ int	main(int argc, char **argv, char *envp[])
 {
 	t_Data	*data;
 
+	rl_catch_signals = 0;
 	data = (t_Data *)malloc(sizeof(t_Data));
 	if (data == NULL)
-		return (display_error("Error\n"), free_data(data), 255);
+		return (display_error("Error\n"), 255);
 	data->envp_tab = duplicate_envp(data, envp);
 	if (!data->envp_tab)
 		return (display_error("Error\n"), free_data(data), 255);
-	rl_catch_signals = 0;
 	if (argc != 1)
 		return (free_data(data), display_error("Usage: ./minishell\n"), 255);
 	handle_signals();
 	if (prompt_loop(data, envp) == 0)
-		return (free_data(data), 255);
+		return (free_data(data), 0);
 	return (0);
 }
 
@@ -57,23 +57,24 @@ int	main(int argc, char **argv, char *envp[])
  *========================================================================**/
 int	prompt_loop(t_Data *data, char *envp[])
 {
-	char	*command;
+	char	*cmd[2];
 	char	*prompt;
 
-	command = NULL;
+	cmd[1] = NULL;
+	cmd[0] = NULL;
 	while (1)
 	{
-		command = readline("minishell> ");
-		if (command && *command)
+		cmd[0] = readline("minishell> ");
+		if (cmd[0] && *cmd[0])
 		{
-			add_history(command);
+			add_history(cmd[0]);
 		}
-		if (command == NULL)
+		if (cmd[0] == NULL)
 			return (ft_printf("exit\n"), 0);
-		if (command_is_builtin(command, data, envp) == 0)
-			return (free(command), 0);
-		if (command)
-			free(command);
+		if (command_is_builtin(cmd, data, envp) == 0)
+			return (free(cmd[0]), 0);
+		if (cmd[0])
+			free(cmd[0]);
 	}
 	return (1);
 }
@@ -83,14 +84,10 @@ int	prompt_loop(t_Data *data, char *envp[])
  * exit builtin implemented without extern function
  * 0 is returned, and the data struct is freed in calling function
  *========================================================================**/
-int	command_is_builtin(char *command, t_Data *data, char *envp[])
+int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[])
 {
 	char	**cmd_tab;
-	char	*cmd[2];
 
-	cmd[0] = command;
-	cmd[1] = NULL;
-	cmd_tab = NULL;
 	cmd_tab = parse_cmd(cmd, data->envp_tab);
 	if (!cmd_tab)
 		return (1);
@@ -114,6 +111,10 @@ int	command_is_builtin(char *command, t_Data *data, char *envp[])
 	return (1);
 }
 
+/**========================================================================
+ *                           duplicate_envp
+ * var ENVP_TAB_SIZE defined in minishell.h
+ *========================================================================**/
 char	**duplicate_envp(t_Data *data, char *envp[])
 {
 	char	**envp_tab;

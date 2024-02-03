@@ -110,7 +110,7 @@ LC_ADDRESS=fr_FR.UTF-8
 GNOME_SHELL_SESSION_MODE=ubuntu
 LC_NAME=fr_FR.UTF-8
 SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-TERMINATOR_UUID=urn:uuid:f7e64159-6ebd-459f-8933-1bfb2a825d77
+TERMINATOR_UUID=urn:uuid:e002b104-007e-4103-a164-aa79ee50e0fc
 XMODIFIERS=@im=ibus
 DESKTOP_SESSION=ubuntu
 LC_MONETARY=fr_FR.UTF-8
@@ -160,9 +160,10 @@ PATH=/home/dan/.nvm/versions/node/v20.10.0/bin:/home/dan/.local/bin:/usr/local/s
 GDMSESSION=ubuntu
 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 NVM_BIN=/home/dan/.nvm/versions/node/v20.10.0/bin
-GIO_LAUNCHED_DESKTOP_FILE_PID=113081
+GIO_LAUNCHED_DESKTOP_FILE_PID=134825
 GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/terminator.desktop
 LC_NUMERIC=fr_FR.UTF-8
+OLDPWD=/home/dan/42/minishell_common/lib/libft
 _=./minishell
 minishell> unset SHELL
 minishell> env
@@ -178,7 +179,7 @@ LC_ADDRESS=fr_FR.UTF-8
 GNOME_SHELL_SESSION_MODE=ubuntu
 LC_NAME=fr_FR.UTF-8
 SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-TERMINATOR_UUID=urn:uuid:f7e64159-6ebd-459f-8933-1bfb2a825d77
+TERMINATOR_UUID=urn:uuid:e002b104-007e-4103-a164-aa79ee50e0fc
 XMODIFIERS=@im=ibus
 DESKTOP_SESSION=ubuntu
 LC_MONETARY=fr_FR.UTF-8
@@ -228,9 +229,10 @@ PATH=/home/dan/.nvm/versions/node/v20.10.0/bin:/home/dan/.local/bin:/usr/local/s
 GDMSESSION=ubuntu
 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 NVM_BIN=/home/dan/.nvm/versions/node/v20.10.0/bin
-GIO_LAUNCHED_DESKTOP_FILE_PID=113081
+GIO_LAUNCHED_DESKTOP_FILE_PID=134825
 GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/terminator.desktop
 LC_NUMERIC=fr_FR.UTF-8
+OLDPWD=/home/dan/42/minishell_common/lib/libft
 _=./minishell
 minishell> exit
 -----------------------
@@ -250,7 +252,7 @@ LC_ADDRESS=fr_FR.UTF-8
 GNOME_SHELL_SESSION_MODE=ubuntu
 LC_NAME=fr_FR.UTF-8
 SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-TERMINATOR_UUID=urn:uuid:f7e64159-6ebd-459f-8933-1bfb2a825d77
+TERMINATOR_UUID=urn:uuid:e002b104-007e-4103-a164-aa79ee50e0fc
 XMODIFIERS=@im=ibus
 DESKTOP_SESSION=ubuntu
 LC_MONETARY=fr_FR.UTF-8
@@ -300,9 +302,10 @@ PATH=/home/dan/.nvm/versions/node/v20.10.0/bin:/home/dan/.local/bin:/usr/local/s
 GDMSESSION=ubuntu
 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 NVM_BIN=/home/dan/.nvm/versions/node/v20.10.0/bin
-GIO_LAUNCHED_DESKTOP_FILE_PID=113081
+GIO_LAUNCHED_DESKTOP_FILE_PID=134825
 GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/terminator.desktop
 LC_NUMERIC=fr_FR.UTF-8
+OLDPWD=/home/dan/42/minishell_common/lib/libft
 _=./minishell
 minishell> unset _
 minishell> env
@@ -319,7 +322,7 @@ LC_ADDRESS=fr_FR.UTF-8
 GNOME_SHELL_SESSION_MODE=ubuntu
 LC_NAME=fr_FR.UTF-8
 SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-TERMINATOR_UUID=urn:uuid:f7e64159-6ebd-459f-8933-1bfb2a825d77
+TERMINATOR_UUID=urn:uuid:e002b104-007e-4103-a164-aa79ee50e0fc
 XMODIFIERS=@im=ibus
 DESKTOP_SESSION=ubuntu
 LC_MONETARY=fr_FR.UTF-8
@@ -369,9 +372,10 @@ PATH=/home/dan/.nvm/versions/node/v20.10.0/bin:/home/dan/.local/bin:/usr/local/s
 GDMSESSION=ubuntu
 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 NVM_BIN=/home/dan/.nvm/versions/node/v20.10.0/bin
-GIO_LAUNCHED_DESKTOP_FILE_PID=113081
+GIO_LAUNCHED_DESKTOP_FILE_PID=134825
 GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/terminator.desktop
 LC_NUMERIC=fr_FR.UTF-8
+OLDPWD=/home/dan/42/minishell_common/lib/libft
 _=./minishell
 minishell> exit
 -----------------------
@@ -391,7 +395,7 @@ LC_ADDRESS=fr_FR.UTF-8
 GNOME_SHELL_SESSION_MODE=ubuntu
 LC_NAME=fr_FR.UTF-8
 SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-TERMINATOR_UUID=urn:uuid:f7e64159-6ebd-459f-8933-1bfb2a825d77
+TERMINATOR_UUID=urn:uuid:e002b104-007e-4103-a164-aa79ee50e0fc
 XMODIFIERS=@im=ibus
 DESKTOP_SESSION=ubuntu
 LC_MONETARY=fr_FR.UTF-8
@@ -441,9 +445,10 @@ PATH=/home/dan/.nvm/versions/node/v20.10.0/bin:/home/dan/.local/bin:/usr/local/s
 GDMSESSION=ubuntu
 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 NVM_BIN=/home/dan/.nvm/versions/node/v20.10.0/bin
-GIO_LAUNCHED_DESKTOP_FILE_PID=113081
+GIO_LAUNCHED_DESKTOP_FILE_PID=134825
 GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/terminator.desktop
 LC_NUMERIC=fr_FR.UTF-8
+OLDPWD=/home/dan/42/minishell_common/lib/libft
 _=./minishell
 minishell> unset OLDPWD
 minishell> env
@@ -460,7 +465,7 @@ LC_ADDRESS=fr_FR.UTF-8
 GNOME_SHELL_SESSION_MODE=ubuntu
 LC_NAME=fr_FR.UTF-8
 SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-TERMINATOR_UUID=urn:uuid:f7e64159-6ebd-459f-8933-1bfb2a825d77
+TERMINATOR_UUID=urn:uuid:e002b104-007e-4103-a164-aa79ee50e0fc
 XMODIFIERS=@im=ibus
 DESKTOP_SESSION=ubuntu
 LC_MONETARY=fr_FR.UTF-8
@@ -510,7 +515,7 @@ PATH=/home/dan/.nvm/versions/node/v20.10.0/bin:/home/dan/.local/bin:/usr/local/s
 GDMSESSION=ubuntu
 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 NVM_BIN=/home/dan/.nvm/versions/node/v20.10.0/bin
-GIO_LAUNCHED_DESKTOP_FILE_PID=113081
+GIO_LAUNCHED_DESKTOP_FILE_PID=134825
 GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/terminator.desktop
 LC_NUMERIC=fr_FR.UTF-8
 _=./minishell
@@ -525,7 +530,7 @@ declare -x DESKTOP_SESSION="ubuntu"
 declare -x DISPLAY=":0"
 declare -x GDMSESSION="ubuntu"
 declare -x GIO_LAUNCHED_DESKTOP_FILE="/usr/share/applications/terminator.desktop"
-declare -x GIO_LAUNCHED_DESKTOP_FILE_PID="113081"
+declare -x GIO_LAUNCHED_DESKTOP_FILE_PID="134825"
 declare -x GJS_DEBUG_OUTPUT="stderr"
 declare -x GJS_DEBUG_TOPICS="JS ERROR;JS LOG"
 declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
@@ -556,6 +561,7 @@ declare -x MANAGERPID="911"
 declare -x NVM_BIN="/home/dan/.nvm/versions/node/v20.10.0/bin"
 declare -x NVM_CD_FLAGS=""
 declare -x NVM_DIR="/home/dan/.nvm"
+declare -x OLDPWD="/home/dan/42/minishell_common/lib/libft"
 declare -x PAPERSIZE="a4"
 declare -x PATH="/home/dan/.nvm/versions/node/v20.10.0/bin:/home/dan/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin"
 declare -x PWD="/home/dan/42/minishell_common"
@@ -570,7 +576,7 @@ declare -x SYSTEMD_EXEC_PID="2079"
 declare -x TERM="xterm-256color"
 declare -x TERMINATOR_DBUS_NAME="net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3"
 declare -x TERMINATOR_DBUS_PATH="/net/tenshu/Terminator2"
-declare -x TERMINATOR_UUID="urn:uuid:f7e64159-6ebd-459f-8933-1bfb2a825d77"
+declare -x TERMINATOR_UUID="urn:uuid:e002b104-007e-4103-a164-aa79ee50e0fc"
 declare -x USER="dan"
 declare -x USERNAME="dan"
 declare -x VTE_VERSION="6800"

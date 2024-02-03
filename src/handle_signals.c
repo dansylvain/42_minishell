@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:41:31 by dan               #+#    #+#             */
-/*   Updated: 2024/01/22 16:01:07 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/03 14:46:40 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	sigquit_handler(int signum);
 
 /**========================================================================
  *                           handle_signals
+ * 2 => SIGINT (CTRL + C)
+ * 3 => SIGQUIT (CTRL + \)
  *========================================================================**/
 void	handle_signals(void)
 {
@@ -26,6 +28,7 @@ void	handle_signals(void)
 
 /**========================================================================
  *                           sigint_handler
+ * replaces the content of reasline buffer + displays the prompt anew 
  *========================================================================**/
 static void	sigint_handler(int signum)
 {
@@ -38,6 +41,7 @@ static void	sigint_handler(int signum)
 
 /**========================================================================
  *                           sigkill_handler
+ * does nothing... as expected
  *========================================================================**/
 static void	sigquit_handler(int signum)
 {
