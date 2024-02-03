@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/02 18:30:02 by dan              ###   ########.fr        #
+#    Updated: 2024/02/03 18:34:10 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,16 +42,17 @@ SRC =	src/main.c \
 		src/builtins/exec_echo.c \
 		src/builtins/exec_unset.c \
 		src/builtins/exec_export.c \
-		src/parsing/parsing_build.c \
-		src/parsing/parsing_invrt.c \
-		src/parsing/parsing_path.c \
-		src/parsing/parsing_qute.c \
-		src/parsing/parsing_spce.c \
-		src/parsing/parsing_utils.c \
-		src/parsing/parsing_wip.c \
-		src/test_file.c \
-		
-		
+		src/parsing/parsing_pipex/parsing_build.c \
+		src/parsing/parsing_pipex/parsing_invrt.c \
+		src/parsing/parsing_pipex/parsing_path.c \
+		src/parsing/parsing_pipex/parsing_qute.c \
+		src/parsing/parsing_pipex/parsing_spce.c \
+		src/parsing/parsing_pipex/parsing_utils.c \
+		src/parsing/parsing_minishell/parsing.c \
+		src/parsing/parsing_minishell/parsing_qute.c \
+		src/parsing/parsing_minishell/parsing_pipe.c \
+		src/parsing/parsing_minishell/parsing_utils.c \
+		src/parsing/parsing_minishell/parsing_test.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -71,7 +72,7 @@ $(GET_NEXT_LINE):
 
 %.o: %.c
 	@printf "%-80s" $<
-	@{ $(CC) $(CFLAGS) -I$(LIBFT_DIR) -I/usr/include -O3 -c $< -o $@; } 2>&1 || \
+	@{ $(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I/usr/include -O3 -c $< -o $@; } 2>&1 || \
 		(echo "\033[0;31mCompilation of $< failed\033[0m"; exit 1)
 	@echo "\033[0;32mcompiled\033[0m"
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 10:03:27 by svidot            #+#    #+#             */
-/*   Updated: 2024/01/29 09:26:39 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/03 18:19:48 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ typedef enum e_tok
 	NONE,
 	INVRT,
 	SQUTE,
+	IN_SQUTE,
 	DQUTE,
+	IN_DQUTE,
+	PIPE,
 	SPACE,
 	CMD,
 	ARG_CMD,

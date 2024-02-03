@@ -6,14 +6,13 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/03 17:36:43 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/03 18:34:18 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	**parse_cmd(char **command, char **env);
-// void	tmpmain();
+char **parse_cmd(char **command, char **env);
+void	tmp_main();
 /**========================================================================
  *                             COMMENTS POLICY
  *? signal info at the end of a function's comment block 
