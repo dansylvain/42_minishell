@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/02 14:18:48 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/03 18:27:11 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	**parse_cmd(char **command, char **env);
-// void	tmpmain();
+char **parse_cmd(char **command, char **env);
+void	tmp_main();
 /**========================================================================
  *                             COMMENTS POLICY
  *? signal info at the end of a function's comment block 
