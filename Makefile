@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/03 19:26:22 by seblin           ###   ########.fr        #
+#    Updated: 2024/02/03 19:31:21 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 
 RLFLAGS = -lreadline -lhistory -I/usr/include/readline
 
-CFLAGS = -g $(RLFLAGS) -Iincludes/parsing
+CFLAGS = -g $(RLFLAGS) -Iincludes/parsing -Iincludes
 # -Wall -Wextra -Werror
 
 # Directories

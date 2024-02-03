@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/01/06 15:42:54 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/03 19:44:31 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "libft.h"
-#include "setup.h"
-#include "bonus.h"
+#include "pipex_setup.h"
+#include "pipex_bonus.h"
 
 char	**parse_cmd(char *argv[], char *envp[], int fd_file[]);
 
@@ -118,7 +118,7 @@ void	create_pipeline(char *argv[], char *envp[], int fd_file[], int flag)
 	close(fd_file[1]);
 }
 
-int	main(int argc, char *argv[], char *envp[])
+int	pipex(int argc, char *argv[], char *envp[])
 {
 	char	*filepaths[2];
 	int		fd_file[2];
