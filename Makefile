@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
+#    By: svidot <svidot@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/02 16:06:36 by seblin           ###   ########.fr        #
+#    Updated: 2024/02/03 15:10:23 by svidot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,14 +42,17 @@ SRC =	src/main.c \
 		src/exec_echo.c \
 		src/exec_unset.c \
 		src/exec_export.c \
-		src/parsing/parsing_build.c \
-		src/parsing/parsing_invrt.c \
-		src/parsing/parsing_path.c \
-		src/parsing/parsing_qute.c \
-		src/parsing/parsing_spce.c \
-		src/parsing/parsing_utils.c \
-		src/parsing/parsing_wip.c \
-		src/parsing/parsing_wip3.c \
+		src/parsing/parsing_pipex/parsing_build.c \
+		src/parsing/parsing_pipex/parsing_invrt.c \
+		src/parsing/parsing_pipex/parsing_path.c \
+		src/parsing/parsing_pipex/parsing_qute.c \
+		src/parsing/parsing_pipex/parsing_spce.c \
+		src/parsing/parsing_pipex/parsing_utils.c \
+		src/parsing/parsing_minishell/parsing.c \
+		src/parsing/parsing_minishell/parsing_qute.c \
+		src/parsing/parsing_minishell/parsing_pipe.c \
+		src/parsing/parsing_minishell/parsing_utils.c \
+		src/parsing/parsing_minishell/parsing_test.c \
 
 OBJ = $(SRC:.c=.o)
 
