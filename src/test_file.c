@@ -33,3 +33,13 @@ char	**create_command_tab(t_ast_nde *node)
 	return (commands_tab);
 }
 
+void	display_command_tab(char **command_tab)
+{
+	int i;
+
+	while (command_tab[i])
+	{
+		ft_printf("%s\n", command_tab[i]);
+		i++;
+	}
+}
