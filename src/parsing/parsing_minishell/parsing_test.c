@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/03 16:19:45 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/03 18:00:46 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	print_sib(t_ast_nde *sib)
 	
 	back_color = 41; 
 	sib_sav2 = sib;	
+	ft_printf("\n");
 	while (sib)
 	{	
 		sib_sav = sib;
-		while (sib)
+		while (sib && sib->token == 0)
 		{	
 			i = 0;
 			while (sib->start + i <= sib->end)
@@ -33,9 +34,10 @@ void	print_sib(t_ast_nde *sib)
 			back_color = (back_color - 41 + 1) % 7 + 41;
 			sib = sib->sibling;
 		}
+		//ft_printf("\n");
 		if (sib_sav && sib_sav->token == PIPE)
 		{	
-			t_ast_nde *tmp = sib_sav->child->sibling->child;
+			t_ast_nde *tmp = sib_sav->child->child;
 			while (tmp)
 			{	
 				i = 0;
@@ -44,10 +46,19 @@ void	print_sib(t_ast_nde *sib)
 				back_color = (back_color - 41 + 1) % 7 + 41;	
 				tmp = tmp->sibling;				
 			}
-			ft_printf("\n");
+			tmp = sib_sav->child->sibling->child;
+			while (tmp)
+			{	
+				i = 0;
+				while (tmp->start + i <= tmp->end)
+					ft_printf("\033[%dm%c\033[0m", back_color, tmp->start[i++]);
+				back_color = (back_color - 41 + 1) % 7 + 41;	
+				tmp = tmp->sibling;				
+			}
+			//ft_printf("\n");
 		}		
-		sib = sib_sav->child;		
 		ft_printf("\n");
+		sib = sib_sav->child;		
 	}
 	ft_printf("\n");
 }

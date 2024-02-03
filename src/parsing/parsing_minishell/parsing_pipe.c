@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:40:28 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/03 15:58:59 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/03 17:36:44 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,15 @@ static char	*search_pipe(const t_ast_nde *sib)
 static void	error_detector(const char *const pipe, const char *const start, const char *const end)
 {
 	if (pipe == start)
+	{
 		ft_printf("pipe left operande missing.\n");
+		exit(1);
+	}
 	if (pipe == end)
+	{
 		ft_printf("pipe right operande missing.\n");
+		exit(1);
+	}
 }
 
 static t_ast_nde	*create_pipe(char *start, char *end, char *pipe)
