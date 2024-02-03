@@ -6,7 +6,7 @@
 /*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/03 15:53:27 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/03 16:05:21 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_ast_nde	*sib_last(t_ast_nde *sib);
 t_ast_nde	*set_pipe(t_ast_nde *node);
 void		print_qute_sib(t_ast_nde *sib);
 void		print_sib(t_ast_nde *sib);
-
+void		print_sib42(t_ast_nde *sib);
 static void	leaf_tree(t_ast_nde *root, t_ast_nde **cmd, t_ast_nde **cmd_sav)
 {
 	t_ast_nde	*head;
@@ -64,7 +64,7 @@ static t_ast_nde	*create_ast(char *str)
 	pip_sib = set_pipe(root);	
 	print_sib(pip_sib);
 	leaf_tree(root, &cmd, &cmd_sav);
-	print_sib(cmd);	
+	print_sib42(cmd);	
 	ast_res = cmd;
 	return (ast_res);
 }
