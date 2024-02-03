@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/03 18:47:31 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/03 19:11:49 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,24 @@ char	**create_command_tab(t_ast_nde *node)
 	char **commands_tab;
 	int i;
 
+	t_ast_nde *current;
+	current = node;
 	tree_length = 0;
-	while (node)
+	while (current)
 	{
-		node = node->sibling;
+		current = current->sibling;
 		tree_length++;
 	}
+	// ft_printf("%s\n", node->start);
 	commands_tab = (char **)malloc(sizeof(char *) * tree_length + 1);
 	if (commands_tab == 0)
 		return (NULL);
 	i = 0;
 	while (i < tree_length)
 	{
-		commands_tab[i] = ft_strndup(node->start, node->end - node->start);
+		commands_tab[i] = ft_strndup(node->start, node->end - node->start + 1);
+		node = node->sibling;
+		ft_printf("commands_tab[%i]: %s\n", i,  commands_tab[i]);
 		if (commands_tab[i] == NULL)
 			return (NULL);
 		i++;
@@ -114,6 +119,7 @@ void	display_command_tab(char **command_tab)
 {
 	int i;
 
+	i = 0;
 	ft_printf("command_tab: \n");
 	while (command_tab[i])
 	{
@@ -131,31 +137,31 @@ int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[])
 {
 	char	**cmd_tab;
 
-	// cmd_tab = parse_cmd(cmd, data->envp_tab);
+	// parse(cmd[0]);
 	cmd_tab = create_command_tab(parse(cmd[0]));
 	
 	display_command_tab(cmd_tab);
 
-	// if (!cmd_tab)
-	// 	return (1);
-	// if (!cmd_tab[0])
-	// 	return (free_command_tab(cmd_tab), 1);
-	// if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "echo", 5))
-	// 	exec_echo(cmd_tab);
-	// if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 5]), "unset", 6))
-	// 	exec_unset(data->envp_tab, cmd_tab);
-	// if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 6]), "export", 7))
-	// 	exec_export(cmd_tab, data);
-	// if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "env", 4))
-	// 	exec_env(data->envp_tab, cmd_tab);
-	// if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "pwd", 4))
-	// 	exec_pwd();
-	// if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 2]), "cd", 3))
-	// 	exec_cd(cmd_tab);
-	// if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "exit", 5))
-	// 	return (ft_printf("exit\n"), free_command_tab(cmd_tab), 0);
-	// free_command_tab(cmd_tab);
-	// return (1);
+	if (!cmd_tab)
+		return (1);
+	if (!cmd_tab[0])
+		return (free_command_tab(cmd_tab), 1);
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "echo", 5))
+		exec_echo(cmd_tab);
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 5]), "unset", 6))
+		exec_unset(data->envp_tab, cmd_tab);
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 6]), "export", 7))
+		exec_export(cmd_tab, data);
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "env", 4))
+		exec_env(data->envp_tab, cmd_tab);
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "pwd", 4))
+		exec_pwd();
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 2]), "cd", 3))
+		exec_cd(cmd_tab);
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "exit", 5))
+		return (ft_printf("exit\n"), free_command_tab(cmd_tab), 0);
+	free_command_tab(cmd_tab);
+	return (1);
 }
 
 /**========================================================================
