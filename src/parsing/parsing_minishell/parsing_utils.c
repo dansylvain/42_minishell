@@ -6,9 +6,12 @@
 /*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:37:11 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/03 14:44:11 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/03 15:34:07 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "parsing_utils.h"
+#include <stdlib.h>
 
 t_ast_nde	*copy_node(t_ast_nde *node)
 {

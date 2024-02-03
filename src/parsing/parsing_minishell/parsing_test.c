@@ -6,9 +6,12 @@
 /*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/03 15:17:07 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/03 15:56:57 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "parsing_utils.h"
+#include "ft_printf.h"
 
 void	print_sib(t_ast_nde *sib)
 {
@@ -26,7 +29,7 @@ void	print_sib(t_ast_nde *sib)
 		{	
 			i = 0;
 			while (sib->start + i <= sib->end)
-				printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);
+				ft_printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);
 			back_color = (back_color - 41 + 1) % 7 + 41;
 			sib = sib->sibling;
 		}
@@ -37,16 +40,16 @@ void	print_sib(t_ast_nde *sib)
 			{	
 				i = 0;
 				while (tmp->start + i <= tmp->end)
-					printf("\033[%dm%c\033[0m", back_color, tmp->start[i++]);
+					ft_printf("\033[%dm%c\033[0m", back_color, tmp->start[i++]);
 				back_color = (back_color - 41 + 1) % 7 + 41;	
 				tmp = tmp->sibling;				
 			}
-			printf("\n");
+			ft_printf("\n");
 		}		
 		sib = sib_sav->child;		
-		printf("\n");
+		ft_printf("\n");
 	}
-	printf("\n");
+	ft_printf("\n");
 }
 
 void	print_qute_sib(t_ast_nde *sib)
@@ -68,8 +71,8 @@ void	print_qute_sib(t_ast_nde *sib)
 			back_color = 46;	
 		i = 0;
 		while (sib->start + i <= sib->end)
-			printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);
+			ft_printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);
 		sib = sib->sibling;
 	}
-	printf("\n");
+	ft_printf("\n");
 }

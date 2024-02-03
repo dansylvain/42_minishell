@@ -6,12 +6,16 @@
 /*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:40:28 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/03 15:21:10 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/03 15:58:59 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "parsing_utils.h"
+#include "ft_printf.h"
 #define RAW NONE //
+
+t_ast_nde	*copy_node(t_ast_nde *node);
 
 static char	*search_pipe(const t_ast_nde *sib)
 {
@@ -36,9 +40,9 @@ static char	*search_pipe(const t_ast_nde *sib)
 static void	error_detector(const char *const pipe, const char *const start, const char *const end)
 {
 	if (pipe == start)
-		ft_printf("pipe left operande missing.");
+		ft_printf("pipe left operande missing.\n");
 	if (pipe == end)
-		ft_printf("pipe right operande missing.");
+		ft_printf("pipe right operande missing.\n");
 }
 
 static t_ast_nde	*create_pipe(char *start, char *end, char *pipe)
@@ -108,8 +112,7 @@ static void	fill_child(t_ast_nde *sib)
 		sib = sib->sibling;
 	}
 	raw_lft->child = raw_lft_child_sav;
-	raw_rght->child = raw_rght_child_sav;
-	
+	raw_rght->child = raw_rght_child_sav;	
 }
 
 t_ast_nde	*set_pipe(t_ast_nde *node)
@@ -127,8 +130,7 @@ t_ast_nde	*set_pipe(t_ast_nde *node)
 		error_detector(pipe, start, end);
 		sib->child = create_pipe(start, end, pipe);
 		fill_child(sib);
-		set_pipe(sib->child->child);
-		//return (sib->child->child);
+		set_pipe(sib->child->child);		
 	}
 	return (sib);
 }

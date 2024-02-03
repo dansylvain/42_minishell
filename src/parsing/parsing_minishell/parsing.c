@@ -6,7 +6,7 @@
 /*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/03 15:23:48 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/03 15:53:27 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	leaf_tree(t_ast_nde *root, t_ast_nde **cmd, t_ast_nde **cmd_sav)
 	}	
 }
 
-t_ast_nde	*create_ast(char *str)
+static t_ast_nde	*create_ast(char *str)
 {
 	t_ast_nde	*ast_res;
 	t_ast_nde	*qute_sib;
@@ -53,7 +53,7 @@ t_ast_nde	*create_ast(char *str)
 	t_ast_nde	*root;
 	t_ast_nde	*cmd_sav;
 	t_ast_nde	*cmd;
-		
+	
 	cmd_sav = NULL;
 	qute_sib = set_qute_sib(str);
 	print_qute_sib(qute_sib);
@@ -78,7 +78,7 @@ t_ast_nde	*parse(char *str)
 int	tmp_main(void)
 {	
 	char *str = "  cat <file1|\"rev\"|ca't'e |grep -n \" cmd1 | cmd2\"| >file2 cut -d':' -f1 ";
-	printf("%s\n", str);
+	ft_printf("%s\n", str);
 	parse(str);
 	return(0);
 }

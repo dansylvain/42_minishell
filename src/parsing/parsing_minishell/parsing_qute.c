@@ -6,11 +6,12 @@
 /*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:36:13 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/03 15:26:56 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/03 15:31:06 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing_utils.h"
+#include "libft.h"
 
 static int	is_raw(char *str)
 {

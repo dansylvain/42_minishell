@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/01/31 17:25:59 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/03 15:36:40 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 char **parse_cmd(char **command, char **env);
-void	tmp_main3();
+void	tmp_main();
 /**========================================================================
  *                             COMMENTS POLICY
  *! signal info at the end of a function's comment block 
@@ -34,7 +34,7 @@ void	tmp_main3();
 int	main(int argc, char **argv, char *envp[])
 {
 	t_Data	*data;
-	tmp_main3(); return 0;
+	tmp_main(); return 0;
 	data = (t_Data *)malloc(sizeof(t_Data));
 	if (data == NULL)
 		return (display_error("Error\n"), free_data(data), 255);
