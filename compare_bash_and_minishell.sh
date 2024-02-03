@@ -14,7 +14,7 @@ commands=(
 # Fonction pour comparer les sorties
 compare_outputs() {
     command_output=$($1)
-    minishell_output=$(echo "$1" | $MINISHELL_EXECUTABLE)
+    minishell_output=$(echo "$1" | $MINISHELL_EXECUTABLE | sed '/minishell>/d')
 
     if [ "$command_output" != "$minishell_output" ]; then
         echo "Différence détectée pour la commande: $1"
