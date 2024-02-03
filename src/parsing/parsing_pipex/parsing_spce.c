@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_spce.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:08:19 by svidot            #+#    #+#             */
-/*   Updated: 2024/01/04 15:15:15 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/03 18:46:19 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_ast_nde	*set_space_nde(t_ast_nde *node)
 	static int			flag;
 
 	if (!flag)
-		spce_nde = create_node(SPACE);
+		spce_nde = create_node(SPCE);
 	while (node->start <= node->end && ft_isspace(*node->start))
 		node->start++;
 	while (node->start <= node->end && !ft_isspace(*node->start))
