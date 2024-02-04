@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/04 17:45:31 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/04 18:22:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	here_doc_handle(char **argv[], int pipefd_in[])
 	(void) argv;
 	(void) pipefd_in;
 }
-void	create_pipeline(char *argv[], char *envp[], int fd_file[], int flag)
+void	create_pipeline(char *argv[], char *envp[], t_redir redir)
 {
 	int		pipefd_in[2];
 	int		pipefd_out[2];
@@ -173,7 +173,7 @@ int	pipex(char *argv[], char *envp[])
 	set_redir(&argc, &argv, redir.redir);
 	set_filepath_and_delim(&argc, &argv, &redir);
 	get_fdio(redir);
-	create_pipeline(argv, envp, fd_file, flag);
+	create_pipeline(argv, envp, redir);
 	while (wait(&(int){0}) > 0)
 		;
 	return (0);
