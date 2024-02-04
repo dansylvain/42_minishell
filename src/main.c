@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/04 08:47:07 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/04 11:37:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char		**parse_cmd(char **command, char **env);
 void		tmp_main();
 t_ast_nde	*parse(char *str);
-int			pipex(int argc, char *argv[], char *envp[]);
+int			pipex(char *argv[], char *envp[]);
 
 /**========================================================================
  *                             COMMENTS POLICY
@@ -141,7 +141,7 @@ int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[])
 	// parse(cmd[0]);
 	cmd_tab = create_command_tab(parse(cmd[0]));	
 	display_command_tab(cmd_tab);
-	pipex(5, cmd_tab, envp);
+	pipex(cmd_tab, envp);
 	return (1);
 	
 	if (!cmd_tab)

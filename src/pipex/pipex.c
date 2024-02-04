@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/04 11:06:04 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/04 11:35:48 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,23 @@ void	create_pipeline(char *argv[], char *envp[], int fd_file[], int flag)
 	close(pipefd_in[0]);
 	close(fd_file[1]);
 }
+int	arr_len(const void *arr[])
+{
+	int	i;
 
-int	pipex(int argc, char *argv[], char *envp[])
+	i = 0;
+	while(arr[i])
+		i++;
+	return (i);
+}
+int	pipex(char *argv[], char *envp[])
 {
 	char	*filepaths[2];
 	int		fd_file[2];
 	int		flag;
+	int		argc;
 
+	argc = arr_len(argv);
 	flag = 0;
 	if (!argc)
 		return (1);
