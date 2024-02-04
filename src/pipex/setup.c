@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/04 10:24:28 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/04 11:05:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 void	set_filepaths(int *argc, char **argv[], char *filepaths[])
 {
-	filepaths[0] = *(++*argv);
-	filepaths[1] = (*argv)[*argc - 2];
+	filepaths[0] = **argv;
+	filepaths[1] = (*argv)[*argc - 1];
 }
 
 static void	close_fd(int fd_file[])

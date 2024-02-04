@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/04 10:42:23 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/04 11:06:04 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,16 +127,14 @@ int	pipex(int argc, char *argv[], char *envp[])
 	int		flag;
 
 	flag = 0;
-	if (argc == 1)
+	if (!argc)
 		return (1);
-	if (!ft_strcmp(*(argv + 1), "here_doc"))
+	if (!ft_strcmp(*(argv), "here_doc"))
 	{
 		argv++;
 		argc--;
 		flag = 1;
-	}
-	if (argc <= 4)
-		return (1);
+	}	
 	set_filepaths(&argc, &argv, filepaths);
 	get_fdio(flag, filepaths, fd_file);
 	create_pipeline(argv, envp, fd_file, flag);
