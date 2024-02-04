@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/03 19:44:31 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/04 10:42:23 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "libft.h"
-#include "pipex_setup.h"
-#include "pipex_bonus.h"
+//#include "../../lib/get_next_line/get_next_line.h"
 
+void	set_filepaths(int *argc, char **argv[], char *filepaths[]);
+void	get_fdio(int flag, char *filepaths[], int fd_file[]);
 char	**parse_cmd(char *argv[], char *envp[], int fd_file[]);
 
 void	set_pipe_forward(int pipefd_in[], int pipefd_out[])
@@ -60,39 +61,40 @@ void	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[])
 		}
 	}
 }
-#ifdef EN_BONUS
 
+// void	here_doc_handle(char **argv[], int pipefd_in[])
+// {
+// 	char	*h_doc;
+// 	char	*line;
+
+// 	h_doc = **argv;
+// 	while (1)
+// 	{
+// 		ft_printf("heredoc> ");
+// 		line = get_next_line(0);
+// 		if (line)
+// 		{
+// 			line[ft_strlen(line) - 1] = 0;
+// 			if (ft_strcmp(line, h_doc))
+// 			{
+// 				line[ft_strlen(line)] = '\n';
+// 				ft_putstr_fd(line, pipefd_in[1]);
+// 			}
+// 			else
+// 			{
+// 				free(line);
+// 				get_next_line(42);
+// 				break ;
+// 			}
+// 		}
+// 		free(line);
+// 	}
+// }
 void	here_doc_handle(char **argv[], int pipefd_in[])
 {
-	char	*h_doc;
-	char	*line;
-
-	h_doc = **argv;
-	while (1)
-	{
-		ft_printf("heredoc> ");
-		line = get_next_line(0);
-		if (line)
-		{
-			line[ft_strlen(line) - 1] = 0;
-			if (ft_strcmp(line, h_doc))
-			{
-				line[ft_strlen(line)] = '\n';
-				ft_putstr_fd(line, pipefd_in[1]);
-			}
-			else
-			{
-				free(line);
-				get_next_line(42);
-				break ;
-			}
-		}
-		free(line);
-	}
+	(void) argv;
+	(void) pipefd_in;
 }
-
-#endif
-
 void	create_pipeline(char *argv[], char *envp[], int fd_file[], int flag)
 {
 	int		pipefd_in[2];
@@ -127,13 +129,13 @@ int	pipex(int argc, char *argv[], char *envp[])
 	flag = 0;
 	if (argc == 1)
 		return (1);
-	if (!ft_strcmp(*(argv + 1), "here_doc") && BONUS)
+	if (!ft_strcmp(*(argv + 1), "here_doc"))
 	{
 		argv++;
 		argc--;
 		flag = 1;
 	}
-	if ((argc != 5 && !BONUS) || (argc <= 4 && BONUS))
+	if (argc <= 4)
 		return (1);
 	set_filepaths(&argc, &argv, filepaths);
 	get_fdio(flag, filepaths, fd_file);

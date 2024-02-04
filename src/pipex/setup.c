@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2023/12/21 15:20:25 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/04 10:24:28 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "libft.h"
-
-#ifndef EN_BONUS
-
-void	here_doc_handle(char **argv[], int pipefd_in[])
-{
-	(void) argv;
-	(void) pipefd_in;
-}
-
-#endif
 
 void	set_filepaths(int *argc, char **argv[], char *filepaths[])
 {
