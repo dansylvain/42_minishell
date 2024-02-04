@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/04 11:35:48 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/04 17:45:31 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
 #include "ft_printf.h"
 #include "libft.h"
 //#include "../../lib/get_next_line/get_next_line.h"
+#include "pipex_setup.h"
 
-void	set_filepaths(int *argc, char **argv[], char *filepaths[]);
-void	get_fdio(int flag, char *filepaths[], int fd_file[]);
+void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir);
+void	get_fdio(t_redir redir);
 char	**parse_cmd(char *argv[], char *envp[], int fd_file[]);
 
 void	set_pipe_forward(int pipefd_in[], int pipefd_out[])
@@ -128,25 +129,50 @@ int	arr_len(const void *arr[])
 		i++;
 	return (i);
 }
+
+
+void	set_redir(int *argc, char **argv[], int redir[])
+{	
+	redir[0] = 0;
+	redir[1] = 0;
+	if (***argv == '<')
+	{
+		redir[0] = 1;
+		if (!ft_strcmp(**argv, "<<"))
+			redir[0] = 2;	 
+		(*argv)++;
+		(*argc)--;	
+	}
+	if (*(*argv)[*argc - 2] == '>')
+	{
+		redir[1] = 1;		
+		if (!ft_strcmp((*argv)[*argc - 2], ">>"))
+			redir[1] = 2;	
+	}
+}
+void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir)
+{
+	redir->delim = NULL;
+	redir->filepath[0] = NULL;
+	redir->filepath[1] = NULL;
+	if (redir->redir[0] == 1)	
+		redir->filepath[0] = *(*argv)++;
+	else if (redir->redir[0] == 2)
+		redir->delim = *(*argv)++;
+	if (redir->redir[1])
+	redir->filepath[1] = (*argv)[(*argc)-- - 1];
+}
 int	pipex(char *argv[], char *envp[])
 {
-	char	*filepaths[2];
-	int		fd_file[2];
-	int		flag;
+	t_redir redir;
 	int		argc;
 
 	argc = arr_len(argv);
-	flag = 0;
 	if (!argc)
 		return (1);
-	if (!ft_strcmp(*(argv), "here_doc"))
-	{
-		argv++;
-		argc--;
-		flag = 1;
-	}	
-	set_filepaths(&argc, &argv, filepaths);
-	get_fdio(flag, filepaths, fd_file);
+	set_redir(&argc, &argv, redir.redir);
+	set_filepath_and_delim(&argc, &argv, &redir);
+	get_fdio(redir);
 	create_pipeline(argv, envp, fd_file, flag);
 	while (wait(&(int){0}) > 0)
 		;

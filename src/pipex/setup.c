@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/04 11:05:21 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/04 17:46:16 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,7 @@
 #include <string.h>
 #include "libft.h"
 
-void	set_filepaths(int *argc, char **argv[], char *filepaths[])
-{
-	filepaths[0] = **argv;
-	filepaths[1] = (*argv)[*argc - 1];
-}
+#include "pipex_setup.h"
 
 static void	close_fd(int fd_file[])
 {
@@ -54,7 +50,7 @@ static char	*create_strerror(char *error_str, char *filepath)
 	return (error_str);
 }
 
-void	get_fdio(int flag, char *filepaths[], int fd_file[])
+void	get_fdio(t_redir redir)
 {
 	char	*error_str;
 
