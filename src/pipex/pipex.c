@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/04 18:22:02 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/04 20:10:06 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir);
 void	get_fdio(t_redir redir);
-char	**parse_cmd(char *argv[], char *envp[], int fd_file[]);
+char	**parse_cmd(char *argv[], char *envp[]);
 
 void	set_pipe_forward(int pipefd_in[], int pipefd_out[])
 {
@@ -48,7 +48,7 @@ void	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[])
 		{
 			close(fd_file[1]);
 			set_pipe_forward(pipefd[0], pipefd[1]);
-			split = parse_cmd(argv, envp, fd_file);
+			split = parse_cmd(argv, envp);
 			execve(split[0], split, envp);
 			exit(EXIT_FAILURE);
 		}
@@ -104,22 +104,36 @@ void	create_pipeline(char *argv[], char *envp[], t_redir redir)
 
 	pipe(pipefd_in);
 	pipe(pipefd_out);
-	if (!flag)
+	if (!redir.redir[0])
 	{
 		close(pipefd_in[0]);
-		pipefd_in[0] = fd_file[0];
+		pipefd_in[0] = 0;
 	}
-	else
+	else if (redir.redir[0] == 1)
+	{
+		close(pipefd_in[0]);
+		pipefd_in[0] = redir.fd_file[0];
+	}
+	else if (redir.redir[0] == 2)
 		here_doc_handle(&argv, pipefd_in);
-	nurcery(argv, envp, fd_file, (int *[]){pipefd_in, pipefd_out});
+	nurcery(argv, envp, redir.fd_file, (int *[]){pipefd_in, pipefd_out});
 	close(pipefd_in[1]);
 	close(pipefd_out[1]);
 	close(pipefd_out[0]);
-	while (read(pipefd_in[0], &buf, 1))
-		ft_putchar_fd(buf, fd_file[1]);
+	if (redir.redir[1])
+	{
+		while (read(pipefd_in[0], &buf, 1))
+			ft_putchar_fd(buf, redir.fd_file[1]);
+		close(redir.fd_file[1]);		
+	}
+	else
+	{		
+		while (read(pipefd_in[0], &buf, 1))
+			ft_putchar_fd(buf, 1);		
+	}
 	close(pipefd_in[0]);
-	close(fd_file[1]);
 }
+
 int	arr_len(const void *arr[])
 {
 	int	i;
@@ -129,7 +143,6 @@ int	arr_len(const void *arr[])
 		i++;
 	return (i);
 }
-
 
 void	set_redir(int *argc, char **argv[], int redir[])
 {	
@@ -167,7 +180,7 @@ int	pipex(char *argv[], char *envp[])
 	t_redir redir;
 	int		argc;
 
-	argc = arr_len(argv);
+	argc = arr_len((void *)argv);
 	if (!argc)
 		return (1);
 	set_redir(&argc, &argv, redir.redir);
