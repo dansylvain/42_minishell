@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/05 08:53:55 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/05 10:48:57 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 
 #include "pipex_setup.h"
 
-static void	close_fd(int fd_file[])
+static void	close_fd(int fd[])
 {
-	if (fd_file[0] >= 0)
-		close(fd_file[0]);
-	if (fd_file[1] >= 0)
-		close(fd_file[1]);
+	if (fd[0] > 2)
+		close(fd[0]);
+	if (fd[1] > 2)
+		close(fd[1]);
 }
 
 static char	*create_strerror(char *error_str, char *filepath)

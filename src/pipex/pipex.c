@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/05 09:31:42 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/05 11:00:12 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir);
 void	get_fdio(t_redir *redir);
 char	**parse_cmd(char *argv[], char *envp[]);
 
-void	set_pipe_forward(int pipefd_in[], int pipefd_out[])
+void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
 {
-	dup2(pipefd_in[0], STDIN_FILENO);
-	close(pipefd_in[0]);
-	close(pipefd_in[1]);
+	if (pipefd_in[0])
+	{		
+		dup2(pipefd_in[0], STDIN_FILENO);
+		close(pipefd_in[0]);
+	}
+		close(pipefd_in[1]);
 	dup2(pipefd_out[1], STDOUT_FILENO);
 	close(pipefd_out[1]);
 	close(pipefd_out[0]);
@@ -51,7 +54,7 @@ void	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[], t_redir r
 		if (pid == 0)
 		{
 			close(fd_file[1]);
-			set_pipe_forward(pipefd[0], pipefd[1]);
+			set_pipe_forward(pipefd[0], pipefd[1], redir);
 			split = parse_cmd(argv, envp);
 			execve(split[0], split, envp);
 			exit(EXIT_FAILURE);
@@ -59,7 +62,8 @@ void	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[], t_redir r
 		else
 		{
 			close(pipefd[0][1]);
-			close(pipefd[0][0]);
+			if (pipefd[0][0] > 2)
+				close(pipefd[0][0]);
 			pipefd[0][0] = pipefd[1][0];
 			pipefd[0][1] = pipefd[1][1];
 			pipe(pipefd[1]);
@@ -115,7 +119,7 @@ void	create_pipeline(char *argv[], char *envp[], t_redir redir)
 		pipefd_in[0] = 0;
 	}
 	else if (redir.redir[0] == 1)
-	{
+	{		
 		close(pipefd_in[0]);
 		pipefd_in[0] = redir.fd_file[0];
 	}
@@ -136,6 +140,7 @@ void	create_pipeline(char *argv[], char *envp[], t_redir redir)
 		while (read(pipefd_in[0], &buf, 1))
 			ft_putchar_fd(buf, 1);		
 	}
+	//if (pipefd_in[0] > 2)
 	close(pipefd_in[0]);
 }
 
