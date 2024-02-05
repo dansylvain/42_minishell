@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 09:57:00 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/01/17 14:25:00 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/05 11:18:42 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	*expand_buff_nl(t_Data **data)
 
 	tmp = NULL;
 	i = 0;
-	if (((*data)->buff_nl_size - ft_strlen((*data)->buff_nl) < BUFFER_SIZE + 1))
+	if (((*data)->buff_nl_size - ft_strlen_gnl((*data)->buff_nl) < BUFFER_SIZE + 1))
 	{
 		tmp = (*data)->buff_nl;
 		(*data)->buff_nl = (char *)malloc((*data)->buff_nl_size * 2);
@@ -110,9 +110,9 @@ void	*expand_buff_nl(t_Data **data)
 		free(tmp - i);
 	}
 	if (i == 0)
-		i = ft_strlen((*data)->buff_nl);
+		i = ft_strlen_gnl((*data)->buff_nl);
 	j = 0;
-	while (j < ft_strlen((*data)->buffer))
+	while (j < ft_strlen_gnl((*data)->buffer))
 		(*data)->buff_nl[i++] = (*data)->buffer[j++];
 	while (i < (size_t)(*data)->buff_nl_size)
 		(*data)->buff_nl[i++] = '\0';
@@ -130,7 +130,7 @@ char	*build_next_line(t_Data **data, char *tmp, int bytes_read)
 		if (!(*data)->buff_nl)
 			return (delete_node(*data));
 		i = 0;
-		while (i < ft_strlen(tmp) - 1 && (tmp + 1)[i] != '\0')
+		while (i < ft_strlen_gnl(tmp) - 1 && (tmp + 1)[i] != '\0')
 		{
 			((*data)->buff_nl)[i] = (tmp + 1)[i];
 			i++;
@@ -140,7 +140,7 @@ char	*build_next_line(t_Data **data, char *tmp, int bytes_read)
 	}
 	else if (bytes_read == 0 && *(*data)->buff_nl)
 	{
-		next_line = ft_substr((*data)->buff_nl, 0, ft_strlen((*data)->buff_nl));
+		next_line = ft_substr((*data)->buff_nl, 0, ft_strlen_gnl((*data)->buff_nl));
 		*(*data)->buff_nl = '\0';
 		return (next_line);
 	}

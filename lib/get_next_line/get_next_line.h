@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 04:58:59 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/01/17 15:44:47 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/05 11:17:56 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	*delete_data(t_Data **head, int fd);
 void	*delete_node(t_Data *node_to_delete);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *s, int c);
-size_t	ft_strlen(const char *s);
+size_t	ft_strlen_gnl(const char *s);
 
 #endif

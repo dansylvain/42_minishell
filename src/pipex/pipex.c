@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/05 11:00:12 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/05 11:16:51 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "libft.h"
-//#include "../../lib/get_next_line/get_next_line.h"
+#include "../../lib/get_next_line/get_next_line.h"
 #include "pipex_setup.h"
 
 void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir);
@@ -72,39 +72,39 @@ void	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[], t_redir r
 	}
 }
 
-// void	here_doc_handle(char **argv[], int pipefd_in[])
-// {
-// 	char	*h_doc;
-// 	char	*line;
-
-// 	h_doc = **argv;
-// 	while (1)
-// 	{
-// 		ft_printf("heredoc> ");
-// 		line = get_next_line(0);
-// 		if (line)
-// 		{
-// 			line[ft_strlen(line) - 1] = 0;
-// 			if (ft_strcmp(line, h_doc))
-// 			{
-// 				line[ft_strlen(line)] = '\n';
-// 				ft_putstr_fd(line, pipefd_in[1]);
-// 			}
-// 			else
-// 			{
-// 				free(line);
-// 				get_next_line(42);
-// 				break ;
-// 			}
-// 		}
-// 		free(line);
-// 	}
-// }
 void	here_doc_handle(char **argv[], int pipefd_in[])
 {
-	(void) argv;
-	(void) pipefd_in;
+	char	*h_doc;
+	char	*line;
+
+	h_doc = **argv;
+	while (1)
+	{
+		ft_printf("heredoc> ");
+		line = get_next_line(0);
+		if (line)
+		{
+			line[ft_strlen(line) - 1] = 0;
+			if (ft_strcmp(line, h_doc))
+			{
+				line[ft_strlen(line)] = '\n';
+				ft_putstr_fd(line, pipefd_in[1]);
+			}
+			else
+			{
+				free(line);
+				get_next_line(42);
+				break ;
+			}
+		}
+		free(line);
+	}
 }
+// void	here_doc_handle(char **argv[], int pipefd_in[])
+// {
+// 	(void) argv;
+// 	(void) pipefd_in;
+// }
 void	create_pipeline(char *argv[], char *envp[], t_redir redir)
 {
 	int		pipefd_in[2];
