@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/04 20:10:06 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/05 09:17:33 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include "pipex_setup.h"
 
 void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir);
-void	get_fdio(t_redir redir);
+void	get_fdio(t_redir *redir);
 char	**parse_cmd(char *argv[], char *envp[]);
 
 void	set_pipe_forward(int pipefd_in[], int pipefd_out[])
@@ -172,20 +172,22 @@ void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir)
 		redir->filepath[0] = *(*argv)++;
 	else if (redir->redir[0] == 2)
 		redir->delim = *(*argv)++;
+	if (redir->redir[0])
+		(*argc)--;
 	if (redir->redir[1])
-	redir->filepath[1] = (*argv)[(*argc)-- - 1];
+	redir->filepath[1] = (*argv)[(*argc) - 1];
 }
 int	pipex(char *argv[], char *envp[])
 {
 	t_redir redir;
 	int		argc;
-
 	argc = arr_len((void *)argv);
 	if (!argc)
 		return (1);
 	set_redir(&argc, &argv, redir.redir);
 	set_filepath_and_delim(&argc, &argv, &redir);
-	get_fdio(redir);
+	get_fdio(&redir);
+//ft_printf("argv: %s, redir 0:%d, redir 1:%d, fdfile 0:%d, fdfile 1:%d, filepath 0:%s, filepath 1:%s, delim : %s", *argv, redir.redir[0], redir.redir[1], redir.fd_file[0], redir.fd_file[1], redir.filepath[0], redir.filepath[1], redir.delim); exit(1);
 	create_pipeline(argv, envp, redir);
 	while (wait(&(int){0}) > 0)
 		;
