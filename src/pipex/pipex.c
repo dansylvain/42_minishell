@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/05 11:16:51 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/05 13:45:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,10 @@ void	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[], t_redir r
 	}
 }
 
-void	here_doc_handle(char **argv[], int pipefd_in[])
+void	here_doc_handle(char **argv[], int pipefd_in[], t_redir redir)
 {
-	char	*h_doc;
 	char	*line;
-
-	h_doc = **argv;
+		
 	while (1)
 	{
 		ft_printf("heredoc> ");
@@ -85,7 +83,7 @@ void	here_doc_handle(char **argv[], int pipefd_in[])
 		if (line)
 		{
 			line[ft_strlen(line) - 1] = 0;
-			if (ft_strcmp(line, h_doc))
+			if (ft_strcmp(line, redir.delim))
 			{
 				line[ft_strlen(line)] = '\n';
 				ft_putstr_fd(line, pipefd_in[1]);
@@ -124,7 +122,7 @@ void	create_pipeline(char *argv[], char *envp[], t_redir redir)
 		pipefd_in[0] = redir.fd_file[0];
 	}
 	else if (redir.redir[0] == 2)
-		here_doc_handle(&argv, pipefd_in);
+		here_doc_handle(&argv, pipefd_in, redir);
 	nurcery(argv, envp, redir.fd_file, (int *[]){pipefd_in, pipefd_out}, redir);
 	close(pipefd_in[1]);
 	close(pipefd_out[1]);
