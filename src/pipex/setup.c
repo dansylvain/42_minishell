@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2023/12/21 15:20:25 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/05 10:48:57 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,14 @@
 #include <string.h>
 #include "libft.h"
 
-#ifndef EN_BONUS
+#include "pipex_setup.h"
 
-void	here_doc_handle(char **argv[], int pipefd_in[])
+static void	close_fd(int fd[])
 {
-	(void) argv;
-	(void) pipefd_in;
-}
-
-#endif
-
-void	set_filepaths(int *argc, char **argv[], char *filepaths[])
-{
-	filepaths[0] = *(++*argv);
-	filepaths[1] = (*argv)[*argc - 2];
-}
-
-static void	close_fd(int fd_file[])
-{
-	if (fd_file[0] >= 0)
-		close(fd_file[0]);
-	if (fd_file[1] >= 0)
-		close(fd_file[1]);
+	if (fd[0] > 2)
+		close(fd[0]);
+	if (fd[1] > 2)
+		close(fd[1]);
 }
 
 static char	*create_strerror(char *error_str, char *filepath)
@@ -64,28 +50,41 @@ static char	*create_strerror(char *error_str, char *filepath)
 	return (error_str);
 }
 
-void	get_fdio(int flag, char *filepaths[], int fd_file[])
+char	*get_fd_outfile(char *error_str, t_redir *redir)
+{
+	if (redir->redir[1] == 1)
+	{	
+		redir->fd_file[1] = open(redir->filepath[1], O_WRONLY | O_CREAT 
+				| O_TRUNC, 400);
+		if (redir->fd_file[1] < 0)
+			error_str = create_strerror(error_str, redir->filepath[1]);
+	}
+	else if (redir->redir[1] == 2)
+	{
+		redir->fd_file[1] = open(redir->filepath[1], O_WRONLY | O_CREAT 
+				| O_APPEND, 400);
+		if (redir->fd_file[1] < 0)
+			error_str = create_strerror(error_str, redir->filepath[1]);
+	}
+	return (error_str);
+}
+
+void	get_fdio(t_redir *redir)
 {
 	char	*error_str;
-
+	
 	error_str = "";
-	if (!flag)
+	redir->fd_file[0] = -1;
+	redir->fd_file[1] = -1;
+	if (redir->redir[0] == 1)
 	{
-		fd_file[0] = open(filepaths[0], O_RDONLY);
-		if (fd_file[0] < 0)
-			error_str = create_strerror(error_str, filepaths[0]);
-		fd_file[1] = open(filepaths[1], O_WRONLY | O_CREAT | O_TRUNC, 400);
-		if (fd_file[1] < 0)
-			error_str = create_strerror(error_str, filepaths[1]);
+		redir->fd_file[0] = open(redir->filepath[0], O_RDONLY);
+		if (redir->fd_file[0] < 0)
+			error_str = create_strerror(error_str, redir->filepath[0]);	
 	}
-	else
-	{
-		fd_file[0] = -1;
-		fd_file[1] = open(filepaths[1], O_WRONLY | O_CREAT | O_APPEND, 400);
-		if (fd_file[1] < 0)
-			error_str = create_strerror(error_str, filepaths[1]);
-	}
+	error_str = get_fd_outfile(error_str, redir);
 	if (*error_str)
 		return (ft_putstr_fd(error_str, STDERR_FILENO), free(error_str),
-			close_fd(fd_file), exit(EXIT_FAILURE));
+			close_fd(redir->fd_file), exit(EXIT_FAILURE));
 }
+	

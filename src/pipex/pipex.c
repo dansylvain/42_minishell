@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/03 19:44:31 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/05 11:00:12 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,81 +19,93 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 #include "libft.h"
+//#include "../../lib/get_next_line/get_next_line.h"
 #include "pipex_setup.h"
-#include "pipex_bonus.h"
 
-char	**parse_cmd(char *argv[], char *envp[], int fd_file[]);
+void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir);
+void	get_fdio(t_redir *redir);
+char	**parse_cmd(char *argv[], char *envp[]);
 
-void	set_pipe_forward(int pipefd_in[], int pipefd_out[])
+void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
 {
-	dup2(pipefd_in[0], STDIN_FILENO);
-	close(pipefd_in[0]);
-	close(pipefd_in[1]);
+	if (pipefd_in[0])
+	{		
+		dup2(pipefd_in[0], STDIN_FILENO);
+		close(pipefd_in[0]);
+	}
+		close(pipefd_in[1]);
 	dup2(pipefd_out[1], STDOUT_FILENO);
 	close(pipefd_out[1]);
 	close(pipefd_out[0]);
 }
 
-void	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[])
+void	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[], t_redir redir)
 {
 	pid_t	pid;
 	char	**split;
-
-	while (*(++argv + 1))
+	int		offset;
+	
+	offset = 0;
+	if (redir.redir[1])
+		offset = 3;
+	while (*(argv + offset))
 	{
 		pid = fork();
 		if (pid == 0)
 		{
 			close(fd_file[1]);
-			set_pipe_forward(pipefd[0], pipefd[1]);
-			split = parse_cmd(argv, envp, fd_file);
+			set_pipe_forward(pipefd[0], pipefd[1], redir);
+			split = parse_cmd(argv, envp);
 			execve(split[0], split, envp);
 			exit(EXIT_FAILURE);
 		}
 		else
 		{
 			close(pipefd[0][1]);
-			close(pipefd[0][0]);
+			if (pipefd[0][0] > 2)
+				close(pipefd[0][0]);
 			pipefd[0][0] = pipefd[1][0];
 			pipefd[0][1] = pipefd[1][1];
 			pipe(pipefd[1]);
 		}
+		argv++;
 	}
 }
-#ifdef EN_BONUS
 
+// void	here_doc_handle(char **argv[], int pipefd_in[])
+// {
+// 	char	*h_doc;
+// 	char	*line;
+
+// 	h_doc = **argv;
+// 	while (1)
+// 	{
+// 		ft_printf("heredoc> ");
+// 		line = get_next_line(0);
+// 		if (line)
+// 		{
+// 			line[ft_strlen(line) - 1] = 0;
+// 			if (ft_strcmp(line, h_doc))
+// 			{
+// 				line[ft_strlen(line)] = '\n';
+// 				ft_putstr_fd(line, pipefd_in[1]);
+// 			}
+// 			else
+// 			{
+// 				free(line);
+// 				get_next_line(42);
+// 				break ;
+// 			}
+// 		}
+// 		free(line);
+// 	}
+// }
 void	here_doc_handle(char **argv[], int pipefd_in[])
 {
-	char	*h_doc;
-	char	*line;
-
-	h_doc = **argv;
-	while (1)
-	{
-		ft_printf("heredoc> ");
-		line = get_next_line(0);
-		if (line)
-		{
-			line[ft_strlen(line) - 1] = 0;
-			if (ft_strcmp(line, h_doc))
-			{
-				line[ft_strlen(line)] = '\n';
-				ft_putstr_fd(line, pipefd_in[1]);
-			}
-			else
-			{
-				free(line);
-				get_next_line(42);
-				break ;
-			}
-		}
-		free(line);
-	}
+	(void) argv;
+	(void) pipefd_in;
 }
-
-#endif
-
-void	create_pipeline(char *argv[], char *envp[], int fd_file[], int flag)
+void	create_pipeline(char *argv[], char *envp[], t_redir redir)
 {
 	int		pipefd_in[2];
 	int		pipefd_out[2];
@@ -101,43 +113,92 @@ void	create_pipeline(char *argv[], char *envp[], int fd_file[], int flag)
 
 	pipe(pipefd_in);
 	pipe(pipefd_out);
-	if (!flag)
+	if (!redir.redir[0])
 	{
 		close(pipefd_in[0]);
-		pipefd_in[0] = fd_file[0];
+		pipefd_in[0] = 0;
 	}
-	else
+	else if (redir.redir[0] == 1)
+	{		
+		close(pipefd_in[0]);
+		pipefd_in[0] = redir.fd_file[0];
+	}
+	else if (redir.redir[0] == 2)
 		here_doc_handle(&argv, pipefd_in);
-	nurcery(argv, envp, fd_file, (int *[]){pipefd_in, pipefd_out});
+	nurcery(argv, envp, redir.fd_file, (int *[]){pipefd_in, pipefd_out}, redir);
 	close(pipefd_in[1]);
 	close(pipefd_out[1]);
 	close(pipefd_out[0]);
-	while (read(pipefd_in[0], &buf, 1))
-		ft_putchar_fd(buf, fd_file[1]);
+	if (redir.redir[1])
+	{
+		while (read(pipefd_in[0], &buf, 1))
+			ft_putchar_fd(buf, redir.fd_file[1]);
+		close(redir.fd_file[1]);		
+	}
+	else
+	{		
+		while (read(pipefd_in[0], &buf, 1))
+			ft_putchar_fd(buf, 1);		
+	}
+	//if (pipefd_in[0] > 2)
 	close(pipefd_in[0]);
-	close(fd_file[1]);
 }
 
-int	pipex(int argc, char *argv[], char *envp[])
+int	arr_len(const void *arr[])
 {
-	char	*filepaths[2];
-	int		fd_file[2];
-	int		flag;
+	int	i;
 
-	flag = 0;
-	if (argc == 1)
-		return (1);
-	if (!ft_strcmp(*(argv + 1), "here_doc") && BONUS)
+	i = 0;
+	while(arr[i])
+		i++;
+	return (i);
+}
+
+void	set_redir(int *argc, char **argv[], int redir[])
+{	
+	redir[0] = 0;
+	redir[1] = 0;
+	if (***argv == '<')
 	{
-		argv++;
-		argc--;
-		flag = 1;
+		redir[0] = 1;
+		if (!ft_strcmp(**argv, "<<"))
+			redir[0] = 2;	 
+		(*argv)++;
+		(*argc)--;	
 	}
-	if ((argc != 5 && !BONUS) || (argc <= 4 && BONUS))
+	if (*(*argv)[*argc - 2] == '>')
+	{
+		redir[1] = 1;		
+		if (!ft_strcmp((*argv)[*argc - 2], ">>"))
+			redir[1] = 2;	
+	}
+}
+void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir)
+{
+	redir->delim = NULL;
+	redir->filepath[0] = NULL;
+	redir->filepath[1] = NULL;
+	if (redir->redir[0] == 1)	
+		redir->filepath[0] = *(*argv)++;
+	else if (redir->redir[0] == 2)
+		redir->delim = *(*argv)++;
+	if (redir->redir[0])
+		(*argc)--;
+	if (redir->redir[1])
+	redir->filepath[1] = (*argv)[(*argc) - 1];
+}
+int	pipex(char *argv[], char *envp[])
+{
+	t_redir redir;
+	int		argc;
+	argc = arr_len((void *)argv);
+	if (!argc)
 		return (1);
-	set_filepaths(&argc, &argv, filepaths);
-	get_fdio(flag, filepaths, fd_file);
-	create_pipeline(argv, envp, fd_file, flag);
+	set_redir(&argc, &argv, redir.redir);
+	set_filepath_and_delim(&argc, &argv, &redir);
+	get_fdio(&redir);
+//ft_printf("argv: %s, redir 0:%d, redir 1:%d, fdfile 0:%d, fdfile 1:%d, filepath 0:%s, filepath 1:%s, delim : %s", *argv, redir.redir[0], redir.redir[1], redir.fd_file[0], redir.fd_file[1], redir.filepath[0], redir.filepath[1], redir.delim); exit(1);
+	create_pipeline(argv, envp, redir);
 	while (wait(&(int){0}) > 0)
 		;
 	return (0);

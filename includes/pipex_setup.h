@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup.h                                            :+:      :+:    :+:   */
+/*   pipex_setup.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 15:27:14 by svidot            #+#    #+#             */
-/*   Updated: 2023/12/21 17:09:12 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/04 17:44:27 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SETUP_H
 # define SETUP_H
 
-void	set_filepaths(int *argc, char **argv[], char *filepaths[]);
-void	get_fdio(int flag, char *filepaths[], int fd_file[]);
-void	here_doc_handle(char **argv[], int pipefd_in[]);
+typedef struct set_redir
+{
+	int		redir[2];
+	int		fd_file[2];
+	char	*filepath[2];
+	char	*delim;
+}	t_redir;
 
 #endif
