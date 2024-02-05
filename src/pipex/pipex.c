@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/05 13:45:21 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/05 13:55:31 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	here_doc_handle(char **argv[], int pipefd_in[], t_redir redir)
 				break ;
 			}
 		}
+		else	
+			break ;
 		free(line);
 	}
 }
