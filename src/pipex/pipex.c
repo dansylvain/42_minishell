@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/05 09:17:33 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/05 09:31:42 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,16 @@ void	set_pipe_forward(int pipefd_in[], int pipefd_out[])
 	close(pipefd_out[0]);
 }
 
-void	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[])
+void	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[], t_redir redir)
 {
 	pid_t	pid;
 	char	**split;
-
-	while (*(++argv + 1))
+	int		offset;
+	
+	offset = 0;
+	if (redir.redir[1])
+		offset = 3;
+	while (*(argv + offset))
 	{
 		pid = fork();
 		if (pid == 0)
@@ -60,6 +64,7 @@ void	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[])
 			pipefd[0][1] = pipefd[1][1];
 			pipe(pipefd[1]);
 		}
+		argv++;
 	}
 }
 
@@ -116,7 +121,7 @@ void	create_pipeline(char *argv[], char *envp[], t_redir redir)
 	}
 	else if (redir.redir[0] == 2)
 		here_doc_handle(&argv, pipefd_in);
-	nurcery(argv, envp, redir.fd_file, (int *[]){pipefd_in, pipefd_out});
+	nurcery(argv, envp, redir.fd_file, (int *[]){pipefd_in, pipefd_out}, redir);
 	close(pipefd_in[1]);
 	close(pipefd_out[1]);
 	close(pipefd_out[0]);
