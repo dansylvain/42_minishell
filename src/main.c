@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/06 09:09:17 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/06 09:41:12 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,15 @@ char	**create_command_tab(t_ast_nde *node)
 	if (commands_tab == 0)
 		return (NULL);
 	i = 0;
-	while (i < tree_length)
-	{
-		commands_tab[i] = ft_strndup(node->start, node->end - node->start + 1);
-		node = node->sibling;
-		ft_printf("commands_tab[%i]: %s\n", i,  commands_tab[i]);
-		if (commands_tab[i] == NULL)
-			return (NULL);
-		i++;
-	}
+	// while (i < tree_length)
+	// {
+	// 	commands_tab[i] = ft_strndup(node->start, node->end - node->start + 1);
+	// 	node = node->sibling;
+	// 	ft_printf("commands_tab[%i]: %s\n", i,  commands_tab[i]);
+	// 	if (commands_tab[i] == NULL)
+	// 		return (NULL);
+	// 	i++;
+	// }
 	commands_tab[i] = NULL;
 	return (commands_tab);
 }

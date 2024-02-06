@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/06 09:29:09 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/06 11:20:50 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,42 +70,87 @@ typedef enum e_tok
 
 */
 
+t_ast_nde	*ft_lstlast_sib(t_ast_nde *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->sibling)
+		lst = lst->sibling;
+	return (lst);
+}
+
+void	ft_lstadd_back_sib(t_ast_nde **lst, t_ast_nde *new)
+{
+	if (!lst || !new)
+		return ;
+	if (!*lst)
+		*lst = new;
+	else
+		ft_lstlast_sib(*lst)->sibling = new;
+}
+
 t_ast_nde	*expand_vars(t_ast_nde *qute_sib)
 {
 	t_ast_nde *current;
 	t_ast_nde *next_sibling;
 	t_ast_nde *var_node;
+	t_ast_nde *raw_node;
+	t_ast_nde *exp_sib;
+	
 	int i;
 	
+	exp_sib = (t_ast_nde *)malloc(sizeof(t_ast_nde));
+	if (exp_sib == NULL)
+		return (NULL);
+	exp_sib->sibling = NULL;
+	
+	
+
 	var_node = NULL;
 	current = qute_sib;
 	while (current)
 	{
-		next_sibling = current->sibling;
-		if (qute_sib->token == RAW || qute_sib->token == IN_DQUTE)
+		if (current->token == RAW || current->token == IN_DQUTE)
 		{
 			i = 0;
+			raw_node = create_node(RAW);
+			raw_node->start = &current->start[i];
+			
 			while (i < qute_sib->end + 1 - qute_sib->start)
 			{
 				if (qute_sib->start[i] == '$' && qute_sib->start[i + 1] && qute_sib->start[i + 1] != ' ')
 				{
+					if (i == 0)
+						free (raw_node);
+					else
+					{
+						raw_node->end = &current->start[i];
+						ft_lstadd_back_sib(&exp_sib, raw_node);
+					}
+					
+
+
+					// create env var node
 					var_node = create_node(EXP);
 					var_node->start = &qute_sib->start[i];
 				}
 				if (var_node && (qute_sib->start[i + 1] == ' ' || i == qute_sib->end - qute_sib->start))
 				{
 					var_node->end = &qute_sib->start[i];
+					ft_lstadd_back_sib(&exp_sib, var_node);
 					break;
 				}
 				i++;
 			}
+			
+
 			if (var_node)
 			{
 				ft_printf("var_node->start: %s\n", var_node->start);
 				ft_printf("starting_char: %c\n", var_node->start[0]);
 				ft_printf("ending_char: %c\n", var_node->end[0]);
-				
 			}
+			// print_sib(exp_sib);
 			
 			// {
 			// 	int i = 0;
@@ -141,6 +186,7 @@ static t_ast_nde	*create_ast(char *str)
 	root->end = sib_last(qute_sib)->end;
 	root->child = qute_sib;
 	expand_vars(qute_sib);
+	print_sib(qute_sib);
 	pip_sib = set_pipe(root);
 	// ft_printf("\nsib: ");
 	// print_sib(pip_sib);
