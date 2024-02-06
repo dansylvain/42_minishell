@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 10:03:27 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/03 18:44:45 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/06 11:33:05 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ typedef enum e_tok
 	DQUTE,
 	IN_DQUTE,
 	PIPE,
+	AND,
+	OR,
+	SCHEV_LFT,
+	DCHEV_LFT,
+	SCHEV_RGTH,
+	DCHEV_RGTH,
 	SPCE,
 	CMD,
 	ARG_CMD,
