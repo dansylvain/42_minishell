@@ -6,37 +6,85 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/06 16:14:09 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/06 18:04:24 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "parsing_utils.h"
 
-static t_ast_nde	*create_pipe(char *start, char *end, char *pipe)
-{	
+t_ast_nde	*copy_node(t_ast_nde *node);
+
+#include<stdio.h>
+static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
+{
+	t_ast_nde	*raw_lft_child_sav;
+	t_ast_nde	*raw_rght_child_sav;
+	t_ast_nde	*raw_overlap;
+
+	raw_lft_child_sav = NULL;
+	raw_rght_child_sav = NULL;
+	//	printf("bonnet\n");
+			//exit(1);
+	while (sib)
+	{
+		//	printf("chapeau\n");
+			//exit(1);
+		if (sib->token != RAW)
+		{
+			if 	(sib->end < token->start)
+				add_sibling(copy_node(sib), &raw_lft->child, &raw_lft_child_sav);				
+			else if (sib->start > token->end)
+				add_sibling(copy_node(sib), &raw_rght->child, &raw_rght_child_sav );	
+		}
+		else
+		{
+			if 	(sib->end < token->start)
+				add_sibling(copy_node(sib), &raw_lft->child, &raw_lft_child_sav);				
+			else if (sib->start > token->end)
+				add_sibling(copy_node(sib), &raw_rght->child, &raw_rght_child_sav );
+			else if (sib->start <= token->start && sib->end >= token->end)
+			{
+				if (sib->start < token->start)
+				{
+					raw_overlap = copy_node(sib);
+					raw_overlap->end = token->start - 1;
+					add_sibling(raw_overlap, &raw_lft->child, &raw_lft_child_sav);					
+				}
+				if (sib->end > token->end)
+				{					
+					raw_overlap = copy_node(sib);
+					raw_overlap->start = token->end + 1;
+					add_sibling(raw_overlap, &raw_rght->child, &raw_rght_child_sav);
+				}
+			}			
+		}		
+		sib = sib->sibling;
+	}
+	raw_lft->child = raw_lft_child_sav;
+	raw_rght->child = raw_rght_child_sav;	
+}
+
+static t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token)
+{		
 	t_ast_nde	*raw_lft; 
 	t_ast_nde	*raw_rght;
-	t_ast_nde	*pipe_nde;
-
+	
 	raw_lft = create_node(RAW);
-	raw_lft->start = start;
-	raw_lft->end = pipe - 1;
+	raw_lft->start = raw->start;
+	raw_lft->end = token->start - 1;
 	raw_rght = create_node(RAW);
-	raw_rght->start = pipe + 1;
-	raw_rght->end = end;	
-	pipe_nde = create_node(PIPE);
-	pipe_nde->start = pipe;
-	pipe_nde->end = pipe;
+	raw_rght->start = token->end + 1;
+	raw_rght->end = raw->end;
 	raw_lft->sibling = raw_rght;
-	pipe_nde->child = raw_lft;	
-	return (pipe_nde);
+	return (raw_lft);	
 }
-static char	*create_token_node(t_ast_nde *sib, t_tok token)
+static t_ast_nde	*create_token_node(t_ast_nde *sib)
 {
 	t_ast_nde	*token_nde;
 	char		*actual;
 	
+	token_nde = NULL;
 	while (sib)
 	{
 		actual = sib->start;	
@@ -52,6 +100,7 @@ static char	*create_token_node(t_ast_nde *sib, t_tok token)
 					token_nde->token = DCHEV_LFT;				
 					token_nde->end = ++actual;
 				}
+				return (token_nde);
 			}
 			else if (*(actual - 1) != '\\' && *actual == '>')
 			{
@@ -63,6 +112,7 @@ static char	*create_token_node(t_ast_nde *sib, t_tok token)
 					token_nde->token = DCHEV_LFT;				
 					token_nde->end = ++actual;
 				}
+				return (token_nde);
 			}
 			else if (*(actual - 1) != '\\' && *actual == '|')
 			{
@@ -74,6 +124,7 @@ static char	*create_token_node(t_ast_nde *sib, t_tok token)
 					token_nde->token = OR;				
 					token_nde->end = ++actual;
 				}
+				return (token_nde);
 			}
 			else if (*(actual - 1) != '\\' && *actual == '&'
 				&& *(actual + 1) == '&')
@@ -81,6 +132,7 @@ static char	*create_token_node(t_ast_nde *sib, t_tok token)
 				token_nde = create_node(AND);
 				token_nde->start = actual;
 				token_nde->end = ++actual;
+				return (token_nde);
 			}
 			actual++;
 		}
@@ -92,20 +144,34 @@ static char	*create_token_node(t_ast_nde *sib, t_tok token)
 t_ast_nde	*set_operator(t_ast_nde *node)
 {
 	t_ast_nde *sib;
-	char 	*start;
-	char 	*end;
-	char	*token;
+	t_ast_nde *sib_parent;
+	t_ast_nde *token;
+	t_ast_nde *raw_lft;
 	
-	sib = node->child;
-	start = node->start;
-	end = node->end;	
-	token = search_pipe(sib);    
-	if (pipe)
+	sib_parent = node->child;
+	sib = sib_parent->child;
+	token = create_token_node(sib);
+	sib_parent->sibling = token;
+	// printf("test1\n");
+	// if (sib)
+	// 	printf("test2\n");
+	// else 
+	// 	printf("test3\n");
+	if (token)
 	{
-		//error_detector(pipe, start, end);
-		sib->child = create_pipe(start, end, pipe);
-		fill_child(sib);
-		set_pipe(sib->child->child);		
+		raw_lft = create_token_child(sib_parent, token);
+		token->child = raw_lft;
+		// if (sib)
+		// 	printf("test42\n");
+		fill_child(sib, raw_lft, raw_lft->sibling, token);	
 	}
+	
+	// if (pipe)
+	// {
+	// 	//error_detector(pipe, start, end);
+	// 	sib->child = create_pipe(start, end, pipe);
+	// 	fill_child(sib);
+	// 	set_pipe(sib->child->child);		
+	// }
 	return (sib);
 }

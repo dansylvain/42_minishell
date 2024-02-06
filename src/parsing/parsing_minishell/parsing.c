@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/06 16:11:50 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/06 17:33:15 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "parsing_qute.h"
 #include "ft_printf.h"
 
+t_ast_nde	*copy_node(t_ast_nde *node);
 t_ast_nde	*set_qute_sib(char *str);
 t_ast_nde	*sib_last(t_ast_nde *sib);
 t_ast_nde	*set_pipe(t_ast_nde *node);
@@ -182,16 +183,19 @@ static t_ast_nde	*create_ast(char *str)
 	root = create_node(RAW);
 	root->start = str;
 	root->end = str + ft_strlen(str) - 1;
-	root->child = set_qute_sib(str);
+	root->child = copy_node(root);
+	root->child->child = set_qute_sib(str);
 	// ft_printf("qute_sib: ");
 	// print_qute_sib(qute_sib);
+
 	set_operator(root);
+	
 	//expand_vars(qute_sib);
 	//print_sib(qute_sib);
 	//pip_sib = set_pipe(root);
 	// ft_printf("\nsib: ");
 	// print_sib(pip_sib);
-	leaf_tree(root, &cmd, &cmd_sav);
+//	leaf_tree(root, &cmd, &cmd_sav);
 	// ft_printf("commandes:\n");
 	// print_sib(cmd_sav);
 	
