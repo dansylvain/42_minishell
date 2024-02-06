@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:40:28 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/06 11:19:51 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/06 13:45:04 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
   
 #include "parsing_utils.h"
 #include "ft_printf.h"
-#define RAW NONE //
+#define RAW RAW //
 
 t_ast_nde	*copy_node(t_ast_nde *node);
 
@@ -41,12 +41,12 @@ static void	error_detector(const char *const pipe, const char *const start, cons
 {
 	if (pipe == start)
 	{
-		ft_printf("pipe left operande missing.\n");
+		ft_printf("pipe left operand missing.\n");
 		exit(1);
 	}
 	if (pipe == end)
 	{
-		ft_printf("pipe right operande missing.\n");
+		ft_printf("pipe right operand missing.\n");
 		exit(1);
 	}
 }

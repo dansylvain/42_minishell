@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 10:03:27 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/06 11:33:05 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/06 13:42:06 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 
 typedef enum e_tok
 {
-	NONE,
+	RAW,
 	INVRT,
 	SQUTE,
 	IN_SQUTE,
 	DQUTE,
 	IN_DQUTE,
+	EXP,
 	PIPE,
 	AND,
 	OR,
