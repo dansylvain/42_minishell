@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/06 11:20:50 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/06 16:11:50 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_ast_nde	*sib_last(t_ast_nde *sib);
 t_ast_nde	*set_pipe(t_ast_nde *node);
 void		print_qute_sib(t_ast_nde *sib);
 void		print_sib(t_ast_nde *sib);
+t_ast_nde	*set_operator(t_ast_nde *node);
 
 static void	leaf_tree(t_ast_nde *root, t_ast_nde **cmd, t_ast_nde **cmd_sav)
 {
@@ -178,16 +179,16 @@ static t_ast_nde	*create_ast(char *str)
 	t_ast_nde	*cmd;
 	
 	cmd_sav = NULL;
-	qute_sib = set_qute_sib(str);
+	root = create_node(RAW);
+	root->start = str;
+	root->end = str + ft_strlen(str) - 1;
+	root->child = set_qute_sib(str);
 	// ft_printf("qute_sib: ");
 	// print_qute_sib(qute_sib);
-	root = create_node(RAW);
-	root->start = qute_sib->start;
-	root->end = sib_last(qute_sib)->end;
-	root->child = qute_sib;
-	expand_vars(qute_sib);
-	print_sib(qute_sib);
-	pip_sib = set_pipe(root);
+	set_operator(root);
+	//expand_vars(qute_sib);
+	//print_sib(qute_sib);
+	//pip_sib = set_pipe(root);
 	// ft_printf("\nsib: ");
 	// print_sib(pip_sib);
 	leaf_tree(root, &cmd, &cmd_sav);
