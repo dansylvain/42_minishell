@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:40:28 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/03 17:36:44 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/06 11:19:51 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+  
 #include "parsing_utils.h"
 #include "ft_printf.h"
 #define RAW NONE //
