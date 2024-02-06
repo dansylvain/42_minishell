@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/05 13:55:31 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/05 17:02:42 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ void	create_pipeline(char *argv[], char *envp[], t_redir redir)
 		while (read(pipefd_in[0], &buf, 1))
 			ft_putchar_fd(buf, 1);		
 	}
-	//if (pipefd_in[0] > 2)
 	close(pipefd_in[0]);
 }
 
