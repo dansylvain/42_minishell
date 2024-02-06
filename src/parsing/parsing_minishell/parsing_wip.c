@@ -85,7 +85,7 @@
 // 			link_qute_node(DQUTE,'\"', &qute_sibling, &qute_sibling_sav, &str);		
 // 		else
 // 		{
-// 			other_nde = create_node(NONE); 
+// 			other_nde = create_node(RAW); 
 // 			set_other_nde(other_nde, &str);
 // 			add_sibling(other_nde, &qute_sibling, &qute_sibling_sav);
 // 		}	
@@ -101,7 +101,7 @@
 	
 // 	while (sib)
 // 	{
-// 		if (sib->token == NONE)
+// 		if (sib->token == RAW)
 // 		{
 // 			color = 32;
 // 			back_color = 41;	
@@ -168,7 +168,7 @@
 // 	res_sibling_sav = NULL;	
 // 	while (node)
 // 	{
-// 		if (node->token == NONE)
+// 		if (node->token == RAW)
 // 		{			
 // 			res_nde = filter(node);
 // 			if (res_nde)
