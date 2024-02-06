@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/03 18:00:46 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/05 15:31:36 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	print_qute_sib(t_ast_nde *sib)
 	
 	while (sib)
 	{
-		if (sib->token == NONE)				
+		if (sib->token == RAW)				
 			back_color = 41;		
 		else if (sib->token == SQUTE)	
 			back_color = 40;

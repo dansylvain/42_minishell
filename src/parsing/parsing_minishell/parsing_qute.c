@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_qute.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:36:13 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/03 15:31:06 by svidot           ###   ########.fr       */
+/*   Updated: 2024/02/05 15:31:33 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_ast_nde	*set_qute_sib(char *str)
 			link_inqute_node((t_tok[]){DQUTE, IN_DQUTE}, '\"', &qute_sibling, &qute_sibling_sav, &str);
 		else
 		{
-			raw_nde = create_node(NONE);
+			raw_nde = create_node(RAW);
 			set_raw_nde(raw_nde, &str);
 			add_sibling(raw_nde, &qute_sibling, &qute_sibling_sav);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/03 17:43:59 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/06 09:29:09 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,84 @@ static void	leaf_tree(t_ast_nde *root, t_ast_nde **cmd, t_ast_nde **cmd_sav)
 	}	
 }
 
+/* typedef struct s_ast_nde
+{
+	t_tok				token;
+	char				*start;
+	char				*end;
+	struct s_ast_nde	*child;
+	struct s_ast_nde	*sibling;
+}	t_ast_nde; 
+
+typedef enum e_tok
+{
+	RAW,
+	INVRT,
+	SQUTE,
+	IN_SQUTE,
+	DQUTE,
+	IN_DQUTE,
+	PIPE,
+	SPCE,
+	CMD,
+	ARG_CMD,
+	OPT_CMD,
+	ARG_OPT	
+}	t_tok;
+
+*/
+
+t_ast_nde	*expand_vars(t_ast_nde *qute_sib)
+{
+	t_ast_nde *current;
+	t_ast_nde *next_sibling;
+	t_ast_nde *var_node;
+	int i;
+	
+	var_node = NULL;
+	current = qute_sib;
+	while (current)
+	{
+		next_sibling = current->sibling;
+		if (qute_sib->token == RAW || qute_sib->token == IN_DQUTE)
+		{
+			i = 0;
+			while (i < qute_sib->end + 1 - qute_sib->start)
+			{
+				if (qute_sib->start[i] == '$' && qute_sib->start[i + 1] && qute_sib->start[i + 1] != ' ')
+				{
+					var_node = create_node(EXP);
+					var_node->start = &qute_sib->start[i];
+				}
+				if (var_node && (qute_sib->start[i + 1] == ' ' || i == qute_sib->end - qute_sib->start))
+				{
+					var_node->end = &qute_sib->start[i];
+					break;
+				}
+				i++;
+			}
+			if (var_node)
+			{
+				ft_printf("var_node->start: %s\n", var_node->start);
+				ft_printf("starting_char: %c\n", var_node->start[0]);
+				ft_printf("ending_char: %c\n", var_node->end[0]);
+				
+			}
+			
+			// {
+			// 	int i = 0;
+			// 	while (i < (var_node->end - var_node->start) + 1)
+			// 		write (1, &var_node->start[i++], 1);
+			// 	ft_printf("\nvar_len = %i\nchar start: %c\nchar end: %c\n", var_node->end - var_node->start + 1, var_node->start[0], var_node->end[0]);
+			// }
+		}
+		current = current->sibling;		
+	}
+	
+	return (qute_sib);
+}
+
+
 static t_ast_nde	*create_ast(char *str)
 {
 	t_ast_nde	*ast_res;
@@ -56,16 +134,19 @@ static t_ast_nde	*create_ast(char *str)
 	
 	cmd_sav = NULL;
 	qute_sib = set_qute_sib(str);
-	print_qute_sib(qute_sib);
-	root = create_node(NONE);
+	// ft_printf("qute_sib: ");
+	// print_qute_sib(qute_sib);
+	root = create_node(RAW);
 	root->start = qute_sib->start;
 	root->end = sib_last(qute_sib)->end;
 	root->child = qute_sib;
-	pip_sib = set_pipe(root);	
-	print_sib(pip_sib);
+	expand_vars(qute_sib);
+	pip_sib = set_pipe(root);
+	// ft_printf("\nsib: ");
+	// print_sib(pip_sib);
 	leaf_tree(root, &cmd, &cmd_sav);
-	ft_printf("commandes:\n");
-	print_sib(cmd_sav);
+	// ft_printf("commandes:\n");
+	// print_sib(cmd_sav);
 	
 	ast_res = cmd_sav;
 	return (ast_res);

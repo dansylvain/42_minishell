@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/05 14:03:48 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/06 09:09:17 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	display_command_tab(char **command_tab)
 	int i;
 
 	i = 0;
-	ft_printf("command_tab: \n");
+	// ft_printf("command_tab: \n");
 	while (command_tab[i])
 	{
 		ft_printf("%s\n", command_tab[i]);

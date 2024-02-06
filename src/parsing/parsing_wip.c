@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 16:18:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/01/31 17:08:36 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/05 15:31:20 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static t_ast_nde	*set_quote_sib(char *str)
 			link_qute_node(DQUTE,'\"', &qute_sibling, &qute_sibling_sav, &str);		
 		else
 		{
-			other_nde = create_node(NONE); 
+			other_nde = create_node(RAW); 
 			set_other_nde(other_nde, &str);
 			add_sibling(other_nde, &qute_sibling, &qute_sibling_sav);
 		}	
@@ -101,7 +101,7 @@ void	print_ast_sib(t_ast_nde *sib)
 	
 	while (sib)
 	{
-		if (sib->token == NONE)
+		if (sib->token == RAW)
 			color = 32;
 		else if (sib->token == SQUTE)
 			color = 31;
