@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/07 14:07:49 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/07 19:02:27 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,47 +64,17 @@ static void	leaf_tree(t_ast_nde *node, t_ast_nde **rslt, t_ast_nde **rslt_sav)
 	if (raw_rght)
 	{
 		add_sibling(raw_rght, rslt, rslt_sav);	
-		add_sibling(copy_node(operator), rslt, rslt_sav);
+		add_sibling(operator, rslt, rslt_sav);
 	}
 	next_operator = NULL;
 	if (raw_lft && raw_lft->child && raw_lft->child->sibling)
 		next_operator = raw_lft->child->sibling;
 	if (next_operator)
 		leaf_tree(next_operator, rslt, rslt_sav);
-	else if (raw_lft && raw_lft->child)
-	{
-		add_sibling(raw_lft->child, rslt, rslt_sav);		
-		//add_sibling(copy_node(operator), rslt, rslt_sav);
-	}
-ft_printf("ici\n");
+	else if (raw_lft && raw_lft->child)	
+		add_sibling(raw_lft->child, rslt, rslt_sav);	
 }
 
-/* typedef struct s_ast_nde
-{
-	t_tok				token;
-	char				*start;
-	char				*end;
-	struct s_ast_nde	*child;
-	struct s_ast_nde	*sibling;
-}	t_ast_nde; 
-
-typedef enum e_tok
-{
-	RAW,
-	INVRT,
-	SQUTE,
-	IN_SQUTE,
-	DQUTE,
-	IN_DQUTE,
-	PIPE,
-	SPCE,
-	CMD,
-	ARG_CMD,
-	OPT_CMD,
-	ARG_OPT	
-}	t_tok;
-
-*/
 
 t_ast_nde	*ft_lstlast_sib(t_ast_nde *lst)
 {
@@ -220,22 +190,14 @@ static t_ast_nde	*create_ast(char *str)
 	root->child = copy_node(root);
 	root->child->child = copy_node(root);
 	root->child->child->child = set_qute_sib(str);
-//	print_raw_rght(root->child->child->child);
-	// ft_printf("qute_sib: ");
-	// print_qute_sib(qute_sib);
+	print_qute_sib(root->child->child->child);
 
 	set_operator(root->child);
 	print_tree(root->child->child->sibling);
-	//expand_vars(qute_sib);
-	//print_sib(qute_sib);
-	//pip_sib = set_pipe(root);
-	// ft_printf("\nsib: ");
-	// print_sib(pip_sib);
-	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav);
-	// ft_printf("commandes:\n");
+
+	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav);	
 	print_rslt(cmd_sav);
-//	print_raw_rght(cmd_sav);
-	// print_sib(cmd_sav);
+
 	if (!cmd_sav)
 		ast_res = root;
 	else
