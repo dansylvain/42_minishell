@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/07 14:41:51 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/07 15:47:06 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,21 +95,27 @@ char	**create_command_tab(t_ast_nde *node)
 	tree_length = 0;
 	while (current)
 	{
+		ft_printf("current->token: %i\n", current->token);
+		ft_printf("%i\n", current->end - current->start + 1);		
+		if (current->token != PIPE && current->end - current->start + 1)
+			tree_length++;
 		current = current->sibling;
-		tree_length++;
 	}
-	// ft_printf("%s\n", node->start);
+	ft_printf("tree_length: %i\n", tree_length);
 	commands_tab = (char **)malloc(sizeof(char *) * tree_length + 1);
 	if (commands_tab == 0)
 		return (NULL);
 	i = 0;
-	while (i < tree_length)
+	while (node)
 	{
-		commands_tab[i] = ft_strndup(node->start, node->end - node->start + 1);
+		if (node->token != PIPE && node->end - node->start + 1)
+		{
+			commands_tab[i] = ft_strndup(node->start, node->end - node->start + 1);
+			if (commands_tab[i] == NULL)
+				return (NULL);
+			i++;
+		}
 		node = node->sibling;
-		if (commands_tab[i] == NULL)
-			return (NULL);
-		i++;
 	}
 	commands_tab[i] = NULL;
 	return (commands_tab);
@@ -123,7 +129,7 @@ void	display_command_tab(char **command_tab)
 	ft_printf("command_tab: \n");
 	while (command_tab[i])
 	{
-		ft_printf("commands_tab[%i]: %s\n", i,  command_tab[i]);
+		ft_printf("commands_tab[%i]: >%s<\n", i,  command_tab[i]);
 		i++;
 	}
 }
