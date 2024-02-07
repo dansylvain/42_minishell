@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/05 15:31:36 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/07 13:56:09 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "parsing_utils.h"
 #include "ft_printf.h"
 
@@ -86,4 +87,73 @@ void	print_qute_sib(t_ast_nde *sib)
 		sib = sib->sibling;
 	}
 	ft_printf("\n");
+}
+
+void	print_raw_rght(t_ast_nde *raw_rght)
+{
+	int	i;
+	int	back_color;
+	t_ast_nde	*sib;
+
+	back_color = 41;
+	i = 0;
+	while (raw_rght && raw_rght->start + i <= raw_rght->end)
+		ft_printf("\033[%dm%c\033[0m", back_color, raw_rght->start[i++]);	
+	sib = raw_rght->child;
+	ft_printf("\n");
+	while (sib)
+	{	
+		i = 0;
+		while (sib->start + i <= sib->end)
+			ft_printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);
+		back_color = (back_color - 41 + 1) % 7 + 41;
+		sib = sib->sibling;
+	}
+	ft_printf("\n");
+}
+
+void print_rslt(t_ast_nde *rslt)
+{
+	int	i;
+	int	back_color;	
+
+	back_color = 41;
+	i = 0;
+	while (rslt)
+	{	
+		i = 0;
+		while (rslt->start + i <= rslt->end)
+			ft_printf("\033[%dm%c\033[0m", back_color, rslt->start[i++]);
+		// if(rslt->child)
+		// 	print_rslt(rslt->child);
+		back_color = (back_color - 41 + 1) % 7 + 41;
+		rslt = rslt->sibling;
+	}
+}
+
+void	print_tree(t_ast_nde *node)
+{
+	t_ast_nde	*operator;
+	t_ast_nde	*raw_lft;
+	t_ast_nde	*raw_rght;
+	
+	operator = node;
+	raw_lft = NULL;
+	raw_rght = NULL;
+	if (operator && operator->child)
+		raw_lft = operator->child;
+	if (raw_lft && raw_lft->sibling)
+	 	raw_rght = raw_lft->sibling;
+	if (raw_rght)
+	{
+		print_raw_rght(raw_rght);
+		ft_printf("\n");
+	}
+	operator = NULL;
+	if (raw_lft && raw_lft->child && raw_lft->child->sibling)
+		operator = raw_lft->child->sibling;
+	if (operator)
+		print_tree(operator);
+	else if (raw_lft && raw_lft->child)
+		print_raw_rght(raw_lft);
 }

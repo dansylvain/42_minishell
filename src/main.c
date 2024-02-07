@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/06 09:41:12 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/07 13:43:25 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[])
 {
 	char	**cmd_tab;
 
-	// parse(cmd[0]);
+	 parse(cmd[0]); exit(1);
 	cmd_tab = create_command_tab(parse(cmd[0]));	
 	display_command_tab(cmd_tab);
 	pipex(cmd_tab, envp);
