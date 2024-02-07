@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/07 12:41:20 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/07 18:20:58 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,9 @@ static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, 
 	t_ast_nde	*raw_overlap;
 
 	raw_lft_child_sav = NULL;
-	raw_rght_child_sav = NULL;
-	//	printf("bonnet\n");
-			//exit(1);
+	raw_rght_child_sav = NULL;	
 	while (sib)
-	{
-		//	printf("chapeau\n");
-			//exit(1);
+	{		
 		if (sib->token != RAW)
 		{
 			if 	(sib->end < token->start)
@@ -149,27 +145,19 @@ t_ast_nde	*set_operator(t_ast_nde *node)
 	t_ast_nde *token;
 	t_ast_nde *raw_lft;
 	t_ast_nde *raw_rght;
+	
 	sib_parent = node->child;
 	sib = sib_parent->child;
-	//print_raw_rght(sib);
+	
 	token = create_token_node(sib);
 	sib_parent->sibling = token;
 	if (token)
-	{printf("token\n");
+	{
 		raw_lft = create_token_child(sib_parent, token);
 		token->child = raw_lft;
-		raw_rght = raw_lft->sibling;
-		//raw_lft->child = copy_node(raw_lft);
+		raw_rght = raw_lft->sibling;		
 		fill_child(sib, raw_lft->child, raw_rght, token);
 		set_operator(raw_lft);
 	}
-	
-	// if (pipe)
-	// {
-	// 	//error_detector(pipe, start, end);
-	// 	sib->child = create_pipe(start, end, pipe);
-	// 	fill_child(sib);
-	// 	set_pipe(sib->child->child);		
-	// }
 	return (sib);
 }
