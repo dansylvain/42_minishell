@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/07 12:52:10 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/07 13:56:09 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,25 @@ void	print_raw_rght(t_ast_nde *raw_rght)
 		sib = sib->sibling;
 	}
 	ft_printf("\n");
+}
+
+void print_rslt(t_ast_nde *rslt)
+{
+	int	i;
+	int	back_color;	
+
+	back_color = 41;
+	i = 0;
+	while (rslt)
+	{	
+		i = 0;
+		while (rslt->start + i <= rslt->end)
+			ft_printf("\033[%dm%c\033[0m", back_color, rslt->start[i++]);
+		// if(rslt->child)
+		// 	print_rslt(rslt->child);
+		back_color = (back_color - 41 + 1) % 7 + 41;
+		rslt = rslt->sibling;
+	}
 }
 
 void	print_tree(t_ast_nde *node)
