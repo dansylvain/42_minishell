@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/07 08:30:44 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/07 12:18:26 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ t_ast_nde	*expand_vars(t_ast_nde *qute_sib)
 	return (qute_sib);
 }
 
-
+void	print_raw_rght(t_ast_nde *raw_rght);
 static t_ast_nde	*create_ast(char *str)
 {
 	t_ast_nde	*ast_res;
@@ -185,12 +185,14 @@ static t_ast_nde	*create_ast(char *str)
 	root->start = str;
 	root->end = str + ft_strlen(str) - 1;
 	root->child = copy_node(root);
-	root->child->child = set_qute_sib(str);
+	root->child->child = copy_node(root);
+	root->child->child->child = set_qute_sib(str);
+//	print_raw_rght(root->child->child->child);
 	// ft_printf("qute_sib: ");
 	// print_qute_sib(qute_sib);
 
-	set_operator(root);
-	print_tree(root);
+	set_operator(root->child);
+	print_tree(root->child->child->sibling);
 	//expand_vars(qute_sib);
 	//print_sib(qute_sib);
 	//pip_sib = set_pipe(root);
