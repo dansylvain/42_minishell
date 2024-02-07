@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/07 13:56:09 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/07 14:40:33 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,9 @@ void print_rslt(t_ast_nde *rslt)
 		// 	print_rslt(rslt->child);
 		back_color = (back_color - 41 + 1) % 7 + 41;
 		rslt = rslt->sibling;
+
 	}
+	ft_printf("\n");
 }
 
 void	print_tree(t_ast_nde *node)
@@ -156,4 +158,6 @@ void	print_tree(t_ast_nde *node)
 		print_tree(operator);
 	else if (raw_lft && raw_lft->child)
 		print_raw_rght(raw_lft);
+	ft_printf("\n");
+
 }
