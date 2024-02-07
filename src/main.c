@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/07 15:47:06 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/07 16:42:46 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,11 +142,13 @@ void	display_command_tab(char **command_tab)
 int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[])
 {
 	char	**cmd_tab;
+	int return_pipex;
 
 	//  parse(cmd[0]); exit(1);
 	cmd_tab = create_command_tab(parse(cmd[0]));	
 	display_command_tab(cmd_tab);
-	pipex(cmd_tab, envp);
+	return_pipex = pipex(cmd_tab, envp);
+	ft_printf("return_pipex: %i\n", return_pipex);
 	return (1);
 	
 	if (!cmd_tab)
