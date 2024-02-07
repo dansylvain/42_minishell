@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/07 16:42:46 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/07 19:26:22 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char		**parse_cmd(char **command, char **env);
 void		tmp_main();
 t_ast_nde	*parse(char *str);
 int			pipex(char *argv[], char *envp[]);
+char	**create_command_tab(t_ast_nde *node, char *envp[]);
+void	display_command_tab(char **command_tab);
 
 /**========================================================================
  *                             COMMENTS POLICY
@@ -84,56 +86,6 @@ int	prompt_loop(t_Data *data, char *envp[])
 	return (1);
 }
 
-char	**create_command_tab(t_ast_nde *node)
-{
-	int tree_length;
-	char **commands_tab;
-	int i;
-
-	t_ast_nde *current;
-	current = node;
-	tree_length = 0;
-	while (current)
-	{
-		ft_printf("current->token: %i\n", current->token);
-		ft_printf("%i\n", current->end - current->start + 1);		
-		if (current->token != PIPE && current->end - current->start + 1)
-			tree_length++;
-		current = current->sibling;
-	}
-	ft_printf("tree_length: %i\n", tree_length);
-	commands_tab = (char **)malloc(sizeof(char *) * tree_length + 1);
-	if (commands_tab == 0)
-		return (NULL);
-	i = 0;
-	while (node)
-	{
-		if (node->token != PIPE && node->end - node->start + 1)
-		{
-			commands_tab[i] = ft_strndup(node->start, node->end - node->start + 1);
-			if (commands_tab[i] == NULL)
-				return (NULL);
-			i++;
-		}
-		node = node->sibling;
-	}
-	commands_tab[i] = NULL;
-	return (commands_tab);
-}
-
-void	display_command_tab(char **command_tab)
-{
-	int i;
-
-	i = 0;
-	ft_printf("command_tab: \n");
-	while (command_tab[i])
-	{
-		ft_printf("commands_tab[%i]: >%s<\n", i,  command_tab[i]);
-		i++;
-	}
-}
-
 /**========================================================================
  *                           command_is_builtin
  * exit builtin implemented without extern function
@@ -145,10 +97,10 @@ int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[])
 	int return_pipex;
 
 	//  parse(cmd[0]); exit(1);
-	cmd_tab = create_command_tab(parse(cmd[0]));	
+	cmd_tab = create_command_tab(parse(cmd[0]), envp);	
 	display_command_tab(cmd_tab);
-	return_pipex = pipex(cmd_tab, envp);
-	ft_printf("return_pipex: %i\n", return_pipex);
+	// return_pipex = pipex(cmd_tab, envp);
+	// ft_printf("return_pipex: %i\n", return_pipex);
 	return (1);
 	
 	if (!cmd_tab)

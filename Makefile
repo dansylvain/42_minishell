@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
+#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/06 17:28:31 by seblin           ###   ########.fr        #
+#    Updated: 2024/02/07 18:30:24 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRC =	src/main.c \
 		src/parsing/parsing_minishell/parsing_test.c \
 		src/pipex/pipex.c \
 		src/pipex/setup.c \
+		src/create_command_tab.c \
 		
 OBJ = $(SRC:.c=.o)
 
