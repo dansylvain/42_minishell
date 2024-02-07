@@ -66,11 +66,11 @@ char	**create_command_tab(t_ast_nde *node, char *envp[])
 	
 	// initialize vars
 	t_ast_nde *current;
-	current = node;
 
 	while (node)
 	{
-
+		current = node;
+		ft_printf("start THE loop\n");
 		// count commands to malloc char **
 		get_command_nbr(&current, &tree_length);
 			
