@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/07 19:08:06 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/07 20:13:13 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void print_rslt(t_ast_nde *rslt)
 		i = 0;
 		while (rslt->start + i <= rslt->end)
 			ft_printf("\033[%dm%c\033[0m", back_color, rslt->start[i++]);
-		ft_printf("res %s end %s\n", rslt->start, rslt->end);
+		//ft_printf("res %s end %s\n", rslt->start, rslt->end);
 		// if(rslt->child)
 		// 	print_rslt(rslt->child);
 		back_color = (back_color - 41 + 1) % 7 + 41;
