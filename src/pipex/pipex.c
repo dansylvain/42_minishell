@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/05 17:02:42 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/07 16:12:24 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
 	close(pipefd_out[0]);
 }
 
-void	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[], t_redir redir)
+pid_t	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[], t_redir redir)
 {
 	pid_t	pid;
 	char	**split;
@@ -70,6 +70,7 @@ void	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[], t_redir r
 		}
 		argv++;
 	}
+	return (pid);
 }
 
 void	here_doc_handle(char **argv[], int pipefd_in[], t_redir redir)
@@ -105,12 +106,14 @@ void	here_doc_handle(char **argv[], int pipefd_in[], t_redir redir)
 // 	(void) argv;
 // 	(void) pipefd_in;
 // }
-void	create_pipeline(char *argv[], char *envp[], t_redir redir)
+pid_t	create_pipeline(char *argv[], char *envp[], t_redir redir)
 {
 	int		pipefd_in[2];
 	int		pipefd_out[2];
 	char	buf;
-
+	pid_t	pid;
+	
+	pid = -1;
 	pipe(pipefd_in);
 	pipe(pipefd_out);
 	if (!redir.redir[0])
@@ -125,7 +128,7 @@ void	create_pipeline(char *argv[], char *envp[], t_redir redir)
 	}
 	else if (redir.redir[0] == 2)
 		here_doc_handle(&argv, pipefd_in, redir);
-	nurcery(argv, envp, redir.fd_file, (int *[]){pipefd_in, pipefd_out}, redir);
+	pid = nurcery(argv, envp, redir.fd_file, (int *[]){pipefd_in, pipefd_out}, redir);
 	close(pipefd_in[1]);
 	close(pipefd_out[1]);
 	close(pipefd_out[0]);
@@ -141,6 +144,7 @@ void	create_pipeline(char *argv[], char *envp[], t_redir redir)
 			ft_putchar_fd(buf, 1);		
 	}
 	close(pipefd_in[0]);
+	return (pid);
 }
 
 int	arr_len(const void *arr[])
@@ -190,6 +194,12 @@ int	pipex(char *argv[], char *envp[])
 {
 	t_redir redir;
 	int		argc;
+	pid_t	pid;
+	int status;
+	int exit_status;
+	
+	exit_status = -1;
+	pid = -1;
 	argc = arr_len((void *)argv);
 	if (!argc)
 		return (1);
@@ -197,8 +207,15 @@ int	pipex(char *argv[], char *envp[])
 	set_filepath_and_delim(&argc, &argv, &redir);
 	get_fdio(&redir);
 //ft_printf("argv: %s, redir 0:%d, redir 1:%d, fdfile 0:%d, fdfile 1:%d, filepath 0:%s, filepath 1:%s, delim : %s", *argv, redir.redir[0], redir.redir[1], redir.fd_file[0], redir.fd_file[1], redir.filepath[0], redir.filepath[1], redir.delim); exit(1);
-	create_pipeline(argv, envp, redir);
+	pid = create_pipeline(argv, envp, redir);	
+	if(waitpid(pid, &status, 0) > 0) // Attend spécifiquement la fin du dernier processus enfant
+	{
+		if (WIFEXITED(status))		
+    		exit_status = WEXITSTATUS(status);		
+	}
+	else 
+    	ft_printf("waitpid a échoué ou il n'y avait aucun enfant à attendre\n");
 	while (wait(&(int){0}) > 0)
 		;
-	return (0);
+	return (exit_status);
 }
