@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 07:30:24 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/03 07:42:51 by dan              ###   ########.fr        #
+#    Updated: 2024/02/08 19:09:16 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC =		ft_atoi.c \
 			ft_strmapi.c \
 			ft_strnstr.c \
 			ft_strrchr.c \
+			ft_strstr.c \
 			ft_strtrim.c \
 			ft_substr.c \
 			ft_tolower.c \

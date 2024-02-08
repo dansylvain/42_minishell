@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/08 17:41:53 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/08 19:33:25 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@ int	is_env_var(char *str)
 	return (1);
 }
 
-char *get_env_var(t_Data *data, char *str)
+char *get_env_var(t_Data *data, char *str, char buff[])
 {
 	int i;
 	int j;
-	char buff[2000];
 	
 	ft_bzero(buff, 2000);
 	i = 0;
@@ -71,35 +70,68 @@ char *get_env_var(t_Data *data, char *str)
 	
 	ft_printf("AFFICHAGE DE LA PUTAIN DE VARIABLE: ");
 	int k = 0;
-	while (k != i - 1)
+	while (k != i)
 	{
-		buff[k] = str[k + 1];
+		buff[k] = str[k];
 		k++;
 	}
-	ft_printf("%s\n", buff);
-	
-
+	ft_printf("buff before comparison: %s\n", buff);
+	ft_printf("buff comparé: %s\n", &buff[1]);
 
 	j = 0;
 	while (data->envp_tab[j])
 	{
-
-		if (!ft_strncmp(buff, data->envp_tab[j], i - 1))
+		if (!ft_strncmp(&buff[1], data->envp_tab[j], i - 1))
 		{
-			ft_printf("HOLLY COW!!!\n");
-			ft_printf("buff: %s\n", buff);
-			ft_printf("value: %s\n", getenv(buff));
+			ft_printf("var renvoyée: %s\n", getenv(&buff[1]));
+	
+			return (getenv(&buff[1]));
 		}
 		j++;
 	}
 }
 
+void expand_env_var(char *command, char *env_var, char buff[])
+{
+	char	*start;
+	char	*end;
+	int		len;
+	char	*sav_command;
+	
+	sav_command = command;
+	len = ft_strlen(buff);
+	start = ft_strstr(command, buff);
+	end = &start[len];
+	
+	command = (char *)ft_calloc(ft_strlen(sav_command) - len + ft_strlen(env_var) + 1, sizeof(char));
+	if (command == NULL)
+		return ;
+	
+	ft_strlcpy(command, sav_command, &start[0] - &sav_command[0] + 1);
+	ft_strlcat(&command[ft_strlen(command)], env_var, ft_strlen(env_var) + 1);
+	ft_strlcat(&command[ft_strlen(command)], end, ft_strlen(end) + 1);
+	ft_printf("len :%i\n", len);
+	ft_printf("WORK ON expand_env_var\n");
+	ft_printf("command: %s\n", sav_command);
+	ft_printf("env_var: %s\n", env_var);
+	ft_printf("buff: %s\n", buff);
+	
+	ft_printf("replaced var: %s\n", command);
+
+	
+	ft_printf("start: >%s<\n", start);
+	ft_printf("end: >%s<\n", end);
+	
+	free(sav_command);
+}
 char	**fill_command_tab(t_Data *data, char ***commands_tab,
 	t_ast_nde **node, int return_pipex)
 {
 	int			i;
 	int			j;
 	t_ast_nde	*current;
+	char 		*env_var;
+	char		buff[2000];
 
 	// ignores first node if return_pipex is failure
 	if (return_pipex && (*node)->sibling->sibling)
@@ -108,6 +140,7 @@ char	**fill_command_tab(t_Data *data, char ***commands_tab,
 	i = 0;
 	while (*node)
 	{
+		env_var = NULL;
 		if ((*node)->token == AND || (*node)->token == OR)
 			break ;
 		current = (*node)->child; 
@@ -120,8 +153,7 @@ char	**fill_command_tab(t_Data *data, char ***commands_tab,
 				{
 					if (is_env_var(&current->start[j]))
 					{
-						ft_printf("ENV VAR: %s", &current->start[j]);
-						get_env_var(data, &current->start[j]);
+						env_var = get_env_var(data, &current->start[j], buff);
 					}
 						
 					j++;
@@ -136,6 +168,11 @@ char	**fill_command_tab(t_Data *data, char ***commands_tab,
 					(*node)->end - (*node)->start + 1);
 			if ((*commands_tab)[i] == NULL)
 				return (NULL);
+			if (env_var)
+			{
+				ft_printf("THERE IS SOMETHING IN THERE\n");
+				expand_env_var((*commands_tab)[i], env_var, buff);
+			}
 			i++;
 		}
 		(*node) = (*node)->sibling;
