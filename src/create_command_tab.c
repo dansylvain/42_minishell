@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/08 19:33:25 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/08 19:52:41 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,22 @@ char *get_env_var(t_Data *data, char *str, char buff[])
 	while (str[i] && (str[i] != ' ' && str[i] != '\'' && str[i] != '\"' && str[i] != '>' && str[i] != '<' && str[i] != '|' && str[i] != '&'))
 		i++;
 	
-	ft_printf("AFFICHAGE DE LA PUTAIN DE VARIABLE: ");
+	// ft_printf("AFFICHAGE DE LA PUTAIN DE VARIABLE: ");
 	int k = 0;
 	while (k != i)
 	{
 		buff[k] = str[k];
 		k++;
 	}
-	ft_printf("buff before comparison: %s\n", buff);
-	ft_printf("buff comparé: %s\n", &buff[1]);
+	// ft_printf("buff before comparison: %s\n", buff);
+	// ft_printf("buff comparé: %s\n", &buff[1]);
 
 	j = 0;
 	while (data->envp_tab[j])
 	{
 		if (!ft_strncmp(&buff[1], data->envp_tab[j], i - 1))
 		{
-			ft_printf("var renvoyée: %s\n", getenv(&buff[1]));
+			// ft_printf("var renvoyée: %s\n", getenv(&buff[1]));
 	
 			return (getenv(&buff[1]));
 		}
@@ -91,36 +91,36 @@ char *get_env_var(t_Data *data, char *str, char buff[])
 	}
 }
 
-void expand_env_var(char *command, char *env_var, char buff[])
+void expand_env_var(char **command, char *env_var, char buff[])
 {
 	char	*start;
 	char	*end;
 	int		len;
 	char	*sav_command;
 	
-	sav_command = command;
+	sav_command = (*command);
 	len = ft_strlen(buff);
-	start = ft_strstr(command, buff);
+	start = ft_strstr((*command), buff);
 	end = &start[len];
 	
-	command = (char *)ft_calloc(ft_strlen(sav_command) - len + ft_strlen(env_var) + 1, sizeof(char));
-	if (command == NULL)
+	(*command) = (char *)ft_calloc(ft_strlen(sav_command) - len + ft_strlen(env_var) + 1, sizeof(char));
+	if ((*command) == NULL)
 		return ;
 	
-	ft_strlcpy(command, sav_command, &start[0] - &sav_command[0] + 1);
-	ft_strlcat(&command[ft_strlen(command)], env_var, ft_strlen(env_var) + 1);
-	ft_strlcat(&command[ft_strlen(command)], end, ft_strlen(end) + 1);
-	ft_printf("len :%i\n", len);
-	ft_printf("WORK ON expand_env_var\n");
-	ft_printf("command: %s\n", sav_command);
-	ft_printf("env_var: %s\n", env_var);
-	ft_printf("buff: %s\n", buff);
+	ft_strlcpy((*command), sav_command, &start[0] - &sav_command[0] + 1);
+	ft_strlcat(&(*command)[ft_strlen((*command))], env_var, ft_strlen(env_var) + 1);
+	ft_strlcat(&(*command)[ft_strlen((*command))], end, ft_strlen(end) + 1);
+	// ft_printf("len :%i\n", len);
+	// ft_printf("WORK ON expand_env_var\n");
+	// ft_printf("command: %s\n", sav_command);
+	// ft_printf("env_var: %s\n", env_var);
+	// ft_printf("buff: %s\n", buff);
 	
-	ft_printf("replaced var: %s\n", command);
+	// ft_printf("replaced var: %s\n", (*command));
 
 	
-	ft_printf("start: >%s<\n", start);
-	ft_printf("end: >%s<\n", end);
+	// ft_printf("start: >%s<\n", start);
+	// ft_printf("end: >%s<\n", end);
 	
 	free(sav_command);
 }
@@ -170,8 +170,10 @@ char	**fill_command_tab(t_Data *data, char ***commands_tab,
 				return (NULL);
 			if (env_var)
 			{
-				ft_printf("THERE IS SOMETHING IN THERE\n");
-				expand_env_var((*commands_tab)[i], env_var, buff);
+				// ft_printf("THERE IS SOMETHING IN THERE\n");
+				// ft_printf("CHANGED COMMAND: %s\n", (*commands_tab)[i]);
+				expand_env_var(&((*commands_tab)[i]), env_var, buff);
+				// ft_printf("CHANGED COMMAND: %s\n", (*commands_tab)[i]);
 			}
 			i++;
 		}
@@ -199,7 +201,7 @@ char	**create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 		commands_tab = fill_command_tab(data, &commands_tab, &node, return_pipex);
 		display_command_tab(commands_tab);
 		return_pipex = pipex(commands_tab, envp);
-		ft_printf("return_pipex: %i\n", return_pipex);
+		// ft_printf("return_pipex: %i\n", return_pipex);
 		if (node == NULL)
 			break ;
 		if (node->token == OR && return_pipex == 0)
