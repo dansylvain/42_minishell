@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/07 19:26:22 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/08 11:47:30 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[])
 
 	//  parse(cmd[0]); exit(1);
 	cmd_tab = create_command_tab(parse(cmd[0]), envp);	
-	display_command_tab(cmd_tab);
 	// return_pipex = pipex(cmd_tab, envp);
 	// ft_printf("return_pipex: %i\n", return_pipex);
 	return (1);

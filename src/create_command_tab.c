@@ -35,11 +35,13 @@ void	get_command_nbr(t_ast_nde **current, int *tree_length)
 	ft_printf("tree_length: %i\n", (*tree_length));
 }
 
-char	**fill_command_tab(char ***commands_tab, t_ast_nde **node)
+char	**fill_command_tab(char ***commands_tab, t_ast_nde **node, int return_pipex)
 {
 	int i;
 
 	i = 0;
+	if (return_pipex && (*node)->sibling->sibling)
+		(*node) = (*node)->sibling->sibling;
 	while (*node)
 	{
 		if ((*node)->token == AND || (*node)->token == OR)
@@ -66,7 +68,7 @@ char	**create_command_tab(t_ast_nde *node, char *envp[])
 	
 	// initialize vars
 	t_ast_nde *current;
-
+	return_pipex = 0;
 	while (node)
 	{
 		current = node;
@@ -80,26 +82,19 @@ char	**create_command_tab(t_ast_nde *node, char *envp[])
 			return (NULL);
 			
 		// fill char **
-		commands_tab = fill_command_tab(&commands_tab, &node);
+		commands_tab = fill_command_tab(&commands_tab, &node, return_pipex);
+		display_command_tab(commands_tab);
 		
 		// pass char ** to PIPEX 
-		// return_pipex = pipex(commands_tab, envp);
-
-		if (node && (node->token == AND || node->token == OR))
-		{
-			ft_printf("Let's rock again\n");
-			return_pipex = pipex(commands_tab, envp);
-			ft_printf("exec PIPEX loop\n");
-			node = node->sibling;
-			continue ;
-		}
-		else if (node == NULL)
-		{
-			ft_printf("Party is over\n");
+		return_pipex = pipex(commands_tab, envp);
+		ft_printf("return_pipex: %i\n", return_pipex);
+		if (node == NULL)
 			break ;
-		}
+		if (node->token == OR && return_pipex == 0)
+			return_pipex = 1;
+		if (node->token == OR && return_pipex == 1)
+			return_pipex = 0;
+		node = node->sibling;
+		continue ;
 	}
-	ft_printf("exec PIPEX create_command_tab\n");
-	return_pipex = pipex(commands_tab, envp);
-	return (commands_tab);
 }
