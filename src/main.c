@@ -6,18 +6,19 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/08 11:47:30 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/08 12:48:55 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "parsing_utils.h"
+
 char		**parse_cmd(char **command, char **env);
-void		tmp_main();
-t_ast_nde	*parse(char *str);
+void		tmp_main(void);
+void		display_command_tab(char **command_tab);
 int			pipex(char *argv[], char *envp[]);
-char	**create_command_tab(t_ast_nde *node, char *envp[]);
-void	display_command_tab(char **command_tab);
+t_ast_nde	*parse(char *str);
+char		**create_command_tab(t_ast_nde *node, char *envp[]);
 
 /**========================================================================
  *                             COMMENTS POLICY
@@ -39,8 +40,6 @@ int	main(int argc, char **argv, char *envp[])
 {
 	t_Data	*data;
 
-	// tmp_main();
-	// return 0;
 	rl_catch_signals = 0;
 	data = (t_Data *)malloc(sizeof(t_Data));
 	if (data == NULL)
@@ -94,14 +93,10 @@ int	prompt_loop(t_Data *data, char *envp[])
 int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[])
 {
 	char	**cmd_tab;
-	int return_pipex;
+	int		return_pipex;
 
-	//  parse(cmd[0]); exit(1);
-	cmd_tab = create_command_tab(parse(cmd[0]), envp);	
-	// return_pipex = pipex(cmd_tab, envp);
-	// ft_printf("return_pipex: %i\n", return_pipex);
+	create_command_tab(parse(cmd[0]), envp);
 	return (1);
-	
 	if (!cmd_tab)
 		return (1);
 	if (!cmd_tab[0])

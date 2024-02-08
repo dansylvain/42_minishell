@@ -1,5 +1,0 @@
--rw-rw-r-- 1 dan dan   59401 févr.  3 15:52 diff_output.txt
--rw-rw-r-- 1 dan dan   27775 févr.  3 18:49 correct_output.txt
--rw-rw-r-- 1 dan dan   27775 févr.  3 18:49 output.txt
--rw-rw-r-- 1 dan dan     217 févr.  7 16:59 test_commands.txt
--rw-rw-r-- 1 dan dan       0 févr.  7 18:15 fichiers.txt
