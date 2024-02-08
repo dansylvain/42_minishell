@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/08 16:34:09 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/08 17:41:53 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,42 @@ int	is_env_var(char *str)
 	return (1);
 }
 
+char *get_env_var(t_Data *data, char *str)
+{
+	int i;
+	int j;
+	char buff[2000];
+	
+	ft_bzero(buff, 2000);
+	i = 0;
+	while (str[i] && (str[i] != ' ' && str[i] != '\'' && str[i] != '\"' && str[i] != '>' && str[i] != '<' && str[i] != '|' && str[i] != '&'))
+		i++;
+	
+	ft_printf("AFFICHAGE DE LA PUTAIN DE VARIABLE: ");
+	int k = 0;
+	while (k != i - 1)
+	{
+		buff[k] = str[k + 1];
+		k++;
+	}
+	ft_printf("%s\n", buff);
+	
+
+
+	j = 0;
+	while (data->envp_tab[j])
+	{
+
+		if (!ft_strncmp(buff, data->envp_tab[j], i - 1))
+		{
+			ft_printf("HOLLY COW!!!\n");
+			ft_printf("buff: %s\n", buff);
+			ft_printf("value: %s\n", getenv(buff));
+		}
+		j++;
+	}
+}
+
 char	**fill_command_tab(t_Data *data, char ***commands_tab,
 	t_ast_nde **node, int return_pipex)
 {
@@ -83,7 +119,11 @@ char	**fill_command_tab(t_Data *data, char ***commands_tab,
 				while (j < current->end - current->start + 1)
 				{
 					if (is_env_var(&current->start[j]))
-						ft_printf("ENV VAR: %s\n", &current->start[j]);
+					{
+						ft_printf("ENV VAR: %s", &current->start[j]);
+						get_env_var(data, &current->start[j]);
+					}
+						
 					j++;
 				}
 			}
