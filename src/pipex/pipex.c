@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/07 16:12:24 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/08 11:38:01 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-result"
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -219,3 +222,5 @@ int	pipex(char *argv[], char *envp[])
 		;
 	return (exit_status);
 }
+
+#pragma GCC diagnostic pop
