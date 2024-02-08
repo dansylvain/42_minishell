@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/07 20:13:13 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/08 08:18:33 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,28 +90,6 @@ void	print_qute_sib(t_ast_nde *sib)
 	ft_printf("\n\n");
 }
 
-void	print_raw_rght(t_ast_nde *raw_rght)
-{
-	int	i;
-	int	back_color;
-	t_ast_nde	*sib;
-
-	back_color = 41;
-	i = 0;
-	while (raw_rght && raw_rght->start + i <= raw_rght->end)
-		ft_printf("\033[%dm%c\033[0m", back_color, raw_rght->start[i++]);	
-	sib = raw_rght->child;
-	ft_printf("\n");
-	while (sib)
-	{
-		i = 0;
-		while (sib->start + i <= sib->end)
-			ft_printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);
-		back_color = (back_color - 41 + 1) % 7 + 41;
-		sib = sib->sibling;
-	}
-	ft_printf("\n");
-}
 
 void print_rslt(t_ast_nde *rslt)
 {
@@ -135,6 +113,28 @@ void print_rslt(t_ast_nde *rslt)
 	ft_printf("\n\n");
 }
 
+void	print_raw(t_ast_nde *raw)
+{
+	int	i;
+	int	back_color;
+	t_ast_nde	*sib;
+
+	back_color = 41;
+	i = 0;
+	while (raw && raw->start + i <= raw->end)
+		ft_printf("\033[%dm%c\033[0m", back_color, raw->start[i++]);	
+	sib = raw->child;
+	ft_printf("\n");
+	while (sib)
+	{
+		i = 0;
+		while (sib->start + i <= sib->end)
+			ft_printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);
+		back_color = (back_color - 41 + 1) % 7 + 41;
+		sib = sib->sibling;
+	}
+	ft_printf("\n");
+}
 void	print_tree(t_ast_nde *node)
 {
 	t_ast_nde	*operator;
@@ -150,7 +150,7 @@ void	print_tree(t_ast_nde *node)
 	 	raw_rght = raw_lft->sibling;
 	if (raw_rght)
 	{
-		print_raw_rght(raw_rght);
+		print_raw(raw_rght);
 		ft_printf("\n");
 	}
 	operator = NULL;
@@ -160,7 +160,7 @@ void	print_tree(t_ast_nde *node)
 		print_tree(operator);
 	else if (raw_lft && raw_lft->child)
 	{
-		print_raw_rght(raw_lft);
+		print_raw(raw_lft);
 		ft_printf("\n");		
 	}
 }

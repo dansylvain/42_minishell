@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/07 19:02:27 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/08 08:26:33 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ static void	leaf_tree(t_ast_nde *node, t_ast_nde **rslt, t_ast_nde **rslt_sav)
 		add_sibling(raw_rght, rslt, rslt_sav);	
 		add_sibling(operator, rslt, rslt_sav);
 	}
+	else
+		add_sibling(operator, rslt, rslt_sav);
 	next_operator = NULL;
 	if (raw_lft && raw_lft->child && raw_lft->child->sibling)
 		next_operator = raw_lft->child->sibling;
