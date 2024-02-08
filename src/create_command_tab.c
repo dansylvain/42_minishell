@@ -6,12 +6,15 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/08 19:52:41 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/08 21:56:57 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "parsing_utils.h"
+
+void	print_tree(t_ast_nde *node);
+
 
 int			pipex(char *argv[], char *envp[]);
 
@@ -146,8 +149,9 @@ char	**fill_command_tab(t_Data *data, char ***commands_tab,
 		current = (*node)->child; 
 		while (current)
 		{
-			if (current->token == DQUTE || current->token == RAW)
+			if (current->token == IN_DQUTE || current->token == RAW)
 			{
+				
 				j = 0;
 				while (j < current->end - current->start + 1)
 				{
@@ -162,18 +166,26 @@ char	**fill_command_tab(t_Data *data, char ***commands_tab,
 			current = current->sibling;
 		}
 
+	/**========================================================================
+	 *! verification to be removed! ((*node)->end - (*node)->start + 1))            
+	 *========================================================================**/
 		if ((*node)->token != PIPE && (*node)->end - (*node)->start + 1)
 		{
+			int k = 0;
+			
 			(*commands_tab)[i] = ft_strndup((*node)->start,
 					(*node)->end - (*node)->start + 1);
 			if ((*commands_tab)[i] == NULL)
 				return (NULL);
-			if (env_var)
+			if ((*node)->child->token == RAW || (*node)->token == DQUTE)
 			{
-				// ft_printf("THERE IS SOMETHING IN THERE\n");
-				// ft_printf("CHANGED COMMAND: %s\n", (*commands_tab)[i]);
-				expand_env_var(&((*commands_tab)[i]), env_var, buff);
-				// ft_printf("CHANGED COMMAND: %s\n", (*commands_tab)[i]);
+				if (env_var)
+				{
+					// ft_printf("THERE IS SOMETHING IN THERE\n");
+					// ft_printf("CHANGED COMMAND: %s\n", (*commands_tab)[i]);
+					expand_env_var(&((*commands_tab)[i]), env_var, buff);
+					// ft_printf("CHANGED COMMAND: %s\n", (*commands_tab)[i]);
+				}
 			}
 			i++;
 		}
