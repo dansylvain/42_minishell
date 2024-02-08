@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/08 08:18:33 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/08 17:21:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void	print_tree(t_ast_nde *node)
 	 	raw_rght = raw_lft->sibling;
 	if (raw_rght)
 	{
-		print_raw(raw_rght);
+		print_raw(raw_rght->child);
 		ft_printf("\n");
 	}
 	operator = NULL;
@@ -160,7 +160,7 @@ void	print_tree(t_ast_nde *node)
 		print_tree(operator);
 	else if (raw_lft && raw_lft->child)
 	{
-		print_raw(raw_lft);
+		print_raw(raw_lft->child);
 		ft_printf("\n");		
 	}
 }

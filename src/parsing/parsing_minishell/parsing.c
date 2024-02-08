@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/08 08:26:33 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/08 17:18:28 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	leaf_tree(t_ast_nde *node, t_ast_nde **rslt, t_ast_nde **rslt_sav)
 	 	raw_rght = raw_lft->sibling;
 	if (raw_rght)
 	{
-		add_sibling(raw_rght, rslt, rslt_sav);	
+		add_sibling(raw_rght->child, rslt, rslt_sav);	
 		add_sibling(operator, rslt, rslt_sav);
 	}
 	else
@@ -195,6 +195,7 @@ static t_ast_nde	*create_ast(char *str)
 	print_qute_sib(root->child->child->child);
 
 	set_operator(root->child);
+	//set_chevron();
 	print_tree(root->child->child->sibling);
 
 	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav);	

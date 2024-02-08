@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/08 08:24:42 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/08 17:38:39 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token)
 		raw_rght = create_node(RAW);
 		raw_rght->start = raw->start;
 		raw_rght->end = token->start - 1;
+		raw_rght->child = copy_node(raw_rght);
 	}
 	raw_lft = create_node(RAW);
 	raw_lft->start = token->end + 1;
@@ -92,31 +93,31 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 		actual = sib->start;	
 		while (sib->token == RAW && actual <= sib->end)
 		{
-			if (*(actual - 1) != '\\' && *actual == '<')
-			{
-				token_nde = create_node(SCHEV_LFT);
-				token_nde->start = actual;
-				token_nde->end = actual;
-				if (*(actual + 1) == '<')
-				{	
-					token_nde->token = DCHEV_LFT;				
-					token_nde->end = ++actual;
-				}
-				return (token_nde);
-			}
-			else if (*(actual - 1) != '\\' && *actual == '>')
-			{
-				token_nde = create_node(SCHEV_RGTH);
-				token_nde->start = actual;
-				token_nde->end = actual;
-				if (*(actual + 1) == '>')
-				{	
-					token_nde->token = DCHEV_LFT;				
-					token_nde->end = ++actual;
-				}
-				return (token_nde);
-			}
-			else if (*(actual - 1) != '\\' && *actual == '|')
+			// if (*(actual - 1) != '\\' && *actual == '<')
+			// {
+			// 	token_nde = create_node(SCHEV_LFT);
+			// 	token_nde->start = actual;
+			// 	token_nde->end = actual;
+			// 	if (*(actual + 1) == '<')
+			// 	{	
+			// 		token_nde->token = DCHEV_LFT;				
+			// 		token_nde->end = ++actual;
+			// 	}
+			// 	return (token_nde);
+			// }
+			// else if (*(actual - 1) != '\\' && *actual == '>')
+			// {
+			// 	token_nde = create_node(SCHEV_RGTH);
+			// 	token_nde->start = actual;
+			// 	token_nde->end = actual;
+			// 	if (*(actual + 1) == '>')
+			// 	{	
+			// 		token_nde->token = DCHEV_LFT;				
+			// 		token_nde->end = ++actual;
+			// 	}
+			// 	return (token_nde);
+			// }
+			if (*(actual - 1) != '\\' && *actual == '|')
 			{
 				token_nde = create_node(PIPE);
 				token_nde->start = actual;
@@ -146,22 +147,22 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 t_ast_nde	*set_operator(t_ast_nde *node)
 {
 	t_ast_nde *sib;
-	t_ast_nde *sib_parent;
+	t_ast_nde *sib_cont;
 	t_ast_nde *token;
 	t_ast_nde *raw_lft;
 	t_ast_nde *raw_rght;
 	
-	sib_parent = node->child;
-	sib = sib_parent->child;
+	sib_cont = node->child;
+	sib = sib_cont->child;
 	
 	token = create_token_node(sib);
-	sib_parent->sibling = token;
+	sib_cont->sibling = token;
 	if (token)
 	{
-		raw_lft = create_token_child(sib_parent, token);
+		raw_lft = create_token_child(sib_cont, token);
 		token->child = raw_lft;
-		raw_rght = raw_lft->sibling;		
-		fill_child(sib, raw_lft->child, raw_rght, token);
+		raw_rght = raw_lft->sibling;	
+		fill_child(sib, raw_lft->child, raw_rght->child, token);
 		set_operator(raw_lft);
 	}
 	return (sib);
