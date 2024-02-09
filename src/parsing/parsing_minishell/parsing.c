@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/08 21:29:21 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/09 11:48:53 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	leaf_tree(t_ast_nde *node, t_ast_nde **rslt, t_ast_nde **rslt_sav)
 		add_sibling(raw_lft->child, rslt, rslt_sav);		
 		//add_sibling(copy_node(operator), rslt, rslt_sav);
 	}
-ft_printf("ici\n");
+// ft_printf("ici\n");
 }
 
 /* typedef struct s_ast_nde
@@ -181,9 +181,9 @@ t_ast_nde	*expand_vars(t_ast_nde *qute_sib)
 
 			if (var_node)
 			{
-				ft_printf("var_node->start: %s\n", var_node->start);
-				ft_printf("starting_char: %c\n", var_node->start[0]);
-				ft_printf("ending_char: %c\n", var_node->end[0]);
+				// ft_printf("var_node->start: %s\n", var_node->start);
+				// ft_printf("starting_char: %c\n", var_node->start[0]);
+				// ft_printf("ending_char: %c\n", var_node->end[0]);
 			}
 			// print_sib(exp_sib);
 			
@@ -224,7 +224,7 @@ static t_ast_nde	*create_ast(char *str)
 	// print_qute_sib(qute_sib);
 
 	set_operator(root->child);
-	print_tree(root->child->child->sibling);
+	// print_tree(root->child->child->sibling);
 	//expand_vars(qute_sib);
 	//print_sib(qute_sib);
 	//pip_sib = set_pipe(root);

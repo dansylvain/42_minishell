@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_operator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/07 12:41:20 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/09 11:44:24 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,8 @@ t_ast_nde	*set_operator(t_ast_nde *node)
 	token = create_token_node(sib);
 	sib_parent->sibling = token;
 	if (token)
-	{printf("token\n");
+	{
+		// printf("token\n");
 		raw_lft = create_token_child(sib_parent, token);
 		token->child = raw_lft;
 		raw_rght = raw_lft->sibling;
