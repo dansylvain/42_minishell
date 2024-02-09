@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/09 10:54:12 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/09 11:17:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,14 @@ int	is_env_var(char *str)
 
 char *get_env_var(t_Data *data, char *str, char buff[])
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
+	char	*env_var;
 	
 	ft_bzero(buff, 2000);
 	i = 0;
-	while (str[i] && (str[i] != ' ' && str[i] != '\'' && str[i] != '\"' && str[i] != '>' && str[i] != '<' && str[i] != '|' && str[i] != '&'))
+	while (str[i] && (str[i] != ' ' && str[i] != '\'' && str[i] != '\"'
+		&& str[i] != '>' && str[i] != '<' && str[i] != '|' && str[i] != '&'))
 		i++;
 	int k = 0;
 	while (k != i)
@@ -79,11 +81,12 @@ char *get_env_var(t_Data *data, char *str, char buff[])
 	while (data->envp_tab[j])
 	{
 		if (!ft_strncmp(&buff[1], data->envp_tab[j], i - 1))
-		{
 			return (getenv(&buff[1]));
-		}
 		j++;
 	}
+	env_var = ft_strdup(buff);
+	ft_bzero(env_var, ft_strlen(buff));
+	return (env_var);
 }
 
 void expand_env_var(char **command, char *env_var, char buff[])
@@ -131,9 +134,7 @@ char	**fill_command_tab(t_Data *data, char ***commands_tab,
 				while (j < current->end - current->start + 1)
 				{
 					if (is_env_var(&current->start[j]))
-					{
 						env_var = get_env_var(data, &current->start[j], buff);
-					}
 					j++;
 				}
 			}
@@ -152,12 +153,8 @@ char	**fill_command_tab(t_Data *data, char ***commands_tab,
 			if ((*commands_tab)[i] == NULL)
 				return (NULL);
 			if ((*node)->child->token == RAW || (*node)->child->token == DQUTE)
-			{
 				if (env_var)
-				{
 					expand_env_var(&((*commands_tab)[i]), env_var, buff);
-				}
-			}
 			i++;
 		}
 		(*node) = (*node)->sibling;
