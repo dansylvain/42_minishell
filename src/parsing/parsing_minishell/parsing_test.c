@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/09 11:50:10 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/09 16:21:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ void	print_tree(t_ast_nde *node)
 	} 
 }
 
-void	print_chevron_tree(t_ast_nde *node)
+void	print_space_tree(t_ast_nde *node)
 {
 	t_ast_nde	*operator;
 	t_ast_nde	*raw_lft;
@@ -185,16 +185,25 @@ void	print_chevron_tree(t_ast_nde *node)
 		ft_printf("\n");
 	}
 	operator = NULL;
-	if (raw_lft && raw_lft->child)
+	if  (raw_lft && raw_lft->child && raw_lft->child->sibling)
+	{
 		operator = raw_lft->child->sibling;
+		print_space_tree(operator);
+	}
+	
+	operator = NULL;	
+	if (raw_rght && raw_rght->child)
+		operator = raw_rght->child->sibling;
+	// else if (raw_lft && raw_lft->child)
+	// 	operator = raw_lft->child->sibling;
 	if (operator)
-		print_tree(operator);
-	// else
-	// {		
-	// 	if (raw_rght && raw_rght->child)
-	// 	{
-	// 		print_raw(raw_rght->child);
-	// 		ft_printf("\n");		
-	// 	}
-	// } 
+		print_space_tree(operator);
+	else
+	{		
+		if (raw_rght && raw_rght->child)
+		{
+			print_raw(raw_rght->child);
+			ft_printf("\n");		
+		}
+	} 
 }

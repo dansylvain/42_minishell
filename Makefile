@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/09 11:25:53 by seblin           ###   ########.fr        #
+#    Updated: 2024/02/09 14:41:01 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,10 +49,11 @@ SRC =	src/main.c \
 		src/parsing/parsing_pipex/parsing_spce.c \
 		src/parsing/parsing_pipex/parsing_utils.c \
 		src/parsing/parsing_minishell/parsing.c \
-		src/parsing/parsing_minishell/parsing_qute.c \
+		src/parsing/parsing_minishell/parsing_quote.c \
 		src/parsing/parsing_minishell/parsing_operator.c \
 		src/parsing/parsing_minishell/parsing_utils.c \
 		src/parsing/parsing_minishell/parsing_test.c \
+		src/parsing/parsing_minishell/parsing_space.c \
 		src/parsing/parsing_minishell/parsing_chevron.c \
 		src/pipex/pipex.c \
 		src/pipex/setup.c \

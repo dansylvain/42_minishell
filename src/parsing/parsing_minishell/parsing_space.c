@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_operator.c                                 :+:      :+:    :+:   */
+/*   parsing_space.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/09 14:43:21 by seblin           ###   ########.fr       */
+/*   Created: 2024/02/08 15:59:03 by seblin            #+#    #+#             */
+/*   Updated: 2024/02/09 13:19:52 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "parsing_utils.h"
 
-#include<stdio.h>
 t_ast_nde	*copy_node(t_ast_nde *node);
 void	print_raw_rght(t_ast_nde *raw_rght);
-
+t_ast_nde	*set_chevron(t_ast_nde *node);
 static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
 {
 	t_ast_nde	*raw_lft_child_sav;
@@ -63,7 +62,32 @@ static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, 
 	if (raw_rght)
 		raw_rght->child = raw_rght_child_sav;	
 }
-
+static t_ast_nde	*create_space_node(t_ast_nde *sib)
+{
+	t_ast_nde	*token_nde;
+	char		*actual;
+	
+	token_nde = NULL;
+	while (sib)
+	{
+		actual = sib->start;	
+		while (sib->token == RAW && actual <= sib->end)
+		{
+			if (*actual == ' ')
+			{
+				token_nde = create_node(SPCE);
+				token_nde->start = actual;
+				token_nde->end = actual;
+				while (*++actual == ' ')								
+					token_nde->end = actual;				
+				return (token_nde);
+			}		
+			actual++;
+		}
+		sib = sib->sibling;
+	}
+	return (token_nde);
+}
 static t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token)
 {		
 	t_ast_nde	*raw_lft; 
@@ -82,45 +106,8 @@ static t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token)
 	raw_lft->sibling = raw_rght;
 	return (raw_lft);
 }
-static t_ast_nde	*create_token_node(t_ast_nde *sib)
-{
-	t_ast_nde	*token_nde;
-	char		*actual;
-	
-	token_nde = NULL;
-	while (sib)
-	{
-		actual = sib->start;	
-		while (sib->token == RAW && actual <= sib->end)
-		{			
-			if (*(actual - 1) != '\\' && *actual == '|')
-			{
-				token_nde = create_node(PIPE);
-				token_nde->start = actual;
-				token_nde->end = actual;
-				if (*(actual + 1) == '|')
-				{	
-					token_nde->token = OR;				
-					token_nde->end = ++actual;
-				}
-				return (token_nde);
-			}
-			else if (*(actual - 1) != '\\' && *actual == '&'
-				&& *(actual + 1) == '&')
-			{
-				token_nde = create_node(AND);
-				token_nde->start = actual;
-				token_nde->end = ++actual;
-				return (token_nde);
-			}
-			actual++;
-		}
-		sib = sib->sibling;
-	}
-	return (token_nde);
-}
 
-t_ast_nde	*set_operator(t_ast_nde *node)
+t_ast_nde	*set_space(t_ast_nde *node)
 {
 	t_ast_nde *sib;
 	t_ast_nde *sib_cont;
@@ -130,7 +117,7 @@ t_ast_nde	*set_operator(t_ast_nde *node)
 	
 	sib_cont = node->child;
 	sib = sib_cont->child;	
-	token = create_token_node(sib);
+	token = create_space_node(sib);
 	sib_cont->sibling = token;
 	if (token)
 	{
@@ -138,8 +125,10 @@ t_ast_nde	*set_operator(t_ast_nde *node)
 		raw_rght = raw_lft->sibling;	
 		token->child = raw_lft;
 		fill_child(sib, raw_lft->child, raw_rght->child, token);
+		if (raw_lft->child)
+			set_chevron(raw_lft);
 		if (raw_rght->child)
-				set_operator(raw_rght);	
+		 	set_space(raw_rght);		
 	}
 	return (sib);
 }
