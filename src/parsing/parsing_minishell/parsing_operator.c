@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/09 11:21:14 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/09 13:41:01 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, 
 		}		
 		sib = sib->sibling;
 	}
-	if (raw_lft->child)
+	if (raw_lft)
 		raw_lft->child = raw_lft_child_sav;
-	if (raw_rght->child)
+	if (raw_rght)
 		raw_rght->child = raw_rght_child_sav;	
 }
 
@@ -161,11 +161,11 @@ t_ast_nde	*set_operator(t_ast_nde *node)
 		raw_lft = create_token_child(sib_cont, token);
 		raw_rght = raw_lft->sibling;	
 		token->child = raw_lft;
-		fill_child(sib, raw_lft->child, raw_rght->child, token);
+		fill_child(sib, raw_lft->child, raw_rght->child, token);//exit(1);
 		if (raw_rght->child)
 				set_operator(raw_rght);
-		else if (raw_lft->child)
-			set_operator(raw_lft);
+		// else if (raw_lft->child)
+		// 	set_operator(raw_lft);
 	}
 	return (sib);
 }

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/09 11:54:38 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/09 13:25:14 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,9 +199,10 @@ static t_ast_nde	*create_ast(char *str)
 	set_operator(root->child); 
 	print_tree(root->child->child->sibling);
 	set_chevron(root->child->child->sibling->child);
+	//exit(1);
 	ft_printf("la\n");
 	print_chevron_tree(root->child->child->sibling);
-	ft_printf("et la\n");
+	ft_printf("et la\n");//exit(1);
 	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav);	
 	print_rslt(cmd_sav, 1);
 	ft_printf("\n\n");
@@ -216,7 +217,7 @@ static t_ast_nde	*create_ast(char *str)
 		cmd_sav2 = cmd_sav2->sibling;
 	}
 	ft_printf("\n\n");
-exit(1);
+
 	if (!cmd_sav)
 		ast_res = root;
 	else
