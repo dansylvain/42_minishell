@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/09 11:41:20 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/09 12:09:38 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char *get_env_var(t_Data *data, char *str, char buff[])
 {
 	int		i;
 	int		j;
+	int		k;
 	char	*env_var;
 	
 	ft_bzero(buff, 2000);
@@ -71,7 +72,7 @@ char *get_env_var(t_Data *data, char *str, char buff[])
 	while (str[i] && (str[i] != ' ' && str[i] != '\'' && str[i] != '\"'
 		&& str[i] != '>' && str[i] != '<' && str[i] != '|' && str[i] != '&'))
 		i++;
-	int k = 0;
+	k = 0;
 	while (k != i)
 	{
 		buff[k] = str[k];
@@ -80,7 +81,8 @@ char *get_env_var(t_Data *data, char *str, char buff[])
 	j = 0;
 	while (data->envp_tab[j])
 	{
-		if (!ft_strncmp(&buff[1], data->envp_tab[j], i - 1))
+		if (!ft_strncmp(&buff[1], data->envp_tab[j], i - 1)
+			&& data->envp_tab[j][ft_strlen(buff) - 1] == '=')
 			return (getenv(&buff[1]));
 		j++;
 	}
