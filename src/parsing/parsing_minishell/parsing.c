@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/09 00:13:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/09 11:54:38 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void		print_qute_sib(t_ast_nde *sib);
 void		print_sib(t_ast_nde *sib);
 t_ast_nde	*set_operator(t_ast_nde *node);
 void	print_tree(t_ast_nde *node);
+t_ast_nde	*set_chevron(t_ast_nde *node);
 
 void print_rslt(t_ast_nde *rslt, int flag);
 // static void	leaf_tree(t_ast_nde *root, t_ast_nde **cmd, t_ast_nde **cmd_sav)
@@ -174,6 +175,7 @@ t_ast_nde	*expand_vars(t_ast_nde *qute_sib)
 }
 
 void	print_raw_rght(t_ast_nde *raw_rght);
+void	print_chevron_tree(t_ast_nde *node);
 static t_ast_nde	*create_ast(char *str)
 {
 	t_ast_nde	*ast_res;
@@ -195,12 +197,14 @@ static t_ast_nde	*create_ast(char *str)
 	print_qute_sib(root->child->child->child);
 
 	set_operator(root->child); 
-	//set_chevron();
 	print_tree(root->child->child->sibling);
-
+	set_chevron(root->child->child->sibling->child);
+	ft_printf("la\n");
+	print_chevron_tree(root->child->child->sibling);
+	ft_printf("et la\n");
 	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav);	
 	print_rslt(cmd_sav, 1);
-	ft_printf("\n");
+	ft_printf("\n\n");
 	t_ast_nde	*cmd_sav2 = cmd_sav;
 	while (cmd_sav2)
 	{	

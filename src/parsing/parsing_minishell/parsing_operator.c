@@ -6,16 +6,17 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/09 00:11:53 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/09 11:21:14 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "parsing_utils.h"
 
+#include<stdio.h>
 t_ast_nde	*copy_node(t_ast_nde *node);
 void	print_raw_rght(t_ast_nde *raw_rght);
-#include<stdio.h>
+
 static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
 {
 	t_ast_nde	*raw_lft_child_sav;
@@ -152,12 +153,11 @@ t_ast_nde	*set_operator(t_ast_nde *node)
 	t_ast_nde *raw_rght;
 	
 	sib_cont = node->child;
-	sib = sib_cont->child;
-	
+	sib = sib_cont->child;	
 	token = create_token_node(sib);
 	sib_cont->sibling = token;
 	if (token)
-	{// printf("token\n");
+	{
 		raw_lft = create_token_child(sib_cont, token);
 		raw_rght = raw_lft->sibling;	
 		token->child = raw_lft;

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/09 00:12:25 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/09 11:50:10 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,11 +149,6 @@ void	print_tree(t_ast_nde *node)
 		print_raw(raw_lft->child);
 		ft_printf("\n");
 	}
-	// if (raw_rght && raw_rght->child)
-	// {
-	// 	print_raw(raw_rght->child);
-	// 	ft_printf("r\n");
-	// }
 	operator = NULL;
 	if (raw_rght && raw_rght->child)
 		operator = raw_rght->child->sibling;
@@ -163,15 +158,43 @@ void	print_tree(t_ast_nde *node)
 		print_tree(operator);
 	else
 	{		
-		// if (raw_lft && raw_lft->child)
-		// {
-		// 	print_raw(raw_lft->child);
-		// 	ft_printf("fl\n");		
-		// }
 		if (raw_rght && raw_rght->child)
 		{
 			print_raw(raw_rght->child);
 			ft_printf("\n");		
 		}
 	} 
+}
+
+void	print_chevron_tree(t_ast_nde *node)
+{
+	t_ast_nde	*operator;
+	t_ast_nde	*raw_lft;
+	t_ast_nde	*raw_rght;
+	
+	operator = node;
+	raw_lft = NULL;
+	raw_rght = NULL;
+	if (operator)
+		raw_lft = operator->child;
+	if (raw_lft)
+	 	raw_rght = raw_lft->sibling;
+	if (raw_lft && raw_lft->child)
+	{
+		print_raw(raw_lft->child);
+		ft_printf("\n");
+	}
+	operator = NULL;
+	if (raw_lft && raw_lft->child)
+		operator = raw_lft->child->sibling;
+	if (operator)
+		print_tree(operator);
+	// else
+	// {		
+	// 	if (raw_rght && raw_rght->child)
+	// 	{
+	// 		print_raw(raw_rght->child);
+	// 		ft_printf("\n");		
+	// 	}
+	// } 
 }
