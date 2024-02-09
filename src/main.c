@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/08 14:40:47 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/09 16:12:37 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,15 @@ int	prompt_loop(t_Data *data, char *envp[])
 	char	*prompt;
 
 	cmd[1] = NULL;
-	cmd[0] = NULL;
 	while (1)
 	{
 		cmd[0] = readline("minishell> ");
 		if (cmd[0] && *cmd[0])
-		{
 			add_history(cmd[0]);
-		}
 		if (cmd[0] == NULL)
 			return (ft_printf("exit\n"), 0);
-		if (command_is_builtin(cmd, data, envp) == 0)
-			return (free(cmd[0]), 0);
-		if (cmd[0])
-			free(cmd[0]);
+		create_command_tab(data, parse(cmd[0]), envp);
+		free(cmd[0]);
 	}
 	return (1);
 }
@@ -95,8 +90,6 @@ int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[])
 	char	**cmd_tab;
 	int		return_pipex;
 
-	create_command_tab(data, parse(cmd[0]), envp);
-	return (1);
 	if (!cmd_tab)
 		return (1);
 	if (!cmd_tab[0])
@@ -121,14 +114,16 @@ int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[])
 
 /**========================================================================
  *                           duplicate_envp
- * var ENVP_TAB_SIZE defined in minishell.h
  *========================================================================**/
 char	**duplicate_envp(t_Data *data, char *envp[])
 {
 	char	**envp_tab;
 	int		i;
-
-	envp_tab = (char **)ft_calloc(ENVP_TAB_SIZE, sizeof(char *));
+	
+	i = 0;
+	while (envp[i])
+		i++;
+	envp_tab = (char **)ft_calloc(i + 1, sizeof(char *));
 	if (envp_tab == NULL)
 		return (NULL);
 	i = 0;
