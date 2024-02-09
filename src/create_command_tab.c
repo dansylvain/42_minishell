@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/08 21:56:57 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/09 10:33:21 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ char	**fill_command_tab(t_Data *data, char ***commands_tab,
 					(*node)->end - (*node)->start + 1);
 			if ((*commands_tab)[i] == NULL)
 				return (NULL);
-			if ((*node)->child->token == RAW || (*node)->token == DQUTE)
+			if ((*node)->child->token == RAW || (*node)->child->token == DQUTE)
 			{
 				if (env_var)
 				{
