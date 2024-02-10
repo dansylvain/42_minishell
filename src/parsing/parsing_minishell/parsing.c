@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/10 07:45:16 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/10 08:31:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,10 +215,16 @@ static t_ast_nde	*create_ast(char *str)
 
 	set_operator(root->child); 
 	print_tree(root->child->child->sibling);
-	set_space(root->child->child->sibling->child);
+	if (root->child->child->sibling)
+		set_space(root->child->child->sibling->child);//exit(1);
+	else 
+		set_space(root->child);
 	//exit(1);
 	ft_printf("space\n\n");
-	print_space_tree(root->child->child->sibling->child->child->sibling);
+	if (root->child->child->sibling)
+		print_space_tree(root->child->child->sibling->child->child->sibling);
+	// else
+	// 	print_space_tree(root->child);
 	ft_printf("end\n\n");//exit(1);
 	//set_chevron();
 	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav);	

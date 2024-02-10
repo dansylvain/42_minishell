@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/07 16:12:24 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/10 09:39:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,13 +168,13 @@ void	set_redir(int *argc, char **argv[], int redir[])
 			redir[0] = 2;	 
 		(*argv)++;
 		(*argc)--;	
-	}
-	if (*(*argv)[*argc - 2] == '>')
+	}//ft_printf("argc %d\n", *argc);
+	if (*argc > 1 && *(*argv)[*argc - 2] == '>')
 	{
 		redir[1] = 1;		
 		if (!ft_strcmp((*argv)[*argc - 2], ">>"))
 			redir[1] = 2;	
-	}
+	}//exit(1);
 }
 void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir)
 {
@@ -200,7 +200,7 @@ int	pipex(char *argv[], char *envp[])
 	
 	exit_status = -1;
 	pid = -1;
-	argc = arr_len((void *)argv);
+	argc = arr_len((void *)argv);ft_printf("argc %d\n", argc);
 	if (!argc)
 		return (1);
 	set_redir(&argc, &argv, redir.redir);
