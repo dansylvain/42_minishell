@@ -133,6 +133,7 @@ int	set_space(t_ast_nde *node)
 				set_chevron(raw_rght);
 		}
 		return (1);
-	}		
+	}
+	set_chevron(node);		
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/10 08:31:59 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/10 11:03:13 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ static void	leaf_tree(t_ast_nde *node, t_ast_nde **rslt, t_ast_nde **rslt_sav)
 			leaf_tree(raw_lft->child->sibling, rslt, rslt_sav);		
 		else				
 			add_sibling(raw_lft->child, rslt, rslt_sav);		
-	}	
+	}
+	if (operator && operator->token != SPCE)
 		add_sibling(operator, rslt, rslt_sav);		
 	next_operator = NULL;
 	if (raw_rght && raw_rght->child)
@@ -228,6 +229,7 @@ static t_ast_nde	*create_ast(char *str)
 	ft_printf("end\n\n");//exit(1);
 	//set_chevron();
 	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav);	
+	//exit(1);
 	print_rslt(cmd_sav, 1);
 	ft_printf("\n\n");
 	t_ast_nde	*cmd_sav2 = cmd_sav;

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/10 09:39:37 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/10 11:22:01 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ pid_t	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[], t_redir 
 	
 	offset = 0;
 	if (redir.redir[1])
-		offset = 3;
+		offset = 2;
 	while (*(argv + offset))
 	{
 		pid = fork();
@@ -174,7 +174,7 @@ void	set_redir(int *argc, char **argv[], int redir[])
 		redir[1] = 1;		
 		if (!ft_strcmp((*argv)[*argc - 2], ">>"))
 			redir[1] = 2;	
-	}//exit(1);
+	}
 }
 void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir)
 {
