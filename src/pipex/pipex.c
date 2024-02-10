@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/10 15:01:22 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/10 17:20:14 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ pid_t	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[], t_redir 
 			close(fd_file[1]);
 			set_pipe_forward(pipefd[0], pipefd[1], redir);
 			split = parse_cmd(argv, envp);
-			if (!command_is_builtin(split))
-			{
+			// if (!command_is_builtin(split))
+			// {
 				execve(split[0], split, envp);
 				exit(EXIT_FAILURE);				
-			}
+			//}
 		}
 		else
 		{
