@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/10 11:03:13 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/10 11:43:24 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,7 @@ static t_ast_nde	*create_ast(char *str)
 		set_space(root->child);
 	//exit(1);
 	ft_printf("space\n\n");
-	if (root->child->child->sibling)
+	if (root->child && root->child->child && root->child->child->sibling && root->child->child->sibling->child && root->child->child->sibling->child->child)
 		print_space_tree(root->child->child->sibling->child->child->sibling);
 	// else
 	// 	print_space_tree(root->child);
