@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/09 18:08:08 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/10 17:46:19 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ char	*get_env_var(t_Data *data, char *str, char buff[])
 	k = 0;
 	ft_memcpy(buff, str, i);
 	buff[i] = '\0';
+	if (!ft_strcmp(buff, "$?"))
+		return (ft_itoa(data->exit_status));
 	j = 0;
 	while (data->envp_tab[j])
 	{
@@ -135,13 +137,13 @@ void	check_if_env_var_and_get_it(t_Data *data, t_ast_nde **node, char **env_var,
 }
 
 char	**fill_command_tab(t_Data *data, char ***cmd_tab,
-	t_ast_nde **node, int return_pipex)
+	t_ast_nde **node)
 {
 	int			i;
 	char		*env_var;
 	char		buff[2000];
 
-	if (return_pipex && (*node)->sibling->sibling)
+	if (data->exit_status && (*node)->sibling->sibling)
 		(*node) = (*node)->sibling->sibling;
 	i = 0;
 	while (*node)
@@ -170,11 +172,10 @@ char	**fill_command_tab(t_Data *data, char ***cmd_tab,
 char	**create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 {
 	char		**cmd_tab;
-	int			return_pipex;
 	int			tree_length;
 	t_ast_nde	*current;
 
-	return_pipex = 0;
+	data->exit_status = 0;
 	while (node)
 	{
 		current = node;
@@ -182,15 +183,15 @@ char	**create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 		cmd_tab = (char **)malloc(sizeof(char *) * tree_length + 1);
 		if (cmd_tab == 0)
 			return (NULL);
-		cmd_tab = fill_command_tab(data, &cmd_tab, &node, return_pipex);
+		cmd_tab = fill_command_tab(data, &cmd_tab, &node);
 		display_command_tab(cmd_tab);
-		return_pipex = pipex(cmd_tab, envp);
+		data->exit_status = pipex(cmd_tab, envp);
 		if (node == NULL)
 			break ;
-		if (node->token == OR && return_pipex == 0)
-			return_pipex = 1;
-		if (node->token == OR && return_pipex == 1)
-			return_pipex = 0;
+		if (node->token == OR && data->exit_status == 0)
+			data->exit_status = 1;
+		if (node->token == OR && data->exit_status == 1)
+			data->exit_status = 0;
 		node = node->sibling;
 		continue ;
 	}
