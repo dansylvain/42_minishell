@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"minishell.h": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"parsing_spce.h": "c"
 	}
 }
