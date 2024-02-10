@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_build.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:08:19 by svidot            #+#    #+#             */
-/*   Updated: 2024/01/26 15:21:30 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/10 17:48:10 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	**build_array(t_ast_nde *node)
 	return (array_sav);
 }
 
-char	**create_ast(char *argv)
+char	**create_ast_pipex(char *argv)
 {
 	char		**ast_res;
 	t_ast_nde	*qute_sib;

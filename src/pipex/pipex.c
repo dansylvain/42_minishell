@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/10 17:20:14 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/10 19:01:00 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir);
 void	get_fdio(t_redir *redir);
 char	**parse_cmd(char *argv[], char *envp[]);
+int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
 
 void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
 {
@@ -59,11 +60,15 @@ pid_t	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[], t_redir 
 			close(fd_file[1]);
 			set_pipe_forward(pipefd[0], pipefd[1], redir);
 			split = parse_cmd(argv, envp);
-			// if (!command_is_builtin(split))
-			// {
+			if (!command_is_builtin(split, NULL, envp))
+			{
+			//	ft_printf("command is not %s (pipex)\n", *split);
+			//	ft_putstr_fd("command ___ is not buitin (pipex)\n", 1);
 				execve(split[0], split, envp);
 				exit(EXIT_FAILURE);				
-			//}
+			}
+			else
+				;//ft_putstr_fd("builtin was launch (pipex)\n", 2);
 		}
 		else
 		{

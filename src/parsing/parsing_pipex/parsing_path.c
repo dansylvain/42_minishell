@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/01 15:23:22 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/10 19:01:08 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,15 @@ char	**parse_cmd(char *argv[], char *envp[])
 		ft_putstr_fd("env PATH not found.\n", 2);
 		exit(1);
 	}
-	split_arg = create_ast(*argv);
+	split_arg = create_ast_pipex(*argv);
 	if (!try_paths(split_arg, env_find) && ft_strcmp(*split_arg, "cd")
 		&& ft_strcmp(*split_arg, "unset") && ft_strcmp(*split_arg, "export")
 		&& ft_strcmp(*split_arg, "exit"))
 	{
 		perror(*split_arg);
-		free_ptr_arr(split_arg);
-		exit(1);
-	}
+		//free_ptr_arr(split_arg);
+		//exit(1);
+	}// printf("in parse %s\n", *split_arg);
+//	ft_putstr_fd("in parse\n", 2 );
 	return (split_arg);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_build.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 15:27:14 by svidot            #+#    #+#             */
-/*   Updated: 2024/01/26 15:21:11 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/10 17:48:19 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "parsing_utils.h"
 
-char	**create_ast(char *argv);
+char	**create_ast_pipex(char *argv);
 
 #endif
