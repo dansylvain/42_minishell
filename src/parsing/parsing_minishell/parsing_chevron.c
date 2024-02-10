@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_operator.c                                 :+:      :+:    :+:   */
+/*   parsing_chevron.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/10 14:35:31 by dan              ###   ########.fr       */
+/*   Created: 2024/02/09 14:42:33 by seblin            #+#    #+#             */
+/*   Updated: 2024/02/09 14:45:24 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "parsing_utils.h"
 
-#include<stdio.h>
 t_ast_nde	*copy_node(t_ast_nde *node);
 void	print_raw_rght(t_ast_nde *raw_rght);
-int	set_space(t_ast_nde *node);
 
 static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
 {
@@ -65,6 +63,47 @@ static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, 
 		raw_rght->child = raw_rght_child_sav;	
 }
 
+static t_ast_nde	*create_chevron_node(t_ast_nde *sib)
+{
+	t_ast_nde	*token_nde;
+	char		*actual;
+	
+	token_nde = NULL;
+	while (sib)
+	{
+		actual = sib->start;	
+		while (sib->token == RAW && actual <= sib->end)
+		{
+			if (*(actual - 1) != '\\' && *actual == '<')
+			{
+				token_nde = create_node(SCHEV_LFT);
+				token_nde->start = actual;
+				token_nde->end = actual;
+				if (*(actual + 1) == '<')
+				{	
+					token_nde->token = DCHEV_LFT;				
+					token_nde->end = ++actual;
+				}
+				return (token_nde);
+			}
+			else if (*(actual - 1) != '\\' && *actual == '>')
+			{
+				token_nde = create_node(SCHEV_RGTH);
+				token_nde->start = actual;
+				token_nde->end = actual;
+				if (*(actual + 1) == '>')
+				{	
+					token_nde->token = DCHEV_LFT;				
+					token_nde->end = ++actual;
+				}
+				return (token_nde);
+			}		
+			actual++;
+		}
+		sib = sib->sibling;
+	}
+	return (token_nde);
+}
 static t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token)
 {		
 	t_ast_nde	*raw_lft; 
@@ -83,45 +122,8 @@ static t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token)
 	raw_lft->sibling = raw_rght;
 	return (raw_lft);
 }
-static t_ast_nde	*create_token_node(t_ast_nde *sib)
-{
-	t_ast_nde	*token_nde;
-	char		*actual;
-	
-	token_nde = NULL;
-	while (sib)
-	{
-		actual = sib->start;	
-		while (sib->token == RAW && actual <= sib->end)
-		{			
-			if (*(actual - 1) != '\\' && *actual == '|')
-			{
-				token_nde = create_node(PIPE);
-				token_nde->start = actual;
-				token_nde->end = actual;
-				if (*(actual + 1) == '|')
-				{	
-					token_nde->token = OR;				
-					token_nde->end = ++actual;
-				}
-				return (token_nde);
-			}
-			else if (*(actual - 1) != '\\' && *actual == '&'
-				&& *(actual + 1) == '&')
-			{
-				token_nde = create_node(AND);
-				token_nde->start = actual;
-				token_nde->end = ++actual;
-				return (token_nde);
-			}
-			actual++;
-		}
-		sib = sib->sibling;
-	}
-	return (token_nde);
-}
 
-int	set_operator(t_ast_nde *node)
+t_ast_nde	*set_chevron(t_ast_nde *node)
 {
 	t_ast_nde *sib;
 	t_ast_nde *sib_cont;
@@ -131,7 +133,7 @@ int	set_operator(t_ast_nde *node)
 	
 	sib_cont = node->child;
 	sib = sib_cont->child;	
-	token = create_token_node(sib);
+	token = create_chevron_node(sib);
 	sib_cont->sibling = token;
 	if (token)
 	{
@@ -140,9 +142,7 @@ int	set_operator(t_ast_nde *node)
 		token->child = raw_lft;
 		fill_child(sib, raw_lft->child, raw_rght->child, token);
 		if (raw_rght->child)
-			if(!set_operator(raw_rght))
-				set_space(raw_rght);
-		return (1);
-	}		
-	return (0);
+		 	set_chevron(raw_rght);		
+	}
+	return (sib);
 }

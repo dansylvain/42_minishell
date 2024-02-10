@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/08 08:18:33 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/09 16:21:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	print_qute_sib(t_ast_nde *sib)
 }
 
 
-void print_rslt(t_ast_nde *rslt)
+void print_rslt(t_ast_nde *rslt, int flag)
 {
 	int	i;
 	int	back_color;	
@@ -102,15 +102,11 @@ void print_rslt(t_ast_nde *rslt)
 	{	
 		i = 0;
 		while (rslt->start + i <= rslt->end)
-			ft_printf("\033[%dm%c\033[0m", back_color, rslt->start[i++]);
-		//ft_printf("res %s end %s\n", rslt->start, rslt->end);
-		// if(rslt->child)
-		// 	print_rslt(rslt->child);
+			ft_printf("\033[%dm%c\033[0m", back_color, rslt->start[i++]);			
 		back_color = (back_color - 41 + 1) % 7 + 41;
 		rslt = rslt->sibling;
-
-	}
-	ft_printf("\n\n");
+	}	
+	//ft_printf("\n");
 }
 
 void	print_raw(t_ast_nde *raw)
@@ -144,23 +140,70 @@ void	print_tree(t_ast_nde *node)
 	operator = node;
 	raw_lft = NULL;
 	raw_rght = NULL;
-	if (operator && operator->child)
+	if (operator)
 		raw_lft = operator->child;
-	if (raw_lft && raw_lft->sibling)
+	if (raw_lft)
 	 	raw_rght = raw_lft->sibling;
-	if (raw_rght)
+	if (raw_lft && raw_lft->child)
 	{
-		print_raw(raw_rght);
+		print_raw(raw_lft->child);
 		ft_printf("\n");
 	}
 	operator = NULL;
-	if (raw_lft && raw_lft->child && raw_lft->child->sibling)
+	if (raw_rght && raw_rght->child)
+		operator = raw_rght->child->sibling;
+	else if (raw_lft && raw_lft->child)
 		operator = raw_lft->child->sibling;
 	if (operator)
 		print_tree(operator);
-	else if (raw_lft && raw_lft->child)
+	else
+	{		
+		if (raw_rght && raw_rght->child)
+		{
+			print_raw(raw_rght->child);
+			ft_printf("\n");		
+		}
+	} 
+}
+
+void	print_space_tree(t_ast_nde *node)
+{
+	t_ast_nde	*operator;
+	t_ast_nde	*raw_lft;
+	t_ast_nde	*raw_rght;
+	
+	operator = node;
+	raw_lft = NULL;
+	raw_rght = NULL;
+	if (operator)
+		raw_lft = operator->child;
+	if (raw_lft)
+	 	raw_rght = raw_lft->sibling;
+	if (raw_lft && raw_lft->child)
 	{
-		print_raw(raw_lft);
-		ft_printf("\n");		
+		print_raw(raw_lft->child);
+		ft_printf("\n");
 	}
+	operator = NULL;
+	if  (raw_lft && raw_lft->child && raw_lft->child->sibling)
+	{
+		operator = raw_lft->child->sibling;
+		print_space_tree(operator);
+	}
+	
+	operator = NULL;	
+	if (raw_rght && raw_rght->child)
+		operator = raw_rght->child->sibling;
+	// else if (raw_lft && raw_lft->child)
+	// 	operator = raw_lft->child->sibling;
+	if (operator)
+		print_space_tree(operator);
+	else
+	{		
+		if (raw_rght && raw_rght->child)
+		{
+			print_raw(raw_rght->child);
+			ft_printf("\n");		
+		}
+	} 
 }

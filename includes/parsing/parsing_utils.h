@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 10:03:27 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/06 13:42:06 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/10 12:40:27 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef enum e_tok
 	DCHEV_LFT,
 	SCHEV_RGTH,
 	DCHEV_RGTH,
+	IO_FILE,
 	SPCE,
 	CMD,
 	ARG_CMD,

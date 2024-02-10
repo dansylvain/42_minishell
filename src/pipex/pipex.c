@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/08 11:38:01 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/10 14:36:22 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ pid_t	nurcery(char *argv[], char *envp[], int fd_file[], int *pipefd[], t_redir 
 	
 	offset = 0;
 	if (redir.redir[1])
-		offset = 3;
+		offset = 2;
 	while (*(argv + offset))
 	{
 		pid = fork();
@@ -171,8 +171,8 @@ void	set_redir(int *argc, char **argv[], int redir[])
 			redir[0] = 2;	 
 		(*argv)++;
 		(*argc)--;	
-	}
-	if (*(*argv)[*argc - 2] == '>')
+	}//ft_printf("argc %d\n", *argc);
+	if (*argc > 1 && *(*argv)[*argc - 2] == '>')
 	{
 		redir[1] = 1;		
 		if (!ft_strcmp((*argv)[*argc - 2], ">>"))
@@ -203,7 +203,7 @@ int	pipex(char *argv[], char *envp[])
 	
 	exit_status = -1;
 	pid = -1;
-	argc = arr_len((void *)argv);
+	argc = arr_len((void *)argv);ft_printf("argc %d\n", argc);
 	if (!argc)
 		return (1);
 	set_redir(&argc, &argv, redir.redir);
