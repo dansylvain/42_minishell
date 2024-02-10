@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/09 11:44:24 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/10 14:30:39 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,9 @@ static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, 
 	t_ast_nde	*raw_overlap;
 
 	raw_lft_child_sav = NULL;
-	raw_rght_child_sav = NULL;
-	//	printf("bonnet\n");
-			//exit(1);
+	raw_rght_child_sav = NULL;	
 	while (sib)
-	{
-		//	printf("chapeau\n");
-			//exit(1);
+	{		
 		if (sib->token != RAW)
 		{
 			if 	(sib->end < token->start)
@@ -62,7 +58,8 @@ static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, 
 		sib = sib->sibling;
 	}
 	raw_lft->child = raw_lft_child_sav;
-	raw_rght->child = raw_rght_child_sav;	
+	if (raw_rght)
+		raw_rght->child = raw_rght_child_sav;	
 }
 
 static t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token)
@@ -70,9 +67,13 @@ static t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token)
 	t_ast_nde	*raw_lft; 
 	t_ast_nde	*raw_rght;
 	
-	raw_rght = create_node(RAW);
-	raw_rght->start = raw->start;
-	raw_rght->end = token->start - 1;
+	raw_rght = NULL;
+	if (raw->start != token->start)
+	{		
+		raw_rght = create_node(RAW);
+		raw_rght->start = raw->start;
+		raw_rght->end = token->start - 1;
+	}
 	raw_lft = create_node(RAW);
 	raw_lft->start = token->end + 1;
 	raw_lft->end = raw->end;
@@ -149,28 +150,19 @@ t_ast_nde	*set_operator(t_ast_nde *node)
 	t_ast_nde *token;
 	t_ast_nde *raw_lft;
 	t_ast_nde *raw_rght;
+	
 	sib_parent = node->child;
 	sib = sib_parent->child;
-	//print_raw_rght(sib);
+	
 	token = create_token_node(sib);
 	sib_parent->sibling = token;
 	if (token)
 	{
-		// printf("token\n");
 		raw_lft = create_token_child(sib_parent, token);
 		token->child = raw_lft;
-		raw_rght = raw_lft->sibling;
-		//raw_lft->child = copy_node(raw_lft);
+		raw_rght = raw_lft->sibling;		
 		fill_child(sib, raw_lft->child, raw_rght, token);
 		set_operator(raw_lft);
 	}
-	
-	// if (pipe)
-	// {
-	// 	//error_detector(pipe, start, end);
-	// 	sib->child = create_pipe(start, end, pipe);
-	// 	fill_child(sib);
-	// 	set_pipe(sib->child->child);		
-	// }
 	return (sib);
 }
