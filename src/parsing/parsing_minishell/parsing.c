@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/10 14:35:51 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/10 14:40:02 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,17 +192,17 @@ t_ast_nde	*expand_vars(t_ast_nde *qute_sib)
 	return (qute_sib);
 }
 
-t_ast_nde	*format_io(t_ast_nde * cmd)
-{
-	t_ast_nde	*actual;
+// t_ast_nde	*format_io(t_ast_nde * cmd)
+// {
+// 	t_ast_nde	*actual;
 
-	actual = cmd;
-	while (actual)
-	{
-		if (actual->)
-		actual = actual->sibling;
-	}
-}
+// 	actual = cmd;
+// 	while (actual)
+// 	{
+// 		if (actual->)
+// 		actual = actual->sibling;
+// 	}
+// }
 
 void	print_raw_rght(t_ast_nde *raw_rght);
 void	print_space_tree(t_ast_nde *node);
@@ -241,9 +241,9 @@ static t_ast_nde	*create_ast(char *str)
 	ft_printf("end\n\n");//exit(1);
 	//set_chevron();
 	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav);
-	print_rslt(cmd_sav, 1);
+	// print_rslt(cmd_sav, 1);
 	ft_printf("\n\n");
-	cmd_sav = format_io(cmd_sav);
+	// cmd_sav = format_io(cmd_sav);
 	//exit(1);
 	print_rslt(cmd_sav, 1);
 	ft_printf("\n\n");
