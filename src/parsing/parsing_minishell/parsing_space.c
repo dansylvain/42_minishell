@@ -107,7 +107,7 @@ static t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token)
 	return (raw_lft);
 }
 
-t_ast_nde	*set_space(t_ast_nde *node)
+int	set_space(t_ast_nde *node)
 {
 	t_ast_nde *sib;
 	t_ast_nde *sib_cont;
@@ -128,7 +128,11 @@ t_ast_nde	*set_space(t_ast_nde *node)
 		if (raw_lft->child)
 			set_chevron(raw_lft);
 		if (raw_rght->child)
-		 	set_space(raw_rght);		
-	}
-	return (sib);
+		{
+		 	if(!set_space(raw_rght))		
+				set_chevron(raw_rght);
+		}
+		return (1);
+	}		
+	return (0);
 }

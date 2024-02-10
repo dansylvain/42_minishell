@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/09 21:15:22 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/10 07:45:16 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,14 @@ static void	leaf_tree(t_ast_nde *node, t_ast_nde **rslt, t_ast_nde **rslt_sav)
 	 	raw_rght = raw_lft->sibling;
 	if (raw_lft && raw_lft->child)
 	{
-		if (raw_lft->child->sibling && raw_lft->child->sibling->child && ((raw_lft->child->sibling->child->child)
-			|| (raw_lft->child->sibling->child->sibling && raw_lft->child->sibling->child->sibling->child)))				
+		// if (raw_lft->child->sibling && raw_lft->child->sibling->child && ((raw_lft->child->sibling->child->child)
+		// 	|| (raw_lft->child->sibling->child->sibling && raw_lft->child->sibling->child->sibling->child)))				
+		if (raw_lft->child->sibling)
 			leaf_tree(raw_lft->child->sibling, rslt, rslt_sav);		
 		else				
 			add_sibling(raw_lft->child, rslt, rslt_sav);		
-		add_sibling(operator, rslt, rslt_sav);		
 	}	
+		add_sibling(operator, rslt, rslt_sav);		
 	next_operator = NULL;
 	if (raw_rght && raw_rght->child)
 		next_operator = raw_rght->child->sibling;
@@ -83,12 +84,12 @@ static void	leaf_tree(t_ast_nde *node, t_ast_nde **rslt, t_ast_nde **rslt_sav)
 	{
 		if (raw_rght->child->sibling)
 		{
-			//add_sibling(operator, rslt, rslt_sav);
 			leaf_tree(raw_rght->child->sibling, rslt, rslt_sav);
+			//add_sibling(operator, rslt, rslt_sav);
 		}	
 		else
 		{
-			add_sibling(operator, rslt, rslt_sav);
+			//add_sibling(operator, rslt, rslt_sav);
 			add_sibling(raw_rght->child, rslt, rslt_sav);	
 		}
 	}
