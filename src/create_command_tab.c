@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/11 14:30:57 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/11 19:23:00 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,54 @@ int	get_cmd_nbr(t_ast_nde *node)
 	}
 	return (cmd_nbr);
 }
-
-void	fill_cmd_tab_tabs(t_ast_nde *node, char ***cmd_tab)
+char *get_node_str(t_ast_nde *node)
 {
+	char	str[2000];
+	int		index;
 	
+	index = 0;
+	ft_bzero(str, 2000);
+	while (node)
+	{
+		ft_memcpy(&(str[index]), node->start, node->end - node->start + 1);
+		index += node->end - node->start + 1;
+		node = node->sibling;
+	}
+	return (ft_strdup(str));
+}
+
+
+char	***fill_cmd_tab_tabs(t_ast_nde *node, char ***cmd_tab)
+{
+	char	str[2000];
+	int		i;
+
+	i = 0;
+	while (node)
+	{
+		if (is_chevron(node))
+		{
+			ft_printf("IS_CHEVRON\n");
+			cmd_tab[i] = (char **)malloc(sizeof(char *) * 3);
+			if (cmd_tab[i] == NULL)
+				return (NULL);
+			cmd_tab[i][0] = ft_strndup(node->start, node->end - node->start + 1);
+			cmd_tab[i][1] = get_node_str(node->sibling->child);
+			cmd_tab[i][2] = NULL;
+			if (node->sibling->sibling)
+				node = node->sibling->sibling;	
+			display_command_tab(cmd_tab[i]);
+		}
+		if (!is_separator(node))
+			ft_printf(">>>%s<<<\n", get_node_str(node->child));
+		if (is_separator(node) || (node->sibling && is_chevron(node->sibling)))
+		{
+			ft_printf("CHANGE LINE\n");
+			i++;
+		}
+		node = node->sibling;
+	}
+	return (cmd_tab);
 }
 
 char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
@@ -116,7 +160,7 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 	int		cmd_nbr;
 	
 	cmd_nbr = get_cmd_nbr(node);
-	ft_printf("cmd_nbr: %i\n", cmd_nbr);
+	// ft_printf("cmd_nbr: %i\n", cmd_nbr);
 
 	//create cmd_tab
 	cmd_tab = (char ***)malloc(sizeof (char **) * cmd_nbr + 1);
@@ -124,7 +168,7 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 		return (NULL);
 	cmd_tab[cmd_nbr] = NULL;
 	
-	fill_cmd_tab_tabs(node, &cmd_tab);
+	cmd_tab = fill_cmd_tab_tabs(node, cmd_tab);
 }
 
 
