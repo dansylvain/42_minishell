@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/11 16:53:09 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/11 20:16:08 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,18 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 				}
 				return (token_nde);
 			}
+			if (*(actual - 1) != '\\' && *actual == '$')
+			{
+				token_nde = create_node(DOLL);
+				token_nde->start = actual;
+				token_nde->end = actual;
+				if (*(actual + 1) == '>')
+				{	
+					token_nde->token = DCHEV_RGTH;				
+					token_nde->end = ++actual;
+				}
+				return (token_nde);
+			}
 			actual++;
 		}
 		sib = sib->sibling;
@@ -170,6 +182,6 @@ int	set_operator(t_ast_nde *node)
 				set_space(raw_rght);
 		return (1);
 	}
-	set_space(node);
+//	set_space(node);
 	return (0);
 }
