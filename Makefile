@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/10 14:36:29 by dan              ###   ########.fr        #
+#    Updated: 2024/02/11 12:05:30 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRC =	src/main.c \
 		src/pipex/pipex.c \
 		src/pipex/setup.c \
 		src/create_command_tab.c \
+		src/var_expansion.c \
 		
 OBJ = $(SRC:.c=.o)
 
