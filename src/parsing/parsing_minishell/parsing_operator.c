@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_operator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/10 14:35:31 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/11 08:09:05 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ int	set_operator(t_ast_nde *node)
 		raw_rght = raw_lft->sibling;	
 		token->child = raw_lft;
 		fill_child(sib, raw_lft->child, raw_rght->child, token);
+		if (raw_lft->child)			
+			set_space(raw_lft);
 		if (raw_rght->child)
 			if(!set_operator(raw_rght))
 				set_space(raw_rght);
