@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/10 19:00:42 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/11 07:42:44 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 	if (!cmd_tab)
 	{
 		ft_printf("commande is nul a chier\n");
-		return (0);
+		return (1);
 	}
 	if (!cmd_tab[0])
 		return (free_command_tab(cmd_tab), 1);
@@ -111,7 +111,7 @@ int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 		return (exec_cd(cmd_tab), 1);
 	// if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "exit", 5))
 	// 	return (ft_printf("exit\n"), free_command_tab(cmd_tab), 0);
-	free_command_tab(cmd_tab);
+	//free_command_tab(cmd_tab);
 	return (0);
 }
 

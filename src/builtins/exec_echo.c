@@ -6,13 +6,12 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:43:09 by dan               #+#    #+#             */
-/*   Updated: 2024/02/10 18:10:32 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/11 07:52:09 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <stdio.h>
-#include <stdlib.h>
+
 void	exec_echo(char **command_tab)
 {
 	int	i;
