@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/11 13:34:24 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/11 14:25:15 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,25 @@ void	display_command_tab(char **command_tab)
 	OPT_CMD,
 	ARG_OPT	
 }	t_tok; */
+
+int	is_separator(t_ast_nde *node)
+{
+	if (node == NULL || node->token == PIPE
+		|| node->token == AND || node->token == OR)
+		return (1);
+	else
+		return (0);	
+}
+
+int	is_chevron(t_ast_nde *node)
+{
+	if (node->token == SCHEV_LFT || node->token == DCHEV_LFT ||
+			node->token == SCHEV_RGTH || node->token == DCHEV_RGTH)
+		return (1);
+	else
+		return (0);	
+}
+
 int	get_cmd_nbr(t_ast_nde *node)
 {
 	int cmd_nbr;
@@ -63,21 +82,23 @@ int	get_cmd_nbr(t_ast_nde *node)
 	cmd_nbr = 0;
 	while (node)
 	{
-		if (node->token == SCHEV_LFT || node->token == DCHEV_LFT ||
-			node->token == SCHEV_RGTH || node->token == DCHEV_RGTH)
+		if (is_chevron(node))
 		{
 			cmd_nbr++;
-			if (node->sibling == NULL)
+			if (is_separator(node->sibling))
 			{
 				ft_printf("HANDLE THIS ERROR!!!\n");
 				return (0);
 			}
 			if (node->sibling->sibling)
+			{
 				node = node->sibling->sibling;
-			if (node->token && node->token != PIPE && node->token != AND && node->token != OR)
-				cmd_nbr++;
+				if (!is_separator(node))
+					cmd_nbr++;	
+			}
+			continue;
 		}
-		if (node->token == PIPE || node->token == AND || node->token == OR)
+		if ((node->token == PIPE || node->token == AND || node->token == OR) && (!is_chevron(node->sibling)))
 			cmd_nbr++;
 		node = node->sibling;
 	}
