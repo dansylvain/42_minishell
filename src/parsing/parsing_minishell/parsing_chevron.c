@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:42:33 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/09 14:45:24 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/11 16:51:56 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static t_ast_nde	*create_chevron_node(t_ast_nde *sib)
 				token_nde->end = actual;
 				if (*(actual + 1) == '>')
 				{	
-					token_nde->token = DCHEV_LFT;				
+					token_nde->token = DCHEV_RGTH;				
 					token_nde->end = ++actual;
 				}
 				return (token_nde);
