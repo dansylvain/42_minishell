@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/11 12:39:06 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/11 12:48:11 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	prompt_loop(t_Data *data, char *envp[])
 {
 	char	*cmd[2];
 	char	*prompt;
+	char	***cmd_tab;
 
 	cmd[1] = NULL;
 	while (1)
