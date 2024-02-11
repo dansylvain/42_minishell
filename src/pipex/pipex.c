@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/11 10:42:10 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/11 12:04:16 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 	return (pid);
 }
 
-void	here_doc_handle(char **argv[], int pipefd_in[], t_redir redir) //argv!!
+void	here_doc_handle(int pipefd_in[], t_redir redir) //argv!!
 {
 	char	*line;
 		
@@ -140,7 +140,7 @@ pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 		pipefd_in[0] = redir.fd_file[0];
 	}
 	else if (redir.redir[0] == 2)
-		here_doc_handle(&argv, pipefd_in, redir);
+		here_doc_handle(pipefd_in, redir);
 	pid = nurcery(argv, envp, redir.fd_file, (int *[]){pipefd_in, pipefd_out}, redir);
 	close(pipefd_in[1]);
 	close(pipefd_out[1]);
@@ -194,7 +194,7 @@ void	set_filepath_and_delim(int *argc, char ***argv[], t_redir *redir)
 	redir->delim = NULL;
 	redir->filepath[0] = NULL;
 	redir->filepath[1] = NULL;
-	if (redir->redir[0] == 1 && )	
+	if (redir->redir[0] == 1)	
 		redir->filepath[0] = (*(*argv)++)[1];
 	else if (redir->redir[0] == 2)
 		redir->delim = (*(*argv)++)[1];
