@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/11 20:17:20 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/11 20:43:27 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ int	is_separator(t_ast_nde *node)
 		return (1);
 	else
 		return (0);	
+}
+
+int is_dollar(t_ast_nde *node)
+{
+
 }
 
 int	is_chevron(t_ast_nde *node)
@@ -146,7 +151,9 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 			display_command_tab(cmd_tab[i]);
 			i++;
 		}
-		if (!is_separator(node))
+		if (node->token == DOLL)
+			ft_printf("FOUND A DOLLAR!!!\n");
+		if (!is_separator(node) && node->token != DOLL)
 			ft_printf(">>>%s<<<\n", get_node_str(data, node->child));
 		if (is_separator(node) || (node->sibling && is_chevron(node->sibling)))
 		{
