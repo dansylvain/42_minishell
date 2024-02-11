@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/11 08:09:05 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/11 20:16:08 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,42 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 				token_nde->start = actual;
 				token_nde->end = ++actual;
 				return (token_nde);
+			}			
+			else if (*(actual - 1) != '\\' && *actual == '<')
+			{
+				token_nde = create_node(SCHEV_LFT);
+				token_nde->start = actual;
+				token_nde->end = actual;
+				if (*(actual + 1) == '<')
+				{	
+					token_nde->token = DCHEV_LFT;				
+					token_nde->end = ++actual;
+				}
+				return (token_nde);
+			}			
+			else if (*(actual - 1) != '\\' && *actual == '>')
+			{
+				token_nde = create_node(SCHEV_RGTH);
+				token_nde->start = actual;
+				token_nde->end = actual;
+				if (*(actual + 1) == '>')
+				{	
+					token_nde->token = DCHEV_RGTH;				
+					token_nde->end = ++actual;
+				}
+				return (token_nde);
+			}
+			if (*(actual - 1) != '\\' && *actual == '$')
+			{
+				token_nde = create_node(DOLL);
+				token_nde->start = actual;
+				token_nde->end = actual;
+				if (*(actual + 1) == '>')
+				{	
+					token_nde->token = DCHEV_RGTH;				
+					token_nde->end = ++actual;
+				}
+				return (token_nde);
 			}
 			actual++;
 		}
@@ -145,6 +181,7 @@ int	set_operator(t_ast_nde *node)
 			if(!set_operator(raw_rght))
 				set_space(raw_rght);
 		return (1);
-	}		
+	}
+//	set_space(node);
 	return (0);
 }

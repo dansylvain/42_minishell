@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/11 08:11:27 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/11 16:48:28 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "ft_printf.h"
 
 t_ast_nde	*copy_node(t_ast_nde *node);
+t_ast_nde	*copy_node_child(t_ast_nde *node);
 t_ast_nde	*set_qute_sib(char *str);
 t_ast_nde	*sib_last(t_ast_nde *sib);
 t_ast_nde	*set_pipe(t_ast_nde *node);
@@ -192,17 +193,107 @@ t_ast_nde	*expand_vars(t_ast_nde *qute_sib)
 	return (qute_sib);
 }
 
-// t_ast_nde	*format_io(t_ast_nde * cmd)
-// {
-// 	t_ast_nde	*actual;
+t_ast_nde	*format_io(t_ast_nde* cmd)
+{
+	t_ast_nde	*actual;
+	t_ast_nde	*format_cmd;
+	t_ast_nde	*format_cmd_sav;
+	t_ast_nde	*inter_cmd_tmp;
+	
+	format_cmd_sav = NULL;
+	actual = cmd;
+	while (actual)
+	{	
+		inter_cmd_tmp = actual;
+		while (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
+		{
+			if (actual->token == SCHEV_LFT || actual->token == DCHEV_LFT)			
+			{
+				add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
+				if (actual && actual->sibling && actual->sibling->token != PIPE && actual->sibling->token != AND  && actual->sibling->token != OR
+					&& actual->sibling->token != SCHEV_LFT && actual->sibling->token != DCHEV_LFT)
+				{
+					add_sibling(copy_node_child(actual->sibling), &format_cmd, &format_cmd_sav);
+					actual = actual->sibling;
+				}
+			}
+			actual = actual->sibling;
+		}
+		actual = inter_cmd_tmp;
+		while (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
+		{
+			if (actual->token == SCHEV_LFT || actual->token == DCHEV_LFT)			
+			{			
+				if (actual && actual->sibling && actual->sibling->token != PIPE && actual->sibling->token != AND  && actual->sibling->token != OR
+					&& actual->sibling->token != SCHEV_LFT && actual->sibling->token != DCHEV_LFT)
+					actual = actual->sibling;
+				// if (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
+				// 	actual = actual->sibling;
+			}
+			else
+				add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
+			actual = actual->sibling;
+		}		
+		if (actual)
+		{
+			add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
+			actual = actual->sibling;
+		}
+	//	actual = actual->sibling;
+	}
+	return (format_cmd_sav);
+}
 
-// 	actual = cmd;
-// 	while (actual)
-// 	{
-// 		if (actual->)
-// 		actual = actual->sibling;
-// 	}
-// }
+t_ast_nde	*format_io2(t_ast_nde* cmd)
+{
+	t_ast_nde	*actual;
+	t_ast_nde	*format_cmd;
+	t_ast_nde	*format_cmd_sav;
+	t_ast_nde	*inter_cmd_tmp;
+	
+	format_cmd_sav = NULL;
+	actual = cmd;
+	while (actual)
+	{	
+		inter_cmd_tmp = actual;
+		while (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
+		{
+			if (actual->token == SCHEV_RGTH || actual->token == DCHEV_RGTH)			
+			{			
+				if (actual && actual->sibling && actual->sibling->token != PIPE && actual->sibling->token != AND  && actual->sibling->token != OR
+					&& actual->sibling->token != SCHEV_RGTH && actual->sibling->token != DCHEV_RGTH)
+					actual = actual->sibling;
+				// if (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
+				// 	actual = actual->sibling;
+			}
+			else
+				add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
+			actual = actual->sibling;
+		}		
+		actual = inter_cmd_tmp;
+		while (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
+		{
+			if (actual->token == SCHEV_RGTH || actual->token == DCHEV_RGTH)			
+			{
+				add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
+				if (actual && actual->sibling && actual->sibling->token != PIPE && actual->sibling->token != AND  && actual->sibling->token != OR
+					&& actual->sibling->token != SCHEV_RGTH && actual->sibling->token != DCHEV_RGTH)
+				{
+					add_sibling(copy_node_child(actual->sibling), &format_cmd, &format_cmd_sav);
+					actual = actual->sibling;
+				}
+			}
+			actual = actual->sibling;
+		}		
+		if (actual)
+		{
+			add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
+			actual = actual->sibling;
+		}
+	//	actual = actual->sibling;
+	}
+	return (format_cmd_sav);
+}
 
 void	print_raw_rght(t_ast_nde *raw_rght);
 void	print_space_tree(t_ast_nde *node);
@@ -256,6 +347,35 @@ static t_ast_nde	*create_ast(char *str)
 			ft_printf(" ");
 		}
 		cmd_sav2 = cmd_sav2->sibling;
+	}
+	ft_printf("\n\n");
+	cmd_sav = format_io(cmd_sav);
+	print_rslt(cmd_sav, 1);
+	ft_printf("\n\n");
+	t_ast_nde	*cmd_sav3 = cmd_sav;
+	while (cmd_sav3)
+	{	
+		if(cmd_sav3->token == RAW)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
+		{			
+			print_rslt(cmd_sav3->child, 0);
+			ft_printf(" ");
+		}
+		cmd_sav3 = cmd_sav3->sibling;
+	}
+	ft_printf("\n\n");
+	
+	cmd_sav = format_io2(cmd_sav);
+	print_rslt(cmd_sav, 1);
+	ft_printf("\n\n");
+	t_ast_nde	*cmd_sav4 = cmd_sav;
+	while (cmd_sav4)
+	{	
+		if(cmd_sav4->token == RAW)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
+		{			
+			print_rslt(cmd_sav4->child, 0);
+			ft_printf(" ");
+		}
+		cmd_sav4 = cmd_sav4->sibling;
 	}
 	ft_printf("\n\n");
 
