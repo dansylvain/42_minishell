@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/11 19:23:00 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/11 20:17:20 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	is_env_var(char *str);
 char	*get_env_var(t_Data *data, char *str, char buff[]);
 void	insert_env_var(char **command, char *env_var, char buff[]);
-void	check_if_env_var_and_get_it(t_Data *data, t_ast_nde **node, char **env_var, char buff[]);
+int		check_if_env_var_and_get_it(t_Data *data, t_ast_nde *node, char str[], int index);
 void	print_tree(t_ast_nde *node);
 
 int		pipex(char *argv[], char *envp[]);
@@ -104,7 +104,7 @@ int	get_cmd_nbr(t_ast_nde *node)
 	}
 	return (cmd_nbr);
 }
-char *get_node_str(t_ast_nde *node)
+char *get_node_str(t_Data *data, t_ast_nde *node)
 {
 	char	str[2000];
 	int		index;
@@ -113,15 +113,18 @@ char *get_node_str(t_ast_nde *node)
 	ft_bzero(str, 2000);
 	while (node)
 	{
-		ft_memcpy(&(str[index]), node->start, node->end - node->start + 1);
-		index += node->end - node->start + 1;
+		if (node->token != SQUTE && node->token != DQUTE)
+		{
+			ft_memcpy(&(str[index]), node->start, node->end - node->start + 1);
+			index += node->end - node->start + 1;
+		}
 		node = node->sibling;
 	}
 	return (ft_strdup(str));
 }
 
 
-char	***fill_cmd_tab_tabs(t_ast_nde *node, char ***cmd_tab)
+char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 {
 	char	str[2000];
 	int		i;
@@ -136,14 +139,15 @@ char	***fill_cmd_tab_tabs(t_ast_nde *node, char ***cmd_tab)
 			if (cmd_tab[i] == NULL)
 				return (NULL);
 			cmd_tab[i][0] = ft_strndup(node->start, node->end - node->start + 1);
-			cmd_tab[i][1] = get_node_str(node->sibling->child);
+			cmd_tab[i][1] = get_node_str(data, node->sibling->child);
 			cmd_tab[i][2] = NULL;
 			if (node->sibling->sibling)
 				node = node->sibling->sibling;	
 			display_command_tab(cmd_tab[i]);
+			i++;
 		}
 		if (!is_separator(node))
-			ft_printf(">>>%s<<<\n", get_node_str(node->child));
+			ft_printf(">>>%s<<<\n", get_node_str(data, node->child));
 		if (is_separator(node) || (node->sibling && is_chevron(node->sibling)))
 		{
 			ft_printf("CHANGE LINE\n");
@@ -168,7 +172,7 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 		return (NULL);
 	cmd_tab[cmd_nbr] = NULL;
 	
-	cmd_tab = fill_cmd_tab_tabs(node, cmd_tab);
+	cmd_tab = fill_cmd_tab_tabs(data, node, cmd_tab);
 }
 
 
