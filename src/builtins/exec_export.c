@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/02 14:18:17 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/11 07:53:34 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	create_export_tab(t_Data *data);
 int		exec_export(char **command_tab, t_Data *data);
 int		is_valid_var(char *export_arg);
-
+#include <stdlib.h>
 int	exec_export(char **command_tab, t_Data *data)
 {
 	int	i;
 	int	j;
-
+write(2, "IN EXC export!\n", 13);
 	if (command_tab[1] == NULL)
 		create_export_tab(data);
 	i = 1;

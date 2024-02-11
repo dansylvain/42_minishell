@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exec_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:09:58 by dan               #+#    #+#             */
-/*   Updated: 2024/01/27 09:14:56 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/11 07:54:09 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
+#include <stdlib.h>
 void	unset_var(char *envp[], int i)
-{
+{write(2, "IN EXC unset!\n", 13);
 	while (envp[i])
 	{
 		envp[i] = envp[i + 1];

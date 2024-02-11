@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/10 14:40:02 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/11 08:11:27 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,10 +228,10 @@ static t_ast_nde	*create_ast(char *str)
 
 	set_operator(root->child); 
 	print_tree(root->child->child->sibling);
-	if (root->child->child->sibling)
-		set_space(root->child->child->sibling->child);//exit(1);
-	else 
-		set_space(root->child);
+	// if (root->child->child->sibling)
+	// 	set_space(root->child->child->sibling->child);//exit(1);
+	// else 
+	// 	set_space(root->child);
 	//exit(1);
 	ft_printf("space\n\n");
 	if (root->child && root->child->child && root->child->child->sibling && root->child->child->sibling->child && root->child->child->sibling->child->child)

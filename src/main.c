@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/10 17:43:32 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/11 12:39:06 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,18 @@ int	prompt_loop(t_Data *data, char *envp[])
  * exit builtin implemented without extern function
  * 0 is returned, and the data struct is freed in calling function
  *========================================================================**/
-int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[])
+int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 {
-	char	**cmd_tab;
+	int		return_pipex;
 
 	if (!cmd_tab)
+	{
+		ft_printf("commande is nul a chier\n");
 		return (1);
+	}
 	if (!cmd_tab[0])
 		return (free_command_tab(cmd_tab), 1);
+	//ft_printf("on est avant le test buitin, is %s\n", cmd_tab[0]);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "echo", 5))
 		return (exec_echo(cmd_tab), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 5]), "unset", 6))
@@ -107,7 +111,7 @@ int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[])
 		return (exec_cd(cmd_tab), 1);
 	// if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "exit", 5))
 	// 	return (ft_printf("exit\n"), free_command_tab(cmd_tab), 0);
-	free_command_tab(cmd_tab);
+	//free_command_tab(cmd_tab);
 	return (0);
 }
 

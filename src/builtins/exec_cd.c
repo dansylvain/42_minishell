@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:29:47 by dan               #+#    #+#             */
-/*   Updated: 2024/01/27 09:14:29 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/11 07:52:58 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+#include <stdlib.h>
 int	exec_cd(char **command_tab)
 {
 	const char	*home;
-
+write(2, "IN EXC CD!\n", 13);
 	if (!command_tab[1])
 	{
 		home = getenv("HOME");

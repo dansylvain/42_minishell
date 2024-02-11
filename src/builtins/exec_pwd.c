@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:12:50 by dan               #+#    #+#             */
-/*   Updated: 2024/01/27 09:14:52 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/11 07:53:56 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
+#include <stdlib.h>
 void	exec_pwd(void)
 {
 	char	buffer[1024];
-
+write(2, "IN EXC pwd!\n", 13);
 	if (getcwd(buffer, sizeof(buffer)) != NULL)
 	{
 		printf("%s\n", buffer);
