@@ -129,11 +129,12 @@ int	set_space(t_ast_nde *node)
 			set_chevron(raw_lft);
 		if (raw_rght->child)
 		{
-		 	if(!set_space(raw_rght))		
-				set_chevron(raw_rght);
+			set_space(raw_rght);
+		 	// if(!set_space(raw_rght))		
+			// 	set_chevron(raw_rght);
 		}
 		return (1);
 	}
-	set_chevron(node);		
+	// set_chevron(node);		
 	return (0);
 }

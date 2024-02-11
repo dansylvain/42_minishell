@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/11 08:11:27 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/11 13:27:43 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,11 +195,24 @@ t_ast_nde	*expand_vars(t_ast_nde *qute_sib)
 // t_ast_nde	*format_io(t_ast_nde * cmd)
 // {
 // 	t_ast_nde	*actual;
-
+// 	t_ast_nde	*io_tmp;
+// 	t_ast_nde	*format_cmd;
+// 	t_ast_nde	*format_cmd_sav;
+	
 // 	actual = cmd;
 // 	while (actual)
 // 	{
-// 		if (actual->)
+// 		if (actual->token == SCHEV_LFT || actual->token == DCHEV_LFT
+// 			|| actual->token == SCHEV_RGTH || actual->token == DCHEV_RGTH)
+// 			io_tmp = actual;
+// 		actual = actual->sibling;
+// 	}
+// 	actual = cmd;
+// 	while (actual)
+// 	{
+// 		if (actual->token == SCHEV_LFT || actual->token == DCHEV_LFT
+// 			|| actual->token == SCHEV_RGTH || actual->token == DCHEV_RGTH)
+		
 // 		actual = actual->sibling;
 // 	}
 // }
@@ -258,7 +271,7 @@ static t_ast_nde	*create_ast(char *str)
 		cmd_sav2 = cmd_sav2->sibling;
 	}
 	ft_printf("\n\n");
-
+	//format_io(cmd_sav);
 	if (!cmd_sav)
 		ast_res = root;
 	else
