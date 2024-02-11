@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/11 16:48:28 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/12 00:01:09 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ static void	leaf_tree(t_ast_nde *node, t_ast_nde **rslt, t_ast_nde **rslt_sav)
 			add_sibling(raw_lft->child, rslt, rslt_sav);		
 	}
 	if (operator && operator->token != SPCE)
+	{
+		operator->child = copy_node(operator);	
 		add_sibling(operator, rslt, rslt_sav);		
+	}
 	next_operator = NULL;
 	if (raw_rght && raw_rght->child)
 		next_operator = raw_rght->child->sibling;
@@ -341,7 +344,7 @@ static t_ast_nde	*create_ast(char *str)
 	t_ast_nde	*cmd_sav2 = cmd_sav;
 	while (cmd_sav2)
 	{	
-		if(cmd_sav2->token == RAW)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
+		if(cmd_sav2->token == RAW || cmd_sav2->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
 		{			
 			print_rslt(cmd_sav2->child, 0);
 			ft_printf(" ");
@@ -355,7 +358,7 @@ static t_ast_nde	*create_ast(char *str)
 	t_ast_nde	*cmd_sav3 = cmd_sav;
 	while (cmd_sav3)
 	{	
-		if(cmd_sav3->token == RAW)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
+		if(cmd_sav3->token == RAW || cmd_sav3->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
 		{			
 			print_rslt(cmd_sav3->child, 0);
 			ft_printf(" ");
@@ -370,7 +373,7 @@ static t_ast_nde	*create_ast(char *str)
 	t_ast_nde	*cmd_sav4 = cmd_sav;
 	while (cmd_sav4)
 	{	
-		if(cmd_sav4->token == RAW)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
+		if(cmd_sav4->token == RAW || cmd_sav4->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
 		{			
 			print_rslt(cmd_sav4->child, 0);
 			ft_printf(" ");

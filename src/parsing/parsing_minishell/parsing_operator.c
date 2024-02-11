@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/11 20:16:08 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/11 23:41:29 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 t_ast_nde	*copy_node(t_ast_nde *node);
 void	print_raw_rght(t_ast_nde *raw_rght);
 int	set_space(t_ast_nde *node);
+//t_ast_nde	*copy_node_child(t_ast_nde *node);
 
 static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
 {
@@ -28,7 +29,7 @@ static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, 
 	raw_rght_child_sav = NULL;	
 	while (sib)
 	{		
-		if (sib->token != RAW)
+		if (sib->token != RAW && sib->token != IN_DQUTE)
 		{
 			if 	(sib->end < token->start)
 				add_sibling(copy_node(sib), &raw_lft->child, &raw_lft_child_sav);				
@@ -92,63 +93,64 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 	while (sib)
 	{
 		actual = sib->start;	
-		while (sib->token == RAW && actual <= sib->end)
-		{			
-			if (*(actual - 1) != '\\' && *actual == '|')
-			{
-				token_nde = create_node(PIPE);
-				token_nde->start = actual;
-				token_nde->end = actual;
-				if (*(actual + 1) == '|')
-				{	
-					token_nde->token = OR;				
-					token_nde->end = ++actual;
+		while (actual <= sib->end)
+		{	
+			if (sib->token == RAW)
+			{				
+				if (*(actual - 1) != '\\' && *actual == '|')
+				{
+					token_nde = create_node(PIPE);
+					token_nde->start = actual;
+					token_nde->end = actual;
+					if (*(actual + 1) == '|')
+					{	
+						token_nde->token = OR;				
+						token_nde->end = ++actual;
+					}
+					return (token_nde);
 				}
-				return (token_nde);
+				else if (*(actual - 1) != '\\' && *actual == '&'
+					&& *(actual + 1) == '&')
+				{
+					token_nde = create_node(AND);
+					token_nde->start = actual;
+					token_nde->end = ++actual;
+					return (token_nde);
+				}			
+				else if (*(actual - 1) != '\\' && *actual == '<')
+				{
+					token_nde = create_node(SCHEV_LFT);
+					token_nde->start = actual;
+					token_nde->end = actual;
+					if (*(actual + 1) == '<')
+					{	
+						token_nde->token = DCHEV_LFT;				
+						token_nde->end = ++actual;
+					}
+					return (token_nde);
+				}			
+				else if (*(actual - 1) != '\\' && *actual == '>')
+				{
+					token_nde = create_node(SCHEV_RGTH);
+					token_nde->start = actual;
+					token_nde->end = actual;
+					if (*(actual + 1) == '>')
+					{	
+						token_nde->token = DCHEV_RGTH;				
+						token_nde->end = ++actual;
+					}
+					return (token_nde);
+				}
 			}
-			else if (*(actual - 1) != '\\' && *actual == '&'
-				&& *(actual + 1) == '&')
+			if (sib->token == IN_DQUTE || sib->token == RAW)
 			{
-				token_nde = create_node(AND);
-				token_nde->start = actual;
-				token_nde->end = ++actual;
-				return (token_nde);
-			}			
-			else if (*(actual - 1) != '\\' && *actual == '<')
-			{
-				token_nde = create_node(SCHEV_LFT);
-				token_nde->start = actual;
-				token_nde->end = actual;
-				if (*(actual + 1) == '<')
-				{	
-					token_nde->token = DCHEV_LFT;				
-					token_nde->end = ++actual;
+				if (*(actual - 1) != '\\' && *actual == '$')
+				{
+					token_nde = create_node(DOLL);
+					token_nde->start = actual;
+					token_nde->end = actual;								
+					return (token_nde);
 				}
-				return (token_nde);
-			}			
-			else if (*(actual - 1) != '\\' && *actual == '>')
-			{
-				token_nde = create_node(SCHEV_RGTH);
-				token_nde->start = actual;
-				token_nde->end = actual;
-				if (*(actual + 1) == '>')
-				{	
-					token_nde->token = DCHEV_RGTH;				
-					token_nde->end = ++actual;
-				}
-				return (token_nde);
-			}
-			if (*(actual - 1) != '\\' && *actual == '$')
-			{
-				token_nde = create_node(DOLL);
-				token_nde->start = actual;
-				token_nde->end = actual;
-				if (*(actual + 1) == '>')
-				{	
-					token_nde->token = DCHEV_RGTH;				
-					token_nde->end = ++actual;
-				}
-				return (token_nde);
 			}
 			actual++;
 		}
