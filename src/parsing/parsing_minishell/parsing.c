@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/12 13:08:14 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/12 18:52:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,6 +294,8 @@ t_ast_nde	*format_io2(t_ast_nde* cmd)
 	}
 	return (format_cmd_sav);
 }
+
+
 
 void	print_raw_rght(t_ast_nde *raw_rght);
 void	print_space_tree(t_ast_nde *node);
