@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/12 00:01:09 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/12 13:08:14 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,9 +229,7 @@ t_ast_nde	*format_io(t_ast_nde* cmd)
 			{			
 				if (actual && actual->sibling && actual->sibling->token != PIPE && actual->sibling->token != AND  && actual->sibling->token != OR
 					&& actual->sibling->token != SCHEV_LFT && actual->sibling->token != DCHEV_LFT)
-					actual = actual->sibling;
-				// if (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
-				// 	actual = actual->sibling;
+					actual = actual->sibling;				
 			}
 			else
 				add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
@@ -241,8 +239,7 @@ t_ast_nde	*format_io(t_ast_nde* cmd)
 		{
 			add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
 			actual = actual->sibling;
-		}
-	//	actual = actual->sibling;
+		}	
 	}
 	return (format_cmd_sav);
 }

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/11 23:41:29 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/12 16:18:13 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,10 +180,11 @@ int	set_operator(t_ast_nde *node)
 		if (raw_lft->child)			
 			set_space(raw_lft);
 		if (raw_rght->child)
-			if(!set_operator(raw_rght))
-				set_space(raw_rght);
+			set_operator(raw_rght);
+			//if(!set_operator(raw_rght))
+				//set_space(raw_rght);
 		return (1);
 	}
-//	set_space(node);
+	set_space(node);
 	return (0);
 }
