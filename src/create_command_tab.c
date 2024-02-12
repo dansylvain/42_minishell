@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/11 20:43:27 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/12 13:28:23 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,10 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 {
 	char	str[2000];
 	int		i;
-
+	t_ast_nde *current;
+	int		j;
+	int		k;
+	
 	i = 0;
 	while (node)
 	{
@@ -149,12 +152,32 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 			if (node->sibling->sibling)
 				node = node->sibling->sibling;	
 			display_command_tab(cmd_tab[i]);
-			i++;
+			if (!is_separator(node))
+				i++;
+			continue ;
 		}
-		if (node->token == DOLL)
-			ft_printf("FOUND A DOLLAR!!!\n");
 		if (!is_separator(node) && node->token != DOLL)
-			ft_printf(">>>%s<<<\n", get_node_str(data, node->child));
+		{
+			current = node;
+			k = 0;
+			while (!is_separator(current) && !is_chevron(current))
+			{
+				ft_printf(">>>%s<<<\n", get_node_str(data, current->child));
+				k++;
+				current = current->sibling;
+			}
+			cmd_tab[i] = (char **)ft_calloc(k, sizeof(char *));
+			if (cmd_tab[i] == NULL)
+				return (NULL);
+			j = 0;
+			while (!is_separator(node) && !is_chevron(node))
+			{
+				cmd_tab[i][j++] = get_node_str(data, node->child);
+				node = node->sibling;
+			}
+			display_command_tab(cmd_tab[i]);
+			continue;
+		}
 		if (is_separator(node) || (node->sibling && is_chevron(node->sibling)))
 		{
 			ft_printf("CHANGE LINE\n");
