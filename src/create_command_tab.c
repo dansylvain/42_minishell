@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/12 19:43:42 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/12 20:41:11 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,7 +245,7 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 	cmd_tab = fill_cmd_tab_tabs(data, node, cmd_tab);
 }
 
-void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
+void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
 {
 	int			state_cmd;
 	t_ast_nde	*cmd_tab_node;
@@ -253,21 +253,21 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 	
 	cmd_tab_node_sav = NULL;
 	state_cmd = 0;
-	while (node)
+	while (node && node->token != AND && node->token != OR)	
 	{
-		while (node->token != AND && node->token != OR)			
+		if (!flag)
 			add_sibling(copy_node_child(node), &cmd_tab_node, &cmd_tab_node_sav);
-		if (cmd_tab_node_sav)
-		{
-			state_cmd = create_command_tab(data, cmd_tab_node_sav, envp);
-			cmd_tab_node_sav = NULL;
-			if (!state_cmd)
-				node = node->sibling
-		}
-		if (cmd)
 		node = node->sibling;
-	}
-	
+	}	
+	if (cmd_tab_node_sav)
+	{
+		state_cmd = create_command_tab(data, cmd_tab_node_sav, envp);	
+		if (state_cmd)
+			flag = 0;
+		else		
+			flag = 1;		
+		launch_command_tab(data, node, envp, flag);
+	}	
 }
 
 
