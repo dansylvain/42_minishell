@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/12 20:56:01 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/12 22:10:39 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		check_if_env_var_and_get_it(t_Data *data, t_ast_nde *node, char str[], int 
 void	print_tree(t_ast_nde *node);
 
 int		pipex(char *argv[], char *envp[]);
+t_ast_nde	*copy_node_child(t_ast_nde *node);
 
 void	display_command_tab(char **command_tab)
 {
@@ -231,6 +232,7 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 	cmd_tab[cmd_nbr] = NULL;
 	
 	cmd_tab = fill_cmd_tab_tabs(data, node, cmd_tab);
+	return (cmd_tab);
 }
 
 void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
@@ -238,9 +240,10 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
 	int			state_cmd;
 	t_ast_nde	*cmd_tab_node;
 	t_ast_nde	*cmd_tab_node_sav;
+	char		***cmd_tab;
 	
 	cmd_tab_node_sav = NULL;
-	state_cmd = 0;
+	//state_cmd = 0;
 	while (node && node->token != AND && node->token != OR)	
 	{
 		if (!flag)
@@ -248,14 +251,19 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
 		node = node->sibling;
 	}	
 	if (cmd_tab_node_sav)
-	{
-		state_cmd = create_command_tab(data, cmd_tab_node_sav, envp);	
+	{		
+		//display_command_tab_big(cmd_tab);	
+		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);
+		state_cmd = pipex(cmd_tab, envp);
 		if (state_cmd)
 			flag = 0;
 		else		
 			flag = 1;		
 		launch_command_tab(data, node, envp, flag);
-	}	
+	}
+	ft_printf("laucnh\n");
+	//exit(1);
+	//return ()	
 }
 
 

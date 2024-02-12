@@ -21,7 +21,8 @@
 	char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
 	void	display_command_tab_big(char ***command_tab);
 	void	exec_pipex(t_Data *data, char *cmd, char *envp[]);
-
+	void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag);
+	
 	/**========================================================================
 	 *                             COMMENTS POLICY
 	 *? signal info at the end of a function's comment block 
