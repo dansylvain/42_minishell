@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_qute.c                                     :+:      :+:    :+:   */
+/*   parsing_quote.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:36:13 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/05 15:31:33 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/12 16:28:49 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,24 @@ static int set_qute_nde(t_ast_nde *qute_nde, char qute,
 	return (0);
 }
 
-static void	link_inqute_node(t_tok *tok, char qute, t_ast_nde **qute_sibling,
+static void	link_inqute_node(t_tok tok, char qute, t_ast_nde **qute_sibling,
 	t_ast_nde **qute_sibling_sav, char **str)
 {
 	t_ast_nde	*new_nde;
 	
-	new_nde = create_node(tok[0]);
-	new_nde->start = *str;
-	new_nde->end = (*str)++;
-	add_sibling(new_nde, qute_sibling, qute_sibling_sav);
-	new_nde = create_node(tok[1]);
+	// new_nde = create_node(tok[0]);
+	// new_nde->start = *str;
+	// new_nde->end = (*str)++;
+	// add_sibling(new_nde, qute_sibling, qute_sibling_sav);
+	(*str)++;
+	new_nde = create_node(tok);
 	set_qute_nde(new_nde, qute, *qute_sibling_sav, str); 	
 	add_sibling(new_nde, qute_sibling, qute_sibling_sav);
-	new_nde = create_node(tok[0]);
-	new_nde->start= *str;
-	new_nde->end = (*str)++;
-	add_sibling(new_nde, qute_sibling, qute_sibling_sav);
+	(*str)++;
+	// new_nde = create_node(tok[0]);
+	// new_nde->start= *str;
+	// new_nde->end = (*str)++;
+	// add_sibling(new_nde, qute_sibling, qute_sibling_sav);
 }
 
 t_ast_nde	*set_qute_sib(char *str)
@@ -87,9 +89,9 @@ t_ast_nde	*set_qute_sib(char *str)
 	while (*str)
 	{
 		if (is_qute(str, '\''))
-			link_inqute_node((t_tok[]){SQUTE, IN_SQUTE}, '\'', &qute_sibling, &qute_sibling_sav, &str);
+			link_inqute_node(IN_SQUTE, '\'', &qute_sibling, &qute_sibling_sav, &str);
 		else if (is_qute(str, '\"'))
-			link_inqute_node((t_tok[]){DQUTE, IN_DQUTE}, '\"', &qute_sibling, &qute_sibling_sav, &str);
+			link_inqute_node(IN_DQUTE, '\"', &qute_sibling, &qute_sibling_sav, &str);
 		else
 		{
 			raw_nde = create_node(RAW);

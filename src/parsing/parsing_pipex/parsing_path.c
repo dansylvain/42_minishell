@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/11 10:36:32 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/12 17:58:28 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "libft.h"
 #include "parsing_build.h"
 
-static char	*try_paths(char **split_arg, char *env_find)
+static char	*try_paths(char **argv, char *env_find)
 {
 	char	*cmd;
 	char	**split_colon;
@@ -29,12 +29,12 @@ static char	*try_paths(char **split_arg, char *env_find)
 	while (split_colon && *split_colon)
 	{
 		tmp = ft_strjoin(*split_colon++, "/");
-		cmd = ft_strjoin(tmp, *split_arg);
+		cmd = ft_strjoin(tmp, *argv);
 		free(tmp);
 		if (!access(cmd, X_OK))
 		{
-			free(*split_arg);
-			*split_arg = cmd;
+			free(*argv);
+			*argv = cmd;
 			break ;
 		}
 		free(cmd);
@@ -101,9 +101,9 @@ char	**search_path(char *argv[], char *envp[])
 		ft_putstr_fd("env PATH not found.\n", 2);
 		exit(1);
 	}	
-	if (!try_paths(split_arg, env_find))
+	if (!try_paths(argv, env_find))
 	{
-		perror(*split_arg);
+		perror(*argv);
 		//free_ptr_arr(split_arg);
 		//exit(1);
 	}

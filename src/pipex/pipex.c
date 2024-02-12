@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/11 12:23:58 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/12 18:05:11 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 	int		offset;
 	
 	offset = 0;
+	ft_printf("argv in nurcery -%s-\n", **argv);
 	if (redir.redir[1])
 		offset = 1;
 	while (*(argv + offset))
@@ -64,13 +65,15 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 			if (!command_is_builtin(*argv, NULL, envp))
 			{
 			//	ft_printf("command is not %s (pipex)\n", *split);
-			//	ft_putstr_fd("command ___ is not buitin (pipex)\n", 1);
+				// ft_putstr_fd("command ___ is not buitin (pipex)\n", 1);
 				search_path(*argv, envp);
+				ft_putstr_fd(**argv, 2);
+				ft_putstr_fd("argv path\n", 2);// -%s-\n", **argv);
 				execve(**argv, *argv, envp);
 				exit(EXIT_FAILURE);				
 			}
 			else
-				;//ft_putstr_fd("builtin was launch (pipex)\n", 2);
+				ft_putstr_fd("builtin was launch (pipex)\n", 2);
 		}
 		else
 		{
@@ -181,11 +184,11 @@ void	set_redir(int argc, char **argv[], int redir[])
 			redir[0] = 2;	 
 		//(*argv)++;
 		//(*argc)--;	
-	}//ft_printf("argc %d\n", *argc);
-	if (argc > 1 && *(*argv)[argc - 1] == '>')
-	{
+	}
+	if (**(argv)[argc - 1] == '>')
+	{//ft_printf("argc %d\n", argc);
 		redir[1] = 1;		
-		if (!ft_strcmp((*argv)[argc - 1], ">>"))
+		if (!ft_strcmp(*argv[argc - 1], ">>"))
 			redir[1] = 2;	
 	}
 }
@@ -212,15 +215,17 @@ int	pipex(char **argv[], char *envp[])
 	int exit_status;
 	
 	exit_status = -1;
-	pid = -1;
+	pid = -1;//ft_printf("argv: %s, redir 0:%d, redir 1:%d, fdfile 0:%d, fdfile 1:%d, filepath 0:%s, filepath 1:%s, delim : %s\n", **argv, redir.redir[0], redir.redir[1], redir.fd_file[0], redir.fd_file[1], redir.filepath[0], redir.filepath[1], redir.delim); 
+
 	argc = arr_len((void *)argv);//ft_printf("argc %d\n", argc);
 	if (!argc)
 		return (1);
 	set_redir(argc, argv, redir.redir);
 	set_filepath_and_delim(&argc, &argv, &redir);
 	get_fdio(&redir);
-//ft_printf("argv: %s, redir 0:%d, redir 1:%d, fdfile 0:%d, fdfile 1:%d, filepath 0:%s, filepath 1:%s, delim : %s", *argv, redir.redir[0], redir.redir[1], redir.fd_file[0], redir.fd_file[1], redir.filepath[0], redir.filepath[1], redir.delim); exit(1);
-	pid = create_pipeline(argv, envp, redir);	
+	pid = create_pipeline(argv, envp, redir);
+	ft_printf("argv: %s, redir 0:%d, redir 1:%d, fdfile 0:%d, fdfile 1:%d, filepath 0:%s, filepath 1:%s, delim : %s\n", **argv, redir.redir[0], redir.redir[1], redir.fd_file[0], redir.fd_file[1], redir.filepath[0], redir.filepath[1], redir.delim); //exit(1);
+	
 	if(waitpid(pid, &status, 0) > 0) // Attend spécifiquement la fin du dernier processus enfant
 	{
 		if (WIFEXITED(status))		
