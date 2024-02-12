@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/12 16:43:22 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/12 19:06:03 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,35 +106,23 @@ int	get_cmd_nbr(t_ast_nde *node)
 	cmd_nbr = 1;
 	while (node)
 	{
-		if (!is_chevron(node) && node->sibling && is_chevron(node->sibling))
-			cmd_nbr++;
 		if (is_chevron(node))
 		{
-			if (is_separator(node->sibling))
+			cmd_nbr++;
+			if(!node->sibling || is_separator(node->sibling) || is_chevron(node->sibling))
 			{
-				ft_printf("HANDLE THIS ERROR!!!\n");
-				return (0);
+				ft_printf("handle this error\n");
 			}
 			if (node->sibling->sibling)
-			{
 				node = node->sibling->sibling;
-				if (!is_separator(node))
-					cmd_nbr++;	
-			}
 			else
-			{
-				ft_printf("cmd_nbr: %i\n", cmd_nbr);
-				cmd_nbr++;
-				return (cmd_nbr);
-			}
-			continue;
+				break;
+			continue;			
 		}
-		if ((node->token == PIPE || node->token == AND || node->token == OR))
+		if ((node->token == PIPE))
 			cmd_nbr++;
 		node = node->sibling;
 	}
-	// if (cmd_nbr == 0)
-	// 	cmd_nbr++;
 	ft_printf("cmd_nbr: %i\n", cmd_nbr);
 	return (cmd_nbr);
 }

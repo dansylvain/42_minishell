@@ -100,7 +100,7 @@
 			return (ft_printf("exit\n"), 0);
 		cmd_tab = create_command_tab(data, parse(cmd[0]), envp);
 		display_command_tab_big(cmd_tab);
-		pipex(cmd_tab, envp);
+		// pipex(cmd_tab, envp);
 		free(cmd[0]);
 	}
 	return (1);
