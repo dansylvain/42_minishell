@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/02/12 19:38:49 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/12 19:45:43 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ void	display_command_tab_big(char ***command_tab);
 void	exec_pipex(t_Data *data, char *cmd, char *envp[])
 {
 	char	***cmd_tab;
+	int exit_status;
 
 	cmd_tab = create_command_tab(data, parse(cmd), envp);
 	display_command_tab_big(cmd_tab);
-	pipex(cmd_tab, envp);
+	exit_status = pipex(cmd_tab, envp);
 }
