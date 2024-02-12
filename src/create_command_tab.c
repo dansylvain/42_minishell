@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/12 13:28:23 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/12 14:43:31 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,25 @@ void	display_command_tab(char **command_tab)
 	while (command_tab[i])
 	{
 		ft_printf("cmd_tab[%i]: >%s<\n", i, command_tab[i]);
+		i++;
+	}
+}
+
+void	display_command_tab_big(char ***command_tab)
+{
+	int	i;
+	int j;
+	
+	i = 0;
+	ft_printf("command_tab: \n");
+	while (command_tab[i])
+	{
+		j = 0;
+		while (command_tab[i][j])
+		{
+			printf("cmd_tab[%i][%i]: >%s<\n", i, j, command_tab[i][j]);
+			j++;
+		}
 		i++;
 	}
 }
@@ -101,6 +120,8 @@ int	get_cmd_nbr(t_ast_nde *node)
 				if (!is_separator(node))
 					cmd_nbr++;	
 			}
+			else
+				return (cmd_nbr);
 			continue;
 		}
 		if ((node->token == PIPE || node->token == AND || node->token == OR) && (!is_chevron(node->sibling)))
@@ -140,9 +161,10 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 	i = 0;
 	while (node)
 	{
+		if (!node)
+			break;
 		if (is_chevron(node))
 		{
-			ft_printf("IS_CHEVRON\n");
 			cmd_tab[i] = (char **)malloc(sizeof(char *) * 3);
 			if (cmd_tab[i] == NULL)
 				return (NULL);
@@ -150,19 +172,22 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 			cmd_tab[i][1] = get_node_str(data, node->sibling->child);
 			cmd_tab[i][2] = NULL;
 			if (node->sibling->sibling)
-				node = node->sibling->sibling;	
-			display_command_tab(cmd_tab[i]);
+				node = node->sibling->sibling;
+			else
+			{
+				break;
+			}
 			if (!is_separator(node))
 				i++;
 			continue ;
 		}
 		if (!is_separator(node) && node->token != DOLL)
 		{
+
 			current = node;
 			k = 0;
 			while (!is_separator(current) && !is_chevron(current))
 			{
-				ft_printf(">>>%s<<<\n", get_node_str(data, current->child));
 				k++;
 				current = current->sibling;
 			}
@@ -175,16 +200,18 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 				cmd_tab[i][j++] = get_node_str(data, node->child);
 				node = node->sibling;
 			}
-			display_command_tab(cmd_tab[i]);
+			cmd_tab[i][k] = NULL;
+			if (!is_separator(node))
+				i++;
 			continue;
 		}
 		if (is_separator(node) || (node->sibling && is_chevron(node->sibling)))
 		{
-			ft_printf("CHANGE LINE\n");
 			i++;
 		}
 		node = node->sibling;
 	}
+	display_command_tab_big(cmd_tab);
 	return (cmd_tab);
 }
 
@@ -194,9 +221,6 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 	int		cmd_nbr;
 	
 	cmd_nbr = get_cmd_nbr(node);
-	// ft_printf("cmd_nbr: %i\n", cmd_nbr);
-
-	//create cmd_tab
 	cmd_tab = (char ***)malloc(sizeof (char **) * cmd_nbr + 1);
 	if (cmd_tab == NULL)
 		return (NULL);
