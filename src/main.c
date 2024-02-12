@@ -16,9 +16,10 @@
 	char		**parse_cmd(char **command, char **env);
 	void		tmp_main(void);
 	void		display_command_tab(char **command_tab);
-	int			pipex(char *argv[], char *envp[]);
+	int			pipex(char **argv[], char *envp[]);
 	t_ast_nde	*parse(char *str);
-	char		**create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
+	char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
+	void	display_command_tab_big(char ***command_tab);
 
 	/**========================================================================
 	 *                             COMMENTS POLICY
@@ -97,7 +98,9 @@
 			add_history(cmd[0]);
 		if (cmd[0] == NULL)
 			return (ft_printf("exit\n"), 0);
-		create_command_tab(data, parse(cmd[0]), envp);
+		cmd_tab = create_command_tab(data, parse(cmd[0]), envp);
+		display_command_tab_big(cmd_tab);
+		pipex(cmd_tab, envp);
 		free(cmd[0]);
 	}
 	return (1);

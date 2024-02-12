@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/12 14:43:31 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/12 15:05:27 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,10 @@ int	get_cmd_nbr(t_ast_nde *node)
 		}
 		if ((node->token == PIPE || node->token == AND || node->token == OR) && (!is_chevron(node->sibling)))
 			cmd_nbr++;
+		cmd_nbr++;
 		node = node->sibling;
 	}
+	ft_printf("cmd_nbr: %i\n", cmd_nbr);
 	return (cmd_nbr);
 }
 char *get_node_str(t_Data *data, t_ast_nde *node)
@@ -211,7 +213,7 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 		}
 		node = node->sibling;
 	}
-	display_command_tab_big(cmd_tab);
+	// display_command_tab_big(cmd_tab);
 	return (cmd_tab);
 }
 
