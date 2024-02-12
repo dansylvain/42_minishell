@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/12 16:18:50 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/12 16:43:22 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,13 @@ int	get_cmd_nbr(t_ast_nde *node)
 {
 	int cmd_nbr;
 	
-	cmd_nbr = 0;
+	cmd_nbr = 1;
 	while (node)
 	{
+		if (!is_chevron(node) && node->sibling && is_chevron(node->sibling))
+			cmd_nbr++;
 		if (is_chevron(node))
 		{
-			cmd_nbr++;
 			if (is_separator(node->sibling))
 			{
 				ft_printf("HANDLE THIS ERROR!!!\n");
@@ -120,19 +121,20 @@ int	get_cmd_nbr(t_ast_nde *node)
 				if (!is_separator(node))
 					cmd_nbr++;	
 			}
-			// else
-			// {
-			// 	ft_printf("cmd_nbr: %i\n", cmd_nbr);
-			// 	return (cmd_nbr);
-			// }
+			else
+			{
+				ft_printf("cmd_nbr: %i\n", cmd_nbr);
+				cmd_nbr++;
+				return (cmd_nbr);
+			}
 			continue;
 		}
-		if ((node->token == PIPE || node->token == AND || node->token == OR) && (!is_chevron(node->sibling)))
+		if ((node->token == PIPE || node->token == AND || node->token == OR))
 			cmd_nbr++;
 		node = node->sibling;
 	}
-	if (cmd_nbr == 0)
-		cmd_nbr++;
+	// if (cmd_nbr == 0)
+	// 	cmd_nbr++;
 	ft_printf("cmd_nbr: %i\n", cmd_nbr);
 	return (cmd_nbr);
 }
@@ -226,6 +228,14 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 	char	***cmd_tab;
 	int		cmd_nbr;
 	
+	t_ast_nde *current;
+	current = node;
+	while (current)
+	{
+		ft_printf("%s\n", get_node_str(data, current->child));
+		current = current->sibling;
+	}
+
 	cmd_nbr = get_cmd_nbr(node);
 	cmd_tab = (char ***)malloc(sizeof (char **) * cmd_nbr + 1);
 	if (cmd_tab == NULL)
