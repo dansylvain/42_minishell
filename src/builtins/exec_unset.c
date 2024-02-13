@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:09:58 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 17:06:04 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/13 17:50:21 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	exec_unset(t_Data *data, char **command_tab)
 {
 	int	i;
 	int	j;
-write(2, "IN EXC unset!\n", 13);
+// write(2, "IN EXC unset!\n", 13);
 	i = 0;
 	while (data->envp_tab[i])
 	{

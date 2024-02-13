@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 10:00:04 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/13 17:49:59 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	exec_export(char **command_tab, t_Data *data)
 {
 	int	i;
 	int	j;
-write(2, "IN EXC export!\n", 13);
+// write(2, "IN EXC export!\n", 13);
 	if (command_tab[1] == NULL)
 		create_export_tab(data);
 	i = 1;

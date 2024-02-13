@@ -100,9 +100,9 @@
 		if (cmd[0] && *cmd[0])
 			add_history(cmd[0]);
 		if (cmd[0] == NULL)
-			return (ft_printf("<<<exit\n"), 0);
+			return (ft_printf("exit\n"), 0);
 		exec_pipex(data, cmd[0], envp);
-		ft_printf("exit_status: %i\n", data->exit_status);
+		// ft_printf("exit_status: %i\n", data->exit_status);
 		
 		free(cmd[0]);
 	}
@@ -120,14 +120,14 @@
 
 	if (!cmd_tab)
 	{
-		ft_putstr_fd("commande is nul a chier fd\n", 2);
-		ft_printf("commande is nul a chier\n");
+		// ft_putstr_fd("commande is nul a chier fd\n", 2);
+		// ft_printf("commande is nul a chier\n");
 		return (1);
 	}
 	if (!cmd_tab[0])
 	{
-		ft_putstr_fd("premier element de com is nul a chier fd\n", 2);
-		ft_printf("premier element de com is nul a chier\n");
+		// ft_putstr_fd("premier element de com is nul a chier fd\n", 2);
+		// ft_printf("premier element de com is nul a chier\n");
 		return (free_command_tab(cmd_tab), 1);
 	}
 	ft_putstr_fd(*cmd_tab, 2);
@@ -159,7 +159,7 @@
 	char	**envp_tab;
 	int		i;
 
-	ft_printf("CREATE ENVP!\n");
+	// ft_printf("CREATE ENVP!\n");
 	i = 0;
 	while (envp[i])
 		i++;
