@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/12 22:10:39 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/13 09:36:28 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,29 +241,40 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
 	t_ast_nde	*cmd_tab_node;
 	t_ast_nde	*cmd_tab_node_sav;
 	char		***cmd_tab;
+	int			op;
 	
-	cmd_tab_node_sav = NULL;
-	//state_cmd = 0;
+	op = 0;
+	cmd_tab_node_sav = NULL;	
 	while (node && node->token != AND && node->token != OR)	
 	{
 		if (!flag)
 			add_sibling(copy_node_child(node), &cmd_tab_node, &cmd_tab_node_sav);
 		node = node->sibling;
-	}	
+	}
+	if (node && node->token == OR)
+	{
+		op = 1;
+	}
+	if (node)
+		node = node->sibling;	
 	if (cmd_tab_node_sav)
-	{		
-		//display_command_tab_big(cmd_tab);	
+	{
 		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);
 		state_cmd = pipex(cmd_tab, envp);
-		if (state_cmd)
+		if (!state_cmd)
 			flag = 0;
 		else		
-			flag = 1;		
-		launch_command_tab(data, node, envp, flag);
+			flag = 1;
+		if (op)
+		{
+			if (flag)
+				flag = 0;	
+			else
+				flag = 1;
+		}
 	}
-	ft_printf("laucnh\n");
-	//exit(1);
-	//return ()	
+	if (node)
+		launch_command_tab(data, node, envp, flag);
 }
 
 

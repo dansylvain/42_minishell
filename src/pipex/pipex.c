@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/12 18:05:11 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/13 09:58:34 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 				exit(EXIT_FAILURE);				
 			}
 			else
+			{
 				ft_putstr_fd("builtin was launch (pipex)\n", 2);
+				exit(0);	
+			}
 		}
 		else
 		{
