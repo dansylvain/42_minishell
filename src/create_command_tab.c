@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 13:08:11 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/13 13:24:25 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,7 +253,6 @@ int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
 
 void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
 {
-	int			state_cmd;
 	t_ast_nde	*cmd_tab_node;
 	t_ast_nde	*cmd_tab_node_sav;
 	char		***cmd_tab;
@@ -277,13 +276,14 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
 	{
 		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);
 		if	(is_pipeline(cmd_tab_node_sav))
-			state_cmd = pipex(cmd_tab, envp);
+			data->exit_status = pipex(cmd_tab, envp);
 		else
 		{
-			state_cmd = 0;
-			command_is_builtin(*cmd_tab, data, envp);
+			data->exit_status = 0;
+			if (command_is_builtin(*cmd_tab, data, envp) == 0)
+				data->exit_status = pipex(cmd_tab, envp);
 		}
-		if (!state_cmd)
+		if (!data->exit_status)
 			flag = 0;
 		else		
 			flag = 1;

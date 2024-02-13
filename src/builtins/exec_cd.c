@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:29:47 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 09:59:14 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/13 13:27:48 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	exec_cd(char **command_tab)
 {
 	const char	*home;
-write(2, "IN EXC CD!\n", 13);
+// write(2, "IN EXC CD!\n", 13);
 	if (!command_tab[1])
 	{
 		home = getenv("HOME");
