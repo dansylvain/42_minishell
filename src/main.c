@@ -130,8 +130,8 @@
 		// ft_printf("premier element de com is nul a chier\n");
 		return (free_command_tab(cmd_tab), 1);
 	}
-	ft_putstr_fd(*cmd_tab, 2);
-	ft_putstr_fd("\n", 2);
+	// ft_putstr_fd(*cmd_tab, 2);
+	// ft_putstr_fd("\n", 2);
 	//ft_printf("on est avant le test buitin, is %s\n", cmd_tab[0]);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "echo", 5))
 		return (exec_echo(data, cmd_tab), 1);

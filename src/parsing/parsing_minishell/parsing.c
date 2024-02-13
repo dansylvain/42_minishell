@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/13 17:50:32 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/13 17:57:43 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,7 +317,7 @@ static t_ast_nde	*create_ast(char *str)
 	root->child = copy_node(root);
 	root->child->child = copy_node(root);
 	root->child->child->child = set_qute_sib(str);
-	print_qute_sib(root->child->child->child);
+	//print_qute_sib(root->child->child->child);
 
 	set_operator(root->child); 
 	//print_tree(root->child->child->sibling);
