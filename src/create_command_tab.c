@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 13:24:25 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/13 16:02:47 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,27 +251,19 @@ int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
 }
 
 
-void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
+void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 {
 	t_ast_nde	*cmd_tab_node;
 	t_ast_nde	*cmd_tab_node_sav;
 	char		***cmd_tab;
-	int			op;
-	
-	op = 0;
+
 	cmd_tab_node_sav = NULL;	
 	while (node && node->token != AND && node->token != OR)	
 	{
-		if (!flag)
+		if (!data->exit_status)
 			add_sibling(copy_node_child(node), &cmd_tab_node, &cmd_tab_node_sav);
 		node = node->sibling;
-	}
-	if (node && node->token == OR)
-	{
-		op = 1;
-	}
-	if (node)
-		node = node->sibling;	
+	}		
 	if (cmd_tab_node_sav)
 	{
 		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);
@@ -282,21 +274,12 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
 			data->exit_status = 0;
 			if (command_is_builtin(*cmd_tab, data, envp) == 0)
 				data->exit_status = pipex(cmd_tab, envp);
-		}
-		if (!data->exit_status)
-			flag = 0;
-		else		
-			flag = 1;
-		if (op)
-		{
-			if (flag)
-				flag = 0;	
-			else
-				flag = 1;
-		}
+		}	
+		if (node && node->token == OR)		
+			data->exit_status = !data->exit_status;
 	}
 	if (node)
-		launch_command_tab(data, node, envp, flag);
+		launch_command_tab(data, node->sibling, envp);	
 }
 
 

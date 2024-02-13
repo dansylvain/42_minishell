@@ -45,7 +45,7 @@
 
 	rl_catch_signals = 0;
 	if (data == NULL)
-		data = (t_Data *)malloc(sizeof(t_Data));
+		data = (t_Data *)ft_calloc(sizeof(t_Data), 1);
 	if (data == NULL)
 		return (display_error("Error\n"), 255);
 	data->envp_tab = duplicate_envp(data, envp);
