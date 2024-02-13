@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:12:50 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 10:00:08 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/13 16:57:53 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdlib.h>
-void	exec_pwd(void)
+void	exec_pwd(t_Data *data)
 {
 	char	buffer[1024];
 write(2, "IN EXC pwd!\n", 13);

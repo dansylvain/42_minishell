@@ -100,8 +100,9 @@
 		if (cmd[0] && *cmd[0])
 			add_history(cmd[0]);
 		if (cmd[0] == NULL)
-			return (ft_printf("exit\n"), 0);
+			return (ft_printf("<<<exit\n"), 0);
 		exec_pipex(data, cmd[0], envp);
+		ft_printf("exit_status: %i\n", data->exit_status);
 		
 		free(cmd[0]);
 	}
@@ -133,19 +134,19 @@
 	ft_putstr_fd("\n", 2);
 	//ft_printf("on est avant le test buitin, is %s\n", cmd_tab[0]);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "echo", 5))
-		return (exec_echo(cmd_tab), 1);
+		return (exec_echo(data, cmd_tab), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 5]), "unset", 6))
-		return (exec_unset(data->envp_tab, cmd_tab), 1);
+		return (exec_unset(data, cmd_tab), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 6]), "export", 7))
 		return (exec_export(cmd_tab, data), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "env", 4))
-		return (exec_env(data->envp_tab, cmd_tab), 1);
+		return (exec_env(data, cmd_tab), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "pwd", 4))
-		return(exec_pwd(), 1);
+		return(exec_pwd(data), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 2]), "cd", 3))
-		return (exec_cd(cmd_tab), 1);
-	// if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "exit", 5))
-	// 	return (ft_printf("exit\n"), free_command_tab(cmd_tab), 0);
+		return (exec_cd(data, cmd_tab), 1);
+	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "exit", 5))
+		return (exit(1), 1);
 	//free_command_tab(cmd_tab);
 	return (0);
 	}

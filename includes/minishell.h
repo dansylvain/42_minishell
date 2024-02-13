@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 13:01:46 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/13 17:05:25 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int		prompt_loop(t_Data *data, char *envp[]);
 void	display_error(char *str);
 void	free_data(t_Data *data);
 void	close_minishell(t_Data *data);
-void	exec_env(char *envp[], char **command_tab);
+void	exec_env(t_Data *data, char **command_tab);
 int		command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
-void	exec_pwd(void);
-int		exec_cd(char **command_tab);
-void	exec_echo(char **command_tab);
-void	exec_unset(char *envp[], char **command_tab);
+void	exec_pwd(t_Data *data);
+int		exec_cd(t_Data *data, char **command_tab);
+void	exec_echo(t_Data *data, char **command_tab);
+void	exec_unset(t_Data *data, char **command_tab);
 void	free_command_tab(char **command_tab);
 char	**duplicate_envp(t_Data *data, char *envp[]);
 int		exec_export(char **command_tab, t_Data *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 16:05:32 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/13 17:27:37 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	exec_pipex(t_Data *data, char *cmd, char *envp[])
 	
 	
 	
-	//data->exit_status = 0;
+	data->exit_status = 0;
 	launch_command_tab(data, cmd_list, envp);
 //	exit(1);
 	//display_command_tab_big(cmd_tab);

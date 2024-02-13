@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/13 10:11:30 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/13 16:48:12 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 	int		offset;
 	
 	offset = 0;
-	ft_printf("argv in nurcery -%s-\n", **argv);
+	// ft_printf("argv in nurcery -%s-\n", **argv);
 	if (redir.redir[1])
 		offset = 1;
 	while (*(argv + offset))
@@ -66,16 +66,16 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 			{
 			//	ft_printf("command is not %s (pipex)\n", *split);
 				// ft_putstr_fd("command ___ is not buitin (pipex)\n", 1);
-				ft_putstr_fd("LAA\n", 2);
+				// ft_putstr_fd("LAA\n", 2);
 				search_path(*argv, envp);
-				ft_putstr_fd(**argv, 2);
-				ft_putstr_fd("argv path\n", 2);// -%s-\n", **argv);
+				// ft_putstr_fd(**argv, 2);
+				// ft_putstr_fd("argv path\n", 2);// -%s-\n", **argv);
 				execve(**argv, *argv, envp);
 				exit(EXIT_FAILURE);				
 			}
 			else
 			{
-				ft_putstr_fd("builtin was launch (pipex)\n", 2);
+				// ft_putstr_fd("builtin was launch (pipex)\n", 2);
 				exit(0);	
 			}
 		}
@@ -228,7 +228,7 @@ int	pipex(char **argv[], char *envp[])
 	set_filepath_and_delim(&argc, &argv, &redir);
 	get_fdio(&redir);
 	pid = create_pipeline(argv, envp, redir);
-	ft_printf("argv: %s, redir 0:%d, redir 1:%d, fdfile 0:%d, fdfile 1:%d, filepath 0:%s, filepath 1:%s, delim : %s\n", **argv, redir.redir[0], redir.redir[1], redir.fd_file[0], redir.fd_file[1], redir.filepath[0], redir.filepath[1], redir.delim); //exit(1);
+	// ft_printf("argv: %s, redir 0:%d, redir 1:%d, fdfile 0:%d, fdfile 1:%d, filepath 0:%s, filepath 1:%s, delim : %s\n", **argv, redir.redir[0], redir.redir[1], redir.fd_file[0], redir.fd_file[1], redir.filepath[0], redir.filepath[1], redir.delim); //exit(1);
 	
 	if(waitpid(pid, &status, 0) > 0) // Attend spécifiquement la fin du dernier processus enfant
 	{
