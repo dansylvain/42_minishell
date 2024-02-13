@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:29:47 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 09:51:02 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/13 09:59:14 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ write(2, "IN EXC CD!\n", 13);
 	if (chdir(command_tab[1]) != 0)
 		return (ft_printf
 			("minishell: cd: %s: No such file or directory\n", command_tab[1]));
-			exit(0);
+	//		exit(0);
 	return (1);
 }

@@ -117,11 +117,18 @@
 
 	if (!cmd_tab)
 	{
+		ft_putstr_fd("commande is nul a chier fd\n", 2);
 		ft_printf("commande is nul a chier\n");
 		return (1);
 	}
 	if (!cmd_tab[0])
+	{
+		ft_putstr_fd("premier element de com is nul a chier fd\n", 2);
+		ft_printf("premier element de com is nul a chier\n");
 		return (free_command_tab(cmd_tab), 1);
+	}
+	ft_putstr_fd(*cmd_tab, 2);
+	ft_putstr_fd("\n", 2);
 	//ft_printf("on est avant le test buitin, is %s\n", cmd_tab[0]);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "echo", 5))
 		return (exec_echo(cmd_tab), 1);
@@ -129,6 +136,7 @@
 		return (exec_unset(data->envp_tab, cmd_tab), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 6]), "export", 7))
 		return (exec_export(cmd_tab, data), 1);
+	if (!data)
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "env", 4))
 		return (exec_env(data->envp_tab, cmd_tab), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "pwd", 4))

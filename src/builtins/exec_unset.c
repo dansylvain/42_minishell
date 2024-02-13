@@ -6,14 +6,14 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:09:58 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 09:51:35 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/13 10:29:38 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdlib.h>
 void	unset_var(char *envp[], int i)
-{write(2, "IN EXC unset!\n", 13);
+{
 	while (envp[i])
 	{
 		envp[i] = envp[i + 1];
@@ -26,7 +26,7 @@ void	exec_unset(char *envp[], char **command_tab)
 {
 	int	i;
 	int	j;
-
+write(2, "IN EXC unset!\n", 13);
 	i = 0;
 	while (envp[i])
 	{
@@ -44,5 +44,5 @@ void	exec_unset(char *envp[], char **command_tab)
 		}
 		i++;
 	}
-	exit(0);
+	//exit(0);
 }
