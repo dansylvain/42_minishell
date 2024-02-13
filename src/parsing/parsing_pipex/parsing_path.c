@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/12 17:58:28 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/13 19:33:05 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <unistd.h>
 #include "libft.h"
 #include "parsing_build.h"
+
+void	display_error(char *str);
 
 static char	*try_paths(char **argv, char *env_find)
 {
@@ -81,7 +83,7 @@ char	**parse_cmd(char *argv[], char *envp[])
 		&& ft_strcmp(*split_arg, "unset") && ft_strcmp(*split_arg, "export")
 		&& ft_strcmp(*split_arg, "exit"))
 	{
-		perror(*split_arg);
+		// perror(*split_arg);
 		//free_ptr_arr(split_arg);
 		//exit(1);
 	}// printf("in parse %s\n", *split_arg);
@@ -103,7 +105,9 @@ char	**search_path(char *argv[], char *envp[])
 	}	
 	if (!try_paths(argv, env_find))
 	{
-		perror(*argv);
+		// ft_putstr_fd("not_existing_command: command not found\n", 2);
+		
+		// perror(*argv);
 		//free_ptr_arr(split_arg);
 		//exit(1);
 	}

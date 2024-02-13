@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:29:47 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 17:22:10 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/13 19:49:13 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		exec_cd(t_Data *data, char **command_tab)
 {
 	const char	*home;
 	data->exit_status = 1;
-// write(2, "IN EXC CD!\n", 13);
 	if (!command_tab[1])
 	{
 		home = getenv("HOME");

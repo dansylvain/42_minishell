@@ -1,0 +1,276 @@
+Commande: ls
+#
+allowed_functions.md
+bash_output.txt
+compare_bash_and_minishell.sh
+correct_output.txt
+diff_output.txt
+en.subject.pdf
+file
+file2
+file3
+file4
+includes
+lib
+Makefile
+minishell
+minishell_output.txt
+not_existing
+notexisting
+README.md
+src
+test_commands.txt
+tests.sh
+to_test
+valgrind.supp
+wc
+
+Commande: pwd
+/home/dan/42/minishell_common
+
+Commande: echo Hello, World!
+Hello, World!
+
+Commande: ls | wc
+     25      25     286
+
+Commande: ls|wc
+     25      25     286
+
+Commande: ls        |       wc
+     25      25     286
+
+Commande: ls | exit
+
+
+Commande: cat file | rev
+#
+dm.snoitcnuf_dewolla
+txt.tuptuo_hsab
+hs.llehsinim_dna_hsab_erapmoc
+txt.tuptuo_tcerroc
+txt.tuptuo_ffid
+fdp.tcejbus.ne
+elif
+2elif
+3elif
+4elif
+sedulcni
+bil
+elifekaM
+llehsinim
+txt.tuptuo_llehsinim
+gnitsixe_ton
+gnitsixeton
+dm.EMDAER
+crs
+txt.sdnammoc_tset
+hs.stset
+tset_ot
+ppus.dnirglav
+cw
+
+Commande: ls > file
+
+
+Commande: ls > wc
+
+
+Commande: ls > notexisting
+
+
+Commande: ls    >   file
+
+
+Commande: exit > file
+
+
+Commande: cd > file
+
+
+Commande: ls > file > file2 > file3 > file4
+
+
+Commande: ls > file > file2 >> file3 > file4
+
+
+Commande: > file
+
+
+Commande: ls > file | ls
+#
+allowed_functions.md
+bash_output.txt
+compare_bash_and_minishell.sh
+correct_output.txt
+diff_output.txt
+en.subject.pdf
+file
+file2
+file3
+file4
+includes
+lib
+Makefile
+minishell
+minishell_output.txt
+not_existing
+notexisting
+README.md
+src
+test_commands.txt
+tests.sh
+to_test
+valgrind.supp
+wc
+
+Commande: wc < file
+ 25  25 286
+
+Commande: wc < notexisting
+ 25  25 286
+
+Commande: cat < file | wc
+     25      25     286
+
+Commande: < file wc
+ 25  25 286
+
+Commande: echo a && ls >
+./compare_bash_and_minishell.sh: eval: line 142: syntax error near unexpected token `newline'
+./compare_bash_and_minishell.sh: eval: line 142: `echo a && ls >'
+
+Commande: echo a && awoiejlk
+a
+./compare_bash_and_minishell.sh: line 142: awoiejlk: command not found
+
+Commande: ls > file && echo "salut"
+salut
+
+Commande: false && (echo aaa)
+
+
+Commande: (ls && ls)
+#
+allowed_functions.md
+bash_output.txt
+compare_bash_and_minishell.sh
+correct_output.txt
+diff_output.txt
+en.subject.pdf
+file
+file2
+file3
+file4
+includes
+lib
+Makefile
+minishell
+minishell_output.txt
+not_existing
+notexisting
+README.md
+src
+test_commands.txt
+tests.sh
+to_test
+valgrind.supp
+wc
+#
+allowed_functions.md
+bash_output.txt
+compare_bash_and_minishell.sh
+correct_output.txt
+diff_output.txt
+en.subject.pdf
+file
+file2
+file3
+file4
+includes
+lib
+Makefile
+minishell
+minishell_output.txt
+not_existing
+notexisting
+README.md
+src
+test_commands.txt
+tests.sh
+to_test
+valgrind.supp
+wc
+
+Commande: ls & & ls
+./compare_bash_and_minishell.sh: eval: line 142: syntax error near unexpected token `&'
+./compare_bash_and_minishell.sh: eval: line 142: `ls & & ls'
+
+Commande: ls && && ls
+./compare_bash_and_minishell.sh: eval: line 142: syntax error near unexpected token `&&'
+./compare_bash_and_minishell.sh: eval: line 142: `ls && && ls'
+
+Commande: ls | | ls
+./compare_bash_and_minishell.sh: eval: line 142: syntax error near unexpected token `|'
+./compare_bash_and_minishell.sh: eval: line 142: `ls | | ls'
+
+Commande: ls (&&) ls
+./compare_bash_and_minishell.sh: eval: line 142: syntax error near unexpected token `&&'
+./compare_bash_and_minishell.sh: eval: line 142: `ls (&&) ls'
+
+Commande: echo "&&" ls
+&& ls
+
+Commande: exit && ls
+
+
+Commande: ls && exit
+#
+allowed_functions.md
+bash_output.txt
+compare_bash_and_minishell.sh
+correct_output.txt
+diff_output.txt
+en.subject.pdf
+file
+file2
+file3
+file4
+includes
+lib
+Makefile
+minishell
+minishell_output.txt
+not_existing
+notexisting
+README.md
+src
+test_commands.txt
+tests.sh
+to_test
+valgrind.supp
+wc
+
+Commande: ls &&
+./compare_bash_and_minishell.sh: eval: line 143: syntax error: unexpected end of file
+
+Commande: && ls
+./compare_bash_and_minishell.sh: eval: line 142: syntax error near unexpected token `&&'
+./compare_bash_and_minishell.sh: eval: line 142: `&& ls'
+
+Commande: &&
+./compare_bash_and_minishell.sh: eval: line 142: syntax error near unexpected token `&&'
+./compare_bash_and_minishell.sh: eval: line 142: `&&'
+
+Commande: ||
+./compare_bash_and_minishell.sh: eval: line 142: syntax error near unexpected token `||'
+./compare_bash_and_minishell.sh: eval: line 142: `||'
+
+Commande: (&&)
+./compare_bash_and_minishell.sh: eval: line 142: syntax error near unexpected token `&&'
+./compare_bash_and_minishell.sh: eval: line 142: `(&&)'
+
+Commande: echo a || wc << fin
+./compare_bash_and_minishell.sh: line 142: warning: here-document at line 142 delimited by end-of-file (wanted `fin')
+a
+
