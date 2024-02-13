@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 09:36:28 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/13 13:08:11 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	insert_env_var(char **command, char *env_var, char buff[]);
 int		check_if_env_var_and_get_it(t_Data *data, t_ast_nde *node, char str[], int index);
 void	print_tree(t_ast_nde *node);
 
-int		pipex(char *argv[], char *envp[]);
+int		pipex(char **argv[], char *envp[]);
 t_ast_nde	*copy_node_child(t_ast_nde *node);
 
 void	display_command_tab(char **command_tab)
@@ -235,6 +235,22 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 	return (cmd_tab);
 }
 
+int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
+{
+	while (cmd_tab_node_sav)
+	{
+		if (cmd_tab_node_sav->token == PIPE)
+		{
+			ft_printf("ISPIPELINE\n");
+			return (1);
+		}
+		cmd_tab_node_sav = cmd_tab_node_sav->sibling;
+	}
+	ft_printf("NOT A PIPELINE\n");
+	return (0);
+}
+
+
 void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
 {
 	int			state_cmd;
@@ -260,7 +276,13 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
 	if (cmd_tab_node_sav)
 	{
 		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);
-		state_cmd = pipex(cmd_tab, envp);
+		if	(is_pipeline(cmd_tab_node_sav))
+			state_cmd = pipex(cmd_tab, envp);
+		else
+		{
+			state_cmd = 0;
+			command_is_builtin(*cmd_tab, data, envp);
+		}
 		if (!state_cmd)
 			flag = 0;
 		else		

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:46:30 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 09:59:59 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/13 13:07:07 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	exec_env(char **envp, char **command_tab)
 {
 	int	i;
-write(2, "IN EXC env!\n", 13);
+	write(2, "IN EXC env!\n", 13);
 	if (command_tab[1] != NULL)
 	{
 		ft_printf("env: ‘%s’: No such file or directory\n", command_tab[1]);

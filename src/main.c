@@ -41,10 +41,11 @@
 	*========================================================================**/
 	int	main(int argc, char **argv, char *envp[])
 	{
-	t_Data	*data;
+	static t_Data	*data = NULL;
 
 	rl_catch_signals = 0;
-	data = (t_Data *)malloc(sizeof(t_Data));
+	if (data == NULL)
+		data = (t_Data *)malloc(sizeof(t_Data));
 	if (data == NULL)
 		return (display_error("Error\n"), 255);
 	data->envp_tab = duplicate_envp(data, envp);
@@ -90,11 +91,12 @@
 	char	prompt[1024];
 
 	ft_bzero(prompt, 1024);
-	build_prompt(prompt);
+	// build_prompt(prompt);
 	cmd[1] = NULL;
 	while (1)
 	{
-		cmd[0] = readline(prompt);
+		// cmd[0] = readline(prompt);
+		cmd[0] = readline("minishell : ");
 		if (cmd[0] && *cmd[0])
 			add_history(cmd[0]);
 		if (cmd[0] == NULL)
@@ -136,7 +138,6 @@
 		return (exec_unset(data->envp_tab, cmd_tab), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 6]), "export", 7))
 		return (exec_export(cmd_tab, data), 1);
-	if (!data)
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "env", 4))
 		return (exec_env(data->envp_tab, cmd_tab), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "pwd", 4))
@@ -157,6 +158,7 @@
 	char	**envp_tab;
 	int		i;
 
+	ft_printf("CREATE ENVP!\n");
 	i = 0;
 	while (envp[i])
 		i++;
