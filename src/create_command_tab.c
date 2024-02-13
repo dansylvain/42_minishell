@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 17:29:26 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/13 17:51:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int	get_cmd_nbr(t_ast_nde *node)
 			cmd_nbr++;
 		node = node->sibling;
 	}
-	ft_printf("cmd_nbr: %i\n", cmd_nbr);
+	// ft_printf("cmd_nbr: %i\n", cmd_nbr);
 	return (cmd_nbr);
 }
 char *get_node_str(t_Data *data, t_ast_nde *node)
@@ -240,12 +240,12 @@ int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
 	{
 		if (cmd_tab_node_sav->token == PIPE)
 		{
-			ft_printf("ISPIPELINE\n");
+			// ft_printf("ISPIPELINE\n");
 			return (1);
 		}
 		cmd_tab_node_sav = cmd_tab_node_sav->sibling;
 	}
-	ft_printf("NOT A PIPELINE\n");
+	// ft_printf("NOT A PIPELINE\n");
 	return (0);
 }
 

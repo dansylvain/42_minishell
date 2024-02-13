@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:43:09 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 16:56:37 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/13 17:49:46 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	exec_echo(t_Data *data, char **command_tab)
 {
 	int	i;
 	int	j;
-write(2, "IN EXC ECHO!\n", 13);
+// write(2, "IN EXC ECHO!\n", 13);
 	i = 1;
 	if (!command_tab[1])
 		return ;
