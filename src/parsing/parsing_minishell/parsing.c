@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/13 16:53:34 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/13 17:50:32 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,66 +320,70 @@ static t_ast_nde	*create_ast(char *str)
 	print_qute_sib(root->child->child->child);
 
 	set_operator(root->child); 
-	print_tree(root->child->child->sibling);
+	//print_tree(root->child->child->sibling);
 	// if (root->child->child->sibling)
 	// 	set_space(root->child->child->sibling->child);//exit(1);
 	// else 
 	// 	set_space(root->child);
 	//exit(1);
-	ft_printf("space\n\n");
-	if (root->child && root->child->child && root->child->child->sibling && root->child->child->sibling->child && root->child->child->sibling->child->child)
-		print_space_tree(root->child->child->sibling->child->child->sibling);
+	//ft_printf("space\n\n");
+	
+	// if (root->child && root->child->child && root->child->child->sibling && root->child->child->sibling->child && root->child->child->sibling->child->child)
+	// 	print_space_tree(root->child->child->sibling->child->child->sibling);
+
 	// else
 	// 	print_space_tree(root->child);
-	ft_printf("end\n\n");//exit(1);
+//	ft_printf("end\n\n");//exit(1);
 	//set_chevron();
 	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav);
 	// print_rslt(cmd_sav, 1);
-	ft_printf("\n\n");
+	//ft_printf("\n\n");
 	// cmd_sav = format_io(cmd_sav);
 	//exit(1);
-	print_rslt(cmd_sav, 1);
-	ft_printf("\n\n");
-	t_ast_nde	*cmd_sav2 = cmd_sav;
-	while (cmd_sav2)
-	{	
-		if(cmd_sav2->token == RAW || cmd_sav2->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
-		{			
-			print_rslt(cmd_sav2->child, 0);
-			ft_printf(" ");
-		}
-		cmd_sav2 = cmd_sav2->sibling;
-	}
-	ft_printf("\n\n");
+	//print_rslt(cmd_sav, 1);
+	//ft_printf("\n\n");
+	
+	// t_ast_nde	*cmd_sav2 = cmd_sav;
+	// while (cmd_sav2)
+	// {	
+	// 	if(cmd_sav2->token == RAW || cmd_sav2->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
+	// 	{			
+	// 		print_rslt(cmd_sav2->child, 0);
+	// 		ft_printf(" ");
+	// 	}
+	// 	cmd_sav2 = cmd_sav2->sibling;
+	// }
+	// ft_printf("\n\n");
+	
 	cmd_sav = format_io(cmd_sav);
-	print_rslt(cmd_sav, 1);
-	ft_printf("\n\n");
-	t_ast_nde	*cmd_sav3 = cmd_sav;
-	while (cmd_sav3)
-	{	
-		if(cmd_sav3->token == RAW || cmd_sav3->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
-		{			
-			print_rslt(cmd_sav3->child, 0);
-			ft_printf(" ");
-		}
-		cmd_sav3 = cmd_sav3->sibling;
-	}
-	ft_printf("\n\n");
+	//print_rslt(cmd_sav, 1);
+	//ft_printf("\n\n");
+	// t_ast_nde	*cmd_sav3 = cmd_sav;
+	// while (cmd_sav3)
+	// {	
+	// 	if(cmd_sav3->token == RAW || cmd_sav3->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
+	// 	{			
+	// 		print_rslt(cmd_sav3->child, 0);
+	// 		ft_printf(" ");
+	// 	}
+	// 	cmd_sav3 = cmd_sav3->sibling;
+	// }
+	// ft_printf("\n\n");
 	
 	cmd_sav = format_io2(cmd_sav);
-	print_rslt(cmd_sav, 1);
-	ft_printf("\n\n");
-	t_ast_nde	*cmd_sav4 = cmd_sav;
-	while (cmd_sav4)
-	{	
-		if(cmd_sav4->token == RAW || cmd_sav4->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
-		{			
-			print_rslt(cmd_sav4->child, 0);
-			ft_printf(" ");
-		}
-		cmd_sav4 = cmd_sav4->sibling;
-	}
-	ft_printf("\n\n");
+	// print_rslt(cmd_sav, 1);
+	// ft_printf("\n\n");
+	// t_ast_nde	*cmd_sav4 = cmd_sav;
+	// while (cmd_sav4)
+	// {	
+	// 	if(cmd_sav4->token == RAW || cmd_sav4->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
+	// 	{			
+	// 		print_rslt(cmd_sav4->child, 0);
+	// 		ft_printf(" ");
+	// 	}
+	// 	cmd_sav4 = cmd_sav4->sibling;
+	// }
+	// ft_printf("\n\n");
 
 	if (!cmd_sav)
 		ast_res = root;
