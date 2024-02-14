@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/14 08:46:49 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/14 13:19:28 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,14 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 	{
 		pid = fork();
 		if (pid == 0)
-		{//ft_printf("argv in nurcery -%s-%s\n", **argv, (*argv)[1]);
-			close(fd_file[1]);
+		{
+			if (fd_file[1] > 2)
+				close(fd_file[1]);
 			set_pipe_forward(pipefd[0], pipefd[1], redir);
-			//split = parse_cmd(argv, envp);
+			//ft_printf("argv in nurcery -%s-%s\n", **argv, (*argv)[1]);
 			if (!command_is_builtin(*argv, NULL, envp))
 			{
-			//	ft_printf("command is not %s (pipex)\n", *split);
+				//ft_printf("command is NOT BUILTIN (pipex)\n");
 				// ft_putstr_fd("command ___ is not buitin (pipex)\n", 1);
 				// ft_putstr_fd("LAA\n", 2);
 				search_path(*argv, envp);
@@ -74,7 +75,7 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 				exit(EXIT_FAILURE);				
 			}
 			else
-			{
+			{			
 				// ft_putstr_fd("builtin was launch (pipex)\n", 2);
 				exit(EXIT_SUCCESS);	
 			}

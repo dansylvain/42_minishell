@@ -32,32 +32,59 @@ run_minishell() {
 
 # Commandes à tester
 # BUILTINS: cd & pwd
-run_minishell "cd" "pwd"
-run_minishell "cd /"  "pwd"
-run_minishell "cd chemin/inexistant"  "pwd"
-run_minishell "cd src/builtins"  "pwd"
-run_minishell "cd .."  "pwd"
-run_minishell "pwd"
-run_minishell "pwd blabla"
-run_minishell "'pwd' blabla"
+# run_minishell "cd" "pwd"
+# run_minishell "cd /"  "pwd"
+# run_minishell "cd chemin/inexistant"  "pwd"
+# run_minishell "cd src/builtins"  "pwd"
+# run_minishell "cd .."  "pwd"
+# run_minishell "pwd"
+# run_minishell "pwd blabla"
+# run_minishell "'pwd' blabla"
 
-# BUILTINS: echo
-run_minishell 'echo "Hello, World!"'
-run_minishell 'echo '\''Single quotes'\'''
-run_minishell "echo 'Single quotes'"
-run_minishell 'echo -n "No newline"'
-run_minishell "echo -n 'No newline'"
-run_minishell 'echo -n "With space at the end"   '
-run_minishell 'echo -n "With space at the end"   "Another argument"'
-run_minishell 'echo -n "With space at the end"   '\''Single quotes'\'''
+# # BUILTINS: echo
+# run_minishell 'echo "Hello, World!"'
+# run_minishell 'echo '\''Single quotes'\'''
+# run_minishell "echo 'Single quotes'"
+# run_minishell 'echo -n "No newline"'
+# run_minishell "echo -n 'No newline'"
+# run_minishell 'echo -n "With space at the end"   '
+# run_minishell 'echo -n "With space at the end"   "Another argument"'
+# run_minishell 'echo -n "With space at the end"   '\''Single quotes'\'''
 
-# BUILTINS: unset
-run_minishell "env" "unset SHELL" "env"
-run_minishell "env" "unset _" "env"
-run_minishell "env" "unset OLDPWD" "env"
+# # BUILTINS: unset
+# run_minishell "env" "unset SHELL" "env"
+# run_minishell "env" "unset _" "env"
+# run_minishell "env" "unset OLDPWD" "env"
 
-# BUILTINS: export
-run_minishell "export"
+# # BUILTINS: export
+# run_minishell "export"
+
+run_minishell "true || echo aaa && echo bbb"
+# run_minishell true || (echo aaa && echo bbb)
+# run_minishell true || (echo aaa && echo bbb
+# run_minishell true || echo aaa && echo bbb)
+# run_minishell true || (echo a && echo b) && echo c
+# run_minishell true || (echo a) && echo b
+# run_minishell true || ((echo a && echo b) && echo c)
+# run_minishell true || "("echo b && echo c)
+# run_minishell echo a && ls >
+# run_minishell echo a && awoiejlk
+# run_minishell ls > file && echo "salut"
+# run_minishell false && (echo aaa)
+# run_minishell (ls && ls)
+# ls & & ls
+# ls && && ls
+# ls | | ls
+# ls (&&) ls
+# echo "&&" ls
+# exit && ls
+# ls && exit
+# ls &&
+# && ls
+# &&
+# ||
+# (&&)
+# echo a || wc << fin
 
 # Comparaison avec fichier de référence
 

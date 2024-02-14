@@ -5,9 +5,17 @@ MINISHELL_EXECUTABLE="./minishell"
 
 # Liste des commandes à tester
 commands=(
-    "ls"
-    "pwd"
-    "echo Hello, World!"
+    # "ls"
+    # "pwd"
+    # "echo Hello, World!"
+	"true || echo aaa && echo bbb"
+	"true || (echo aaa && echo bbb)"
+	"true || (echo aaa && echo bbb"
+	"true || echo aaa && echo bbb)"
+	"true || (echo a && echo b) && echo c"
+	"true || (echo a) && echo b"
+	"true || ((echo a && echo b) && echo c)"
+
     # Ajoutez d'autres commandes ici
 )
 
