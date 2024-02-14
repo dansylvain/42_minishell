@@ -101,7 +101,7 @@
 			add_history(cmd[0]);
 		if (cmd[0] == NULL)
 			return (ft_printf("exit\n"), 0);
-		exec_pipex(data, cmd[0], envp);
+		exec_pipex(data, cmd[0], data->envp_tab);
 		// ft_printf("exit_status: %i\n", data->exit_status);
 		
 		free(cmd[0]);
