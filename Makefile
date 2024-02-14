@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/12 19:34:20 by dan              ###   ########.fr        #
+#    Updated: 2024/02/14 19:34:44 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC =	src/main.c \
 		src/builtins/exec_echo.c \
 		src/builtins/exec_unset.c \
 		src/builtins/exec_export.c \
+		src/builtins/exec_exit.c \
 		src/parsing/parsing_pipex/parsing_build.c \
 		src/parsing/parsing_pipex/parsing_invrt.c \
 		src/parsing/parsing_pipex/parsing_path.c \

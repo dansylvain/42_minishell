@@ -22,7 +22,8 @@
 	void	display_command_tab_big(char ***command_tab);
 	void	exec_pipex(t_Data *data, char *cmd, char *envp[]);
 	void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag);
-	
+	int	exec_exit(t_Data *data, char **command_tab);
+
 	/**========================================================================
 	 *                             COMMENTS POLICY
 	 *? signal info at the end of a function's comment block 
@@ -146,7 +147,7 @@
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 2]), "cd", 3))
 		return (exec_cd(data, cmd_tab), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "exit", 5))
-		return (exit(1), 1); //ft_putstr_fd("builtin\n", 2);
+		(exec_exit(data, cmd_tab));
 	//free_command_tab(cmd_tab);
 	return (0);
 	}
