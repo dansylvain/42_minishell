@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/14 13:33:20 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/14 15:47:14 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,10 @@ char	**search_path(char *argv[], char *envp[])
 	}	
 	if (!try_paths(argv, env_find))
 	{
-		// ft_putstr_fd("not_existing_command: command not found\n", 2);
+		ft_putstr_fd("not_existing_command: command not found\n", 2);
 		
 		// perror(*argv);
-		//free_ptr_arr(split_arg);
+		// free_ptr_arr(split_arg);
 		exit(1);
 	}
 

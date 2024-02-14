@@ -35,7 +35,7 @@ commands=(
 	#invalid pointer
 	# "ls | rev | tr 'e' 'E' | grep -v \"file\" | cat -e"
 	
-	
+			
 	
 	"ls | exit"
 	"cat file | rev"
