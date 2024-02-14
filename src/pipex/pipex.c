@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/13 16:48:12 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/14 08:46:49 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 	{
 		pid = fork();
 		if (pid == 0)
-		{
+		{//ft_printf("argv in nurcery -%s-%s\n", **argv, (*argv)[1]);
 			close(fd_file[1]);
 			set_pipe_forward(pipefd[0], pipefd[1], redir);
 			//split = parse_cmd(argv, envp);
@@ -76,7 +76,7 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 			else
 			{
 				// ft_putstr_fd("builtin was launch (pipex)\n", 2);
-				exit(0);	
+				exit(EXIT_SUCCESS);	
 			}
 		}
 		else
@@ -217,7 +217,7 @@ int	pipex(char **argv[], char *envp[])
 	pid_t	pid;
 	int status;
 	int exit_status;
-	
+	//ft_printf("argv in nurcery -%s-%s\n", **argv, (*argv)[1]);
 	exit_status = -1;
 	pid = -1;//ft_printf("argv: %s, redir 0:%d, redir 1:%d, fdfile 0:%d, fdfile 1:%d, filepath 0:%s, filepath 1:%s, delim : %s\n", **argv, redir.redir[0], redir.redir[1], redir.fd_file[0], redir.fd_file[1], redir.filepath[0], redir.filepath[1], redir.delim); 
 

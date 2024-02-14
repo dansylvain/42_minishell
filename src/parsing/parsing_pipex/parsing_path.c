@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/12 17:58:28 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/13 22:53:15 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char	**search_path(char *argv[], char *envp[])
 	{
 		perror(*argv);
 		//free_ptr_arr(split_arg);
-		//exit(1);
+		exit(1);
 	}
 
 	return (split_arg);

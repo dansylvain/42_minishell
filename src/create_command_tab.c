@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 17:51:28 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/14 09:11:16 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,7 @@ int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
 }
 
 
-void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
+void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
 {
 	t_ast_nde	*cmd_tab_node;
 	t_ast_nde	*cmd_tab_node_sav;
@@ -259,26 +259,26 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 	cmd_tab_node_sav = NULL;	
 	while (node && node->token != AND && node->token != OR)	
 	{
-		if (!data->exit_status)
-			add_sibling(copy_node_child(node), &cmd_tab_node, &cmd_tab_node_sav);
+		if (!flag)		
+			add_sibling(copy_node_child(node), &cmd_tab_node, &cmd_tab_node_sav);		
 		node = node->sibling;
-	}		
+	}	
 	if (cmd_tab_node_sav)
-	{
-		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);
-		if	(is_pipeline(cmd_tab_node_sav))
-			data->exit_status = pipex(cmd_tab, envp);
-		else
-		{
-			//data->exit_status = 0;
-			if (command_is_builtin(*cmd_tab, data, envp) == 0)
-				data->exit_status = pipex(cmd_tab, envp);
+	{		
+		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);			
+		if	(is_pipeline(cmd_tab_node_sav))		
+			data->exit_status = pipex(cmd_tab, envp);	
+		else if (!command_is_builtin(*cmd_tab, data, envp))	
+		{					
+			data->exit_status = pipex(cmd_tab, envp);	
+			//ft_printf("return pipex: %d\n", data->exit_status);	
 		}	
-		if (node && node->token == OR)		
-			data->exit_status = !data->exit_status;
 	}
+	flag = data->exit_status;
+	if (node && node->token == OR)		
+		flag = !flag;
 	if (node)
-		launch_command_tab(data, node->sibling, envp);	
+		launch_command_tab(data, node->sibling, envp, flag);	
 }
 
 
