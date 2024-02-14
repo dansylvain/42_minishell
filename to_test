@@ -68,25 +68,26 @@ cd ~/..
 export HOME=$HOME/notexisting  and   ls ~
 
 WILDCARD
-echo *
-echo "*"
-echo '*'
-echo $*
-cat *.c
-touch "file with spaces"       and       rm *
-cat src/*.c | grep "printf"
+"echo *"
+"echo \"*\""
+"echo '*'"
+"echo \$*"
+"cat *.c"
+"touch \"file with spaces\"       and       rm *"
+"cat src/*.c | grep \"printf\""
+
 
 OPERATORS
-ls >>> file
-ls >>      > file
-ls >      >> file
-wc <<< file
-wc <<      < file
-wc <> file
-ls >< file
-ls |> wc
-echo hello >    > file
-ls | rev << END
+"ls >>> file"
+"ls >>      > file"
+"ls >      >> file"
+"wc <<< file"
+"wc <<      < file"
+"wc <> file"
+"ls >< file"
+"ls |> wc"
+"echo hello >    > file"
+"ls | rev << END"
 
 LOGIC_OPERATORS
 true || echo aaa && echo bbb
