@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:46:30 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 18:38:00 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/14 13:39:49 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	exec_env(t_Data *data, char **command_tab)
 		ft_printf("env: ‘%s’: No such WWWfile or directory\n", command_tab[1]);
 		return ;
 	}
-	else
+	else if (!data)	
+		ft_printf("no data in child\n");
+	else	
 	{
 		i = 0;
 		while (data->envp_tab[i])

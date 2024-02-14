@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:43:09 by dan               #+#    #+#             */
-/*   Updated: 2024/02/14 08:28:32 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/14 13:40:15 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	exec_echo(t_Data *data, char **command_tab)
 {
 	int	i;
 	int	j;
-// write(2, "IN EXC ECHO!\n", 13);
+ //write(2, "IN EXC ECHO!\n", 13);
 	i = 1;
 	if (!command_tab[1])
 		return ;
@@ -31,6 +31,6 @@ void	exec_echo(t_Data *data, char **command_tab)
 	}
 	if (j == 1)
 		ft_printf("\n");
-	data->exit_status = 0;
-	//exit(0);
+	if (data)
+		data->exit_status = 0;	
 }

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/14 09:11:16 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/14 13:22:14 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	display_command_tab(char **command_tab)
 		ft_printf("cmd_tab[%i]: >%s<\n", i, command_tab[i]);
 		i++;
 	}
+	ft_printf("after display command tab\n");
 }
 
 void	display_command_tab_big(char ***command_tab)
@@ -47,11 +48,13 @@ void	display_command_tab_big(char ***command_tab)
 		j = 0;
 		while (command_tab[i][j])
 		{
-			printf("cmd_tab[%i][%i]: >%s<\n", i, j, command_tab[i][j]);
+			ft_printf("cmd_tab[%i][%i]: >%s<\n", i, j, command_tab[i][j]);
 			j++;
 		}
 		i++;
+		ft_printf("after\n");
 	}
+	ft_printf("command_tab end: \n");
 }
 /* typedef enum e_tok
 {
@@ -240,7 +243,7 @@ int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
 	{
 		if (cmd_tab_node_sav->token == PIPE)
 		{
-			// ft_printf("ISPIPELINE\n");
+			 //ft_printf("ISPIPELINE\n");
 			return (1);
 		}
 		cmd_tab_node_sav = cmd_tab_node_sav->sibling;
@@ -249,7 +252,7 @@ int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
 	return (0);
 }
 
-
+void print_rslt(t_ast_nde *rslt, int flag);
 void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
 {
 	t_ast_nde	*cmd_tab_node;
@@ -257,15 +260,19 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
 	char		***cmd_tab;
 
 	cmd_tab_node_sav = NULL;	
-	while (node && node->token != AND && node->token != OR)	
+	while (node && node->token != AND && node->token != OR)// && node->token != DCHEV_LFT)	
 	{
 		if (!flag)		
 			add_sibling(copy_node_child(node), &cmd_tab_node, &cmd_tab_node_sav);		
 		node = node->sibling;
 	}	
 	if (cmd_tab_node_sav)
-	{		
-		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);			
+	{	
+		//print_rslt(cmd_tab_node_sav, 0);
+	//	ft_printf("\n\n");
+		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);	
+		//display_command_tab_big(cmd_tab);
+		//ft_printf("\n\n");
 		if	(is_pipeline(cmd_tab_node_sav))		
 			data->exit_status = pipex(cmd_tab, envp);	
 		else if (!command_is_builtin(*cmd_tab, data, envp))	

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:29:47 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 19:49:13 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/14 14:03:46 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 int		exec_cd(t_Data *data, char **command_tab)
 {
 	const char	*home;
-	data->exit_status = 1;
+	if (data)
+		data->exit_status = 1;
+// write(2, "IN EXC CD!\n", 13);
 	if (!command_tab[1])
 	{
 		home = getenv("HOME");
@@ -24,7 +26,8 @@ int		exec_cd(t_Data *data, char **command_tab)
 			return (ft_printf("HOME env var not found\n"));
 		if (chdir(home) != 0)
 			return (ft_printf("problem chdir"));
-		data->exit_status = 0;
+		if (data)
+			data->exit_status = 0;
 		return ;
 	}
 	if (command_tab[1] && command_tab[2])
@@ -32,6 +35,7 @@ int		exec_cd(t_Data *data, char **command_tab)
 	if (chdir(command_tab[1]) != 0)
 		return (ft_printf
 			("minishell: cd: %s: No such file or directory\n", command_tab[1]));
-	data->exit_status = 0;
+	if (data)
+		data->exit_status = 0;
 	return ;
 }
