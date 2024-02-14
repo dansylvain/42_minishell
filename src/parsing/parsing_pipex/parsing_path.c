@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/14 15:47:14 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/14 16:45:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "libft.h"
+#include "ft_printf.h"
 #include "parsing_build.h"
 
 void	display_error(char *str);
@@ -105,6 +106,7 @@ char	**search_path(char *argv[], char *envp[])
 	}	
 	if (!try_paths(argv, env_find))
 	{
+		//ft_printf("not exist:%s\n", *argv);
 		ft_putstr_fd("not_existing_command: command not found\n", 2);
 		
 		// perror(*argv);

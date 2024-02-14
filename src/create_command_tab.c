@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/14 13:22:14 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/14 16:46:46 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
 {
 	while (cmd_tab_node_sav)
 	{
-		if (cmd_tab_node_sav->token == PIPE)
+		if (cmd_tab_node_sav->token == PIPE || cmd_tab_node_sav->token == DCHEV_RGTH || cmd_tab_node_sav->token == SCHEV_RGTH)
 		{
 			 //ft_printf("ISPIPELINE\n");
 			return (1);
@@ -268,11 +268,11 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
 	}	
 	if (cmd_tab_node_sav)
 	{	
-		//print_rslt(cmd_tab_node_sav, 0);
+	//	print_rslt(cmd_tab_node_sav, 0);
 	//	ft_printf("\n\n");
 		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);	
-		//display_command_tab_big(cmd_tab);
-		//ft_printf("\n\n");
+	//	display_command_tab_big(cmd_tab);
+	//	ft_printf("\n\n");
 		if	(is_pipeline(cmd_tab_node_sav))		
 			data->exit_status = pipex(cmd_tab, envp);	
 		else if (!command_is_builtin(*cmd_tab, data, envp))	
