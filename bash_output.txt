@@ -1,22 +1,413 @@
-Commande: true || echo aaa && echo bbb
+Commande: /bin/ls
+allowed_functions.md
+bash_output.txt
+compare_bash_and_minishell.sh
+correct_output.txt
+diff_output.txt
+en.subject.pdf
+eval_minishell.pdf
+fie
+file1
+includes
+lib
+ls
+Makefile
+minishell
+minishell_output.txt
+minishell_tester
+not_existing
+notexisting
+output.txt
+README.md
+src
+test_commands.txt
+test_lucas
+tests.sh
+token
+to_test
+valgrind.supp
+wc
+
+Commande: 
+
+
+Commande: /bin/ls -a
+.
+..
+allowed_functions.md
+bash_output.txt
+compare_bash_and_minishell.sh
+correct_output.txt
+diff_output.txt
+en.subject.pdf
+eval_minishell.pdf
+fie
+file1
+.git
+.gitignore
+includes
+lib
+ls
+Makefile
+minishell
+minishell_output.txt
+minishell_tester
+not_existing
+notexisting
+output.txt
+README.md
+src
+test_commands.txt
+test_lucas
+tests.sh
+token
+to_test
+valgrind.supp
+.vscode
+wc
+
+Commande: echo bonjour
+bonjour
+
+Commande: echo
+
+
+Commande: echo -n bonjour
+bonjour
+
+Commande: ls -a | rev
+.
+..
+dm.snoitcnuf_dewolla
+txt.tuptuo_hsab
+hs.llehsinim_dna_hsab_erapmoc
+txt.tuptuo_tcerroc
+txt.tuptuo_ffid
+fdp.tcejbus.ne
+fdp.llehsinim_lave
+eif
+1elif
+tig.
+erongitig.
+sedulcni
+bil
+sl
+elifekaM
+llehsinim
+txt.tuptuo_llehsinim
+retset_llehsinim
+gnitsixe_ton
+gnitsixeton
+txt.tuptuo
+dm.EMDAER
+crs
+txt.sdnammoc_tset
+sacul_tset
+hs.stset
+nekot
+tset_ot
+ppus.dnirglav
+edocsv.
+cw
+
+Commande: exit 42
+
+
+Commande: echo 0
+0
+
+Commande: ls -a
+.
+..
+allowed_functions.md
+bash_output.txt
+compare_bash_and_minishell.sh
+correct_output.txt
+diff_output.txt
+en.subject.pdf
+eval_minishell.pdf
+fie
+file1
+.git
+.gitignore
+includes
+lib
+ls
+Makefile
+minishell
+minishell_output.txt
+minishell_tester
+not_existing
+notexisting
+output.txt
+README.md
+src
+test_commands.txt
+test_lucas
+tests.sh
+token
+to_test
+valgrind.supp
+.vscode
+wc
+
+Commande: echo 0
+0
+
+Commande: ls fichiernulachier
+ls: cannot access 'fichiernulachier': No such file or directory
+
+Commande: echo 0
+0
+
+Commande: echo 0 + 0
+0 + 0
+
+Commande: ls includes
+minishell.h
+parsing
+pipex_setup.h
+
+Commande: echo "cat lol.c | cat > lol.c"
+cat lol.c | cat > lol.c
+
+Commande: ls inclu"des"
+minishell.h
+parsing
+pipex_setup.h
+
+Commande: echo 'dan'
+dan
+
+Commande: cat includes/minishell.h
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
+/*   Updated: 2024/02/13 17:05:25 by dan              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <signal.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include "../lib/ft_printf/ft_printf.h"
+# include "../lib/libft/libft.h"
+// # include "../lib/get_next_line/get_next_line.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+
+typedef struct t_Data
+{
+	char	**envp_tab;
+	int		exit_status;
+}	t_Data;
+
+void	handle_signals(void);
+int		prompt_loop(t_Data *data, char *envp[]);
+void	display_error(char *str);
+void	free_data(t_Data *data);
+void	close_minishell(t_Data *data);
+void	exec_env(t_Data *data, char **command_tab);
+int		command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
+void	exec_pwd(t_Data *data);
+int		exec_cd(t_Data *data, char **command_tab);
+void	exec_echo(t_Data *data, char **command_tab);
+void	exec_unset(t_Data *data, char **command_tab);
+void	free_command_tab(char **command_tab);
+char	**duplicate_envp(t_Data *data, char *envp[]);
+int		exec_export(char **command_tab, t_Data *data);
+
+#endif
+
+Commande: cat <includes/minishell.h
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
+/*   Updated: 2024/02/13 17:05:25 by dan              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <signal.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include "../lib/ft_printf/ft_printf.h"
+# include "../lib/libft/libft.h"
+// # include "../lib/get_next_line/get_next_line.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+
+typedef struct t_Data
+{
+	char	**envp_tab;
+	int		exit_status;
+}	t_Data;
+
+void	handle_signals(void);
+int		prompt_loop(t_Data *data, char *envp[]);
+void	display_error(char *str);
+void	free_data(t_Data *data);
+void	close_minishell(t_Data *data);
+void	exec_env(t_Data *data, char **command_tab);
+int		command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
+void	exec_pwd(t_Data *data);
+int		exec_cd(t_Data *data, char **command_tab);
+void	exec_echo(t_Data *data, char **command_tab);
+void	exec_unset(t_Data *data, char **command_tab);
+void	free_command_tab(char **command_tab);
+char	**duplicate_envp(t_Data *data, char *envp[]);
+int		exec_export(char **command_tab, t_Data *data);
+
+#endif
+
+Commande: echo papa >> file1
+
+
+Commande: echo maman >> file1
+
+
+Commande: cat file1
+papa
+papa
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+
+Commande: cat file1 | grep papa | more
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+
+Commande: ls fichiernul | grep bla | more
+ls: cannot access 'fichiernul': No such file or directory
+
+Commande: echo aaa && echo bbb || echo ccc
+aaa
 bbb
 
-Commande: true || (echo aaa && echo bbb)
+Commande: echo aaa || echo bbb || echo ccc
+aaa
+
+Commande: false && echo bbb || echo ccc
+ccc
+
+Commande: false || echo bbb || echo ccc
+bbb
+
+Commande: false && echo bbb && echo ccc
 
 
-Commande: true || (echo aaa && echo bbb
-./compare_bash_and_minishell.sh: eval: line 150: syntax error: unexpected end of file
-
-Commande: true || echo aaa && echo bbb)
-./compare_bash_and_minishell.sh: eval: line 149: syntax error near unexpected token `)'
-./compare_bash_and_minishell.sh: eval: line 149: `true || echo aaa && echo bbb)'
-
-Commande: true || (echo a && echo b) && echo c
-c
-
-Commande: true || (echo a) && echo b
-b
-
-Commande: true || ((echo a && echo b) && echo c)
-
+Commande: echo /bin/bash
+/bin/bash
 
