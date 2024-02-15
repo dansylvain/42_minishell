@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 07:42:44 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/15 08:44:07 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/15 12:24:13 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,11 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 		{			
 			if (sib->token == IN_DQUTE || sib->token == RAW)
 			{
-				if (*(actual - 1) != '\\' && *actual == '$' && actual + 1 <= sib->end && *(actual + 1) != ' ')
+				if (*(actual - 1) != '\\' && *actual == '$' && actual + 1 <= sib->end)// && *(actual + 1) != ' ')
 				{
 					token_nde = create_node(DOLL);
 					token_nde->start = actual;					
-					while (actual <= sib->end && *actual != ' ')					
+					while (actual <= sib->end)// && *actual != ' ')					
 						token_nde->end = actual++;										
 					return (token_nde);
 				}
@@ -144,12 +144,12 @@ int	set_dollar(t_ast_nde *node)
 		raw_rght = raw_lft->sibling;	
 		token->child = raw_lft;
 		fill_child(sib, raw_lft->child, raw_rght->child, token);
-		if (raw_lft->child)			
-			set_space(raw_lft);
+		// if (raw_lft->child)			
+		// 	set_space(raw_lft);
 		if (raw_rght->child)
 			set_dollar(raw_rght);	
 		return (1);
 	}
-	set_space(node);
+	//set_space(node);
 	return (0);
 }

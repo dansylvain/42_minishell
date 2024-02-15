@@ -16,6 +16,7 @@
 t_ast_nde	*copy_node(t_ast_nde *node);
 void	print_raw_rght(t_ast_nde *raw_rght);
 t_ast_nde	*set_chevron(t_ast_nde *node);
+t_ast_nde	*set_dollar(t_ast_nde *node);
 static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
 {
 	t_ast_nde	*raw_lft_child_sav;
@@ -126,15 +127,11 @@ int	set_space(t_ast_nde *node)
 		token->child = raw_lft;
 		fill_child(sib, raw_lft->child, raw_rght->child, token);
 		if (raw_lft->child)
-			set_chevron(raw_lft);
-		if (raw_rght->child)
-		{
+			set_dollar(raw_lft);
+		if (raw_rght->child)		
 			set_space(raw_rght);
-		 	// if(!set_space(raw_rght))		
-			// 	set_chevron(raw_rght);
-		}
 		return (1);
 	}
-	// set_chevron(node);		
+	set_dollar(node);		
 	return (0);
 }

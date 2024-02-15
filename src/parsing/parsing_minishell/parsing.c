@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/15 10:22:45 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/15 13:36:20 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void		print_qute_sib(t_ast_nde *sib);
 void		print_sib(t_ast_nde *sib);
 t_ast_nde	*set_operator(t_ast_nde *node);
 void	print_tree(t_ast_nde *node);
-t_ast_nde	*set_space(t_ast_nde *node);
-
+//t_ast_nde	*set_space(t_ast_nde *node);
+int	set_dollar(t_ast_nde *node);
 void print_rslt(t_ast_nde *rslt, int flag);
 // static void	leaf_tree(t_ast_nde *root, t_ast_nde **cmd, t_ast_nde **cmd_sav)
 // {
@@ -53,15 +53,17 @@ char* get_var(t_ast_nde *node)
 {	
 	char	*str;
 
-	str = node->start + 1;	
+	//str = node->start;	
+	str = ft_strndup(node->start, node->end - node->start + 1);
+	str++;
 	str[node->end - node->start] = 0;
-	//ft_printf("year: %s\n", str);
+	ft_printf("year: %s\n", str);
 	if (!ft_strcmp(str, "var"))
 	{
-		//ft_printf("is var: %c\n", *(node->start + 1));
+		ft_printf("is var: %c\n", *(node->start + 1));
 		return "test";
 	}
-	//ft_printf("is no var: %c\n", *(node->start + 1));
+	ft_printf("is no var: %c\n", *(node->start + 1));
 	return NULL;	
 }
 
@@ -88,16 +90,24 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 	}
 	if (operator && operator->token != SPCE)
 	{ 
+		if (operator && operator->token == DOLL)
+		{
+			
+			ft_printf("printresult:\n");
+			print_rslt(operator, 0);
+			ft_printf("fint:\n");
+		}
 		if (operator->token == DOLL && get_var(operator))
 		{
+		;
 			expand = get_var(operator);
 			operator->start = expand;
-			operator->end = expand + ft_strlen(expand) - 1;
+			operator->end = expand + ft_strlen(expand) - 1;		
 			//exit(1);
 		}
-		if (expand || !expand && operator->token != DOLL)
+		if (expand || operator->token != DOLL)
 		{			
-			operator->child = copy_node(operator);	
+			operator->child = copy_node(operator);
 			add_sibling(operator, rslt, rslt_sav);		
 		}
 	}
@@ -367,7 +377,7 @@ static t_ast_nde	*create_ast(char *str)
 	// }
 	// ft_printf("\n\n");
 	
-	cmd_sav = format_io(cmd_sav);
+	//cmd_sav = format_io(cmd_sav);
 	//print_rslt(cmd_sav, 1);
 	//ft_printf("\n\n");
 	// t_ast_nde	*cmd_sav3 = cmd_sav;
@@ -382,7 +392,7 @@ static t_ast_nde	*create_ast(char *str)
 	// }
 	// ft_printf("\n\n");
 	
-	cmd_sav = format_io2(cmd_sav);
+	//cmd_sav = format_io2(cmd_sav);
 	print_rslt(cmd_sav, 1);
 	ft_printf("\n\n");
 	t_ast_nde	*cmd_sav4 = cmd_sav;

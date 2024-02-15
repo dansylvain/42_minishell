@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/15 07:52:37 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/15 11:50:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 #include<stdio.h>
 t_ast_nde	*copy_node(t_ast_nde *node);
 void	print_raw_rght(t_ast_nde *raw_rght);
-//int	set_space(t_ast_nde *node);
+int	set_space(t_ast_nde *node);
 //t_ast_nde	*copy_node_child(t_ast_nde *node);
-int	set_dollar(t_ast_nde *node);
+//int	set_dollar(t_ast_nde *node);
 static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
 {
 	t_ast_nde	*raw_lft_child_sav;
@@ -178,11 +178,11 @@ int	set_operator(t_ast_nde *node)
 		token->child = raw_lft;
 		fill_child(sib, raw_lft->child, raw_rght->child, token);
 		if (raw_lft->child)			
-			set_dollar(raw_lft);
+			set_space(raw_lft);
 		if (raw_rght->child)
 			set_operator(raw_rght);			
 		return (1);
 	}
-	set_dollar(node);
+	set_space(node);
 	return (0);
 }
