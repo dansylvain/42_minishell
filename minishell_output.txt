@@ -69,10 +69,13 @@ wc
 Commande: echo bonjour
 bonjour
 
+Commande: echo     	
+
+
 Commande: echo
 
 
-Commande: echo -n bonjour
+Commande: echo -n au revoir
 
 
 Commande: ls -a | rev
@@ -354,8 +357,26 @@ papa
 papa
 maman
 maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
 
 Commande: cat file1 | grep papa | more
+papa
+papa
+papa
+papa
+papa
+papa
 papa
 papa
 papa

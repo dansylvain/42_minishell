@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:29:47 by dan               #+#    #+#             */
-/*   Updated: 2024/02/14 14:03:46 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/15 20:10:37 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		exec_cd(t_Data *data, char **command_tab)
 			return (ft_printf("problem chdir"));
 		if (data)
 			data->exit_status = 0;
-		return ;
+		return (0);
 	}
 	if (command_tab[1] && command_tab[2])
 		return (ft_printf("minishell: cd: too many arguments\n"));
@@ -37,5 +37,5 @@ int		exec_cd(t_Data *data, char **command_tab)
 			("minishell: cd: %s: No such file or directory\n", command_tab[1]));
 	if (data)
 		data->exit_status = 0;
-	return ;
+	return (0);
 }
