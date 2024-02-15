@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/15 17:02:11 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/15 19:13:18 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ int	exec_export(char **command_tab, t_Data *data)
 		{
 			ft_strlcpy(env_var, &(command_tab[i][j + 1]), ft_strlen(&(command_tab[i][j])));
 		}
-		else
+		else if (ft_strncmp(command_tab[i], "_=", 2))
 			data->envp_tab = create_new_env_var(data->envp_tab, command_tab[i]);
 		i++;
 	}
