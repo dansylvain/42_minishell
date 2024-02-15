@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/14 16:45:21 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/15 15:12:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*try_paths(char **argv, char *env_find)
 	return (cmd);
 }
 
-static char	*search_env_var(char *envp[], char *env_to_find)
+char	*search_env_var(char *envp[], char *env_to_find)
 {
 	char	*env_find;
 
