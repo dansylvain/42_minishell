@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/14 16:45:47 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/15 16:44:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "parsing_spce.h"
 #include "parsing_qute.h"
 #include "ft_printf.h"
+#include "minishell.h"
 
 t_ast_nde	*copy_node(t_ast_nde *node);
 t_ast_nde	*copy_node_child(t_ast_nde *node);
@@ -27,9 +28,10 @@ void		print_qute_sib(t_ast_nde *sib);
 void		print_sib(t_ast_nde *sib);
 t_ast_nde	*set_operator(t_ast_nde *node);
 void	print_tree(t_ast_nde *node);
-t_ast_nde	*set_space(t_ast_nde *node);
-
+//t_ast_nde	*set_space(t_ast_nde *node);
+int	set_dollar(t_ast_nde *node);
 void print_rslt(t_ast_nde *rslt, int flag);
+char	*search_env_var(char *envp[], char *env_to_find);
 // static void	leaf_tree(t_ast_nde *root, t_ast_nde **cmd, t_ast_nde **cmd_sav)
 // {
 // 	t_ast_nde	*head;
@@ -49,15 +51,49 @@ void print_rslt(t_ast_nde *rslt, int flag);
 // 	}	
 // }
 
+char* get_var(t_ast_nde *node, t_Data *data)
+{	
+	char	*str;
+	char	*var;
+	//str = node->start;
+	var = NULL;
+	str = ft_strndup(node->start, node->end - node->start + 1);
+	str++;
+	str[node->end - node->start] = 0;
+	//ft_printf("print expand -%s-\n", str);
+	if (*str == '?')
+		var = ft_itoa(data->exit_status);
+	else
+		var = search_env_var(data->envp_tab, ft_strjoin(str, "="));
+	
+	//ft_printf("year: %s\n", str);
+	//if (!ft_strcmp(str, var))
+	if (var)
+	{
+	//	ft_printf("is var: %c\n", *(node->start + 1));
+		return (var);
+	}
+	//ft_printf("is no var: %c\n", *(node->start + 1));
+	return NULL;	
+}
 
-static void	leaf_tree(t_ast_nde *node, t_ast_nde **rslt, t_ast_nde **rslt_sav)
+t_ast_nde	*build_dollar_node(t_ast_nde *node)
 {
-	t_ast_nde	*operator;
+	t_ast_nde *new_node;
+	
+	new_node = create_node(RAW);
+	new_node->start = node->start;
+	
+}
+
+static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data)
+{	
 	t_ast_nde	*next_operator;
 	t_ast_nde	*raw_lft;
-	t_ast_nde	*raw_rght;
+	t_ast_nde	*raw_rght;	
+	char		*expand;
 	
-	operator = node;
+	expand = NULL;
 	raw_lft = NULL;
 	raw_rght = NULL;
 	if (operator)
@@ -65,41 +101,51 @@ static void	leaf_tree(t_ast_nde *node, t_ast_nde **rslt, t_ast_nde **rslt_sav)
 	if (raw_lft)
 	 	raw_rght = raw_lft->sibling;
 	if (raw_lft && raw_lft->child)
-	{
-		// if (raw_lft->child->sibling && raw_lft->child->sibling->child && ((raw_lft->child->sibling->child->child)
-		// 	|| (raw_lft->child->sibling->child->sibling && raw_lft->child->sibling->child->sibling->child)))				
+	{	
+		// if (raw_lft->child->sibling && raw_lft->child->sibling->token == DOLL)
+		// {
+		// 	build_dollar_node(raw_lft->child->sibling);
+		// }		
 		if (raw_lft->child->sibling)
-			leaf_tree(raw_lft->child->sibling, rslt, rslt_sav);		
+			leaf_tree(raw_lft->child->sibling, rslt, rslt_sav, data);		
 		else				
 			add_sibling(raw_lft->child, rslt, rslt_sav);		
 	}
 	if (operator && operator->token != SPCE)
-	{
-		operator->child = copy_node(operator);	
-		add_sibling(operator, rslt, rslt_sav);		
+	{ 
+		if (operator && operator->token == DOLL)
+		{
+			
+			//ft_printf("printresult:\n");
+		//	print_rslt(operator, 0);
+			//ft_printf("fint:\n");
+		}
+		if (operator->token == DOLL && get_var(operator, data))
+		{
+		;
+			expand = get_var(operator, data);
+			//ft_printf("print expand -%s-\n", expand);
+			operator->start = expand;
+			operator->end = expand + ft_strlen(expand) - 1;		
+			//exit(1);
+		}
+		if (expand || operator->token != DOLL)
+		{			
+			operator->child = copy_node(operator);
+			add_sibling(operator, rslt, rslt_sav);		
+		}
 	}
 	next_operator = NULL;
 	if (raw_rght && raw_rght->child)
 		next_operator = raw_rght->child->sibling;
-	// else if (raw_lft && raw_lft->child)
-	// 	next_operator = raw_lft->child->sibling;
 	if (next_operator)
-		leaf_tree(next_operator, rslt, rslt_sav);
-	else if (raw_rght && raw_rght->child)
-	{
-		if (raw_rght->child->sibling)
-		{
-			leaf_tree(raw_rght->child->sibling, rslt, rslt_sav);
-			//add_sibling(operator, rslt, rslt_sav);
-		}	
-		else
-		{
-			//add_sibling(operator, rslt, rslt_sav);
-			add_sibling(raw_rght->child, rslt, rslt_sav);	
-		}
-	}
+		leaf_tree(next_operator, rslt, rslt_sav, data);
+	else if (raw_rght && raw_rght->child)	
+		add_sibling(raw_rght->child, rslt, rslt_sav);		
 }
-
+// if (raw_rght->child->sibling)
+// 	leaf_tree(raw_rght->child->sibling, rslt, rslt_sav);
+// else
 
 t_ast_nde	*ft_lstlast_sib(t_ast_nde *lst)
 {
@@ -299,7 +345,7 @@ t_ast_nde	*format_io2(t_ast_nde* cmd)
 
 void	print_raw_rght(t_ast_nde *raw_rght);
 void	print_space_tree(t_ast_nde *node);
-static t_ast_nde	*create_ast(char *str)
+static t_ast_nde	*create_ast(char *str, t_Data *data)
 {
 	t_ast_nde	*ast_res;
 	t_ast_nde	*qute_sib;
@@ -335,7 +381,7 @@ static t_ast_nde	*create_ast(char *str)
 	// 	print_space_tree(root->child);
 //	ft_printf("end\n\n");//exit(1);
 	//set_chevron();
-	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav);
+	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav, data);
 	// print_rslt(cmd_sav, 1);
 	//ft_printf("\n\n");
 	// cmd_sav = format_io(cmd_sav);
@@ -379,7 +425,7 @@ static t_ast_nde	*create_ast(char *str)
 	// 	//if(cmd_sav4->token == RAW || cmd_sav4->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
 	// 	//{			
 	// 		print_rslt(cmd_sav4->child, 0);
-	// 		ft_printf(" ");
+	// 		ft_printf("z");
 	// 	//}
 	// 	cmd_sav4 = cmd_sav4->sibling;
 	// }
@@ -392,16 +438,16 @@ static t_ast_nde	*create_ast(char *str)
 	return (ast_res);
 }
 
-t_ast_nde	*parse(char *str)
+t_ast_nde	*parse(char *str, t_Data *data)
 {
 	if (!*str)
 		return (NULL);
-	return (create_ast(str));	
+	return (create_ast(str, data));	
 }
-int	tmp_main(void)
-{	
-	char *str = " |cat <file1|\"rev\"|ca't'e |grep -n \" cmd1 | cmd2\"| >file2 cut -d':' -f1 ";
-	ft_printf("\n%s\n", str);
-	parse(str);
-	return(0);
-}
+// int	tmp_main(void)
+// {	
+// 	char *str = " |cat <file1|\"rev\"|ca't'e |grep -n \" cmd1 | cmd2\"| >file2 cut -d':' -f1 ";
+// 	ft_printf("\n%s\n", str);
+// 	parse(str, data);
+// 	return(0);
+// }

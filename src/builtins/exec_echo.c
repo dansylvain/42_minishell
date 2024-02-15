@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:43:09 by dan               #+#    #+#             */
-/*   Updated: 2024/02/14 13:40:15 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/15 14:03:53 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exec_echo(t_Data *data, char **command_tab)
 	{
 		ft_printf("%s", command_tab[i++]);
 		if (command_tab[i])
-			ft_printf(" ");
+			ft_printf("g");
 	}
 	if (j == 1)
 		ft_printf("\n");

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/12 16:18:13 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/15 11:50:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_ast_nde	*copy_node(t_ast_nde *node);
 void	print_raw_rght(t_ast_nde *raw_rght);
 int	set_space(t_ast_nde *node);
 //t_ast_nde	*copy_node_child(t_ast_nde *node);
-
+//int	set_dollar(t_ast_nde *node);
 static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
 {
 	t_ast_nde	*raw_lft_child_sav;
@@ -142,16 +142,16 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 					return (token_nde);
 				}
 			}
-			if (sib->token == IN_DQUTE || sib->token == RAW)
-			{
-				if (*(actual - 1) != '\\' && *actual == '$')
-				{
-					token_nde = create_node(DOLL);
-					token_nde->start = actual;
-					token_nde->end = actual;								
-					return (token_nde);
-				}
-			}
+			// if (sib->token == IN_DQUTE || sib->token == RAW)
+			// {
+			// 	if (*(actual - 1) != '\\' && *actual == '$')
+			// 	{
+			// 		token_nde = create_node(DOLL);
+			// 		token_nde->start = actual;
+			// 		token_nde->end = actual;								
+			// 		return (token_nde);
+			// 	}
+			// }
 			actual++;
 		}
 		sib = sib->sibling;
@@ -180,9 +180,7 @@ int	set_operator(t_ast_nde *node)
 		if (raw_lft->child)			
 			set_space(raw_lft);
 		if (raw_rght->child)
-			set_operator(raw_rght);
-			//if(!set_operator(raw_rght))
-				//set_space(raw_rght);
+			set_operator(raw_rght);			
 		return (1);
 	}
 	set_space(node);

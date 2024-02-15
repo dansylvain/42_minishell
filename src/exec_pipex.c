@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/02/14 08:18:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/15 15:19:49 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@ char		**parse_cmd(char **command, char **env);
 void		tmp_main(void);
 void		display_command_tab(char **command_tab);
 int			pipex(char **argv[], char *envp[]);
-t_ast_nde	*parse(char *str);
+t_ast_nde	*parse(char *str, t_Data *data);
 char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
 void	display_command_tab_big(char ***command_tab);
 void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag);
 
-void	exec_pipex2(t_Data *data, char *cmd, char *envp[])
-{
-	char	***cmd_tab;
-	int exit_status;
+// void	exec_pipex2(t_Data *data, char *cmd, char *envp[])
+// {
+// 	char	***cmd_tab;
+// 	int exit_status;
 
-	cmd_tab = create_command_tab(data, parse(cmd), envp);
-	display_command_tab_big(cmd_tab);
-	exit_status = pipex(cmd_tab, envp);
-}
+// 	cmd_tab = create_command_tab(data, parse(cmd), envp);
+// 	display_command_tab_big(cmd_tab);
+// 	exit_status = pipex(cmd_tab, envp);
+// }
 
 void	exec_pipex(t_Data *data, char *cmd, char *envp[])
 {
@@ -40,7 +40,7 @@ void	exec_pipex(t_Data *data, char *cmd, char *envp[])
 	//cmd_tab = 
 	t_ast_nde *cmd_list;
 
-	cmd_list = parse(cmd);	
+	cmd_list = parse(cmd, data);	
 	//data->exit_status = 0;
 	launch_command_tab(data, cmd_list, envp, 0);
 //	exit(1);
