@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/15 15:38:30 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/15 16:59:24 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,34 @@ char *get_env_var(t_Data *data, char *to_find)
 	return (env_var);
 }
 
+char	**create_new_env_var(char **envp, char *env_var)
+{
+	char **new_envp_tab;
+	int		i;
+
+	i = 0;
+	while (envp[i])
+		i++;
+	new_envp_tab = (char **)ft_calloc(i + 2, sizeof(char *));
+	if (new_envp_tab == NULL)
+		return (NULL);
+	i = 0;
+	while (envp[i])
+	{
+		new_envp_tab[i] = (char *)ft_calloc((ft_strlen(envp[i]) + 1), sizeof(char));
+		if (new_envp_tab[i] == NULL)
+			return (NULL);
+		ft_strlcpy(new_envp_tab[i], envp[i], ft_strlen(envp[i]) + 1);
+		i++;
+	}
+	new_envp_tab[i] = (char *)ft_calloc((ft_strlen(env_var) + 1), sizeof(char));
+	if (new_envp_tab[i] == NULL)
+		return (NULL);
+	ft_strlcpy(new_envp_tab[i], env_var, ft_strlen(env_var) + 1);
+	free_command_tab(envp);
+	return (new_envp_tab);
+}
+
 int	exec_export(char **command_tab, t_Data *data)
 {
 	char export_tab[100][500];
@@ -124,6 +152,7 @@ int	exec_export(char **command_tab, t_Data *data)
 	i = 1;
 	while (command_tab[i])
 	{
+		
 		ft_bzero(var, 500);
 		j = 0;
 		while (command_tab[i][j] && command_tab[i][j] != '=')
@@ -131,15 +160,13 @@ int	exec_export(char **command_tab, t_Data *data)
 			var[j] = command_tab[i][j];
 			j++;
 		}
-		ft_printf("var: %s\n", var);
 		env_var = get_env_var(data, var); 
-		if (env_var)
+		if (env_var && ft_strncmp(command_tab[i], "_=", 2))
 		{
 			ft_strlcpy(env_var, &(command_tab[i][j + 1]), ft_strlen(&(command_tab[i][j])));
 		}
 		else
-			ft_printf("VAR NOT FOUND\n");
-		
+			data->envp_tab = create_new_env_var(data->envp_tab, command_tab[i]);
 		i++;
 	}
 		

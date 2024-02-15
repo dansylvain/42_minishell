@@ -179,7 +179,6 @@
 	char	**envp_tab;
 	int		i;
 
-	// ft_printf("CREATE ENVP!\n");
 	i = 0;
 	while (envp[i])
 		i++;
