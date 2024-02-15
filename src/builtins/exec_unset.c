@@ -6,14 +6,19 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:09:58 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 17:50:21 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/15 12:25:40 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdlib.h>
-void	unset_var(char *envp[], int i)
+void	unset_var(char **envp, int index)
 {
+	int i;
+
+	if (!ft_strncmp(envp[index], "_=", 2))
+		return ;
+	i = index;
 	while (envp[i])
 	{
 		envp[i] = envp[i + 1];
@@ -26,20 +31,19 @@ void	exec_unset(t_Data *data, char **command_tab)
 {
 	int	i;
 	int	j;
-// write(2, "IN EXC unset!\n", 13);
-	i = 0;
-	while (data->envp_tab[i])
+	int len;
+	char *var;
+	
+	i = 1;
+	while (command_tab[i])
 	{
-		j = 1;
-		while (command_tab[j] && ft_strncmp(data->envp_tab[i], "_=", 2))
+		len = ft_strlen(command_tab[i]);
+		j = 0;
+		while (data->envp_tab[j])
 		{
-			if ((!ft_strncmp(command_tab[j], data->envp_tab[i], ft_strlen
-						(command_tab[j]))) && data->envp_tab[i][ft_strlen
-				(command_tab[j])] == '=')
-			{
-				unset_var(data->envp_tab, i);
-				exec_unset(data, command_tab);
-			}
+			var = data->envp_tab[j];
+			if (!ft_strncmp(var, command_tab[i], len) && var[len] == '=')
+				unset_var(data->envp_tab, j);
 			j++;
 		}
 		i++;

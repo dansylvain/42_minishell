@@ -152,6 +152,25 @@
 	return (0);
 	}
 
+	char	**update_shlvl(char	**envp_tab)
+	{
+		int	i;
+		int shlvl;
+		char *new_shlvl;
+
+		i = 0;
+		while (envp_tab[i])
+		{
+			if (!ft_strncmp(envp_tab[i], "SHLVL=", 6))
+			{
+				shlvl = ft_atoi(&(envp_tab[i][6]));
+				shlvl++;
+				new_shlvl = ft_itoa(shlvl);
+				ft_strlcpy(&envp_tab[i][6], new_shlvl, ft_strlen (new_shlvl) + 1);
+			}
+			i++;
+		}
+	}
 	/**========================================================================
 	 *                           duplicate_envp
 	 *========================================================================**/
@@ -160,7 +179,6 @@
 	char	**envp_tab;
 	int		i;
 
-	// ft_printf("CREATE ENVP!\n");
 	i = 0;
 	while (envp[i])
 		i++;
@@ -177,5 +195,6 @@
 		i++;
 	}
 	envp_tab[i] = NULL;
+	update_shlvl(envp_tab);
 	return (envp_tab);
 	}
