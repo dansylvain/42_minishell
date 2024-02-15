@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/15 13:36:20 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/15 14:20:06 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ char* get_var(t_ast_nde *node)
 	str = ft_strndup(node->start, node->end - node->start + 1);
 	str++;
 	str[node->end - node->start] = 0;
-	ft_printf("year: %s\n", str);
+	//ft_printf("year: %s\n", str);
 	if (!ft_strcmp(str, "var"))
 	{
-		ft_printf("is var: %c\n", *(node->start + 1));
+	//	ft_printf("is var: %c\n", *(node->start + 1));
 		return "test";
 	}
-	ft_printf("is no var: %c\n", *(node->start + 1));
+	//ft_printf("is no var: %c\n", *(node->start + 1));
 	return NULL;	
 }
 
@@ -93,14 +93,15 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 		if (operator && operator->token == DOLL)
 		{
 			
-			ft_printf("printresult:\n");
-			print_rslt(operator, 0);
-			ft_printf("fint:\n");
+			//ft_printf("printresult:\n");
+		//	print_rslt(operator, 0);
+			//ft_printf("fint:\n");
 		}
 		if (operator->token == DOLL && get_var(operator))
 		{
 		;
 			expand = get_var(operator);
+			//ft_printf("print expand -%s-\n", expand);
 			operator->start = expand;
 			operator->end = expand + ft_strlen(expand) - 1;		
 			//exit(1);
@@ -401,7 +402,7 @@ static t_ast_nde	*create_ast(char *str)
 		//if(cmd_sav4->token == RAW || cmd_sav4->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
 		//{			
 			print_rslt(cmd_sav4->child, 0);
-			ft_printf(" ");
+			ft_printf("z");
 		//}
 		cmd_sav4 = cmd_sav4->sibling;
 	}
