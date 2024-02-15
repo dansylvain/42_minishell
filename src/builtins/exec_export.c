@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/15 16:59:24 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/15 17:02:11 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ char *get_env_var(t_Data *data, char *to_find)
 		var = data->envp_tab[j];
 		if (!ft_strncmp(var, to_find, len) && var[len] == '=')
 		{
-			ft_printf("var found: %s\n", &var[len + 1]);
 			env_var = &var[len + 1];
 			break;
 		}
