@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/15 15:40:27 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/15 16:44:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char* get_var(t_ast_nde *node, t_Data *data)
 	str = ft_strndup(node->start, node->end - node->start + 1);
 	str++;
 	str[node->end - node->start] = 0;
-	ft_printf("print expand -%s-\n", str);
+	//ft_printf("print expand -%s-\n", str);
 	if (*str == '?')
 		var = ft_itoa(data->exit_status);
 	else
@@ -401,7 +401,7 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	// }
 	// ft_printf("\n\n");
 	
-	//cmd_sav = format_io(cmd_sav);
+	cmd_sav = format_io(cmd_sav);
 	//print_rslt(cmd_sav, 1);
 	//ft_printf("\n\n");
 	// t_ast_nde	*cmd_sav3 = cmd_sav;
@@ -416,20 +416,20 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	// }
 	// ft_printf("\n\n");
 	
-	//cmd_sav = format_io2(cmd_sav);
-	print_rslt(cmd_sav, 1);
-	ft_printf("\n\n");
-	t_ast_nde	*cmd_sav4 = cmd_sav;
-	while (cmd_sav4)
-	{	
-		//if(cmd_sav4->token == RAW || cmd_sav4->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
-		//{			
-			print_rslt(cmd_sav4->child, 0);
-			ft_printf("z");
-		//}
-		cmd_sav4 = cmd_sav4->sibling;
-	}
-	ft_printf("\n\n");
+	cmd_sav = format_io2(cmd_sav);
+	// print_rslt(cmd_sav, 1);
+	// ft_printf("\n\n");
+	// t_ast_nde	*cmd_sav4 = cmd_sav;
+	// while (cmd_sav4)
+	// {	
+	// 	//if(cmd_sav4->token == RAW || cmd_sav4->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
+	// 	//{			
+	// 		print_rslt(cmd_sav4->child, 0);
+	// 		ft_printf("z");
+	// 	//}
+	// 	cmd_sav4 = cmd_sav4->sibling;
+	// }
+	// ft_printf("\n\n");
 
 	if (!cmd_sav)
 		ast_res = root->child->child;
