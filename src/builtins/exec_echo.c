@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:43:09 by dan               #+#    #+#             */
-/*   Updated: 2024/02/16 20:05:50 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/16 20:14:45 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,17 @@ void	exec_echo(t_Data *data, char **command_tab)
 {
 	int	i;
 	int	j;
- //write(2, "IN EXC ECHO!\n", 13);
+	
 	i = 1;
 	if (!command_tab[1])
+	{
+		ft_printf("\n");
 		return ;
+	}
 	if (!ft_strncmp(command_tab[1], "-n", 3))
 		i = 2;
 	j = i;
+	
 	while (command_tab[i])
 	{
 		ft_printf("%s", command_tab[i++]);

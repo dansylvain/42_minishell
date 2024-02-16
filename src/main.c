@@ -110,6 +110,21 @@
 	return (1);
 	}
 
+	int	is_only_space(char *str)
+	{
+		int i;
+
+		i = 0;
+		while (str[i])
+		{
+			if (!ft_isspace(str[i]))
+				return (0);
+			i++;
+		}
+		return (1);
+	}
+
+
 	/**========================================================================
 	 *                           command_is_builtin
 	 * exit builtin implemented without extern function
@@ -134,6 +149,8 @@
 	// ft_putstr_fd(*cmd_tab, 2);
 	// ft_putstr_fd("\n", 2);
 	//ft_printf("on est avant le test buitin, is %s\n", cmd_tab[0]);
+	if (is_only_space(cmd_tab[0]))
+		return (1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "echo", 5))
 		return (exec_echo(data, cmd_tab), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 5]), "unset", 6))
