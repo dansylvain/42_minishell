@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/16 17:31:16 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/16 23:04:19 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ char* get_var(t_ast_nde *node, t_Data *data)
 	if (*++str == '?')
 		var = ft_itoa(data->exit_status);
 	else
-		var = search_env_var(data->envp_tab, ft_strjoin(str, "="));
+		var = search_env_var(data->envp_tab, ft_strjoin(str, "="));	
 	return (var);
 	
 	//ft_printf("year: %s\n", str);
 	//if (!ft_strcmp(str, var))
 	//if (var)
 //	return NULL;	
-	
+
 	//	ft_printf("is var: %c\n", *(node->start + 1));
 	
 	//ft_printf("is no var: %c\n", *(node->start + 1));
@@ -79,34 +79,61 @@ char* get_var(t_ast_nde *node, t_Data *data)
 t_ast_nde *rebuild_dollar_str_node(char *str)
 {
 	t_ast_nde *str_node;
-	
-	str_node = create_node(RAW);
-	str_node->start = str;
-	str_node->end = str + ft_strlen(str) - 1;
-	str_node->child = copy_node(str_node);
+
+	str_node = NULL;
+	if (str)
+	{
+		str_node = create_node(RAW);
+		str_node->start = str;
+		str_node->end = str + ft_strlen(str) - 1;
+		str_node->child = copy_node(str_node);
+	}
 	return (str_node);
 }
+char	*link_sibling(t_ast_nde *node)
+{
+	char	*str;
+	
+	str = NULL;
+	if (node)
+		node = node->child;
+	while (node)
+	{		
+		str = ft_strjoin(str, ft_strndup(node->child->child->start, node->child->child->end - node->child->child->start + 1));
+		node = node->sibling;
+	}
+	return (str);
+}
 
-char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_ast_nde *data)
+char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 {	
 	char		*str_lft;
+	char		*str_rght;
 	char		*str_tok;
 	char		*str_join;
-		
-	if (!str && node->child && node->child->child)
-		str_lft = ft_strndup(node->child->child->start, node->child->child->end - node->child->child->start + 1);
-	else
-		str_lft = str;
+	
+	str_lft = NULL;
+	if (node->child && node->child->child)	
+		str_lft = link_sibling(node->child->child);
+	if (!str)
+		str = str_lft;
+	else if (str && str_lft)
+		str = ft_strjoin(str, str_lft);
 	str_tok = get_var(node, data);
-	if (str_lft && str_tok)
-		str_join = ft_strjoin(str_lft, str_tok);
+	if (str && str_tok)
+		str = ft_strjoin(str, str_tok);
 	else
-		str_join = str_tok;
-	if (node &&  node->child && node->child->sibling && node->child->sibling->child && node->child->sibling->child->sibling)
-		rebuild_dollar_str(node->child->sibling->child->sibling, str, data);
+		str = str_tok;				
+	if (str && node && node->child && node->child->sibling && node->child->sibling->child && node->child->sibling->child->sibling)	//operateur
+		str = rebuild_dollar_str(node->child->sibling->child->sibling, str, data);	
 	else if (node->child && node->child->sibling && node->child->sibling->child)
-		str_join = ft_strjoin(str_join, node->child->sibling->child);
-	return (str_join)	
+	{
+		str_rght = link_sibling(node->child->sibling->child); 
+		if (str && str_rght)
+			str = ft_strjoin(str, str_rght);	
+	}
+	ft_printf("strjoin: %s\n", str);
+	return (str);
 }
 
 static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data)
@@ -122,25 +149,19 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 	if (operator)
 		raw_lft = operator->child;
 	if (raw_lft)
-	 	raw_rght = raw_lft->sibling;	
-	if (raw_lft && raw_lft->child)
+	 	raw_rght = raw_lft->sibling;
+	if (operator->token == DOLL)				
+		return (add_sibling(rebuild_dollar_str_node(rebuild_dollar_str(operator, NULL, data)), rslt, rslt_sav));
+	else if (raw_lft && raw_lft->child)
 	{	
-		if (operator == DOLL)				
-			add_sibling(rebuild_dollar_str_node(rebuild_dollar_str(operator, NULL, data)), rslt, rslt_sav);		
-		else if (raw_lft->child->sibling)
-			leaf_tree(raw_lft->child->sibling, rslt, rslt_sav, data);		
-		else				
-			add_sibling(raw_lft->child, rslt, rslt_sav);		
+		
+		if (raw_lft->child->sibling)
+			leaf_tree(raw_lft->child->sibling, rslt, rslt_sav, data);
+		else
+			add_sibling(raw_lft->child, rslt, rslt_sav);
 	}
 	if (operator && operator->token != SPCE)
-	{ 
-		if (operator && operator->token == DOLL)
-		{
-			
-			//ft_printf("printresult:\n");
-		//	print_rslt(operator, 0);
-			//ft_printf("fint:\n");
-		}
+	{ 		
 		if (operator->token == DOLL && get_var(operator, data))
 		{
 		
@@ -164,8 +185,11 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 		next_operator = raw_rght->child->sibling;
 	if (next_operator)
 		leaf_tree(next_operator, rslt, rslt_sav, data);
-	else if (raw_rght && raw_rght->child)	
+	else if (raw_rght && raw_rght->child)
+	{
+		
 		add_sibling(raw_rght->child, rslt, rslt_sav);		
+	}
 }
 // if (raw_rght->child->sibling)
 // 	leaf_tree(raw_rght->child->sibling, rslt, rslt_sav);
@@ -441,19 +465,22 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	// ft_printf("\n\n");
 	
 	cmd_sav = format_io2(cmd_sav);
-	// print_rslt(cmd_sav, 1);
-	// ft_printf("\n\n");
-	// t_ast_nde	*cmd_sav4 = cmd_sav;
-	// while (cmd_sav4)
-	// {	
-	// 	//if(cmd_sav4->token == RAW || cmd_sav4->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
-	// 	//{			
-	// 		print_rslt(cmd_sav4->child, 0);
-	// 		ft_printf("z");
-	// 	//}
-	// 	cmd_sav4 = cmd_sav4->sibling;
-	// }
-	// ft_printf("\n\n");
+	if(cmd_sav->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
+	{
+		print_rslt(cmd_sav, 1);
+		ft_printf("\n\n");
+	}
+	t_ast_nde	*cmd_sav4 = cmd_sav;
+	while (cmd_sav4)
+	{	
+		if( cmd_sav4->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
+		{			
+			print_rslt(cmd_sav4->child, 0);
+			ft_printf("z");
+		}
+		cmd_sav4 = cmd_sav4->sibling;
+	}
+	ft_printf("\n\n");
 
 	if (!cmd_sav)
 		ast_res = root->child->child;
