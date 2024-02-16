@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/15 16:44:59 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/16 17:31:16 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,34 +56,57 @@ char* get_var(t_ast_nde *node, t_Data *data)
 	char	*str;
 	char	*var;
 	//str = node->start;
-	var = NULL;
+	
 	str = ft_strndup(node->start, node->end - node->start + 1);
-	str++;
-	str[node->end - node->start] = 0;
+	//str++;
+	//str[node->end - node->start] = 0; //!!!!!!
 	//ft_printf("print expand -%s-\n", str);
-	if (*str == '?')
+	if (*++str == '?')
 		var = ft_itoa(data->exit_status);
 	else
 		var = search_env_var(data->envp_tab, ft_strjoin(str, "="));
+	return (var);
 	
 	//ft_printf("year: %s\n", str);
 	//if (!ft_strcmp(str, var))
-	if (var)
-	{
+	//if (var)
+//	return NULL;	
+	
 	//	ft_printf("is var: %c\n", *(node->start + 1));
-		return (var);
-	}
+	
 	//ft_printf("is no var: %c\n", *(node->start + 1));
-	return NULL;	
+}
+t_ast_nde *rebuild_dollar_str_node(char *str)
+{
+	t_ast_nde *str_node;
+	
+	str_node = create_node(RAW);
+	str_node->start = str;
+	str_node->end = str + ft_strlen(str) - 1;
+	str_node->child = copy_node(str_node);
+	return (str_node);
 }
 
-t_ast_nde	*build_dollar_node(t_ast_nde *node)
-{
-	t_ast_nde *new_node;
-	
-	new_node = create_node(RAW);
-	new_node->start = node->start;
-	
+char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_ast_nde *data)
+{	
+	char		*str_lft;
+	char		*str_tok;
+	char		*str_join;
+		
+	if (!str && node->child && node->child->child)
+		str_lft = ft_strndup(node->child->child->start, node->child->child->end - node->child->child->start + 1);
+	else
+		str_lft = str;
+	str_tok = get_var(node, data);
+	if (str_lft && str_tok)
+		str_join = ft_strjoin(str_lft, str_tok);
+	else
+		str_join = str_tok;
+	if (node &&  node->child && node->child->sibling && node->child->sibling->child && node->child->sibling->child->sibling)
+		rebuild_dollar_str(node->child->sibling->child->sibling, str, data);
+	else if (node->child && node->child->sibling && node->child->sibling->child)
+		str_join = ft_strjoin(str_join, node->child->sibling->child);
+	return (str_join)	
 }
 
 static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data)
@@ -99,14 +122,12 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 	if (operator)
 		raw_lft = operator->child;
 	if (raw_lft)
-	 	raw_rght = raw_lft->sibling;
+	 	raw_rght = raw_lft->sibling;	
 	if (raw_lft && raw_lft->child)
 	{	
-		// if (raw_lft->child->sibling && raw_lft->child->sibling->token == DOLL)
-		// {
-		// 	build_dollar_node(raw_lft->child->sibling);
-		// }		
-		if (raw_lft->child->sibling)
+		if (operator == DOLL)				
+			add_sibling(rebuild_dollar_str_node(rebuild_dollar_str(operator, NULL, data)), rslt, rslt_sav);		
+		else if (raw_lft->child->sibling)
 			leaf_tree(raw_lft->child->sibling, rslt, rslt_sav, data);		
 		else				
 			add_sibling(raw_lft->child, rslt, rslt_sav);		
@@ -122,11 +143,14 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 		}
 		if (operator->token == DOLL && get_var(operator, data))
 		{
-		;
+		
 			expand = get_var(operator, data);
 			//ft_printf("print expand -%s-\n", expand);
-			operator->start = expand;
-			operator->end = expand + ft_strlen(expand) - 1;		
+			if (expand)
+			{					
+				operator->start = expand;
+				operator->end = expand + ft_strlen(expand) - 1;		
+			}
 			//exit(1);
 		}
 		if (expand || operator->token != DOLL)
