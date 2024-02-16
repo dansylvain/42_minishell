@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:41:31 by dan               #+#    #+#             */
-/*   Updated: 2024/02/03 14:46:40 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/16 17:52:36 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,19 @@ void	handle_signals(void)
 /**========================================================================
  *                           sigint_handler
  * replaces the content of reasline buffer + displays the prompt anew 
+ * waitpid used to check that no other instance of minishell is running
  *========================================================================**/
 static void	sigint_handler(int signum)
 {
+
 	(void)signum;
-	ft_printf("^C\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	if (waitpid(-1, NULL, WNOHANG) == -1)
+	{
+		ft_printf("^C\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
 /**========================================================================
