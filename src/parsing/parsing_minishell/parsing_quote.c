@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:36:13 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/15 14:24:05 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/16 22:46:17 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ t_ast_nde	*set_qute_sib(char *str)
 			add_sibling(raw_nde, &qute_sibling, &qute_sibling_sav);
 		}
 	}
+	//qute_sibling_sav = unquote_sibling(qute_sibling_sav);
 	return (qute_sibling_sav);
 }
