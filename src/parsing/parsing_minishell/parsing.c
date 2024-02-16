@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/16 23:04:19 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/16 23:29:05 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	char		*str_rght;
 	char		*str_tok;
 	char		*str_join;
-	
+	ft_printf("rebuild:\n");
 	str_lft = NULL;
 	if (node->child && node->child->child)	
 		str_lft = link_sibling(node->child->child);
@@ -123,11 +123,16 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	if (str && str_tok)
 		str = ft_strjoin(str, str_tok);
 	else
-		str = str_tok;				
-	if (str && node && node->child && node->child->sibling && node->child->sibling->child && node->child->sibling->child->sibling)	//operateur
-		str = rebuild_dollar_str(node->child->sibling->child->sibling, str, data);	
-	else if (node->child && node->child->sibling && node->child->sibling->child)
+		str = str_tok;	
+	ft_printf("rebuild2:\n");			
+	if (str && node && node->child && node->child->sibling && node->child->sibling->child && node->child->sibling->child->sibling)	//operateur		
 	{
+		ft_printf("rebuild3:\n");
+		str = rebuild_dollar_str(node->child->sibling->child->sibling, str, data);	
+
+	}
+	else if (node->child && node->child->sibling && node->child->sibling->child)
+	{ft_printf("rebuild4:\n");
 		str_rght = link_sibling(node->child->sibling->child); 
 		if (str && str_rght)
 			str = ft_strjoin(str, str_rght);	
@@ -162,23 +167,23 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 	}
 	if (operator && operator->token != SPCE)
 	{ 		
-		if (operator->token == DOLL && get_var(operator, data))
-		{
+		// if (operator->token == DOLL && get_var(operator, data))
+		// {
 		
-			expand = get_var(operator, data);
-			//ft_printf("print expand -%s-\n", expand);
-			if (expand)
-			{					
-				operator->start = expand;
-				operator->end = expand + ft_strlen(expand) - 1;		
-			}
-			//exit(1);
-		}
-		if (expand || operator->token != DOLL)
-		{			
+		// 	expand = get_var(operator, data);
+		// 	//ft_printf("print expand -%s-\n", expand);
+		// 	if (expand)
+		// 	{					
+		// 		operator->start = expand;
+		// 		operator->end = expand + ft_strlen(expand) - 1;		
+		// 	}
+		// 	//exit(1);
+		// }
+		// if (expand || operator->token != DOLL)
+		// {			
 			operator->child = copy_node(operator);
 			add_sibling(operator, rslt, rslt_sav);		
-		}
+		//}
 	}
 	next_operator = NULL;
 	if (raw_rght && raw_rght->child)
