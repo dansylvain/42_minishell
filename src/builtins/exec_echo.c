@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:43:09 by dan               #+#    #+#             */
-/*   Updated: 2024/02/15 17:01:32 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/16 20:05:50 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	exec_echo(t_Data *data, char **command_tab)
 	while (command_tab[i])
 	{
 		ft_printf("%s", command_tab[i++]);
-		if (command_tab[i])
+		if (command_tab[i] && command_tab[i][0])
 			ft_printf(" ");
 	}
 	if (j == 1)
