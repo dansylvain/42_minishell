@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/17 17:53:53 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/17 18:19:03 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ int	get_fdio(t_redir *redir)
 	if (*error_str)
 		return (ft_putstr_fd(error_str, STDERR_FILENO), free(error_str),
 			close_fd(redir->fd_file), 1);
+	return (0);
 }
 	

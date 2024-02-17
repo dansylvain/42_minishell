@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/17 17:56:34 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/17 18:19:32 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,7 @@ int	set_redir(char **argv, t_redir *redir)
 		if (get_fdio(redir))
 			return (1);
 	}
+	return (0);
 }
 int	set_io(char **argv[], t_redir *redir)
 {
@@ -256,6 +257,7 @@ int	set_io(char **argv[], t_redir *redir)
 			return (1);
 		argv++;
 	}
+	return (0);
 }
 
 int	pipex(char **argv[], char *envp[])
