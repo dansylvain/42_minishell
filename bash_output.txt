@@ -10,7 +10,6 @@ fie
 file1
 includes
 lib
-ls
 Makefile
 minishell
 minishell_output.txt
@@ -47,7 +46,6 @@ file1
 .gitignore
 includes
 lib
-ls
 Makefile
 minishell
 minishell_output.txt
@@ -94,7 +92,6 @@ tig.
 erongitig.
 sedulcni
 bil
-sl
 elifekaM
 llehsinim
 txt.tuptuo_llehsinim
@@ -135,7 +132,6 @@ file1
 .gitignore
 includes
 lib
-ls
 Makefile
 minishell
 minishell_output.txt
@@ -167,6 +163,7 @@ Commande: echo 0 + 0
 0 + 0
 
 Commande: ls includes
+ls
 minishell.h
 parsing
 pipex_setup.h
@@ -175,6 +172,7 @@ Commande: echo "cat lol.c | cat > lol.c"
 cat lol.c | cat > lol.c
 
 Commande: ls inclu"des"
+ls
 minishell.h
 parsing
 pipex_setup.h
@@ -369,8 +367,14 @@ papa
 papa
 maman
 maman
+papa
+papa
+maman
+maman
 
 Commande: cat file1 | grep papa | more
+papa
+papa
 papa
 papa
 papa
