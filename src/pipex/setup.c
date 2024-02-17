@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/05 10:48:57 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/17 18:19:03 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*get_fd_outfile(char *error_str, t_redir *redir)
 	return (error_str);
 }
 
-void	get_fdio(t_redir *redir)
+int	get_fdio(t_redir *redir)
 {
 	char	*error_str;
 	
@@ -85,6 +85,7 @@ void	get_fdio(t_redir *redir)
 	error_str = get_fd_outfile(error_str, redir);
 	if (*error_str)
 		return (ft_putstr_fd(error_str, STDERR_FILENO), free(error_str),
-			close_fd(redir->fd_file), exit(EXIT_FAILURE));
+			close_fd(redir->fd_file), 1);
+	return (0);
 }
 	
