@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:09:58 by dan               #+#    #+#             */
-/*   Updated: 2024/02/15 12:25:40 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/17 14:02:01 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	exec_unset(t_Data *data, char **command_tab)
 		while (data->envp_tab[j])
 		{
 			var = data->envp_tab[j];
-			if (!ft_strncmp(var, command_tab[i], len) && var[len] == '=')
+			if (!ft_strncmp(var, command_tab[i], len) && (var[len] == '=' || !var[len]))
 				unset_var(data->envp_tab, j);
 			j++;
 		}
