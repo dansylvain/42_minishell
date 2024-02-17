@@ -71,16 +71,16 @@
 		char *shortened_cwd = strstr(cwd, home);
 		if (shortened_cwd != NULL)
 		{
-			strcat(prompt, "\033[1;34m");
-			strcat(prompt, shortened_cwd + strlen(home));
-			strcat(prompt, "\033[0m");
+			ft_strcat(prompt, "\033[1;34m");
+			ft_strcat(prompt, shortened_cwd + strlen(home));
+			ft_strcat(prompt, "\033[0m");
 		}
 		else
-			strcat(prompt, cwd);
+			ft_strcat(prompt, cwd);
 	}
 	else
 		perror("getcwd");
-	strcat(prompt, "\033[1;36m $\033[0m ");
+	ft_strcat(prompt, "\033[1;36m $\033[0m ");
 	}
 
 

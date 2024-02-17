@@ -2,6 +2,7 @@
 	"files.associations": {
 		"minishell.h": "c",
 		"unistd.h": "c",
-		"parsing_spce.h": "c"
+		"parsing_spce.h": "c",
+		"stdlib.h": "c"
 	}
 }
