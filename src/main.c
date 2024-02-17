@@ -30,6 +30,7 @@
 	*? signal info in the main comment bloc
 	*? add your name at the beggining of a comment
 	*---
+	*! found free risponsible for invalid free error in file parsing_path.c
 	*TODO finish builtin export
 	*TODO fix memory leaks export
 	*TODO fix memory leaks unset
