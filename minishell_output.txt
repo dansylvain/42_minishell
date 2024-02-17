@@ -39,39 +39,114 @@ Commande: echo 0
 Commande: 
 
 
-Commande: /bin/ls -a
-.
-..
-allowed_functions.md
-bash_output.txt
-compare_bash_and_minishell.sh
-correct_output.txt
-diff_output.txt
-en.subject.pdf
-eval_minishell.pdf
-fie
-file1
-.git
-.gitignore
-includes
-lib
-Makefile
-minishell
-minishell_output.txt
-minishell_tester
-not_existing
-notexisting
-output.txt
-README.md
-src
-test_commands.txt
-test_lucas
-tests.sh
-token
-to_test
-valgrind.supp
-.vscode
-wc
+Commande: echo 0
+0
+
+Commande: /bin/ls -al
+total 2060
+drwxrwxrwx  9 dan dan    4096 févr. 17 17:19 .
+drwxrwxr-x 13 dan dan    4096 févr. 15 18:07 ..
+-rw-rw-r--  1 dan dan   50859 févr.  2 14:22 allowed_functions.md
+-rw-rw-r--  1 dan dan     454 févr. 17 17:19 bash_output.txt
+-rwxrwxr-x  1 dan dan    4125 févr. 17 12:43 compare_bash_and_minishell.sh
+-rw-rw-r--  1 dan dan   27775 févr.  3 18:49 correct_output.txt
+-rw-rw-r--  1 dan dan   59401 févr.  3 15:52 diff_output.txt
+-rw-rw-r--  1 dan dan 1568461 janv. 26 11:52 en.subject.pdf
+-rw-rw-r--  1 dan dan   90973 févr. 14 14:11 eval_minishell.pdf
+-rw-rw-r--  1 dan dan      20 févr. 17 10:29 fie
+-rw-rw-r--  1 dan dan      18 févr. 17 10:48 file
+-rw-rw-r--  1 dan dan    1572 févr. 17 17:19 file1
+-rw-rw-r--  1 dan dan       7 févr. 17 10:48 fille
+drwxrwxr-x  8 dan dan    4096 févr. 17 17:19 .git
+-rw-rw-r--  1 dan dan      17 janv. 26 14:59 .gitignore
+drwxrwxr-x  3 dan dan    4096 févr. 17 10:29 includes
+drwxrwxr-x  5 dan dan    4096 janv. 25 09:42 lib
+-rw-rw-r--  1 dan dan    3385 févr. 17 16:26 Makefile
+-rwxrwxr-x  1 dan dan  164840 févr. 17 17:11 minishell
+-rw-rw-r--  1 dan dan     454 févr. 17 17:19 minishell_output.txt
+drwxrwxr-x  2 dan dan    4096 févr. 14 13:34 minishell_tester
+-rw-rw-r--  1 dan dan       6 févr. 14 13:32 not_existing
+-rw-rw-r--  1 dan dan     414 févr. 14 18:46 notexisting
+-rw-rw-r--  1 dan dan      25 févr. 17 15:44 outfile
+-rw-rw-r--  1 dan dan       5 févr. 17 10:48 outfille
+-rw-rw-r--  1 dan dan       5 févr. 17 10:48 outfille2
+-rw-rw-r--  1 dan dan     126 févr. 14 14:07 output.txt
+-rw-rw-r--  1 dan dan     786 févr. 10 14:42 README.md
+drwxrwxr-x  5 dan dan    4096 févr. 17 17:19 src
+-rw-rw-r--  1 dan dan     217 févr.  7 16:59 test_commands.txt
+-rw-rw-r--  1 dan dan      38 févr. 17 12:43 testfile
+drwxrwxr-x  2 dan dan    4096 févr. 14 13:34 test_lucas
+-rwxrwxr-x  1 dan dan    2595 févr. 14 14:07 tests.sh
+-rw-rw-r--  1 dan dan       0 févr. 15 17:03 token
+-rw-rw-r--  1 dan dan    2866 févr. 14 13:32 to_test
+-rw-rw-r--  1 dan dan      70 févr.  2 14:22 valgrind.supp
+drwxrwxr-x  2 dan dan    4096 févr. 17 17:19 .vscode
+-rw-rw-r--  1 dan dan     414 févr. 14 18:46 wc
+
+Commande: echo 0
+0
+
+Commande: grep -i 'return' src/main.c
+		return (display_error("Error\n"), 255);
+		return (display_error("Error\n"), free_data(data), 255);
+		return (free_data(data), display_error("Usage: ./minishell\n"), 255);
+		return (free_data(data), 0);
+	return (0);
+			return (ft_printf("exit\n"), 0);
+	return (1);
+				return (0);
+		return (1);
+	 * 0 is returned, and the data struct is freed in calling function
+	int		return_pipex;
+		return (1);
+		return (free_command_tab(cmd_tab), 1);
+		return (1);
+		return (exec_echo(data, cmd_tab), 1);
+		return (exec_unset(data, cmd_tab), 1);
+		return (exec_export(cmd_tab, data), 1);
+		return (exec_env(data, cmd_tab), 1);
+		return(exec_pwd(data), 1);
+		return (exec_cd(data, cmd_tab), 1);
+	return (0);
+		return (NULL);
+			return (NULL);
+	return (envp_tab);
+
+Commande: echo 0
+0
+
+Commande: /usr/bin/cat testfile
+test
+motif olala
+motif nononon
+pôuet
+
+Commande: echo 0
+0
+
+Commande: /bin/grep -i motif /testfile
+/bin/grep: /testfile: No such file or directory
+
+Commande: echo 0
+0
+
+Commande: /bin/chmod 755 /testfile
+/bin/chmod: cannot access '/testfile': No such file or directory
+
+Commande: echo 0
+0
+
+Commande: /bin/cp /testfile /includes/mon_fichier.txt
+/bin/cp: cannot stat '/testfile': No such file or directory
+
+Commande: echo 0
+0
+
+Commande: /bin/mv /testfile /includes/mon_fichier.txt
+/bin/mv: cannot stat '/testfile': No such file or directory
+
+Commande: echo 0
+0
 
 Commande: echo bonjour
 bonjour
@@ -252,32 +327,32 @@ Commande: echo 0
 Commande: l's' '-'l
 total 2048
 -rw-rw-r-- 1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r-- 1 dan dan    6113 févr. 17 12:42 bash_output.txt
--rwxrwxr-x 1 dan dan    4161 févr. 17 12:41 compare_bash_and_minishell.sh
+-rw-rw-r-- 1 dan dan    6113 févr. 17 17:19 bash_output.txt
+-rwxrwxr-x 1 dan dan    4125 févr. 17 12:43 compare_bash_and_minishell.sh
 -rw-rw-r-- 1 dan dan   27775 févr.  3 18:49 correct_output.txt
 -rw-rw-r-- 1 dan dan   59401 févr.  3 15:52 diff_output.txt
 -rw-rw-r-- 1 dan dan 1568461 janv. 26 11:52 en.subject.pdf
 -rw-rw-r-- 1 dan dan   90973 févr. 14 14:11 eval_minishell.pdf
 -rw-rw-r-- 1 dan dan      20 févr. 17 10:29 fie
 -rw-rw-r-- 1 dan dan      18 févr. 17 10:48 file
--rw-rw-r-- 1 dan dan    1550 févr. 17 12:38 file1
+-rw-rw-r-- 1 dan dan    1572 févr. 17 17:19 file1
 -rw-rw-r-- 1 dan dan       7 févr. 17 10:48 fille
 drwxrwxr-x 3 dan dan    4096 févr. 17 10:29 includes
 drwxrwxr-x 5 dan dan    4096 janv. 25 09:42 lib
--rw-rw-r-- 1 dan dan    3385 févr. 17 10:29 Makefile
--rwxrwxr-x 1 dan dan  164576 févr. 17 12:38 minishell
--rw-rw-r-- 1 dan dan    5757 févr. 17 12:42 minishell_output.txt
+-rw-rw-r-- 1 dan dan    3385 févr. 17 16:26 Makefile
+-rwxrwxr-x 1 dan dan  164840 févr. 17 17:11 minishell
+-rw-rw-r-- 1 dan dan    5757 févr. 17 17:19 minishell_output.txt
 drwxrwxr-x 2 dan dan    4096 févr. 14 13:34 minishell_tester
 -rw-rw-r-- 1 dan dan       6 févr. 14 13:32 not_existing
 -rw-rw-r-- 1 dan dan     414 févr. 14 18:46 notexisting
--rw-rw-r-- 1 dan dan      25 févr. 17 12:38 outfile
+-rw-rw-r-- 1 dan dan      25 févr. 17 15:44 outfile
 -rw-rw-r-- 1 dan dan       5 févr. 17 10:48 outfille
 -rw-rw-r-- 1 dan dan       5 févr. 17 10:48 outfille2
 -rw-rw-r-- 1 dan dan     126 févr. 14 14:07 output.txt
 -rw-rw-r-- 1 dan dan     786 févr. 10 14:42 README.md
-drwxrwxr-x 5 dan dan    4096 févr. 17 12:38 src
+drwxrwxr-x 5 dan dan    4096 févr. 17 17:19 src
 -rw-rw-r-- 1 dan dan     217 févr.  7 16:59 test_commands.txt
--rw-rw-r-- 1 dan dan      38 févr. 17 11:19 testfile
+-rw-rw-r-- 1 dan dan      38 févr. 17 12:43 testfile
 drwxrwxr-x 2 dan dan    4096 févr. 14 13:34 test_lucas
 -rwxrwxr-x 1 dan dan    2595 févr. 14 14:07 tests.sh
 -rw-rw-r-- 1 dan dan       0 févr. 15 17:03 token
@@ -479,6 +554,221 @@ papa
 papa
 maman
 maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+
+Commande: echo 0
+0
 
 Commande: cat file1 | grep papa | more
 papa
@@ -521,6 +811,115 @@ papa
 papa
 papa
 papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+
+Commande: echo 0
+0
 
 Commande: ls fichiernul | grep bla | more
 /usr/bin/ls: cannot access 'fichiernul': No such file or directory
