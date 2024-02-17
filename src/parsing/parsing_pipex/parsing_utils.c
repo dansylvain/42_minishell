@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:08:19 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/05 15:02:39 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/16 18:17:00 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,18 @@ t_ast_nde	*create_node(t_tok token)
 void	add_sibling(t_ast_nde *node, t_ast_nde **sibling,
 					t_ast_nde **sibling_sav)
 {
-	if (!*sibling_sav)
-	{
-		*sibling = node;
-		*sibling_sav = *sibling;
-	}
-	else
-	{
-		(*sibling)->sibling = node;
-		*sibling = (*sibling)->sibling;
+	if (node)
+	{		
+		if (!*sibling_sav)
+		{
+			*sibling = node;
+			*sibling_sav = *sibling;
+		}
+		else
+		{
+			(*sibling)->sibling = node;
+			*sibling = (*sibling)->sibling;
+		}
 	}
 }
 
