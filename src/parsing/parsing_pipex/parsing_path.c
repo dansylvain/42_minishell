@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/15 20:07:18 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/17 17:07:34 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "parsing_build.h"
 
 void	display_error(char *str);
+
 
 static char	*try_paths(char **argv, char *env_find)
 {
@@ -36,6 +37,11 @@ static char	*try_paths(char **argv, char *env_find)
 		free(tmp);
 		if (!access(cmd, X_OK))
 		{
+/**========================================================================
+ *!                             COMMENT BLOCK
+ *!		THIS FREE CAUSES COMMAND "ls -a -l" to terminate  
+ *!  	with error message "free(): invalid pointer"
+ *========================================================================**/
 			free(*argv);
 			*argv = cmd;
 			break ;
