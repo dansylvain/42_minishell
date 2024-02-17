@@ -1,48 +1,48 @@
-	/* ************************************************************************** */
-	/*                                                                            */
-	/*                                                        :::      ::::::::   */
-	/*   main.c                                             :+:      :+:    :+:   */
-	/*                                                    +:+ +:+         +:+     */
-	/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
-	/*                                                +#+#+#+#+#+   +#+           */
-	/*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-	/*   Updated: 2024/02/12 11:58:29 by dan              ###   ########.fr       */
-	/*                                                                            */
-	/* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
+/*   Updated: 2024/02/17 18:10:37 by dan              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-	#include "../includes/minishell.h"
-	#include "parsing_utils.h"
+#include "../includes/minishell.h"
+#include "parsing_utils.h"
 
-	char		**parse_cmd(char **command, char **env);
-	void		tmp_main(void);
-	void		display_command_tab(char **command_tab);
-	int			pipex(char **argv[], char *envp[]);
-	t_ast_nde	*parse(char *str);
-	char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
-	void	display_command_tab_big(char ***command_tab);
-	void	exec_pipex(t_Data *data, char *cmd, char *envp[]);
-	void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag);
-	int	exec_exit(t_Data *data, char **command_tab);
+char		**parse_cmd(char **command, char **env);
+void		tmp_main(void);
+void		display_command_tab(char **command_tab);
+int			pipex(char **argv[], char *envp[]);
+t_ast_nde	*parse(char *str);
+char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
+void	display_command_tab_big(char ***command_tab);
+void	exec_pipex(t_Data *data, char *cmd, char *envp[]);
+void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag);
+int	exec_exit(t_Data *data, char **command_tab);
 
-	/**========================================================================
-	 *                             COMMENTS POLICY
-	 *? signal info at the end of a function's comment block 
-	*? signal info in the main comment bloc
-	*? add your name at the beggining of a comment
-	*---
-	*! found free risponsible for invalid free error in file parsing_path.c
-	*TODO finish builtin export
-	*TODO fix memory leaks export
-	*TODO fix memory leaks unset
-	*========================================================================**/
+/**========================================================================
+ *                             COMMENTS POLICY
+ *? signal info at the end of a function's comment block 
+*? signal info in the main comment bloc
+*? add your name at the beggining of a comment
+*---
+*! found free risponsible for invalid free error in file parsing_path.c
+*TODO finish builtin export
+*TODO fix memory leaks export
+*TODO fix memory leaks unset
+*========================================================================**/
 
-	/**========================================================================
-	 *                           main.c
-	 *? rl_catch_signals is a global variable (from readline lib)
-	*? it is used to ignore SIGQUILL (see handle_signals.c)
-	*========================================================================**/
-	int	main(int argc, char **argv, char *envp[])
-	{
+/**========================================================================
+ *                           main.c
+ *? rl_catch_signals is a global variable (from readline lib)
+*? it is used to ignore SIGQUILL (see handle_signals.c)
+*========================================================================**/
+int	main(int argc, char **argv, char *envp[])
+{
 	static t_Data	*data = NULL;
 
 	rl_catch_signals = 0;
@@ -59,20 +59,21 @@
 	if (prompt_loop(data, envp) == 0)
 		return (free_data(data), 0);
 	return (0);
-	}
+}
 
-	void build_prompt(char prompt[]) {
+void build_prompt(char prompt[])
+{
 	char cwd[1024];
 	char *home;
 
 	home = getenv("HOME");
-	ft_strlcpy(prompt, "\033[1;32mminishell: \033[0m", 18);
+	ft_strlcpy(prompt, "\033[1;33mminishell: \033[0m", 18);
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		char *shortened_cwd = strstr(cwd, home);
 		if (shortened_cwd != NULL)
 		{
-			ft_strcat(prompt, "\033[1;34m");
+			ft_strcat(prompt, "\033[1;37m");
 			ft_strcat(prompt, shortened_cwd + strlen(home));
 			ft_strcat(prompt, "\033[0m");
 		}
@@ -82,17 +83,17 @@
 	else
 		perror("getcwd");
 	ft_strcat(prompt, "\033[1;36m $\033[0m ");
-	}
+}
 
 
-	/**========================================================================
-	 *                           
-	 * possibility to add the path before prompt with this function
-	 * (write a function "build_prompt")
-	 * prompt = getcwd(NULL, 0);
-	 *========================================================================**/
-	int	prompt_loop(t_Data *data, char *envp[])
-	{
+/**========================================================================
+ *                           
+ * possibility to add the path before prompt with this function
+ * (write a function "build_prompt")
+ * prompt = getcwd(NULL, 0);
+ *========================================================================**/
+int	prompt_loop(t_Data *data, char *envp[])
+{
 	char	*cmd[2];
 	char	prompt[1024];
 
@@ -112,10 +113,10 @@
 		free(cmd[0]);
 	}
 	return (1);
-	}
+}
 
-	int	is_only_space(char *str)
-	{
+int	is_only_space(char *str)
+{
 		int i;
 
 		i = 0;
@@ -126,16 +127,16 @@
 			i++;
 		}
 		return (1);
-	}
+}
 
 
-	/**========================================================================
-	 *                           command_is_builtin
-	 * exit builtin implemented without extern function
-	 * 0 is returned, and the data struct is freed in calling function
-	 *========================================================================**/
-	int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
-	{
+/**========================================================================
+ *                           command_is_builtin
+ * exit builtin implemented without extern function
+ * 0 is returned, and the data struct is freed in calling function
+ *========================================================================**/
+int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
+{
 	int		return_pipex;
 
 	if (!cmd_tab)
@@ -171,10 +172,10 @@
 		(exec_exit(data, cmd_tab));
 	//free_command_tab(cmd_tab);
 	return (0);
-	}
+}
 
-	char	**update_shlvl(char	**envp_tab)
-	{
+char	**update_shlvl(char	**envp_tab)
+{
 		int	i;
 		int shlvl;
 		char *new_shlvl;
@@ -191,12 +192,12 @@
 			}
 			i++;
 		}
-	}
-	/**========================================================================
-	 *                           duplicate_envp
-	 *========================================================================**/
-	char	**duplicate_envp(t_Data *data, char *envp[])
-	{
+}
+/**========================================================================
+ *                           duplicate_envp
+ *========================================================================**/
+char	**duplicate_envp(t_Data *data, char *envp[])
+{
 	char	**envp_tab;
 	int		i;
 
@@ -218,4 +219,4 @@
 	envp_tab[i] = NULL;
 	update_shlvl(envp_tab);
 	return (envp_tab);
-	}
+}
