@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:43:09 by dan               #+#    #+#             */
-/*   Updated: 2024/02/16 20:14:45 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/17 18:46:49 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	exec_echo(t_Data *data, char **command_tab)
 {
 	int	i;
 	int	j;
-	
+
 	i = 1;
 	if (!command_tab[1])
 	{
@@ -26,7 +26,6 @@ void	exec_echo(t_Data *data, char **command_tab)
 	if (!ft_strncmp(command_tab[1], "-n", 3))
 		i = 2;
 	j = i;
-	
 	while (command_tab[i])
 	{
 		ft_printf("%s", command_tab[i++]);
@@ -36,5 +35,5 @@ void	exec_echo(t_Data *data, char **command_tab)
 	if (j == 1)
 		ft_printf("\n");
 	if (data)
-		data->exit_status = 0;	
+		data->exit_status = 0;
 }

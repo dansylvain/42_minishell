@@ -6,15 +6,16 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:09:58 by dan               #+#    #+#             */
-/*   Updated: 2024/02/17 14:02:01 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/17 18:48:43 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdlib.h>
+
 void	unset_var(char **envp, int index)
 {
-	int i;
+	int	i;
 
 	if (!ft_strncmp(envp[index], "_=", 2))
 		return ;
@@ -29,11 +30,11 @@ void	unset_var(char **envp, int index)
 
 void	exec_unset(t_Data *data, char **command_tab)
 {
-	int	i;
-	int	j;
-	int len;
-	char *var;
-	
+	int		i;
+	int		j;
+	int		len;
+	char	*var;
+
 	i = 1;
 	while (command_tab[i])
 	{
@@ -42,7 +43,8 @@ void	exec_unset(t_Data *data, char **command_tab)
 		while (data->envp_tab[j])
 		{
 			var = data->envp_tab[j];
-			if (!ft_strncmp(var, command_tab[i], len) && (var[len] == '=' || !var[len]))
+			if (!ft_strncmp(var, command_tab[i], len) && (var[len] == '='
+					|| !var[len]))
 				unset_var(data->envp_tab, j);
 			j++;
 		}

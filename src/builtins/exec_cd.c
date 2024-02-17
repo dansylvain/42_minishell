@@ -6,19 +6,19 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:29:47 by dan               #+#    #+#             */
-/*   Updated: 2024/02/15 20:10:37 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/17 18:41:04 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 #include <stdlib.h>
-int		exec_cd(t_Data *data, char **command_tab)
+
+int	exec_cd(t_Data *data, char **command_tab)
 {
 	const char	*home;
+
 	if (data)
 		data->exit_status = 1;
-// write(2, "IN EXC CD!\n", 13);
 	if (!command_tab[1])
 	{
 		home = getenv("HOME");

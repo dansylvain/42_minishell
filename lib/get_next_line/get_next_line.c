@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 09:57:00 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/02/05 11:18:42 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/17 18:56:34 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,8 @@ char	*build_next_line(t_Data **data, char *tmp, int bytes_read)
 	}
 	else if (bytes_read == 0 && *(*data)->buff_nl)
 	{
-		next_line = ft_substr((*data)->buff_nl, 0, ft_strlen_gnl((*data)->buff_nl));
+		next_line = ft_substr((*data)->buff_nl, 0,
+				ft_strlen_gnl((*data)->buff_nl));
 		*(*data)->buff_nl = '\0';
 		return (next_line);
 	}
