@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/17 17:09:52 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/17 17:56:34 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #include "pipex_setup.h"
 
 // void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir);
-void	get_fdio(t_redir *redir);
+int	get_fdio(t_redir *redir);
 //char	**parse_cmd(char *argv[], char *envp[]);
 int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
 char	**search_path(char *argv[], char *envp[]);
@@ -224,13 +224,14 @@ void	set_filepath_and_delim2(int *argc, char ***argv[], t_redir *redir)
 // 	redir->filepath[1] = (*argv)[(*argc) - 1][1];
 
 // }
-void	set_redir(char **argv, t_redir *redir)
+int	set_redir(char **argv, t_redir *redir)
 {	
 	if (**argv == '<')
 	{
 		redir->redir[0] = 1;	
 		redir->filepath[0] = argv[1];
-		get_fdio(redir);
+		if (get_fdio(redir))
+			return (1);
 	}
 	else if (**argv == '>')
 	{
@@ -238,10 +239,11 @@ void	set_redir(char **argv, t_redir *redir)
 		if (!ft_strcmp(*argv, ">>"))
 			redir->redir[1] = 2;
 		redir->filepath[1] = argv[1];
-		get_fdio(redir);
+		if (get_fdio(redir))
+			return (1);
 	}
 }
-void	set_io(char **argv[], t_redir *redir)
+int	set_io(char **argv[], t_redir *redir)
 {
 	redir->redir[0] = 0;
 	redir->redir[1] = 0;
@@ -250,7 +252,8 @@ void	set_io(char **argv[], t_redir *redir)
 	redir->filepath[1] = NULL;
 	while (*argv)
 	{
-		set_redir(*argv, redir);
+		if (set_redir(*argv, redir))
+			return (1);
 		argv++;
 	}
 }
@@ -273,7 +276,8 @@ int	pipex(char **argv[], char *envp[])
 	// set_redir(argc, argv, redir.redir);
 	// set_filepath_and_delim(&argc, &argv, &redir);
 	// get_fdio(&redir);
-	set_io(argv, &redir);
+	if (set_io(argv, &redir))
+		return (1);
 	pid = create_pipeline(argv, envp, redir);
 	// ft_printf("argv: %s, redir 0:%d, redir 1:%d, fdfile 0:%d, fdfile 1:%d, filepath 0:%s, filepath 1:%s, delim : %s\n", **argv, redir.redir[0], redir.redir[1], redir.fd_file[0], redir.fd_file[1], redir.filepath[0], redir.filepath[1], redir.delim); //exit(1);
 	
