@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/16 23:29:05 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/17 08:41:51 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,20 @@ t_ast_nde *rebuild_dollar_str_node(char *str)
 char	*link_sibling(t_ast_nde *node)
 {
 	char	*str;
+	char	*node_str;
 	
 	str = NULL;
 	if (node)
 		node = node->child;
 	while (node)
-	{		
-		str = ft_strjoin(str, ft_strndup(node->child->child->start, node->child->child->end - node->child->child->start + 1));
+	{	
+		ft_printf("rebuild AVANT BIS:\n");
+		node_str = ft_strndup(node->start, node->end - node->start + 1);
+		if (str && node_str)
+			str = ft_strjoin(str, node_str);
+		else
+			str = node_str;
+		ft_printf("rebuild BIS:\n");
 		node = node->sibling;
 	}
 	return (str);
@@ -115,6 +122,7 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	str_lft = NULL;
 	if (node->child && node->child->child)	
 		str_lft = link_sibling(node->child->child);
+	ft_printf("rebuild2:\n");
 	if (!str)
 		str = str_lft;
 	else if (str && str_lft)
@@ -124,7 +132,7 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 		str = ft_strjoin(str, str_tok);
 	else
 		str = str_tok;	
-	ft_printf("rebuild2:\n");			
+				
 	if (str && node && node->child && node->child->sibling && node->child->sibling->child && node->child->sibling->child->sibling)	//operateur		
 	{
 		ft_printf("rebuild3:\n");
@@ -419,7 +427,7 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	//print_qute_sib(root->child->child->child);
 
 	set_operator(root->child); 
-	//print_tree(root->child->child->sibling);
+	print_tree(root->child->child->sibling);
 	// if (root->child->child->sibling)
 	// 	set_space(root->child->child->sibling->child);//exit(1);
 	// else 
@@ -454,7 +462,7 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	// }
 	// ft_printf("\n\n");
 	
-	cmd_sav = format_io(cmd_sav);
+	//cmd_sav = format_io(cmd_sav);
 	//print_rslt(cmd_sav, 1);
 	//ft_printf("\n\n");
 	// t_ast_nde	*cmd_sav3 = cmd_sav;
@@ -469,26 +477,29 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	// }
 	// ft_printf("\n\n");
 	
-	cmd_sav = format_io2(cmd_sav);
-	if(cmd_sav->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
-	{
+	//cmd_sav = format_io2(cmd_sav);
+	//if(cmd_sav->token == DOLL || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
+	//{
 		print_rslt(cmd_sav, 1);
 		ft_printf("\n\n");
-	}
+	//}
 	t_ast_nde	*cmd_sav4 = cmd_sav;
 	while (cmd_sav4)
 	{	
-		if( cmd_sav4->token == DOLL)// || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
-		{			
+		//if( cmd_sav4->token == DOLL || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
+		//{			
 			print_rslt(cmd_sav4->child, 0);
 			ft_printf("z");
-		}
+		//}
 		cmd_sav4 = cmd_sav4->sibling;
 	}
 	ft_printf("\n\n");
 
 	if (!cmd_sav)
+	{
+		ft_printf("commande sav fausle\n");
 		ast_res = root->child->child;
+	}
 	else
 		ast_res = cmd_sav;
 	return (ast_res);
