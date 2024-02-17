@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/17 10:11:58 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/17 10:43:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,12 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	char		*str_rght;
 	char		*str_tok;
 	char		*str_join;
+		
 	//ft_printf("rebuild:\n");
 	str_lft = NULL;
 	if (node->child && node->child->child)	
 		str_lft = link_sibling(node->child->child);
+	
 	//ft_printf("rebuild2:\n");
 	if (!str)
 		str = str_lft;
@@ -136,9 +138,11 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	// {
 	// 	str = str_lft;
 	// }	
+	
 	if (str && node && node->child && node->child->sibling && node->child->sibling->child && node->child->sibling->child->sibling)	//operateur		
 	{
 		//ft_printf("rebuild3:\n");
+		
 		str = rebuild_dollar_str(node->child->sibling->child->sibling, str, data);	
 
 	}
@@ -168,18 +172,24 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 		raw_lft = operator->child;
 	if (raw_lft)
 	 	raw_rght = raw_lft->sibling;
-	if (operator->token == DOLL)				
+	//exit(1);
+	if (operator && operator->token == DOLL)
+	{
+			
 		return (add_sibling(rebuild_dollar_str_node(rebuild_dollar_str(operator, NULL, data)), rslt, rslt_sav));
+	}
+	
 	else if (raw_lft && raw_lft->child)
-	{	
-		
+	{		
+			
 		if (raw_lft->child->sibling)
 			leaf_tree(raw_lft->child->sibling, rslt, rslt_sav, data);
 		else
 			add_sibling(raw_lft->child, rslt, rslt_sav);
 	}
+	
 	if (operator && operator->token != SPCE)
-	{ 		
+	{ 
 		// if (operator->token == DOLL && get_var(operator, data))
 		// {
 		
@@ -447,11 +457,12 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	// 	print_space_tree(root->child);
 //	ft_printf("end\n\n");//exit(1);
 	//set_chevron();
+	
 	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav, data);
 	// print_rslt(cmd_sav, 1);
 	//ft_printf("\n\n");
 	// cmd_sav = format_io(cmd_sav);
-	//exit(1);
+	
 	//print_rslt(cmd_sav, 1);
 	//ft_printf("\n\n");
 	
