@@ -6,14 +6,14 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 04:58:59 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/02/05 11:17:56 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/17 18:58:56 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+# ifndef BUFF
+#  define BUFF 42
 # endif
 
 # include <unistd.h>

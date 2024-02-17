@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_setup.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 15:27:14 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/04 17:44:27 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/17 19:03:09 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SETUP_H
-# define SETUP_H
+#ifndef PIPEX_SETUP_H
+# define PIPEX_SETUP_H
 
 typedef struct set_redir
 {
