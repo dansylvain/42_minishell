@@ -6,13 +6,14 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/14 19:33:51 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/17 18:26:58 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "parsing_utils.h"
 
+void print_rslt(t_ast_nde *rslt, int flag);
 int	is_env_var(char *str);
 char	*get_env_var(t_Data *data, char *str, char buff[]);
 void	insert_env_var(char **command, char *env_var, char buff[]);
@@ -55,29 +56,6 @@ void	display_command_tab_big(char ***command_tab)
 	}
 	ft_printf("command_tab end: \n");
 }
-/* typedef enum e_tok
-{
-	RAW,
-	INVRT,
-	SQUTE,
-	IN_SQUTE,
-	DQUTE,
-	IN_DQUTE,
-	EXP,
-	PIPE,
-	AND,
-	OR,
-	SCHEV_LFT,
-	DCHEV_LFT,
-	SCHEV_RGTH,
-	DCHEV_RGTH,
-	IO_FILE,
-	SPCE,
-	CMD,
-	ARG_CMD,
-	OPT_CMD,
-	ARG_OPT	
-}	t_tok; */
 
 int	is_separator(t_ast_nde *node)
 {
@@ -86,11 +64,6 @@ int	is_separator(t_ast_nde *node)
 		return (1);
 	else
 		return (0);	
-}
-
-int is_dollar(t_ast_nde *node)
-{
-
 }
 
 int	is_chevron(t_ast_nde *node)
@@ -104,7 +77,7 @@ int	is_chevron(t_ast_nde *node)
 
 int	get_cmd_nbr(t_ast_nde *node)
 {
-	int cmd_nbr;
+	int	cmd_nbr;
 	
 	cmd_nbr = 1;
 	while (node)
@@ -126,7 +99,6 @@ int	get_cmd_nbr(t_ast_nde *node)
 			cmd_nbr++;
 		node = node->sibling;
 	}
-	// ft_printf("cmd_nbr: %i\n", cmd_nbr);
 	return (cmd_nbr);
 }
 char *get_node_str(t_Data *data, t_ast_nde *node)
@@ -151,11 +123,11 @@ char *get_node_str(t_Data *data, t_ast_nde *node)
 
 char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 {
-	char	str[2000];
-	int		i;
-	t_ast_nde *current;
-	int		j;
-	int		k;
+	char		str[2000];
+	int			i;
+	t_ast_nde	*current;
+	int			j;
+	int			k;
 	
 	i = 0;
 	while (node)
@@ -205,12 +177,9 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 			continue;
 		}
 		if (is_separator(node) || (node->sibling && is_chevron(node->sibling)))
-		{
 			i++;
-		}
 		node = node->sibling;
 	}
-	// display_command_tab_big(cmd_tab);
 	return (cmd_tab);
 }
 
@@ -222,10 +191,7 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 	t_ast_nde *current;
 	current = node;
 	while (current)
-	{
 		current = current->sibling;
-	}
-
 	cmd_nbr = get_cmd_nbr(node);
 	cmd_tab = (char ***)malloc(sizeof (char **) * cmd_nbr + 1);
 	if (cmd_tab == NULL)
@@ -241,128 +207,38 @@ int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
 	while (cmd_tab_node_sav)
 	{
 		if (cmd_tab_node_sav->token == PIPE || cmd_tab_node_sav->token == DCHEV_RGTH || cmd_tab_node_sav->token == SCHEV_RGTH)
-		{
-			 //ft_printf("ISPIPELINE\n");
 			return (1);
-		}
 		cmd_tab_node_sav = cmd_tab_node_sav->sibling;
 	}
-	// ft_printf("NOT A PIPELINE\n");
 	return (0);
 }
 
-void print_rslt(t_ast_nde *rslt, int flag);
-void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag)
+void	launch_command_tab(t_Data *data, t_ast_nde *node,
+		char *envp[], int flag)
 {
 	t_ast_nde	*cmd_tab_node;
 	t_ast_nde	*cmd_tab_node_sav;
 	char		***cmd_tab;
 
-	cmd_tab_node_sav = NULL;	
-	while (node && node->token != AND && node->token != OR)// && node->token != DCHEV_LFT)	
+	cmd_tab_node_sav = NULL;
+	while (node && node->token != AND && node->token != OR)
 	{
-		if (!flag)		
-			add_sibling(copy_node_child(node), &cmd_tab_node, &cmd_tab_node_sav);		
+		if (!flag)
+			add_sibling(copy_node_child(node),
+				&cmd_tab_node, &cmd_tab_node_sav);
 		node = node->sibling;
-	}	
+	}
 	if (cmd_tab_node_sav)
-	{	
-	//	print_rslt(cmd_tab_node_sav, 0);
-	//	ft_printf("\n\n");
-		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);	
-	//	display_command_tab_big(cmd_tab);
-	//	ft_printf("\n\n");
-		if	(is_pipeline(cmd_tab_node_sav))		
-			data->exit_status = pipex(cmd_tab, envp);	
-		else if (!command_is_builtin(*cmd_tab, data, envp))	
-		{					
-			data->exit_status = pipex(cmd_tab, envp);	
-			//ft_printf("return pipex: %d\n", data->exit_status);	
-		}	
+	{
+		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);
+		if (is_pipeline(cmd_tab_node_sav))
+			data->exit_status = pipex(cmd_tab, envp);
+		else if (!command_is_builtin(*cmd_tab, data, envp))
+			data->exit_status = pipex(cmd_tab, envp);
 	}
 	flag = data->exit_status;
-	if (node && node->token == OR)		
+	if (node && node->token == OR)
 		flag = !flag;
 	if (node)
-		launch_command_tab(data, node->sibling, envp, flag);	
+		launch_command_tab(data, node->sibling, envp, flag);
 }
-
-
-
-
-// void	get_command_nbr(t_ast_nde **current, int *tree_length)
-// {
-// 	(*tree_length) = 0;
-// 	while (*current)
-// 	{
-// 		if ((*current)->token == AND || (*current)->token == OR)
-// 			break ;
-// 		if ((*current)->token != PIPE && (*current)->end
-// 			- (*current)->start + 1)
-// 			(*tree_length)++;
-// 		*current = (*current)->sibling;
-// 	}
-// }
-
-
-
-// char	**fill_command_tab(t_Data *data, char ***cmd_tab,
-// 	t_ast_nde **node)
-// {
-// 	int			i;
-// 	char		*env_var;
-// 	char		buff[2000];
-
-// 	if (data->exit_status && (*node)->sibling->sibling)
-// 		(*node) = (*node)->sibling->sibling;
-// 	i = 0;
-// 	while (*node)
-// 	{
-// 		if ((*node)->token == AND || (*node)->token == OR)
-// 			break ;
-// 		env_var = NULL;
-// 		check_if_env_var_and_get_it(data, node, &env_var, buff);
-// 		if ((*node)->token != PIPE && (*node)->end - (*node)->start + 1)
-// 		{
-// 			(*cmd_tab)[i] = ft_strndup((*node)->start,
-// 					(*node)->end - (*node)->start + 1);
-// 			if ((*cmd_tab)[i] == NULL)
-// 				return (NULL);
-// 			if ((*node)->child->token == RAW || (*node)->child->token == DQUTE)
-// 				if (env_var)
-// 					insert_env_var(&((*cmd_tab)[i]), env_var, buff);
-// 			i++;
-// 		}
-// 		(*node) = (*node)->sibling;
-// 	}
-// 	(*cmd_tab)[i] = NULL;
-// 	return (*cmd_tab);
-// }
-
-// char	**create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
-// {
-// 	char		**cmd_tab;
-// 	int			tree_length;
-// 	t_ast_nde	*current;
-
-// 	data->exit_status = 0;
-// 	while (node)
-// 	{
-// 		current = node;
-// 		get_command_nbr(&current, &tree_length);
-// 		cmd_tab = (char **)malloc(sizeof(char *) * tree_length + 1);
-// 		if (cmd_tab == 0)
-// 			return (NULL);
-// 		cmd_tab = fill_command_tab(data, &cmd_tab, &node);
-// 		display_command_tab(cmd_tab);
-// 		data->exit_status = pipex(cmd_tab, envp);
-// 		if (node == NULL)
-// 			break ;
-// 		if (node->token == OR && data->exit_status == 0)
-// 			data->exit_status = 1;
-// 		if (node->token == OR && data->exit_status == 1)
-// 			data->exit_status = 0;
-// 		node = node->sibling;
-// 		continue ;
-// 	}
-// }

@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/17 18:10:37 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/17 18:19:12 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ void		tmp_main(void);
 void		display_command_tab(char **command_tab);
 int			pipex(char **argv[], char *envp[]);
 t_ast_nde	*parse(char *str);
-char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
-void	display_command_tab_big(char ***command_tab);
-void	exec_pipex(t_Data *data, char *cmd, char *envp[]);
-void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag);
-int	exec_exit(t_Data *data, char **command_tab);
+char		***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
+void		display_command_tab_big(char ***command_tab);
+void		exec_pipex(t_Data *data, char *cmd, char *envp[]);
+void		launch_command_tab(t_Data *data, t_ast_nde *node,
+				char *envp[], int flag);
+int			exec_exit(t_Data *data, char **command_tab);
 
 /**========================================================================
  *                             COMMENTS POLICY
@@ -61,16 +62,17 @@ int	main(int argc, char **argv, char *envp[])
 	return (0);
 }
 
-void build_prompt(char prompt[])
+void	build_prompt(char prompt[])
 {
-	char cwd[1024];
-	char *home;
+	char	cwd[1024];
+	char	*home;
+	char	*shortened_cwd;
 
 	home = getenv("HOME");
 	ft_strlcpy(prompt, "\033[1;33mminishell: \033[0m", 18);
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
-		char *shortened_cwd = strstr(cwd, home);
+		shortened_cwd = strstr(cwd, home);
 		if (shortened_cwd != NULL)
 		{
 			ft_strcat(prompt, "\033[1;37m");
@@ -84,7 +86,6 @@ void build_prompt(char prompt[])
 		perror("getcwd");
 	ft_strcat(prompt, "\033[1;36m $\033[0m ");
 }
-
 
 /**========================================================================
  *                           
@@ -102,14 +103,11 @@ int	prompt_loop(t_Data *data, char *envp[])
 	{
 		build_prompt(prompt);
 		cmd[0] = readline(prompt);
-		// cmd[0] = readline("minishell : ");
 		if (cmd[0] && *cmd[0])
 			add_history(cmd[0]);
 		if (cmd[0] == NULL)
 			return (ft_printf("exit\n"), 0);
 		exec_pipex(data, cmd[0], data->envp_tab);
-		// ft_printf("exit_status: %i\n", data->exit_status);
-		
 		free(cmd[0]);
 	}
 	return (1);
@@ -117,18 +115,17 @@ int	prompt_loop(t_Data *data, char *envp[])
 
 int	is_only_space(char *str)
 {
-		int i;
+	int	i;
 
-		i = 0;
-		while (str[i])
-		{
-			if (!ft_isspace(str[i]))
-				return (0);
-			i++;
-		}
-		return (1);
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isspace(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }
-
 
 /**========================================================================
  *                           command_is_builtin
@@ -140,20 +137,9 @@ int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 	int		return_pipex;
 
 	if (!cmd_tab)
-	{
-		// ft_putstr_fd("commande is nul a chier fd\n", 2);
-		// ft_printf("commande is nul a chier\n");
 		return (1);
-	}
 	if (!cmd_tab[0])
-	{
-		// ft_putstr_fd("premier element de com is nul a chier fd\n", 2);
-		// ft_printf("premier element de com is nul a chier\n");
 		return (free_command_tab(cmd_tab), 1);
-	} 
-	// ft_putstr_fd(*cmd_tab, 2);
-	// ft_putstr_fd("\n", 2);
-	//ft_printf("on est avant le test buitin, is %s\n", cmd_tab[0]);
 	if (is_only_space(cmd_tab[0]))
 		return (1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "echo", 5))
@@ -165,34 +151,34 @@ int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "env", 4))
 		return (exec_env(data, cmd_tab), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "pwd", 4))
-		return(exec_pwd(data), 1);
+		return (exec_pwd(data), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 2]), "cd", 3))
 		return (exec_cd(data, cmd_tab), 1);
 	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "exit", 5))
 		(exec_exit(data, cmd_tab));
-	//free_command_tab(cmd_tab);
 	return (0);
 }
 
 char	**update_shlvl(char	**envp_tab)
 {
-		int	i;
-		int shlvl;
-		char *new_shlvl;
+	int		i;
+	int		shlvl;
+	char	*new_shlvl;
 
-		i = 0;
-		while (envp_tab[i])
+	i = 0;
+	while (envp_tab[i])
+	{
+		if (!ft_strncmp(envp_tab[i], "SHLVL=", 6))
 		{
-			if (!ft_strncmp(envp_tab[i], "SHLVL=", 6))
-			{
-				shlvl = ft_atoi(&(envp_tab[i][6]));
-				shlvl++;
-				new_shlvl = ft_itoa(shlvl);
-				ft_strlcpy(&envp_tab[i][6], new_shlvl, ft_strlen (new_shlvl) + 1);
-			}
-			i++;
+			shlvl = ft_atoi(&(envp_tab[i][6]));
+			shlvl++;
+			new_shlvl = ft_itoa(shlvl);
+			ft_strlcpy(&envp_tab[i][6], new_shlvl, ft_strlen (new_shlvl) + 1);
 		}
+		i++;
+	}
 }
+
 /**========================================================================
  *                           duplicate_envp
  *========================================================================**/
