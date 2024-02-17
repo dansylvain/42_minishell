@@ -114,6 +114,8 @@ commands=(
 	"echo $?"
 	"<testfile cat | rev > outfile"
 	"echo $?"
+	"cat <testfile"
+	"echo $?"
 	"<outfile cat"
 	"echo $?" 
 	"<testfile cat | echo niania | rev > outfile"
@@ -138,7 +140,8 @@ commands=(
 	"echo aaa && false && echo ccc"
 	"echo $?"
 	"<<end <<end"
-	
+	"<<end cat"
+	"<<end" 
 	#"cat | cat | ls"
 	"echo $?"
 	

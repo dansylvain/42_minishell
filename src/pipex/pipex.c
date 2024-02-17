@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/17 18:19:32 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/17 19:28:01 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,9 +229,18 @@ int	set_redir(char **argv, t_redir *redir)
 	if (**argv == '<')
 	{
 		redir->redir[0] = 1;	
-		redir->filepath[0] = argv[1];
-		if (get_fdio(redir))
-			return (1);
+		if (!ft_strcmp(*argv, "<<"))
+		{			
+			redir->delim = argv[1];
+			redir->redir[0] = 2;
+			//here_doc_handle()			
+		}
+		else
+		{
+			redir->filepath[0] = argv[1];
+			if (get_fdio(redir))
+				return (1);			
+		}			
 	}
 	else if (**argv == '>')
 	{
@@ -267,7 +276,7 @@ int	pipex(char **argv[], char *envp[])
 	pid_t	pid;
 	int status;
 	int exit_status;
-	//ft_printf("argv in nurcery -%s-%s\n", **argv, (*argv)[1]);
+	//ft_printf("argv in nurcery");// -%s-%s\n", **argv, (*argv)[1]);
 	exit_status = -1;
 	pid = -1;//ft_printf("argv: %s, redir 0:%d, redir 1:%d, fdfile 0:%d, fdfile 1:%d, filepath 0:%s, filepath 1:%s, delim : %s\n", **argv, redir.redir[0], redir.redir[1], redir.fd_file[0], redir.fd_file[1], redir.filepath[0], redir.filepath[1], redir.delim); 
 
