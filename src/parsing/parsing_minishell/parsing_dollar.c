@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 07:42:44 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/17 08:21:41 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/17 10:06:47 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 					token_nde = create_node(DOLL);
 					token_nde->start = actual;
 					token_nde->end = actual++;					
-					while (actual <= sib->end && *actual != '$' && *actual != ' ')
+					while (actual <= sib->end && *actual != '$' && *actual != ' '  && *actual != '\'')
 					{
 						printf("%c", *actual);
 						token_nde->end = actual++;										
