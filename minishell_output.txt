@@ -1,4 +1,6 @@
 Commande: /bin/ls
+Makefile
+README.md
 allowed_functions.md
 bash_output.txt
 compare_bash_and_minishell.sh
@@ -10,26 +12,27 @@ fie
 file
 file1
 fille
+fou
 includes
 lib
-Makefile
 minishell
 minishell_output.txt
 minishell_tester
+moutou
 not_existing
 notexisting
 outfile
+outfile2
 outfille
 outfille2
 output.txt
-README.md
 src
 test_commands.txt
-testfile
 test_lucas
+testfile
 tests.sh
-token
 to_test
+token
 valgrind.supp
 wc
 
@@ -175,6 +178,11 @@ Commande: echo 0
 Commande: ls -a | rev
 .
 ..
+tig.
+erongitig.
+edocsv.
+elifekaM
+dm.EMDAER
 dm.snoitcnuf_dewolla
 txt.tuptuo_hsab
 hs.llehsinim_dna_hsab_erapmoc
@@ -186,30 +194,28 @@ eif
 elif
 1elif
 ellif
-tig.
-erongitig.
+uof
 sedulcni
 bil
-elifekaM
 llehsinim
 txt.tuptuo_llehsinim
 retset_llehsinim
+uotuom
 gnitsixe_ton
 gnitsixeton
 eliftuo
+2eliftuo
 elliftuo
 2elliftuo
 txt.tuptuo
-dm.EMDAER
 crs
 txt.sdnammoc_tset
-eliftset
 sacul_tset
+eliftset
 hs.stset
-nekot
 tset_ot
+nekot
 ppus.dnirglav
-edocsv.
 cw
 
 Commande: echo 0
@@ -242,6 +248,11 @@ Commande: echo 0
 Commande: ls -a
 .
 ..
+.git
+.gitignore
+.vscode
+Makefile
+README.md
 allowed_functions.md
 bash_output.txt
 compare_bash_and_minishell.sh
@@ -253,37 +264,35 @@ fie
 file
 file1
 fille
-.git
-.gitignore
+fou
 includes
 lib
-Makefile
 minishell
 minishell_output.txt
 minishell_tester
+moutou
 not_existing
 notexisting
 outfile
+outfile2
 outfille
 outfille2
 output.txt
-README.md
 src
 test_commands.txt
-testfile
 test_lucas
+testfile
 tests.sh
-token
 to_test
+token
 valgrind.supp
-.vscode
 wc
 
 Commande: echo 0
 0
 
 Commande: <noexist cat
-
+No such file or directory: noexist
 
 Commande: echo 0
 0
@@ -364,6 +373,8 @@ Commande: echo 0
 0
 
 Commande: ls 
+Makefile
+README.md
 allowed_functions.md
 bash_output.txt
 compare_bash_and_minishell.sh
@@ -375,31 +386,32 @@ fie
 file
 file1
 fille
+fou
 includes
 lib
-Makefile
 minishell
 minishell_output.txt
 minishell_tester
+moutou
 not_existing
 notexisting
 outfile
+outfile2
 outfille
 outfille2
 output.txt
-README.md
 src
 test_commands.txt
-testfile
 test_lucas
+testfile
 tests.sh
-token
 to_test
+token
 valgrind.supp
 wc
 
-Commande: echo 'dan'
-dan
+Commande: echo 'seblin'
+seblin
 
 Commande: echo 0
 0
@@ -1015,6 +1027,8 @@ Commande: echo 0
 0
 
 Commande: ls
+Makefile
+README.md
 allowed_functions.md
 bash_output.txt
 compare_bash_and_minishell.sh
@@ -1026,26 +1040,27 @@ fie
 file
 file1
 fille
+fou
 includes
 lib
-Makefile
 minishell
 minishell_output.txt
 minishell_tester
+moutou
 not_existing
 notexisting
 outfile
+outfile2
 outfille
 outfille2
 output.txt
-README.md
 src
 test_commands.txt
-testfile
 test_lucas
+testfile
 tests.sh
-token
 to_test
+token
 valgrind.supp
 wc
 
@@ -1056,7 +1071,7 @@ Commande: cd ..
 
 
 Commande: pwd
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo 0
 0
@@ -1068,25 +1083,25 @@ Commande: echo 0
 0
 
 Commande: pwd
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo 0
 0
 
 Commande: pwd kzbgkbzekgb
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo 0
 0
 
 Commande: pwd kzbg  kbzekgb
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo 0
 0
 
 Commande: pwd 42 bzekgb
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo 0
 0
@@ -1148,57 +1163,7 @@ Commande: echo 0
 0
 
 Commande: cat ../../42/minishell_common/includes/minishell.h
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 17:05:25 by dan              ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-# include <sys/wait.h>
-# include <sys/types.h>
-# include <signal.h>
-# include <stdio.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "../lib/ft_printf/ft_printf.h"
-# include "../lib/libft/libft.h"
-// # include "../lib/get_next_line/get_next_line.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-
-typedef struct t_Data
-{
-	char	**envp_tab;
-	int		exit_status;
-}	t_Data;
-
-void	handle_signals(void);
-int		prompt_loop(t_Data *data, char *envp[]);
-void	display_error(char *str);
-void	free_data(t_Data *data);
-void	close_minishell(t_Data *data);
-void	exec_env(t_Data *data, char **command_tab);
-int		command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
-void	exec_pwd(t_Data *data);
-int		exec_cd(t_Data *data, char **command_tab);
-void	exec_echo(t_Data *data, char **command_tab);
-void	exec_unset(t_Data *data, char **command_tab);
-void	free_command_tab(char **command_tab);
-char	**duplicate_envp(t_Data *data, char *envp[]);
-int		exec_export(char **command_tab, t_Data *data);
-
-#endif
+/usr/bin/cat: ../../42/minishell_common/includes/minishell.h: No such file or directory
 
 Commande: echo 0
 0
@@ -1276,6 +1241,15 @@ Commande: false && echo bbb && echo ccc
 Commande: echo 0
 0
 
+Commande: echo aaa && false && echo ccc
+aaa
+
+Commande: echo 0
+0
+
+Commande: <<end <<end
+No such file or directory: end
+
 Commande: echo 0
 0
 
@@ -1285,68 +1259,98 @@ Commande: echo /bin/bash
 Commande: echo 0
 0
 
-Commande: echo dan/bin/bash$
-dan/bin/bash$
+Commande: echo seblin/bin/bash$
+seblin/bin/bash$
 
 Commande: echo 0
 0
 
-Commande: echo dan/bin/bash
-dan/bin/bash
+Commande: echo seblin/bin/bash
+seblin/bin/bash
 
 Commande: echo 0
 0
 
-Commande: echo dan   /bin/bash $
-dan /bin/bash $
+Commande: echo seblin   /bin/bash $
+seblin /bin/bash $
 
 Commande: echo 0
 0
 
-Commande: echo 'dan/bin/bash$'
-dan/bin/bash$
+Commande: echo 'seblin/bin/bash$'
+seblin/bin/bash$
 
 Commande: echo 0
 0
 
-Commande: echo dan /bin/bash $ 
-dan /bin/bash $
+Commande: echo seblin /bin/bash $ 
+seblin /bin/bash $
 
 Commande: echo 0
 0
 
-Commande: echo dan/bin/bash
-dan/bin/bash
+Commande: echo seblin/bin/bash
+seblin/bin/bash
 
 Commande: echo 0
 0
 
-Commande: echo "dan$  SHELL $ "
-dan  SHELL  
+Commande: echo "seblin$  SHELL $ "
+seblin$  SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo "trrtdan$   SHELL $ "
-trrtdan   SHELL  
+Commande: echo "trrtseblin$   SHELL $ "
+trrtseblin$   SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo trrtdan$   SHELL $ 
-trrtdan$ SHELL $
+Commande: echo "trrtseblin   SHELL $ "
+trrtseblin   SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo "dan"
-dan
+Commande: echo "trrtseblin SHELL $ "
+trrtseblin SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo dan
-dan
+Commande: echo trrtseblin$   SHELL $ 
+trrtseblin$ SHELL $
+
+Commande: echo 0
+0
+
+Commande: echo "trrtseblin'Mach' $'LOGNAME'  SHELL $ "
+trrtseblin'Mach' $'LOGNAME'  SHELL $ 
+
+Commande: echo 0
+0
+
+Commande: echo "trrt'Mach' seblin'Mach' $'LOGNA'M''E'  SHELL $ "
+trrt'Mach' seblin'Mach' $'LOGNA'M''E'  SHELL $ 
+
+Commande: echo 0
+0
+
+Commande: echo "trrt'Mach'p louseblin'Mach' $'LOGNA'M''E'42  SHELL $ "
+trrt'Mach'p louseblin'Mach' $'LOGNA'M''E'42  SHELL $ 
+
+Commande: echo 0
+0
+
+Commande: echo "seblin"
+seblin
+
+Commande: echo 0
+0
+
+Commande: echo seblin
+seblin
 
 Commande: echo 0
 0
