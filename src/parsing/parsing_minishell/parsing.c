@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/17 08:41:51 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/17 10:11:58 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ char	*link_sibling(t_ast_nde *node)
 		node = node->child;
 	while (node)
 	{	
-		ft_printf("rebuild AVANT BIS:\n");
+		//ft_printf("rebuild AVANT BIS:\n");
 		node_str = ft_strndup(node->start, node->end - node->start + 1);
 		if (str && node_str)
 			str = ft_strjoin(str, node_str);
 		else
 			str = node_str;
-		ft_printf("rebuild BIS:\n");
+		//ft_printf("rebuild BIS:\n");
 		node = node->sibling;
 	}
 	return (str);
@@ -118,11 +118,11 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	char		*str_rght;
 	char		*str_tok;
 	char		*str_join;
-	ft_printf("rebuild:\n");
+	//ft_printf("rebuild:\n");
 	str_lft = NULL;
 	if (node->child && node->child->child)	
 		str_lft = link_sibling(node->child->child);
-	ft_printf("rebuild2:\n");
+	//ft_printf("rebuild2:\n");
 	if (!str)
 		str = str_lft;
 	else if (str && str_lft)
@@ -130,22 +130,27 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	str_tok = get_var(node, data);
 	if (str && str_tok)
 		str = ft_strjoin(str, str_tok);
-	else
+	else if (!str)
 		str = str_tok;	
-				
+	// else if (!str_tok)
+	// {
+	// 	str = str_lft;
+	// }	
 	if (str && node && node->child && node->child->sibling && node->child->sibling->child && node->child->sibling->child->sibling)	//operateur		
 	{
-		ft_printf("rebuild3:\n");
+		//ft_printf("rebuild3:\n");
 		str = rebuild_dollar_str(node->child->sibling->child->sibling, str, data);	
 
 	}
 	else if (node->child && node->child->sibling && node->child->sibling->child)
-	{ft_printf("rebuild4:\n");
+	{//ft_printf("rebuild4:\n");
 		str_rght = link_sibling(node->child->sibling->child); 
 		if (str && str_rght)
-			str = ft_strjoin(str, str_rght);	
+			str = ft_strjoin(str, str_rght);
+		// else if (!str)
+		// 	str = str_rght;	
 	}
-	ft_printf("strjoin: %s\n", str);
+	//ft_printf("strjoin: %s\n", str);
 	return (str);
 }
 
@@ -427,7 +432,7 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	//print_qute_sib(root->child->child->child);
 
 	set_operator(root->child); 
-	print_tree(root->child->child->sibling);
+	//print_tree(root->child->child->sibling);
 	// if (root->child->child->sibling)
 	// 	set_space(root->child->child->sibling->child);//exit(1);
 	// else 
@@ -480,24 +485,24 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	//cmd_sav = format_io2(cmd_sav);
 	//if(cmd_sav->token == DOLL || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
 	//{
-		print_rslt(cmd_sav, 1);
-		ft_printf("\n\n");
-	//}
-	t_ast_nde	*cmd_sav4 = cmd_sav;
-	while (cmd_sav4)
-	{	
-		//if( cmd_sav4->token == DOLL || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
-		//{			
-			print_rslt(cmd_sav4->child, 0);
-			ft_printf("z");
-		//}
-		cmd_sav4 = cmd_sav4->sibling;
-	}
-	ft_printf("\n\n");
+	// 	print_rslt(cmd_sav, 1);
+	// 	ft_printf("\n\n");
+	// //}
+	// t_ast_nde	*cmd_sav4 = cmd_sav;
+	// while (cmd_sav4)
+	// {	
+	// 	//if( cmd_sav4->token == DOLL || cmd_sav2->token == SCHEV_LFT || cmd_sav2->token == DCHEV_LFT || cmd_sav2->token == SCHEV_RGTH || cmd_sav2->token == DCHEV_RGTH)
+	// 	//{			
+	// 		print_rslt(cmd_sav4->child, 0);
+	// 		ft_printf("z");
+	// 	//}
+	// 	cmd_sav4 = cmd_sav4->sibling;
+	// }
+	// ft_printf("\n\n");
 
 	if (!cmd_sav)
 	{
-		ft_printf("commande sav fausle\n");
+	//	ft_printf("commande sav fausle\n");
 		ast_res = root->child->child;
 	}
 	else
