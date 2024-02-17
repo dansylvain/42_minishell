@@ -65,18 +65,22 @@
 	char *home;
 
 	home = getenv("HOME");
-	ft_strlcpy(prompt, "minishell: ", 12);
+	ft_strlcpy(prompt, "\033[1;32mminishell: \033[0m", 18);
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		char *shortened_cwd = strstr(cwd, home);
 		if (shortened_cwd != NULL)
+		{
+			strcat(prompt, "\033[1;34m");
 			strcat(prompt, shortened_cwd + strlen(home));
+			strcat(prompt, "\033[0m");
+		}
 		else
 			strcat(prompt, cwd);
 	}
 	else
 		perror("getcwd");
-	strcat(prompt, "$ ");
+	strcat(prompt, "\033[1;36m $\033[0m ");
 	}
 
 
@@ -91,13 +95,12 @@
 	char	*cmd[2];
 	char	prompt[1024];
 
-	ft_bzero(prompt, 1024);
-	// build_prompt(prompt);
 	cmd[1] = NULL;
 	while (1)
 	{
-		// cmd[0] = readline(prompt);
-		cmd[0] = readline("minishell : ");
+		build_prompt(prompt);
+		cmd[0] = readline(prompt);
+		// cmd[0] = readline("minishell : ");
 		if (cmd[0] && *cmd[0])
 			add_history(cmd[0]);
 		if (cmd[0] == NULL)
