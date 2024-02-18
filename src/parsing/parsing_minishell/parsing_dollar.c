@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_dollar.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 07:42:44 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/17 18:31:58 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/18 09:42:00 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,17 +110,27 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 		{			
 			if (sib->token == IN_DQUTE || sib->token == RAW)
 			{
-				if (*(actual - 1) != '\\' && *actual == '$' && actual + 1 <= sib->end && *(actual + 1) != ' ' && *(actual + 1) != '\'')
+				if (*(actual - 1) != '\\' && *actual == '$' && actual + 1 <= sib->end && *(actual + 1) != ' ' && *(actual + 1) != '\'' && *(actual + 1) != '*')
 				{//printf("%c", *actual);
 					token_nde = create_node(DOLL);
 					token_nde->start = actual++;										
-					while (actual <= sib->end && *actual != '$' && *actual != ' '  && *actual != '\'') 						
+					while (actual <= sib->end && *actual != '$' && *actual != ' '  && *actual != '\'' && *actual != '*' ) 						
 						token_nde->end = actual++;										
 					
 					//printf("FIN\n");				
 					return (token_nde);
 				}
 				
+			}
+			if (sib->token == RAW)
+			{
+				if (*(actual - 1) != '\\' && *actual == '*')
+				{
+					token_nde = create_node(JOKER);
+					token_nde->start = actual;
+					token_nde->end = actual;	
+					return (token_nde);
+				}				
 			}
 			actual++;
 		}

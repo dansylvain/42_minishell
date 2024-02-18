@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 10:03:27 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/11 20:16:25 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/18 09:12:22 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum e_tok
 	SCHEV_RGTH,
 	DCHEV_RGTH,
 	DOLL,
+	JOKER,
 	IO_FILE,
 	SPCE,
 	CMD,

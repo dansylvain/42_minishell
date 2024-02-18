@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/17 12:44:18 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/18 09:31:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,10 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 		str = str_lft;
 	else if (str && str_lft)
 		str = ft_strjoin(str, str_lft);
-	str_tok = get_var(node, data);
+	if (node->token == DOLL)
+		str_tok = get_var(node, data);
+	else if (node->token == JOKER)
+		str_tok = "MONCUL";
 	if (str && str_tok)
 		str = ft_strjoin(str, str_tok);
 	else if (!str)
@@ -173,9 +176,8 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 	if (raw_lft)
 	 	raw_rght = raw_lft->sibling;
 	//exit(1);
-	if (operator && operator->token == DOLL)
-	{
-			
+	if (operator && (operator->token == DOLL || operator->token == JOKER))
+	{			
 		return (add_sibling(rebuild_dollar_str_node(rebuild_dollar_str(operator, NULL, data)), rslt, rslt_sav));
 	}
 	
