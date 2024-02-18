@@ -1,6 +1,7 @@
 Commande: /bin/ls
  
-|
+Makefile
+README.md
 allowed_functions.md
 bash_output.txt
 compare_bash_and_minishell.sh
@@ -14,7 +15,6 @@ file.txt
 file1
 file2.txt
 fileout
-file.txt
 fille
 fou
 gnl_compare_bash_and_minishell.sh
@@ -38,6 +38,7 @@ tests.sh
 to_test
 token
 valgrind.supp
+|
 
 Commande: echo 0
 0
@@ -49,52 +50,52 @@ Commande: echo 0
 0
 
 Commande: /bin/ls -al
-total 2088
--rw-rw-r--  1 dan dan      27 févr. 18 16:59  
-drwxrwxrwx  9 dan dan    4096 févr. 18 17:48 .
-drwxrwxr-x 13 dan dan    4096 févr. 15 18:07 ..
--rw-rw-r--  1 dan dan       3 févr. 18 16:55 |
--rw-rw-r--  1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r--  1 dan dan     527 févr. 18 17:48 bash_output.txt
--rwxrwxr-x  1 dan dan    4675 févr. 18 16:55 compare_bash_and_minishell.sh
--rw-rw-r--  1 dan dan   27775 févr.  3 18:49 correct_output.txt
--rw-rw-r--  1 dan dan   59401 févr.  3 15:52 diff_output.txt
--rw-rw-r--  1 dan dan 1568461 janv. 26 11:52 en.subject.pdf
--rw-rw-r--  1 dan dan   90973 févr. 14 14:11 eval_minishell.pdf
--rw-rw-r--  1 dan dan      20 févr. 18 16:51 fie
--rw-rw-r--  1 dan dan     101 févr. 18 16:51 file
--rw-rw-r--  1 dan dan    3110 févr. 18 17:48 file1
--rw-rw-r--  1 dan dan       7 févr. 18 16:51 file2.txt
--rw-rw-r--  1 dan dan       0 févr. 18 17:48 fileout
--rw-rw-r--  1 dan dan       6 févr. 18 16:51 file.txt
--rw-rw-r--  1 dan dan       7 févr. 18 16:51 fille
--rw-rw-r--  1 dan dan      45 févr. 18 16:51 fou
-drwxrwxr-x  8 dan dan    4096 févr. 18 17:02 .git
--rw-rw-r--  1 dan dan      55 févr. 17 19:05 .gitignore
--rwxrwxrwx  1 dan dan    4652 févr. 18 17:35 gnl_compare_bash_and_minishell.sh
-drwxrwxr-x  3 dan dan    4096 févr. 18 16:55 includes
-drwxrwxr-x  5 dan dan    4096 janv. 25 09:42 lib
--rw-rw-r--  1 dan dan    3390 févr. 18 16:47 Makefile
--rwxrwxr-x  1 dan dan  171520 févr. 18 17:48 minishell
--rw-rw-r--  1 dan dan     527 févr. 18 17:48 minishell_output.txt
-drwxrwxr-x  2 dan dan    4096 févr. 14 13:34 minishell_tester
--rw-rw-r--  1 dan dan       0 févr. 17 18:28 moutou
--rw-rw-r--  1 dan dan       6 févr. 14 13:32 not_existing
--rw-rw-r--  1 dan dan     414 févr. 14 18:46 notexisting
--rw-rw-r--  1 dan dan      25 févr. 18 17:48 outfile
--rw-rw-r--  1 dan dan       5 févr. 18 16:51 outfille
--rw-rw-r--  1 dan dan       5 févr. 18 16:51 outfille2
--rw-rw-r--  1 dan dan     126 févr. 14 14:07 output.txt
--rw-rw-r--  1 dan dan     786 févr. 18 13:59 README.md
-drwxrwxr-x  5 dan dan    4096 févr. 18 17:48 src
--rw-rw-r--  1 dan dan     217 févr.  7 16:59 test_commands.txt
--rw-rw-r--  1 dan dan      38 févr. 17 12:43 testfile
-drwxrwxr-x  2 dan dan    4096 févr. 14 13:34 test_lucas
--rwxrwxr-x  1 dan dan    2595 févr. 14 14:07 tests.sh
--rw-rw-r--  1 dan dan       0 févr. 15 17:03 token
--rw-rw-r--  1 dan dan    2866 févr. 14 13:32 to_test
--rw-rw-r--  1 dan dan      70 févr.  2 14:22 valgrind.supp
-drwxrwxr-x  2 dan dan    4096 févr. 17 18:32 .vscode
+total 2084
+-rw-r--r--  1 seblin seblin      27 Feb 18 16:54  
+drwxr-xr-x  9 seblin seblin    4096 Feb 18 18:18 .
+drwxr-xr-x 11 seblin seblin    4096 Jan 29 20:52 ..
+drwxr-xr-x  8 seblin seblin    4096 Feb 18 17:52 .git
+-rw-r--r--  1 seblin seblin      55 Feb 18 16:49 .gitignore
+drwxr-xr-x  2 seblin seblin    4096 Feb 17 18:33 .vscode
+-rw-r--r--  1 seblin seblin    3390 Feb 18 16:49 Makefile
+-rw-r--r--  1 seblin seblin     786 Feb 10 14:43 README.md
+-rw-r--r--  1 seblin seblin   50859 Feb  3 18:34 allowed_functions.md
+-rw-r--r--  1 seblin seblin     527 Feb 18 18:18 bash_output.txt
+-rwxr-xr-x  1 seblin seblin    4675 Feb 18 16:54 compare_bash_and_minishell.sh
+-rw-r--r--  1 seblin seblin   27775 Feb  3 18:53 correct_output.txt
+-rw-r--r--  1 seblin seblin   59401 Feb  3 18:34 diff_output.txt
+-rw-r--r--  1 seblin seblin 1568461 Jan 26 11:14 en.subject.pdf
+-rw-r--r--  1 seblin seblin   90973 Feb 14 15:59 eval_minishell.pdf
+-rw-r--r--  1 seblin seblin      20 Feb 15 17:02 fie
+-rw-r--r--  1 seblin seblin     101 Feb 18 16:49 file
+-rw-r--r--  1 seblin seblin       6 Feb 18 16:49 file.txt
+-rw-r--r--  1 seblin seblin    3198 Feb 18 18:14 file1
+-rw-r--r--  1 seblin seblin       7 Feb 18 16:49 file2.txt
+-rw-r--r--  1 seblin seblin       0 Feb 18 18:14 fileout
+-rw-r--r--  1 seblin seblin       7 Feb 17 10:33 fille
+-rw-r--r--  1 seblin seblin      45 Feb 17 18:23 fou
+-rwxr-xr-x  1 seblin seblin    4652 Feb 18 17:51 gnl_compare_bash_and_minishell.sh
+drwxr-xr-x  3 seblin seblin    4096 Feb 18 16:54 includes
+drwxr-xr-x  5 seblin seblin    4096 Jan 25 18:43 lib
+-rwxr-xr-x  1 seblin seblin  171440 Feb 18 18:18 minishell
+-rw-r--r--  1 seblin seblin     527 Feb 18 18:18 minishell_output.txt
+drwxr-xr-x  6 seblin seblin    4096 Feb 13 19:37 minishell_tester
+-rw-r--r--  1 seblin seblin       0 Feb 17 18:23 moutou
+-rw-r--r--  1 seblin seblin       6 Feb 14 14:05 not_existing
+-rw-r--r--  1 seblin seblin     414 Feb 14 16:56 notexisting
+-rw-r--r--  1 seblin seblin      25 Feb 18 18:14 outfile
+-rw-r--r--  1 seblin seblin       5 Feb 17 10:33 outfille
+-rw-r--r--  1 seblin seblin       5 Feb 17 10:33 outfille2
+-rw-r--r--  1 seblin seblin     126 Feb 14 14:02 output.txt
+drwxr-xr-x  5 seblin seblin    4096 Feb 18 18:18 src
+-rw-r--r--  1 seblin seblin     217 Feb  7 18:14 test_commands.txt
+drwxr-xr-x  6 seblin seblin    4096 Feb 14 09:12 test_lucas
+-rw-r--r--  1 seblin seblin      38 Feb 17 12:46 testfile
+-rwxr-xr-x  1 seblin seblin    2595 Feb 14 14:02 tests.sh
+-rw-r--r--  1 seblin seblin    2866 Feb 14 14:05 to_test
+-rw-r--r--  1 seblin seblin       0 Feb 15 16:51 token
+-rw-r--r--  1 seblin seblin      70 Feb  3 18:34 valgrind.supp
+-rw-r--r--  1 seblin seblin       3 Feb 18 16:54 |
 
 Commande: echo 0
 0
@@ -105,7 +106,8 @@ Commande: grep -i 'return' src/main.c
 		return (free_data(data), display_error("Usage: ./minishell\n"), 255);
 		return (free_data(data), 0);
 	return (0);
-			return (ft_printf("exit\n"), 0);
+			return (0);
+			// return (ft_printf("exit\n"), 0);
 	return (1);
 			return (0);
 	return (1);
@@ -207,11 +209,8 @@ txt.elif
 1elif
 txt.2elif
 tuoelif
-txt.elif
 ellif
 uof
-tig.
-erongitig.
 hs.llehsinim_dna_hsab_erapmoc_lng
 sedulcni
 bil
@@ -233,7 +232,7 @@ hs.stset
 tset_ot
 nekot
 ppus.dnirglav
-edocsv.
+|
 
 Commande: echo 0
 0
@@ -245,19 +244,19 @@ Commande: echo 0
 0
 
 Commande: exit 42hgzef
-./compare_bash_and_minishell.sh: line 189: exit: 42hgzef: numeric argument required
+./gnl_compare_bash_and_minishell.sh: line 189: exit: 42hgzef: numeric argument required
 
 Commande: echo 0
 0
 
 Commande: exit 42 jhgzegf
-./compare_bash_and_minishell.sh: line 189: exit: too many arguments
+./gnl_compare_bash_and_minishell.sh: line 189: exit: too many arguments
 
 Commande: echo 0
 0
 
 Commande: exit jhzef
-./compare_bash_and_minishell.sh: line 189: exit: jhzef: numeric argument required
+./gnl_compare_bash_and_minishell.sh: line 189: exit: jhzef: numeric argument required
 
 Commande: echo 0
 0
@@ -284,11 +283,8 @@ file.txt
 file1
 file2.txt
 fileout
-file.txt
 fille
 fou
-.git
-.gitignore
 gnl_compare_bash_and_minishell.sh
 includes
 lib
@@ -310,19 +306,19 @@ tests.sh
 to_test
 token
 valgrind.supp
-.vscode
+|
 
 Commande: echo 0
 0
 
 Commande: <noexist cat
-./compare_bash_and_minishell.sh: line 189: noexist: No such file or directory
+./gnl_compare_bash_and_minishell.sh: line 189: noexist: No such file or directory
 
 Commande: echo 0
 0
 
 Commande: bin/ls fichiernulachier
-./compare_bash_and_minishell.sh: line 189: bin/ls: No such file or directory
+./gnl_compare_bash_and_minishell.sh: line 189: bin/ls: No such file or directory
 
 Commande: echo 0
 0
@@ -358,54 +354,55 @@ Commande: echo 0
 0
 
 Commande: l's' '-'l
-total 2076
--rw-rw-r-- 1 dan dan      27 févr. 18 16:59  
--rw-rw-r-- 1 dan dan       3 févr. 18 16:55 |
--rw-rw-r-- 1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r-- 1 dan dan    6725 févr. 18 17:48 bash_output.txt
--rwxrwxr-x 1 dan dan    4675 févr. 18 16:55 compare_bash_and_minishell.sh
--rw-rw-r-- 1 dan dan   27775 févr.  3 18:49 correct_output.txt
--rw-rw-r-- 1 dan dan   59401 févr.  3 15:52 diff_output.txt
--rw-rw-r-- 1 dan dan 1568461 janv. 26 11:52 en.subject.pdf
--rw-rw-r-- 1 dan dan   90973 févr. 14 14:11 eval_minishell.pdf
--rw-rw-r-- 1 dan dan      20 févr. 18 16:51 fie
--rw-rw-r-- 1 dan dan     101 févr. 18 16:51 file
--rw-rw-r-- 1 dan dan    3110 févr. 18 17:48 file1
--rw-rw-r-- 1 dan dan       7 févr. 18 16:51 file2.txt
--rw-rw-r-- 1 dan dan       0 févr. 18 17:48 fileout
--rw-rw-r-- 1 dan dan       6 févr. 18 16:51 file.txt
--rw-rw-r-- 1 dan dan       7 févr. 18 16:51 fille
--rw-rw-r-- 1 dan dan      45 févr. 18 16:51 fou
--rwxrwxrwx 1 dan dan    4652 févr. 18 17:35 gnl_compare_bash_and_minishell.sh
-drwxrwxr-x 3 dan dan    4096 févr. 18 16:55 includes
-drwxrwxr-x 5 dan dan    4096 janv. 25 09:42 lib
--rw-rw-r-- 1 dan dan    3390 févr. 18 16:47 Makefile
--rwxrwxr-x 1 dan dan  171520 févr. 18 17:48 minishell
--rw-rw-r-- 1 dan dan    6403 févr. 18 17:48 minishell_output.txt
-drwxrwxr-x 2 dan dan    4096 févr. 14 13:34 minishell_tester
--rw-rw-r-- 1 dan dan       0 févr. 17 18:28 moutou
--rw-rw-r-- 1 dan dan       6 févr. 14 13:32 not_existing
--rw-rw-r-- 1 dan dan     414 févr. 14 18:46 notexisting
--rw-rw-r-- 1 dan dan      25 févr. 18 17:48 outfile
--rw-rw-r-- 1 dan dan       5 févr. 18 16:51 outfille
--rw-rw-r-- 1 dan dan       5 févr. 18 16:51 outfille2
--rw-rw-r-- 1 dan dan     126 févr. 14 14:07 output.txt
--rw-rw-r-- 1 dan dan     786 févr. 18 13:59 README.md
-drwxrwxr-x 5 dan dan    4096 févr. 18 17:48 src
--rw-rw-r-- 1 dan dan     217 févr.  7 16:59 test_commands.txt
--rw-rw-r-- 1 dan dan      38 févr. 17 12:43 testfile
-drwxrwxr-x 2 dan dan    4096 févr. 14 13:34 test_lucas
--rwxrwxr-x 1 dan dan    2595 févr. 14 14:07 tests.sh
--rw-rw-r-- 1 dan dan       0 févr. 15 17:03 token
--rw-rw-r-- 1 dan dan    2866 févr. 14 13:32 to_test
--rw-rw-r-- 1 dan dan      70 févr.  2 14:22 valgrind.supp
+total 2072
+-rw-r--r-- 1 seblin seblin      27 Feb 18 16:54  
+-rw-r--r-- 1 seblin seblin    3390 Feb 18 16:49 Makefile
+-rw-r--r-- 1 seblin seblin     786 Feb 10 14:43 README.md
+-rw-r--r-- 1 seblin seblin   50859 Feb  3 18:34 allowed_functions.md
+-rw-r--r-- 1 seblin seblin    6900 Feb 18 18:18 bash_output.txt
+-rwxr-xr-x 1 seblin seblin    4675 Feb 18 16:54 compare_bash_and_minishell.sh
+-rw-r--r-- 1 seblin seblin   27775 Feb  3 18:53 correct_output.txt
+-rw-r--r-- 1 seblin seblin   59401 Feb  3 18:34 diff_output.txt
+-rw-r--r-- 1 seblin seblin 1568461 Jan 26 11:14 en.subject.pdf
+-rw-r--r-- 1 seblin seblin   90973 Feb 14 15:59 eval_minishell.pdf
+-rw-r--r-- 1 seblin seblin      20 Feb 15 17:02 fie
+-rw-r--r-- 1 seblin seblin     101 Feb 18 16:49 file
+-rw-r--r-- 1 seblin seblin       6 Feb 18 16:49 file.txt
+-rw-r--r-- 1 seblin seblin    3198 Feb 18 18:14 file1
+-rw-r--r-- 1 seblin seblin       7 Feb 18 16:49 file2.txt
+-rw-r--r-- 1 seblin seblin       0 Feb 18 18:14 fileout
+-rw-r--r-- 1 seblin seblin       7 Feb 17 10:33 fille
+-rw-r--r-- 1 seblin seblin      45 Feb 17 18:23 fou
+-rwxr-xr-x 1 seblin seblin    4652 Feb 18 17:51 gnl_compare_bash_and_minishell.sh
+drwxr-xr-x 3 seblin seblin    4096 Feb 18 16:54 includes
+drwxr-xr-x 5 seblin seblin    4096 Jan 25 18:43 lib
+-rwxr-xr-x 1 seblin seblin  171440 Feb 18 18:18 minishell
+-rw-r--r-- 1 seblin seblin    6708 Feb 18 18:18 minishell_output.txt
+drwxr-xr-x 6 seblin seblin    4096 Feb 13 19:37 minishell_tester
+-rw-r--r-- 1 seblin seblin       0 Feb 17 18:23 moutou
+-rw-r--r-- 1 seblin seblin       6 Feb 14 14:05 not_existing
+-rw-r--r-- 1 seblin seblin     414 Feb 14 16:56 notexisting
+-rw-r--r-- 1 seblin seblin      25 Feb 18 18:14 outfile
+-rw-r--r-- 1 seblin seblin       5 Feb 17 10:33 outfille
+-rw-r--r-- 1 seblin seblin       5 Feb 17 10:33 outfille2
+-rw-r--r-- 1 seblin seblin     126 Feb 14 14:02 output.txt
+drwxr-xr-x 5 seblin seblin    4096 Feb 18 18:18 src
+-rw-r--r-- 1 seblin seblin     217 Feb  7 18:14 test_commands.txt
+drwxr-xr-x 6 seblin seblin    4096 Feb 14 09:12 test_lucas
+-rw-r--r-- 1 seblin seblin      38 Feb 17 12:46 testfile
+-rwxr-xr-x 1 seblin seblin    2595 Feb 14 14:02 tests.sh
+-rw-r--r-- 1 seblin seblin    2866 Feb 14 14:05 to_test
+-rw-r--r-- 1 seblin seblin       0 Feb 15 16:51 token
+-rw-r--r-- 1 seblin seblin      70 Feb  3 18:34 valgrind.supp
+-rw-r--r-- 1 seblin seblin       3 Feb 18 16:54 |
 
 Commande: echo 0
 0
 
 Commande: ls 
  
-|
+Makefile
+README.md
 allowed_functions.md
 bash_output.txt
 compare_bash_and_minishell.sh
@@ -419,7 +416,6 @@ file.txt
 file1
 file2.txt
 fileout
-file.txt
 fille
 fou
 gnl_compare_bash_and_minishell.sh
@@ -443,6 +439,7 @@ tests.sh
 to_test
 token
 valgrind.supp
+|
 
 Commande: echo 'seblin'
 seblin
@@ -1080,6 +1077,22 @@ papa
 papa
 maman
 maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
 
 Commande: echo 0
 0
@@ -1357,12 +1370,20 @@ papa
 papa
 papa
 papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
 
 Commande: echo 0
 0
 
 Commande: << end cat|>fileout
-./compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
+./gnl_compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
 
 Commande: echo 0
 0
@@ -1408,7 +1429,8 @@ Commande: echo 0
 
 Commande: ls
  
-|
+Makefile
+README.md
 allowed_functions.md
 bash_output.txt
 compare_bash_and_minishell.sh
@@ -1422,7 +1444,6 @@ file.txt
 file1
 file2.txt
 fileout
-file.txt
 fille
 fou
 gnl_compare_bash_and_minishell.sh
@@ -1446,6 +1467,7 @@ tests.sh
 to_test
 token
 valgrind.supp
+|
 
 Commande: echo 0
 0
@@ -1588,7 +1610,7 @@ Commande: echo 0
 0
 
 Commande: <testfile cat | echeo niania | rev > outfile
-./compare_bash_and_minishell.sh: line 189: echeo: command not found
+./gnl_compare_bash_and_minishell.sh: line 189: echeo: command not found
 
 Commande: echo 0
 0
@@ -1640,14 +1662,14 @@ Commande: echo 0
 0
 
 Commande: <<end <<end
-./compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
-./compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
+./gnl_compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
+./gnl_compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
 
 Commande: <<end cat
-./compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
+./gnl_compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
 
 Commande: <<end
-./compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
+./gnl_compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
 
 Commande: echo 0
 0

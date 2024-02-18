@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/18 16:25:05 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/18 18:10:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,5 +242,6 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 	if (node && node->token == OR)
 		flag = !flag;
 	if (node)
-		launch_command_tab(data, node->sibling, envp, flag);
+		launch_command_tab(data, node->sibling, envp, flag);	
+		
 }
