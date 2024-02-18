@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/18 09:29:47 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/18 12:25:33 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,27 +135,27 @@ int	is_only_space(char *str)
 int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 {
 	int		return_pipex;
-
+	
 	if (!cmd_tab)
 		return (1);
 	if (!cmd_tab[0])
 		return (free_command_tab(cmd_tab), 1);
-	if (is_only_space(cmd_tab[0]))
+	if (is_only_space(cmd_tab[0]) || ft_strlen(cmd_tab[0]) < 2)
 		return (1);
-	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "echo", 5))
-		return (exec_echo(data, cmd_tab), 1);
-	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 5]), "unset", 6))
-		return (exec_unset(data, cmd_tab), 1);
-	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 6]), "export", 7))
-		return (exec_export(cmd_tab, data), 1);
-	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "env", 4))
-		return (exec_env(data, cmd_tab), 1);
-	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "pwd", 4))
-		return (exec_pwd(data), 1);
-	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 2]), "cd", 3))
+	if (ft_strlen(cmd_tab[0]) >= 2 && !ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 2]), "cd", 3))
 		return (exec_cd(data, cmd_tab), 1);
-	if (!ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "exit", 5))
+	if (ft_strlen(cmd_tab[0]) >= 3 && !ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "env", 4))
+		return (exec_env(data, cmd_tab), 1);
+	if (ft_strlen(cmd_tab[0]) >= 3 && !ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "pwd", 4))
+		return (exec_pwd(data), 1);
+	if (ft_strlen(cmd_tab[0]) >= 4 && !ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "echo", 5))
+		return (exec_echo(data, cmd_tab), 1);
+	if (ft_strlen(cmd_tab[0]) >= 4 && !ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "exit", 5))
 		(exec_exit(data, cmd_tab));
+	if (ft_strlen(cmd_tab[0]) >= 5 && !ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 5]), "unset", 6))
+		return (exec_unset(data, cmd_tab), 1);
+	if (ft_strlen(cmd_tab[0]) >= 6 && !ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 6]), "export", 7))
+		return (exec_export(cmd_tab, data), 1);
 	return (0);
 }
 
