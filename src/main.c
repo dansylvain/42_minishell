@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/18 17:01:35 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/18 17:50:07 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void		exec_pipex(t_Data *data, char *cmd, char *envp[]);
 void		launch_command_tab(t_Data *data, t_ast_nde *node,
 				char *envp[], int flag);
 int			exec_exit(t_Data *data, char **command_tab);
+char	*get_next_line(int fd);
+
 
 /**========================================================================
  *                             COMMENTS POLICY
@@ -88,10 +90,7 @@ void	build_prompt(char prompt[])
 }
 
 /**========================================================================
- *                           
- * possibility to add the path before prompt with this function
- * (write a function "build_prompt")
- * prompt = getcwd(NULL, 0);
+ *                           prompt_loop
  *========================================================================**/
 
 int	prompt_loop(t_Data *data, char *envp[])
@@ -102,8 +101,12 @@ int	prompt_loop(t_Data *data, char *envp[])
 	cmd[1] = NULL;
 	while (1)
 	{
-		build_prompt(prompt);
-		cmd[0] = readline(prompt);
+		// build_prompt(prompt);
+		// cmd[0] = readline(prompt);
+		// ft_printf("%s", prompt);
+		char *gnl_output = get_next_line(0);
+		gnl_output[ft_strlen(gnl_output) - 1] = '\0';
+		cmd[0] = gnl_output;
 		if (cmd[0] && *cmd[0])
 			add_history(cmd[0]);
 		if (cmd[0] == NULL)

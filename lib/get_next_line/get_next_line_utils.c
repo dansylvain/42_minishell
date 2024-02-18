@@ -6,16 +6,16 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 10:00:32 by dan               #+#    #+#             */
-/*   Updated: 2024/02/18 10:25:40 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/18 17:05:06 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*delete_data(t_Data **head, int fd)
+void	*delete_data(t_gnl **head, int fd)
 {
-	t_Data	*current;
-	t_Data	*node_to_delete;
+	t_gnl	*current;
+	t_gnl	*node_to_delete;
 
 	node_to_delete = NULL;
 	current = *head;
@@ -41,7 +41,7 @@ void	*delete_data(t_Data **head, int fd)
 	return (NULL);
 }
 
-void	*delete_node(t_Data *node_to_delete)
+void	*delete_node(t_gnl *node_to_delete)
 {
 	if (node_to_delete)
 	{

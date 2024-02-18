@@ -16,6 +16,7 @@ fileout
 file.txt
 fille
 fou
+gnl_compare_bash_and_minishell.sh
 includes
 lib
 Makefile
@@ -38,7 +39,6 @@ tests.sh
 token
 to_test
 valgrind.supp
-wc
 
 Commande: echo 0
 0
@@ -50,13 +50,13 @@ Commande: echo 0
 0
 
 Commande: /bin/ls -al
-total 2084
+total 2088
 -rw-rw-r--  1 dan dan      27 févr. 18 16:59  
-drwxrwxrwx  9 dan dan    4096 févr. 18 17:01 .
+drwxrwxrwx  9 dan dan    4096 févr. 18 17:48 .
 drwxrwxr-x 13 dan dan    4096 févr. 15 18:07 ..
 -rw-rw-r--  1 dan dan       3 févr. 18 16:55 |
 -rw-rw-r--  1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r--  1 dan dan     496 févr. 18 17:01 bash_output.txt
+-rw-rw-r--  1 dan dan     527 févr. 18 17:48 bash_output.txt
 -rwxrwxr-x  1 dan dan    4675 févr. 18 16:55 compare_bash_and_minishell.sh
 -rw-rw-r--  1 dan dan   27775 févr.  3 18:49 correct_output.txt
 -rw-rw-r--  1 dan dan   59401 févr.  3 15:52 diff_output.txt
@@ -64,29 +64,30 @@ drwxrwxr-x 13 dan dan    4096 févr. 15 18:07 ..
 -rw-rw-r--  1 dan dan   90973 févr. 14 14:11 eval_minishell.pdf
 -rw-rw-r--  1 dan dan      20 févr. 18 16:51 fie
 -rw-rw-r--  1 dan dan     101 févr. 18 16:51 file
--rw-rw-r--  1 dan dan    2912 févr. 18 17:00 file1
+-rw-rw-r--  1 dan dan    3110 févr. 18 17:48 file1
 -rw-rw-r--  1 dan dan       7 févr. 18 16:51 file2.txt
--rw-rw-r--  1 dan dan       0 févr. 18 17:00 fileout
+-rw-rw-r--  1 dan dan       0 févr. 18 17:48 fileout
 -rw-rw-r--  1 dan dan       6 févr. 18 16:51 file.txt
 -rw-rw-r--  1 dan dan       7 févr. 18 16:51 fille
 -rw-rw-r--  1 dan dan      45 févr. 18 16:51 fou
-drwxrwxr-x  8 dan dan    4096 févr. 18 17:00 .git
+drwxrwxr-x  8 dan dan    4096 févr. 18 17:02 .git
 -rw-rw-r--  1 dan dan      55 févr. 17 19:05 .gitignore
+-rwxrwxrwx  1 dan dan    4652 févr. 18 17:35 gnl_compare_bash_and_minishell.sh
 drwxrwxr-x  3 dan dan    4096 févr. 18 16:55 includes
 drwxrwxr-x  5 dan dan    4096 janv. 25 09:42 lib
 -rw-rw-r--  1 dan dan    3390 févr. 18 16:47 Makefile
--rwxrwxr-x  1 dan dan  171592 févr. 18 17:01 minishell
--rw-rw-r--  1 dan dan     496 févr. 18 17:01 minishell_output.txt
+-rwxrwxr-x  1 dan dan  171520 févr. 18 17:48 minishell
+-rw-rw-r--  1 dan dan     527 févr. 18 17:48 minishell_output.txt
 drwxrwxr-x  2 dan dan    4096 févr. 14 13:34 minishell_tester
 -rw-rw-r--  1 dan dan       0 févr. 17 18:28 moutou
 -rw-rw-r--  1 dan dan       6 févr. 14 13:32 not_existing
 -rw-rw-r--  1 dan dan     414 févr. 14 18:46 notexisting
--rw-rw-r--  1 dan dan      25 févr. 18 17:00 outfile
+-rw-rw-r--  1 dan dan      25 févr. 18 17:48 outfile
 -rw-rw-r--  1 dan dan       5 févr. 18 16:51 outfille
 -rw-rw-r--  1 dan dan       5 févr. 18 16:51 outfille2
 -rw-rw-r--  1 dan dan     126 févr. 14 14:07 output.txt
 -rw-rw-r--  1 dan dan     786 févr. 18 13:59 README.md
-drwxrwxr-x  5 dan dan    4096 févr. 18 17:01 src
+drwxrwxr-x  5 dan dan    4096 févr. 18 17:48 src
 -rw-rw-r--  1 dan dan     217 févr.  7 16:59 test_commands.txt
 -rw-rw-r--  1 dan dan      38 févr. 17 12:43 testfile
 drwxrwxr-x  2 dan dan    4096 févr. 14 13:34 test_lucas
@@ -95,7 +96,6 @@ drwxrwxr-x  2 dan dan    4096 févr. 14 13:34 test_lucas
 -rw-rw-r--  1 dan dan    2866 févr. 14 13:32 to_test
 -rw-rw-r--  1 dan dan      70 févr.  2 14:22 valgrind.supp
 drwxrwxr-x  2 dan dan    4096 févr. 17 18:32 .vscode
--rw-rw-r--  1 dan dan     414 févr. 14 18:46 wc
 
 Commande: echo 0
 0
@@ -208,6 +208,7 @@ ellif
 uof
 tig.
 erongitig.
+hs.llehsinim_dna_hsab_erapmoc_lng
 sedulcni
 bil
 elifekaM
@@ -231,7 +232,6 @@ nekot
 tset_ot
 ppus.dnirglav
 edocsv.
-cw
 
 Commande: echo 0
 0
@@ -282,6 +282,7 @@ fille
 fou
 .git
 .gitignore
+gnl_compare_bash_and_minishell.sh
 includes
 lib
 Makefile
@@ -305,7 +306,6 @@ token
 to_test
 valgrind.supp
 .vscode
-wc
 
 Commande: echo 0
 0
@@ -353,11 +353,11 @@ Commande: echo 0
 0
 
 Commande: l's' '-'l
-total 2072
+total 2076
 -rw-rw-r-- 1 dan dan      27 févr. 18 16:59  
 -rw-rw-r-- 1 dan dan       3 févr. 18 16:55 |
 -rw-rw-r-- 1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r-- 1 dan dan    6601 févr. 18 17:01 bash_output.txt
+-rw-rw-r-- 1 dan dan    6725 févr. 18 17:48 bash_output.txt
 -rwxrwxr-x 1 dan dan    4675 févr. 18 16:55 compare_bash_and_minishell.sh
 -rw-rw-r-- 1 dan dan   27775 févr.  3 18:49 correct_output.txt
 -rw-rw-r-- 1 dan dan   59401 févr.  3 15:52 diff_output.txt
@@ -365,27 +365,28 @@ total 2072
 -rw-rw-r-- 1 dan dan   90973 févr. 14 14:11 eval_minishell.pdf
 -rw-rw-r-- 1 dan dan      20 févr. 18 16:51 fie
 -rw-rw-r-- 1 dan dan     101 févr. 18 16:51 file
--rw-rw-r-- 1 dan dan    2912 févr. 18 17:00 file1
+-rw-rw-r-- 1 dan dan    3110 févr. 18 17:48 file1
 -rw-rw-r-- 1 dan dan       7 févr. 18 16:51 file2.txt
--rw-rw-r-- 1 dan dan       0 févr. 18 17:00 fileout
+-rw-rw-r-- 1 dan dan       0 févr. 18 17:48 fileout
 -rw-rw-r-- 1 dan dan       6 févr. 18 16:51 file.txt
 -rw-rw-r-- 1 dan dan       7 févr. 18 16:51 fille
 -rw-rw-r-- 1 dan dan      45 févr. 18 16:51 fou
+-rwxrwxrwx 1 dan dan    4652 févr. 18 17:35 gnl_compare_bash_and_minishell.sh
 drwxrwxr-x 3 dan dan    4096 févr. 18 16:55 includes
 drwxrwxr-x 5 dan dan    4096 janv. 25 09:42 lib
 -rw-rw-r-- 1 dan dan    3390 févr. 18 16:47 Makefile
--rwxrwxr-x 1 dan dan  171592 févr. 18 17:01 minishell
--rw-rw-r-- 1 dan dan    6279 févr. 18 17:01 minishell_output.txt
+-rwxrwxr-x 1 dan dan  171520 févr. 18 17:48 minishell
+-rw-rw-r-- 1 dan dan    6403 févr. 18 17:48 minishell_output.txt
 drwxrwxr-x 2 dan dan    4096 févr. 14 13:34 minishell_tester
 -rw-rw-r-- 1 dan dan       0 févr. 17 18:28 moutou
 -rw-rw-r-- 1 dan dan       6 févr. 14 13:32 not_existing
 -rw-rw-r-- 1 dan dan     414 févr. 14 18:46 notexisting
--rw-rw-r-- 1 dan dan      25 févr. 18 17:00 outfile
+-rw-rw-r-- 1 dan dan      25 févr. 18 17:48 outfile
 -rw-rw-r-- 1 dan dan       5 févr. 18 16:51 outfille
 -rw-rw-r-- 1 dan dan       5 févr. 18 16:51 outfille2
 -rw-rw-r-- 1 dan dan     126 févr. 14 14:07 output.txt
 -rw-rw-r-- 1 dan dan     786 févr. 18 13:59 README.md
-drwxrwxr-x 5 dan dan    4096 févr. 18 17:01 src
+drwxrwxr-x 5 dan dan    4096 févr. 18 17:48 src
 -rw-rw-r-- 1 dan dan     217 févr.  7 16:59 test_commands.txt
 -rw-rw-r-- 1 dan dan      38 févr. 17 12:43 testfile
 drwxrwxr-x 2 dan dan    4096 févr. 14 13:34 test_lucas
@@ -393,7 +394,6 @@ drwxrwxr-x 2 dan dan    4096 févr. 14 13:34 test_lucas
 -rw-rw-r-- 1 dan dan       0 févr. 15 17:03 token
 -rw-rw-r-- 1 dan dan    2866 févr. 14 13:32 to_test
 -rw-rw-r-- 1 dan dan      70 févr.  2 14:22 valgrind.supp
--rw-rw-r-- 1 dan dan     414 févr. 14 18:46 wc
 
 Commande: echo 0
 0
@@ -416,6 +416,7 @@ fileout
 file.txt
 fille
 fou
+gnl_compare_bash_and_minishell.sh
 includes
 lib
 Makefile
@@ -438,7 +439,6 @@ tests.sh
 token
 to_test
 valgrind.supp
-wc
 
 Commande: echo 'dan'
 dan
@@ -1040,11 +1040,65 @@ papa
 papa
 maman
 maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
 
 Commande: echo 0
 0
 
 Commande: cat file1 | grep papa | more
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
 papa
 papa
 papa
@@ -1366,6 +1420,7 @@ fileout
 file.txt
 fille
 fou
+gnl_compare_bash_and_minishell.sh
 includes
 lib
 Makefile
@@ -1388,7 +1443,6 @@ tests.sh
 token
 to_test
 valgrind.supp
-wc
 
 Commande: echo 0
 0

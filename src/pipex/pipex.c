@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/18 07:58:07 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/18 17:04:00 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include "libft.h"
 #include "../../lib/get_next_line/get_next_line.h"
 #include "pipex_setup.h"
+#include "../../includes/minishell.h"
 
 void	close_fd(int fd[]);
 // void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir);
