@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:08:19 by svidot            #+#    #+#             */
-/*   Updated: 2024/01/28 19:06:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/18 13:57:08 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static void	set_dqute_nde(t_ast_nde *dqute, t_ast_nde *sibling_sav,
 	if (dqute->start && !dqute->end)
 	{
 		ft_putstr_fd("double quote error\n", 2);
-		free_sib(sibling_sav);
-		free_sib(dqute);
+		free_sibling(sibling_sav);
+		free_sibling(dqute);
 		exit(1);
 	}
 }
@@ -82,8 +82,8 @@ static void	set_squte_nde(t_ast_nde *squte, t_ast_nde *sibling_sav,
 	if (squte->start && !squte->end)
 	{
 		ft_putstr_fd("simple quote error\n", 2);
-		free_sib(sibling_sav);
-		free_sib(squte);
+		free_sibling(sibling_sav);
+		free_sibling(squte);
 		exit(1);
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/15 11:50:02 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/18 11:48:05 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "parsing_utils.h"
-
+#include "libft.h"
 #include<stdio.h>
 t_ast_nde	*copy_node(t_ast_nde *node);
 void	print_raw_rght(t_ast_nde *raw_rght);
@@ -159,6 +159,26 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 	return (token_nde);
 }
 
+char	*translate_enum(t_tok token)
+{
+	if (token == AND)
+		return "&&";
+	else if (token == OR)
+		return "||";
+	else if (token == PIPE)
+		return "|";
+	else if (token == SCHEV_LFT)
+		return "<";
+	else if (token == DCHEV_LFT)
+		return "<<";
+	else if (token == SCHEV_RGTH)
+		return ">";
+	else if (token == DCHEV_RGTH)
+		return ">>";
+	ft_putstr_fd("no token enum\n", 2);
+	return (NULL);
+}
+
 int	set_operator(t_ast_nde *node)
 {
 	t_ast_nde *sib;
@@ -177,10 +197,27 @@ int	set_operator(t_ast_nde *node)
 		raw_rght = raw_lft->sibling;	
 		token->child = raw_lft;
 		fill_child(sib, raw_lft->child, raw_rght->child, token);
-		if (raw_lft->child)			
+		if (raw_lft->child)	
+		{			
 			set_space(raw_lft);
+		}
+		else
+		{
+			if (token->token == AND || token->token == OR || token->token == PIPE)
+			{				
+				ft_putstr_fd(translate_enum(token->token), 2);
+				ft_putchar_fd('\n', 2);
+				ft_putstr_fd("HANDLE this error\n", 2);
+			}
+		}
 		if (raw_rght->child)
-			set_operator(raw_rght);			
+			set_operator(raw_rght);
+		else
+		{
+			ft_putstr_fd(translate_enum(token->token), 2);
+			ft_putchar_fd('\n', 2);
+			ft_putstr_fd("HANDLE this error HEREDOC\n", 2);		
+		}	
 		return (1);
 	}
 	set_space(node);

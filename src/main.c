@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/17 18:19:12 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/18 16:25:51 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			exec_exit(t_Data *data, char **command_tab);
 int	main(int argc, char **argv, char *envp[])
 {
 	static t_Data	*data = NULL;
-
+	
 	rl_catch_signals = 0;
 	if (data == NULL)
 		data = (t_Data *)ft_calloc(sizeof(t_Data), 1);
@@ -93,6 +93,7 @@ void	build_prompt(char prompt[])
  * (write a function "build_prompt")
  * prompt = getcwd(NULL, 0);
  *========================================================================**/
+
 int	prompt_loop(t_Data *data, char *envp[])
 {
 	char	*cmd[2];

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:08:19 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/10 17:48:10 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/18 13:56:40 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ char	**create_ast_pipex(char *argv)
 	spce_sib = filter_wrapper_spce(invrt_sib, set_space_nde);
 	clean_quotes("null", qute_sib);
 	ast_res = build_array(spce_sib);
-	free_sib(qute_sib);
-	free_sib(invrt_sib);
-	free_sib(spce_sib);
+	free_sibling(qute_sib);
+	free_sibling(invrt_sib);
+	free_sibling(spce_sib);
 	return (ast_res);
 }

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/18 09:31:59 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/18 16:27:36 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	print_tree(t_ast_nde *node);
 int	set_dollar(t_ast_nde *node);
 void print_rslt(t_ast_nde *rslt, int flag);
 char	*search_env_var(char *envp[], char *env_to_find);
+void	free_sibling(t_ast_nde *sib);
 // static void	leaf_tree(t_ast_nde *root, t_ast_nde **cmd, t_ast_nde **cmd_sav)
 // {
 // 	t_ast_nde	*head;
@@ -54,27 +55,14 @@ char	*search_env_var(char *envp[], char *env_to_find);
 char* get_var(t_ast_nde *node, t_Data *data)
 {	
 	char	*str;
-	char	*var;
-	//str = node->start;
+	char	*var;	
 	
 	str = ft_strndup(node->start, node->end - node->start + 1);
-	//str++;
-	//str[node->end - node->start] = 0; //!!!!!!
-	//ft_printf("print expand -%s-\n", str);
 	if (*++str == '?')
 		var = ft_itoa(data->exit_status);
 	else
 		var = search_env_var(data->envp_tab, ft_strjoin(str, "="));	
-	return (var);
-	
-	//ft_printf("year: %s\n", str);
-	//if (!ft_strcmp(str, var))
-	//if (var)
-//	return NULL;	
-
-	//	ft_printf("is var: %c\n", *(node->start + 1));
-	
-	//ft_printf("is no var: %c\n", *(node->start + 1));
+	return (var);	
 }
 t_ast_nde *rebuild_dollar_str_node(char *str)
 {
@@ -99,14 +87,12 @@ char	*link_sibling(t_ast_nde *node)
 	if (node)
 		node = node->child;
 	while (node)
-	{	
-		//ft_printf("rebuild AVANT BIS:\n");
+	{		
 		node_str = ft_strndup(node->start, node->end - node->start + 1);
 		if (str && node_str)
 			str = ft_strjoin(str, node_str);
 		else
-			str = node_str;
-		//ft_printf("rebuild BIS:\n");
+			str = node_str;	
 		node = node->sibling;
 	}
 	return (str);
@@ -118,13 +104,10 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	char		*str_rght;
 	char		*str_tok;
 	char		*str_join;
-		
-	//ft_printf("rebuild:\n");
+			
 	str_lft = NULL;
 	if (node->child && node->child->child)	
-		str_lft = link_sibling(node->child->child);
-	
-	//ft_printf("rebuild2:\n");
+		str_lft = link_sibling(node->child->child);	
 	if (!str)
 		str = str_lft;
 	else if (str && str_lft)
@@ -136,28 +119,15 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	if (str && str_tok)
 		str = ft_strjoin(str, str_tok);
 	else if (!str)
-		str = str_tok;	
-	// else if (!str_tok)
-	// {
-	// 	str = str_lft;
-	// }	
-	
-	if (str && node && node->child && node->child->sibling && node->child->sibling->child && node->child->sibling->child->sibling)	//operateur		
-	{
-		//ft_printf("rebuild3:\n");
-		
-		str = rebuild_dollar_str(node->child->sibling->child->sibling, str, data);	
-
-	}
+		str = str_tok;		
+	if (str && node && node->child && node->child->sibling && node->child->sibling->child && node->child->sibling->child->sibling)	//operateur			
+		str = rebuild_dollar_str(node->child->sibling->child->sibling, str, data);		
 	else if (node->child && node->child->sibling && node->child->sibling->child)
-	{//ft_printf("rebuild4:\n");
+	{
 		str_rght = link_sibling(node->child->sibling->child); 
 		if (str && str_rght)
-			str = ft_strjoin(str, str_rght);
-		// else if (!str)
-		// 	str = str_rght;	
-	}
-	//ft_printf("strjoin: %s\n", str);
+			str = ft_strjoin(str, str_rght);	
+	}	
 	return (str);
 }
 
@@ -175,55 +145,28 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 		raw_lft = operator->child;
 	if (raw_lft)
 	 	raw_rght = raw_lft->sibling;
-	//exit(1);
-	if (operator && (operator->token == DOLL || operator->token == JOKER))
-	{			
-		return (add_sibling(rebuild_dollar_str_node(rebuild_dollar_str(operator, NULL, data)), rslt, rslt_sav));
-	}
-	
+	if (operator && (operator->token == DOLL || operator->token == JOKER))			
+		return (add_sibling(rebuild_dollar_str_node(rebuild_dollar_str(operator, NULL, data)), rslt, rslt_sav));	
 	else if (raw_lft && raw_lft->child)
-	{		
-			
+	{					
 		if (raw_lft->child->sibling)
 			leaf_tree(raw_lft->child->sibling, rslt, rslt_sav, data);
 		else
 			add_sibling(raw_lft->child, rslt, rslt_sav);
-	}
-	
+	}	
 	if (operator && operator->token != SPCE)
-	{ 
-		// if (operator->token == DOLL && get_var(operator, data))
-		// {
-		
-		// 	expand = get_var(operator, data);
-		// 	//ft_printf("print expand -%s-\n", expand);
-		// 	if (expand)
-		// 	{					
-		// 		operator->start = expand;
-		// 		operator->end = expand + ft_strlen(expand) - 1;		
-		// 	}
-		// 	//exit(1);
-		// }
-		// if (expand || operator->token != DOLL)
-		// {			
-			operator->child = copy_node(operator);
-			add_sibling(operator, rslt, rslt_sav);		
-		//}
+	{ 				
+		operator->child = copy_node(operator);
+		add_sibling(operator, rslt, rslt_sav);				
 	}
 	next_operator = NULL;
 	if (raw_rght && raw_rght->child)
 		next_operator = raw_rght->child->sibling;
 	if (next_operator)
 		leaf_tree(next_operator, rslt, rslt_sav, data);
-	else if (raw_rght && raw_rght->child)
-	{
-		
-		add_sibling(raw_rght->child, rslt, rslt_sav);		
-	}
+	else if (raw_rght && raw_rght->child)		
+		add_sibling(raw_rght->child, rslt, rslt_sav);			
 }
-// if (raw_rght->child->sibling)
-// 	leaf_tree(raw_rght->child->sibling, rslt, rslt_sav);
-// else
 
 t_ast_nde	*ft_lstlast_sib(t_ast_nde *lst)
 {
@@ -419,7 +362,41 @@ t_ast_nde	*format_io2(t_ast_nde* cmd)
 	return (format_cmd_sav);
 }
 
-
+void	free_tree(t_ast_nde *node)
+{
+	t_ast_nde *tmp;
+	t_ast_nde *raw_lft;
+	t_ast_nde *raw_rght;
+	
+	raw_lft = NULL;
+	raw_rght = NULL;	
+	if (node)
+	{
+		raw_lft = node->child;
+		if (raw_lft)
+			raw_rght = raw_lft->sibling;
+		free(node);
+	}	
+	if (raw_lft)
+	{
+		tmp = raw_lft->child;
+		free(raw_lft);
+		if (tmp)
+			free_sibling(tmp->child);
+		if (tmp && tmp->sibling)	
+			free_tree(tmp->sibling);
+	}
+	tmp = NULL;
+	if (raw_rght)
+	{
+		tmp = raw_rght->child;
+		free(raw_rght);
+		if (tmp)
+			free_sibling(tmp->child);
+		if (tmp && tmp->sibling)
+			free_tree(tmp->sibling);
+	}
+}
 
 void	print_raw_rght(t_ast_nde *raw_rght);
 void	print_space_tree(t_ast_nde *node);
@@ -443,7 +420,8 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	root->child->child->child = set_qute_sib(str);
 	//print_qute_sib(root->child->child->child);
 
-	set_operator(root->child); 
+	set_operator(root->child);
+
 	//print_tree(root->child->child->sibling);
 	// if (root->child->child->sibling)
 	// 	set_space(root->child->child->sibling->child);//exit(1);
@@ -461,6 +439,8 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	//set_chevron();
 	
 	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav, data);
+	//free_tree(root);
+	
 	// print_rslt(cmd_sav, 1);
 	//ft_printf("\n\n");
 	// cmd_sav = format_io(cmd_sav);

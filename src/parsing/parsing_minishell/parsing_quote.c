@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:36:13 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/16 22:46:17 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/18 13:57:43 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ static int set_qute_nde(t_ast_nde *qute_nde, char qute,
 		(*str)++;	
 	}
 	if (!qute_nde->end)
-	{
-		ft_putstr_fd("quote error\n", 2);
-		free_sib(sibling_sav);
-		free_sib(qute_nde);
+	{		
+		ft_putstr_fd("HANDLE this quote error\n", 2);
+		free_sibling(sibling_sav);
+		free_sibling(qute_nde);
 		return (1);
 	}
 	return (0);

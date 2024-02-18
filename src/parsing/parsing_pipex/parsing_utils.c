@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:08:19 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/16 18:17:00 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/18 13:49:30 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	add_sibling(t_ast_nde *node, t_ast_nde **sibling,
 	}
 }
 
-void	free_sib(t_ast_nde *sib)
+void	free_sibling(t_ast_nde *sib)
 {
 	t_ast_nde	*tmp;
 
