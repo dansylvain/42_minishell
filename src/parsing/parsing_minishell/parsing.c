@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/18 18:31:26 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/18 22:18:36 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char* get_var(t_ast_nde *node, t_Data *data)
 	if (*++str == '?')
 		var = ft_itoa(data->exit_status);
 	else
-		var = search_env_var(data->envp_tab, ft_strjoin(str, "="));	
+		var = search_env_var(data->envp_tab, ft_strjoin_up(str, "=", 1, 0));	
 	return (var);	
 }
 t_ast_nde *rebuild_dollar_str_node(char *str)
@@ -90,7 +90,7 @@ char	*link_sibling(t_ast_nde *node)
 	{		
 		node_str = ft_strndup(node->start, node->end - node->start + 1);
 		if (str && node_str)
-			str = ft_strjoin(str, node_str);
+			str = ft_strjoin_up(str, node_str, 1, 1);
 		else
 			str = node_str;	
 		node = node->sibling;
@@ -111,13 +111,13 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	if (!str)
 		str = str_lft;
 	else if (str && str_lft)
-		str = ft_strjoin(str, str_lft);
+		str = ft_strjoin_up(str, str_lft, 1, 1);
 	if (node->token == DOLL)
 		str_tok = get_var(node, data);
 	else if (node->token == JOKER)
 		str_tok = "MONCUL";
 	if (str && str_tok)
-		str = ft_strjoin(str, str_tok);
+		str = ft_strjoin_up(str, str_tok, 1, 1);
 	else if (!str)
 		str = str_tok;		
 	if (str && node && node->child && node->child->sibling && node->child->sibling->child && node->child->sibling->child->sibling)	//operateur			
