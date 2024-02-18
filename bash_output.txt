@@ -46,16 +46,16 @@ Commande: echo 0
 0
 
 Commande: /bin/ls -al
-total 2064
-drwxr-xr-x  9 seblin seblin    4096 Feb 18 07:58 .
+total 2060
+drwxr-xr-x  9 seblin seblin    4096 Feb 18 09:35 .
 drwxr-xr-x 11 seblin seblin    4096 Jan 29 20:52 ..
-drwxr-xr-x  8 seblin seblin    4096 Feb 17 19:28 .git
+drwxr-xr-x  8 seblin seblin    4096 Feb 18 09:34 .git
 -rw-r--r--  1 seblin seblin      17 Jan 26 15:17 .gitignore
 drwxr-xr-x  2 seblin seblin    4096 Feb 17 18:33 .vscode
 -rw-r--r--  1 seblin seblin    3361 Feb 17 18:33 Makefile
 -rw-r--r--  1 seblin seblin     786 Feb 10 14:43 README.md
 -rw-r--r--  1 seblin seblin   50859 Feb  3 18:34 allowed_functions.md
--rw-r--r--  1 seblin seblin     473 Feb 18 07:59 bash_output.txt
+-rw-r--r--  1 seblin seblin     473 Feb 18 09:35 bash_output.txt
 -rwxr-xr-x  1 seblin seblin    4675 Feb 17 21:08 compare_bash_and_minishell.sh
 -rw-r--r--  1 seblin seblin   27775 Feb  3 18:53 correct_output.txt
 -rw-r--r--  1 seblin seblin   59401 Feb  3 18:34 diff_output.txt
@@ -63,23 +63,23 @@ drwxr-xr-x  2 seblin seblin    4096 Feb 17 18:33 .vscode
 -rw-r--r--  1 seblin seblin   90973 Feb 14 15:59 eval_minishell.pdf
 -rw-r--r--  1 seblin seblin      20 Feb 15 17:02 fie
 -rw-r--r--  1 seblin seblin      13 Feb 17 18:23 file
--rw-r--r--  1 seblin seblin    2188 Feb 17 19:06 file1
--rw-------  1 seblin seblin       6 Feb 17 21:06 fileout
+-rw-r--r--  1 seblin seblin    2210 Feb 18 09:34 file1
+-rw-------  1 seblin seblin       0 Feb 18 09:32 fileout
 -rw-r--r--  1 seblin seblin       7 Feb 17 10:33 fille
 -rw-r--r--  1 seblin seblin      45 Feb 17 18:23 fou
 drwxr-xr-x  3 seblin seblin    4096 Feb 17 10:31 includes
 drwxr-xr-x  5 seblin seblin    4096 Jan 25 18:43 lib
--rwxr-xr-x  1 seblin seblin  164640 Feb 18 07:58 minishell
--rw-r--r--  1 seblin seblin     473 Feb 18 07:59 minishell_output.txt
+-rwxr-xr-x  1 seblin seblin  164728 Feb 18 09:35 minishell
+-rw-r--r--  1 seblin seblin     477 Feb 18 09:35 minishell_output.txt
 drwxr-xr-x  6 seblin seblin    4096 Feb 13 19:37 minishell_tester
 -rw-r--r--  1 seblin seblin       0 Feb 17 18:23 moutou
 -rw-r--r--  1 seblin seblin       6 Feb 14 14:05 not_existing
 -rw-r--r--  1 seblin seblin     414 Feb 14 16:56 notexisting
--rw-r--r--  1 seblin seblin       7 Feb 18 07:59 outfile
+-rw-r--r--  1 seblin seblin      25 Feb 18 09:33 outfile
 -rw-r--r--  1 seblin seblin       5 Feb 17 10:33 outfille
 -rw-r--r--  1 seblin seblin       5 Feb 17 10:33 outfille2
 -rw-r--r--  1 seblin seblin     126 Feb 14 14:02 output.txt
-drwxr-xr-x  5 seblin seblin    4096 Feb 17 19:22 src
+drwxr-xr-x  5 seblin seblin    4096 Feb 18 09:29 src
 -rw-r--r--  1 seblin seblin     217 Feb  7 18:14 test_commands.txt
 drwxr-xr-x  6 seblin seblin    4096 Feb 14 09:12 test_lucas
 -rw-r--r--  1 seblin seblin      38 Feb 17 12:46 testfile
@@ -341,7 +341,7 @@ total 2052
 -rw-r--r-- 1 seblin seblin    3361 Feb 17 18:33 Makefile
 -rw-r--r-- 1 seblin seblin     786 Feb 10 14:43 README.md
 -rw-r--r-- 1 seblin seblin   50859 Feb  3 18:34 allowed_functions.md
--rw-r--r-- 1 seblin seblin    6451 Feb 18 07:59 bash_output.txt
+-rw-r--r-- 1 seblin seblin    6451 Feb 18 09:35 bash_output.txt
 -rwxr-xr-x 1 seblin seblin    4675 Feb 17 21:08 compare_bash_and_minishell.sh
 -rw-r--r-- 1 seblin seblin   27775 Feb  3 18:53 correct_output.txt
 -rw-r--r-- 1 seblin seblin   59401 Feb  3 18:34 diff_output.txt
@@ -349,23 +349,23 @@ total 2052
 -rw-r--r-- 1 seblin seblin   90973 Feb 14 15:59 eval_minishell.pdf
 -rw-r--r-- 1 seblin seblin      20 Feb 15 17:02 fie
 -rw-r--r-- 1 seblin seblin      13 Feb 17 18:23 file
--rw-r--r-- 1 seblin seblin    2188 Feb 17 19:06 file1
--rw------- 1 seblin seblin       6 Feb 17 21:06 fileout
+-rw-r--r-- 1 seblin seblin    2210 Feb 18 09:34 file1
+-rw------- 1 seblin seblin       0 Feb 18 09:32 fileout
 -rw-r--r-- 1 seblin seblin       7 Feb 17 10:33 fille
 -rw-r--r-- 1 seblin seblin      45 Feb 17 18:23 fou
 drwxr-xr-x 3 seblin seblin    4096 Feb 17 10:31 includes
 drwxr-xr-x 5 seblin seblin    4096 Jan 25 18:43 lib
--rwxr-xr-x 1 seblin seblin  164640 Feb 18 07:58 minishell
--rw-r--r-- 1 seblin seblin    6129 Feb 18 07:59 minishell_output.txt
+-rwxr-xr-x 1 seblin seblin  164728 Feb 18 09:35 minishell
+-rw-r--r-- 1 seblin seblin    9685 Feb 18 09:35 minishell_output.txt
 drwxr-xr-x 6 seblin seblin    4096 Feb 13 19:37 minishell_tester
 -rw-r--r-- 1 seblin seblin       0 Feb 17 18:23 moutou
 -rw-r--r-- 1 seblin seblin       6 Feb 14 14:05 not_existing
 -rw-r--r-- 1 seblin seblin     414 Feb 14 16:56 notexisting
--rw-r--r-- 1 seblin seblin       7 Feb 18 07:59 outfile
+-rw-r--r-- 1 seblin seblin      25 Feb 18 09:33 outfile
 -rw-r--r-- 1 seblin seblin       5 Feb 17 10:33 outfille
 -rw-r--r-- 1 seblin seblin       5 Feb 17 10:33 outfille2
 -rw-r--r-- 1 seblin seblin     126 Feb 14 14:02 output.txt
-drwxr-xr-x 5 seblin seblin    4096 Feb 17 19:22 src
+drwxr-xr-x 5 seblin seblin    4096 Feb 18 09:29 src
 -rw-r--r-- 1 seblin seblin     217 Feb  7 18:14 test_commands.txt
 drwxr-xr-x 6 seblin seblin    4096 Feb 14 09:12 test_lucas
 -rw-r--r-- 1 seblin seblin      38 Feb 17 12:46 testfile
@@ -896,11 +896,14 @@ papa
 papa
 maman
 maman
+papa
+maman
 
 Commande: echo 0
 0
 
 Commande: cat file1 | grep papa | more
+papa
 papa
 papa
 papa
@@ -1153,6 +1156,7 @@ Commande: echo 0
 0
 
 Commande: ls
+ 
 Makefile
 README.md
 allowed_functions.md
@@ -1337,7 +1341,7 @@ Commande: echo 0
 0
 
 Commande: <outfile cat
-dnuof ton dnammoc :oehce
+
 
 Commande: echo 0
 0
