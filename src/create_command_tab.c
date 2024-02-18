@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/17 18:39:30 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/18 09:44:46 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 				k++;
 				current = current->sibling;
 			}
-			cmd_tab[i] = (char **)ft_calloc(k, sizeof(char *));
+			cmd_tab[i] = (char **)ft_calloc(k + 1, sizeof(char *));
 			if (cmd_tab[i] == NULL)
 				return (NULL);
 			j = 0;
@@ -171,7 +171,7 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 				cmd_tab[i][j++] = get_node_str(data, node->child);
 				node = node->sibling;
 			}
-			cmd_tab[i][k] = NULL;
+			cmd_tab[i][j] = NULL;
 			if (!is_separator(node))
 				i++;
 			continue ;
@@ -193,7 +193,7 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 	while (current)
 		current = current->sibling;
 	cmd_nbr = get_cmd_nbr(node);
-	cmd_tab = (char ***)malloc(sizeof (char **) * cmd_nbr + 1);
+	cmd_tab = (char ***)ft_calloc(cmd_nbr + 1, sizeof (char **));
 	if (cmd_tab == NULL)
 		return (NULL);
 	cmd_tab[cmd_nbr] = NULL;

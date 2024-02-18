@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/17 18:19:12 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/18 09:29:47 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ char	**update_shlvl(char	**envp_tab)
 			shlvl++;
 			new_shlvl = ft_itoa(shlvl);
 			ft_strlcpy(&envp_tab[i][6], new_shlvl, ft_strlen (new_shlvl) + 1);
+			free(new_shlvl);
 		}
 		i++;
 	}
