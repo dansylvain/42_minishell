@@ -50,41 +50,41 @@ Commande: echo 0
 
 Commande: /bin/ls -al
 total 2084
-drwxrwxrwx  9 dan dan    4096 févr. 18 16:25 .
+drwxrwxrwx  9 dan dan    4096 févr. 18 16:46 .
 drwxrwxr-x 13 dan dan    4096 févr. 15 18:07 ..
--rw--w----  1 dan dan       1 févr. 18 11:32 |
+-rw-rw-r--  1 dan dan       1 févr. 18 16:39 |
 -rw-rw-r--  1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r--  1 dan dan     495 févr. 18 16:26 bash_output.txt
+-rw-rw-r--  1 dan dan     495 févr. 18 16:46 bash_output.txt
 -rwxrwxr-x  1 dan dan    4592 févr. 17 18:28 compare_bash_and_minishell.sh
 -rw-rw-r--  1 dan dan   27775 févr.  3 18:49 correct_output.txt
 -rw-rw-r--  1 dan dan   59401 févr.  3 15:52 diff_output.txt
 -rw-rw-r--  1 dan dan 1568461 janv. 26 11:52 en.subject.pdf
 -rw-rw-r--  1 dan dan   90973 févr. 14 14:11 eval_minishell.pdf
 -rw-rw-r--  1 dan dan      20 févr. 17 17:28 fie
--rw-rw-r--  1 dan dan     101 févr. 18 11:07 file
--rw-rw-r--  1 dan dan    2846 févr. 18 16:20 file1
--rw-rw-r--  1 dan dan       7 févr. 18 11:13 file2.txt
--rw-rw-r--  1 dan dan       6 févr. 18 11:13 file.txt
+-rw-rw-r--  1 dan dan     101 févr. 18 16:37 file
+-rw-rw-r--  1 dan dan    2868 févr. 18 16:45 file1
+-rw-rw-r--  1 dan dan       7 févr. 18 16:37 file2.txt
+-rw-rw-r--  1 dan dan       6 févr. 18 16:37 file.txt
 -rw-rw-r--  1 dan dan       7 févr. 17 17:28 fille
 -rw-rw-r--  1 dan dan      45 févr. 17 18:28 fou
-drwxrwxr-x  8 dan dan    4096 févr. 18 13:57 .git
+drwxrwxr-x  8 dan dan    4096 févr. 18 16:45 .git
 -rw-rw-r--  1 dan dan      55 févr. 17 19:05 .gitignore
 drwxrwxr-x  3 dan dan    4096 févr. 17 19:05 includes
 drwxrwxr-x  5 dan dan    4096 janv. 25 09:42 lib
--rw-rw-r--  1 dan dan    3390 févr. 18 10:21 Makefile
--rwxrwxr-x  1 dan dan  169024 févr. 18 16:25 minishell
--rw-rw-r--  1 dan dan     495 févr. 18 16:26 minishell_output.txt
+-rw-rw-r--  1 dan dan    3390 févr. 18 16:37 Makefile
+-rwxrwxr-x  1 dan dan  169024 févr. 18 16:46 minishell
+-rw-rw-r--  1 dan dan     495 févr. 18 16:46 minishell_output.txt
 drwxrwxr-x  2 dan dan    4096 févr. 14 13:34 minishell_tester
 -rw-rw-r--  1 dan dan       0 févr. 17 18:28 moutou
 -rw-rw-r--  1 dan dan       6 févr. 14 13:32 not_existing
 -rw-rw-r--  1 dan dan     414 févr. 14 18:46 notexisting
--rw-rw-r--  1 dan dan      25 févr. 18 16:20 outfile
+-rw-rw-r--  1 dan dan      25 févr. 18 16:44 outfile
 -rw-rw-r--  1 dan dan       5 févr. 17 18:28 outfile2
 -rw-rw-r--  1 dan dan       5 févr. 17 10:48 outfille
 -rw-rw-r--  1 dan dan       5 févr. 17 10:48 outfille2
 -rw-rw-r--  1 dan dan     126 févr. 14 14:07 output.txt
 -rw-rw-r--  1 dan dan     786 févr. 18 13:59 README.md
-drwxrwxr-x  5 dan dan    4096 févr. 18 16:25 src
+drwxrwxr-x  5 dan dan    4096 févr. 18 16:46 src
 -rw-rw-r--  1 dan dan     217 févr.  7 16:59 test_commands.txt
 -rw-rw-r--  1 dan dan      38 févr. 17 12:43 testfile
 drwxrwxr-x  2 dan dan    4096 févr. 14 13:34 test_lucas
@@ -307,7 +307,7 @@ Commande: echo 0
 0
 
 Commande: <noexist cat
-
+No such file or directory: noexist
 
 Commande: echo 0
 0
@@ -350,37 +350,37 @@ Commande: echo 0
 
 Commande: l's' '-'l
 total 2072
--rw--w---- 1 dan dan       1 févr. 18 11:32 |
+-rw-rw-r-- 1 dan dan       1 févr. 18 16:39 |
 -rw-rw-r-- 1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r-- 1 dan dan    6552 févr. 18 16:26 bash_output.txt
+-rw-rw-r-- 1 dan dan    6552 févr. 18 16:46 bash_output.txt
 -rwxrwxr-x 1 dan dan    4592 févr. 17 18:28 compare_bash_and_minishell.sh
 -rw-rw-r-- 1 dan dan   27775 févr.  3 18:49 correct_output.txt
 -rw-rw-r-- 1 dan dan   59401 févr.  3 15:52 diff_output.txt
 -rw-rw-r-- 1 dan dan 1568461 janv. 26 11:52 en.subject.pdf
 -rw-rw-r-- 1 dan dan   90973 févr. 14 14:11 eval_minishell.pdf
 -rw-rw-r-- 1 dan dan      20 févr. 17 17:28 fie
--rw-rw-r-- 1 dan dan     101 févr. 18 11:07 file
--rw-rw-r-- 1 dan dan    2846 févr. 18 16:20 file1
--rw-rw-r-- 1 dan dan       7 févr. 18 11:13 file2.txt
--rw-rw-r-- 1 dan dan       6 févr. 18 11:13 file.txt
+-rw-rw-r-- 1 dan dan     101 févr. 18 16:37 file
+-rw-rw-r-- 1 dan dan    2868 févr. 18 16:45 file1
+-rw-rw-r-- 1 dan dan       7 févr. 18 16:37 file2.txt
+-rw-rw-r-- 1 dan dan       6 févr. 18 16:37 file.txt
 -rw-rw-r-- 1 dan dan       7 févr. 17 17:28 fille
 -rw-rw-r-- 1 dan dan      45 févr. 17 18:28 fou
 drwxrwxr-x 3 dan dan    4096 févr. 17 19:05 includes
 drwxrwxr-x 5 dan dan    4096 janv. 25 09:42 lib
--rw-rw-r-- 1 dan dan    3390 févr. 18 10:21 Makefile
--rwxrwxr-x 1 dan dan  169024 févr. 18 16:25 minishell
--rw-rw-r-- 1 dan dan    6196 févr. 18 16:26 minishell_output.txt
+-rw-rw-r-- 1 dan dan    3390 févr. 18 16:37 Makefile
+-rwxrwxr-x 1 dan dan  169024 févr. 18 16:46 minishell
+-rw-rw-r-- 1 dan dan    6230 févr. 18 16:46 minishell_output.txt
 drwxrwxr-x 2 dan dan    4096 févr. 14 13:34 minishell_tester
 -rw-rw-r-- 1 dan dan       0 févr. 17 18:28 moutou
 -rw-rw-r-- 1 dan dan       6 févr. 14 13:32 not_existing
 -rw-rw-r-- 1 dan dan     414 févr. 14 18:46 notexisting
--rw-rw-r-- 1 dan dan      25 févr. 18 16:20 outfile
+-rw-rw-r-- 1 dan dan      25 févr. 18 16:44 outfile
 -rw-rw-r-- 1 dan dan       5 févr. 17 18:28 outfile2
 -rw-rw-r-- 1 dan dan       5 févr. 17 10:48 outfille
 -rw-rw-r-- 1 dan dan       5 févr. 17 10:48 outfille2
 -rw-rw-r-- 1 dan dan     126 févr. 14 14:07 output.txt
 -rw-rw-r-- 1 dan dan     786 févr. 18 13:59 README.md
-drwxrwxr-x 5 dan dan    4096 févr. 18 16:25 src
+drwxrwxr-x 5 dan dan    4096 févr. 18 16:46 src
 -rw-rw-r-- 1 dan dan     217 févr.  7 16:59 test_commands.txt
 -rw-rw-r-- 1 dan dan      38 févr. 17 12:43 testfile
 drwxrwxr-x 2 dan dan    4096 févr. 14 13:34 test_lucas
@@ -1022,11 +1022,17 @@ papa
 papa
 maman
 maman
+papa
+papa
+maman
+maman
 
 Commande: echo 0
 0
 
 Commande: cat file1 | grep papa | more
+papa
+papa
 papa
 papa
 papa
@@ -1520,7 +1526,10 @@ Commande: echo 0
 0
 
 Commande: <outfile cat
-
+tset
+alalo fitom
+nononon fitom
+teuôp
 
 Commande: echo 0
 0
@@ -1532,7 +1541,7 @@ Commande: echo 0
 0
 
 Commande: <outfile cat
-
+ainain
 
 Commande: echo 0
 0
@@ -1544,7 +1553,7 @@ Commande: echo 0
 0
 
 Commande: <outfile cat
-
+dnuof ton dnammoc :oehce
 
 Commande: echo 0
 0
