@@ -6,13 +6,14 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/18 11:30:34 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/18 16:25:05 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "parsing_utils.h"
 
+void	free_command_tab_lg(char ***command_tab);
 void		print_rslt(t_ast_nde *rslt, int flag);
 int			is_env_var(char *str);
 char		*get_env_var(t_Data *data, char *str, char buff[]);
@@ -235,6 +236,7 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 			data->exit_status = pipex(cmd_tab, envp);
 		else if (!command_is_builtin(*cmd_tab, data, envp))
 			data->exit_status = pipex(cmd_tab, envp);
+		free_command_tab_lg(cmd_tab);
 	}
 	flag = data->exit_status;
 	if (node && node->token == OR)

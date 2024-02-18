@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:22:52 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/02/13 18:41:07 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/18 14:09:25 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,18 @@ void	free_command_tab(char **command_tab)
 		if (command_tab[i])
 			free(command_tab[i]);
 		i++;
+	}
+	free(command_tab);
+}
+
+void	free_command_tab_lg(char ***command_tab)
+{
+	int	i;
+
+	i = 0;
+	while (command_tab[i])
+	{
+		free_command_tab(command_tab[i++]);
 	}
 	free(command_tab);
 }
