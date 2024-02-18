@@ -6,12 +6,12 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 15:27:14 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/18 07:41:51 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/18 16:49:41 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SETUP_H
-# define SETUP_H
+#ifndef PIPEX_SETUP_H
+# define PIPEX_SETUP_H
 
 typedef struct set_redir
 {

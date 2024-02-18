@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 07:30:24 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/17 15:41:55 by dan              ###   ########.fr        #
+#    Updated: 2024/02/18 11:24:33 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRC =		ft_atoi.c \
 			ft_memmove.c \
 			ft_memset.c \
 			ft_split.c \
-			ft_strchr.c \
 			ft_strdup.c \
 			ft_strndup.c \
 			ft_striteri.c \
@@ -55,6 +54,8 @@ SRC =		ft_atoi.c \
 			ft_putstr_fd.c \
 			ft_strcmp.c \
 			ft_strcat.c \
+			ft_realloc.c \
+			# ft_strchr.c \
 
 SRC_BONUS = ft_lstnew_bonus.c \
 			ft_lstadd_front_bonus.c \

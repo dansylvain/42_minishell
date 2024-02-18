@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 09:57:00 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/02/05 11:18:42 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/17 18:58:56 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_next_line(int fd)
 		return (delete_data(&data, fd));
 	while (!(ft_strchr(data->buff_nl, '\n')) && data->bytes_read)
 	{
-		data->bytes_read = read(fd, data->buffer, BUFFER_SIZE);
+		data->bytes_read = read(fd, data->buffer, BUFF);
 		if (data->bytes_read == -1)
 			return (delete_data(&head, fd));
 		data->buffer[data->bytes_read] = '\0';
@@ -68,17 +68,17 @@ int	initialise_variables(t_Data **data)
 
 	if (!(*data)->buff_nl)
 	{
-		(*data)->buff_nl = (char *)malloc((BUFFER_SIZE * 5) * sizeof(char));
-		(*data)->buff_nl_size = BUFFER_SIZE * 5;
+		(*data)->buff_nl = (char *)malloc((BUFF * 5) * sizeof(char));
+		(*data)->buff_nl_size = BUFF * 5;
 		i = 0;
-		while (i < BUFFER_SIZE * 5)
+		while (i < BUFF * 5)
 			(*data)->buff_nl[i++] = '\0';
 	}
 	if (!(*data)->buffer)
 	{
 		i = 0;
-		(*data)->buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-		while (i < BUFFER_SIZE + 1)
+		(*data)->buffer = (char *)malloc((BUFF + 1) * sizeof(char));
+		while (i < BUFF + 1)
 			((*data)->buffer)[i++] = '\0';
 	}
 	if (!*data || !(*data)->buff_nl || !(*data)->buffer)
@@ -98,7 +98,7 @@ void	*expand_buff_nl(t_Data **data)
 
 	tmp = NULL;
 	i = 0;
-	if (((*data)->buff_nl_size - ft_strlen_gnl((*data)->buff_nl) < BUFFER_SIZE + 1))
+	if (((*data)->buff_nl_size - ft_strlen_gnl((*data)->buff_nl) < BUFF + 1))
 	{
 		tmp = (*data)->buff_nl;
 		(*data)->buff_nl = (char *)malloc((*data)->buff_nl_size * 2);
@@ -140,7 +140,8 @@ char	*build_next_line(t_Data **data, char *tmp, int bytes_read)
 	}
 	else if (bytes_read == 0 && *(*data)->buff_nl)
 	{
-		next_line = ft_substr((*data)->buff_nl, 0, ft_strlen_gnl((*data)->buff_nl));
+		next_line = ft_substr((*data)->buff_nl, 0,
+				ft_strlen_gnl((*data)->buff_nl));
 		*(*data)->buff_nl = '\0';
 		return (next_line);
 	}
