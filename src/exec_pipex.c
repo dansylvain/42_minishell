@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/02/18 18:30:22 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 00:45:07 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ void	exec_pipex(t_Data *data, char *cmd, char *envp[])
 		current = current->sibling;	
 	}
 	launch_command_tab(data, cmd_list, envp, 0);
-	free_sibling_and_child(cmd_list);
+	//free_sibling_and_child(cmd_list);
 }
