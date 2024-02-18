@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 09:57:00 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/02/17 18:58:56 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/18 17:03:05 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*get_next_line(int fd)
 {
-	static t_Data	*head = NULL;
-	t_Data			*data;
+	static t_gnl	*head = NULL;
+	t_gnl			*data;
 	char			*next_line;
 	char			*tmp;
 
@@ -40,9 +40,9 @@ char	*get_next_line(int fd)
 	return (NULL);
 }
 
-t_Data	*get_data(t_Data **head, int fd)
+t_gnl	*get_data(t_gnl **head, int fd)
 {
-	t_Data	*current;
+	t_gnl	*current;
 
 	current = *head;
 	while (current)
@@ -51,7 +51,7 @@ t_Data	*get_data(t_Data **head, int fd)
 			return (current);
 		current = current->next;
 	}
-	current = (t_Data *)malloc(sizeof(t_Data));
+	current = (t_gnl *)malloc(sizeof(t_gnl));
 	if (!current)
 		return (delete_node(current));
 	current->buff_nl = NULL;
@@ -62,7 +62,7 @@ t_Data	*get_data(t_Data **head, int fd)
 	return (current);
 }
 
-int	initialise_variables(t_Data **data)
+int	initialise_variables(t_gnl **data)
 {
 	size_t			i;
 
@@ -90,7 +90,7 @@ int	initialise_variables(t_Data **data)
 	return (1);
 }
 
-void	*expand_buff_nl(t_Data **data)
+void	*expand_buff_nl(t_gnl **data)
 {
 	char	*tmp;
 	size_t	i;
@@ -119,7 +119,7 @@ void	*expand_buff_nl(t_Data **data)
 	return ((*data)->buff_nl);
 }
 
-char	*build_next_line(t_Data **data, char *tmp, int bytes_read)
+char	*build_next_line(t_gnl **data, char *tmp, int bytes_read)
 {
 	char	*next_line;
 	size_t	i;

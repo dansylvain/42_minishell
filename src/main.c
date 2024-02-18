@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/18 16:52:18 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/18 17:50:07 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void		exec_pipex(t_Data *data, char *cmd, char *envp[]);
 void		launch_command_tab(t_Data *data, t_ast_nde *node,
 				char *envp[], int flag);
 int			exec_exit(t_Data *data, char **command_tab);
+char	*get_next_line(int fd);
+
 
 /**========================================================================
  *                             COMMENTS POLICY
@@ -88,10 +90,7 @@ void	build_prompt(char prompt[])
 }
 
 /**========================================================================
- *                           
- * possibility to add the path before prompt with this function
- * (write a function "build_prompt")
- * prompt = getcwd(NULL, 0);
+ *                           prompt_loop
  *========================================================================**/
 
 int	prompt_loop(t_Data *data, char *envp[])
@@ -102,8 +101,12 @@ int	prompt_loop(t_Data *data, char *envp[])
 	cmd[1] = NULL;
 	while (1)
 	{
-		build_prompt(prompt);
-		cmd[0] = readline(prompt);
+		// build_prompt(prompt);
+		// cmd[0] = readline(prompt);
+		// ft_printf("%s", prompt);
+		char *gnl_output = get_next_line(0);
+		gnl_output[ft_strlen(gnl_output) - 1] = '\0';
+		cmd[0] = gnl_output;
 		if (cmd[0] && *cmd[0])
 			add_history(cmd[0]);
 		if (cmd[0] == NULL)
@@ -135,27 +138,29 @@ int	is_only_space(char *str)
  *========================================================================**/
 int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 {
-	int		return_pipex;
+	int	return_pipex;
+	int	len;
 	
+	len = ft_strlen(cmd_tab[0]);
 	if (!cmd_tab)
 		return (1);
 	if (!cmd_tab[0])
 		return (free_command_tab(cmd_tab), 1);
 	if (is_only_space(cmd_tab[0]))
 		return (1);
-	if (ft_strlen(cmd_tab[0]) >= 2 && !ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 2]), "cd", 3))
+	if (len >= 2 && !ft_strncmp(&(cmd_tab[0][len - 2]), "cd", 3))
 		return (exec_cd(data, cmd_tab), 1);
-	if (ft_strlen(cmd_tab[0]) >= 3 && !ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "env", 4))
+	if (len >= 3 && !ft_strncmp(&(cmd_tab[0][len - 3]), "env", 4))
 		return (exec_env(data, cmd_tab), 1);
-	if (ft_strlen(cmd_tab[0]) >= 3 && !ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 3]), "pwd", 4))
+	if (len >= 3 && !ft_strncmp(&(cmd_tab[0][len - 3]), "pwd", 4))
 		return (exec_pwd(data), 1);
-	if (ft_strlen(cmd_tab[0]) >= 4 && !ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "echo", 5))
+	if (len >= 4 && !ft_strncmp(&(cmd_tab[0][len - 4]), "echo", 5))
 		return (exec_echo(data, cmd_tab), 1);
-	if (ft_strlen(cmd_tab[0]) >= 4 && !ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 4]), "exit", 5))
+	if (len >= 4 && !ft_strncmp(&(cmd_tab[0][len - 4]), "exit", 5))
 		(exec_exit(data, cmd_tab));
-	if (ft_strlen(cmd_tab[0]) >= 5 && !ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 5]), "unset", 6))
+	if (len >= 5 && !ft_strncmp(&(cmd_tab[0][len - 5]), "unset", 6))
 		return (exec_unset(data, cmd_tab), 1);
-	if (ft_strlen(cmd_tab[0]) >= 6 && !ft_strncmp(&(cmd_tab[0][ft_strlen(cmd_tab[0]) - 6]), "export", 7))
+	if (len >= 6 && !ft_strncmp(&(cmd_tab[0][len - 6]), "export", 7))
 		return (exec_export(cmd_tab, data), 1);
 	return (0);
 }
