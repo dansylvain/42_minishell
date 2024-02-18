@@ -80,6 +80,8 @@ commands=(
 	"echo $?"
 	"cat file1 | grep papa | more"
 	"echo $?"
+	"<< end cat|>fileout"
+	"echo $?"
 	"ls fichiernul | grep bla | more"
 	"echo $?"
 	"export VAR=tamaman"

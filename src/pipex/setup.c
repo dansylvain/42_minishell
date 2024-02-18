@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/17 18:19:03 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/18 07:50:30 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 #include "pipex_setup.h"
 
-static void	close_fd(int fd[])
+void	close_fd(int fd[])
 {
 	if (fd[0] > 2)
 		close(fd[0]);

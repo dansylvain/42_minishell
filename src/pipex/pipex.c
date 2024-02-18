@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/17 19:28:01 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/18 07:58:07 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include "../../lib/get_next_line/get_next_line.h"
 #include "pipex_setup.h"
 
+void	close_fd(int fd[]);
 // void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir);
 int	get_fdio(t_redir *redir);
 //char	**parse_cmd(char *argv[], char *envp[]);
@@ -91,7 +92,7 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 					close(pipefd[0][0]);
 				pipefd[0][0] = pipefd[1][0];
 				pipefd[0][1] = pipefd[1][1];
-				pipe(pipefd[1]);
+				pipe(pipefd[1]); 
 			}
 		}
 		argv++;
@@ -109,7 +110,7 @@ void	here_doc_handle(int pipefd_in[], t_redir redir) //argv!!
 		line = get_next_line(0);
 		if (line)
 		{
-			line[ft_strlen(line) - 1] = 0;
+			line[ft_strlen(line) - 1] = 0; //optimisable ... ajout \n a delim
 			if (ft_strcmp(line, redir.delim))
 			{
 				line[ft_strlen(line)] = '\n';
@@ -122,9 +123,12 @@ void	here_doc_handle(int pipefd_in[], t_redir redir) //argv!!
 				break ;
 			}
 		}
-		else	
+		else
+		{
+			ft_printf("\rwarning: here-document at line 1 delimited by end-of-file (wanted '%s')\n", redir.delim);
 			break ;
-		free(line);
+		}
+		free(line); //opti
 	}
 }
 // void	here_doc_handle(char **argv[], int pipefd_in[])
@@ -140,8 +144,14 @@ pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 	pid_t	pid;
 	
 	pid = -1;
-	pipe(pipefd_in);
-	pipe(pipefd_out);
+	if (redir.pipe[0] < 0)
+		pipe(pipefd_in);
+	else
+	{
+		pipefd_in[0] = redir.pipe[0];
+		pipefd_in[1] = redir.pipe[1];
+	}
+	pipe(pipefd_out); // optim ?
 	if (!redir.redir[0])
 	{
 		close(pipefd_in[0]);
@@ -152,8 +162,9 @@ pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 		close(pipefd_in[0]);
 		pipefd_in[0] = redir.fd_file[0];
 	}
-	else if (redir.redir[0] == 2)
-		here_doc_handle(pipefd_in, redir);
+	// else if (redir.redir[0] == 2)
+	// 	redir.pipe[0] = 
+	// 	here_doc_handle(pipefd_in, redir);
 	pid = nurcery(argv, envp, redir.fd_file, (int *[]){pipefd_in, pipefd_out}, redir);
 	close(pipefd_in[1]);
 	close(pipefd_out[1]);
@@ -232,8 +243,10 @@ int	set_redir(char **argv, t_redir *redir)
 		if (!ft_strcmp(*argv, "<<"))
 		{			
 			redir->delim = argv[1];
-			redir->redir[0] = 2;
-			//here_doc_handle()			
+			redir->redir[0] = 2;			
+			close_fd(redir->pipe);
+			pipe(redir->pipe);
+			here_doc_handle(redir->pipe, *redir);		
 		}
 		else
 		{
@@ -255,6 +268,9 @@ int	set_redir(char **argv, t_redir *redir)
 }
 int	set_io(char **argv[], t_redir *redir)
 {
+	redir->pipe[0] = -1;
+	redir->pipe[1] = -1;
+	redir->redir[1] = 0;
 	redir->redir[0] = 0;
 	redir->redir[1] = 0;
 	redir->delim = NULL;
@@ -298,7 +314,7 @@ int	pipex(char **argv[], char *envp[])
     		exit_status = WEXITSTATUS(status);		
 	}
 	else 
-    	ft_printf("waitpid a échoué ou il n'y avait aucun enfant à attendre\n");
+    	;//ft_printf("waitpid a échoué ou il n'y avait aucun enfant à attendre\n");
 	while (wait(&(int){0}) > 0)
 		;
 	return (exit_status);
