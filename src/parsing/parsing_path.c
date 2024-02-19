@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/19 20:11:13 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 22:55:09 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 #include <unistd.h>
 #include "libft.h"
 #include "ft_printf.h"
-#include "parsing_build.h"
 #include "minishell.h"
 
+
+void	display_error(char *str);
+void	free_ptr_arr(char **arr);
 
 static char	*try_paths(char **argv, char *env_find)
 {
@@ -71,31 +73,6 @@ char	*search_env_var(char *envp[], char *env_to_find)
 	return (env_find);
 }
 
-char	**parse_cmd(char *argv[], char *envp[])
-{
-	char	**split_arg;
-	char	*env_find;
-
-	if (!**argv)
-		return (NULL);
-	env_find = search_env_var(envp, "PATH=");
-	if (!env_find)
-	{
-		ft_putstr_fd("env PATH not found.\n", 2);
-		exit(1);
-	}
-	split_arg = create_ast_pipex(*argv);
-	if (!try_paths(split_arg, env_find) && ft_strcmp(*split_arg, "cd")
-		&& ft_strcmp(*split_arg, "unset") && ft_strcmp(*split_arg, "export")
-		&& ft_strcmp(*split_arg, "exit"))
-	{
-		// perror(*split_arg);
-		//free_ptr_arr(split_arg);
-		//exit(1);
-	}// printf("in parse %s\n", *split_arg);
-//	ft_putstr_fd("in parse\n", 2 );
-	return (split_arg);
-}
 char	**search_path(char *argv[], char *envp[])
 {
 	char	**split_arg;

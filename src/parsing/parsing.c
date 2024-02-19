@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/19 19:22:41 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 22:46:38 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "parsing_utils.h"
 #include "libft.h"
 #include "stdio.h"
-#include "parsing_spce.h"
-#include "parsing_qute.h"
 #include "ft_printf.h"
 #include "minishell.h"
 
@@ -28,29 +26,12 @@ void		print_qute_sib(t_ast_nde *sib);
 void		print_sib(t_ast_nde *sib);
 t_ast_nde	*set_operator(t_ast_nde *node);
 void	print_tree(t_ast_nde *node);
-//t_ast_nde	*set_space(t_ast_nde *node);
 int	set_dollar(t_ast_nde *node);
 void print_rslt(t_ast_nde *rslt, int flag);
 char	*search_env_var(char *envp[], char *env_to_find);
 void	free_sibling(t_ast_nde *sib);
-// static void	leaf_tree(t_ast_nde *root, t_ast_nde **cmd, t_ast_nde **cmd_sav)
-// {
-// 	t_ast_nde	*head;
-	
-// 	head = root;
-// 	while (head)
-// 	{			
-// 		if (head->token == PIPE)
-// 		{				
-// 			leaf_tree(head->child, cmd, cmd_sav);
-// 			if (!head->child->child->child)			
-// 				add_sibling(head->child, cmd, cmd_sav);			
-// 			add_sibling(head->child->sibling, cmd, cmd_sav);
-// 			return ;
-// 		}		
-// 		head = head->child;
-// 	}	
-// }
+void print_sibling(t_ast_nde *sib);
+void	print_cmd(t_ast_nde *cmd);
 
 char* get_var(t_ast_nde *node, t_Data *data)
 {	
@@ -127,8 +108,7 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	{
 		str_rght = link_sibling(node->child->sibling->child); 
 		if (str && str_rght)
-			str = ft_strjoin_up(str, str_rght, 1, 1);	
-			//str = ft_strjoin(str, str_rght);
+			str = ft_strjoin_up(str, str_rght, 1, 1);			
 	}	
 	return (str);
 }
@@ -200,17 +180,11 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 	{					
 		if (raw_lft->child->sibling)
 			leaf_tree(raw_lft->child->sibling, rslt, rslt_sav, data);
-		else
-		{
-		//add_sibling(raw_lft->child, rslt, rslt_sav);	
-			add_sibling(copy_sibling2(raw_lft->child), rslt, rslt_sav);
-		}
+		else		
+			add_sibling(copy_sibling2(raw_lft->child), rslt, rslt_sav);		
 	}	
-	if (operator && operator->token != SPCE)
-	{ 		
-
-		    // operator->child = copy_node(operator);
-            // add_sibling(operator, rslt, rslt_sav);
+	if (operator && operator->token != SPCE && operator->token != RAW)
+	{ 	
 		tmp_op = copy_node(operator);
 		tmp_op->child = copy_node(operator);	
 		
@@ -221,11 +195,8 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 		next_operator = raw_rght->child->sibling;
 	if (next_operator)
 		leaf_tree(next_operator, rslt, rslt_sav, data);
-	else if (raw_rght && raw_rght->child)	
-	{
-		// add_sibling(raw_rght->child, rslt, rslt_sav);
-		add_sibling(copy_sibling2(raw_rght->child), rslt, rslt_sav);			
-	}	
+	else if (raw_rght && raw_rght->child)		
+		add_sibling(copy_sibling2(raw_rght->child), rslt, rslt_sav);		
 }
 
 t_ast_nde	*ft_lstlast_sib(t_ast_nde *lst)
@@ -323,105 +294,6 @@ t_ast_nde	*expand_vars(t_ast_nde *qute_sib)
 	return (qute_sib);
 }
 
-t_ast_nde	*format_io(t_ast_nde* cmd)
-{
-	t_ast_nde	*actual;
-	t_ast_nde	*format_cmd;
-	t_ast_nde	*format_cmd_sav;
-	t_ast_nde	*inter_cmd_tmp;
-	
-	format_cmd_sav = NULL;
-	actual = cmd;
-	while (actual)
-	{	
-		inter_cmd_tmp = actual;
-		while (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
-		{
-			if (actual->token == SCHEV_LFT || actual->token == DCHEV_LFT)			
-			{
-				add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
-				if (actual && actual->sibling && actual->sibling->token != PIPE && actual->sibling->token != AND  && actual->sibling->token != OR
-					&& actual->sibling->token != SCHEV_LFT && actual->sibling->token != DCHEV_LFT)
-				{
-					add_sibling(copy_node_child(actual->sibling), &format_cmd, &format_cmd_sav);
-					actual = actual->sibling;
-				}
-			}
-			actual = actual->sibling;
-		}
-		actual = inter_cmd_tmp;
-		while (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
-		{
-			if (actual->token == SCHEV_LFT || actual->token == DCHEV_LFT)			
-			{			
-				if (actual && actual->sibling && actual->sibling->token != PIPE && actual->sibling->token != AND  && actual->sibling->token != OR
-					&& actual->sibling->token != SCHEV_LFT && actual->sibling->token != DCHEV_LFT)
-					actual = actual->sibling;				
-			}
-			else
-				add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
-			actual = actual->sibling;
-		}		
-		if (actual)
-		{
-			add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
-			actual = actual->sibling;
-		}	
-	}
-	return (format_cmd_sav);
-}
-
-t_ast_nde	*format_io2(t_ast_nde* cmd)
-{
-	t_ast_nde	*actual;
-	t_ast_nde	*format_cmd;
-	t_ast_nde	*format_cmd_sav;
-	t_ast_nde	*inter_cmd_tmp;
-	
-	format_cmd_sav = NULL;
-	actual = cmd;
-	while (actual)
-	{	
-		inter_cmd_tmp = actual;
-		while (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
-		{
-			if (actual->token == SCHEV_RGTH || actual->token == DCHEV_RGTH)			
-			{			
-				if (actual && actual->sibling && actual->sibling->token != PIPE && actual->sibling->token != AND  && actual->sibling->token != OR
-					&& actual->sibling->token != SCHEV_RGTH && actual->sibling->token != DCHEV_RGTH)
-					actual = actual->sibling;
-				// if (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
-				// 	actual = actual->sibling;
-			}
-			else
-				add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
-			actual = actual->sibling;
-		}		
-		actual = inter_cmd_tmp;
-		while (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
-		{
-			if (actual->token == SCHEV_RGTH || actual->token == DCHEV_RGTH)			
-			{
-				add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
-				if (actual && actual->sibling && actual->sibling->token != PIPE && actual->sibling->token != AND  && actual->sibling->token != OR
-					&& actual->sibling->token != SCHEV_RGTH && actual->sibling->token != DCHEV_RGTH)
-				{
-					add_sibling(copy_node_child(actual->sibling), &format_cmd, &format_cmd_sav);
-					actual = actual->sibling;
-				}
-			}
-			actual = actual->sibling;
-		}		
-		if (actual)
-		{
-			add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
-			actual = actual->sibling;
-		}
-	//	actual = actual->sibling;
-	}
-	return (format_cmd_sav);
-}
-
 void	free_tree(t_ast_nde *operator)
 {
 	t_ast_nde *cont;
@@ -470,12 +342,6 @@ void	print_space_tree(t_ast_nde *node);
 static t_ast_nde	*create_ast(char *str, t_Data *data)
 {
 	t_ast_nde	*root;
-	t_ast_nde	*ast_res;
-	t_ast_nde	*qute_sib;
-	t_ast_nde	*spce_sib;
-	t_ast_nde	*pip_sib;
-	t_ast_nde	*parnths_sib;
-
 	t_ast_nde	*cmd_sav;
 	t_ast_nde	*cmd;
 	
@@ -486,60 +352,15 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	root->child = copy_node(root);
 	root->child->child = copy_node(root);
 	root->child->child->child = set_qute_sib(str);
-	//print_qute_sib(root->child->child->child);
-
 	set_operator(root->child);
-
-	//print_tree(root->child->child->sibling);
-	// if (root->child->child->sibling)
-	// 	set_space(root->child->child->sibling->child);//exit(1);
-	// else 
-	// 	set_space(root->child);
-	//exit(1);
-	//ft_printf("space\n\n");
+	leaf_tree(root, &cmd, &cmd_sav, data);	
 	
-	// if (root->child && root->child->child && root->child->child->sibling && root->child->child->sibling->child && root->child->child->sibling->child->child)
-	// 	print_space_tree(root->child->child->sibling->child->child->sibling);
-
-	// else
-	// 	print_space_tree(root->child);
-//	ft_printf("end\n\n");//exit(1);
-	//set_chevron();
+	// print_qute_sib(root->child->child->child);	
+	// print_tree(root->child->child->sibling);
+	// print_cmd(cmd_sav);
 	
-	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav, data);
-	//leaf_tree(root, &cmd, &cmd_sav, data);
-//	exit(1);
-	// print_rslt(cmd_sav, 1);
-	//ft_printf("\n\n");
-	// cmd_sav = format_io(cmd_sav);
-	
-	
-	
-
-
-	if (!cmd_sav)
-	{
-	//	ft_printf("commande sav fausle\n");
-		ast_res = root->child->child;
-	}
-	else
-		ast_res = cmd_sav;
-	if (root && root->child && root->child->child && root->child->child->sibling)
-	{
-		free_tree(root->child->child->sibling);
-	}
-	// if (root && root->child && root->child->child && root->child->child->child)
-	// {
-	// 	free(root->child->child->child);
-	// }
-		
-	// //	free(root->child->child);
-	// if (root && root->child)
-	// 	free(root->child);
-	// if (root)
-	// 	free(root);
-	//free_tree(root);
-	return (ast_res);
+	free_tree(root);
+	return (cmd_sav);
 }
 
 t_ast_nde	*parse(char *str, t_Data *data)
@@ -548,10 +369,3 @@ t_ast_nde	*parse(char *str, t_Data *data)
 		return (NULL);
 	return (create_ast(str, data));	
 }
-// int	tmp_main(void)
-// {	
-// 	char *str = " |cat <file1|\"rev\"|ca't'e |grep -n \" cmd1 | cmd2\"| >file2 cut -d':' -f1 ";
-// 	ft_printf("\n%s\n", str);
-// 	parse(str, data);
-// 	return(0);
-// }
