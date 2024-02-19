@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 14:10:57 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 14:17:49 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,15 @@ void		free_command_tab_lg(char ***command_tab);
 int			pipex(char **argv[], char *envp[]);
 t_ast_nde	*copy_node_child(t_ast_nde *node);
 
+/*   exec_pipex.c                                       :+:      :+:    :+:   */
+char		**parse_cmd(char **command, char **env);
+t_ast_nde	*parse(char *str, t_Data *data);
+void		launch_command_tab(t_Data *data, t_ast_nde *node,
+				char *envp[], int flag);
+int			wilcard_func(char *pattern);
+
+
+/*   handle_signals.c                                   :+:      :+:    :+:   */
+static void	sigint_handler(int signum);
+static void	sigquit_handler(int signum);
 #endif

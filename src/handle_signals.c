@@ -6,14 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:41:31 by dan               #+#    #+#             */
-/*   Updated: 2024/02/17 18:20:56 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 14:17:34 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-static void	sigint_handler(int signum);
-static void	sigquit_handler(int signum);
 
 /**========================================================================
  *                           handle_signals

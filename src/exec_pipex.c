@@ -6,24 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 11:16:28 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 14:16:37 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include "parsing_utils.h"
-
-char		**parse_cmd(char **command, char **env);
-void		tmp_main(void);
-void		display_command_tab(char **command_tab);
-int			pipex(char **argv[], char *envp[]);
-t_ast_nde	*parse(char *str, t_Data *data);
-char		***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
-void		display_command_tab_big(char ***command_tab);
-void		launch_command_tab(t_Data *data, t_ast_nde *node,
-				char *envp[], int flag);
-int			has_wildcard(char *str);
-int			wilcard_func(char *pattern);
 
 void	exec_pipex(t_Data *data, char *cmd, char *envp[])
 {
