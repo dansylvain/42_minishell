@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/19 15:09:43 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 19:02:04 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,7 @@ char	*translate_enum(t_tok token)
 	else if (token == SCHEV_RGTH)
 		return ">";
 	else if (token == DCHEV_RGTH)
-		return ">>";
-	ft_putstr_fd("no token enum\n", 2);
+		return ">>";	
 	return (NULL);
 }
 

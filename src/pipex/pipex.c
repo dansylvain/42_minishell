@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/19 14:54:54 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 19:31:51 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 					// ft_putstr_fd("LAA\n", 2);
 					if (access(**argv, X_OK))		
 						search_path(*argv, envp);
+						
 					// ft_putstr_fd(**argv, 2);
 					// ft_putstr_fd("argv path\n", 2);// -%s-\n", **argv);
 					execve(**argv, *argv, envp);
@@ -313,7 +314,9 @@ int	pipex(char **argv[], char *envp[])
 	if(waitpid(pid, &status, 0) > 0) // Attend spécifiquement la fin du dernier processus enfant
 	{
 		if (WIFEXITED(status))		
-    		exit_status = WEXITSTATUS(status);		
+    		exit_status = WEXITSTATUS(status);	
+		if (exit_status >= 1)
+			exit_status = 127;
 	}
 	else 
     	;//ft_printf("waitpid a échoué ou il n'y avait aucun enfant à attendre\n");
