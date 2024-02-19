@@ -120,11 +120,11 @@ commands=(
 	"echo $?"
 	"<outfile cat"
 	"echo $?" 
-	"<testfile cat | echo niania | rev > outfile"
+	"<testfile cat | echeo niania | rev > outfile"
 	"echo $?"
 	"<outfile cat"
 	"echo $?"
-	"<testfile cat | echeo niania | rev > outfile"
+	"<testfile cat | echo niania | rev > outfile"
 	"echo $?"
 	"<outfile cat"
 	"echo $?" 
@@ -181,6 +181,7 @@ commands=(
 	"echo $?"
 	"echo $USER"
 	"echo $?"
+	"< outfile | rev"
 	)
 
 # Fonction pour comparer les sorties
