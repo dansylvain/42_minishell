@@ -6,125 +6,64 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/17 18:53:05 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 11:12:48 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <stdlib.h>
 
+int		exec_export(char **command_tab, t_Data *data);
+void	add_env_var_to_envp_tab(char **command_tab, t_Data *data, int *i);
+char	**create_new_env_var(char **envp, char *env_var);
+char	*get_env_var(t_Data *data, char *to_find);
+void	display_export_tab(char export_tab[][500]);
+void	create_export_tab(t_Data *data, char export_tab[][500]);
+int		has_var(char *str);
+void	insert_quote(char *str);
+void	format_export_tab(char export_tab[][500]);
 int		is_valid_var(char *export_arg);
 
-void	format_export_tab(char export_tab[][500])
+int	exec_export(char **command_tab, t_Data *data)
 {
+	char	export_tab[100][500];
 	int		i;
-	char	str[500];
 
-	ft_bzero(str, 500);
-	i = 0;
-	while (export_tab[i][0] && export_tab[i + 1][0])
+	if (command_tab[1] == NULL)
 	{
-		if (ft_strcmp(export_tab[i], export_tab[i + 1]) > 0)
-		{
-			ft_strlcpy(str, export_tab[i], 500);
-			ft_strlcpy(export_tab[i], export_tab[i + 1], 500);
-			ft_strlcpy(export_tab[i + 1], str, 500);
-			i = 0;
-			continue ;
-		}
+		create_export_tab(data, export_tab);
+		display_export_tab(export_tab);
+		return (0);
+	}
+	i = 1;
+	while (command_tab[i])
+	{
+		add_env_var_to_envp_tab(command_tab, data, &i);
 		i++;
 	}
 }
 
-void	insert_quote(char *str)
+void	add_env_var_to_envp_tab(char **command_tab, t_Data *data, int *i)
 {
-	int		i;
-	char	tmp[500];
-	int		qute_dne;
-
-	i = 0;
-	qute_dne = 0;
-	while (str[i] && str[i + 1])
-	{
-		if (str[i] == '=' && qute_dne == 0)
-		{
-			qute_dne = 1;
-			ft_memcpy(tmp, &(str[i + 1]), 501 - i);
-			ft_memcpy(&(str[i + 2]), tmp, 500 - i);
-			str[i + 1] = '\"';
-		}
-		i++;
-	}
-	if (qute_dne == 1)
-		str[i + 1] = '\"';
-}
-
-int	has_var(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '=')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-void	create_export_tab(t_Data *data, char export_tab[][500])
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	ft_memset(export_tab, '\0', sizeof(char) * 500 * 100);
-	while (data->envp_tab[i])
-	{
-		if (ft_strncmp(data->envp_tab[i], "_=", 2)
-			&& has_var(data->envp_tab[i]))
-		{
-			ft_strlcpy(export_tab[j], data->envp_tab[i], sizeof(export_tab[i]));
-			insert_quote(export_tab[j]);
-			j++;
-		}
-		i++;
-	}
-	format_export_tab(export_tab);
-}
-
-void	display_export_tab(char export_tab[][500])
-{
-	int	i;
-
-	i = 0;
-	while (export_tab[i][0])
-		ft_printf("declare declare -x %s\n", export_tab[i++]);
-}
-
-char	*get_env_var(t_Data *data, char *to_find)
-{
-	char	*env_var;
-	int		len;
 	int		j;
-	char	*var;
+	char	var[500];
+	char	*env_var;
 
-	env_var = NULL;
-	len = ft_strlen(to_find);
+	ft_bzero(var, 500);
 	j = 0;
-	while (data->envp_tab[j])
+	while (command_tab[*i][j] && command_tab[*i][j] != '=')
 	{
-		var = data->envp_tab[j];
-		if (!ft_strncmp(var, to_find, len) && var[len] == '=')
-		{
-			env_var = &var[len + 1];
-			break ;
-		}
+		var[j] = command_tab[*i][j];
 		j++;
 	}
-	return (env_var);
+	env_var = get_env_var(data, var);
+	if (env_var && ft_strncmp(command_tab[*i], "_=", 2))
+	{
+		ft_strlcpy(env_var, &(command_tab[*i][j + 1]),
+			ft_strlen(&(command_tab[*i][j])));
+	}
+	else if (ft_strncmp(command_tab[*i], "_=", 2))
+		data->envp_tab = create_new_env_var(data->envp_tab, command_tab[*i]);
 }
 
 char	**create_new_env_var(char **envp, char *env_var)
@@ -156,39 +95,25 @@ char	**create_new_env_var(char **envp, char *env_var)
 	return (new_envp_tab);
 }
 
-int	exec_export(char **command_tab, t_Data *data)
+char	*get_env_var(t_Data *data, char *to_find)
 {
-	char	export_tab[100][500];
-	int		i;
-	int		j;
-	char	var[500];
 	char	*env_var;
+	int		len;
+	int		j;
+	char	*var;
 
-	ft_bzero(var, 500);
-	if (command_tab[1] == NULL)
+	env_var = NULL;
+	len = ft_strlen(to_find);
+	j = 0;
+	while (data->envp_tab[j])
 	{
-		create_export_tab(data, export_tab);
-		display_export_tab(export_tab);
-		return (0);
-	}
-	i = 1;
-	while (command_tab[i])
-	{
-		ft_bzero(var, 500);
-		j = 0;
-		while (command_tab[i][j] && command_tab[i][j] != '=')
+		var = data->envp_tab[j];
+		if (!ft_strncmp(var, to_find, len) && var[len] == '=')
 		{
-			var[j] = command_tab[i][j];
-			j++;
+			env_var = &var[len + 1];
+			break ;
 		}
-		env_var = get_env_var(data, var);
-		if (env_var && ft_strncmp(command_tab[i], "_=", 2))
-		{
-			ft_strlcpy(env_var, &(command_tab[i][j + 1]),
-				ft_strlen(&(command_tab[i][j])));
-		}
-		else if (ft_strncmp(command_tab[i], "_=", 2))
-			data->envp_tab = create_new_env_var(data->envp_tab, command_tab[i]);
-		i++;
+		j++;
 	}
+	return (env_var);
 }
