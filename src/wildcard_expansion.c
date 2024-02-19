@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 10:14:43 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 12:27:11 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 12:32:47 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,26 @@
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h>
+
 int	matches_pattern(const char *filename, const char *pattern);
 
 char	**expand_wildcards(const char *pattern)
 {
-	DIR *dir;
-	struct dirent *entry;
-	char **matches = NULL;
-	size_t count = 0;
+	DIR				*dir;
+	struct dirent	*entry;
+	char			**matches;
+	size_t			count;
 
+	matches = NULL;
+	count = 0;
 	dir = opendir(".");
 	if ((dir) != NULL)
 	{
-		while ((entry = readdir(dir)) != NULL)
+		while (1)
 		{
+			entry = readdir(dir);
+			if (entry == NULL)
+				break ;
 			if (matches_pattern(entry->d_name, pattern))
 			{
 				matches = ft_realloc(matches, (count + 1) * sizeof(char *));
