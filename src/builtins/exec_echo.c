@@ -6,13 +6,25 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:43:09 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 10:10:47 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 10:17:40 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	is_only_space(char *str);
+int	is_only_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isspace(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 void	exec_echo(t_Data *data, char **command_tab)
 {

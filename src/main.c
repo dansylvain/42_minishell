@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/18 18:25:25 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 10:17:24 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,20 +123,6 @@ int	prompt_loop(t_Data *data, char *envp[])
 	return (1);
 }
 
-int	is_only_space(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isspace(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 /**========================================================================
  *                           command_is_builtin
  * exit builtin implemented without extern function
@@ -152,8 +138,6 @@ int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 		return (1);
 	if (!cmd_tab[0])
 		return (free_command_tab(cmd_tab), 1);
-	if (is_only_space(cmd_tab[0]))
-		return (1);
 	if (len >= 2 && !ft_strncmp(&(cmd_tab[0][len - 2]), "cd", 3))
 		return (exec_cd(data, cmd_tab), 1);
 	if (len >= 3 && !ft_strncmp(&(cmd_tab[0][len - 3]), "env", 4))
