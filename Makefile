@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
+#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/19 11:12:01 by dan              ###   ########.fr        #
+#    Updated: 2024/02/19 22:35:43 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,13 +44,8 @@ SRC =	src/main.c \
 		src/builtins/exec_export.c \
 		src/builtins/exec_export_utils.c \
 		src/builtins/exec_exit.c \
-		src/parsing/parsing_pipex/parsing_build.c \
-		src/parsing/parsing_pipex/parsing_invrt.c \
-		src/parsing/parsing_pipex/parsing_path.c \
-		src/parsing/parsing_pipex/parsing_qute.c \
-		src/parsing/parsing_pipex/parsing_spce.c \
-		src/parsing/parsing_pipex/parsing_utils.c \
 		src/parsing/parsing_minishell/parsing.c \
+		src/parsing/parsing_minishell/parsing_path.c \
 		src/parsing/parsing_minishell/parsing_quote.c \
 		src/parsing/parsing_minishell/parsing_operator.c \
 		src/parsing/parsing_minishell/parsing_utils.c \
