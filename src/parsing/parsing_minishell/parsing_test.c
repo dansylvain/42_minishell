@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/09 16:21:21 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 22:08:01 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,55 +14,6 @@
 #include "parsing_utils.h"
 #include "ft_printf.h"
 
-// void	print_sib(t_ast_nde *sib)
-// {
-// 	int	i;	
-// 	int	back_color;
-// 	const t_ast_nde *sib_sav;
-// 	t_ast_nde *sib_sav2;
-	
-// 	back_color = 41; 
-// 	sib_sav2 = sib;	
-// 	ft_printf("\n");
-// 	while (sib)
-// 	{	
-// 		sib_sav = sib;
-// 		while (sib && sib->token == 0)
-// 		{	
-// 			i = 0;
-// 			while (sib->start + i <= sib->end)
-// 				ft_printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);
-// 			back_color = (back_color - 41 + 1) % 7 + 41;
-// 			sib = sib->sibling;
-// 		}
-// 		//ft_printf("\n");
-// 		if (sib_sav && sib_sav->token == PIPE)
-// 		{	
-// 			t_ast_nde *tmp = sib_sav->child->child;
-// 			while (tmp)
-// 			{	
-// 				i = 0;
-// 				while (tmp->start + i <= tmp->end)
-// 					ft_printf("\033[%dm%c\033[0m", back_color, tmp->start[i++]);
-// 				back_color = (back_color - 41 + 1) % 7 + 41;	
-// 				tmp = tmp->sibling;				
-// 			}
-// 			tmp = sib_sav->child->sibling->child;
-// 			while (tmp)
-// 			{	
-// 				i = 0;
-// 				while (tmp->start + i <= tmp->end)
-// 					ft_printf("\033[%dm%c\033[0m", back_color, tmp->start[i++]);
-// 				back_color = (back_color - 41 + 1) % 7 + 41;	
-// 				tmp = tmp->sibling;				
-// 			}
-// 			//ft_printf("\n");
-// 		}		
-// 		ft_printf("\n");
-// 		sib = sib_sav->child;		
-// 	}
-// 	ft_printf("\n");
-// }
 
 void	print_qute_sib(t_ast_nde *sib)
 {
@@ -91,22 +42,33 @@ void	print_qute_sib(t_ast_nde *sib)
 }
 
 
-void print_rslt(t_ast_nde *rslt, int flag)
+void print_sibling(t_ast_nde *sib)
 {
 	int	i;
 	int	back_color;	
 
 	back_color = 41;
 	i = 0;
-	while (rslt)
+	while (sib)
 	{	
 		i = 0;
-		while (rslt->start + i <= rslt->end)
-			ft_printf("\033[%dm%c\033[0m", back_color, rslt->start[i++]);			
+		while (sib->start + i <= sib->end)
+			ft_printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);			
 		back_color = (back_color - 41 + 1) % 7 + 41;
-		rslt = rslt->sibling;
+		sib = sib->sibling;
 	}	
-	//ft_printf("\n");
+}
+void	print_cmd(t_ast_nde *cmd)
+{
+	print_sibling(cmd);
+	ft_printf("\n\n");
+	while (cmd)
+	{
+		if (cmd->child)
+			print_sibling(cmd->child);
+		ft_printf("\n\n");
+		cmd = cmd->sibling;
+	}
 }
 
 void	print_raw(t_ast_nde *raw)

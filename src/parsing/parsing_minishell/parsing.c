@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/19 21:53:27 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 22:13:11 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	set_dollar(t_ast_nde *node);
 void print_rslt(t_ast_nde *rslt, int flag);
 char	*search_env_var(char *envp[], char *env_to_find);
 void	free_sibling(t_ast_nde *sib);
+void print_sibling(t_ast_nde *sib);
+void	print_cmd(t_ast_nde *cmd);
 
 char* get_var(t_ast_nde *node, t_Data *data)
 {	
@@ -354,16 +356,13 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	root->child->child->child = set_qute_sib(str);
 	set_operator(root->child);
 	leaf_tree(root, &cmd, &cmd_sav, data);	
+	
+	print_qute_sib(root->child->child->child);	
+	print_tree(root->child->child->sibling);
+	print_cmd(cmd_sav);
+	
 	free_tree(root);
 	return (cmd_sav);
-	//print_qute_sib(root->child->child->child);
-	//print_tree(root->child->child->sibling);
-	// if (root->child->child->sibling)
-	// 	set_space(root->child->child->sibling->child);//exit(1);
-	// else 
-	// 	set_space(root->child);
-	//exit(1);
-	//ft_printf("space\n\n");
 }
 
 t_ast_nde	*parse(char *str, t_Data *data)
