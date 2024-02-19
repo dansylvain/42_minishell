@@ -13,11 +13,11 @@ MINISHELL_OUTPUT_FILE="minishell_output.txt"
 
 # Liste des commandes à tester
 commands=(
-    "usr/bin/ls"
+    "/usr/bin/ls"
 	"echo $?"
 	""
 	"echo $?"
-	"usr/bin/ls -al"
+	"/usr/bin/ls -al"
 	"echo $?"
 	"grep -i 'return' src/main.c"
 	"echo $?"
