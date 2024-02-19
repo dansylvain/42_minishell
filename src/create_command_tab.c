@@ -6,24 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 11:14:25 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 14:10:52 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include "parsing_utils.h"
-
-void		free_command_tab_lg(char ***command_tab);
-void		print_rslt(t_ast_nde *rslt, int flag);
-int			is_env_var(char *str);
-char		*get_env_var(t_Data *data, char *str, char buff[]);
-void		insert_env_var(char **command, char *env_var, char buff[]);
-int			check_if_env_var_and_get_it(t_Data *data,
-				t_ast_nde *node, char str[], int index);
-void		print_tree(t_ast_nde *node);
-
-int			pipex(char **argv[], char *envp[]);
-t_ast_nde	*copy_node_child(t_ast_nde *node);
 
 void	display_command_tab(char **command_tab)
 {

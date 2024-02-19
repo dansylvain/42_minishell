@@ -6,28 +6,15 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:09:58 by dan               #+#    #+#             */
-/*   Updated: 2024/02/17 18:48:43 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 14:07:25 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <stdlib.h>
 
-void	unset_var(char **envp, int index)
-{
-	int	i;
-
-	if (!ft_strncmp(envp[index], "_=", 2))
-		return ;
-	i = index;
-	while (envp[i])
-	{
-		envp[i] = envp[i + 1];
-		i++;
-	}
-	envp[i] = NULL;
-}
-
+/**========================================================================
+ *                           exec_unset
+ *========================================================================**/
 void	exec_unset(t_Data *data, char **command_tab)
 {
 	int		i;
@@ -50,4 +37,22 @@ void	exec_unset(t_Data *data, char **command_tab)
 		}
 		i++;
 	}
+}
+
+/**========================================================================
+ *                           unset_var
+ *========================================================================**/
+void	unset_var(char **envp, int index)
+{
+	int	i;
+
+	if (!ft_strncmp(envp[index], "_=", 2))
+		return ;
+	i = index;
+	while (envp[i])
+	{
+		envp[i] = envp[i + 1];
+		i++;
+	}
+	envp[i] = NULL;
 }

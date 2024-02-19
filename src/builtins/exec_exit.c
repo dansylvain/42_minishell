@@ -6,28 +6,15 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:30:35 by dan               #+#    #+#             */
-/*   Updated: 2024/02/17 18:47:14 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 14:07:43 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	display_command_tab(char **command_tab);
-
-int	str_is_digit(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
+/**========================================================================
+ *                           exec_exit
+ *========================================================================**/
 int	exec_exit(t_Data *data, char **command_tab)
 {
 	data->exit_status = 0;
@@ -49,4 +36,21 @@ int	exec_exit(t_Data *data, char **command_tab)
 		}
 	}
 	exit(data->exit_status);
+}
+
+/**========================================================================
+ *                           str_is_digit
+ *========================================================================**/
+int	str_is_digit(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }

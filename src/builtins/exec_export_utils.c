@@ -6,24 +6,15 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:11:13 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 11:11:41 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 14:07:17 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <stdlib.h>
 
-int		exec_export(char **command_tab, t_Data *data);
-void	add_env_var_to_envp_tab(char **command_tab, t_Data *data, int *i);
-char	**create_new_env_var(char **envp, char *env_var);
-char	*get_env_var(t_Data *data, char *to_find);
-void	display_export_tab(char export_tab[][500]);
-void	create_export_tab(t_Data *data, char export_tab[][500]);
-int		has_var(char *str);
-void	insert_quote(char *str);
-void	format_export_tab(char export_tab[][500]);
-int		is_valid_var(char *export_arg);
-
+/**========================================================================
+ *                           format_export_tab
+ *========================================================================**/
 void	format_export_tab(char export_tab[][500])
 {
 	int		i;
@@ -45,6 +36,9 @@ void	format_export_tab(char export_tab[][500])
 	}
 }
 
+/**========================================================================
+ *                           insert_quote
+ *========================================================================**/
 void	insert_quote(char *str)
 {
 	int		i;
@@ -68,6 +62,9 @@ void	insert_quote(char *str)
 		str[i + 1] = '\"';
 }
 
+/**========================================================================
+ *                           has_var
+ *========================================================================**/
 int	has_var(char *str)
 {
 	int	i;
@@ -82,6 +79,9 @@ int	has_var(char *str)
 	return (0);
 }
 
+/**========================================================================
+ *                           create_export_tab
+ *========================================================================**/
 void	create_export_tab(t_Data *data, char export_tab[][500])
 {
 	int	i;
@@ -104,6 +104,9 @@ void	create_export_tab(t_Data *data, char export_tab[][500])
 	format_export_tab(export_tab);
 }
 
+/**========================================================================
+ *                           display_export_tab
+ *========================================================================**/
 void	display_export_tab(char export_tab[][500])
 {
 	int	i;

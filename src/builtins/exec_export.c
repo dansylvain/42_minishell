@@ -6,24 +6,15 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 11:12:48 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 14:07:50 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <stdlib.h>
 
-int		exec_export(char **command_tab, t_Data *data);
-void	add_env_var_to_envp_tab(char **command_tab, t_Data *data, int *i);
-char	**create_new_env_var(char **envp, char *env_var);
-char	*get_env_var(t_Data *data, char *to_find);
-void	display_export_tab(char export_tab[][500]);
-void	create_export_tab(t_Data *data, char export_tab[][500]);
-int		has_var(char *str);
-void	insert_quote(char *str);
-void	format_export_tab(char export_tab[][500]);
-int		is_valid_var(char *export_arg);
-
+/**========================================================================
+ *                           exec_export
+ *========================================================================**/
 int	exec_export(char **command_tab, t_Data *data)
 {
 	char	export_tab[100][500];
@@ -43,6 +34,9 @@ int	exec_export(char **command_tab, t_Data *data)
 	}
 }
 
+/**========================================================================
+ *                      add_env_var_to_envp_tab
+ *========================================================================**/
 void	add_env_var_to_envp_tab(char **command_tab, t_Data *data, int *i)
 {
 	int		j;
@@ -66,6 +60,9 @@ void	add_env_var_to_envp_tab(char **command_tab, t_Data *data, int *i)
 		data->envp_tab = create_new_env_var(data->envp_tab, command_tab[*i]);
 }
 
+/**========================================================================
+ *                           create_new_env_var
+ *========================================================================**/
 char	**create_new_env_var(char **envp, char *env_var)
 {
 	char	**new_envp_tab;
@@ -95,6 +92,9 @@ char	**create_new_env_var(char **envp, char *env_var)
 	return (new_envp_tab);
 }
 
+/**========================================================================
+ *                           get_env_var
+ *========================================================================**/
 char	*get_env_var(t_Data *data, char *to_find)
 {
 	char	*env_var;

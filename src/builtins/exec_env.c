@@ -6,20 +6,22 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:46:30 by dan               #+#    #+#             */
-/*   Updated: 2024/02/17 18:43:40 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 14:07:35 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <stdlib.h>
 
+/**========================================================================
+ *                           exec_env
+ *========================================================================**/
 void	exec_env(t_Data *data, char **command_tab)
 {
 	int	i;
 
 	if (command_tab[1] != NULL)
 	{
-		ft_printf("env: ‘%s’: No such WWWfile or directory\n", command_tab[1]);
+		ft_printf("env: ‘%s’: No such file or directory\n", command_tab[1]);
 		return ;
 	}
 	else if (!data)

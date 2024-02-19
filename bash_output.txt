@@ -43,10 +43,10 @@ Commande: echo 0
 Commande: /usr/bin/ls -al
 total 2056
 -rw-rw-r--  1 dan dan      27 févr. 18 16:59  
-drwxrwxrwx  9 dan dan    4096 févr. 19 11:23 .
+drwxrwxrwx  9 dan dan    4096 févr. 19 14:11 .
 drwxrwxr-x 13 dan dan    4096 févr. 15 18:07 ..
 -rw-rw-r--  1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r--  1 dan dan     487 févr. 19 11:23 bash_output.txt
+-rw-rw-r--  1 dan dan     487 févr. 19 14:11 bash_output.txt
 -rwxrwxr-x  1 dan dan    4675 févr. 19 09:59 compare_bash_and_minishell.sh
 -rw-rw-r--  1 dan dan   27775 févr.  3 18:49 correct_output.txt
 -rw-rw-r--  1 dan dan   59401 févr.  3 15:52 diff_output.txt
@@ -54,30 +54,30 @@ drwxrwxr-x 13 dan dan    4096 févr. 15 18:07 ..
 -rw-rw-r--  1 dan dan   90973 févr. 14 14:11 eval_minishell.pdf
 -rw-rw-r--  1 dan dan       0 févr. 19 09:52 fichiernul
 -rw-rw-r--  1 dan dan       0 févr. 19 09:52 fichiernulachier
--rw-rw-r--  1 dan dan     154 févr. 19 11:12 file1
--rw-rw-r--  1 dan dan       0 févr. 19 11:12 fileout
-drwxrwxr-x  8 dan dan    4096 févr. 19 11:23 .git
+-rw-rw-r--  1 dan dan     264 févr. 19 14:04 file1
+-rw-rw-r--  1 dan dan       0 févr. 19 14:04 fileout
+drwxrwxr-x  8 dan dan    4096 févr. 19 13:53 .git
 -rw-rw-r--  1 dan dan      55 févr. 17 19:05 .gitignore
 -rwxrwxr-x  1 dan dan    4680 févr. 19 10:45 gnl_compare_bash_and_minishell.sh
-drwxrwxr-x  3 dan dan    4096 févr. 18 16:55 includes
+drwxrwxr-x  3 dan dan    4096 févr. 19 13:53 includes
 drwxrwxr-x  5 dan dan    4096 janv. 25 09:42 lib
 -rw-rw-r--  1 dan dan    3427 févr. 19 11:12 Makefile
--rwxrwxr-x  1 dan dan  172320 févr. 19 11:23 minishell
--rw-rw-r--  1 dan dan     487 févr. 19 11:23 minishell_output.txt
+-rwxrwxr-x  1 dan dan  172320 févr. 19 14:11 minishell
+-rw-rw-r--  1 dan dan     487 févr. 19 14:11 minishell_output.txt
 drwxrwxr-x  2 dan dan    4096 févr. 14 13:34 minishell_tester
 -rw-rw-r--  1 dan dan       6 févr. 14 13:32 not_existing
 -rw-rw-r--  1 dan dan     414 févr. 14 18:46 notexisting
--rw-rw-r--  1 dan dan       7 févr. 19 11:12 outfile
+-rw-rw-r--  1 dan dan       7 févr. 19 14:04 outfile
 -rw-rw-r--  1 dan dan     126 févr. 14 14:07 output.txt
 -rw-rw-r--  1 dan dan     786 févr. 18 13:59 README.md
-drwxrwxr-x  5 dan dan    4096 févr. 19 11:23 src
+drwxrwxr-x  5 dan dan    4096 févr. 19 14:11 src
 -rw-rw-r--  1 dan dan     217 févr.  7 16:59 test_commands.txt
 -rw-rw-r--  1 dan dan      38 févr. 19 09:59 testfile
 drwxrwxr-x  2 dan dan    4096 févr. 14 13:34 test_lucas
 -rwxrwxr-x  1 dan dan    2595 févr. 14 14:07 tests.sh
 -rw-rw-r--  1 dan dan    2866 févr. 14 13:32 to_test
 -rw-rw-r--  1 dan dan      70 févr.  2 14:22 valgrind.supp
-drwxrwxr-x  2 dan dan    4096 févr. 17 18:32 .vscode
+drwxrwxr-x  2 dan dan    4096 févr. 19 11:42 .vscode
 
 Commande: echo 0
 0
@@ -318,7 +318,7 @@ Commande: l's' '-'l
 total 2044
 -rw-rw-r-- 1 dan dan      27 févr. 18 16:59  
 -rw-rw-r-- 1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r-- 1 dan dan    6076 févr. 19 11:23 bash_output.txt
+-rw-rw-r-- 1 dan dan    6076 févr. 19 14:11 bash_output.txt
 -rwxrwxr-x 1 dan dan    4675 févr. 19 09:59 compare_bash_and_minishell.sh
 -rw-rw-r-- 1 dan dan   27775 févr.  3 18:49 correct_output.txt
 -rw-rw-r-- 1 dan dan   59401 févr.  3 15:52 diff_output.txt
@@ -326,21 +326,21 @@ total 2044
 -rw-rw-r-- 1 dan dan   90973 févr. 14 14:11 eval_minishell.pdf
 -rw-rw-r-- 1 dan dan       0 févr. 19 09:52 fichiernul
 -rw-rw-r-- 1 dan dan       0 févr. 19 09:52 fichiernulachier
--rw-rw-r-- 1 dan dan     154 févr. 19 11:12 file1
--rw-rw-r-- 1 dan dan       0 févr. 19 11:12 fileout
+-rw-rw-r-- 1 dan dan     264 févr. 19 14:04 file1
+-rw-rw-r-- 1 dan dan       0 févr. 19 14:04 fileout
 -rwxrwxr-x 1 dan dan    4680 févr. 19 10:45 gnl_compare_bash_and_minishell.sh
-drwxrwxr-x 3 dan dan    4096 févr. 18 16:55 includes
+drwxrwxr-x 3 dan dan    4096 févr. 19 13:53 includes
 drwxrwxr-x 5 dan dan    4096 janv. 25 09:42 lib
 -rw-rw-r-- 1 dan dan    3427 févr. 19 11:12 Makefile
--rwxrwxr-x 1 dan dan  172320 févr. 19 11:23 minishell
--rw-rw-r-- 1 dan dan    5938 févr. 19 11:23 minishell_output.txt
+-rwxrwxr-x 1 dan dan  172320 févr. 19 14:11 minishell
+-rw-rw-r-- 1 dan dan    5938 févr. 19 14:11 minishell_output.txt
 drwxrwxr-x 2 dan dan    4096 févr. 14 13:34 minishell_tester
 -rw-rw-r-- 1 dan dan       6 févr. 14 13:32 not_existing
 -rw-rw-r-- 1 dan dan     414 févr. 14 18:46 notexisting
--rw-rw-r-- 1 dan dan       7 févr. 19 11:12 outfile
+-rw-rw-r-- 1 dan dan       7 févr. 19 14:04 outfile
 -rw-rw-r-- 1 dan dan     126 févr. 14 14:07 output.txt
 -rw-rw-r-- 1 dan dan     786 févr. 18 13:59 README.md
-drwxrwxr-x 5 dan dan    4096 févr. 19 11:23 src
+drwxrwxr-x 5 dan dan    4096 févr. 19 14:11 src
 -rw-rw-r-- 1 dan dan     217 févr.  7 16:59 test_commands.txt
 -rw-rw-r-- 1 dan dan      38 févr. 19 09:59 testfile
 drwxrwxr-x 2 dan dan    4096 févr. 14 13:34 test_lucas
@@ -399,7 +399,7 @@ Commande: cat includes/minishell.h
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 17:05:25 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 14:10:57 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -419,6 +419,7 @@ Commande: cat includes/minishell.h
 // # include "../lib/get_next_line/get_next_line.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "parsing_utils.h"
 
 typedef struct t_Data
 {
@@ -440,6 +441,27 @@ void	exec_unset(t_Data *data, char **command_tab);
 void	free_command_tab(char **command_tab);
 char	**duplicate_envp(t_Data *data, char *envp[]);
 int		exec_export(char **command_tab, t_Data *data);
+
+/*   exec_export.c                                  :+:      :+:    :+:   */
+void	add_env_var_to_envp_tab(char **command_tab, t_Data *data, int *i);
+char	**create_new_env_var(char **envp, char *env_var);
+char	*get_env_var(t_Data *data, char *to_find);
+void	display_export_tab(char export_tab[][500]);
+void	create_export_tab(t_Data *data, char export_tab[][500]);
+
+/*   exec_echo.c                                  :+:      :+:    :+:   */
+int	is_only_space(char *str);
+
+/*   exec_exit.c                                  :+:      :+:    :+:   */
+int	str_is_digit(char *str);
+
+/*   exec_unset.c                                  :+:      :+:    :+:   */
+void	unset_var(char **envp, int index);
+
+
+void		free_command_tab_lg(char ***command_tab);
+int			pipex(char **argv[], char *envp[]);
+t_ast_nde	*copy_node_child(t_ast_nde *node);
 
 #endif
 
@@ -494,11 +516,41 @@ papa
 papa
 maman
 maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
 
 Commande: echo 0
 0
 
 Commande: cat file1 | grep papa | more
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
 papa
 papa
 papa
@@ -648,7 +700,7 @@ Commande: cat includes/minishell.h
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 17:05:25 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 14:10:57 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -668,6 +720,7 @@ Commande: cat includes/minishell.h
 // # include "../lib/get_next_line/get_next_line.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "parsing_utils.h"
 
 typedef struct t_Data
 {
@@ -689,6 +742,27 @@ void	exec_unset(t_Data *data, char **command_tab);
 void	free_command_tab(char **command_tab);
 char	**duplicate_envp(t_Data *data, char *envp[]);
 int		exec_export(char **command_tab, t_Data *data);
+
+/*   exec_export.c                                  :+:      :+:    :+:   */
+void	add_env_var_to_envp_tab(char **command_tab, t_Data *data, int *i);
+char	**create_new_env_var(char **envp, char *env_var);
+char	*get_env_var(t_Data *data, char *to_find);
+void	display_export_tab(char export_tab[][500]);
+void	create_export_tab(t_Data *data, char export_tab[][500]);
+
+/*   exec_echo.c                                  :+:      :+:    :+:   */
+int	is_only_space(char *str);
+
+/*   exec_exit.c                                  :+:      :+:    :+:   */
+int	str_is_digit(char *str);
+
+/*   exec_unset.c                                  :+:      :+:    :+:   */
+void	unset_var(char **envp, int index);
+
+
+void		free_command_tab_lg(char ***command_tab);
+int			pipex(char **argv[], char *envp[]);
+t_ast_nde	*copy_node_child(t_ast_nde *node);
 
 #endif
 
@@ -704,7 +778,7 @@ Commande: cat ../../42/minishell_common/includes/minishell.h
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/13 17:05:25 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 14:10:57 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -724,6 +798,7 @@ Commande: cat ../../42/minishell_common/includes/minishell.h
 // # include "../lib/get_next_line/get_next_line.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "parsing_utils.h"
 
 typedef struct t_Data
 {
@@ -745,6 +820,27 @@ void	exec_unset(t_Data *data, char **command_tab);
 void	free_command_tab(char **command_tab);
 char	**duplicate_envp(t_Data *data, char *envp[]);
 int		exec_export(char **command_tab, t_Data *data);
+
+/*   exec_export.c                                  :+:      :+:    :+:   */
+void	add_env_var_to_envp_tab(char **command_tab, t_Data *data, int *i);
+char	**create_new_env_var(char **envp, char *env_var);
+char	*get_env_var(t_Data *data, char *to_find);
+void	display_export_tab(char export_tab[][500]);
+void	create_export_tab(t_Data *data, char export_tab[][500]);
+
+/*   exec_echo.c                                  :+:      :+:    :+:   */
+int	is_only_space(char *str);
+
+/*   exec_exit.c                                  :+:      :+:    :+:   */
+int	str_is_digit(char *str);
+
+/*   exec_unset.c                                  :+:      :+:    :+:   */
+void	unset_var(char **envp, int index);
+
+
+void		free_command_tab_lg(char ***command_tab);
+int			pipex(char **argv[], char *envp[]);
+t_ast_nde	*copy_node_child(t_ast_nde *node);
 
 #endif
 
