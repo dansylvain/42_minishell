@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/19 22:43:17 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 22:46:38 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "parsing_utils.h"
 #include "libft.h"
 #include "stdio.h"
-#include "parsing_spce.h"
-#include "parsing_qute.h"
 #include "ft_printf.h"
 #include "minishell.h"
 

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/19 22:30:54 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 22:47:31 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 #include <unistd.h>
 #include "libft.h"
 #include "ft_printf.h"
-#include "parsing_build.h"
 
 void	display_error(char *str);
-
+void	free_ptr_arr(char **arr);
 
 static char	*try_paths(char **argv, char *env_find)
 {
