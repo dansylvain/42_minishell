@@ -1,4 +1,4 @@
-Commande: /bin/ls
+Commande: /usr/bin/ls
  
 allowed_functions.md
 bash_output.txt
@@ -7,6 +7,8 @@ correct_output.txt
 diff_output.txt
 en.subject.pdf
 eval_minishell.pdf
+fichiernul
+fichiernulachier
 file1
 fileout
 gnl_compare_bash_and_minishell.sh
@@ -38,37 +40,39 @@ Commande:
 Commande: echo 0
 0
 
-Commande: /bin/ls -al
-total 2052
+Commande: /usr/bin/ls -al
+total 2056
 -rw-rw-r--  1 dan dan      27 févr. 18 16:59  
-drwxrwxrwx  9 dan dan    4096 févr. 18 18:17 .
+drwxrwxrwx  9 dan dan    4096 févr. 19 11:23 .
 drwxrwxr-x 13 dan dan    4096 févr. 15 18:07 ..
 -rw-rw-r--  1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r--  1 dan dan     455 févr. 18 18:17 bash_output.txt
--rwxrwxr-x  1 dan dan    4675 févr. 18 16:55 compare_bash_and_minishell.sh
+-rw-rw-r--  1 dan dan     487 févr. 19 11:23 bash_output.txt
+-rwxrwxr-x  1 dan dan    4675 févr. 19 09:59 compare_bash_and_minishell.sh
 -rw-rw-r--  1 dan dan   27775 févr.  3 18:49 correct_output.txt
 -rw-rw-r--  1 dan dan   59401 févr.  3 15:52 diff_output.txt
 -rw-rw-r--  1 dan dan 1568461 janv. 26 11:52 en.subject.pdf
 -rw-rw-r--  1 dan dan   90973 févr. 14 14:11 eval_minishell.pdf
--rw-rw-r--  1 dan dan      88 févr. 18 18:17 file1
--rw-rw-r--  1 dan dan       0 févr. 18 18:17 fileout
-drwxrwxr-x  8 dan dan    4096 févr. 18 17:51 .git
+-rw-rw-r--  1 dan dan       0 févr. 19 09:52 fichiernul
+-rw-rw-r--  1 dan dan       0 févr. 19 09:52 fichiernulachier
+-rw-rw-r--  1 dan dan     154 févr. 19 11:12 file1
+-rw-rw-r--  1 dan dan       0 févr. 19 11:12 fileout
+drwxrwxr-x  8 dan dan    4096 févr. 19 11:23 .git
 -rw-rw-r--  1 dan dan      55 févr. 17 19:05 .gitignore
--rwxrwxr-x  1 dan dan    4652 févr. 18 17:51 gnl_compare_bash_and_minishell.sh
+-rwxrwxr-x  1 dan dan    4680 févr. 19 10:45 gnl_compare_bash_and_minishell.sh
 drwxrwxr-x  3 dan dan    4096 févr. 18 16:55 includes
 drwxrwxr-x  5 dan dan    4096 janv. 25 09:42 lib
--rw-rw-r--  1 dan dan    3390 févr. 18 16:47 Makefile
--rwxrwxr-x  1 dan dan  171448 févr. 18 18:17 minishell
--rw-rw-r--  1 dan dan     455 févr. 18 18:17 minishell_output.txt
+-rw-rw-r--  1 dan dan    3427 févr. 19 11:12 Makefile
+-rwxrwxr-x  1 dan dan  172320 févr. 19 11:23 minishell
+-rw-rw-r--  1 dan dan     487 févr. 19 11:23 minishell_output.txt
 drwxrwxr-x  2 dan dan    4096 févr. 14 13:34 minishell_tester
 -rw-rw-r--  1 dan dan       6 févr. 14 13:32 not_existing
 -rw-rw-r--  1 dan dan     414 févr. 14 18:46 notexisting
--rw-rw-r--  1 dan dan      25 févr. 18 18:17 outfile
+-rw-rw-r--  1 dan dan       7 févr. 19 11:12 outfile
 -rw-rw-r--  1 dan dan     126 févr. 14 14:07 output.txt
 -rw-rw-r--  1 dan dan     786 févr. 18 13:59 README.md
-drwxrwxr-x  5 dan dan    4096 févr. 18 18:17 src
+drwxrwxr-x  5 dan dan    4096 févr. 19 11:23 src
 -rw-rw-r--  1 dan dan     217 févr.  7 16:59 test_commands.txt
--rw-rw-r--  1 dan dan      38 févr. 17 12:43 testfile
+-rw-rw-r--  1 dan dan      38 févr. 19 09:59 testfile
 drwxrwxr-x  2 dan dan    4096 févr. 14 13:34 test_lucas
 -rwxrwxr-x  1 dan dan    2595 févr. 14 14:07 tests.sh
 -rw-rw-r--  1 dan dan    2866 févr. 14 13:32 to_test
@@ -87,13 +91,10 @@ Commande: grep -i 'return' src/main.c
 			return (0);
 			// return (ft_printf("exit\n"), 0);
 	return (1);
-			return (0);
-	return (1);
  * 0 is returned, and the data struct is freed in calling function
 	int	return_pipex;
 		return (1);
 		return (free_command_tab(cmd_tab), 1);
-		return (1);
 		return (exec_cd(data, cmd_tab), 1);
 		return (exec_env(data, cmd_tab), 1);
 		return (exec_pwd(data), 1);
@@ -176,6 +177,8 @@ txt.tuptuo_tcerroc
 txt.tuptuo_ffid
 fdp.tcejbus.ne
 fdp.llehsinim_lave
+lunreihcif
+reihcalunreihcif
 1elif
 tuoelif
 tig.
@@ -211,19 +214,19 @@ Commande: echo 0
 0
 
 Commande: exit 42hgzef
-./gnl_compare_bash_and_minishell.sh: line 189: exit: 42hgzef: numeric argument required
+./gnl_compare_bash_and_minishell.sh: line 190: exit: 42hgzef: numeric argument required
 
 Commande: echo 0
 0
 
 Commande: exit 42 jhgzegf
-./gnl_compare_bash_and_minishell.sh: line 189: exit: too many arguments
+./gnl_compare_bash_and_minishell.sh: line 190: exit: too many arguments
 
 Commande: echo 0
 0
 
 Commande: exit jhzef
-./gnl_compare_bash_and_minishell.sh: line 189: exit: jhzef: numeric argument required
+./gnl_compare_bash_and_minishell.sh: line 190: exit: jhzef: numeric argument required
 
 Commande: echo 0
 0
@@ -239,6 +242,8 @@ correct_output.txt
 diff_output.txt
 en.subject.pdf
 eval_minishell.pdf
+fichiernul
+fichiernulachier
 file1
 fileout
 .git
@@ -268,13 +273,13 @@ Commande: echo 0
 0
 
 Commande: <noexist cat
-./gnl_compare_bash_and_minishell.sh: line 189: noexist: No such file or directory
+./gnl_compare_bash_and_minishell.sh: line 190: noexist: No such file or directory
 
 Commande: echo 0
 0
 
-Commande: bin/ls fichiernulachier
-./gnl_compare_bash_and_minishell.sh: line 189: bin/ls: No such file or directory
+Commande: /bin/ls fichiernulachier
+fichiernulachier
 
 Commande: echo 0
 0
@@ -310,32 +315,34 @@ Commande: echo 0
 0
 
 Commande: l's' '-'l
-total 2040
+total 2044
 -rw-rw-r-- 1 dan dan      27 févr. 18 16:59  
 -rw-rw-r-- 1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r-- 1 dan dan    5969 févr. 18 18:17 bash_output.txt
--rwxrwxr-x 1 dan dan    4675 févr. 18 16:55 compare_bash_and_minishell.sh
+-rw-rw-r-- 1 dan dan    6076 févr. 19 11:23 bash_output.txt
+-rwxrwxr-x 1 dan dan    4675 févr. 19 09:59 compare_bash_and_minishell.sh
 -rw-rw-r-- 1 dan dan   27775 févr.  3 18:49 correct_output.txt
 -rw-rw-r-- 1 dan dan   59401 févr.  3 15:52 diff_output.txt
 -rw-rw-r-- 1 dan dan 1568461 janv. 26 11:52 en.subject.pdf
 -rw-rw-r-- 1 dan dan   90973 févr. 14 14:11 eval_minishell.pdf
--rw-rw-r-- 1 dan dan      88 févr. 18 18:17 file1
--rw-rw-r-- 1 dan dan       0 févr. 18 18:17 fileout
--rwxrwxr-x 1 dan dan    4652 févr. 18 17:51 gnl_compare_bash_and_minishell.sh
+-rw-rw-r-- 1 dan dan       0 févr. 19 09:52 fichiernul
+-rw-rw-r-- 1 dan dan       0 févr. 19 09:52 fichiernulachier
+-rw-rw-r-- 1 dan dan     154 févr. 19 11:12 file1
+-rw-rw-r-- 1 dan dan       0 févr. 19 11:12 fileout
+-rwxrwxr-x 1 dan dan    4680 févr. 19 10:45 gnl_compare_bash_and_minishell.sh
 drwxrwxr-x 3 dan dan    4096 févr. 18 16:55 includes
 drwxrwxr-x 5 dan dan    4096 janv. 25 09:42 lib
--rw-rw-r-- 1 dan dan    3390 févr. 18 16:47 Makefile
--rwxrwxr-x 1 dan dan  171448 févr. 18 18:17 minishell
--rw-rw-r-- 1 dan dan    5777 févr. 18 18:17 minishell_output.txt
+-rw-rw-r-- 1 dan dan    3427 févr. 19 11:12 Makefile
+-rwxrwxr-x 1 dan dan  172320 févr. 19 11:23 minishell
+-rw-rw-r-- 1 dan dan    5938 févr. 19 11:23 minishell_output.txt
 drwxrwxr-x 2 dan dan    4096 févr. 14 13:34 minishell_tester
 -rw-rw-r-- 1 dan dan       6 févr. 14 13:32 not_existing
 -rw-rw-r-- 1 dan dan     414 févr. 14 18:46 notexisting
--rw-rw-r-- 1 dan dan      25 févr. 18 18:17 outfile
+-rw-rw-r-- 1 dan dan       7 févr. 19 11:12 outfile
 -rw-rw-r-- 1 dan dan     126 févr. 14 14:07 output.txt
 -rw-rw-r-- 1 dan dan     786 févr. 18 13:59 README.md
-drwxrwxr-x 5 dan dan    4096 févr. 18 18:17 src
+drwxrwxr-x 5 dan dan    4096 févr. 19 11:23 src
 -rw-rw-r-- 1 dan dan     217 févr.  7 16:59 test_commands.txt
--rw-rw-r-- 1 dan dan      38 févr. 17 12:43 testfile
+-rw-rw-r-- 1 dan dan      38 févr. 19 09:59 testfile
 drwxrwxr-x 2 dan dan    4096 févr. 14 13:34 test_lucas
 -rwxrwxr-x 1 dan dan    2595 févr. 14 14:07 tests.sh
 -rw-rw-r-- 1 dan dan    2866 févr. 14 13:32 to_test
@@ -353,6 +360,8 @@ correct_output.txt
 diff_output.txt
 en.subject.pdf
 eval_minishell.pdf
+fichiernul
+fichiernulachier
 file1
 fileout
 gnl_compare_bash_and_minishell.sh
@@ -473,6 +482,18 @@ papa
 papa
 maman
 maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
 
 Commande: echo 0
 0
@@ -488,18 +509,24 @@ papa
 papa
 papa
 papa
+papa
+papa
+papa
+papa
+papa
+papa
 
 Commande: echo 0
 0
 
 Commande: << end cat|>fileout
-./gnl_compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
+./gnl_compare_bash_and_minishell.sh: line 190: warning: here-document at line 190 delimited by end-of-file (wanted `end')
 
 Commande: echo 0
 0
 
 Commande: ls fichiernul | grep bla | more
-ls: cannot access 'fichiernul': No such file or directory
+
 
 Commande: echo 0
 0
@@ -546,6 +573,8 @@ correct_output.txt
 diff_output.txt
 en.subject.pdf
 eval_minishell.pdf
+fichiernul
+fichiernulachier
 file1
 fileout
 gnl_compare_bash_and_minishell.sh
@@ -746,6 +775,18 @@ teuôp
 Commande: echo 0
 0
 
+Commande: <testfile cat | echeo niania | rev > outfile
+./gnl_compare_bash_and_minishell.sh: line 190: echeo: command not found
+
+Commande: echo 0
+0
+
+Commande: <outfile cat
+dnuof ton dnammoc :oehce
+
+Commande: echo 0
+0
+
 Commande: <testfile cat | echo niania | rev > outfile
 
 
@@ -754,18 +795,6 @@ Commande: echo 0
 
 Commande: <outfile cat
 ainain
-
-Commande: echo 0
-0
-
-Commande: <testfile cat | echeo niania | rev > outfile
-./gnl_compare_bash_and_minishell.sh: line 189: echeo: command not found
-
-Commande: echo 0
-0
-
-Commande: <outfile cat
-dnuof ton dnammoc :oehce
 
 Commande: echo 0
 0
@@ -811,14 +840,14 @@ Commande: echo 0
 0
 
 Commande: <<end <<end
-./gnl_compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
-./gnl_compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
+./gnl_compare_bash_and_minishell.sh: line 190: warning: here-document at line 190 delimited by end-of-file (wanted `end')
+./gnl_compare_bash_and_minishell.sh: line 190: warning: here-document at line 190 delimited by end-of-file (wanted `end')
 
 Commande: <<end cat
-./gnl_compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
+./gnl_compare_bash_and_minishell.sh: line 190: warning: here-document at line 190 delimited by end-of-file (wanted `end')
 
 Commande: <<end
-./gnl_compare_bash_and_minishell.sh: line 189: warning: here-document at line 189 delimited by end-of-file (wanted `end')
+./gnl_compare_bash_and_minishell.sh: line 190: warning: here-document at line 190 delimited by end-of-file (wanted `end')
 
 Commande: echo 0
 0
@@ -924,4 +953,7 @@ dan
 
 Commande: echo 0
 0
+
+Commande: < outfile | rev
+
 
