@@ -52,15 +52,15 @@ Commande: echo 0
 Commande: /bin/ls -al
 total 2088
 -rw-r--r--  1 seblin seblin      27 Feb 18 16:54  
-drwxr-xr-x  9 seblin seblin    4096 Feb 19 00:34 .
+drwxr-xr-x  9 seblin seblin    4096 Feb 19 00:49 .
 drwxr-xr-x 11 seblin seblin    4096 Jan 29 20:52 ..
-drwxr-xr-x  8 seblin seblin    4096 Feb 18 22:23 .git
+drwxr-xr-x  8 seblin seblin    4096 Feb 19 00:47 .git
 -rw-r--r--  1 seblin seblin      55 Feb 18 16:49 .gitignore
 drwxr-xr-x  2 seblin seblin    4096 Feb 17 18:33 .vscode
 -rw-r--r--  1 seblin seblin    3390 Feb 18 16:49 Makefile
 -rw-r--r--  1 seblin seblin     786 Feb 10 14:43 README.md
 -rw-r--r--  1 seblin seblin   50859 Feb  3 18:34 allowed_functions.md
--rw-r--r--  1 seblin seblin     527 Feb 19 00:35 bash_output.txt
+-rw-r--r--  1 seblin seblin     527 Feb 19 00:49 bash_output.txt
 -rwxr-xr-x  1 seblin seblin    4675 Feb 18 16:54 compare_bash_and_minishell.sh
 -rw-r--r--  1 seblin seblin   27775 Feb  3 18:53 correct_output.txt
 -rw-r--r--  1 seblin seblin   59401 Feb  3 18:34 diff_output.txt
@@ -77,8 +77,8 @@ drwxr-xr-x  2 seblin seblin    4096 Feb 17 18:33 .vscode
 -rwxr-xr-x  1 seblin seblin    4652 Feb 18 17:51 gnl_compare_bash_and_minishell.sh
 drwxr-xr-x  3 seblin seblin    4096 Feb 18 16:54 includes
 drwxr-xr-x  5 seblin seblin    4096 Jan 25 18:43 lib
--rwxr-xr-x  1 seblin seblin  175904 Feb 19 00:34 minishell
--rw-r--r--  1 seblin seblin     637 Feb 19 00:35 minishell_output.txt
+-rwxr-xr-x  1 seblin seblin  175840 Feb 19 00:49 minishell
+-rw-r--r--  1 seblin seblin     565 Feb 19 00:49 minishell_output.txt
 drwxr-xr-x  6 seblin seblin    4096 Feb 13 19:37 minishell_tester
 -rw-r--r--  1 seblin seblin       0 Feb 17 18:23 moutou
 -rw-r--r--  1 seblin seblin       6 Feb 14 14:05 not_existing
@@ -87,7 +87,7 @@ drwxr-xr-x  6 seblin seblin    4096 Feb 13 19:37 minishell_tester
 -rw-r--r--  1 seblin seblin       5 Feb 17 10:33 outfille
 -rw-r--r--  1 seblin seblin       5 Feb 17 10:33 outfille2
 -rw-r--r--  1 seblin seblin     126 Feb 14 14:02 output.txt
-drwxr-xr-x  5 seblin seblin    4096 Feb 18 23:04 src
+drwxr-xr-x  5 seblin seblin    4096 Feb 19 00:49 src
 -rw-r--r--  1 seblin seblin     217 Feb  7 18:14 test_commands.txt
 drwxr-xr-x  6 seblin seblin    4096 Feb 14 09:12 test_lucas
 -rw-r--r--  1 seblin seblin      38 Feb 17 12:46 testfile
@@ -236,4 +236,13 @@ ppus.dnirglav
 
 Commande: echo 0
 0
+
+Commande: exit 42
+
+
+Commande: echo 0
+0
+
+Commande: exit 42hgzef
+./gnl_compare_bash_and_minishell.sh: line 189: exit: 42hgzef: numeric argument required
 

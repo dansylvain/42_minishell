@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/18 18:10:37 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 00:48:13 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,7 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 			data->exit_status = pipex(cmd_tab, envp);
 		else if (!command_is_builtin(*cmd_tab, data, envp))
 			data->exit_status = pipex(cmd_tab, envp);
-		free_command_tab_lg(cmd_tab);
+		//free_command_tab_lg(cmd_tab);
 	}
 	flag = data->exit_status;
 	if (node && node->token == OR)

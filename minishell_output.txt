@@ -42,22 +42,18 @@ valgrind.supp
 
 Commande: echo 0
 0: command not found
-double free or corruption (fasttop)
 
 Commande: 
 
 
 Commande: echo 0
 0: command not found
-double free or corruption (fasttop)
 
 Commande: /bin/ls -al
 -al: command not found
-double free or corruption (fasttop)
 
 Commande: echo 0
 0: command not found
-double free or corruption (fasttop)
 
 Commande: grep -i 'return' src/main.c
 		return (display_error("Error\n"), 255);
@@ -88,72 +84,60 @@ Commande: grep -i 'return' src/main.c
 
 Commande: echo 0
 0: command not found
-double free or corruption (fasttop)
 
 Commande: /usr/bin/cat testfile
 testfile: command not found
-double free or corruption (fasttop)
 
 Commande: echo 0
 0: command not found
-double free or corruption (fasttop)
 
 Commande: /bin/grep -i motif /testfile
 -imotif/testfile: command not found
 
 Commande: echo 0
 0: command not found
-double free or corruption (fasttop)
 
 Commande: /bin/chmod 755 /testfile
 755/testfile: command not found
 
 Commande: echo 0
 0: command not found
-double free or corruption (fasttop)
 
 Commande: /bin/cp /testfile /includes/mon_fichier.txt
 /testfile/includes/mon_fichier.txt: command not found
 
 Commande: echo 0
 0: command not found
-double free or corruption (fasttop)
 
 Commande: /bin/mv /testfile /includes/mon_fichier.txt
 /testfile/includes/mon_fichier.txt: command not found
 
 Commande: echo 0
 0: command not found
-double free or corruption (fasttop)
 
 Commande: echo bonjour
 bonjour: command not found
-double free or corruption (fasttop)
 
 Commande: echo 0
 0: command not found
-double free or corruption (fasttop)
 
 Commande: echo     	
-double free or corruption (fasttop)
+
 
 Commande: echo 0
 0: command not found
-double free or corruption (fasttop)
 
 Commande: echo
 
 
 Commande: echo 0
 0: command not found
-double free or corruption (fasttop)
 
 Commande: echo -n au revoir
 -naurevoir: command not found
 
 Commande: echo 0
 0: command not found
-double free or corruption (fasttop)
 
 Commande: ls -a | rev
  
@@ -204,5 +188,13 @@ ppus.dnirglav
 
 Commande: echo 0
 0: command not found
-double free or corruption (fasttop)
+
+Commande: exit 42
+42: command not found
+
+Commande: echo 0
+0: command not found
+
+Commande: exit 42hgzef
+42hgzef: command not found
 
