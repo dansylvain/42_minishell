@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 18:32:05 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 18:35:44 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	exec_export(char **command_tab, t_Data *data)
 	{
 		if (!are_only_valid_chars(command_tab[i]))
 		{
-			ft_printf("minishell: export: `%s': not a valid identifier\n", command_tab[i]);
+			display_error("minishell: export: : not a valid identifier\n");
 			data->exit_status = 1;
 			return (0);
 		}
