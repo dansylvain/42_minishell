@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/19 19:22:41 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 21:43:55 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,7 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 			add_sibling(copy_sibling2(raw_lft->child), rslt, rslt_sav);
 		}
 	}	
-	if (operator && operator->token != SPCE)
+	if (operator && operator->token != SPCE && operator->token != RAW)
 	{ 		
 
 		    // operator->child = copy_node(operator);
@@ -323,105 +323,6 @@ t_ast_nde	*expand_vars(t_ast_nde *qute_sib)
 	return (qute_sib);
 }
 
-t_ast_nde	*format_io(t_ast_nde* cmd)
-{
-	t_ast_nde	*actual;
-	t_ast_nde	*format_cmd;
-	t_ast_nde	*format_cmd_sav;
-	t_ast_nde	*inter_cmd_tmp;
-	
-	format_cmd_sav = NULL;
-	actual = cmd;
-	while (actual)
-	{	
-		inter_cmd_tmp = actual;
-		while (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
-		{
-			if (actual->token == SCHEV_LFT || actual->token == DCHEV_LFT)			
-			{
-				add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
-				if (actual && actual->sibling && actual->sibling->token != PIPE && actual->sibling->token != AND  && actual->sibling->token != OR
-					&& actual->sibling->token != SCHEV_LFT && actual->sibling->token != DCHEV_LFT)
-				{
-					add_sibling(copy_node_child(actual->sibling), &format_cmd, &format_cmd_sav);
-					actual = actual->sibling;
-				}
-			}
-			actual = actual->sibling;
-		}
-		actual = inter_cmd_tmp;
-		while (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
-		{
-			if (actual->token == SCHEV_LFT || actual->token == DCHEV_LFT)			
-			{			
-				if (actual && actual->sibling && actual->sibling->token != PIPE && actual->sibling->token != AND  && actual->sibling->token != OR
-					&& actual->sibling->token != SCHEV_LFT && actual->sibling->token != DCHEV_LFT)
-					actual = actual->sibling;				
-			}
-			else
-				add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
-			actual = actual->sibling;
-		}		
-		if (actual)
-		{
-			add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
-			actual = actual->sibling;
-		}	
-	}
-	return (format_cmd_sav);
-}
-
-t_ast_nde	*format_io2(t_ast_nde* cmd)
-{
-	t_ast_nde	*actual;
-	t_ast_nde	*format_cmd;
-	t_ast_nde	*format_cmd_sav;
-	t_ast_nde	*inter_cmd_tmp;
-	
-	format_cmd_sav = NULL;
-	actual = cmd;
-	while (actual)
-	{	
-		inter_cmd_tmp = actual;
-		while (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
-		{
-			if (actual->token == SCHEV_RGTH || actual->token == DCHEV_RGTH)			
-			{			
-				if (actual && actual->sibling && actual->sibling->token != PIPE && actual->sibling->token != AND  && actual->sibling->token != OR
-					&& actual->sibling->token != SCHEV_RGTH && actual->sibling->token != DCHEV_RGTH)
-					actual = actual->sibling;
-				// if (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
-				// 	actual = actual->sibling;
-			}
-			else
-				add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
-			actual = actual->sibling;
-		}		
-		actual = inter_cmd_tmp;
-		while (actual && actual->token != PIPE && actual->token != AND  && actual->token != OR)
-		{
-			if (actual->token == SCHEV_RGTH || actual->token == DCHEV_RGTH)			
-			{
-				add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
-				if (actual && actual->sibling && actual->sibling->token != PIPE && actual->sibling->token != AND  && actual->sibling->token != OR
-					&& actual->sibling->token != SCHEV_RGTH && actual->sibling->token != DCHEV_RGTH)
-				{
-					add_sibling(copy_node_child(actual->sibling), &format_cmd, &format_cmd_sav);
-					actual = actual->sibling;
-				}
-			}
-			actual = actual->sibling;
-		}		
-		if (actual)
-		{
-			add_sibling(copy_node_child(actual), &format_cmd, &format_cmd_sav);
-			actual = actual->sibling;
-		}
-	//	actual = actual->sibling;
-	}
-	return (format_cmd_sav);
-}
-
 void	free_tree(t_ast_nde *operator)
 {
 	t_ast_nde *cont;
@@ -506,40 +407,16 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 //	ft_printf("end\n\n");//exit(1);
 	//set_chevron();
 	
-	leaf_tree(root->child->child->sibling, &cmd, &cmd_sav, data);
-	//leaf_tree(root, &cmd, &cmd_sav, data);
+	//leaf_tree(root->child->child->sibling, &cmd, &cmd_sav, data);
+	leaf_tree(root, &cmd, &cmd_sav, data);
 //	exit(1);
 	// print_rslt(cmd_sav, 1);
 	//ft_printf("\n\n");
 	// cmd_sav = format_io(cmd_sav);
 	
 	
-	
-
-
-	if (!cmd_sav)
-	{
-	//	ft_printf("commande sav fausle\n");
-		ast_res = root->child->child;
-	}
-	else
-		ast_res = cmd_sav;
-	if (root && root->child && root->child->child && root->child->child->sibling)
-	{
-		free_tree(root->child->child->sibling);
-	}
-	// if (root && root->child && root->child->child && root->child->child->child)
-	// {
-	// 	free(root->child->child->child);
-	// }
-		
-	// //	free(root->child->child);
-	// if (root && root->child)
-	// 	free(root->child);
-	// if (root)
-	// 	free(root);
-	//free_tree(root);
-	return (ast_res);
+	free_tree(root);
+	return (cmd_sav);
 }
 
 t_ast_nde	*parse(char *str, t_Data *data)
