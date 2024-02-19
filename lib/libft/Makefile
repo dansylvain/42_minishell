@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
+#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 07:30:24 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/18 11:24:33 by dan              ###   ########.fr        #
+#    Updated: 2024/02/18 20:25:48 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC =		ft_atoi.c \
 			ft_strndup.c \
 			ft_striteri.c \
 			ft_strjoin.c \
+			ft_strjoin_up.c \
 			ft_strlcat.c \
 			ft_strlcpy.c \
 			ft_strlen.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 14:16:09 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 17:44:19 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,7 @@ int	prompt_loop(t_Data *data, char *envp[])
 		char *gnl_output = get_next_line(0);
 		if (gnl_output)
 			gnl_output[ft_strlen(gnl_output) - 1] = '\0';
-		else
-		{
-			
-		}
+		
 		cmd[0] = gnl_output;
 		// if (cmd[0] && *cmd[0])
 		// 	add_history(cmd[0]);

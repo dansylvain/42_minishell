@@ -14,7 +14,6 @@ fileout
 gnl_compare_bash_and_minishell.sh
 includes
 lib
-Makefile
 minishell
 minishell_output.txt
 minishell_tester
@@ -22,14 +21,15 @@ not_existing
 notexisting
 outfile
 output.txt
-README.md
 src
 test_commands.txt
-testfile
 test_lucas
+testfile
 tests.sh
 to_test
+token
 valgrind.supp
+|
 
 Commande: echo 0
 0
@@ -149,7 +149,7 @@ Commande: echo 0
 0
 
 Commande: echo     	
-
+	
 
 Commande: echo 0
 0
@@ -161,6 +161,7 @@ Commande: echo 0
 0
 
 Commande: echo -n au revoir
+au revoir
 au revoir
 
 Commande: echo 0
@@ -186,7 +187,6 @@ erongitig.
 hs.llehsinim_dna_hsab_erapmoc_lng
 sedulcni
 bil
-elifekaM
 llehsinim
 txt.tuptuo_llehsinim
 retset_llehsinim
@@ -194,20 +194,21 @@ gnitsixe_ton
 gnitsixeton
 eliftuo
 txt.tuptuo
-dm.EMDAER
 crs
 txt.sdnammoc_tset
-eliftset
 sacul_tset
+eliftset
 hs.stset
 tset_ot
+nekot
 ppus.dnirglav
-edocsv.
+|
 
 Commande: echo 0
 0
 
 Commande: exit 42
+exit
 exit
 
 Commande: echo 0
@@ -216,6 +217,7 @@ Commande: echo 0
 Commande: exit 42hgzef
 exit
 minishell: exit: 42hgzef:numeric argument required
+minishell: exit: 42hgzef:numeric argument required
 
 Commande: echo 0
 0
@@ -223,12 +225,14 @@ Commande: echo 0
 Commande: exit 42 jhgzegf
 exit
 minishell: exit: too many arguments
+minishell: exit: too many arguments
 
 Commande: echo 0
 0
 
 Commande: exit jhzef
 exit
+minishell: exit: jhzef:numeric argument required
 minishell: exit: jhzef:numeric argument required
 
 Commande: echo 0
@@ -254,7 +258,6 @@ fileout
 gnl_compare_bash_and_minishell.sh
 includes
 lib
-Makefile
 minishell
 minishell_output.txt
 minishell_tester
@@ -262,15 +265,15 @@ not_existing
 notexisting
 outfile
 output.txt
-README.md
 src
 test_commands.txt
-testfile
 test_lucas
+testfile
 tests.sh
 to_test
+token
 valgrind.supp
-.vscode
+|
 
 Commande: echo 0
 0
@@ -370,7 +373,6 @@ fileout
 gnl_compare_bash_and_minishell.sh
 includes
 lib
-Makefile
 minishell
 minishell_output.txt
 minishell_tester
@@ -378,17 +380,18 @@ not_existing
 notexisting
 outfile
 output.txt
-README.md
 src
 test_commands.txt
-testfile
 test_lucas
+testfile
 tests.sh
 to_test
+token
 valgrind.supp
+|
 
-Commande: echo 'dan'
-dan
+Commande: echo 'seblin'
+seblin
 
 Commande: echo 0
 0
@@ -604,7 +607,8 @@ Commande: echo 0
 0
 
 Commande: << end cat|>fileout
-heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+heredoc> 
+warning: here-document at line 1 delimited by end-of-file (wanted 'end')
 
 Commande: echo 0
 0
@@ -664,7 +668,6 @@ fileout
 gnl_compare_bash_and_minishell.sh
 includes
 lib
-Makefile
 minishell
 minishell_output.txt
 minishell_tester
@@ -672,14 +675,15 @@ not_existing
 notexisting
 outfile
 output.txt
-README.md
 src
 test_commands.txt
-testfile
 test_lucas
+testfile
 tests.sh
 to_test
+token
 valgrind.supp
+|
 
 Commande: echo 0
 0
@@ -688,7 +692,7 @@ Commande: cd ..
 
 
 Commande: pwd
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo 0
 0
@@ -700,25 +704,25 @@ Commande: echo 0
 0
 
 Commande: pwd
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo 0
 0
 
 Commande: pwd kzbgkbzekgb
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo 0
 0
 
 Commande: pwd kzbg  kbzekgb
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo 0
 0
 
 Commande: pwd 42 bzekgb
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo 0
 0
@@ -990,14 +994,18 @@ Commande: echo 0
 0
 
 Commande: <<end <<end
-heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
-heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+heredoc> 
+warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+heredoc> 
+warning: here-document at line 1 delimited by end-of-file (wanted 'end')
 
 Commande: <<end cat
-heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+heredoc> 
+warning: here-document at line 1 delimited by end-of-file (wanted 'end')
 
 Commande: <<end
-heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+heredoc> 
+warning: here-document at line 1 delimited by end-of-file (wanted 'end')
 
 Commande: echo 0
 0
@@ -1008,98 +1016,98 @@ Commande: echo /bin/bash
 Commande: echo 0
 0
 
-Commande: echo dan/bin/bash$
-dan/bin/bash$
+Commande: echo seblin/bin/bash$
+seblin/bin/bash$
 
 Commande: echo 0
 0
 
-Commande: echo dan/bin/bash
-dan/bin/bash
+Commande: echo seblin/bin/bash
+seblin/bin/bash
 
 Commande: echo 0
 0
 
-Commande: echo dan   /bin/bash $
-dan /bin/bash $
+Commande: echo seblin   /bin/bash $
+seblin /bin/bash $
 
 Commande: echo 0
 0
 
-Commande: echo 'dan/bin/bash$'
-dan/bin/bash$
+Commande: echo 'seblin/bin/bash$'
+seblin/bin/bash$
 
 Commande: echo 0
 0
 
-Commande: echo dan /bin/bash $ 
-dan /bin/bash $
+Commande: echo seblin /bin/bash $ 
+seblin /bin/bash $
 
 Commande: echo 0
 0
 
-Commande: echo dan/bin/bash
-dan/bin/bash
+Commande: echo seblin/bin/bash
+seblin/bin/bash
 
 Commande: echo 0
 0
 
-Commande: echo "dan$  SHELL $ "
-dan$  SHELL $ 
+Commande: echo "seblin$  SHELL $ "
+seblin$  SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo "trrtdan$   SHELL $ "
-trrtdan$   SHELL $ 
+Commande: echo "trrtseblin$   SHELL $ "
+trrtseblin$   SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo "trrtdan   SHELL $ "
-trrtdan   SHELL $ 
+Commande: echo "trrtseblin   SHELL $ "
+trrtseblin   SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo "trrtdan SHELL $ "
-trrtdan SHELL $ 
+Commande: echo "trrtseblin SHELL $ "
+trrtseblin SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo trrtdan$   SHELL $ 
-trrtdan$ SHELL $
+Commande: echo trrtseblin$   SHELL $ 
+trrtseblin$ SHELL $
 
 Commande: echo 0
 0
 
-Commande: echo "trrtdan'Mach' $'LOGNAME'  SHELL $ "
-trrtdan'Mach' $'LOGNAME'  SHELL $ 
+Commande: echo "trrtseblin'Mach' $'LOGNAME'  SHELL $ "
+trrtseblin'Mach' $'LOGNAME'  SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo "trrt'Mach' dan'Mach' $'LOGNA'M''E'  SHELL $ "
-trrt'Mach' dan'Mach' $'LOGNA'M''E'  SHELL $ 
+Commande: echo "trrt'Mach' seblin'Mach' $'LOGNA'M''E'  SHELL $ "
+trrt'Mach' seblin'Mach' $'LOGNA'M''E'  SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo "trrt'Mach'p loudan'Mach' $'LOGNA'M''E'42  SHELL $ "
-trrt'Mach'p loudan'Mach' $'LOGNA'M''E'42  SHELL $ 
+Commande: echo "trrt'Mach'p louseblin'Mach' $'LOGNA'M''E'42  SHELL $ "
+trrt'Mach'p louseblin'Mach' $'LOGNA'M''E'42  SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo "dan"
-dan
+Commande: echo "seblin"
+seblin
 
 Commande: echo 0
 0
 
-Commande: echo dan
-dan
+Commande: echo seblin
+seblin
 
 Commande: echo 0
 0

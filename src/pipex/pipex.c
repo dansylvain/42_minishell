@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/18 17:04:00 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 14:54:54 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 	pid_t	pid;
 //	char	**split;
 //	int		offset;
-	
+//	pid = -1;
 //	offset = 0;
 	// ft_printf("argv in nurcery -%s-\n", **argv);
 	// if (redir.redir[1])
@@ -67,7 +67,7 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 				if (fd_file[1] > 2)
 					close(fd_file[1]);
 				set_pipe_forward(pipefd[0], pipefd[1], redir);
-			//	ft_printf("argv in nurcery -%s-%s\n", **argv, (*argv)[1]);
+				//ft_printf("argv in nurcery -%s-%s\n", **argv, (*argv)[1]);
 				if (!command_is_builtin(*argv, NULL, envp))
 				{
 					//ft_printf("command is NOT BUILTIN (pipex)\n");
@@ -269,10 +269,11 @@ int	set_redir(char **argv, t_redir *redir)
 }
 int	set_io(char **argv[], t_redir *redir)
 {
+	redir->fd_file[0] = -1;
+	redir->fd_file[1] = -1;
 	redir->pipe[0] = -1;
 	redir->pipe[1] = -1;
-	redir->redir[1] = 0;
-	redir->redir[0] = 0;
+	redir->redir[0] = 0;	
 	redir->redir[1] = 0;
 	redir->delim = NULL;
 	redir->filepath[0] = NULL;
