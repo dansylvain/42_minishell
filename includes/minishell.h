@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 19:10:53 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 20:11:03 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef struct t_Data
 
 void	handle_signals(void);
 int		prompt_loop(t_Data *data, char *envp[]);
-void	display_error(char *str, char *details, char *str2);
+void	display_error(char *str);
+void	display_error_detail(char *str, char *details, char *str2);
 void	free_data(t_Data *data);
 void	close_minishell(t_Data *data);
 void	exec_env(t_Data *data, char **command_tab);

@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:22:52 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/02/19 19:19:16 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 20:10:33 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,13 @@
  * takes the error message as argument
  *! error message should not be longer than 1000 chars
 *========================================================================**/
-void	display_error(char *str, char *details, char *str2)
+void	display_error(char *str)
+{
+	if (write(2, str, ft_strlen(str)) == -1)
+		perror("display_error");
+}
+
+void	display_error_detail(char *str, char *details, char *str2)
 {
 	char tmp[2000];
 	int len = 0;

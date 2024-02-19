@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/19 14:45:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 20:11:13 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 #include "libft.h"
 #include "ft_printf.h"
 #include "parsing_build.h"
-
-void	display_error(char *str);
+#include "minishell.h"
 
 
 static char	*try_paths(char **argv, char *env_find)
@@ -114,7 +113,7 @@ char	**search_path(char *argv[], char *envp[])
 	{
 		//ft_printf("not exist:%s\n", *argv);
 		// ft_putstr_fd("%s: command not found\n", argv[0]);
-		ft_printf("%s: command not found\n", argv[0]);
+		display_error("command not found\n");
 		// perror(*argv);
 		// free_ptr_arr(split_arg);
 		exit(1);
