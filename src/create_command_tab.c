@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 00:48:13 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 10:51:19 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		print_tree(t_ast_nde *node);
 
 int			pipex(char **argv[], char *envp[]);
 t_ast_nde	*copy_node_child(t_ast_nde *node);
+t_ast_nde 	*copy_sibling(t_ast_nde *node);
 
 void	display_command_tab(char **command_tab)
 {
@@ -72,9 +73,15 @@ int	is_chevron(t_ast_nde *node)
 {
 	if (node->token == SCHEV_LFT || node->token == DCHEV_LFT
 		|| node->token == SCHEV_RGTH || node->token == DCHEV_RGTH)
+		{
+			
 		return (1);
+		}
 	else
+	{
+		
 		return (0);
+	}
 }
 
 int	get_cmd_nbr(t_ast_nde *node)
@@ -107,15 +114,17 @@ int	get_cmd_nbr(t_ast_nde *node)
 
 char	*get_node_str(t_Data *data, t_ast_nde *node)
 {
-	char	str[2000];
+	char	str[2000000000];
 	int		index;
 
 	index = 0;
-	ft_bzero(str, 2000);
+	ft_bzero(str, 2000000000);
 	while (node)
 	{
 		if (node->token != SQUTE && node->token != DQUTE)
 		{
+			(void) (node->end - node->start + 1);
+			//exit(1);
 			ft_memcpy(&(str[index]), node->start, node->end - node->start + 1);
 			index += node->end - node->start + 1;
 		}
@@ -167,6 +176,7 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 			if (cmd_tab[i] == NULL)
 				return (NULL);
 			j = 0;
+			
 			while (!is_separator(node) && !is_chevron(node))
 			{
 				cmd_tab[i][j++] = get_node_str(data, node->child);
@@ -225,18 +235,21 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 	while (node && node->token != AND && node->token != OR)
 	{
 		if (!flag)
-			add_sibling(copy_node_child(node),
+			add_sibling(copy_sibling(node),
 				&cmd_tab_node, &cmd_tab_node_sav);
+			
 		node = node->sibling;
 	}
 	if (cmd_tab_node_sav)
 	{
+		
 		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);
 		if (is_pipeline(cmd_tab_node_sav))
 			data->exit_status = pipex(cmd_tab, envp);
 		else if (!command_is_builtin(*cmd_tab, data, envp))
 			data->exit_status = pipex(cmd_tab, envp);
-		//free_command_tab_lg(cmd_tab);
+		free_sibling_and_child(cmd_tab_node_sav);
+		free_command_tab_lg(cmd_tab);
 	}
 	flag = data->exit_status;
 	if (node && node->token == OR)

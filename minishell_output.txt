@@ -41,19 +41,64 @@ valgrind.supp
 |
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: 
 
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: /bin/ls -al
--al: command not found
+total 2092
+-rw-r--r--  1 seblin seblin      27 Feb 18 16:54  
+drwxr-xr-x  9 seblin seblin    4096 Feb 19 10:25 .
+drwxr-xr-x 11 seblin seblin    4096 Jan 29 20:52 ..
+drwxr-xr-x  8 seblin seblin    4096 Feb 19 08:56 .git
+-rw-r--r--  1 seblin seblin      55 Feb 18 16:49 .gitignore
+drwxr-xr-x  2 seblin seblin    4096 Feb 17 18:33 .vscode
+-rw-r--r--  1 seblin seblin    3390 Feb 18 16:49 Makefile
+-rw-r--r--  1 seblin seblin     786 Feb 10 14:43 README.md
+-rw-r--r--  1 seblin seblin   50859 Feb  3 18:34 allowed_functions.md
+-rw-r--r--  1 seblin seblin     527 Feb 19 10:25 bash_output.txt
+-rwxr-xr-x  1 seblin seblin    4675 Feb 18 16:54 compare_bash_and_minishell.sh
+-rw-r--r--  1 seblin seblin   27775 Feb  3 18:53 correct_output.txt
+-rw-r--r--  1 seblin seblin   59401 Feb  3 18:34 diff_output.txt
+-rw-r--r--  1 seblin seblin 1568461 Jan 26 11:14 en.subject.pdf
+-rw-r--r--  1 seblin seblin   90973 Feb 14 15:59 eval_minishell.pdf
+-rw-r--r--  1 seblin seblin      20 Feb 15 17:02 fie
+-rw-r--r--  1 seblin seblin     101 Feb 18 16:49 file
+-rw-r--r--  1 seblin seblin       6 Feb 18 16:49 file.txt
+-rw-r--r--  1 seblin seblin    3528 Feb 19 10:25 file1
+-rw-r--r--  1 seblin seblin       7 Feb 18 16:49 file2.txt
+-rw-r--r--  1 seblin seblin       0 Feb 19 10:25 fileout
+-rw-r--r--  1 seblin seblin       7 Feb 17 10:33 fille
+-rw-r--r--  1 seblin seblin      45 Feb 17 18:23 fou
+-rwxr-xr-x  1 seblin seblin    4652 Feb 18 17:51 gnl_compare_bash_and_minishell.sh
+drwxr-xr-x  3 seblin seblin    4096 Feb 18 16:54 includes
+drwxr-xr-x  5 seblin seblin    4096 Jan 25 18:43 lib
+-rwxr-xr-x  1 seblin seblin  177184 Feb 19 10:25 minishell
+-rw-r--r--  1 seblin seblin     527 Feb 19 10:25 minishell_output.txt
+drwxr-xr-x  6 seblin seblin    4096 Feb 13 19:37 minishell_tester
+-rw-r--r--  1 seblin seblin       0 Feb 17 18:23 moutou
+-rw-r--r--  1 seblin seblin       6 Feb 14 14:05 not_existing
+-rw-r--r--  1 seblin seblin     414 Feb 14 16:56 notexisting
+-rw-r--r--  1 seblin seblin      25 Feb 19 10:25 outfile
+-rw-r--r--  1 seblin seblin       5 Feb 17 10:33 outfille
+-rw-r--r--  1 seblin seblin       5 Feb 17 10:33 outfille2
+-rw-r--r--  1 seblin seblin     126 Feb 14 14:02 output.txt
+drwxr-xr-x  5 seblin seblin    4096 Feb 19 10:25 src
+-rw-r--r--  1 seblin seblin     217 Feb  7 18:14 test_commands.txt
+drwxr-xr-x  6 seblin seblin    4096 Feb 14 09:12 test_lucas
+-rw-r--r--  1 seblin seblin      38 Feb 17 12:46 testfile
+-rwxr-xr-x  1 seblin seblin    2595 Feb 14 14:02 tests.sh
+-rw-r--r--  1 seblin seblin    2866 Feb 14 14:05 to_test
+-rw-r--r--  1 seblin seblin       0 Feb 15 16:51 token
+-rw-r--r--  1 seblin seblin      70 Feb  3 18:34 valgrind.supp
+-rw-r--r--  1 seblin seblin       3 Feb 18 16:54 |
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: grep -i 'return' src/main.c
 		return (display_error("Error\n"), 255);
@@ -83,61 +128,64 @@ Commande: grep -i 'return' src/main.c
 	return (envp_tab);
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: /usr/bin/cat testfile
-testfile: command not found
+test
+motif olala
+motif nononon
+pôuet
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: /bin/grep -i motif /testfile
--imotif/testfile: command not found
+/bin/grep: /testfile: No such file or directory
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: /bin/chmod 755 /testfile
-755/testfile: command not found
+/bin/chmod: cannot access '/testfile': No such file or directory
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: /bin/cp /testfile /includes/mon_fichier.txt
-/testfile/includes/mon_fichier.txt: command not found
+/bin/cp: cannot stat '/testfile': No such file or directory
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: /bin/mv /testfile /includes/mon_fichier.txt
-/testfile/includes/mon_fichier.txt: command not found
+/bin/mv: cannot stat '/testfile': No such file or directory
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: echo bonjour
-bonjour: command not found
+bonjour
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: echo     	
-
+	
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: echo
 
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: echo -n au revoir
--naurevoir: command not found
+au revoir
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: ls -a | rev
  
@@ -187,14 +235,1637 @@ ppus.dnirglav
 |
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: exit 42
-42: command not found
+exit
 
 Commande: echo 0
-0: command not found
+0
 
 Commande: exit 42hgzef
-42hgzef: command not found
+exit
+minishell: exit: 42hgzef:numeric argument required
+
+Commande: echo 0
+0
+
+Commande: exit 42 jhgzegf
+exit
+minishell: exit: too many arguments
+
+Commande: echo 0
+0
+
+Commande: exit jhzef
+exit
+minishell: exit: jhzef:numeric argument required
+
+Commande: echo 0
+0
+
+Commande: ls -a
+ 
+.
+..
+.git
+.gitignore
+.vscode
+Makefile
+README.md
+allowed_functions.md
+bash_output.txt
+compare_bash_and_minishell.sh
+correct_output.txt
+diff_output.txt
+en.subject.pdf
+eval_minishell.pdf
+fie
+file
+file.txt
+file1
+file2.txt
+fileout
+fille
+fou
+gnl_compare_bash_and_minishell.sh
+includes
+lib
+minishell
+minishell_output.txt
+minishell_tester
+moutou
+not_existing
+notexisting
+outfile
+outfille
+outfille2
+output.txt
+src
+test_commands.txt
+test_lucas
+testfile
+tests.sh
+to_test
+token
+valgrind.supp
+|
+
+Commande: echo 0
+0
+
+Commande: <noexist cat
+No such file or directory: noexist
+
+Commande: echo 0
+0
+
+Commande: bin/ls fichiernulachier
+bin/ls: command not found
+
+Commande: echo 0
+0
+
+Commande: echo 0 + 0
+0 + 0
+
+Commande: echo 0
+0
+
+Commande: ls includes
+ls
+minishell.h
+parsing
+pipex_setup.h
+
+Commande: echo 0
+0
+
+Commande: echo "cat lol.c | cat > lol.c"
+cat lol.c | cat > lol.c
+
+Commande: echo 0
+0
+
+Commande: ls inclu"des"
+ls
+minishell.h
+parsing
+pipex_setup.h
+
+Commande: echo 0
+0
+
+Commande: l's' '-'l
+total 2080
+-rw-r--r-- 1 seblin seblin      27 Feb 18 16:54  
+-rw-r--r-- 1 seblin seblin    3390 Feb 18 16:49 Makefile
+-rw-r--r-- 1 seblin seblin     786 Feb 10 14:43 README.md
+-rw-r--r-- 1 seblin seblin   50859 Feb  3 18:34 allowed_functions.md
+-rw-r--r-- 1 seblin seblin    6900 Feb 19 10:25 bash_output.txt
+-rwxr-xr-x 1 seblin seblin    4675 Feb 18 16:54 compare_bash_and_minishell.sh
+-rw-r--r-- 1 seblin seblin   27775 Feb  3 18:53 correct_output.txt
+-rw-r--r-- 1 seblin seblin   59401 Feb  3 18:34 diff_output.txt
+-rw-r--r-- 1 seblin seblin 1568461 Jan 26 11:14 en.subject.pdf
+-rw-r--r-- 1 seblin seblin   90973 Feb 14 15:59 eval_minishell.pdf
+-rw-r--r-- 1 seblin seblin      20 Feb 15 17:02 fie
+-rw-r--r-- 1 seblin seblin     101 Feb 18 16:49 file
+-rw-r--r-- 1 seblin seblin       6 Feb 18 16:49 file.txt
+-rw-r--r-- 1 seblin seblin    3528 Feb 19 10:25 file1
+-rw-r--r-- 1 seblin seblin       7 Feb 18 16:49 file2.txt
+-rw-r--r-- 1 seblin seblin       0 Feb 19 10:25 fileout
+-rw-r--r-- 1 seblin seblin       7 Feb 17 10:33 fille
+-rw-r--r-- 1 seblin seblin      45 Feb 17 18:23 fou
+-rwxr-xr-x 1 seblin seblin    4652 Feb 18 17:51 gnl_compare_bash_and_minishell.sh
+drwxr-xr-x 3 seblin seblin    4096 Feb 18 16:54 includes
+drwxr-xr-x 5 seblin seblin    4096 Jan 25 18:43 lib
+-rwxr-xr-x 1 seblin seblin  177184 Feb 19 10:25 minishell
+-rw-r--r-- 1 seblin seblin    6708 Feb 19 10:25 minishell_output.txt
+drwxr-xr-x 6 seblin seblin    4096 Feb 13 19:37 minishell_tester
+-rw-r--r-- 1 seblin seblin       0 Feb 17 18:23 moutou
+-rw-r--r-- 1 seblin seblin       6 Feb 14 14:05 not_existing
+-rw-r--r-- 1 seblin seblin     414 Feb 14 16:56 notexisting
+-rw-r--r-- 1 seblin seblin      25 Feb 19 10:25 outfile
+-rw-r--r-- 1 seblin seblin       5 Feb 17 10:33 outfille
+-rw-r--r-- 1 seblin seblin       5 Feb 17 10:33 outfille2
+-rw-r--r-- 1 seblin seblin     126 Feb 14 14:02 output.txt
+drwxr-xr-x 5 seblin seblin    4096 Feb 19 10:25 src
+-rw-r--r-- 1 seblin seblin     217 Feb  7 18:14 test_commands.txt
+drwxr-xr-x 6 seblin seblin    4096 Feb 14 09:12 test_lucas
+-rw-r--r-- 1 seblin seblin      38 Feb 17 12:46 testfile
+-rwxr-xr-x 1 seblin seblin    2595 Feb 14 14:02 tests.sh
+-rw-r--r-- 1 seblin seblin    2866 Feb 14 14:05 to_test
+-rw-r--r-- 1 seblin seblin       0 Feb 15 16:51 token
+-rw-r--r-- 1 seblin seblin      70 Feb  3 18:34 valgrind.supp
+-rw-r--r-- 1 seblin seblin       3 Feb 18 16:54 |
+
+Commande: echo 0
+0
+
+Commande: ls 
+ 
+Makefile
+README.md
+allowed_functions.md
+bash_output.txt
+compare_bash_and_minishell.sh
+correct_output.txt
+diff_output.txt
+en.subject.pdf
+eval_minishell.pdf
+fie
+file
+file.txt
+file1
+file2.txt
+fileout
+fille
+fou
+gnl_compare_bash_and_minishell.sh
+includes
+lib
+minishell
+minishell_output.txt
+minishell_tester
+moutou
+not_existing
+notexisting
+outfile
+outfille
+outfille2
+output.txt
+src
+test_commands.txt
+test_lucas
+testfile
+tests.sh
+to_test
+token
+valgrind.supp
+|
+
+Commande: echo 'seblin'
+seblin
+
+Commande: echo 0
+0
+
+Commande: cat includes/minishell.h
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
+/*   Updated: 2024/02/13 17:05:25 by dan              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <signal.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include "../lib/ft_printf/ft_printf.h"
+# include "../lib/libft/libft.h"
+// # include "../lib/get_next_line/get_next_line.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+
+typedef struct t_Data
+{
+	char	**envp_tab;
+	int		exit_status;
+}	t_Data;
+
+void	handle_signals(void);
+int		prompt_loop(t_Data *data, char *envp[]);
+void	display_error(char *str);
+void	free_data(t_Data *data);
+void	close_minishell(t_Data *data);
+void	exec_env(t_Data *data, char **command_tab);
+int		command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
+void	exec_pwd(t_Data *data);
+int		exec_cd(t_Data *data, char **command_tab);
+void	exec_echo(t_Data *data, char **command_tab);
+void	exec_unset(t_Data *data, char **command_tab);
+void	free_command_tab(char **command_tab);
+char	**duplicate_envp(t_Data *data, char *envp[]);
+int		exec_export(char **command_tab, t_Data *data);
+
+#endif
+
+Commande: echo 0
+0
+
+Commande: echo 0
+0
+
+Commande: echo papa >> file1
+
+
+Commande: echo 0
+0
+
+Commande: echo maman >> file1
+
+
+Commande: echo 0
+0
+
+Commande: cat file1
+papa
+papa
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+maman
+papa
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+command_tab :
+echo
+papa
+papa
+maman
+command_tab :
+echo
+maman
+maman
+papa
+command_tab :
+echo
+papa
+papa
+maman
+command_tab :
+echo
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+command_tab :
+echo
+papa
+papa
+maman
+command_tab :
+echo
+maman
+maman
+papa
+command_tab :
+echo
+papa
+papa
+maman
+command_tab :
+echo
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+maman
+papa
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+
+Commande: echo 0
+0
+
+Commande: cat file1 | grep papa | more
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+
+Commande: echo 0
+0
+
+Commande: << end cat|>fileout
+heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+
+Commande: echo 0
+0
+
+Commande: ls fichiernul | grep bla | more
+/usr/bin/ls: cannot access 'fichiernul': No such file or directory
+
+Commande: echo 0
+0
+
+Commande: export VAR=tamaman
+
+
+Commande: echo 0
+0
+
+Commande: echo 
+
+
+Commande: echo 0
+0
+
+Commande: echo 
+
+
+Commande: unset VAR
+
+
+Commande: echo 0
+0
+
+Commande: echo 
+
+
+Commande: echo 0
+0
+
+Commande: unset PATH
+
+
+Commande: echo 0
+0
+
+Commande: ls
+ 
+Makefile
+README.md
+allowed_functions.md
+bash_output.txt
+compare_bash_and_minishell.sh
+correct_output.txt
+diff_output.txt
+en.subject.pdf
+eval_minishell.pdf
+fie
+file
+file.txt
+file1
+file2.txt
+fileout
+fille
+fou
+gnl_compare_bash_and_minishell.sh
+includes
+lib
+minishell
+minishell_output.txt
+minishell_tester
+moutou
+not_existing
+notexisting
+outfile
+outfille
+outfille2
+output.txt
+src
+test_commands.txt
+test_lucas
+testfile
+tests.sh
+to_test
+token
+valgrind.supp
+|
+
+Commande: echo 0
+0
+
+Commande: cd ..
+
+
+Commande: pwd
+/home/seblin/42/42_minishell
+
+Commande: echo 0
+0
+
+Commande: cd
+
+
+Commande: echo 0
+0
+
+Commande: pwd
+/home/seblin/42/42_minishell
+
+Commande: echo 0
+0
+
+Commande: pwd kzbgkbzekgb
+/home/seblin/42/42_minishell
+
+Commande: echo 0
+0
+
+Commande: pwd kzbg  kbzekgb
+/home/seblin/42/42_minishell
+
+Commande: echo 0
+0
+
+Commande: pwd 42 bzekgb
+/home/seblin/42/42_minishell
+
+Commande: echo 0
+0
+
+Commande: cat includes/minishell.h
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
+/*   Updated: 2024/02/13 17:05:25 by dan              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <signal.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include "../lib/ft_printf/ft_printf.h"
+# include "../lib/libft/libft.h"
+// # include "../lib/get_next_line/get_next_line.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+
+typedef struct t_Data
+{
+	char	**envp_tab;
+	int		exit_status;
+}	t_Data;
+
+void	handle_signals(void);
+int		prompt_loop(t_Data *data, char *envp[]);
+void	display_error(char *str);
+void	free_data(t_Data *data);
+void	close_minishell(t_Data *data);
+void	exec_env(t_Data *data, char **command_tab);
+int		command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
+void	exec_pwd(t_Data *data);
+int		exec_cd(t_Data *data, char **command_tab);
+void	exec_echo(t_Data *data, char **command_tab);
+void	exec_unset(t_Data *data, char **command_tab);
+void	free_command_tab(char **command_tab);
+char	**duplicate_envp(t_Data *data, char *envp[]);
+int		exec_export(char **command_tab, t_Data *data);
+
+#endif
+
+Commande: echo 0
+0
+
+Commande: cat ../../42/minishell_common/includes/minishell.h
+/usr/bin/cat: ../../42/minishell_common/includes/minishell.h: No such file or directory
+
+Commande: echo 0
+0
+
+Commande: <testfile cat | rev > outfile
+
+
+Commande: echo 0
+0
+
+Commande: cat <testfile
+test
+motif olala
+motif nononon
+pôuet
+
+Commande: echo 0
+0
+
+Commande: <outfile cat
+tset
+alalo fitom
+nononon fitom
+teuôp
+
+Commande: echo 0
+0
+
+Commande: <testfile cat | echo niania | rev > outfile
+
+
+Commande: echo 0
+0
+
+Commande: <outfile cat
+ainain
+
+Commande: echo 0
+0
+
+Commande: <testfile cat | echeo niania | rev > outfile
+
+
+Commande: echo 0
+0
+
+Commande: <outfile cat
+dnuof ton dnammoc :oehce
+
+Commande: echo 0
+0
+
+Commande: echo aaa && echo bbb || echo ccc
+aaa
+bbb
+
+Commande: echo 0
+0
+
+Commande: echo aaa || echo bbb || echo ccc
+aaa
+
+Commande: echo 0
+0
+
+Commande: echo 0
+0
+
+Commande: false && echo bbb || echo ccc
+ccc
+
+Commande: echo 0
+0
+
+Commande: false || echo bbb || echo ccc
+bbb
+
+Commande: echo 0
+0
+
+Commande: false && echo bbb && echo ccc
+
+
+Commande: echo 0
+0
+
+Commande: echo aaa && false && echo ccc
+aaa
+
+Commande: echo 0
+0
+
+Commande: <<end <<end
+heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+
+Commande: <<end cat
+heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+
+Commande: <<end
+heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+
+Commande: echo 0
+0
+
+Commande: echo /bin/bash
+/bin/bash
+
+Commande: echo 0
+0
+
+Commande: echo seblin/bin/bash$
+seblin/bin/bash$
+
+Commande: echo 0
+0
+
+Commande: echo seblin/bin/bash
+seblin/bin/bash
+
+Commande: echo 0
+0
+
+Commande: echo seblin   /bin/bash $
+seblin /bin/bash $
+
+Commande: echo 0
+0
+
+Commande: echo 'seblin/bin/bash$'
+seblin/bin/bash$
+
+Commande: echo 0
+0
+
+Commande: echo seblin /bin/bash $ 
+seblin /bin/bash $
+
+Commande: echo 0
+0
+
+Commande: echo seblin/bin/bash
+seblin/bin/bash
+
+Commande: echo 0
+0
+
+Commande: echo "seblin$  SHELL $ "
+seblin$  SHELL $ 
+
+Commande: echo 0
+0
+
+Commande: echo "trrtseblin$   SHELL $ "
+trrtseblin$   SHELL $ 
+
+Commande: echo 0
+0
+
+Commande: echo "trrtseblin   SHELL $ "
+trrtseblin   SHELL $ 
+
+Commande: echo 0
+0
+
+Commande: echo "trrtseblin SHELL $ "
+trrtseblin SHELL $ 
+
+Commande: echo 0
+0
+
+Commande: echo trrtseblin$   SHELL $ 
+trrtseblin$ SHELL $
+
+Commande: echo 0
+0
+
+Commande: echo "trrtseblin'Mach' $'LOGNAME'  SHELL $ "
+trrtseblin'Mach' $'LOGNAME'  SHELL $ 
+
+Commande: echo 0
+0
+
+Commande: echo "trrt'Mach' seblin'Mach' $'LOGNA'M''E'  SHELL $ "
+trrt'Mach' seblin'Mach' $'LOGNA'M''E'  SHELL $ 
+
+Commande: echo 0
+0
+
+Commande: echo "trrt'Mach'p louseblin'Mach' $'LOGNA'M''E'42  SHELL $ "
+trrt'Mach'p louseblin'Mach' $'LOGNA'M''E'42  SHELL $ 
+
+Commande: echo 0
+0
+
+Commande: echo "seblin"
+seblin
+
+Commande: echo 0
+0
+
+Commande: echo seblin
+seblin
+
+Commande: echo 0
+0
 
