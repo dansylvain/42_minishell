@@ -6,11 +6,27 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 14:07:50 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 18:32:05 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	are_only_valid_chars(char *str)
+{
+	int i;
+
+	i = 0;
+	if (ft_isdigit(str[0]))
+		return (0);
+	while (str[i])
+	{
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 /**========================================================================
  *                           exec_export
@@ -29,6 +45,12 @@ int	exec_export(char **command_tab, t_Data *data)
 	i = 1;
 	while (command_tab[i])
 	{
+		if (!are_only_valid_chars(command_tab[i]))
+		{
+			ft_printf("minishell: export: `%s': not a valid identifier\n", command_tab[i]);
+			data->exit_status = 1;
+			return (0);
+		}
 		add_env_var_to_envp_tab(command_tab, data, &i);
 		i++;
 	}
