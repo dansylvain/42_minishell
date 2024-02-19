@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 10:51:19 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 17:03:05 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		print_tree(t_ast_nde *node);
 int			pipex(char **argv[], char *envp[]);
 t_ast_nde	*copy_node_child(t_ast_nde *node);
 t_ast_nde 	*copy_sibling(t_ast_nde *node);
+t_ast_nde 	*copy_sibling2(t_ast_nde *node);
 
 void	display_command_tab(char **command_tab)
 {
@@ -111,20 +112,18 @@ int	get_cmd_nbr(t_ast_nde *node)
 	}
 	return (cmd_nbr);
 }
-
+void print_rslt(t_ast_nde *rslt, int flag); //!
 char	*get_node_str(t_Data *data, t_ast_nde *node)
 {
-	char	str[2000000000];
+	char	str[20000];
 	int		index;
 
 	index = 0;
-	ft_bzero(str, 2000000000);
+	ft_bzero(str, 20000);
 	while (node)
 	{
 		if (node->token != SQUTE && node->token != DQUTE)
-		{
-			(void) (node->end - node->start + 1);
-			//exit(1);
+		{	
 			ft_memcpy(&(str[index]), node->start, node->end - node->start + 1);
 			index += node->end - node->start + 1;
 		}
@@ -235,8 +234,10 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 	while (node && node->token != AND && node->token != OR)
 	{
 		if (!flag)
+		{					
 			add_sibling(copy_sibling(node),
 				&cmd_tab_node, &cmd_tab_node_sav);
+		}
 			
 		node = node->sibling;
 	}
@@ -255,6 +256,5 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 	if (node && node->token == OR)
 		flag = !flag;
 	if (node)
-		launch_command_tab(data, node->sibling, envp, flag);	
-		
+		launch_command_tab(data, node->sibling, envp, flag);		
 }

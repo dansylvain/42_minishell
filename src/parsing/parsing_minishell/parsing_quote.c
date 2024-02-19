@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:36:13 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/18 13:57:43 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 15:12:35 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 static int	is_raw(char *str)
 {
-	return (!(*(str - 1) != '\\' && (*str == '\'' || *str == '\"')));
+	return (!(*str == '\'' || *str == '\"'));
 }
 
 static int	is_qute(char *str, char qute)
 {
-	return (*(str - 1) != '\\' && *str == qute);
+	return (*str == qute);
 }
 
 static void	set_raw_nde(t_ast_nde *raw, char **str)

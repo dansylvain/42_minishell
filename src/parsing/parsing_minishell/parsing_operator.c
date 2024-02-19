@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/18 11:48:05 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 15:09:43 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 		{	
 			if (sib->token == RAW)
 			{				
-				if (*(actual - 1) != '\\' && *actual == '|')
+				if (*actual == '|')
 				{
 					token_nde = create_node(PIPE);
 					token_nde->start = actual;
@@ -109,7 +109,7 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 					}
 					return (token_nde);
 				}
-				else if (*(actual - 1) != '\\' && *actual == '&'
+				else if (*actual == '&'
 					&& *(actual + 1) == '&')
 				{
 					token_nde = create_node(AND);
@@ -117,7 +117,7 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 					token_nde->end = ++actual;
 					return (token_nde);
 				}			
-				else if (*(actual - 1) != '\\' && *actual == '<')
+				else if (*actual == '<')
 				{
 					token_nde = create_node(SCHEV_LFT);
 					token_nde->start = actual;
@@ -129,7 +129,7 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 					}
 					return (token_nde);
 				}			
-				else if (*(actual - 1) != '\\' && *actual == '>')
+				else if (*actual == '>')
 				{
 					token_nde = create_node(SCHEV_RGTH);
 					token_nde->start = actual;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/17 17:11:08 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 14:45:36 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*try_paths(char **argv, char *env_find)
  *!		THIS FREE CAUSES COMMAND "ls -a -l" to terminate  
  *!  	with error message "free(): invalid pointer"
  *========================================================================**/
-			// free(*argv);
+			free(*argv);
 			*argv = cmd;
 			break ;
 		}

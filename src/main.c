@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 09:31:04 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 15:26:36 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ int	prompt_loop(t_Data *data, char *envp[])
 		if (gnl_output)
 			gnl_output[ft_strlen(gnl_output) - 1] = '\0';
 		cmd[0] = gnl_output;
-		if (cmd[0] && *cmd[0])
-			add_history(cmd[0]);
+		// if (cmd[0] && *cmd[0])
+		// 	add_history(cmd[0]);
 		if (cmd[0] == NULL)
 			return (0);
 			// return (ft_printf("exit\n"), 0);

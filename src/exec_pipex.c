@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 10:29:45 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/19 17:02:58 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ int	has_wildcard(char *str);
 int wilcard_func(char *pattern);
 void	free_tree(t_ast_nde *node);
 void free_tree_lcl();
+void		print_rslt(t_ast_nde *rslt, int flag);
+
 void	exec_pipex(t_Data *data, char *cmd, char *envp[])
 {
 	t_ast_nde *cmd_list;
-
-	cmd_list = parse(cmd, data);
+	cmd_list = parse(cmd, data);	
+//exit(1);
 	t_ast_nde *current;
 	current = cmd_list;
 	while (current)
@@ -39,5 +41,4 @@ void	exec_pipex(t_Data *data, char *cmd, char *envp[])
 	}
 	launch_command_tab(data, cmd_list, envp, 0);
 	free_sibling_and_child(cmd_list);
-	//free_tree_lcl();
 }
