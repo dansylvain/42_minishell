@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 18:52:57 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/19 19:52:24 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ int	main(int argc, char **argv, char *envp[])
 	if (data == NULL)
 		data = (t_Data *)ft_calloc(sizeof(t_Data), 1);
 	if (data == NULL)
-		return (display_error("Error\n"), 255);
+		return (display_error("Error\n", NULL, NULL), 255);
 	data->envp_tab = duplicate_envp(data, envp);
 	if (!data->envp_tab)
-		return (display_error("Error\n"), free_data(data), 255);
+		return (display_error("Error\n", NULL, NULL), free_data(data), 255);
 	if (argc != 1)
-		return (free_data(data), display_error("Usage: ./minishell\n"), 255);
+		return (free_data(data), display_error("Usage: ./minishell\n", NULL, NULL), 255);
 	handle_signals();
 	if (prompt_loop(data, envp) == 0)
 		return (free_data(data), 0);
