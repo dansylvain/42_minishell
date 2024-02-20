@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 07:42:44 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/20 09:26:05 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/20 12:08:29 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,21 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 			}
 			if (sib->token == RAW)
 			{
-				if (*actual == '*')
-				{
-					token_nde = create_node(JOKER);
-					token_nde->start = actual;
-					token_nde->end = actual;	
-					return (token_nde);
-				}				
+				char	*tmp;
+				
+				tmp = actual;
+				while (actual <= sib->end) 						
+				{					
+					if (*actual == '*')
+					{
+						token_nde = create_node(JOKER);
+						token_nde->start = tmp;												
+					}
+					if (token_nde)
+						token_nde->end = actual;
+					actual++;
+				}
+				return (token_nde);			
 			}
 			actual++;
 		}
