@@ -6,113 +6,62 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 17:52:04 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 18:01:25 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	display_command_tab(char **command_tab)
+void	launch_command_tab(t_Data *data, t_ast_nde *node,
+		char *envp[], int flag)
 {
-	int	i;
+	t_ast_nde	*cmd_tab_node;
+	t_ast_nde	*cmd_tab_node_sav;
+	char		***cmd_tab;
 
-	i = 0;
-	ft_printf("command_tab: \n");
-	while (command_tab[i])
+	cmd_tab_node_sav = NULL;
+	while (node && node->token != AND && node->token != OR)
 	{
-		ft_printf("cmd_tab[%i]: >%s<\n", i, command_tab[i]);
-		i++;
-	}
-}
-
-void	display_command_tab_big(char ***command_tab)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	ft_printf("command_tab: \n");
-	while (command_tab[i])
-	{
-		j = 0;
-		while (command_tab[i][j])
+		if (!flag)
 		{
-			ft_printf("cmd_tab[%i][%i]: >%s<\n", i, j, command_tab[i][j]);
-			j++;
-		}
-		i++;
-		ft_printf("after\n");
-	}
-	ft_printf("command_tab end: \n");
-}
-
-int	is_separator(t_ast_nde *node)
-{
-	if (node == NULL || node->token == PIPE
-		|| node->token == AND || node->token == OR)
-		return (1);
-	else
-		return (0);
-}
-
-int	is_chevron(t_ast_nde *node)
-{
-	if (node->token == SCHEV_LFT || node->token == DCHEV_LFT
-		|| node->token == SCHEV_RGTH || node->token == DCHEV_RGTH)
-	{
-		return (1);
-	}
-	else
-	{
-		return (0);
-	}
-}
-
-int	get_cmd_nbr(t_ast_nde *node)
-{
-	int	cmd_nbr;
-
-	cmd_nbr = 1;
-	while (node)
-	{
-		if (is_chevron(node))
-		{
-			cmd_nbr++;
-			if (!node->sibling || is_separator(node->sibling)
-				|| is_chevron(node->sibling))
-			{
-				ft_printf("handle this error\n");
-			}
-			if (node->sibling->sibling)
-				node = node->sibling->sibling;
-			else
-				break ;
-			continue ;
-		}
-		if ((node->token == PIPE))
-			cmd_nbr++;
+			add_sibling(copy_sibling(node),
+				&cmd_tab_node, &cmd_tab_node_sav);
+		}	
 		node = node->sibling;
 	}
-	return (cmd_nbr);
+	if (cmd_tab_node_sav)
+	{
+		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);
+		if (is_pipeline(cmd_tab_node_sav))
+			data->exit_status = pipex(cmd_tab, envp);
+		else if (!command_is_builtin(*cmd_tab, data, envp))
+			data->exit_status = pipex(cmd_tab, envp);
+		free_sibling_and_child(cmd_tab_node_sav);
+		free_command_tab_lg(cmd_tab);
+	}
+	flag = data->exit_status;
+	if (node && node->token == OR)
+		flag = !flag;
+	if (node)
+		launch_command_tab(data, node->sibling, envp, flag);
 }
 
-char	*get_node_str(t_Data *data, t_ast_nde *node)
+char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 {
-	char	str[20000];
-	int		index;
+	char		***cmd_tab;
+	int			cmd_nbr;
+	t_ast_nde	*current;
 
-	index = 0;
-	ft_bzero(str, 20000);
-	while (node)
-	{
-		if (node->token != SQUTE && node->token != DQUTE)
-		{
-			ft_memcpy(&(str[index]), node->start, node->end - node->start + 1);
-			index += node->end - node->start + 1;
-		}
-		node = node->sibling;
-	}
-	return (ft_strdup(str));
+	current = node;
+	while (current)
+		current = current->sibling;
+	cmd_nbr = get_cmd_nbr(node);
+	cmd_tab = (char ***)ft_calloc(cmd_nbr + 1, sizeof (char **));
+	if (cmd_tab == NULL)
+		return (NULL);
+	cmd_tab[cmd_nbr] = NULL;
+	cmd_tab = fill_cmd_tab_tabs(data, node, cmd_tab);
+	return (cmd_tab);
 }
 
 char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
@@ -175,66 +124,30 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 	return (cmd_tab);
 }
 
-char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
+int	get_cmd_nbr(t_ast_nde *node)
 {
-	char		***cmd_tab;
-	int			cmd_nbr;
-	t_ast_nde	*current;
+	int	cmd_nbr;
 
-	current = node;
-	while (current)
-		current = current->sibling;
-	cmd_nbr = get_cmd_nbr(node);
-	cmd_tab = (char ***)ft_calloc(cmd_nbr + 1, sizeof (char **));
-	if (cmd_tab == NULL)
-		return (NULL);
-	cmd_tab[cmd_nbr] = NULL;
-	cmd_tab = fill_cmd_tab_tabs(data, node, cmd_tab);
-	return (cmd_tab);
-}
-
-int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
-{
-	while (cmd_tab_node_sav)
+	cmd_nbr = 1;
+	while (node)
 	{
-		if (cmd_tab_node_sav->token == PIPE || cmd_tab_node_sav->token
-			== DCHEV_RGTH || cmd_tab_node_sav->token == SCHEV_RGTH)
-			return (1);
-		cmd_tab_node_sav = cmd_tab_node_sav->sibling;
-	}
-	return (0);
-}
-
-void	launch_command_tab(t_Data *data, t_ast_nde *node,
-		char *envp[], int flag)
-{
-	t_ast_nde	*cmd_tab_node;
-	t_ast_nde	*cmd_tab_node_sav;
-	char		***cmd_tab;
-
-	cmd_tab_node_sav = NULL;
-	while (node && node->token != AND && node->token != OR)
-	{
-		if (!flag)
+		if (is_chevron(node))
 		{
-			add_sibling(copy_sibling(node),
-				&cmd_tab_node, &cmd_tab_node_sav);
-		}	
+			cmd_nbr++;
+			if (!node->sibling || is_separator(node->sibling)
+				|| is_chevron(node->sibling))
+			{
+				ft_printf("handle this error\n");
+			}
+			if (node->sibling->sibling)
+				node = node->sibling->sibling;
+			else
+				break ;
+			continue ;
+		}
+		if ((node->token == PIPE))
+			cmd_nbr++;
 		node = node->sibling;
 	}
-	if (cmd_tab_node_sav)
-	{
-		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);
-		if (is_pipeline(cmd_tab_node_sav))
-			data->exit_status = pipex(cmd_tab, envp);
-		else if (!command_is_builtin(*cmd_tab, data, envp))
-			data->exit_status = pipex(cmd_tab, envp);
-		free_sibling_and_child(cmd_tab_node_sav);
-		free_command_tab_lg(cmd_tab);
-	}
-	flag = data->exit_status;
-	if (node && node->token == OR)
-		flag = !flag;
-	if (node)
-		launch_command_tab(data, node->sibling, envp, flag);
+	return (cmd_nbr);
 }
