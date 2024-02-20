@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:30:35 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 14:07:43 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 09:32:16 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ int	str_is_digit(char *str)
 	int	i;
 
 	i = 0;
+	if (!ft_isdigit(str[0]) && str[0] != '+' && str[0] != '-')
+		return (0);
+	i++;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))

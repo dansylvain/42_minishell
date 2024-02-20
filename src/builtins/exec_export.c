@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 09:08:21 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 09:12:37 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	are_only_valid_chars(char *str)
 	int i;
 
 	i = 0;
-	if (ft_isdigit(str[0]))
+	if (ft_isdigit(str[0]) || str[0] == '=')
 		return (0);
 	while (str[i] && str[i] != '=')
 	{

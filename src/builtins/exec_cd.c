@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:29:47 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 14:00:52 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 09:20:48 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ int	exec_cd(t_Data *data, char **command_tab)
 		return (0);
 	}
 	if (command_tab[1] && command_tab[2])
-		return (ft_printf("minishell: cd: too many arguments\n"));
+		return (display_error("minishell: cd: too many arguments\n"), 0);
 	if (chdir(command_tab[1]) != 0)
-		return (ft_printf
-			("minishell: cd: %s: No such file or directory\n", command_tab[1]));
+		return (display_error_detail("env: ‘", command_tab[1], "’: No such file or directory\n"), 0);
 	if (data)
 		data->exit_status = 0;
 	return (0);
