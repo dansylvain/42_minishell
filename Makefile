@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/20 19:25:46 by dan              ###   ########.fr        #
+#    Updated: 2024/02/20 19:34:06 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ LIBS = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf -L$(GET_NEXT_LINE_DIR) 
 
 # Source files
 SRC =	src/main.c \
+		src/create_envp.c \
 		src/utils.c \
 		src/utils_2.c \
 		src/handle_signals.c \

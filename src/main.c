@@ -6,25 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 20:11:41 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 19:36:32 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include "parsing_utils.h"
-
-char		**parse_cmd(char **command, char **env);
-void		tmp_main(void);
-void		display_command_tab(char **command_tab);
-int			pipex(char **argv[], char *envp[]);
-char		***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
-void		display_command_tab_big(char ***command_tab);
-void		exec_pipex(t_Data *data, char *cmd, char *envp[]);
-void		launch_command_tab(t_Data *data, t_ast_nde *node,
-				char *envp[], int flag);
-int			exec_exit(t_Data *data, char **command_tab);
-char	*get_next_line(int fd);
-
 
 /**========================================================================
  *                             COMMENTS POLICY
@@ -32,7 +18,6 @@ char	*get_next_line(int fd);
 *? signal info in the main comment bloc
 *? add your name at the beggining of a comment
 *---
-*! found free risponsible for invalid free error in file parsing_path.c
 *TODO finish builtin export
 *TODO fix memory leaks export
 *TODO fix memory leaks unset
@@ -46,7 +31,7 @@ char	*get_next_line(int fd);
 int	main(int argc, char **argv, char *envp[])
 {
 	static t_Data	*data = NULL;
-	
+
 	rl_catch_signals = 0;
 	if (data == NULL)
 		data = (t_Data *)ft_calloc(sizeof(t_Data), 1);
@@ -106,13 +91,11 @@ int	prompt_loop(t_Data *data, char *envp[])
 		// char *gnl_output = get_next_line(0);
 		// if (gnl_output)
 		// 	gnl_output[ft_strlen(gnl_output) - 1] = '\0';
-		
 		// cmd[0] = gnl_output;
 		if (cmd[0] && *cmd[0])
 			add_history(cmd[0]);
 		if (cmd[0] == NULL)
 			return (ft_printf("exit\n"), 0);
-			// return (0);
 		exec_pipex(data, cmd[0], data->envp_tab);
 		free(cmd[0]);
 	}
@@ -128,7 +111,7 @@ int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 {
 	int	return_pipex;
 	int	len;
-	
+
 	len = ft_strlen(cmd_tab[0]);
 	if (!cmd_tab)
 		return (1);
@@ -149,53 +132,4 @@ int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 	if (len >= 6 && !ft_strncmp(&(cmd_tab[0][len - 6]), "export", 7))
 		return (exec_export(cmd_tab, data), 1);
 	return (0);
-}
-
-char	**update_shlvl(char	**envp_tab)
-{
-	int		i;
-	int		shlvl;
-	char	*new_shlvl;
-
-	i = 0;
-	while (envp_tab[i])
-	{
-		if (!ft_strncmp(envp_tab[i], "SHLVL=", 6))
-		{
-			shlvl = ft_atoi(&(envp_tab[i][6]));
-			shlvl++;
-			new_shlvl = ft_itoa(shlvl);
-			ft_strlcpy(&envp_tab[i][6], new_shlvl, ft_strlen (new_shlvl) + 1);
-			free(new_shlvl);
-		}
-		i++;
-	}
-}
-
-/**========================================================================
- *                           duplicate_envp
- *========================================================================**/
-char	**duplicate_envp(t_Data *data, char *envp[])
-{
-	char	**envp_tab;
-	int		i;
-
-	i = 0;
-	while (envp[i])
-		i++;
-	envp_tab = (char **)ft_calloc(i + 1, sizeof(char *));
-	if (envp_tab == NULL)
-		return (NULL);
-	i = 0;
-	while (envp[i])
-	{
-		envp_tab[i] = (char *)ft_calloc((ft_strlen(envp[i]) + 1), sizeof(char));
-		if (envp_tab[i] == NULL)
-			return (NULL);
-		ft_strlcpy(envp_tab[i], envp[i], ft_strlen(envp[i]) + 1);
-		i++;
-	}
-	envp_tab[i] = NULL;
-	update_shlvl(envp_tab);
-	return (envp_tab);
 }
