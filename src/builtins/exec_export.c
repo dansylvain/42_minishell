@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 20:09:42 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 09:08:21 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	are_only_valid_chars(char *str)
 	i = 0;
 	if (ft_isdigit(str[0]))
 		return (0);
-	while (str[i])
+	while (str[i] && str[i] != '=')
 	{
-		if (!ft_isalnum(str[i]) && str[i] != '_' && str[i] != '=' && str[i] != '\"')
+		if (!ft_isalnum(str[i]) && str[i] != '_' && str[i] != '=' && str[i] != '\"' && str[i] != ' ')
 			return (0);
 		i++;
 	}
