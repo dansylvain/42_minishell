@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:46:30 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 09:18:06 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 10:26:42 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	exec_env(t_Data *data, char **command_tab)
 		return ;
 	}
 	else if (!data)
-		display_error("no data in child\n");
+	{
+	}
+		// display_error("no data in child\n");
 	else
 	{
 		i = 0;

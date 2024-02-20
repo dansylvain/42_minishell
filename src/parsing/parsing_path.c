@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/20 08:44:15 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/20 10:16:57 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	**search_path(char *argv[], char *envp[])
 	{
 		//ft_printf("not exist:%s\n", *argv);
 		// ft_putstr_fd("%s: command not found\n", argv[0]);
-		display_error("command not found\n");
+		display_error_detail(argv[0], ": command ",  "not found\n");
 		// perror(*argv);
 		// free_ptr_arr(split_arg);
 		exit(1);
