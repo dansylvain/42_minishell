@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 16:27:26 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 17:45:02 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "parsing_utils.h"
+# include <dirent.h>
 
 typedef struct t_Data
 {
