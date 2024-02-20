@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/19 22:08:01 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/20 12:14:11 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ void	print_cmd(t_ast_nde *cmd)
 	{
 		if (cmd->child)
 			print_sibling(cmd->child);
-		ft_printf("\n\n");
 		cmd = cmd->sibling;
+		ft_printf(" ");
 	}
+	ft_printf("\n\n");
 }
 
 void	print_raw(t_ast_nde *raw)
