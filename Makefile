@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/20 17:59:48 by dan              ###   ########.fr        #
+#    Updated: 2024/02/20 19:25:46 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRC =	src/main.c \
 		src/pipex/setup.c \
 		src/create_command_tab.c \
 		src/create_command_tab_utils.c \
+		src/fill_command_tab.c \
 		src/exec_pipex.c \
 		src/wildcard_expansion.c \
 		

@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 18:24:09 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 19:24:03 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,3 +104,5 @@ void	build_command_tab(char ****cmd_tab, t_Data *data,
 		t_ast_nde **cmd_tab_node_sav, char *envp[]);
 
 
+int	create_separator_tab(t_Data *data, t_ast_nde **node, char ****cmd_tab, int *i);
+int	create_chevron_tab(char ****cmd_tab, int *i, t_ast_nde **node, t_Data *data);
