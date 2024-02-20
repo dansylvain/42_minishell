@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 17:45:02 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 18:24:09 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,3 +84,23 @@ char			*wilcard_func(char *pattern);
 static void	sigint_handler(int signum);
 static void	sigquit_handler(int signum);
 #endif
+
+/*   create_command_tab.c                           :+:      :+:    :+:   */
+t_ast_nde 	*copy_sibling(t_ast_nde *node);
+
+/*   create_command_tab.c                               :+:      :+:    :+:   */
+int		is_separator(t_ast_nde *node);
+int		is_chevron(t_ast_nde *node);
+int		is_pipeline(t_ast_nde *cmd_tab_node_sav);
+char	*get_node_str(t_Data *data, t_ast_nde *node);
+void	display_command_tab(char **command_tab);
+void	display_command_tab_big(char ***command_tab);
+void	launch_command_tab(t_Data *data, t_ast_nde *node,
+		char *envp[], int flag);
+char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
+char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab);
+int		get_cmd_nbr(t_ast_nde *node);
+void	build_command_tab(char ****cmd_tab, t_Data *data,
+		t_ast_nde **cmd_tab_node_sav, char *envp[]);
+
+

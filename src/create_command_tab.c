@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 18:01:25 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 18:22:50 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,28 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 	while (node && node->token != AND && node->token != OR)
 	{
 		if (!flag)
-		{
-			add_sibling(copy_sibling(node),
-				&cmd_tab_node, &cmd_tab_node_sav);
-		}	
+			add_sibling(copy_sibling(node), &cmd_tab_node, &cmd_tab_node_sav);
 		node = node->sibling;
 	}
 	if (cmd_tab_node_sav)
-	{
-		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);
-		if (is_pipeline(cmd_tab_node_sav))
-			data->exit_status = pipex(cmd_tab, envp);
-		else if (!command_is_builtin(*cmd_tab, data, envp))
-			data->exit_status = pipex(cmd_tab, envp);
-		free_sibling_and_child(cmd_tab_node_sav);
-		free_command_tab_lg(cmd_tab);
-	}
+		build_command_tab(&cmd_tab, data, &cmd_tab_node_sav, envp);
 	flag = data->exit_status;
 	if (node && node->token == OR)
 		flag = !flag;
 	if (node)
 		launch_command_tab(data, node->sibling, envp, flag);
+}
+
+void	build_command_tab(char ****cmd_tab, t_Data *data,
+		t_ast_nde **cmd_tab_node_sav, char *envp[])
+{
+	(*cmd_tab) = create_command_tab(data, (*cmd_tab_node_sav), envp);
+	if (is_pipeline((*cmd_tab_node_sav)))
+		data->exit_status = pipex((*cmd_tab), envp);
+	else if (!command_is_builtin(*(*cmd_tab), data, envp))
+		data->exit_status = pipex((*cmd_tab), envp);
+	free_sibling_and_child((*cmd_tab_node_sav));
+	free_command_tab_lg((*cmd_tab));
 }
 
 char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])

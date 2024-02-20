@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:53:57 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 17:56:05 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 18:06:05 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,36 +64,36 @@ char	*get_node_str(t_Data *data, t_ast_nde *node)
 	}
 	return (ft_strdup(str));
 }
-void	display_command_tab(char **command_tab)
-{
-	int	i;
+// void	display_command_tab(char **command_tab)
+// {
+// 	int	i;
 
-	i = 0;
-	ft_printf("command_tab: \n");
-	while (command_tab[i])
-	{
-		ft_printf("cmd_tab[%i]: >%s<\n", i, command_tab[i]);
-		i++;
-	}
-}
+// 	i = 0;
+// 	ft_printf("command_tab: \n");
+// 	while (command_tab[i])
+// 	{
+// 		ft_printf("cmd_tab[%i]: >%s<\n", i, command_tab[i]);
+// 		i++;
+// 	}
+// }
 
-void	display_command_tab_big(char ***command_tab)
-{
-	int	i;
-	int	j;
+// void	display_command_tab_big(char ***command_tab)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	ft_printf("command_tab: \n");
-	while (command_tab[i])
-	{
-		j = 0;
-		while (command_tab[i][j])
-		{
-			ft_printf("cmd_tab[%i][%i]: >%s<\n", i, j, command_tab[i][j]);
-			j++;
-		}
-		i++;
-		ft_printf("after\n");
-	}
-	ft_printf("command_tab end: \n");
-}
+// 	i = 0;
+// 	ft_printf("command_tab: \n");
+// 	while (command_tab[i])
+// 	{
+// 		j = 0;
+// 		while (command_tab[i][j])
+// 		{
+// 			ft_printf("cmd_tab[%i][%i]: >%s<\n", i, j, command_tab[i][j]);
+// 			j++;
+// 		}
+// 		i++;
+// 		ft_printf("after\n");
+// 	}
+// 	ft_printf("command_tab end: \n");
+// }
