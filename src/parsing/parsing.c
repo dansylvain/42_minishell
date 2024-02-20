@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/19 22:46:38 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/20 08:50:08 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ char* get_var(t_ast_nde *node, t_Data *data)
 	str = ft_strndup(node->start, node->end - node->start + 1);
 	if (*(str + 1) == '?')
 		var = ft_itoa(data->exit_status);
-	else
-		var = search_env_var(data->envp_tab, ft_strjoin_up(str, "=", 1, 0));	
+	else		
+		var = search_env_var(data->envp_tab, ft_strjoin_up(str + 1, "=", 0, 0));	
+	if (str)
+		free(str);
+	//ft_printf("var: -%s-", var);
 	return (var);	
 }
 t_ast_nde *rebuild_dollar_str_node(char *str)

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/19 22:55:09 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/20 08:44:15 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,11 @@ char	*search_env_var(char *envp[], char *env_to_find)
 			break ;
 		}
 	}
+	//ft_printf("in search: -%s-", env_find);
 	if (!env_find)
 		return (NULL);
 	env_find += ft_strlen(env_to_find);
+	//ft_printf("in search: -%s-", env_find);
 	return (env_find);
 }
 
