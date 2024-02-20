@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 10:14:43 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 12:32:47 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 12:27:48 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**expand_wildcards(const char *pattern)
 					perror("realloc");
 					exit(EXIT_FAILURE);
 				}
-				matches[count] = strdup(entry->d_name);
+				matches[count] = ft_strdup(entry->d_name);
 				count++;
 			}
 		}
@@ -55,7 +55,7 @@ char	**expand_wildcards(const char *pattern)
 		perror("opendir");
 		exit(EXIT_FAILURE);
 	}
-	matches = realloc(matches, (count + 1) * sizeof(char *));
+	matches = ft_realloc(matches, (count + 1) * sizeof(char *));
 	if (matches == NULL)
 	{
 		perror("realloc");
@@ -102,23 +102,45 @@ int	has_wildcard(char *str)
 	return (ft_strchr(str, '*') != NULL);
 }
 
+int	get_str_size(char **matches)
+{
+	int	i;
+	int	res;
+
+	i = 0;
+	res = 0;
+	while (matches[i])
+	{
+		res += ft_strlen(matches[i]);
+		i++;
+	}
+	return (res);
+}
+
 int	wilcard_func(char *pattern)
 {
 	size_t	i;
 	char	**matches;
+	char	*ret_str;
+	int		index;
 
+	index = 0;
 	if (!has_wildcard(pattern))
 		return (EXIT_SUCCESS);
 	matches = expand_wildcards(pattern);
+	ret_str = (char *)ft_calloc(get_str_size(matches), sizeof(char) + 1);
 	if (matches[0] != NULL)
 	{
 		i = 0;
 		while (matches[i] != NULL)
 		{
-			ft_printf("%s\n", matches[i]);
+			ft_memcpy(&ret_str[index], matches[i], ft_strlen(matches[i]));
+			index += ft_strlen(matches[i]);
+			ret_str[index++] = ' ';
 			free(matches[i]);
 			i++;
 		}
+		ft_printf("ret_str: %s\n", ret_str);
 	}
 	free (matches);
 }

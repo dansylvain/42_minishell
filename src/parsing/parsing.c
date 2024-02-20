@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/20 08:50:08 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/20 12:02:42 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,8 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 		raw_lft = operator->child;
 	if (raw_lft)
 	 	raw_rght = raw_lft->sibling;
-	if (operator && (operator->token == DOLL || operator->token == JOKER))			
+	// if (operator && (operator->token == DOLL || operator->token == JOKER))			
+	if (operator && (operator->token == DOLL))			
 		return (add_sibling(rebuild_dollar_str_node(rebuild_dollar_str(operator, NULL, data)), rslt, rslt_sav));	
 	else if (raw_lft && raw_lft->child)
 	{					
