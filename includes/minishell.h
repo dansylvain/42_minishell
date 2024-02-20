@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 20:11:03 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 16:27:26 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char		**parse_cmd(char **command, char **env);
 t_ast_nde	*parse(char *str, t_Data *data);
 void		launch_command_tab(t_Data *data, t_ast_nde *node,
 				char *envp[], int flag);
-int			wilcard_func(char *pattern);
+char			*wilcard_func(char *pattern);
 
 
 /*   handle_signals.c                                   :+:      :+:    :+:   */

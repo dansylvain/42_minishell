@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 17:43:06 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/20 16:28:00 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
 void	display_command_tab_big(char ***command_tab);
 void	launch_command_tab(t_Data *data, t_ast_nde *node, char *envp[], int flag);
 int	has_wildcard(char *str);
-int wilcard_func(char *pattern);
+char *wilcard_func(char *pattern);
 void	free_tree(t_ast_nde *node);
 void free_tree_lcl();
 void		print_rslt(t_ast_nde *rslt, int flag);

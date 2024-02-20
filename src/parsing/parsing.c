@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/20 12:39:20 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 16:32:59 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	char		*str_rght;
 	char		*str_tok;
 	char		*str_join;
+	char		*str2;	
 			
 	str_lft = NULL;
 	if (node->child && node->child->child)	
@@ -100,7 +101,10 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	if (node->token == DOLL)
 		str_tok = get_var(node, data);
 	else if (node->token == JOKER)
-		str_tok = "JOKER";
+	{
+		str2 = ft_strndup(node->start, node->end - node->start + 1);
+		str_tok = wilcard_func(str2);
+	}
 	if (str && str_tok)
 		str = ft_strjoin_up(str, str_tok, 1, 0);//!!!
 	else if (!str)
@@ -177,8 +181,8 @@ static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sa
 		raw_lft = operator->child;
 	if (raw_lft)
 	 	raw_rght = raw_lft->sibling;
-	// if (operator && (operator->token == DOLL || operator->token == JOKER))			
-	if (operator && (operator->token == DOLL))			
+	// if (operator && (operator->token == DOLL))			
+	if (operator && (operator->token == DOLL || operator->token == JOKER))			
 		return (add_sibling(rebuild_dollar_str_node(rebuild_dollar_str(operator, NULL, data)), rslt, rslt_sav));	
 	else if (raw_lft && raw_lft->child)
 	{					

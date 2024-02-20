@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 10:14:43 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 12:27:48 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 16:28:42 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	get_str_size(char **matches)
 	return (res);
 }
 
-int	wilcard_func(char *pattern)
+char	*wilcard_func(char *pattern)
 {
 	size_t	i;
 	char	**matches;
@@ -125,8 +125,8 @@ int	wilcard_func(char *pattern)
 	int		index;
 
 	index = 0;
-	if (!has_wildcard(pattern))
-		return (EXIT_SUCCESS);
+	// if (!has_wildcard(pattern))
+	// 	return (EXIT_SUCCESS);
 	matches = expand_wildcards(pattern);
 	ret_str = (char *)ft_calloc(get_str_size(matches), sizeof(char) + 1);
 	if (matches[0] != NULL)
@@ -140,7 +140,8 @@ int	wilcard_func(char *pattern)
 			free(matches[i]);
 			i++;
 		}
-		ft_printf("ret_str: %s\n", ret_str);
+		// ft_printf("ret_str: %s\n", ret_str);
+		return (ret_str);
 	}
 	free (matches);
 }
