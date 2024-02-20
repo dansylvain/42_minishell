@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 09:45:06 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 11:06:17 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 int	are_only_valid_chars(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_isdigit(str[0]) || str[0] == '=')
 		return (0);
 	while (str[i] && str[i] != '=')
 	{
-		if (!ft_isalnum(str[i]) && str[i] != '_' && str[i] != '=' && str[i] != '\"' && str[i] != ' ')
+		if (!ft_isalnum(str[i]) && str[i] != '_' && str[i] != '='
+			&& str[i] != '\"' && str[i] != ' ')
 			return (0);
 		i++;
 	}
@@ -47,7 +48,8 @@ int	exec_export(char **command_tab, t_Data *data)
 	{
 		if (!are_only_valid_chars(command_tab[i]))
 		{
-			display_error_detail("minishell: export: `", command_tab[i], "': not a valid identifier\n");
+			display_error_detail("minishell: export: `", command_tab[i],
+				"': not a valid identifier\n");
 			data->exit_status = 1;
 			return (0);
 		}

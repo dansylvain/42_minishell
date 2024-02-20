@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:46:30 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 10:26:42 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 11:06:40 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	exec_env(t_Data *data, char **command_tab)
 
 	if (command_tab[1] != NULL)
 	{
-		display_error_detail("env: ‘", command_tab[1], "’: No such file or directory\n");
+		display_error_detail("env: ‘", command_tab[1],
+			"’: No such file or directory\n");
 		return ;
 	}
 	else if (!data)
 	{
 	}
-		// display_error("no data in child\n");
 	else
 	{
 		i = 0;
