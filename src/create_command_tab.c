@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 18:33:06 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/20 17:52:04 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include "parsing_utils.h"
-
-void	free_command_tab_lg(char ***command_tab);
-void		print_rslt(t_ast_nde *rslt, int flag);
-int			is_env_var(char *str);
-//char		*get_env_var(t_Data *data, char *str, char buff[]);
-void		insert_env_var(char **command, char *env_var, char buff[]);
-int			check_if_env_var_and_get_it(t_Data *data,
-				t_ast_nde *node, char str[], int index);
-void		print_tree(t_ast_nde *node);
-
-int			pipex(char **argv[], char *envp[]);
-t_ast_nde	*copy_node_child(t_ast_nde *node);
-t_ast_nde 	*copy_sibling(t_ast_nde *node);
-t_ast_nde 	*copy_sibling2(t_ast_nde *node);
 
 void	display_command_tab(char **command_tab)
 {
@@ -74,13 +59,11 @@ int	is_chevron(t_ast_nde *node)
 {
 	if (node->token == SCHEV_LFT || node->token == DCHEV_LFT
 		|| node->token == SCHEV_RGTH || node->token == DCHEV_RGTH)
-		{
-			
+	{
 		return (1);
-		}
+	}
 	else
 	{
-		
 		return (0);
 	}
 }
@@ -112,7 +95,7 @@ int	get_cmd_nbr(t_ast_nde *node)
 	}
 	return (cmd_nbr);
 }
-void print_rslt(t_ast_nde *rslt, int flag); //!
+
 char	*get_node_str(t_Data *data, t_ast_nde *node)
 {
 	char	str[20000];
@@ -123,7 +106,7 @@ char	*get_node_str(t_Data *data, t_ast_nde *node)
 	while (node)
 	{
 		if (node->token != SQUTE && node->token != DQUTE)
-		{	
+		{
 			ft_memcpy(&(str[index]), node->start, node->end - node->start + 1);
 			index += node->end - node->start + 1;
 		}
@@ -175,7 +158,6 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 			if (cmd_tab[i] == NULL)
 				return (NULL);
 			j = 0;
-			
 			while (!is_separator(node) && !is_chevron(node))
 			{
 				cmd_tab[i][j++] = get_node_str(data, node->child);
@@ -234,16 +216,14 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 	while (node && node->token != AND && node->token != OR)
 	{
 		if (!flag)
-		{					
+		{
 			add_sibling(copy_sibling(node),
 				&cmd_tab_node, &cmd_tab_node_sav);
-		}
-			
+		}	
 		node = node->sibling;
 	}
 	if (cmd_tab_node_sav)
 	{
-		
 		cmd_tab = create_command_tab(data, cmd_tab_node_sav, envp);
 		if (is_pipeline(cmd_tab_node_sav))
 			data->exit_status = pipex(cmd_tab, envp);
@@ -256,5 +236,5 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 	if (node && node->token == OR)
 		flag = !flag;
 	if (node)
-		launch_command_tab(data, node->sibling, envp, flag);		
+		launch_command_tab(data, node->sibling, envp, flag);
 }
