@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:29:47 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 11:05:21 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/20 16:50:01 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	exec_cd(t_Data *data, char **command_tab)
 	{
 		home = getenv("HOME");
 		if (home == NULL)
-			return (ft_printf("HOME env var not found\n"));
+			return (display_error("HOME env var not found\n"), 0);
 		if (chdir(home) != 0)
-			return (ft_printf("problem chdir"));
+			return (display_error("problem chdir"), 0);
 		if (data)
 			data->exit_status = 0;
 		return (0);
