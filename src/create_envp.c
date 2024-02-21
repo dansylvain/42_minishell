@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   create_envp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:33:25 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 19:35:35 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/21 13:27:51 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	**update_shlvl(char	**envp_tab)
+void	update_shlvl(char	**envp_tab)
 {
 	int		i;
 	int		shlvl;
 	char	*new_shlvl;
 
 	i = 0;
+	if (envp_tab == NULL)
+		return ;
 	while (envp_tab[i])
 	{
 		if (!ft_strncmp(envp_tab[i], "SHLVL=", 6))
@@ -42,6 +44,8 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 	int		i;
 
 	i = 0;
+	if (envp_tab == NULL)
+		return (NULL);
 	while (envp[i])
 		i++;
 	envp_tab = (char **)ft_calloc(i + 1, sizeof(char *));

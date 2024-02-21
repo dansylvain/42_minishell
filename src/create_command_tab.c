@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 19:25:01 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/21 12:35:24 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	get_cmd_nbr(t_ast_nde *node)
 				break ;
 			continue ;
 		}
-		if ((node->token == PIPE))
+		if (node->token == PIPE)
 			cmd_nbr++;
 		node = node->sibling;
 	}

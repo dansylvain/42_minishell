@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 19:36:32 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/21 13:29:47 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "../includes/rl_header.h"
 
 /**========================================================================
  *                             COMMENTS POLICY
@@ -32,6 +33,8 @@ int	main(int argc, char **argv, char *envp[])
 {
 	static t_Data	*data = NULL;
 
+	if (envp == NULL)
+		return 0;
 	rl_catch_signals = 0;
 	if (data == NULL)
 		data = (t_Data *)ft_calloc(sizeof(t_Data), 1);

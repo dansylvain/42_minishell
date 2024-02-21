@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 10:14:43 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 17:44:50 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/21 12:39:52 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,5 @@ char	*wilcard_func(char *pattern)
 		}
 		return (free (matches), ret_str);
 	}
-	free (matches);
+	return(free (matches), NULL);
 }

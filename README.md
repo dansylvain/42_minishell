@@ -22,3 +22,6 @@ valgrind --suppressions=valgrind.supp ./minishell
 # TO DELETE
 I silenced the pipex warning with a flag in file src/pipex/pipex.c
 because it sucks. Let us not forget to remove it by the end of the project!
+
+
+env -i ./minishell !!!--

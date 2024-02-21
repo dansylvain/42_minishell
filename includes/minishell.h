@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 19:32:16 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/21 12:27:33 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 # include "../lib/ft_printf/ft_printf.h"
 # include "../lib/libft/libft.h"
 // # include "../lib/get_next_line/get_next_line.h"
-# include <readline/readline.h>
-# include <readline/history.h>
 # include "parsing_utils.h"
 # include <dirent.h>
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
+#    By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/20 19:34:06 by dan              ###   ########.fr        #
+#    Updated: 2024/02/21 13:48:23 by dsylvain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 
 RLFLAGS = -lreadline -lhistory -I/usr/include/readline
 
-CFLAGS = -g $(RLFLAGS) -Iincludes/parsing -Iincludes 
+CFLAGS = -g -Iincludes/parsing -Iincludes 
 # -Wall -Wextra -Werror
 
 # Directories
@@ -68,7 +68,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(FT_PRINTF) $(GET_NEXT_LINE)
-	@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LIBS)
+	@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(RLFLAGS) $(LIBS)
 	@echo "\033[0;32mCompilation successful\033[0m"
 $(LIBFT):
 	@make -s -C $(LIBFT_DIR)
@@ -81,7 +81,7 @@ $(GET_NEXT_LINE):
 
 %.o: %.c
 	@printf "%-80s" $<
-	@{ $(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I/usr/include -O3 -c $< -o $@; } 2>&1 || \
+	@{ $(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I/usr/include -O3 -c $< -o $@; } 2>&1 || \
 		(echo "\033[0;31mCompilation of $< failed\033[0m"; exit 1)
 	@echo "\033[0;32mcompiled\033[0m"
 
