@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/21 15:16:11 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/21 15:18:53 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 		str_tok = get_var(node, data);
 	else if (node->token == JOKER)
 	{
-		//str2 = ft_strndup(node->start, node->end - node->start + 1);
-		str_tok = "JOKER"; 
-		//str_tok = wilcard_func(str2);
+		str2 = ft_strndup(node->start, node->end - node->start + 1);
+		//str_tok = "JOKER"; 
+		str_tok = wilcard_func(str2);
 	}
 	if (str && str_tok)
 		str = ft_strjoin_up(str, str_tok, 1, 0);//!!!
