@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/20 12:14:11 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/21 12:18:08 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void print_sibling(t_ast_nde *sib)
 void	print_cmd(t_ast_nde *cmd)
 {
 	print_sibling(cmd);
-	ft_printf("\n\n");
+	ft_printf("\n");
 	while (cmd)
 	{
 		if (cmd->child)
@@ -83,7 +83,7 @@ void	print_raw(t_ast_nde *raw)
 	while (raw && raw->start + i <= raw->end)
 		ft_printf("\033[%dm%c\033[0m", back_color, raw->start[i++]);	
 	sib = raw->child;
-	ft_printf("\n");
+	ft_printf("z\n");
 	while (sib)
 	{
 		i = 0;
@@ -111,6 +111,12 @@ void	print_tree(t_ast_nde *node)
 	{
 		print_raw(raw_lft->child);
 		ft_printf("\n");
+	}
+	if (operator->token != SPCE)
+	{		
+		ft_printf("operator\n");
+		print_sibling(operator);
+		ft_printf("end operator\n");
 	}
 	operator = NULL;
 	if (raw_rght && raw_rght->child)

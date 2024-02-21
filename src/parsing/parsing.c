@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/20 16:32:59 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/21 15:16:11 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char* get_var(t_ast_nde *node, t_Data *data)
 		var = search_env_var(data->envp_tab, ft_strjoin_up(str + 1, "=", 0, 0));	
 	if (str)
 		free(str);
-	//ft_printf("var: -%s-", var);
+//	ft_printf("var: -%s-", var);
 	return (var);	
 }
 t_ast_nde *rebuild_dollar_str_node(char *str)
@@ -102,8 +102,9 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 		str_tok = get_var(node, data);
 	else if (node->token == JOKER)
 	{
-		str2 = ft_strndup(node->start, node->end - node->start + 1);
-		str_tok = wilcard_func(str2);
+		//str2 = ft_strndup(node->start, node->end - node->start + 1);
+		str_tok = "JOKER"; 
+		//str_tok = wilcard_func(str2);
 	}
 	if (str && str_tok)
 		str = ft_strjoin_up(str, str_tok, 1, 0);//!!!
@@ -115,7 +116,10 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	{
 		str_rght = link_sibling(node->child->sibling->child); 
 		if (str && str_rght)
-			str = ft_strjoin_up(str, str_rght, 1, 1);			
+			str = ft_strjoin_up(str, str_rght, 0, 1);//!!
+		else if (!str)
+			str = str_rght;	
+		//	exit(1);
 	}	
 	return (str);
 }
@@ -360,12 +364,12 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	root->child = copy_node(root);
 	root->child->child = copy_node(root);
 	root->child->child->child = set_qute_sib(str);
+	//print_qute_sib(root->child->child->child);	
 	set_operator(root->child);
 	leaf_tree(root, &cmd, &cmd_sav, data);	
 	
-	// print_qute_sib(root->child->child->child);	
-	// print_tree(root->child->child->sibling);
-	// print_cmd(cmd_sav);
+	//print_tree(root->child->child->sibling);
+	//print_cmd(cmd_sav);
 	
 	free_tree(root);
 	return (cmd_sav);

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 07:42:44 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/20 12:08:29 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/21 15:12:55 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,35 +113,49 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 				if (*actual == '$' && actual + 1 <= sib->end && *(actual + 1) != ' ' && *(actual + 1) != '\'' && *(actual + 1) != '*')
 				{
 					token_nde = create_node(DOLL);
-					token_nde->start = actual++;										
-					while (actual <= sib->end && *actual != '$' && *actual != ' '  && *actual != '\'' && *actual != '*' ) 						
+					token_nde->start = actual;										
+					token_nde->end = actual;
+					actual++;
+					if (*actual == '?')
 					{
 						token_nde->end = actual;
-						if (actual <= sib->end && *actual == '?')
-							break;
-						actual++;
+						return (token_nde);
+					}
+					while (actual <= sib->end && *actual != '$' && *actual != ' '  && *actual != '\'' && *actual != '*' && *actual != '?') 						
+					{
+						token_nde->end = actual++;
+						//actual++;
 					}								
 					return (token_nde);
 				}				
 			}
-			if (sib->token == RAW)
-			{
-				char	*tmp;
+			// if (sib->token == RAW)
+			// {
+			// 	if (*actual == '*')
+			// 	{
+			// 		token_nde = create_node(JOKER);
+			// 		token_nde->start = actual;
+			// 		token_nde->end = actual;
+			// 	}
+			// }
+			// if (sib->token == RAW)
+			// {
+			// 	char	*tmp;
 				
-				tmp = actual;
-				while (actual <= sib->end) 						
-				{					
-					if (*actual == '*')
-					{
-						token_nde = create_node(JOKER);
-						token_nde->start = tmp;												
-					}
-					if (token_nde)
-						token_nde->end = actual;
-					actual++;
-				}
-				return (token_nde);			
-			}
+			// 	tmp = actual;
+			// 	while (actual <= sib->end) 						
+			// 	{					
+			// 		if (*actual == '*')
+			// 		{
+			// 			token_nde = create_node(JOKER);
+			// 			token_nde->start = tmp;												
+			// 		}
+			// 		if (token_nde)
+			// 			token_nde->end = actual;
+			// 		actual++;
+			// 	}
+			// 	return (token_nde);			
+			// }
 			actual++;
 		}
 		sib = sib->sibling;
