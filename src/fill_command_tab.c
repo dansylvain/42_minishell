@@ -6,11 +6,19 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:25:16 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 12:38:17 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:48:38 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	viva_norminette(t_ast_nde **node, int *i)
+{
+	if (is_separator(*node) || ((*node)->sibling
+			&& is_chevron((*node)->sibling)))
+		(*i)++;
+	(*node) = (*node)->sibling;
+}
 
 char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 {
@@ -23,18 +31,20 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 		if (!node)
 			break ;
 		if (is_chevron(node))
+		{
 			if (create_chevron_tab(&cmd_tab, &i, &node, data))
 				continue ;
-		else
-			break ;
+			else
+				break ;
+		}
 		if (!is_separator(node) && node->token != DOLL)
+		{
 			if (create_separator_tab(data, &node, &cmd_tab, &i))
 				continue ;
-		else
-			break ;
-		if (is_separator(node) || (node->sibling && is_chevron(node->sibling)))
-			i++;
-		node = node->sibling;
+			else
+				break ;
+		}
+		viva_norminette(&node, &i);
 	}
 	return (cmd_tab);
 }
