@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 12:27:33 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:25:32 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct t_Data
 	int		exit_status;
 }	t_Data;
 
+void	build_prompt(char prompt[]);
 void	handle_signals(void);
 int		prompt_loop(t_Data *data, char *envp[]);
 void	display_error(char *str);

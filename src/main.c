@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 13:29:47 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:25:39 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,38 +42,13 @@ int	main(int argc, char **argv, char *envp[])
 		return (display_error("Error\n"), 255);
 	data->envp_tab = duplicate_envp(data, envp);
 	if (!data->envp_tab)
-		return (display_error("Error\n"), free_data(data), 255);
+			return (display_error("Error\n"), free_data(data), 255);
 	if (argc != 1)
 		return (free_data(data), display_error("Usage: ./minishell\n"), 255);
 	handle_signals();
 	if (prompt_loop(data, envp) == 0)
 		return (free_data(data), 0);
 	return (0);
-}
-
-void	build_prompt(char prompt[])
-{
-	char	cwd[1024];
-	char	*home;
-	char	*shortened_cwd;
-
-	home = getenv("HOME");
-	ft_strlcpy(prompt, "\033[1;33mminishell: \033[0m", 18);
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-	{
-		shortened_cwd = strstr(cwd, home);
-		if (shortened_cwd != NULL)
-		{
-			ft_strcat(prompt, "\033[1;37m");
-			ft_strcat(prompt, shortened_cwd + strlen(home));
-			ft_strcat(prompt, "\033[0m");
-		}
-		else
-			ft_strcat(prompt, cwd);
-	}
-	else
-		perror("getcwd");
-	ft_strcat(prompt, "\033[1;36m $\033[0m ");
 }
 
 /**========================================================================
@@ -103,6 +78,31 @@ int	prompt_loop(t_Data *data, char *envp[])
 		free(cmd[0]);
 	}
 	return (1);
+}
+
+void	build_prompt(char prompt[])
+{
+	char	cwd[1024];
+	char	*home;
+	char	*shortened_cwd;
+
+	home = getenv("HOME");
+	ft_strlcpy(prompt, "\033[1;33mminishell: \033[0m", 18);
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	{
+		shortened_cwd = strstr(cwd, home);
+		if (shortened_cwd != NULL)
+		{
+			ft_strcat(prompt, "\033[1;37m");
+			ft_strcat(prompt, shortened_cwd + strlen(home));
+			ft_strcat(prompt, "\033[0m");
+		}
+		else
+			ft_strcat(prompt, cwd);
+	}
+	else
+		perror("getcwd");
+	ft_strcat(prompt, "\033[1;36m $\033[0m ");
 }
 
 /**========================================================================

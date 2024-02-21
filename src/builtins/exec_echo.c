@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:43:09 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 13:43:01 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/02/21 20:27:40 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	exec_echo(t_Data *data, char **command_tab)
 	}
 	if (!ft_strncmp(command_tab[i], "-n", 3))
 	{
-		while(!ft_strncmp(command_tab[i], "-n", 3))
+		while (!ft_strncmp(command_tab[i], "-n", 3))
 			i++;
 	}
 	j = i;
