@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:43:09 by dan               #+#    #+#             */
-/*   Updated: 2024/02/22 09:41:23 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/22 10:52:07 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	exec_echo(t_Data *data, char **command_tab)
 {
 	int	i;
 	int	j;
-   
+
 	i = 1;
 	if (!command_tab[1] || is_only_space(command_tab[1]))
 	{
