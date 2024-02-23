@@ -17,52 +17,8 @@ t_ast_nde	*copy_node(t_ast_nde *node);
 void	print_raw_rght(t_ast_nde *raw_rght);
 t_ast_nde	*set_chevron(t_ast_nde *node);
 t_ast_nde	*set_dollar(t_ast_nde *node);
-static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
-{
-	t_ast_nde	*raw_lft_child_sav;
-	t_ast_nde	*raw_rght_child_sav;
-	t_ast_nde	*raw_overlap;
+void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token);
 
-	raw_lft_child_sav = NULL;
-	raw_rght_child_sav = NULL;	
-	while (sib)
-	{		
-		if (sib->token != RAW)
-		{
-			if 	(sib->end < token->start)
-				add_sibling(copy_node(sib), &raw_lft->child, &raw_lft_child_sav);				
-			else if (sib->start > token->end)
-				add_sibling(copy_node(sib), &raw_rght->child, &raw_rght_child_sav);	
-		}
-		else
-		{
-			if 	(sib->end < token->start)
-				add_sibling(copy_node(sib), &raw_lft->child, &raw_lft_child_sav);				
-			else if (sib->start > token->end)
-				add_sibling(copy_node(sib), &raw_rght->child, &raw_rght_child_sav );
-			else if (sib->start <= token->start && sib->end >= token->end)
-			{
-				if (sib->start < token->start)
-				{
-					raw_overlap = copy_node(sib);
-					raw_overlap->end = token->start - 1;
-					add_sibling(raw_overlap, &raw_lft->child, &raw_lft_child_sav);					
-				}
-				if (sib->end > token->end)
-				{					
-					raw_overlap = copy_node(sib);
-					raw_overlap->start = token->end + 1;
-					add_sibling(raw_overlap, &raw_rght->child, &raw_rght_child_sav);
-				}
-			}			
-		}		
-		sib = sib->sibling;
-	}
-	if (raw_lft)
-		raw_lft->child = raw_lft_child_sav;
-	if (raw_rght)
-		raw_rght->child = raw_rght_child_sav;	
-}
 static t_ast_nde	*create_space_node(t_ast_nde *sib)
 {
 	t_ast_nde	*token_nde;

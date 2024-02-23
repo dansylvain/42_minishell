@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/23 18:29:48 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/23 18:51:34 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 #include "parsing_utils.h"
 #include "libft.h"
 #include<stdio.h>
+
 t_ast_nde	*copy_node(t_ast_nde *node);
-void	print_raw_rght(t_ast_nde *raw_rght);
 int	set_space(t_ast_nde *node);
-//t_ast_nde	*copy_node_child(t_ast_nde *node);
-//int	set_dollar(t_ast_nde *node);
 int	set_operator(t_ast_nde *node);
 
 int	fill_child_entire(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token, t_ast_nde **raw_lft_child_sav, t_ast_nde **raw_rght_child_sav)
@@ -36,9 +34,7 @@ void	fill_child_overlap(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght,
 {
 	t_ast_nde	*raw_overlap;
 	
-	if (fill_child_entire(sib, raw_lft, raw_rght, token, raw_lft_child_sav, raw_rght_child_sav))
-		;
-	else if (sib->start <= token->start && sib->end >= token->end)
+	if (sib->start <= token->start && sib->end >= token->end)
 	{
 		if (sib->start < token->start)
 		{
@@ -55,7 +51,7 @@ void	fill_child_overlap(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght,
 	}
 }
 
-static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
+void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
 {
 	t_ast_nde	*raw_lft_child_sav;
 	t_ast_nde	*raw_rght_child_sav;
@@ -64,8 +60,8 @@ static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, 
 	raw_rght_child_sav = NULL;	
 	while (sib)
 	{		
-		if (sib->token != RAW && sib->token != IN_DQUTE)		
-			fill_child_entire(sib, raw_lft, raw_rght, token, &raw_lft_child_sav, &raw_rght_child_sav);		
+		if (fill_child_entire(sib, raw_lft, raw_rght, token, &raw_lft_child_sav, &raw_rght_child_sav))
+			;		
 		else		
 			fill_child_overlap(sib, raw_lft, raw_rght, token, &raw_lft_child_sav, &raw_rght_child_sav);	
 		sib = sib->sibling;
