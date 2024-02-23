@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/21 18:23:37 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/23 11:25:01 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,7 +293,7 @@ int	pipex(char **argv[], char *envp[])
 	// set_filepath_and_delim(&argc, &argv, &redir);
 	// get_fdio(&redir);
 	if (set_io(argv, &redir))//
-	;//	return (1);
+		return (1);
 	pid = create_pipeline(argv, envp, redir);
 	// ft_printf("argv: %s, redir 0:%d, redir 1:%d, fdfile 0:%d, fdfile 1:%d, filepath 0:%s, filepath 1:%s, delim : %s\n", **argv, redir.redir[0], redir.redir[1], redir.fd_file[0], redir.fd_file[1], redir.filepath[0], redir.filepath[1], redir.delim); //exit(1);
 	
