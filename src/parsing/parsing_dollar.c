@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 07:42:44 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/21 15:41:29 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/23 18:29:36 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_ast_nde	*copy_node(t_ast_nde *node);
 void	print_raw_rght(t_ast_nde *raw_rght);
 int	set_space(t_ast_nde *node);
 //t_ast_nde	*copy_node_child(t_ast_nde *node);
+t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token);
 
 static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
 {
@@ -78,24 +79,7 @@ static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, 
 		raw_rght->child = raw_rght_child_sav;	
 }
 
-static t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token)
-{		
-	t_ast_nde	*raw_lft; 
-	t_ast_nde	*raw_rght;
-		
-	raw_lft = create_node(RAW);
-	raw_lft->start = raw->start;
-	raw_lft->end = token->start - 1;
-	if (raw->start != token->start)
-		raw_lft->child = copy_node(raw_lft);	
-	raw_rght = create_node(RAW);
-	raw_rght->start = token->end + 1;
-	raw_rght->end = raw->end;
-	if (raw->end != token->end)
-		raw_rght->child = copy_node(raw_rght);
-	raw_lft->sibling = raw_rght;
-	return (raw_lft);
-}
+
 
 static t_ast_nde	*create_token_node(t_ast_nde *sib)
 {
@@ -121,23 +105,11 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 						token_nde->end = actual;
 						return (token_nde);
 					}
-					while (actual <= sib->end && *actual != '$' && *actual != ' ' && *actual != '\'' && *actual != '*' && *actual != '?' && *actual != '.') 						
-					{
-						token_nde->end = actual++;
-						//actual++;
-					}								
+					while (actual <= sib->end && *actual != '$' && *actual != ' ' && *actual != '\'' && *actual != '*' && *actual != '?' && *actual != '.') 					
+						token_nde->end = actual++;							
 					return (token_nde);
 				}				
 			}
-			// if (sib->token == RAW)
-			// {
-			// 	if (*actual == '*')
-			// 	{
-			// 		token_nde = create_node(JOKER);
-			// 		token_nde->start = actual;
-			// 		token_nde->end = actual;
-			// 	}
-			// }
 			if (sib->token == RAW)
 			{
 				char	*tmp;

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/23 14:30:01 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/23 18:29:48 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, 
 		raw_rght->child = raw_rght_child_sav;	
 }
 
-static t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token)
+t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token)
 {		
 	t_ast_nde	*raw_lft; 
 	t_ast_nde	*raw_rght;
