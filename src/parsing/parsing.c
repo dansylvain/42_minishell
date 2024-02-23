@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/21 15:18:53 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/23 20:43:42 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	*search_env_var(char *envp[], char *env_to_find);
 void	free_sibling(t_ast_nde *sib);
 void print_sibling(t_ast_nde *sib);
 void	print_cmd(t_ast_nde *cmd);
+void	free_tree(t_ast_nde *operator);
 
 char* get_var(t_ast_nde *node, t_Data *data)
 {	
@@ -306,9 +307,23 @@ t_ast_nde	*expand_vars(t_ast_nde *qute_sib)
 	return (qute_sib);
 }
 
-void	free_tree(t_ast_nde *operator)
+void	free_branch(t_ast_nde *raw)
 {
 	t_ast_nde *cont;
+	
+	cont = raw->child;
+	free(raw);
+	if (cont)
+		free_sibling(cont->child);
+	if (cont && cont->sibling)	
+	{
+		free_tree(cont->sibling);
+		free(cont);
+	}
+}
+
+void	free_tree(t_ast_nde *operator)
+{	
 	t_ast_nde *raw_lft;
 	t_ast_nde *raw_rght;
 	
@@ -321,31 +336,10 @@ void	free_tree(t_ast_nde *operator)
 			raw_rght = raw_lft->sibling;
 		free(operator);
 	}	
-	if (raw_lft)
-	{
-		cont = raw_lft->child;
-		free(raw_lft);
-		if (cont)
-			free_sibling(cont->child);
-		if (cont && cont->sibling)	
-		{
-			free_tree(cont->sibling);
-			free(cont);
-		}
-	}
-	cont = NULL;
+	if (raw_lft)	
+		free_branch(raw_lft);	
 	if (raw_rght)
-	{
-		cont = raw_rght->child;
-		free(raw_rght);
-		if (cont)
-			free_sibling(cont->child);
-		if (cont && cont->sibling)
-		{
-			free_tree(cont->sibling);
-			free(cont);
-		}
-	}
+		free_branch(raw_rght);	
 }
 
 void	print_raw_rght(t_ast_nde *raw_rght);

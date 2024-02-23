@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/23 18:51:34 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/23 19:51:10 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,14 +135,11 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 	while (sib)
 	{
 		actual = sib->start;	
-		while (actual <= sib->end)
-		{	
-			if (sib->token == RAW)
-			{
-				token_nde = search_token(actual);
-				if (token_nde)
-					return (token_nde);
-			}	
+		while (sib->token == RAW && actual <= sib->end)
+		{				
+			token_nde = search_token(actual);
+			if (token_nde)
+				return (token_nde);			
 			actual++;
 		}
 		sib = sib->sibling;
