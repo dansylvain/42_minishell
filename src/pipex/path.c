@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_path.c                                     :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/20 10:16:57 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/24 19:10:18 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,20 @@ char	**search_path(char *argv[], char *envp[])
 	}
 
 	return (split_arg);
+}
+
+char* search_var(const t_ast_nde *node, t_Data *data)
+{	
+	char	*str;
+	char	*var;	
+	
+	str = ft_strndup(node->start, node->end - node->start + 1);
+	if (*(str + 1) == '?')
+		var = ft_itoa(data->exit_status);
+	else		
+		var = search_env_var(data->envp_tab, ft_strjoin_up(str + 1, "=", 0, 0));	
+	if (str)
+		free(str);
+//	ft_printf("var: -%s-", var);
+	return (var);	
 }
