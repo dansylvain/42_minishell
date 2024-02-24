@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/23 20:43:42 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/24 11:20:26 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	free_sibling(t_ast_nde *sib);
 void print_sibling(t_ast_nde *sib);
 void	print_cmd(t_ast_nde *cmd);
 void	free_tree(t_ast_nde *operator);
+static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data);
 
 char* get_var(t_ast_nde *node, t_Data *data)
 {	
@@ -171,45 +172,51 @@ t_ast_nde *copy_sibling(t_ast_nde *node)
 	return (new_node);
 }
 
-static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data)
-{	
-	t_ast_nde	*next_operator;
-	t_ast_nde	*raw_lft;
-	t_ast_nde	*raw_rght;
-	t_ast_nde	*tmp_op;
-	char		*expand;
-	
-	expand = NULL;
-	raw_lft = NULL;
-	raw_rght = NULL;
-	if (operator)
-		raw_lft = operator->child;
-	if (raw_lft)
-	 	raw_rght = raw_lft->sibling;
-	// if (operator && (operator->token == DOLL))			
-	if (operator && (operator->token == DOLL || operator->token == JOKER))			
-		return (add_sibling(rebuild_dollar_str_node(rebuild_dollar_str(operator, NULL, data)), rslt, rslt_sav));	
-	else if (raw_lft && raw_lft->child)
+void	leaf_raw_lft(t_ast_nde	*raw_lft, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data)
+{
+	if (raw_lft && raw_lft->child)
 	{					
 		if (raw_lft->child->sibling)
 			leaf_tree(raw_lft->child->sibling, rslt, rslt_sav, data);
 		else		
 			add_sibling(copy_sibling2(raw_lft->child), rslt, rslt_sav);		
-	}	
-	if (operator && operator->token != SPCE && operator->token != RAW)
-	{ 	
-		tmp_op = copy_node(operator);
-		tmp_op->child = copy_node(operator);	
-		
-		add_sibling(tmp_op, rslt, rslt_sav);				
 	}
+}
+void	leaf_raw_rght(t_ast_nde	*raw_rght, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data)
+{
+	t_ast_nde	*next_operator;
+	
 	next_operator = NULL;
 	if (raw_rght && raw_rght->child)
 		next_operator = raw_rght->child->sibling;
 	if (next_operator)
 		leaf_tree(next_operator, rslt, rslt_sav, data);
 	else if (raw_rght && raw_rght->child)		
-		add_sibling(copy_sibling2(raw_rght->child), rslt, rslt_sav);		
+		add_sibling(copy_sibling2(raw_rght->child), rslt, rslt_sav);
+}
+
+static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data)
+{	
+	t_ast_nde	*raw_lft;
+	t_ast_nde	*raw_rght;
+	t_ast_nde	*tmp_op;
+
+	raw_lft = NULL;
+	raw_rght = NULL;
+	if (operator)
+		raw_lft = operator->child;
+	if (raw_lft)
+	 	raw_rght = raw_lft->sibling;			
+	if (operator && (operator->token == DOLL || operator->token == JOKER))			
+		return (add_sibling(rebuild_dollar_str_node(rebuild_dollar_str(operator, NULL, data)), rslt, rslt_sav));
+	leaf_raw_lft(raw_lft, rslt, rslt_sav, data);		
+	if (operator && operator->token != SPCE && operator->token != RAW)
+	{ 	
+		tmp_op = copy_node(operator);
+		tmp_op->child = copy_node(operator);		
+		add_sibling(tmp_op, rslt, rslt_sav);				
+	}
+	leaf_raw_rght(raw_rght, rslt, rslt_sav, data);		
 }
 
 t_ast_nde	*ft_lstlast_sib(t_ast_nde *lst)
