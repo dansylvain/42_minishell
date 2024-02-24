@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/24 15:10:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/24 17:09:32 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_cmd(t_ast_nde *cmd);
 void	free_tree(t_ast_nde *operator);
 static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data);
 
-char* get_var(t_ast_nde *node, t_Data *data)
+char* get_var(const t_ast_nde *node, t_Data *data)
 {	
 	char	*str;
 	char	*var;	
@@ -65,7 +65,7 @@ t_ast_nde *rebuild_dollar_str_node(char *str)
 	}
 	return (str_node);
 }
-char	*link_sibling(t_ast_nde *node)
+char	*link_sibling(const t_ast_nde *node)
 {
 	char	*str;
 	char	*node_str;
@@ -85,67 +85,88 @@ char	*link_sibling(t_ast_nde *node)
 	return (str);
 }
 
-void	merge_str(t_ast_nde *operator, char **str)
+void	merge_str_and_sibling(char **str, const t_ast_nde *sibling)
 {
-	char		*str_lft;
-	t_ast_nde	*sibling;
-	
-	sibling = NULL;
-	str_lft = NULL;
-	if (operator && operator->child && operator->child->child)
-		sibling = operator->child->child;
-	if (sibling)
-		str_lft = link_sibling(sibling);
-	if (str && !*str)
-		*str = str_lft;
-	else if (str_lft)
-		*str = ft_strjoin_up(*str, str_lft, 1, 1);
+	char	*new_str;
+		
+	new_str = NULL;	
+	if (sibling && str)
+	{		
+		new_str = link_sibling(sibling);
+		if (new_str)
+		{
+			if (*str)
+				*str = ft_strjoin_up(*str, new_str, 1, 1);
+			else if (!*str)
+				*str = new_str;			
+		}
+	}
 }
 
-char	*rebuild_dollar_str(t_ast_nde *operator, char *str, t_Data *data)
-{	
-	// char		*str_lft;
-	char		*str_rght;
-	char		*str_tok;
-	char		*str_join;
-	char		*str2;	
-			
-	// str_lft = NULL;
-	// if (operator->child && operator->child->child)	
-	// 	str_lft = link_sibling(operator->child->child);	
-	// if (!str)
-	// 	str = str_lft;
-	// else if (str_lft)
-	// 	str = ft_strjoin_up(str, str_lft, 1, 1);
-	merge_str(operator, &str);
-	if (operator->token == DOLL)
-		str_tok = get_var(operator, data);
-	else if (operator->token == JOKER)
-	{
-		str2 = ft_strndup(operator->start, operator->end - operator->start + 1);
-		//str_tok = "JOKER"; 
-		str_tok = wilcard_func(str2);
-	}
+// void	merge_str2(t_ast_nde *operator, char **str, t_ast_nde *sibling)
+// {	
+// 	char		*str_rght;
+// 	t_ast_nde	*sibling;
 	
-	if (str && str_tok)
-		str = ft_strjoin_up(str, str_tok, 1, 0);//!!!
-	else if (!str)
-		str = str_tok;
-			
-	if (str && operator && operator->child && operator->child->sibling && operator->child->sibling->child && operator->child->sibling->child->sibling)	//operateur			
-		str = rebuild_dollar_str(operator->child->sibling->child->sibling, str, data);		
-		
-	else if (operator->child && operator->child->sibling && operator->child->sibling->child)
+// 	sibling = NULL;
+// 	str_rght = NULL;
+// 	if (operator->child && operator->child->sibling && operator->child->sibling->child)
+// 		sibling = operator->child->sibling->child;
+// 	if (sibling)
+// 	{
+// 		str_rght = link_sibling(operator->child->sibling->child); 
+// 		if (str && *str && str_rght)
+// 			*str = ft_strjoin_up(*str, str_rght, 0, 1);//!!
+// 		else if (str && !*str)
+// 			*str = str_rght;		
+// 	}	
+// }
+void	build_token_and_merge(const t_ast_nde *operator, char **str,  t_Data *data)
+{
+	char	*str_tok;
+	
+	str_tok = NULL;
+	if (operator)
+	{		
+		if (operator->token == DOLL)
+			str_tok = get_var(operator, data);
+		else if (operator->token == JOKER)
+			str_tok = wilcard_func(ft_strndup(operator->start, operator->end - operator->start + 1));
+		if (str_tok)
+		{
+			if (str && *str)
+				*str = ft_strjoin_up(*str, str_tok, 1, 0);//!!!
+			else if (str)
+				*str = str_tok;		
+		}
+	}
+}
+char	*rebuild_dollar_str(const t_ast_nde *operator, char *str, t_Data *data)
+{		
+	const t_ast_nde	*sibling_lft = NULL;
+	const t_ast_nde	*sibling_rght = NULL;
+	const t_ast_nde	*next_operator = NULL;
+
+	if (operator && operator->child)
 	{
-		str_rght = link_sibling(operator->child->sibling->child); 
-		if (str && str_rght)
-			str = ft_strjoin_up(str, str_rght, 0, 1);//!!
-		else if (!str)
-			str = str_rght;	
-		//	exit(1);
-	}	
+		if (operator->child->child)
+			sibling_lft = operator->child->child;
+		if (operator->child->sibling && operator->child->sibling->child)
+		{
+			sibling_rght = operator->child->sibling->child;		
+			if (operator->child->sibling->child->sibling)
+				next_operator = operator->child->sibling->child->sibling;
+		}
+	}		
+	merge_str_and_sibling(&str, sibling_lft);
+	build_token_and_merge(operator, &str, data);			
+	if (next_operator)			
+		str = rebuild_dollar_str(next_operator, str, data);		
+	else 		
+		merge_str_and_sibling(&str, sibling_rght);
 	return (str);
 }
+
 t_ast_nde *copy_sibling2(t_ast_nde *node)
 {
 	t_ast_nde *child;
