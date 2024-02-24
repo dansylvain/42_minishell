@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/24 17:09:32 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/24 18:05:14 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,24 +103,6 @@ void	merge_str_and_sibling(char **str, const t_ast_nde *sibling)
 	}
 }
 
-// void	merge_str2(t_ast_nde *operator, char **str, t_ast_nde *sibling)
-// {	
-// 	char		*str_rght;
-// 	t_ast_nde	*sibling;
-	
-// 	sibling = NULL;
-// 	str_rght = NULL;
-// 	if (operator->child && operator->child->sibling && operator->child->sibling->child)
-// 		sibling = operator->child->sibling->child;
-// 	if (sibling)
-// 	{
-// 		str_rght = link_sibling(operator->child->sibling->child); 
-// 		if (str && *str && str_rght)
-// 			*str = ft_strjoin_up(*str, str_rght, 0, 1);//!!
-// 		else if (str && !*str)
-// 			*str = str_rght;		
-// 	}	
-// }
 void	build_token_and_merge(const t_ast_nde *operator, char **str,  t_Data *data)
 {
 	char	*str_tok;
@@ -167,194 +149,7 @@ char	*rebuild_dollar_str(const t_ast_nde *operator, char *str, t_Data *data)
 	return (str);
 }
 
-t_ast_nde *copy_sibling2(t_ast_nde *node)
-{
-	t_ast_nde *child;
-	t_ast_nde *new_node;
-	t_ast_nde *new_node2;
-	t_ast_nde *new_sibling;
-	t_ast_nde *new_sibling_sav;
-	
-	new_sibling_sav = NULL;	
-	new_node = NULL;
-	new_node2 = NULL;
-	child = NULL;
-	if (node)
-	{		
-		child = node->child;
-		while (child)
-		{
-			new_node = copy_node(child);
-			add_sibling(new_node, &new_sibling, &new_sibling_sav);	
-			child = child->sibling;
-		}	
-		new_node2 = copy_node(node);	
-		new_node2->child = new_sibling_sav;
-	}
-	return (new_node2);
-}
-t_ast_nde *copy_sibling(t_ast_nde *node)
-{
-	t_ast_nde *child;
-	t_ast_nde *new_node;
-	t_ast_nde *new_sibling;
-	t_ast_nde *new_sibling_sav;
-	
-	new_node = NULL;
-	child = node->child;
-	new_sibling_sav = NULL;	
-	while (child)
-	{
-		new_node = copy_node(child);
-		add_sibling(new_node, &new_sibling, &new_sibling_sav);	
-		child = child->sibling;
-	}	
-	new_node = copy_node(node);	
-	new_node->child = new_sibling_sav;
-	return (new_node);
-}
 
-void	leaf_raw_lft(t_ast_nde	*raw_lft, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data)
-{
-	if (raw_lft && raw_lft->child)
-	{					
-		if (raw_lft->child->sibling)
-			leaf_tree(raw_lft->child->sibling, rslt, rslt_sav, data);
-		else		
-			add_sibling(copy_sibling2(raw_lft->child), rslt, rslt_sav);		
-	}
-}
-void	leaf_raw_rght(t_ast_nde	*raw_rght, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data)
-{
-	t_ast_nde	*next_operator;
-	
-	next_operator = NULL;
-	if (raw_rght && raw_rght->child)
-		next_operator = raw_rght->child->sibling;
-	if (next_operator)
-		leaf_tree(next_operator, rslt, rslt_sav, data);
-	else if (raw_rght && raw_rght->child)		
-		add_sibling(copy_sibling2(raw_rght->child), rslt, rslt_sav);
-}
-
-static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data)
-{	
-	t_ast_nde	*raw_lft;
-	t_ast_nde	*raw_rght;
-	t_ast_nde	*tmp_op;
-
-	raw_lft = NULL;
-	raw_rght = NULL;
-	if (operator)
-		raw_lft = operator->child;
-	if (raw_lft)
-	 	raw_rght = raw_lft->sibling;			
-	if (operator && (operator->token == DOLL || operator->token == JOKER))			
-		return (add_sibling(rebuild_dollar_str_node(rebuild_dollar_str(operator, NULL, data)), rslt, rslt_sav));
-	leaf_raw_lft(raw_lft, rslt, rslt_sav, data);		
-	if (operator && operator->token != SPCE && operator->token != RAW)
-	{ 	
-		tmp_op = copy_node(operator);
-		tmp_op->child = copy_node(operator);		
-		add_sibling(tmp_op, rslt, rslt_sav);				
-	}
-	leaf_raw_rght(raw_rght, rslt, rslt_sav, data);		
-}
-
-t_ast_nde	*ft_lstlast_sib(t_ast_nde *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->sibling)
-		lst = lst->sibling;
-	return (lst);
-}
-
-void	ft_lstadd_back_sib(t_ast_nde **lst, t_ast_nde *new)
-{
-	if (!lst || !new)
-		return ;
-	if (!*lst)
-		*lst = new;
-	else
-		ft_lstlast_sib(*lst)->sibling = new;
-}
-
-t_ast_nde	*expand_vars(t_ast_nde *qute_sib)
-{
-	t_ast_nde *current;
-	t_ast_nde *next_sibling;
-	t_ast_nde *var_node;
-	t_ast_nde *raw_node;
-	t_ast_nde *exp_sib;
-	
-	int i;
-	
-	exp_sib = (t_ast_nde *)malloc(sizeof(t_ast_nde));
-	if (exp_sib == NULL)
-		return (NULL);
-	exp_sib->sibling = NULL;
-	
-	
-
-	var_node = NULL;
-	current = qute_sib;
-	while (current)
-	{
-		if (current->token == RAW || current->token == IN_DQUTE)
-		{
-			i = 0;
-			raw_node = create_node(RAW);
-			raw_node->start = &current->start[i];
-			
-			while (i < qute_sib->end + 1 - qute_sib->start)
-			{
-				if (qute_sib->start[i] == '$' && qute_sib->start[i + 1] && qute_sib->start[i + 1] != ' ')
-				{
-					if (i == 0)
-						free (raw_node);
-					else
-					{
-						raw_node->end = &current->start[i];
-						ft_lstadd_back_sib(&exp_sib, raw_node);
-					}
-					
-
-
-					// create env var node
-					var_node = create_node(EXP);
-					var_node->start = &qute_sib->start[i];
-				}
-				if (var_node && (qute_sib->start[i + 1] == ' ' || i == qute_sib->end - qute_sib->start))
-				{
-					var_node->end = &qute_sib->start[i];
-					ft_lstadd_back_sib(&exp_sib, var_node);
-					break;
-				}
-				i++;
-			}
-			
-
-			if (var_node)
-			{
-				// ft_printf("var_node->start: %s\n", var_node->start);
-				// ft_printf("starting_char: %c\n", var_node->start[0]);
-				// ft_printf("ending_char: %c\n", var_node->end[0]);
-			}
-			// print_sib(exp_sib);
-			
-			// {
-			// 	int i = 0;
-			// 	while (i < (var_node->end - var_node->start) + 1)
-			// 		write (1, &var_node->start[i++], 1);
-			// 	ft_printf("\nvar_len = %i\nchar start: %c\nchar end: %c\n", var_node->end - var_node->start + 1, var_node->start[0], var_node->end[0]);
-			// }
-		}
-		current = current->sibling;		
-	}
-	
-	return (qute_sib);
-}
 
 void	free_branch(t_ast_nde *raw)
 {
