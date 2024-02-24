@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/24 11:20:26 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/24 15:10:36 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,38 +85,59 @@ char	*link_sibling(t_ast_nde *node)
 	return (str);
 }
 
-char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
-{	
+void	merge_str(t_ast_nde *operator, char **str)
+{
 	char		*str_lft;
+	t_ast_nde	*sibling;
+	
+	sibling = NULL;
+	str_lft = NULL;
+	if (operator && operator->child && operator->child->child)
+		sibling = operator->child->child;
+	if (sibling)
+		str_lft = link_sibling(sibling);
+	if (str && !*str)
+		*str = str_lft;
+	else if (str_lft)
+		*str = ft_strjoin_up(*str, str_lft, 1, 1);
+}
+
+char	*rebuild_dollar_str(t_ast_nde *operator, char *str, t_Data *data)
+{	
+	// char		*str_lft;
 	char		*str_rght;
 	char		*str_tok;
 	char		*str_join;
 	char		*str2;	
 			
-	str_lft = NULL;
-	if (node->child && node->child->child)	
-		str_lft = link_sibling(node->child->child);	
-	if (!str)
-		str = str_lft;
-	else if (str && str_lft)
-		str = ft_strjoin_up(str, str_lft, 1, 1);
-	if (node->token == DOLL)
-		str_tok = get_var(node, data);
-	else if (node->token == JOKER)
+	// str_lft = NULL;
+	// if (operator->child && operator->child->child)	
+	// 	str_lft = link_sibling(operator->child->child);	
+	// if (!str)
+	// 	str = str_lft;
+	// else if (str_lft)
+	// 	str = ft_strjoin_up(str, str_lft, 1, 1);
+	merge_str(operator, &str);
+	if (operator->token == DOLL)
+		str_tok = get_var(operator, data);
+	else if (operator->token == JOKER)
 	{
-		str2 = ft_strndup(node->start, node->end - node->start + 1);
+		str2 = ft_strndup(operator->start, operator->end - operator->start + 1);
 		//str_tok = "JOKER"; 
 		str_tok = wilcard_func(str2);
 	}
+	
 	if (str && str_tok)
 		str = ft_strjoin_up(str, str_tok, 1, 0);//!!!
 	else if (!str)
-		str = str_tok;		
-	if (str && node && node->child && node->child->sibling && node->child->sibling->child && node->child->sibling->child->sibling)	//operateur			
-		str = rebuild_dollar_str(node->child->sibling->child->sibling, str, data);		
-	else if (node->child && node->child->sibling && node->child->sibling->child)
+		str = str_tok;
+			
+	if (str && operator && operator->child && operator->child->sibling && operator->child->sibling->child && operator->child->sibling->child->sibling)	//operateur			
+		str = rebuild_dollar_str(operator->child->sibling->child->sibling, str, data);		
+		
+	else if (operator->child && operator->child->sibling && operator->child->sibling->child)
 	{
-		str_rght = link_sibling(node->child->sibling->child); 
+		str_rght = link_sibling(operator->child->sibling->child); 
 		if (str && str_rght)
 			str = ft_strjoin_up(str, str_rght, 0, 1);//!!
 		else if (!str)
