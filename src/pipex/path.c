@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/24 19:10:18 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/25 15:55:41 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 #include "ft_printf.h"
 #include "minishell.h"
 
-
 void	display_error(char *str);
-void	free_ptr_arr(char **arr);
 
 static char	*try_paths(char **argv, char *env_find)
 {
@@ -50,7 +48,7 @@ static char	*try_paths(char **argv, char *env_find)
 		free(cmd);
 		cmd = NULL;
 	}
-	free_ptr_arr(split_colon_sav);
+	ft_free_ptr_arr((void **) split_colon_sav);
 	return (cmd);
 }
 

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 19:25:01 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/25 16:01:15 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+t_ast_nde *copy_node_and_child(t_ast_nde *node);
 
 void	launch_command_tab(t_Data *data, t_ast_nde *node,
 		char *envp[], int flag)
@@ -23,7 +24,7 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 	while (node && node->token != AND && node->token != OR)
 	{
 		if (!flag)
-			add_sibling(copy_sibling(node), &cmd_tab_node, &cmd_tab_node_sav);
+			add_sibling(copy_node_and_child(node), &cmd_tab_node, &cmd_tab_node_sav);
 		node = node->sibling;
 	}
 	if (cmd_tab_node_sav)

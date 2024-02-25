@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_dollar.c                                   :+:      :+:    :+:   */
+/*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 07:42:44 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/24 17:28:19 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/25 14:21:16 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "parsing_utils.h"
 
-#include<stdio.h>
-t_ast_nde	*copy_node(t_ast_nde *node);
-void	print_raw_rght(t_ast_nde *raw_rght);
-int	set_space(t_ast_nde *node);
-//t_ast_nde	*copy_node_child(t_ast_nde *node);
 t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token);
-void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token);
+void		fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token);
 
 t_ast_nde	*search_token_joker(t_ast_nde *sib, char *actual)
 {

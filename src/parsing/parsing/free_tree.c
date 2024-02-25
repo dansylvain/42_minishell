@@ -6,25 +6,14 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:59:08 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/24 21:00:23 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/25 15:28:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
 #include "parsing_utils.h"
 
-void	free_sibling_and_child(t_ast_nde *sib)
-{
-	t_ast_nde	*tmp;
-	
-	while (sib)
-	{
-		free_sibling(sib->child);
-		tmp = sib->sibling;
-		free(sib);
-		sib = tmp;
-	}
-}
+void	free_tree(t_ast_nde *operator);
 
 void	free_sibling(t_ast_nde *sib)
 {
@@ -71,4 +60,17 @@ void	free_tree(t_ast_nde *operator)
 		free_branch(raw_lft);	
 	if (raw_rght)
 		free_branch(raw_rght);	
+}
+
+void	free_sibling_and_child(t_ast_nde *sib)
+{
+	t_ast_nde	*tmp;
+	
+	while (sib)
+	{
+		free_sibling(sib->child);
+		tmp = sib->sibling;
+		free(sib);
+		sib = tmp;
+	}
 }

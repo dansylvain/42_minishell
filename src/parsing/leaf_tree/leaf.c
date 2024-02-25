@@ -6,13 +6,19 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:01:47 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/24 18:03:20 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/25 15:47:06 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing_utils.h"
 #include <unistd.h>
 #include "minishell.h"
+
+t_ast_nde	*copy_node(t_ast_nde *node);
+t_ast_nde	*copy_node_and_child(t_ast_nde *node);
+void		leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data);
+char		*rebuild_dollar_str(const t_ast_nde *operator, char *str, t_Data *data);
+t_ast_nde	*rebuild_dollar_str_node(char *str);
 
 void	leaf_raw_lft(t_ast_nde	*raw_lft, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data)
 {
@@ -21,7 +27,7 @@ void	leaf_raw_lft(t_ast_nde	*raw_lft, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_
 		if (raw_lft->child->sibling)
 			leaf_tree(raw_lft->child->sibling, rslt, rslt_sav, data);
 		else		
-			add_sibling(copy_sibling2(raw_lft->child), rslt, rslt_sav);		
+			add_sibling(copy_node_and_child(raw_lft->child), rslt, rslt_sav);		
 	}
 }
 
@@ -35,7 +41,7 @@ void	leaf_raw_rght(t_ast_nde	*raw_rght, t_ast_nde **rslt, t_ast_nde **rslt_sav, 
 	if (next_operator)
 		leaf_tree(next_operator, rslt, rslt_sav, data);
 	else if (raw_rght && raw_rght->child)		
-		add_sibling(copy_sibling2(raw_rght->child), rslt, rslt_sav);
+		add_sibling(copy_node_and_child(raw_rght->child), rslt, rslt_sav);
 }
 
 void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data)

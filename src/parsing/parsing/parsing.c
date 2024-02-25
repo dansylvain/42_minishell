@@ -6,37 +6,25 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/24 21:10:46 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/25 15:26:16 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdio.h>
 #include "parsing_utils.h"
 #include "libft.h"
-#include "stdio.h"
-#include "ft_printf.h"
 #include "minishell.h"
+#include "ft_printf.h"
 
 t_ast_nde	*copy_node(t_ast_nde *node);
-t_ast_nde	*copy_node_child(t_ast_nde *node);
 t_ast_nde	*set_qute_sib(char *str);
-t_ast_nde	*sib_last(t_ast_nde *sib);
-t_ast_nde	*set_pipe(t_ast_nde *node);
-void		print_qute_sib(t_ast_nde *sib);
-void		print_sib(t_ast_nde *sib);
 t_ast_nde	*set_operator(t_ast_nde *node);
-void	print_tree(t_ast_nde *node);
-int	set_dollar(t_ast_nde *node);
-void print_rslt(t_ast_nde *rslt, int flag);
-char	*search_env_var(char *envp[], char *env_to_find);
-void	free_sibling(t_ast_nde *sib);
-void print_sibling(t_ast_nde *sib);
-void	print_cmd(t_ast_nde *cmd);
+void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data);
 void	free_tree(t_ast_nde *operator);
-static void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt, t_ast_nde **rslt_sav, t_Data *data);
-
-void	print_raw_rght(t_ast_nde *raw_rght);
-void	print_space_tree(t_ast_nde *node);
+void	print_qute_sib(t_ast_nde *sib);
+void	print_tree(t_ast_nde *node);
+void	print_cmd(t_ast_nde *cmd);
 	
 static t_ast_nde	*create_ast(char *str, t_Data *data)
 {
@@ -54,7 +42,6 @@ static t_ast_nde	*create_ast(char *str, t_Data *data)
 	//print_qute_sib(root->child->child->child);	
 	set_operator(root->child);
 	leaf_tree(root, &cmd, &cmd_sav, data);	
-	
 	//print_tree(root->child->child->sibling);
 	//print_cmd(cmd_sav);
 	
