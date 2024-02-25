@@ -6,12 +6,12 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 20:57:31 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/24 21:02:12 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/25 16:31:19 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_utils.h"
 #include <stdlib.h>
+#include "parsing_utils.h"
 
 char	*translate_enum(t_tok token)
 {

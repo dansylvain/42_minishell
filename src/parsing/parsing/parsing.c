@@ -6,16 +6,16 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/25 15:26:16 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/25 16:28:19 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 #include "parsing_utils.h"
 #include "libft.h"
 #include "minishell.h"
-#include "ft_printf.h"
+//#include <stdio.h>
+//#include "ft_printf.h"
 
 t_ast_nde	*copy_node(t_ast_nde *node);
 t_ast_nde	*set_qute_sib(char *str);

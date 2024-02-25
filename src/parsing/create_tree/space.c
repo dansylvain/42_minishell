@@ -13,11 +13,8 @@
 #include <stdlib.h>
 #include "parsing_utils.h"
 
-t_ast_nde	*copy_node(t_ast_nde *node);
-void	print_raw_rght(t_ast_nde *raw_rght);
-t_ast_nde	*set_chevron(t_ast_nde *node);
 t_ast_nde	*set_dollar(t_ast_nde *node);
-void	fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token);
+void		fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token);
 t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token);
 
 static t_ast_nde	*create_space_node(t_ast_nde *sib)

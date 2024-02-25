@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/25 16:11:20 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/25 16:20:39 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "minishell.h"
 
 t_ast_nde	*copy_node(t_ast_nde *node);
+char		*search_var(const t_ast_nde *node, t_Data *data);
 
 t_ast_nde *rebuild_dollar_str_node(char *str)
 {
@@ -78,7 +79,7 @@ void	build_token_and_merge(const t_ast_nde *operator, char **str,  t_Data *data)
 	if (operator)
 	{		
 		if (operator->token == DOLL)
-			str_tok = get_var(operator, data);
+			str_tok = search_var(operator, data);
 		else if (operator->token == JOKER)
 			str_tok = wilcard_func(ft_strndup(operator->start, operator->end - operator->start + 1));
 		if (str_tok)
