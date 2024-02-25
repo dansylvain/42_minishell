@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/23 11:25:01 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/25 22:38:56 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,47 +172,47 @@ pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 	return (pid);
 }
 
-int	arr_len(const void *arr[])
-{
-	int	i;
+// int	arr_len(const void *arr[])
+// {
+// 	int	i;
 
-	i = 0;
-	while(arr[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while(arr[i])
+// 		i++;
+// 	return (i);
+// }
 
-void	set_redir2(int argc, char **argv[], int redir[])
-{	
-	redir[0] = 0;
-	redir[1] = 0;
-	if (***argv == '<')
-	{
-		redir[0] = 1;
-		if (!ft_strcmp(**argv, "<<"))
-			redir[0] = 2;	 			
-	}
-	if (**(argv)[argc - 1] == '>')
-	{
-		redir[1] = 1;		
-		if (!ft_strcmp(*argv[argc - 1], ">>"))
-			redir[1] = 2;	
-	}
-}
-void	set_filepath_and_delim2(int *argc, char ***argv[], t_redir *redir)
-{
-	redir->delim = NULL;
-	redir->filepath[0] = NULL;
-	redir->filepath[1] = NULL;
-	if (redir->redir[0] == 1)	
-		redir->filepath[0] = (*(*argv)++)[1];
-	else if (redir->redir[0] == 2)
-		redir->delim = (*(*argv)++)[1];
-	if (redir->redir[0])
-		(*argc)--;
-	if (redir->redir[1])
-	redir->filepath[1] = (*argv)[(*argc) - 1][1];
-}
+// void	set_redir2(int argc, char **argv[], int redir[])
+// {	
+// 	redir[0] = 0;
+// 	redir[1] = 0;
+// 	if (***argv == '<')
+// 	{
+// 		redir[0] = 1;
+// 		if (!ft_strcmp(**argv, "<<"))
+// 			redir[0] = 2;	 			
+// 	}
+// 	if (**(argv)[argc - 1] == '>')
+// 	{
+// 		redir[1] = 1;		
+// 		if (!ft_strcmp(*argv[argc - 1], ">>"))
+// 			redir[1] = 2;	
+// 	}
+// }
+// void	set_filepath_and_delim2(int *argc, char ***argv[], t_redir *redir)
+// {
+// 	redir->delim = NULL;
+// 	redir->filepath[0] = NULL;
+// 	redir->filepath[1] = NULL;
+// 	if (redir->redir[0] == 1)	
+// 		redir->filepath[0] = (*(*argv)++)[1];
+// 	else if (redir->redir[0] == 2)
+// 		redir->delim = (*(*argv)++)[1];
+// 	if (redir->redir[0])
+// 		(*argc)--;
+// 	if (redir->redir[1])
+// 	redir->filepath[1] = (*argv)[(*argc) - 1][1];
+// }
 // void	set_filepath(int *argc, char **argv, char *filepath[])
 // {
 // 	if (redir->redir[0] == 1)	
@@ -285,9 +285,9 @@ int	pipex(char **argv[], char *envp[])
 	exit_status = -1;
 	pid = -1;//ft_printf("argv: %s, redir 0:%d, redir 1:%d, fdfile 0:%d, fdfile 1:%d, filepath 0:%s, filepath 1:%s, delim : %s\n", **argv, redir.redir[0], redir.redir[1], redir.fd_file[0], redir.fd_file[1], redir.filepath[0], redir.filepath[1], redir.delim); 
 
-	argc = arr_len((void *)argv);//ft_printf("argc %d\n", argc);
-	if (!argc)
-		return (1);
+	// argc = arr_len((void *)argv);//ft_printf("argc %d\n", argc);
+	// if (!argc)
+	// 	return (1);
 	
 	// set_redir(argc, argv, redir.redir);
 	// set_filepath_and_delim(&argc, &argv, &redir);
