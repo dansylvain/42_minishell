@@ -6,13 +6,11 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/25 16:39:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/25 16:49:00 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-//#include <stdio.h>
-//#include <unistd.h>
 #include "libft.h"
 #include "ft_printf.h"
 #include "minishell.h"
