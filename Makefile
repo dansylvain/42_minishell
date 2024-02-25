@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/25 15:32:28 by seblin           ###   ########.fr        #
+#    Updated: 2024/02/25 17:37:15 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ SRC =	src/main.c \
 		src/parsing/create_tree/space.c \
 		src/parsing/create_tree/token_child.c \
 		src/parsing/leaf_tree/leaf.c \
-		src/parsing/leaf_tree/rebuild_expansion.c \
+		src/parsing/leaf_tree/dollar_expansion.c \
 		src/pipex/path.c \
 		src/pipex/pipex.c \
 		src/pipex/setup.c \
