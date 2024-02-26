@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:59:08 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/25 16:27:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/26 09:36:47 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	free_sibling(t_ast_nde *sib)
 
 void	free_branch(t_ast_nde *raw)
 {
-	t_ast_nde *cont;
-	
+	t_ast_nde	*cont;
+
 	cont = raw->child;
 	free(raw);
 	if (cont)
 		free_sibling(cont->child);
-	if (cont && cont->sibling)	
+	if (cont && cont->sibling)
 	{
 		free_tree(cont->sibling);
 		free(cont);
@@ -43,29 +43,29 @@ void	free_branch(t_ast_nde *raw)
 }
 
 void	free_tree(t_ast_nde *operator)
-{	
-	t_ast_nde *raw_lft;
-	t_ast_nde *raw_rght;
-	
+{
+	t_ast_nde	*raw_lft;
+	t_ast_nde	*raw_rght;
+
 	raw_lft = NULL;
-	raw_rght = NULL;	
+	raw_rght = NULL;
 	if (operator)
 	{
 		raw_lft = operator->child;
 		if (raw_lft)
 			raw_rght = raw_lft->sibling;
 		free(operator);
-	}	
-	if (raw_lft)	
-		free_branch(raw_lft);	
+	}
+	if (raw_lft)
+		free_branch(raw_lft);
 	if (raw_rght)
-		free_branch(raw_rght);	
+		free_branch(raw_rght);
 }
 
 void	free_sibling_and_child(t_ast_nde *sib)
 {
 	t_ast_nde	*tmp;
-	
+
 	while (sib)
 	{
 		free_sibling(sib->child);
