@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/26 09:59:00 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/26 12:37:48 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	close_fd(int fd[]);
 int		get_fdio(t_redir *redir);
 int		command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
 char	**search_path(char *argv[], char *envp[]);
+
 
 void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
 {
@@ -59,15 +60,15 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 					close(fd_file[1]);
 				set_pipe_forward(pipefd[0], pipefd[1], redir);
 				//ft_printf("argv in nurcery -%s-%s\n", **argv, (*argv)[1]);
-				if (!command_is_builtin(*argv, NULL, envp))
+				if (!command_is_builtin(*argv, data, envp))
 				{
 					if (access(**argv, X_OK))
 						search_path(*argv, envp);
 					execve(**argv, *argv, envp);
-					exit(EXIT_FAILURE);
+					exit(126);
 				}
 				else
-					exit(EXIT_SUCCESS);
+					exit(0);
 			}
 			else
 			{
@@ -234,8 +235,8 @@ int	pipex(char **argv[], char *envp[])
 	{
 		if (WIFEXITED(status))
     		exit_status = WEXITSTATUS(status);
-		if (exit_status >= 1)
-			exit_status = 127;
+		// if (exit_status >= 1)
+		// 	exit_status = WIFEXITED(status);
 	}
 	// else
     // 	;//ft_printf("waitpid a échoué ou il n'y avait aucun enfant à attendre\n");

@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/26 09:21:14 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/26 12:22:33 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 *TODO fix memory leaks unset
 *========================================================================**/
 
+t_Data	*data = NULL;
+
 /**========================================================================
  *                           main.c
  *? rl_catch_signals is a global variable (from readline lib)
@@ -31,8 +33,6 @@
 *========================================================================**/
 int	main(int argc, char **argv, char *envp[])
 {
-	static t_Data	*data = NULL;
-
 	if (envp == NULL)
 		return 0;
 	rl_catch_signals = 0;
@@ -58,25 +58,25 @@ int	main(int argc, char **argv, char *envp[])
 
 int	prompt_loop(t_Data *data, char *envp[])
 {
-	char	*cmd[2];
+	char	*cmd;
 	char	prompt[1024];
 
-	cmd[1] = NULL;
+	cmd = NULL;
 	while (1)
 	{
 		build_prompt(prompt);
-		cmd[0] = readline(prompt);
+		cmd = readline(prompt);
 		// ft_printf("%s", prompt);
 		// char *gnl_output = get_next_line(0);
 		// if (gnl_output)
 		// 	gnl_output[ft_strlen(gnl_output) - 1] = '\0';
 		// cmd[0] = gnl_output;
-		if (cmd[0] && *cmd[0])
-			add_history(cmd[0]);
-		if (cmd[0] == NULL)
+		if (cmd && *cmd)
+			add_history(cmd);
+		if (cmd == NULL)
 			return (ft_printf("exit\n"), 0);
-		exec_pipex(data, cmd[0], data->envp_tab);
-		free(cmd[0]);
+		exec_pipex(data, cmd, data->envp_tab);
+		free(cmd);
 	}
 	return (1);
 	(void)envp;
@@ -117,8 +117,8 @@ int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 	int	len;
 
 	len = ft_strlen(cmd_tab[0]);
-	if (!cmd_tab)
-		return (1);
+	// if (!cmd_tab)
+	// 	return (1);
 	if (!cmd_tab[0])
 		return (free_command_tab(cmd_tab), 1);
 	if (len >= 2 && !ft_strncmp(&(cmd_tab[0][len - 2]), "cd", 3))

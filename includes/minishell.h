@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/26 09:19:42 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/26 12:02:01 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct t_Data
 	char	**envp_tab;
 	int		exit_status;
 }	t_Data;
+
+extern t_Data	*data;
 
 void	build_prompt(char prompt[]);
 void	handle_signals(void);
@@ -82,7 +84,6 @@ char			*wilcard_func(char *pattern);
 /*   handle_signals.c                                   :+:      :+:    :+:   */
 void	sigint_handler(int signum);
 void	sigquit_handler(int signum);
-#endif
 
 /*   create_command_tab.c                           :+:      :+:    :+:   */
 t_ast_nde 	*copy_sibling(t_ast_nde *node);
@@ -108,3 +109,5 @@ int	create_chevron_tab(char ****cmd_tab, int *i, t_ast_nde **node, t_Data *data)
 
 void		exec_pipex(t_Data *data, char *cmd, char *envp[]);
 int			exec_exit(t_Data *data, char **command_tab);
+
+#endif

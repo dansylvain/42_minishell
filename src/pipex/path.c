@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/26 09:41:08 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/26 12:32:29 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ char	**search_path(char *argv[], char *envp[])
 	if (!env_find)
 	{
 		ft_putstr_fd("env PATH not found.\n", 2);
-		exit(1);
+		exit(127);
 	}
 	if (!try_paths(argv, env_find))
 	{
 		display_error_detail(argv[0], ": command ", "not found\n");
-		exit(1);
+		exit(127);
 	}
 	return (split_arg);
 }
