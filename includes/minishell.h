@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 19:25:32 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/26 09:19:42 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ char			*wilcard_func(char *pattern);
 
 
 /*   handle_signals.c                                   :+:      :+:    :+:   */
-static void	sigint_handler(int signum);
-static void	sigquit_handler(int signum);
+void	sigint_handler(int signum);
+void	sigquit_handler(int signum);
 #endif
 
 /*   create_command_tab.c                           :+:      :+:    :+:   */

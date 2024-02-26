@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 19:25:39 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/26 09:21:14 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int argc, char **argv, char *envp[])
 	if (prompt_loop(data, envp) == 0)
 		return (free_data(data), 0);
 	return (0);
+	(void)argv;
 }
 
 /**========================================================================
@@ -78,6 +79,7 @@ int	prompt_loop(t_Data *data, char *envp[])
 		free(cmd[0]);
 	}
 	return (1);
+	(void)envp;
 }
 
 void	build_prompt(char prompt[])
@@ -112,7 +114,6 @@ void	build_prompt(char prompt[])
  *========================================================================**/
 int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 {
-	int	return_pipex;
 	int	len;
 
 	len = ft_strlen(cmd_tab[0]);
@@ -135,4 +136,5 @@ int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 	if (len >= 6 && !ft_strncmp(&(cmd_tab[0][len - 6]), "export", 7))
 		return (exec_export(cmd_tab, data), 1);
 	return (0);
+	(void)envp;
 }

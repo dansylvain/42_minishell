@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:33:25 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 19:29:12 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/26 09:21:44 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 	envp_tab[i] = NULL;
 	update_shlvl(envp_tab);
 	return (envp_tab);
+	(void)data;
 }
