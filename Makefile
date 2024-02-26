@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+         #
+#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/06 05:50:42 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/21 13:48:23 by dsylvain         ###   ########.fr        #
+#    Created: Invalid date        by                   #+#    #+#              #
+#    Updated: 2024/02/26 09:22:05 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME = minishell
 
@@ -46,15 +47,19 @@ SRC =	src/main.c \
 		src/builtins/exec_export.c \
 		src/builtins/exec_export_utils.c \
 		src/builtins/exec_exit.c \
-		src/parsing/parsing.c \
-		src/parsing/parsing_path.c \
-		src/parsing/parsing_quote.c \
-		src/parsing/parsing_operator.c \
-		src/parsing/parsing_utils.c \
-		src/parsing/parsing_test.c \
-		src/parsing/parsing_space.c \
-		src/parsing/parsing_chevron.c \
-		src/parsing/parsing_dollar.c \
+		src/parsing/parsing/free_tree.c \
+		src/parsing/parsing/parsing.c \
+		src/parsing/parsing/test.c \
+		src/parsing/parsing/utils.c \
+		src/parsing/parsing/utils2.c \
+		src/parsing/create_tree/expansion.c \
+		src/parsing/create_tree/operator.c \
+		src/parsing/create_tree/quote.c \
+		src/parsing/create_tree/space.c \
+		src/parsing/create_tree/token_child.c \
+		src/parsing/leaf_tree/leaf.c \
+		src/parsing/leaf_tree/dollar_expansion.c \
+		src/pipex/path.c \
 		src/pipex/pipex.c \
 		src/pipex/setup.c \
 		src/create_command_tab.c \
