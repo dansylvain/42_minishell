@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 20:57:31 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/25 16:31:19 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/26 09:44:14 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 char	*translate_enum(t_tok token)
 {
 	if (token == AND)
-		return "&&";
+		return ("&&");
 	else if (token == OR)
-		return "||";
+		return ("||");
 	else if (token == PIPE)
-		return "|";
+		return ("|");
 	else if (token == SCHEV_LFT)
-		return "<";
+		return ("<");
 	else if (token == DCHEV_LFT)
-		return "<<";
+		return ("<<");
 	else if (token == SCHEV_RGTH)
-		return ">";
+		return (">");
 	else if (token == DCHEV_RGTH)
-		return ">>";	
+		return (">>");
 	return (NULL);
 }
 
@@ -52,8 +52,8 @@ void	ft_lstadd_back_sib(t_ast_nde **lst, t_ast_nde *new)
 }
 
 t_ast_nde	*sib_last(t_ast_nde *sib)
-{	
-	while (sib && sib->sibling)		
-		sib = sib->sibling; 
+{
+	while (sib && sib->sibling)
+		sib = sib->sibling;
 	return (sib);
 }
