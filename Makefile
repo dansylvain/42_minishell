@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
+#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/02/26 09:28:33 by dan              ###   ########.fr        #
+#    Updated: 2024/02/26 10:02:49 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CC = cc
 
 RLFLAGS = -lreadline -lhistory -I/usr/include/readline
 
-CFLAGS = -g -Iincludes/parsing -Iincludes -Wall -Wextra -Werror
+CFLAGS = -g -Iincludes/parsing -Iincludes
+# -Wall -Wextra -Werror
 
 # Directories
 LIBFT_DIR = lib/libft
