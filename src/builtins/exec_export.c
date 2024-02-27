@@ -6,28 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 20:25:38 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/27 15:23:25 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	are_only_valid_chars(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (ft_isdigit(str[0]) || str[0] == '=')
-		return (0);
-	while (str[i] && str[i] != '=')
-	{
-		if (!ft_isalnum(str[i]) && str[i] != '_' && str[i] != '='
-			&& str[i] != '\"' && str[i] != ' ')
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 /**========================================================================
  *                           exec_export
@@ -141,4 +124,21 @@ char	*get_env_var(t_Data *data, char *to_find)
 		j++;
 	}
 	return (env_var);
+}
+
+int	are_only_valid_chars(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (ft_isdigit(str[0]) || str[0] == '=')
+		return (0);
+	while (str[i] && str[i] != '=')
+	{
+		if (!ft_isalnum(str[i]) && str[i] != '_' && str[i] != '='
+			&& str[i] != '\"' && str[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
 }

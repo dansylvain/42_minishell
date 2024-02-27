@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/26 12:22:33 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/27 15:15:41 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 	int	len;
 
 	len = ft_strlen(cmd_tab[0]);
-	// if (!cmd_tab)
-	// 	return (1);
+	if (!cmd_tab || is_only_space(cmd_tab[0]))
+		return (1);
 	if (!cmd_tab[0])
 		return (free_command_tab(cmd_tab), 1);
 	if (len >= 2 && !ft_strncmp(&(cmd_tab[0][len - 2]), "cd", 3))

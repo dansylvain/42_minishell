@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/26 12:02:01 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/27 15:23:53 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	**create_new_env_var(char **envp, char *env_var);
 char	*get_env_var(t_Data *data, char *to_find);
 void	display_export_tab(char export_tab[][500]);
 void	create_export_tab(t_Data *data, char export_tab[][500]);
+int		are_only_valid_chars(char *str);
 
 /*   exec_echo.c                                  :+:      :+:    :+:   */
 int	is_only_space(char *str);
