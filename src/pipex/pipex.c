@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/27 18:35:56 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/27 19:04:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int	set_all_redir_out(char **argv[], t_redir *redir)
 	ret = 0;
 	while (*argv)
 	{		
-		ret = set_redir_out(*argv, redir);
+		ret += set_redir_out(*argv, redir);
 		argv++;
 	}
 	return (ret);
@@ -148,12 +148,15 @@ int	set_all_redir_out(char **argv[], t_redir *redir)
 
 int	set_all_redir_in(char **argv[], t_redir *redir)
 {
+	int	ret;
+
+	ret = 0;
 	while (*argv)
 	{		
-		set_redir_in(*argv, redir);		 	
+		ret += set_redir_in(*argv, redir);			 	
 		argv++;
 	}
-	return (0);
+	return (ret);
 }
 void	set_pipefd_in(int pipefd_in[], t_redir *redir)
 {
@@ -186,15 +189,13 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 	pid_t	pid;
 	
 	init_redir(redir);
-	set_all_redir_in(argv, redir);	
+	if (set_all_redir_in(argv, redir))	
+		exit(1);
+	if (set_all_redir_out(argv, redir))
+		exit(1);
 	set_pipefd_in(pipefd[0], redir);
 	while (*argv)
-	{
-		if (set_all_redir_out(argv, redir))
-		{
-			argv++;
-			continue;
-		}			
+	{						
 		pipe(pipefd[1]);		
 		if (***argv != '>' && ***argv != '<')
 		{
