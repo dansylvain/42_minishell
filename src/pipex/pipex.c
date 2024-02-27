@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/27 22:19:02 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/27 23:00:41 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #include "pipex_setup.h"
 #include "../../includes/minishell.h"
 
-void	close_fd(int fd[]);
+void	close_fd(int fd);
 void	close_fds(int fd[]);
 // void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir);
 int	get_fdio(t_redir *redir);
@@ -76,7 +76,6 @@ void	here_doc_handle(int pipefd_in[], t_redir redir) //argv!!
 		free(line); //opti
 	}
 }
-
 
 int set_redir_out(char **argv, t_redir *redir)
 {
@@ -190,28 +189,31 @@ void	builtin_or_execve(char **argv[], char *envp[])
 		exit(EXIT_SUCCESS);
 }
 
+void	set_redir_io(char **argv[], t_redir *redir)
+{
+	if (set_all_redir_in(argv, redir))	
+		exit(1);
+	if (set_all_redir_out(argv, redir))
+		exit(1);
+}
+
 pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir *redir)
 {
 	pid_t	pid;
 		
-	init_redir(redir);	
+	init_redir(redir);
+	set_redir_io(argv, redir);	
 	while (*argv)
 	{						
 		if (***argv != '>' && ***argv != '<')
 		{
-			pipe(pipefd[1]);		
+			pipe(pipefd[1]);
 			pid = fork();
 			if (!pid)
 			{							
-				close_fd(fd_file[1]);
-				
-				if (set_all_redir_in(argv, redir))	
-					exit(1);
-				if (set_all_redir_out(argv, redir))
-					exit(1);	
-				set_pipefd_in(pipefd[0], redir);						
-				set_pipe_forward(pipefd[0], pipefd[1], *redir);
-				
+				close_fd(fd_file[1]);				
+				set_pipefd_in(pipefd[0], redir);										
+				set_pipe_forward(pipefd[0], pipefd[1], *redir);						
 				builtin_or_execve(argv, envp);						
 			}
 			else						
