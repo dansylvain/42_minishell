@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/27 10:39:55 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/27 11:12:54 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
 		dup2(pipefd_in[0], STDIN_FILENO);
 		close(pipefd_in[0]);
 	}
-		close(pipefd_in[1]);
+	close(pipefd_in[1]);
 	dup2(pipefd_out[1], STDOUT_FILENO);
 	close(pipefd_out[1]);
 	close(pipefd_out[0]);
@@ -132,24 +132,20 @@ pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 	pid_t	pid;
 	
 	pid = -1;
-	if (redir.redir[0] < 0)
-		pipe(pipefd_in);
- else
+	pipefd_in[0] = -1;
+	pipefd_in[1] = -1;
+	// if (redir.redir[0] < 0)
+	// 	pipe(pipefd_in);
+	if (!redir.redir[0]) // pas de redir		
+		pipefd_in[0] = 0;	
+	else if (redir.redir[0] == 1)	
+		pipefd_in[0] = redir.fd_file[0];	
+  	else  if (redir.redir[0] == 2 )
 	{
 		pipefd_in[0] = redir.pipe[0];
 		pipefd_in[1] = redir.pipe[1];//
 	}
 	pipe(pipefd_out); // optim ?
-	if (!redir.redir[0]) // pas de redir
-	{
-		//close(pipefd_in[0]);
-		pipefd_in[0] = 0;
-	}
-	else if (redir.redir[0] == 1)
-	{		
-		close(pipefd_in[0]);
-		pipefd_in[0] = redir.fd_file[0];
-	}
 	// else if (redir.redir[0] == 2)
 	// 	redir.pipe[0] = 
 	// 	here_doc_handle(pipefd_in, redir);
