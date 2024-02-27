@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 09:57:00 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/02/18 17:03:05 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/27 17:02:29 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_next_line(int fd)
 	char			*next_line;
 	char			*tmp;
 
-	data = get_data(&head, fd);
+	data = fet_data_gnl(&head, fd);
 	if (!initialise_variables(&data) || !data)
 		return (delete_data(&data, fd));
 	while (!(ft_strchr(data->buff_nl, '\n')) && data->bytes_read)
@@ -40,7 +40,7 @@ char	*get_next_line(int fd)
 	return (NULL);
 }
 
-t_gnl	*get_data(t_gnl **head, int fd)
+t_gnl	*fet_data_gnl(t_gnl **head, int fd)
 {
 	t_gnl	*current;
 

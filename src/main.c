@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/27 15:15:41 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/27 17:09:49 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 *TODO fix memory leaks unset
 *========================================================================**/
 
-t_Data	*data = NULL;
-
 /**========================================================================
  *                           main.c
  *? rl_catch_signals is a global variable (from readline lib)
@@ -33,23 +31,36 @@ t_Data	*data = NULL;
 *========================================================================**/
 int	main(int argc, char **argv, char *envp[])
 {
-	if (envp == NULL)
-		return 0;
-	rl_catch_signals = 0;
-	if (data == NULL)
-		data = (t_Data *)ft_calloc(sizeof(t_Data), 1);
-	if (data == NULL)
-		return (display_error("Error\n"), 255);
-	data->envp_tab = duplicate_envp(data, envp);
-	if (!data->envp_tab)
-			return (display_error("Error\n"), free_data(data), 255);
+	t_Data	*data;
+	
 	if (argc != 1)
 		return (free_data(data), display_error("Usage: ./minishell\n"), 255);
+	data = get_data(envp);
+	if (data == NULL)
+		return (display_error("Error\n"), 255);
 	handle_signals();
+	rl_catch_signals = 0;
 	if (prompt_loop(data, envp) == 0)
 		return (free_data(data), 0);
 	return (0);
 	(void)argv;
+}
+
+/**========================================================================
+ *                           get_data
+ *========================================================================**/
+t_Data	*get_data(char *envp[])
+{
+	static t_Data *data = NULL;
+	
+	if (data == NULL)
+	{
+		data = (t_Data *)ft_calloc(sizeof(t_Data), 1);
+		data->envp_tab = duplicate_envp(data, envp);
+		if (!data->envp_tab)
+			return (display_error("Error\n"), free_data(data), NULL);
+	}
+	return (data);	
 }
 
 /**========================================================================

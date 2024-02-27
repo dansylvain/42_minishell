@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/26 12:37:48 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/27 17:01:17 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	close_fd(int fd[]);
 int		get_fdio(t_redir *redir);
 int		command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
 char	**search_path(char *argv[], char *envp[]);
+t_Data	*get_data(char *envp[]);
 
 
 void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
@@ -48,7 +49,9 @@ void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
 pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir redir)
 {
 	pid_t	pid;
+	t_Data *data;
 
+	data = get_data(NULL);
 	while (*argv)
 	{
 		if (***argv != '>' && ***argv != '<')

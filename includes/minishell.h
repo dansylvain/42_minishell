@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/27 15:23:53 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/27 17:08:27 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ typedef struct t_Data
 	int		exit_status;
 }	t_Data;
 
-extern t_Data	*data;
+// extern t_Data	*data;
+
+t_Data	*get_data(char *envp[]);
+
 
 void	build_prompt(char prompt[]);
 void	handle_signals(void);

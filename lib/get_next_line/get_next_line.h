@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 04:58:59 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/02/18 17:03:09 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/27 17:02:31 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct t_gnl
 }	t_gnl;
 
 char	*get_next_line(int fd);
-t_gnl	*get_data(t_gnl **head, int fd);
+t_gnl	*fet_data_gnl(t_gnl **head, int fd);
 int		initialise_variables(t_gnl **data);
 void	*expand_buff_nl(t_gnl **data);
 char	*build_next_line(t_gnl **data, char *tmp, int bytes_read);
