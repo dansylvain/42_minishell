@@ -6,16 +6,11 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:20:41 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 13:56:24 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 14:19:44 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "pipex_setup.h"
-#include "libft.h"
-
-void	close_fds(int fd[]);
-void	close_fd(int fd);
+#include "pipe_fwrd.h"
 
 void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
 {

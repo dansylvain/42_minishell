@@ -6,18 +6,11 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 13:52:55 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 14:23:45 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_setup.h"
-#include <stdlib.h>
-#include "libft.h"
-
-int		get_fdio(t_redir *redir);
-void	close_fd(int fd);
-void	close_fds(int fd[]);
-void	here_doc_handle(int pipefd_in[], t_redir redir);
+#include "redir.h"
 
 int	set_redir_out(char **argv, t_redir *redir)
 {

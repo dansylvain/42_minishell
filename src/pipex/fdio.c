@@ -6,19 +6,11 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 13:53:42 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 14:13:27 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <stdio.h>
-#include <string.h>
-#include "libft.h"
-
-#include "pipex_setup.h"
+#include "fdio.h"
 
 void	close_fd(int fd)
 {

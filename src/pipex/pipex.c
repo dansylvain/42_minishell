@@ -6,36 +6,11 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 14:02:56 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 14:22:24 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
-#include <stdio.h>
-#include <errno.h>
-#include <sys/wait.h>
-#include <stdlib.h>
-#include "ft_printf.h"
-#include "libft.h"
-#include "../../lib/get_next_line/get_next_line.h"
-#include "pipex_setup.h"
-#include "../../includes/minishell.h"
-
-void	close_fd(int fd);
-void	close_fds(int fd[]);
-int		command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
-char	**search_path(char *argv[], char *envp[]);
-t_Data	*get_data(char *envp[]);
-
-void	init_redir( t_redir *redir);
-void	set_redir_io(char **argv[], t_redir *redir);
-
-void	pipe_to_screen(int pipe, t_redir redir);
-void	switch_pipes(int *pipefd[]);
-void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir);
-void	set_pipefd_in(int pipefd_in[], t_redir *redir);
+#include "pipex.h"
 
 void	here_doc_handle(int pipefd_in[], t_redir redir) //argv!!
 {
