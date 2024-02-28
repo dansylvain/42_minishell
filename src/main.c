@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/28 15:55:00 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/28 17:50:16 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 	if (len >= 4 && !ft_strncmp(&(cmd_tab[0][len - 4]), "echo", 5))
 		return (exec_echo(data, cmd_tab), 1);
 	if (len >= 4 && !ft_strncmp(&(cmd_tab[0][len - 4]), "exit", 5))
-		(exec_exit(data, cmd_tab));
+		(exec_exit(data, cmd_tab), 1);
 	if (len >= 5 && !ft_strncmp(&(cmd_tab[0][len - 5]), "unset", 6))
 		return (exec_unset(data, cmd_tab), 1);
 	if (len >= 6 && !ft_strncmp(&(cmd_tab[0][len - 6]), "export", 7))
