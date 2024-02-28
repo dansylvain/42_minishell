@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 13:14:34 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 13:30:40 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include "libft.h"
 
 #include "pipex_setup.h"
-
 
 void	close_fd(int fd)
 {

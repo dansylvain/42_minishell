@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 13:10:13 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 13:33:58 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,10 @@ t_Data	*get_data(char *envp[]);
 void	init_redir( t_redir *redir);
 void	set_redir_io(char **argv[], t_redir *redir);
 
-void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
-{		
-	dup2(pipefd_in[0], STDIN_FILENO);
-	close_fds(pipefd_in);		
-	dup2(pipefd_out[1], STDOUT_FILENO);
-	close_fds(pipefd_out);	
-}
+void	pipe_to_screen(int pipe, t_redir redir);
+void	switch_pipes(int *pipefd[]);
+void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir);
+void	set_pipefd_in(int pipefd_in[], t_redir *redir);
 
 void	here_doc_handle(int pipefd_in[], t_redir redir) //argv!!
 {
@@ -75,25 +72,6 @@ void	here_doc_handle(int pipefd_in[], t_redir redir) //argv!!
 	}
 }
 
-
-void	set_pipefd_in(int pipefd_in[], t_redir *redir)
-{
-	if (!redir->redir[0]) 
-		pipefd_in[0] = 0;	
-	else if (redir->redir[0] == 1)	
-		pipefd_in[0] = redir->fd_file[0];	
-  	else  if (redir->redir[0] == 2 )
-	{
-		pipefd_in[0] = redir->pipe[0];
-		pipefd_in[1] = redir->pipe[1];
-	}
-}
-void	switch_pipes(int *pipefd[])
-{	
-	close_fds(pipefd[0]);	
-	pipefd[0][0] = pipefd[1][0];
-	pipefd[0][1] = pipefd[1][1];
-}
 void	builtin_or_execve(char **argv[], char *envp[])
 {
 	t_Data	*data;
@@ -136,22 +114,6 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 		argv++;
 	}
 	return (pid);
-}
-
-void	pipe_to_screen(int pipe, t_redir redir)
-{
-	char	buf;
-	
-	if (redir.redir[1])
-	{
-		while (read(pipe, &buf, 1))
-			ft_putchar_fd(buf, redir.fd_file[1]);	
-	}
-	else
-	{		
-		while (read(pipe, &buf, 1))
-			ft_putchar_fd(buf, 1);		
-	}
 }
 
 pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
