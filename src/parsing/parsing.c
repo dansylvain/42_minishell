@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/20 16:32:59 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/22 10:45:45 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	*rebuild_dollar_str(t_ast_nde *node, char *str, t_Data *data)
 	else if (node->token == JOKER)
 	{
 		str2 = ft_strndup(node->start, node->end - node->start + 1);
-		str_tok = wilcard_func(str2);
+		// str_tok = wilcard_func(str2);
 	}
 	if (str && str_tok)
 		str = ft_strjoin_up(str, str_tok, 1, 0);//!!!
