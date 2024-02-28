@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/27 23:05:24 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 09:39:28 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,7 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 	pid_t	pid;
 		
 	init_redir(redir);
-	set_redir_io(argv, redir);	
+	set_redir_io(argv, redir);
 	while (*argv)
 	{						
 		if (***argv != '>' && ***argv != '<')
@@ -214,9 +214,10 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 			pipe(pipefd[1]);
 			pid = fork();
 			if (!pid)
-			{							
-				close_fd(fd_file[1]);				
-				set_pipefd_in(pipefd[0], redir);										
+			{					
+				close_fd(fd_file[1]);	
+														
+				set_pipefd_in(pipefd[0], redir);
 				set_pipe_forward(pipefd[0], pipefd[1], *redir);						
 				builtin_or_execve(argv, envp);						
 			}
