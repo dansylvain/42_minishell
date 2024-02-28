@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/28 09:42:48 by codespace        ###   ########.fr       */
+/*   Updated: 2024/02/28 15:55:00 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int	main(int argc, char **argv, char *envp[])
 	t_Data	*data;
 	
 	if (argc != 1)
-		return (free_data(data), display_error("Usage: ./minishell\n"), 255);
+		return (display_error("Usage: ./minishell\n"), 255);
 	data = get_data(envp);
 	if (data == NULL)
-		return (display_error("Error\n"), 255);
+		return (free_data(data), display_error("Error\n"), 255);
 	handle_signals();
 	rl_catch_signals = 0;
 	if (prompt_loop(data, envp) == 0)
@@ -56,9 +56,11 @@ t_Data	*get_data(char *envp[])
 	if (data == NULL)
 	{
 		data = (t_Data *)ft_calloc(sizeof(t_Data), 1);
+		if (data == NULL)
+			return (NULL);
 		data->envp_tab = duplicate_envp(data, envp);
 		if (!data->envp_tab)
-			return (display_error("Error\n"), free_data(data), NULL);
+			return (NULL);
 	}
 	return (data);	
 }
@@ -77,11 +79,6 @@ int	prompt_loop(t_Data *data, char *envp[])
 	{
 		build_prompt(prompt);
 		cmd = readline(prompt);
-		// ft_printf("%s", prompt);
-		// char *gnl_output = get_next_line(0);
-		// if (gnl_output)
-		// 	gnl_output[ft_strlen(gnl_output) - 1] = '\0';
-		// cmd[0] = gnl_output;
 		if (cmd && *cmd)
 			add_history(cmd);
 		if (cmd == NULL)

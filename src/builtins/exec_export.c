@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/27 15:23:25 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/28 16:53:05 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	add_env_var_to_envp_tab(char **command_tab, t_Data *data, int *i)
 	if (env_var && ft_strncmp(command_tab[*i], "_=", 2))
 	{
 		ft_strlcpy(env_var, &(command_tab[*i][j + 1]),
-			ft_strlen(&(command_tab[*i][j])));
+			ft_strlen(&(command_tab[*i][j + 1])));
 	}
 	else if (ft_strncmp(command_tab[*i], "_=", 2))
 		data->envp_tab = create_new_env_var(data->envp_tab, command_tab[*i]);
@@ -88,13 +88,13 @@ char	**create_new_env_var(char **envp, char *env_var)
 		new_envp_tab[i] = (char *)ft_calloc((ft_strlen(envp[i]) + 1),
 				sizeof(char));
 		if (new_envp_tab[i] == NULL)
-			return (NULL);
+			return (free_command_tab(new_envp_tab), NULL);
 		ft_strlcpy(new_envp_tab[i], envp[i], ft_strlen(envp[i]) + 1);
 		i++;
 	}
 	new_envp_tab[i] = (char *)ft_calloc((ft_strlen(env_var) + 1), sizeof(char));
 	if (new_envp_tab[i] == NULL)
-		return (NULL);
+		return (free_command_tab(new_envp_tab), NULL);
 	ft_strlcpy(new_envp_tab[i], env_var, ft_strlen(env_var) + 1);
 	free_command_tab(envp);
 	return (new_envp_tab);
