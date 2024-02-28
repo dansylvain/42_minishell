@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/27 17:09:49 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/28 09:42:48 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 /**========================================================================
  *                             COMMENTS POLICY
+*? add your name at the beggining of a comment
  *? signal info at the end of a function's comment block 
 *? signal info in the main comment bloc
-*? add your name at the beggining of a comment
 *---
 *TODO finish builtin export
 *TODO fix memory leaks export
