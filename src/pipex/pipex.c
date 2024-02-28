@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 09:52:53 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 10:47:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,9 @@ int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
 char	**search_path(char *argv[], char *envp[]);
 
 void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
-{
-	if (redir.redir[0])
-	{		
-		dup2(pipefd_in[0], STDIN_FILENO);
-		close_fds(pipefd_in);		
-	}		
+{		
+	dup2(pipefd_in[0], STDIN_FILENO);
+	close_fds(pipefd_in);		
 	dup2(pipefd_out[1], STDOUT_FILENO);
 	close_fds(pipefd_out);	
 }
@@ -87,7 +84,7 @@ int set_redir_out(char **argv, t_redir *redir)
 		redir->filepath[1] = argv[1];
 		if (get_fdio(redir))
 		{
-			redir->redir[1] = 0;
+			//redir->redir[1] = 0;
 			return (1);
 		}
 	}
@@ -112,7 +109,7 @@ int	set_redir_in(char **argv, t_redir *redir)
 			redir->filepath[0] = argv[1];
 			if (get_fdio(redir))
 			{
-				redir->redir[0] = 0;
+				//redir->redir[0] = 0;
 				return (1);			
 			}
 		}			
@@ -216,8 +213,7 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 			pid = fork();
 			if (!pid)
 			{					
-				close_fd(fd_file[1]);														
-			
+				close_fd(fd_file[1]);
 				set_pipe_forward(pipefd[0], pipefd[1], *redir);						
 				builtin_or_execve(argv, envp);						
 			}
