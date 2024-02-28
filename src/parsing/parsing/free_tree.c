@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:59:08 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 16:01:21 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 18:37:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,15 @@ static void	free_branch(t_ast_nde *raw)
 	cont = raw->child;
 	free(raw);
 	if (cont)
+	{
+		
+	}
 		free_sibling(cont->child);
 	if (cont && cont->sibling)
 	{
 		free_tree(cont->sibling);
-		free(cont);
 	}
+		free(cont);
 }
 
 void	free_tree(t_ast_nde *operator)

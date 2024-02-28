@@ -17,7 +17,7 @@ git restore --staged nom_de_fichier : 	enlève de la zone staged vers la zone wo
 git restore : 				supprime les modifs NON STAGED de la zone working directory
 
 # ==================
-valgrind --suppressions=valgrind.supp ./minishell
+valgrind --leak-check=full --suppressions=valgrind.supp ./minishell
 
 # TO DELETE
 I silenced the pipex warning with a flag in file src/pipex/pipex.c
