@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/26 09:52:58 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/28 12:12:46 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void	build_token_and_merge(const t_ast_nde *operator,
 						operator->end - operator->start + 1));
 		if (str_tok)
 		{
-			if (str && *str)
-				*str = ft_strjoin_up(*str, str_tok, 1, 0);
+			if (str && *str)		
+				*str = ft_strjoin_up(*str, str_tok, 0, 0);
 			else if (str)
 				*str = str_tok;
 		}
@@ -111,10 +111,10 @@ char	*rebuild_dollar_str(const t_ast_nde *operator, char *str, t_Data *data)
 		}
 	}
 	merge_str_and_sibling(&str, sibling_lft);
-	build_token_and_merge(operator, &str, data);
-	if (next_operator)
-		str = rebuild_dollar_str(next_operator, str, data);
-	else
-		merge_str_and_sibling(&str, sibling_rght);
+	build_token_and_merge(operator, &str, data); 
+	if (next_operator)		
+		str = rebuild_dollar_str(next_operator, str, data);	
+	else	
+		merge_str_and_sibling(&str, sibling_rght);		
 	return (str);
 }
