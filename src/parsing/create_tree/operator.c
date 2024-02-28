@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/26 09:17:38 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 12:53:42 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	token_child_handle(t_ast_nde *sib_cont,
 		if (token->token == AND || token->token == OR || token->token == PIPE)
 		{
 			ft_putstr_fd(translate_enum(token->token), 2);
-			ft_putstr_fd("\nHANDLE this error\n", 2);
+			ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
 		}
 	}
 	if (raw_rght->child)
@@ -103,7 +103,7 @@ void	token_child_handle(t_ast_nde *sib_cont,
 	else
 	{
 		ft_putstr_fd(translate_enum(token->token), 2);
-		ft_putstr_fd("\nHANDLE this error HEREDOC\n", 2);
+		ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
 	}
 }
 

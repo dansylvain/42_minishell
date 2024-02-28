@@ -6,12 +6,9 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 11:21:34 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 13:08:24 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-result"
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -29,12 +26,14 @@
 void	close_fd(int fd);
 void	close_fds(int fd[]);
 // void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir);
-int	get_fdio(t_redir *redir);
+
 //char	**parse_cmd(char *argv[], char *envp[]);
 int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
 char	**search_path(char *argv[], char *envp[]);
 t_Data	*get_data(char *envp[]);
 
+void	init_redir( t_redir *redir);
+void	set_redir_io(char **argv[], t_redir *redir);
 
 void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
 {		
@@ -76,78 +75,7 @@ void	here_doc_handle(int pipefd_in[], t_redir redir) //argv!!
 	}
 }
 
-int set_redir_out(char **argv, t_redir *redir)
-{
-	if (**argv == '>')
-	{
-		redir->redir[1] = 1;		
-		if (!ft_strcmp(*argv, ">>"))
-			redir->redir[1] = 2;
-		redir->filepath[1] = argv[1];
-		if (get_fdio(redir))
-		{
-			redir->redir[1] = 0;
-			return (1);
-		}
-	}
-	return (0);
-}
 
-int	set_redir_in(char **argv, t_redir *redir)
-{
-	if (**argv == '<')
-	{
-		redir->redir[0] = 1;
-		if (!ft_strcmp(*argv, "<<"))
-		{
-			redir->delim = argv[1];
-			redir->redir[0] = 2;
-			close_fds(redir->pipe);
-			pipe(redir->pipe);
-			here_doc_handle(redir->pipe, *redir);		
-		}
-		else
-		{
-			redir->filepath[0] = argv[1];
-			if (get_fdio(redir))
-			{
-				redir->redir[0] = 0;
-				return (1);			
-			}
-		}			
-	}
-	return (0);
-}
-
-int	set_all_redir_out(char **argv[], t_redir *redir)
-{
-	int	ret;
-
-	ret = 0;
-	while (*argv)
-	{		
-		ret += set_redir_out(*argv, redir);
-		if (ret)
-			return (ret);
-		argv++;
-	}
-	return (ret);
-}
-
-int	set_all_redir_in(char **argv[], t_redir *redir)
-{
-	int	ret;
-
-	ret = 0;
-	while (*argv)
-	{		
-		ret += set_redir_in(*argv, redir);
-		if (ret)
-			return (ret);	 	
-		argv++;
-	}
-	return (ret);
-}
 void	set_pipefd_in(int pipefd_in[], t_redir *redir)
 {
 	if (!redir->redir[0]) 
@@ -159,19 +87,6 @@ void	set_pipefd_in(int pipefd_in[], t_redir *redir)
 		pipefd_in[0] = redir->pipe[0];
 		pipefd_in[1] = redir->pipe[1];
 	}
-}
-
-void	init_redir( t_redir *redir)
-{
-	redir->fd_file[0] = -1;
-	redir->fd_file[1] = -1;
-	redir->pipe[0] = -1;
-	redir->pipe[1] = -1;
-	redir->redir[0] = 0;	
-	redir->redir[1] = 0;
-	redir->delim = NULL;
-	redir->filepath[0] = NULL;
-	redir->filepath[1] = NULL;
 }
 void	switch_pipes(int *pipefd[])
 {	
@@ -195,13 +110,7 @@ void	builtin_or_execve(char **argv[], char *envp[])
 		exit(EXIT_SUCCESS);
 }
 
-void	set_redir_io(char **argv[], t_redir *redir)
-{
-	if (set_all_redir_in(argv, redir))	
-		exit(1);
-	if (set_all_redir_out(argv, redir))
-		exit(1);
-}
+
 
 pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir *redir)
 {
@@ -214,7 +123,8 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 	{						
 		if (***argv != '>' && ***argv != '<')
 		{
-			pipe(pipefd[1]);
+			if (pipe(pipefd[1]) < 0)
+				exit(1);
 			pid = fork();
 			if (!pid)
 			{					
@@ -364,4 +274,4 @@ int	pipex(char **argv[], char *envp[])
 
 
 
-#pragma GCC diagnostic pop
+

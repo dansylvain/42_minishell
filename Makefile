@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
+#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/02/27 17:11:46 by dan              ###   ########.fr        #
+#    Updated: 2024/02/28 13:03:37 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRC =	src/main.c \
 		src/parsing/leaf_tree/dollar_expansion.c \
 		src/pipex/path.c \
 		src/pipex/pipex.c \
+		src/pipex/redir.c \
 		src/pipex/setup.c \
 		src/create_command_tab.c \
 		src/create_command_tab_utils.c \
