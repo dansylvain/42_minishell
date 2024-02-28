@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_envp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:33:25 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 13:27:51 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:21:44 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 {
 	char	**envp_tab;
 	int		i;
-
+	
+	if (envp[0] == NULL)
+		return (ft_printf("No env var... no fun!\n"), NULL);
 	i = 0;
-	if (envp_tab == NULL)
-		return (NULL);
 	while (envp[i])
 		i++;
 	envp_tab = (char **)ft_calloc(i + 1, sizeof(char *));
@@ -63,4 +63,5 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 	envp_tab[i] = NULL;
 	update_shlvl(envp_tab);
 	return (envp_tab);
+	(void)data;
 }

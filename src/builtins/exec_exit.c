@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:30:35 by dan               #+#    #+#             */
-/*   Updated: 2024/02/20 11:06:53 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/27 15:17:04 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	exec_exit(t_Data *data, char **command_tab)
 		if (!str_is_digit(command_tab[1]))
 		{
 			display_error_detail("minishell: exit: ", command_tab[1],
-				":numeric argument required\n");
+				": numeric argument required\n");
 			data->exit_status = 2;
 		}
 		else

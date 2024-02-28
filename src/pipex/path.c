@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_path.c                                     :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/20 10:16:57 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/26 12:32:29 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
 #include "libft.h"
 #include "ft_printf.h"
 #include "minishell.h"
 
-
 void	display_error(char *str);
-void	free_ptr_arr(char **arr);
 
 static char	*try_paths(char **argv, char *env_find)
 {
@@ -38,11 +34,6 @@ static char	*try_paths(char **argv, char *env_find)
 		free(tmp);
 		if (!access(cmd, X_OK))
 		{
-/**========================================================================
- *!                             COMMENT BLOCK
- *!		THIS FREE CAUSES COMMAND "ls -a -l" to terminate  
- *!  	with error message "free(): invalid pointer"
- *========================================================================**/
 			free(*argv);
 			*argv = cmd;
 			break ;
@@ -50,7 +41,7 @@ static char	*try_paths(char **argv, char *env_find)
 		free(cmd);
 		cmd = NULL;
 	}
-	free_ptr_arr(split_colon_sav);
+	ft_free_ptr_arr((void **) split_colon_sav);
 	return (cmd);
 }
 
@@ -67,11 +58,9 @@ char	*search_env_var(char *envp[], char *env_to_find)
 			break ;
 		}
 	}
-	//ft_printf("in search: -%s-", env_find);
 	if (!env_find)
 		return (NULL);
 	env_find += ft_strlen(env_to_find);
-	//ft_printf("in search: -%s-", env_find);
 	return (env_find);
 }
 
@@ -86,17 +75,27 @@ char	**search_path(char *argv[], char *envp[])
 	if (!env_find)
 	{
 		ft_putstr_fd("env PATH not found.\n", 2);
-		exit(1);
-	}	
+		exit(127);
+	}
 	if (!try_paths(argv, env_find))
 	{
-		//ft_printf("not exist:%s\n", *argv);
-		// ft_putstr_fd("%s: command not found\n", argv[0]);
-		display_error_detail(argv[0], ": command ",  "not found\n");
-		// perror(*argv);
-		// free_ptr_arr(split_arg);
-		exit(1);
+		display_error_detail(argv[0], ": command ", "not found\n");
+		exit(127);
 	}
-
 	return (split_arg);
+}
+
+char	*search_var(const t_ast_nde *node, t_Data *data)
+{
+	char	*str;
+	char	*var;
+
+	str = ft_strndup(node->start, node->end - node->start + 1);
+	if (*(str + 1) == '?')
+		var = ft_itoa(data->exit_status);
+	else
+		var = search_env_var(data->envp_tab, ft_strjoin_up(str + 1, "=", 0, 0));
+	if (str)
+		free(str);
+	return (var);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_signals.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:41:31 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 16:45:02 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/02/26 09:22:03 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	handle_signals(void)
  * replaces the content of reasline buffer + displays the prompt anew 
  * waitpid used to check that no other instance of minishell is running
  *========================================================================**/
-static void	sigint_handler(int signum)
+void	sigint_handler(int signum)
 {
 	(void)signum;
 	if (waitpid(-1, NULL, WNOHANG) == -1)
@@ -45,7 +45,7 @@ static void	sigint_handler(int signum)
  *                           sigkill_handler
  * does nothing... as expected
  *========================================================================**/
-static void	sigquit_handler(int signum)
+void	sigquit_handler(int signum)
 {
 	(void)signum;
 }

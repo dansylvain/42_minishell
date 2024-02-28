@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:11:13 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 14:07:17 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/27 15:53:50 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,13 @@ void	insert_quote(char *str)
 
 	i = 0;
 	qute_dne = 0;
-	while (str[i] && str[i + 1])
+	while (str[i])
 	{
-		if (str[i] == '=' && qute_dne == 0)
+		if (str[i] == '=' && str[i + 1] == '\0')
+		{
+			str[i + 1] = '\"';
+		}
+		if (str[i + 1] && str[i] == '=' && qute_dne == 0)
 		{
 			qute_dne = 1;
 			ft_memcpy(tmp, &(str[i + 1]), 501 - i);
@@ -95,7 +99,7 @@ void	create_export_tab(t_Data *data, char export_tab[][500])
 		if (ft_strncmp(data->envp_tab[i], "_=", 2)
 			&& has_var(data->envp_tab[i]))
 		{
-			ft_strlcpy(export_tab[j], data->envp_tab[i], sizeof(export_tab[i]));
+			ft_strlcpy(export_tab[j], data->envp_tab[i], sizeof(export_tab[j]));
 			insert_quote(export_tab[j]);
 			j++;
 		}

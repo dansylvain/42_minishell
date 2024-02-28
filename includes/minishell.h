@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 12:27:33 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:08:27 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ typedef struct t_Data
 	int		exit_status;
 }	t_Data;
 
+// extern t_Data	*data;
+
+t_Data	*get_data(char *envp[]);
+
+
+void	build_prompt(char prompt[]);
 void	handle_signals(void);
 int		prompt_loop(t_Data *data, char *envp[]);
 void	display_error(char *str);
@@ -55,6 +61,7 @@ char	**create_new_env_var(char **envp, char *env_var);
 char	*get_env_var(t_Data *data, char *to_find);
 void	display_export_tab(char export_tab[][500]);
 void	create_export_tab(t_Data *data, char export_tab[][500]);
+int		are_only_valid_chars(char *str);
 
 /*   exec_echo.c                                  :+:      :+:    :+:   */
 int	is_only_space(char *str);
@@ -79,9 +86,8 @@ char			*wilcard_func(char *pattern);
 
 
 /*   handle_signals.c                                   :+:      :+:    :+:   */
-static void	sigint_handler(int signum);
-static void	sigquit_handler(int signum);
-#endif
+void	sigint_handler(int signum);
+void	sigquit_handler(int signum);
 
 /*   create_command_tab.c                           :+:      :+:    :+:   */
 t_ast_nde 	*copy_sibling(t_ast_nde *node);
@@ -107,3 +113,5 @@ int	create_chevron_tab(char ****cmd_tab, int *i, t_ast_nde **node, t_Data *data)
 
 void		exec_pipex(t_Data *data, char *cmd, char *envp[]);
 int			exec_exit(t_Data *data, char **command_tab);
+
+#endif

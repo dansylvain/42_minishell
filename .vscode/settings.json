@@ -3,6 +3,9 @@
 		"minishell.h": "c",
 		"unistd.h": "c",
 		"parsing_spce.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"array": "c",
+		"string": "c",
+		"string_view": "c"
 	}
 }

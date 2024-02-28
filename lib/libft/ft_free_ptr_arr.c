@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_pipex.c                                       :+:      :+:    :+:   */
+/*   ft_free_ptr_arr.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/02/28 06:38:59 by dsylvain         ###   ########.fr       */
+/*   Created: 2024/01/08 13:40:22 by svidot            #+#    #+#             */
+/*   Updated: 2024/01/08 14:05:35 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include <stdlib.h>
 
-void	exec_pipex(t_Data *data, char *cmd, char *envp[])
+void	ft_free_ptr_arr(void **arr)
 {
-	t_ast_nde	*cmd_list;
-	t_ast_nde	*current;
+	int	i;
 
-	cmd_list = parse(cmd, data);
-	launch_command_tab(data, cmd_list, envp, 0);
-	free_sibling_and_child(cmd_list);
+	if (arr)
+	{
+		i = 0;
+		while (arr[i])
+			free(arr[i++]);
+		free(arr);
+	}
 }
