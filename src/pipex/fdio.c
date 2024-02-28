@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup.c                                            :+:      :+:    :+:   */
+/*   fdio.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/27 21:45:01 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 15:55:31 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <stdio.h>
-#include <string.h>
-#include "libft.h"
-
-#include "pipex_setup.h"
-
+#include "fdio.h"
 
 void	close_fd(int fd)
 {
@@ -29,6 +20,7 @@ void	close_fd(int fd)
 		fd = -1;
 	}
 }
+
 void	close_fds(int fd[])
 {
 	close_fd(fd[0]);
@@ -49,7 +41,7 @@ static char	*create_strerror(char *error_str, char *filepath)
 	return (error_str);
 }
 
-char	*get_fd_outfile(char *error_str, t_redir *redir)
+static char	*get_fd_outfile(char *error_str, t_redir *redir)
 {
 	if (redir->redir[1] == 1)
 	{

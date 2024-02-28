@@ -6,23 +6,13 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/26 09:17:38 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:08:58 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "parsing_utils.h"
-#include "libft.h"
+#include "operator.h"
 
-t_ast_nde	*copy_node(t_ast_nde *node);
-int			set_space(t_ast_nde *node);
-int			set_operator(t_ast_nde *node);
-char		*translate_enum(t_tok token);
-t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token);
-void		fill_child(t_ast_nde *sib, t_ast_nde *raw_lft,
-				t_ast_nde *raw_rght, t_ast_nde *token);
-
-t_ast_nde	*create_token(t_tok simpl_tok, t_tok doubl_tok,
+static t_ast_nde	*create_token(t_tok simpl_tok, t_tok doubl_tok,
 	char *actual, char char_tok)
 {
 	t_ast_nde	*token_nde;
@@ -38,7 +28,7 @@ t_ast_nde	*create_token(t_tok simpl_tok, t_tok doubl_tok,
 	return (token_nde);
 }
 
-t_ast_nde	*search_token(char *actual)
+static t_ast_nde	*search_token(char *actual)
 {
 	t_ast_nde	*token_nde;
 
@@ -78,7 +68,7 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 	return (NULL);
 }
 
-void	token_child_handle(t_ast_nde *sib_cont,
+static void	token_child_handle(t_ast_nde *sib_cont,
 	t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
 {
 	t_ast_nde	*sib;
@@ -95,7 +85,7 @@ void	token_child_handle(t_ast_nde *sib_cont,
 		if (token->token == AND || token->token == OR || token->token == PIPE)
 		{
 			ft_putstr_fd(translate_enum(token->token), 2);
-			ft_putstr_fd("\nHANDLE this error\n", 2);
+			ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
 		}
 	}
 	if (raw_rght->child)
@@ -103,7 +93,7 @@ void	token_child_handle(t_ast_nde *sib_cont,
 	else
 	{
 		ft_putstr_fd(translate_enum(token->token), 2);
-		ft_putstr_fd("\nHANDLE this error HEREDOC\n", 2);
+		ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
 	}
 }
 

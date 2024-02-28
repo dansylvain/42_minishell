@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 20:57:31 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/26 09:44:14 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/28 15:07:17 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "parsing_utils.h"
+#include "utils2.h"
 
 char	*translate_enum(t_tok token)
 {

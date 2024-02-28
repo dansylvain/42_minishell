@@ -3,26 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   leaf.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:01:47 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/26 09:56:38 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/28 16:04:10 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_utils.h"
-#include <unistd.h>
-#include "minishell.h"
+#include "leaf.h"
 
-t_ast_nde	*copy_node(t_ast_nde *node);
-t_ast_nde	*copy_node_and_child(t_ast_nde *node);
-void		leaf_tree(t_ast_nde *operator, t_ast_nde **rslt,
-				t_ast_nde **rslt_sav, t_Data *data);
-char		*rebuild_dollar_str(const t_ast_nde *operator,
-				char *str, t_Data *data);
-t_ast_nde	*rebuild_dollar_str_node(char *str);
-
-void	leaf_raw_lft(t_ast_nde	*raw_lft, t_ast_nde **rslt,
+static void	leaf_raw_lft(t_ast_nde	*raw_lft, t_ast_nde **rslt,
 		t_ast_nde **rslt_sav, t_Data *data)
 {
 	if (raw_lft && raw_lft->child)
@@ -34,7 +24,7 @@ void	leaf_raw_lft(t_ast_nde	*raw_lft, t_ast_nde **rslt,
 	}
 }
 
-void	leaf_raw_rght(t_ast_nde	*raw_rght, t_ast_nde **rslt,
+static void	leaf_raw_rght(t_ast_nde	*raw_rght, t_ast_nde **rslt,
 		t_ast_nde **rslt_sav, t_Data *data)
 {
 	t_ast_nde	*next_operator;

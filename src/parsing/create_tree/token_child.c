@@ -6,16 +6,13 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 17:37:22 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/26 08:39:50 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:07:00 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_utils.h"
-#include <stdlib.h>
+#include "token_child.h"
 
-t_ast_nde	*copy_node(t_ast_nde *node);
-
-int	fill_child_entire(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token, t_ast_nde **raw_lft_child_sav, t_ast_nde **raw_rght_child_sav)
+static int	fill_child_entire(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token, t_ast_nde **raw_lft_child_sav, t_ast_nde **raw_rght_child_sav)
 {
 	if (sib->end < token->start)
 		add_sibling(copy_node(sib), &raw_lft->child, raw_lft_child_sav);
@@ -26,7 +23,7 @@ int	fill_child_entire(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t
 	return (1);
 }
 
-void	fill_child_overlap(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token, t_ast_nde **raw_lft_child_sav, t_ast_nde **raw_rght_child_sav)
+static void	fill_child_overlap(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token, t_ast_nde **raw_lft_child_sav, t_ast_nde **raw_rght_child_sav)
 {
 	t_ast_nde	*raw_overlap;
 

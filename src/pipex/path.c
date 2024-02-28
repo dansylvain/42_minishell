@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/26 12:32:29 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/28 15:57:09 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
-#include "ft_printf.h"
-#include "minishell.h"
-
-void	display_error(char *str);
+#include "path.h"
 
 static char	*try_paths(char **argv, char *env_find)
 {
@@ -45,7 +40,7 @@ static char	*try_paths(char **argv, char *env_find)
 	return (cmd);
 }
 
-char	*search_env_var(char *envp[], char *env_to_find)
+static char	*search_env_var(char *envp[], char *env_to_find)
 {
 	char	*env_find;
 

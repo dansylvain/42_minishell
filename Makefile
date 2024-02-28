@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
+#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/02/27 17:11:46 by dan              ###   ########.fr        #
+#    Updated: 2024/02/28 15:45:19 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CC = cc
 
 RLFLAGS = -lreadline -lhistory -I/usr/include/readline
 
-CFLAGS = -g -Iincludes/parsing -Iincludes
+CFLAGS = -g -Iincludes -Iincludes/parsing/parsing -Iincludes/parsing/create_tree \
+-Iincludes/parsing/leaf_tree -Iincludes/pipex
 # -Wall -Wextra -Werror
 
 # Directories
@@ -59,9 +60,11 @@ SRC =	src/main.c \
 		src/parsing/create_tree/token_child.c \
 		src/parsing/leaf_tree/leaf.c \
 		src/parsing/leaf_tree/dollar_expansion.c \
+		src/pipex/pipe_fwrd.c \
 		src/pipex/path.c \
 		src/pipex/pipex.c \
-		src/pipex/setup.c \
+		src/pipex/redir.c \
+		src/pipex/fdio.c \
 		src/create_command_tab.c \
 		src/create_command_tab_utils.c \
 		src/fill_command_tab.c \
