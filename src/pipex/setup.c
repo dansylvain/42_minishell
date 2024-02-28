@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/26 09:38:04 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/27 21:45:01 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,19 @@
 
 #include "pipex_setup.h"
 
-void	close_fd(int fd[])
+
+void	close_fd(int fd)
 {
-	if (fd[0] > 2)
-		close(fd[0]);
-	if (fd[1] > 2)
-		close(fd[1]);
+	if (fd > 2)
+	{
+		close(fd);
+		fd = -1;
+	}
+}
+void	close_fds(int fd[])
+{
+	close_fd(fd[0]);
+	close_fd(fd[1]);
 }
 
 static char	*create_strerror(char *error_str, char *filepath)
@@ -76,7 +83,7 @@ int	get_fdio(t_redir *redir)
 	}
 	error_str = get_fd_outfile(error_str, redir);
 	if (*error_str)
-		return (ft_putstr_fd(error_str, STDERR_FILENO), free(error_str),
-			close_fd(redir->fd_file), 1);
+		return (ft_putstr_fd(error_str, STDERR_FILENO), free(error_str), 1);
+			//close_fd(redir->fd_file), 1);
 	return (0);
 }
