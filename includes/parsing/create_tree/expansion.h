@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:27:47 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 14:34:26 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:10:15 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,8 @@
 # include <stdlib.h>
 # include "parsing_utils.h"
 
+t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token);
+void		fill_child(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght,
+				t_ast_nde *token);
+				
 #endif

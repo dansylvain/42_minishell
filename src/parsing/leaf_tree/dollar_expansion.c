@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 14:41:55 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:04:50 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_ast_nde	*rebuild_dollar_str_node(char *str)
 	return (str_node);
 }
 
-char	*link_sibling(const t_ast_nde *node)
+static char	*link_sibling(const t_ast_nde *node)
 {
 	char	*str;
 	char	*node_str;
@@ -47,7 +47,7 @@ char	*link_sibling(const t_ast_nde *node)
 	return (str);
 }
 
-void	merge_str_and_sibling(char **str, const t_ast_nde *sibling)
+static void	merge_str_and_sibling(char **str, const t_ast_nde *sibling)
 {
 	char	*new_str;
 
@@ -65,7 +65,7 @@ void	merge_str_and_sibling(char **str, const t_ast_nde *sibling)
 	}
 }
 
-void	build_token_and_merge(const t_ast_nde *operator,
+static void	build_token_and_merge(const t_ast_nde *operator,
 		char **str, t_Data *data)
 {
 	char	*str_tok;

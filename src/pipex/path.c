@@ -6,13 +6,11 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 14:17:31 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 15:57:09 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "path.h"
-
-void	display_error(char *str);
 
 static char	*try_paths(char **argv, char *env_find)
 {
@@ -42,7 +40,7 @@ static char	*try_paths(char **argv, char *env_find)
 	return (cmd);
 }
 
-char	*search_env_var(char *envp[], char *env_to_find)
+static char	*search_env_var(char *envp[], char *env_to_find)
 {
 	char	*env_find;
 

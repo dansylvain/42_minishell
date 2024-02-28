@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:15:20 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 14:17:14 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 15:56:03 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,7 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "minishell.h"
+
+void	display_error(char *str);
 
 #endif

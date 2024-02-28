@@ -6,13 +6,13 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 14:23:45 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:00:30 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redir.h"
 
-int	set_redir_out(char **argv, t_redir *redir)
+static int	set_redir_out(char **argv, t_redir *redir)
 {
 	if (**argv == '>')
 	{
@@ -29,7 +29,7 @@ int	set_redir_out(char **argv, t_redir *redir)
 	return (0);
 }
 
-int	set_redir_in(char **argv, t_redir *redir)
+static int	set_redir_in(char **argv, t_redir *redir)
 {
 	if (**argv == '<')
 	{
@@ -56,7 +56,7 @@ int	set_redir_in(char **argv, t_redir *redir)
 	return (0);
 }
 
-int	set_all_redir_out(char **argv[], t_redir *redir)
+static int	set_all_redir_out(char **argv[], t_redir *redir)
 {
 	int	ret;
 
@@ -71,7 +71,7 @@ int	set_all_redir_out(char **argv[], t_redir *redir)
 	return (ret);
 }
 
-int	set_all_redir_in(char **argv[], t_redir *redir)
+static int	set_all_redir_in(char **argv[], t_redir *redir)
 {
 	int	ret;
 

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 14:22:24 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:13:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	here_doc_handle(int pipefd_in[], t_redir redir) //argv!!
 	}
 }
 
-void	builtin_or_execve(char **argv[], char *envp[])
+static void	builtin_or_execve(char **argv[], char *envp[])
 {
 	t_Data	*data;
 
@@ -61,7 +61,7 @@ void	builtin_or_execve(char **argv[], char *envp[])
 		exit(EXIT_SUCCESS);
 }
 
-pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir *redir)
+static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir *redir)
 {
 	pid_t	pid;
 
@@ -89,7 +89,7 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 	return (pid);
 }
 
-pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
+static pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 {
 	int		pipefd_in[2];
 	int		pipefd_out[2];

@@ -6,13 +6,13 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:01:47 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 14:42:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:04:10 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "leaf.h"
 
-void	leaf_raw_lft(t_ast_nde	*raw_lft, t_ast_nde **rslt,
+static void	leaf_raw_lft(t_ast_nde	*raw_lft, t_ast_nde **rslt,
 		t_ast_nde **rslt_sav, t_Data *data)
 {
 	if (raw_lft && raw_lft->child)
@@ -24,7 +24,7 @@ void	leaf_raw_lft(t_ast_nde	*raw_lft, t_ast_nde **rslt,
 	}
 }
 
-void	leaf_raw_rght(t_ast_nde	*raw_rght, t_ast_nde **rslt,
+static void	leaf_raw_rght(t_ast_nde	*raw_rght, t_ast_nde **rslt,
 		t_ast_nde **rslt_sav, t_Data *data)
 {
 	t_ast_nde	*next_operator;

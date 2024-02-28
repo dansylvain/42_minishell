@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:59:08 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 15:51:10 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:01:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_sibling(t_ast_nde *sib)
 	}
 }
 
-void	free_branch(t_ast_nde *raw)
+static void	free_branch(t_ast_nde *raw)
 {
 	t_ast_nde	*cont;
 
