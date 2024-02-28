@@ -6,14 +6,11 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 17:37:22 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/26 08:39:50 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 14:40:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_utils.h"
-#include <stdlib.h>
-
-t_ast_nde	*copy_node(t_ast_nde *node);
+#include "token_child.h"
 
 int	fill_child_entire(t_ast_nde *sib, t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token, t_ast_nde **raw_lft_child_sav, t_ast_nde **raw_rght_child_sav)
 {

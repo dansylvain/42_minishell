@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:59:08 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/26 09:36:47 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/28 15:51:10 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "parsing_utils.h"
-
-void	free_tree(t_ast_nde *operator);
+# include "free_tree.h"
 
 void	free_sibling(t_ast_nde *sib)
 {

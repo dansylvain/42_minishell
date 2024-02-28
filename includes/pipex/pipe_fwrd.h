@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir.h                                            :+:      :+:    :+:   */
+/*   pipe_fwrd.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 14:22:59 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 14:23:26 by seblin           ###   ########.fr       */
+/*   Created: 2024/02/28 14:18:04 by seblin            #+#    #+#             */
+/*   Updated: 2024/02/28 15:23:23 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPE_FWRD_H
+# define PIPE_FWRD_H
 
-#include "pipex_setup.h"
-#include <stdlib.h>
-#include "libft.h"
-
-int		get_fdio(t_redir *redir);
-void	close_fd(int fd);
-void	close_fds(int fd[]);
-void	here_doc_handle(int pipefd_in[], t_redir redir);
+# include <unistd.h>
+# include "pipex_utils.h"
+# include "libft.h"
 
 #endif

@@ -6,16 +6,11 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 12:12:46 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 14:41:55 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "parsing_utils.h"
-#include "minishell.h"
-
-t_ast_nde	*copy_node(t_ast_nde *node);
-char		*search_var(const t_ast_nde *node, t_Data *data);
+#include "dollar_expansion.h"
 
 t_ast_nde	*rebuild_dollar_str_node(char *str)
 {

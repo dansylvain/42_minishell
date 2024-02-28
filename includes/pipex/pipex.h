@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:20:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 14:22:10 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 15:22:56 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@
 # include "ft_printf.h"
 # include "libft.h"
 # include "../../lib/get_next_line/get_next_line.h"
-# include "pipex_setup.h"
+# include "pipex_utils.h"
 # include "../../includes/minishell.h"
 
-void	close_fd(int fd);
-void	close_fds(int fd[]);
 int		command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
 char	**search_path(char *argv[], char *envp[]);
 t_Data	*get_data(char *envp[]);

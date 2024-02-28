@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdio.h                                             :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 14:12:27 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 14:15:01 by seblin           ###   ########.fr       */
+/*   Created: 2024/02/28 14:30:00 by seblin            #+#    #+#             */
+/*   Updated: 2024/02/28 15:31:44 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDIO_H
-# define FDIO_H
+#ifndef PARSING_H
+# define PARSING_H
 
-# include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
-# include <errno.h>
-# include <stdio.h>
-# include <string.h>
+# include "parsing_utils.h"
 # include "libft.h"
-# include "pipex_setup.h"
+# include "minishell.h"
+
+t_ast_nde	*set_qute_sib(char *str);
+t_ast_nde	*set_operator(t_ast_nde *node);
+void		leaf_tree(t_ast_nde *operator, t_ast_nde **rslt,
+				t_ast_nde **rslt_sav, t_Data *data);
+
+void		print_qute_sib(t_ast_nde *sib);//!
+void		print_tree(t_ast_nde *node);//!
+void		print_cmd(t_ast_nde *cmd);//!
 
 #endif

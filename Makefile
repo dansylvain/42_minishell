@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/02/28 13:29:38 by seblin           ###   ########.fr        #
+#    Updated: 2024/02/28 15:45:19 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CC = cc
 
 RLFLAGS = -lreadline -lhistory -I/usr/include/readline
 
-CFLAGS = -g -Iincludes/parsing -Iincludes
+CFLAGS = -g -Iincludes -Iincludes/parsing/parsing -Iincludes/parsing/create_tree \
+-Iincludes/parsing/leaf_tree -Iincludes/pipex
 # -Wall -Wextra -Werror
 
 # Directories

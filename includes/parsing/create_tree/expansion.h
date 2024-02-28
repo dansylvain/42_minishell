@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_fwrd.h                                        :+:      :+:    :+:   */
+/*   expansion.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 14:18:04 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 14:19:11 by seblin           ###   ########.fr       */
+/*   Created: 2024/02/28 14:27:47 by seblin            #+#    #+#             */
+/*   Updated: 2024/02/28 14:34:26 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPE_FWRD_H
-# define PIPE_FWRD_H
+#ifndef EXPANSION_H
+# define EXPANSION_H
 
-# include <unistd.h>
-# include "pipex_setup.h"
-# include "libft.h"
-
-void	close_fds(int fd[]);
-void	close_fd(int fd);
+# include <stdlib.h>
+# include "parsing_utils.h"
 
 #endif

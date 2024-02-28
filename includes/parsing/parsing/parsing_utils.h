@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 10:03:27 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/18 18:24:55 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 15:37:30 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,16 @@ typedef struct s_ast_nde
 t_ast_nde	*create_node(t_tok token);
 void		add_sibling(t_ast_nde *node, t_ast_nde **sibling,
 				t_ast_nde **sibling_sav);
+t_ast_nde	*copy_node(t_ast_nde *node);
+t_ast_nde	*copy_node_child(t_ast_nde *node);
+t_ast_nde	*copy_node_and_child(t_ast_nde *node);
+
+t_ast_nde	*ft_lstlast_sib(t_ast_nde *lst);
+void		ft_lstadd_back_sib(t_ast_nde **lst, t_ast_nde *new);
+t_ast_nde	*sib_last(t_ast_nde *sib);
+
+void		free_tree(t_ast_nde *operator);
 void		free_sibling(t_ast_nde *sib);
 void		free_sibling_and_child(t_ast_nde *sib);
-void		free_ptr_arr(char **arr);
 
 #endif

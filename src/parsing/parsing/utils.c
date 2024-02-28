@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:37:11 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/26 09:41:37 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/28 14:44:41 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_utils.h"
-#include <stdlib.h>
-#include "libft.h"
+#include "utils.h"
 
 t_ast_nde	*create_node(t_tok token)
 {
