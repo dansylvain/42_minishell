@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 10:47:37 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 11:09:17 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int set_redir_out(char **argv, t_redir *redir)
 		redir->filepath[1] = argv[1];
 		if (get_fdio(redir))
 		{
-			//redir->redir[1] = 0;
+			redir->redir[1] = 0;
 			return (1);
 		}
 	}
@@ -109,7 +109,7 @@ int	set_redir_in(char **argv, t_redir *redir)
 			redir->filepath[0] = argv[1];
 			if (get_fdio(redir))
 			{
-				//redir->redir[0] = 0;
+				redir->redir[0] = 0;
 				return (1);			
 			}
 		}			
