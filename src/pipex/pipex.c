@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 13:08:24 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 13:10:13 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ void	builtin_or_execve(char **argv[], char *envp[])
 	else
 		exit(EXIT_SUCCESS);
 }
-
-
 
 pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir *redir)
 {

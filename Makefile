@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/02/28 13:03:37 by seblin           ###   ########.fr        #
+#    Updated: 2024/02/28 13:15:49 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ SRC =	src/main.c \
 		src/pipex/path.c \
 		src/pipex/pipex.c \
 		src/pipex/redir.c \
-		src/pipex/setup.c \
+		src/pipex/fdio.c \
 		src/create_command_tab.c \
 		src/create_command_tab_utils.c \
 		src/fill_command_tab.c \
