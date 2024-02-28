@@ -1,6 +1,0 @@
-Commande: true || echo aaa && echo bbb
-minishell : true || echo aaa && echo bbb
-bbb
-minishell : exit
------------------------
-
