@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 16:04:50 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 20:56:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	build_token_and_merge(const t_ast_nde *operator,
 		if (str_tok)
 		{
 			if (str && *str)		
-				*str = ft_strjoin_up(*str, str_tok, 0, 0);
+				*str = ft_strjoin_up(*str, str_tok, 1, 0);
 			else if (str)
 				*str = str_tok;
 		}
@@ -106,10 +106,10 @@ char	*rebuild_dollar_str(const t_ast_nde *operator, char *str, t_Data *data)
 		}
 	}
 	merge_str_and_sibling(&str, sibling_lft);
-	build_token_and_merge(operator, &str, data); 
-	if (next_operator)		
+	build_token_and_merge(operator, &str, data);
+	if (next_operator)
 		str = rebuild_dollar_str(next_operator, str, data);	
-	else	
-		merge_str_and_sibling(&str, sibling_rght);		
+	else
+		merge_str_and_sibling(&str, sibling_rght);
 	return (str);
 }

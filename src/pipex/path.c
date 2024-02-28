@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 15:57:09 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 20:24:26 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,9 @@ static char	*search_env_var(char *envp[], char *env_to_find)
 			env_find = *--envp;
 			break ;
 		}
-	}
-	if (!env_find)
-		return (NULL);
-	env_find += ft_strlen(env_to_find);
+	}		
+	if (env_find)
+		env_find += ft_strlen(env_to_find);
 	return (env_find);
 }
 
@@ -84,12 +83,17 @@ char	*search_var(const t_ast_nde *node, t_Data *data)
 {
 	char	*str;
 	char	*var;
-
+	char	*tmp;
+	
 	str = ft_strndup(node->start, node->end - node->start + 1);
 	if (*(str + 1) == '?')
 		var = ft_itoa(data->exit_status);
 	else
-		var = search_env_var(data->envp_tab, ft_strjoin_up(str + 1, "=", 0, 0));
+	{
+		tmp = ft_strjoin_up(str + 1, "=", 0, 0);
+		var = search_env_var(data->envp_tab, tmp);
+		free(tmp);
+	}
 	if (str)
 		free(str);
 	return (var);
