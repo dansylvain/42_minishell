@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 13:33:58 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/28 14:02:56 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@
 
 void	close_fd(int fd);
 void	close_fds(int fd[]);
-// void	set_filepath_and_delim(int *argc, char **argv[], t_redir *redir);
-
-//char	**parse_cmd(char *argv[], char *envp[]);
-int	command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
+int		command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
 char	**search_path(char *argv[], char *envp[]);
 t_Data	*get_data(char *envp[]);
 
@@ -43,7 +40,7 @@ void	set_pipefd_in(int pipefd_in[], t_redir *redir);
 void	here_doc_handle(int pipefd_in[], t_redir redir) //argv!!
 {
 	char	*line;
-		
+
 	while (1)
 	{
 		ft_printf("heredoc> ");
@@ -65,7 +62,8 @@ void	here_doc_handle(int pipefd_in[], t_redir redir) //argv!!
 		}
 		else
 		{
-			ft_printf("\rwarning: here-document at line 1 delimited by end-of-file (wanted '%s')\n", redir.delim);
+			ft_printf("\rwarning: here-document at line 1 \
+				delimited by end-of-file (wanted '%s')\n", redir.delim);
 			break ;
 		}
 		free(line); //opti
@@ -96,19 +94,19 @@ pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir
 	set_redir_io(argv, redir);
 	set_pipefd_in(pipefd[0], redir);
 	while (*argv)
-	{						
+	{
 		if (***argv != '>' && ***argv != '<')
 		{
 			if (pipe(pipefd[1]) < 0)
 				exit(1);
 			pid = fork();
 			if (!pid)
-			{					
+			{
 				close_fd(fd_file[1]);
-				set_pipe_forward(pipefd[0], pipefd[1], *redir);						
-				builtin_or_execve(argv, envp);						
+				set_pipe_forward(pipefd[0], pipefd[1], *redir);
+				builtin_or_execve(argv, envp);
 			}
-			else						
+			else
 				switch_pipes(pipefd);
 		}
 		argv++;
@@ -121,37 +119,38 @@ pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 	int		pipefd_in[2];
 	int		pipefd_out[2];
 	pid_t	pid;
-	
+
 	pid = -1;
 	pipefd_in[0] = -1;
 	pipefd_in[1] = -1;
 	pipefd_out[0] = -1;
 	pipefd_out[1] = -1;
-	pid = nurcery(argv, envp, redir.fd_file, (int *[]){pipefd_in, pipefd_out}, &redir);		
+	pid = nurcery(argv, envp, redir.fd_file,
+			(int *[]){pipefd_in, pipefd_out}, &redir);
 	close_fd(pipefd_in[1]);
 	pipe_to_screen(pipefd_in[0], redir);
 	close_fd(pipefd_in[0]);
-	close_fds(pipefd_out);	
+	close_fds(pipefd_out);
 	return (pid);
 }
 
 int	pipex(char **argv[], char *envp[])
 {
-	t_redir redir;
+	t_redir	redir;
 	pid_t	pid;
-	int status;
-	int exit_status;
-	
+	int		status;
+	int		exit_status;
+
 	exit_status = -1;
 	pid = -1;
-	pid = create_pipeline(argv, envp, redir);	
-	if(waitpid(pid, &status, 0) > 0)
+	pid = create_pipeline(argv, envp, redir);
+	if (waitpid(pid, &status, 0) > 0)
 	{
-		if (WIFEXITED(status))		
-    		exit_status = WEXITSTATUS(status);	
+		if (WIFEXITED(status))
+			exit_status = WEXITSTATUS(status);
 		if (exit_status >= 1)
 			exit_status = 127;
-	}	
+	}
 	while (wait(&(int){0}) > 0)
 		;
 	return (exit_status);
