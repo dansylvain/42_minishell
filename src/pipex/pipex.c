@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/29 17:20:59 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/29 18:33:43 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ delimited by end-of-file (wanted '%s')\n", redir.delim);
 		free(line); //opti
 	}
 }
-
+void	store_and_free_cmd_list(t_ast_nde *cmd_list);
 static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 {
 	t_Data	*data;
@@ -56,6 +56,7 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 		{
 			if (search_path(*argv, envp))
 			{
+				store_and_free_cmd_list(NULL);
 				free_command_tab_lg(argv_sav);	
 				exit(127);
 			}
