@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/29 12:19:08 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/29 12:38:26 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_ast_nde	*parse(char *str, t_Data *data)
 	// 	return (NULL);	
 	// }
 	root->child->child->child = quote;
-	// if (!set_operator(root->child))
+	 if (!set_operator(root->child));
 	// {
 	// 	free_tree(root);
 	// 	return (NULL);
