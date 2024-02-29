@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 16:08:58 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/29 11:01:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 	return (NULL);
 }
 
-static void	token_child_handle(t_ast_nde *sib_cont,
+static int	token_child_handle(t_ast_nde *sib_cont,
 	t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
 {
 	t_ast_nde	*sib;
@@ -86,6 +86,7 @@ static void	token_child_handle(t_ast_nde *sib_cont,
 		{
 			ft_putstr_fd(translate_enum(token->token), 2);
 			ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
+			return (0);
 		}
 	}
 	if (raw_rght->child)
@@ -94,7 +95,9 @@ static void	token_child_handle(t_ast_nde *sib_cont,
 	{
 		ft_putstr_fd(translate_enum(token->token), 2);
 		ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
+		return (0);
 	}
+	return (1);
 }
 
 int	set_operator(t_ast_nde *node)
@@ -110,7 +113,7 @@ int	set_operator(t_ast_nde *node)
 	token = create_token_node(sib);
 	sib_cont->sibling = token;
 	if (token)
-		return (token_child_handle(sib_cont, raw_lft, raw_rght, token), 1);
+		return (token_child_handle(sib_cont, raw_lft, raw_rght, token));
 	set_space(node);
 	return (0);
 }

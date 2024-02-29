@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/02/28 06:38:59 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:45:53 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	exec_pipex(t_Data *data, char *cmd, char *envp[])
 	t_ast_nde	*current;
 
 	cmd_list = parse(cmd, data);
+	if (!cmd_list)		
+		return ;	
 	launch_command_tab(data, cmd_list, envp, 0);
 	free_sibling_and_child(cmd_list);
 }
