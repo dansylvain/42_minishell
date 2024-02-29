@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 16:13:02 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/29 17:20:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ void	here_doc_handle(int pipefd_in[], t_redir redir) //argv!!
 		else
 		{
 			ft_printf("\rwarning: here-document at line 1 \
-				delimited by end-of-file (wanted '%s')\n", redir.delim);
+delimited by end-of-file (wanted '%s')\n", redir.delim);
 			break ;
 		}
 		free(line); //opti
 	}
 }
 
-static void	builtin_or_execve(char **argv[], char *envp[])
+static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 {
 	t_Data	*data;
 
@@ -53,7 +53,13 @@ static void	builtin_or_execve(char **argv[], char *envp[])
 	if (!command_is_builtin(*argv, data, envp))
 	{
 		if (access(**argv, X_OK))
-			search_path(*argv, envp);
+		{
+			if (search_path(*argv, envp))
+			{
+				free_command_tab_lg(argv_sav);	
+				exit(127);
+			}
+		}
 		execve(**argv, *argv, envp);
 		exit(EXIT_FAILURE);
 	}
@@ -64,7 +70,9 @@ static void	builtin_or_execve(char **argv[], char *envp[])
 static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir *redir)
 {
 	pid_t	pid;
+	char 	***argv_sav;
 
+	argv_sav = argv;
 	init_redir(redir);
 	set_redir_io(argv, redir);
 	set_pipefd_in(pipefd[0], redir);
@@ -79,7 +87,7 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 			{
 				close_fd(fd_file[1]);
 				set_pipe_forward(pipefd[0], pipefd[1], *redir);
-				builtin_or_execve(argv, envp);
+				builtin_or_execve(argv, argv_sav, envp);
 			}
 			else
 				switch_pipes(pipefd);

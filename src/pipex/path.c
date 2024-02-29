@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 20:58:04 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/29 16:38:22 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,29 +58,28 @@ static char	*search_env_var(char *envp[], char *env_to_find)
 	return (env_find);
 }
 
-char	**search_path(char *argv[], char *envp[])
-{
-	char	**split_arg;
+int	search_path(char *argv[], char *envp[])
+{	
 	char	*env_find;
 	t_Data	*data;
 
 	data = get_data(NULL);
 	if (!**argv)
-		return (NULL);
+		return (1);
 	env_find = search_env_var(envp, "PATH=");
 	if (!env_find)
 	{
 		ft_putstr_fd("env PATH not found.\n", 2);
 		free_data(data);
-		exit(127);
+		return (1);
 	}
 	if (!try_paths(argv, env_find))
 	{
 		display_error_detail(argv[0], ": command ", "not found\n");
-		free_data(data);
-		exit(127);
+		free_data(data);	
+		return (1);
 	}
-	return (split_arg);
+	return (0);
 }
 
 char	*search_var(const t_ast_nde *node, t_Data *data)

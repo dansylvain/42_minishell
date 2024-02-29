@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/26 09:21:13 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/29 17:26:49 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,24 @@ void	build_command_tab(char ****cmd_tab, t_Data *data,
 		t_ast_nde **cmd_tab_node_sav, char *envp[])
 {
 	(*cmd_tab) = create_command_tab(data, (*cmd_tab_node_sav), envp);
-	if (is_pipeline((*cmd_tab_node_sav)))
-		data->exit_status = pipex((*cmd_tab), envp);
+	if (is_pipeline(*cmd_tab_node_sav))
+	{
+		
+		free_sibling_and_child(*cmd_tab_node_sav);		
+		data->exit_status = pipex(*cmd_tab, envp);
+	}
 	else if (!command_is_builtin(*(*cmd_tab), data, envp))
-		data->exit_status = pipex((*cmd_tab), envp);
-	free_sibling_and_child((*cmd_tab_node_sav));
-	free_command_tab_lg((*cmd_tab));
+	{
+		free_sibling_and_child(*cmd_tab_node_sav);
+		data->exit_status = pipex(*cmd_tab, envp);
+	}
+	else
+	{		
+		
+		free_sibling_and_child(*cmd_tab_node_sav);
+	}
+		//free_sibling_and_child((*cmd_tab_node_sav));
+	free_command_tab_lg(*cmd_tab);
 }
 
 char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
