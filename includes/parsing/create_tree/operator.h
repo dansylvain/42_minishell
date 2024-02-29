@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:27:56 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 15:18:39 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/29 13:37:44 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "parsing_utils.h"
 # include "libft.h"
 
+void		display_error(char *str);
 int			set_space(t_ast_nde *node);
 int			set_operator(t_ast_nde *node);
 char		*translate_enum(t_tok token);

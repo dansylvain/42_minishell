@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/29 12:47:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/29 13:57:48 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,11 @@ t_ast_nde	*parse(char *str, t_Data *data)
 	root->child->child = copy_node(root);
 	quote = set_qute_sib(str);
 	if (!quote)
-	{
-		free_tree(root);
-		return (NULL);	
-	}
+		return (free_tree(root), NULL);	
 	root->child->child->child = quote;
 	if (set_operator(root->child))
-	{
-		free_tree(root);
-		return (NULL);
-	}
+		return (free_tree(root), NULL);	
 	leaf_tree(root, &cmd, &cmd_sav, data);
-	//print_cmd(cmd_sav);
-	free_tree(root);
-	return (cmd_sav);
+	//print_cmd(cmd_sav);	
+	return (free_tree(root), cmd_sav);
 }

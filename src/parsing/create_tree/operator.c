@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/29 12:40:31 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/29 14:26:38 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,23 +80,14 @@ static int	token_child_handle(t_ast_nde *sib_cont,
 	fill_child(sib, raw_lft->child, raw_rght->child, token);
 	if (raw_lft->child)
 		set_space(raw_lft);
-	else
-	{
-		if (token->token == AND || token->token == OR || token->token == PIPE)
-		{
-			ft_putstr_fd(translate_enum(token->token), 2);
-			ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
-			return (1);
-		}
-	}
-	if (raw_rght->child)
-		set_operator(raw_rght);
-	else
-	{
-		ft_putstr_fd(translate_enum(token->token), 2);
-		ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
-		return (1);
-	}
+	else if (token->token == AND || token->token == OR || token->token == PIPE)
+		return (display_error(ft_strjoin("bash: syntax error near \
+unexpected token ", translate_enum(token->token))), 1);
+	if (raw_rght->child)		
+		return ((set_operator(raw_rght)));	
+	else if (token->token == AND || token->token == OR || token->token == PIPE)
+		return (display_error(ft_strjoin("bash: syntax error near \
+unexpected token ", translate_enum(token->token))), 1);
 	return (0);
 }
 

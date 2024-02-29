@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 20:57:31 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 15:07:17 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/29 13:41:48 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 char	*translate_enum(t_tok token)
 {
 	if (token == AND)
-		return ("&&");
+		return ("'&&'\n");
 	else if (token == OR)
-		return ("||");
+		return ("'||'\n");
 	else if (token == PIPE)
-		return ("|");
+		return ("'|'\n");
 	else if (token == SCHEV_LFT)
-		return ("<");
+		return ("'<'\n");
 	else if (token == DCHEV_LFT)
-		return ("<<");
+		return ("'<<'\n");
 	else if (token == SCHEV_RGTH)
-		return (">");
+		return ("'>'\n");
 	else if (token == DCHEV_RGTH)
-		return (">>");
+		return ("'>>'\n");
 	return (NULL);
 }
 
