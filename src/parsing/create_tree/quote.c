@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:36:13 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/29 12:13:14 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/29 12:26:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	link_inqute_node(t_tok tok, char qute, t_ast_nde **qute_sibling,
 	(*str)++;
 	new_nde = create_node(tok);
 	if (set_qute_nde(new_nde, qute, *qute_sibling_sav, str))
-		return (1);
+		;//return (1);
 	add_sibling(new_nde, qute_sibling, qute_sibling_sav);
 	(*str)++;
 	return (0);
@@ -84,13 +84,13 @@ t_ast_nde	*set_qute_sib(char *str)
 		{			
 			if (link_inqute_node(IN_SQUTE, '\'', &qute_sibling,
 				&qute_sibling_sav, &str))
-					return (NULL);
+					;//return (NULL);
 		}
 		else if (is_qute(str, '\"'))
 		{			
 			if (link_inqute_node(IN_DQUTE, '\"', &qute_sibling,
 				&qute_sibling_sav, &str))
-					return (NULL);
+					;//return (NULL);
 		}
 		else
 		{

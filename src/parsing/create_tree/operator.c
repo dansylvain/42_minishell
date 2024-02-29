@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/29 11:01:21 by seblin           ###   ########.fr       */
+/*   Updated: 2024/02/29 12:30:20 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int	token_child_handle(t_ast_nde *sib_cont,
 		{
 			ft_putstr_fd(translate_enum(token->token), 2);
 			ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
-			return (0);
+			//return (0);
 		}
 	}
 	if (raw_rght->child)
@@ -95,7 +95,7 @@ static int	token_child_handle(t_ast_nde *sib_cont,
 	{
 		ft_putstr_fd(translate_enum(token->token), 2);
 		ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
-		return (0);
+		//return (0);
 	}
 	return (1);
 }
@@ -113,7 +113,7 @@ int	set_operator(t_ast_nde *node)
 	token = create_token_node(sib);
 	sib_cont->sibling = token;
 	if (token)
-		return (token_child_handle(sib_cont, raw_lft, raw_rght, token));
+		return (token_child_handle(sib_cont, raw_lft, raw_rght, token), 1);
 	set_space(node);
 	return (0);
 }
