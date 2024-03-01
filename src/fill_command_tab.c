@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_command_tab.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:25:16 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 16:48:38 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:14:07 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,20 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 	k = 0;
 	while (!is_separator(current) && !is_chevron(current))
 	{
+		if (current->token)
+		{
+			j = 0;
+			while (current->start[j])
+			{
+				if (current->start[j] == ' ')
+					k++;
+				j++;
+			}
+		}
 		k++;
 		current = current->sibling;
 	}
+	ft_printf("k: %i\n", k);
 	(*cmd_tab)[*i] = (char **)ft_calloc(k + 1, sizeof(char *));
 	if ((*cmd_tab)[*i] == NULL)
 		return (0);

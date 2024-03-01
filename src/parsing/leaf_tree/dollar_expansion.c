@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 20:56:21 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/01 15:07:00 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_ast_nde	*rebuild_dollar_str_node(char *str)
 	str_node = NULL;
 	if (str)
 	{
-		str_node = create_node(RAW);
+		str_node = create_node(JOKER);
 		str_node->start = str;
 		str_node->end = str + ft_strlen(str) - 1;
 		str_node->child = copy_node(str_node);
