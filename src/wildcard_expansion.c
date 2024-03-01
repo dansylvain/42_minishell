@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 10:14:43 by dan               #+#    #+#             */
-/*   Updated: 2024/03/01 17:57:06 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/01 18:21:22 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ char	*wilcard_func(char *pattern)
 	if (!ft_strchr(pattern, '*'))
 		return (NULL);
 	matches = expand_wildcards(pattern);
+	if (matches[0] == NULL)
+		return (pattern);
 	ret_str = (char *)ft_calloc(get_str_size(matches), sizeof(char) + 1);
 	if (ret_str == NULL)
 		return (free (matches), NULL);
@@ -137,7 +139,6 @@ char	*wilcard_func(char *pattern)
 		free(pattern);
 		return (free (matches), ret_str);
 	}
-	if (matches[0] == NULL)
-		return (pattern);
+	
 	return(free (matches), NULL);
 }

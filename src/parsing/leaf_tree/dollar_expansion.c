@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/01 17:51:36 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/01 18:01:48 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,8 @@ static void	build_token_and_merge(const t_ast_nde *operator,
 						operator->end - operator->start + 1));
 		if (str_tok)
 		{
-			if (str && *str)
-			{
-				*str = ft_strjoin_up(*str, str_tok, 1, 0);				
-			}	
+			if (str && *str)			
+				*str = ft_strjoin_up(*str, str_tok, 1, 1);		
 			else if (str)			
 				*str = str_tok;							
 		}
