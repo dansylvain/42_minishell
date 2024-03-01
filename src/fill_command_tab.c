@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_command_tab.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:25:16 by dan               #+#    #+#             */
-/*   Updated: 2024/03/01 17:04:58 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/01 17:57:00 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 				free(tab[k]);
 				k++;
 			}
-			free((*node)->child->start);
-			free((*node)->start);
+			// free((*node)->child->start);
+			// free((*node)->start);
 			free(tab);
 		}
 		else
