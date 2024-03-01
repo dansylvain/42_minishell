@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:25:16 by dan               #+#    #+#             */
-/*   Updated: 2024/03/01 15:14:07 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/01 15:26:00 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,27 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 		k++;
 		current = current->sibling;
 	}
-	ft_printf("k: %i\n", k);
+	// ft_printf("k: %i\n", k);
 	(*cmd_tab)[*i] = (char **)ft_calloc(k + 1, sizeof(char *));
 	if ((*cmd_tab)[*i] == NULL)
 		return (0);
 	j = 0;
 	while (!is_separator((*node)) && !is_chevron((*node)))
 	{
-		(*cmd_tab)[*i][j++] = get_node_str(data, (*node)->child);
+		if ((*node)->token == JOKER)
+		{
+			// ft_printf("JOKER : >%s<\n", (*node)->start);
+			char **tab;
+			tab = ft_split((*node)->start, ' ');
+			k = 0;
+			while (tab[k])
+			{
+				(*cmd_tab)[*i][j++] = ft_strdup(tab[k]);
+				k++;
+			}
+		}
+		else
+			(*cmd_tab)[*i][j++] = get_node_str(data, (*node)->child);
 		(*node) = (*node)->sibling;
 	}
 	(*cmd_tab)[*i][j] = NULL;
