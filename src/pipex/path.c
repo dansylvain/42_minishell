@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/29 16:38:22 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/01 17:31:01 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ char	*search_var(const t_ast_nde *node, t_Data *data)
 	{
 		tmp = ft_strjoin_up(str + 1, "=", 0, 0);
 		var = search_env_var(data->envp_tab, tmp);
+		if (var)		
+			var = ft_strdup(var);		
 		free(tmp);
 	}
 	if (str)
