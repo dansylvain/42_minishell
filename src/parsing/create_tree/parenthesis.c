@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:52:11 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/01 15:32:39 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/01 21:28:18 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,23 +90,20 @@ void	token_child_handle(t_ast_nde *sib_cont,
 	raw_rght = raw_lft->sibling;
 	token->child = raw_lft;
 	fill_child(sib, raw_lft->child, raw_rght->child, token);
-	if (raw_lft->child)
-		set_operator(raw_lft);
-	else
-	{
-		if (token->token == AND || token->token == OR || token->token == PIPE)
-		{
-			ft_putstr_fd(translate_enum(token->token), 2);
-			ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
-		}
+	if (set_operator(raw_lft))
+	{	
+		// if (token->token == AND || token->token == OR || token->token == PIPE)
+		// {
+		// 	ft_putstr_fd(translate_enum(token->token), 2);
+		// 	ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
+		// }
 	}
-	if (raw_rght->child)
-		set_parenthesis(raw_rght);
-	else
-	{
-		ft_putstr_fd(translate_enum(token->token), 2);
-		ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
+	if (set_parenthesis(raw_rght))
+	{		
+		// ft_putstr_fd(translate_enum(token->token), 2);
+		// ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
 	}
+	
 }
 
 int	set_parenthesis(t_ast_nde *node)
@@ -116,13 +113,18 @@ int	set_parenthesis(t_ast_nde *node)
 	t_ast_nde	*token;
 	t_ast_nde	*raw_lft;
 	t_ast_nde	*raw_rght;
-
-	sib_cont = node->child;
-	sib = sib_cont->child;
-	token = create_token_node(sib);
-	sib_cont->sibling = token;
-	if (token)
-		return (token_child_handle(sib_cont, raw_lft, raw_rght, token), 1);
-	set_operator(node);
+	
+	if (node && node->child && node->child->child)
+	{		
+		sib_cont = node->child;
+		sib = sib_cont->child;
+		token = create_token_node(sib);
+		sib_cont->sibling = token;
+		if (token)
+			return (token_child_handle(sib_cont, raw_lft, raw_rght, token), 1);
+		set_operator(node);
+	}
+	else 
+		return (1);
 	return (0);
 }

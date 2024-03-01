@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 10:14:43 by dan               #+#    #+#             */
-/*   Updated: 2024/03/01 18:36:12 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/01 20:18:31 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	get_str_size(char **matches)
 	}
 	return (res);
 }
-
+void	print_cmd(t_ast_nde *cmd);
 char	*wilcard_func(char *pattern)
 {
 	size_t	i;
@@ -118,13 +118,13 @@ char	*wilcard_func(char *pattern)
 
 	index = 0;
 	if (!ft_strchr(pattern, '*'))
-		return (NULL);
+		return (free(pattern), NULL);
 	matches = expand_wildcards(pattern);
 	if (matches[0] == NULL)
 		return (pattern);
 	ret_str = (char *)ft_calloc(get_str_size(matches), sizeof(char) + 1);
 	if (ret_str == NULL)
-		return (free (matches), NULL);
+		return (free (matches), free(pattern), NULL);
 	if (matches[0] != NULL)
 	{
 		i = 0;
@@ -138,7 +138,6 @@ char	*wilcard_func(char *pattern)
 		}
 		free(pattern);
 		return (free (matches), ret_str);
-	}
-	
-	return(free (matches), NULL);
+	}	
+	return(free (matches), 	free(pattern), NULL);
 }

@@ -6,11 +6,16 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:01:47 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/01 16:17:12 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/01 20:55:40 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "leaf.h"
+
+void	leaf_parenthesis()
+{
+	
+}
 
 static void	leaf_raw_lft(t_ast_nde	*raw_lft, t_ast_nde **rslt,
 		t_ast_nde **rslt_sav, t_Data *data)
