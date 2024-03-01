@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:25:16 by dan               #+#    #+#             */
-/*   Updated: 2024/03/01 15:26:00 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/01 15:36:23 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,10 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 			while (tab[k])
 			{
 				(*cmd_tab)[*i][j++] = ft_strdup(tab[k]);
+				free(tab[k]);
 				k++;
 			}
+			free(tab);
 		}
 		else
 			(*cmd_tab)[*i][j++] = get_node_str(data, (*node)->child);
