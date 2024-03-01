@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/02/29 18:14:21 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/01 11:25:24 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	build_command_tab(char ****cmd_tab, t_Data *data,
 		
 		free_sibling_and_child(*cmd_tab_node_sav);
 	}
-	//	free_sibling_and_child((*cmd_tab_node_sav));
+	//free_sibling_and_child((*cmd_tab_node_sav));
 	free_command_tab_lg(*cmd_tab);
 }
 
