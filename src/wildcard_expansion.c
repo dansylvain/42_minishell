@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 10:14:43 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 12:39:52 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:15:10 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,8 @@ char	*wilcard_func(char *pattern)
 		{
 			ft_memcpy(&ret_str[index], matches[i], ft_strlen(matches[i]));
 			index += ft_strlen(matches[i]);
-			ret_str[index++] = ' ';
+			if (matches[i + 1])
+				ret_str[index++] = ' ';
 			free(matches[i++]);
 		}
 		return (free (matches), ret_str);
