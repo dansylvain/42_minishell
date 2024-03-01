@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:01:47 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 16:04:10 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/01 16:17:12 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt,
 		raw_rght = raw_lft->sibling;
 	if (operator && (operator->token == DOLL || operator->token == JOKER))
 		return (add_sibling(rebuild_dollar_str_node
-				(rebuild_dollar_str(operator, NULL, data)), rslt, rslt_sav));
+				(rebuild_dollar_str(operator, NULL, data), operator->token), rslt, rslt_sav));
 	leaf_raw_lft(raw_lft, rslt, rslt_sav, data);
 	if (operator && operator->token != SPCE && operator->token != RAW)
 	{

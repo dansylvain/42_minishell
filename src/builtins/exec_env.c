@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:46:30 by dan               #+#    #+#             */
-/*   Updated: 2024/02/26 12:14:33 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/01 10:54:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	exec_env(t_Data *data, char **command_tab)
 
 	if (command_tab[1] != NULL)
 	{
-		display_error_detail("env: ‘", command_tab[1],
+		display_error_detail("env: ", command_tab[1],
 			"’: No such file or directory\n");
 		if (data)
 			data->exit_status = 126;

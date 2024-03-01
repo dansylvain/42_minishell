@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:52:11 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 22:21:56 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/01 15:32:39 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char		*translate_enum(t_tok token);
 t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token);
 void		fill_child(t_ast_nde *sib, t_ast_nde *raw_lft,
 				t_ast_nde *raw_rght, t_ast_nde *token);
+int	set_parenthesis(t_ast_nde *node);
 
 t_ast_nde	*create_token(t_tok simpl_tok, t_tok doubl_tok,
 	char *actual, char char_tok)

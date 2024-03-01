@@ -6,12 +6,12 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/29 13:57:48 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/01 16:13:52 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
+int	set_parenthesis(t_ast_nde *node);
 t_ast_nde	*parse(char *str, t_Data *data)
 {
 	t_ast_nde	*root;
@@ -31,6 +31,7 @@ t_ast_nde	*parse(char *str, t_Data *data)
 	if (!quote)
 		return (free_tree(root), NULL);	
 	root->child->child->child = quote;
+	//if (set_parenthesis(root->child))
 	if (set_operator(root->child))
 		return (free_tree(root), NULL);	
 	leaf_tree(root, &cmd, &cmd_sav, data);

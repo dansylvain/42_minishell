@@ -6,20 +6,23 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/01 15:07:00 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/01 16:28:18 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dollar_expansion.h"
 
-t_ast_nde	*rebuild_dollar_str_node(char *str)
+t_ast_nde	*rebuild_dollar_str_node(char *str, t_tok token)
 {
 	t_ast_nde	*str_node;
 
 	str_node = NULL;
 	if (str)
 	{
-		str_node = create_node(JOKER);
+		if (token == JOKER)
+			str_node = create_node(JOKER);		
+		else
+			str_node = create_node(RAW);	
 		str_node->start = str;
 		str_node->end = str + ft_strlen(str) - 1;
 		str_node->child = copy_node(str_node);

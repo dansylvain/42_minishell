@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:29:53 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 15:17:44 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/01 16:15:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void		leaf_tree(t_ast_nde *oper, t_ast_nde **rslt,
 				t_ast_nde **rslt_sav, t_Data *data);
 char		*rebuild_dollar_str(const t_ast_nde *oper,
 				char *str, t_Data *data);
-t_ast_nde	*rebuild_dollar_str_node(char *str);
+t_ast_nde	*rebuild_dollar_str_node(char *str, t_tok token);
 
 #endif

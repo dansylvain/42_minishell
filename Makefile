@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/02/28 15:45:19 by seblin           ###   ########.fr        #
+#    Updated: 2024/03/01 15:31:54 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRC =	src/main.c \
 		src/parsing/parsing/utils2.c \
 		src/parsing/create_tree/expansion.c \
 		src/parsing/create_tree/operator.c \
+		src/parsing/create_tree/parenthesis.c \
 		src/parsing/create_tree/quote.c \
 		src/parsing/create_tree/space.c \
 		src/parsing/create_tree/token_child.c \

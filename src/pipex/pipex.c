@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/29 18:33:43 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/01 11:44:48 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ delimited by end-of-file (wanted '%s')\n", redir.delim);
 	}
 }
 void	store_and_free_cmd_list(t_ast_nde *cmd_list);
+void	free_data(t_Data *data);
 static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 {
 	t_Data	*data;
@@ -65,7 +66,12 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 		exit(EXIT_FAILURE);
 	}
 	else
+	{
+		free_data(data);
+		free_command_tab_lg(argv_sav);
+		store_and_free_cmd_list(NULL);
 		exit(EXIT_SUCCESS);
+	}
 }
 
 static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir *redir)
