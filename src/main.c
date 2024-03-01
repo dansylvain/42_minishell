@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/02/28 17:50:16 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/01 16:17:21 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
  *? signal info at the end of a function's comment block 
 *? signal info in the main comment bloc
 *---
-*TODO finish builtin export
-*TODO fix memory leaks export
-*TODO fix memory leaks unset
 *========================================================================**/
 
 /**========================================================================
