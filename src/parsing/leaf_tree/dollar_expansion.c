@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/01 17:40:11 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/01 17:51:36 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	build_token_and_merge(const t_ast_nde *operator,
 		{
 			if (str && *str)
 			{
-				*str = ft_strjoin_up(*str, str_tok, 1, 1);				
+				*str = ft_strjoin_up(*str, str_tok, 1, 0);				
 			}	
 			else if (str)			
 				*str = str_tok;							
