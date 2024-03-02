@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/02 22:04:31 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/02 22:06:29 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	print_node(t_ast_nde *node)
 		ft_printf("\033[%dm%c\033[0m", back_color, node->start[i++]);			
 	back_color = (back_color - 41 + 1) % 7 + 41;
 }
+
 void	print_sibling(t_ast_nde *sib)
 {
 	int	i;
@@ -69,6 +70,7 @@ void	print_sibling(t_ast_nde *sib)
 		sib = sib->sibling;
 	}	
 }
+
 void	print_cmd(t_ast_nde *cmd)
 {
 	print_sibling(cmd);
