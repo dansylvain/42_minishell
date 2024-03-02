@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fill_command_tab.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:25:16 by dan               #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2024/03/01 18:48:01 by seblin           ###   ########.fr       */
+=======
 /*   Updated: 2024/03/02 16:14:49 by dan              ###   ########.fr       */
+>>>>>>> b5be64f9a2a1147130b870671782c03ce595c81a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +102,14 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 	j = 0;
 	while (!is_separator((*node)) && !is_chevron((*node)))
 	{
+		// if ((*node)->token == RAW)
+		// {
+		// 	if ((*node)->start)
+		// 	{
+		// 		ft_printf("YOOO\n");
+		// 		free((*node)->start);
+		// 	}
+		// }
 		if ((*node)->token == JOKER)
 		{
 			// ft_printf("JOKER : >%s<\n", (*node)->start);
@@ -111,7 +123,10 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 				k++;
 			}
 			if ((*node)->start)
+			{
+				// ft_printf("YOOO\n");
 				free((*node)->start);
+			}
 			free(tab);
 		}
 		else if ((*node)->token == DOLL)

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 10:03:27 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 15:37:30 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/02 17:01:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 typedef enum e_tok
 {
-	RAW,
+	RAW,	
 	INVRT,
+	PRTH,
 	SQUTE,
 	IN_SQUTE,
 	DQUTE,
