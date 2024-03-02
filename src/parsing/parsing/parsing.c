@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/02 17:00:49 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/02 17:31:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-int	set_parenthesis(t_ast_nde *node);
+//int	set_parenthesis(t_ast_nde *node);
 t_ast_nde	*parse(char *str, t_Data *data)
 {
 	t_ast_nde	*root;
