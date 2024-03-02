@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/02 15:38:24 by dan              ###   ########.fr        #
+#    Updated: 2024/03/02 15:52:05 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ CC = cc
 RLFLAGS = -lreadline -lhistory -I/usr/include/readline
 
 CFLAGS = -g -Iincludes -Iincludes/parsing/parsing -Iincludes/parsing/create_tree \
--Iincludes/parsing/leaf_tree -Iincludes/pipex
+-Iincludes/parsing/leaf_tree -Iincludes/pipex -Iincludes/root_files \
+-Iincludes/exec_files
 # -Wall -Wextra -Werror
 
 # Directories
