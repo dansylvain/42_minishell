@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/27 17:08:27 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/02 15:42:27 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,16 @@ int	create_chevron_tab(char ****cmd_tab, int *i, t_ast_nde **node, t_Data *data)
 void		exec_pipex(t_Data *data, char *cmd, char *envp[]);
 int			exec_exit(t_Data *data, char **command_tab);
 
+
+
+/*   wildcard_expansion.c                               :+:      :+:    :+:   */
+int		get_matching_elements(const char *pattern, DIR *dir,
+			struct dirent *entry, char ***matches);
+int		matches_pattern(const char *filename, const char *pattern);
+char	*wilcard_func(char *pattern);
+char	**expand_wildcards(const char *pattern);
+int		get_str_size(char **matches);
+char	*copy_matches(char ***matches, char **ret_str,
+			int index, char **pattern);
+			
 #endif

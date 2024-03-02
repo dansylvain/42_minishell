@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/01 20:22:03 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/02 16:40:09 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_ast_nde	*rebuild_dollar_str_node(char *str, t_tok token)
 	{
 		if (token == JOKER)
 			str_node = create_node(JOKER);		
+		else if (token == DOLL)
+			str_node = create_node(DOLL);
 		else
 			str_node = create_node(RAW);	
 		str_node->start = str;

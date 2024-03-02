@@ -6,7 +6,11 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:25:16 by dan               #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/01 18:48:01 by seblin           ###   ########.fr       */
+=======
+/*   Updated: 2024/03/02 16:14:49 by dan              ###   ########.fr       */
+>>>>>>> b5be64f9a2a1147130b870671782c03ce595c81a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +121,23 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 				(*cmd_tab)[*i][j++] = ft_strdup(tab[k]);
 				free(tab[k]);
 				k++;
+<<<<<<< HEAD
 			}			
+=======
+			}
+>>>>>>> b5be64f9a2a1147130b870671782c03ce595c81a
 			if ((*node)->start)
 			{
 				ft_printf("YOOO\n");
 				free((*node)->start);
 			}
 			free(tab);
+		}
+		else if ((*node)->token == DOLL)
+		{
+			(*cmd_tab)[*i][j++] = get_node_str(data, (*node)->child);
+			if ((*node)->start)
+				free((*node)->start);
 		}
 		else
 			(*cmd_tab)[*i][j++] = get_node_str(data, (*node)->child);
