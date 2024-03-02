@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/02 15:52:05 by dan              ###   ########.fr        #
+#    Updated: 2024/03/02 17:54:34 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,8 +49,8 @@ SRC =	src/main.c \
 		src/builtins/exec_export.c \
 		src/builtins/exec_export_utils.c \
 		src/builtins/exec_exit.c \
-		src/parsing/parsing/free_tree.c \
 		src/parsing/parsing/parsing.c \
+		src/parsing/parsing/free_tree.c \
 		src/parsing/parsing/test.c \
 		src/parsing/parsing/utils.c \
 		src/parsing/parsing/utils2.c \

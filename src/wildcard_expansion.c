@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 10:14:43 by dan               #+#    #+#             */
-/*   Updated: 2024/03/02 17:44:27 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/02 18:03:12 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,3 @@ char	*copy_matches(char ***matches, char **ret_str,
 	free(*pattern);
 	return (free (*matches), *ret_str);
 }
-

@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/01 16:17:21 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/02 17:38:34 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
 		return (free_command_tab(cmd_tab), 1);
 	if (len >= 2 && !ft_strncmp(&(cmd_tab[0][len - 2]), "cd", 3))
 		return (exec_cd(data, cmd_tab), 1);
+	if (len >= 2 && !ft_strncmp(&(cmd_tab[0][len - 2]), "$?", 3))
+		return (ft_printf("HOLLY SHIT!\n"), 1);
 	if (len >= 3 && !ft_strncmp(&(cmd_tab[0][len - 3]), "env", 4))
 		return (exec_env(data, cmd_tab), 1);
 	if (len >= 3 && !ft_strncmp(&(cmd_tab[0][len - 3]), "pwd", 4))
