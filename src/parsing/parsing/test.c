@@ -6,13 +6,15 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/25 16:30:14 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/02 22:04:31 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "parsing_utils.h"
 #include "ft_printf.h"
+
+void	print_raw(t_ast_nde *raw);
 
 void	print_qute_sib(t_ast_nde *sib)
 {
@@ -40,8 +42,18 @@ void	print_qute_sib(t_ast_nde *sib)
 	ft_printf("\n\n");
 }
 
-
-void print_sibling(t_ast_nde *sib)
+void	print_node(t_ast_nde *node)
+{
+	int	i;
+	int	back_color;
+	
+	back_color = 41;
+	i = 0;
+	while (node->start + i <= node->end)
+		ft_printf("\033[%dm%c\033[0m", back_color, node->start[i++]);			
+	back_color = (back_color - 41 + 1) % 7 + 41;
+}
+void	print_sibling(t_ast_nde *sib)
 {
 	int	i;
 	int	back_color;	
@@ -71,28 +83,26 @@ void	print_cmd(t_ast_nde *cmd)
 	ft_printf("\n\n");
 }
 
-void	print_raw(t_ast_nde *raw)
+void	print_descend(t_ast_nde *node)
 {
-	int	i;
-	int	back_color;
-	t_ast_nde	*sib;
-
-	back_color = 41;
-	i = 0;
-	while (raw && raw->start + i <= raw->end)
-		ft_printf("\033[%dm%c\033[0m", back_color, raw->start[i++]);	
-	sib = raw->child;
-	ft_printf("z\n");
-	while (sib)
-	{
-		i = 0;
-		while (sib->start + i <= sib->end)
-			ft_printf("\033[%dm%c\033[0m", back_color, sib->start[i++]);
-		back_color = (back_color - 41 + 1) % 7 + 41;
-		sib = sib->sibling;
-	}
-	ft_printf("\n");
+		if (node)
+	{		
+		print_sibling(node);					
+		ft_printf("\n");
+		print_descend(node->child);
+	}	
 }
+
+void	print_raw(t_ast_nde *raw)
+{		
+	if (raw)
+	{		
+		print_node(raw);					
+		ft_printf("\n");
+		print_descend(raw->child);
+	}	
+}
+
 void	print_tree(t_ast_nde *node)
 {
 	t_ast_nde	*operator;
