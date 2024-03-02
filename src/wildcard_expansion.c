@@ -6,79 +6,13 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 10:14:43 by dan               #+#    #+#             */
-/*   Updated: 2024/03/02 14:15:46 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/02 14:25:35 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 int	matches_pattern(const char *filename, const char *pattern);
-
-// int get_matching_elements(const char *pattern, DIR *dir, struct dirent *entry, char ***matches) 
-// {
-// 	size_t count = 0; size_t capacity = 0;
-// 	*matches = NULL;
-// 	while ((entry = readdir(dir)) != NULL) 
-// 	{ 
-// 		if (matches_pattern(entry->d_name, pattern)) 
-// 		{
-// 			if (count >= capacity) 
-// 			{
-// 				size_t new_capacity = capacity == 0 ? 1 : capacity * 2; 
-// 				char **temp = ft_realloc(*matches, new_capacity * sizeof(char *));
-// 				if (temp == NULL) 
-// 				{ 
-// 					perror("realloc"); 
-// 					for (size_t i = 0; i < count; i++)
-// 					{
-// 						free((*matches)[i]);
-// 					} 
-// 					free(*matches); exit(EXIT_FAILURE);
-// 				}
-// 				*matches = temp; capacity = new_capacity;
-// 			} 
-// 			(*matches)[count] = ft_strdup(entry->d_name);
-// 			if ((*matches)[count] == NULL)
-// 			{ 
-// 				perror("strdup"); 
-// 				for (size_t i = 0; i < count; i++) 
-// 				{ 
-// 					free((*matches)[i]); 
-// 				} 
-// 				free(*matches); 
-// 				exit(EXIT_FAILURE);
-// 			} 
-// 			count++;
-// 		} 
-// 	} 
-// 	if (capacity > count)
-// 	{ 
-// 		(*matches)[count] = NULL;
-// 	}
-// 	else
-// 	{
-// 		char **temp = ft_realloc(*matches, (count + 1) * sizeof(char *));
-// 		if (temp == NULL)
-// 		{
-// 			perror("realloc"); 
-// 			for (size_t i = 0; i < count; i++)
-// 			{
-// 				free((*matches)[i]);
-// 			}
-// 			free(*matches);
-// 			exit(EXIT_FAILURE);
-// 		}
-// 	*matches = temp;
-// 	(*matches)[count] = NULL;
-// 	}
-// 	closedir(dir);
-// 	return count;
-// }
-
-
-
-
-
 
 int	get_matching_elements(const char *pattern, DIR *dir,
 	struct dirent *entry, char ***matches)
@@ -184,7 +118,7 @@ char	*wilcard_func(char *pattern)
 	if (!ft_strchr(pattern, '*'))
 		return (NULL);
 	matches = expand_wildcards(pattern);
-	if (matches[0] == NULL)
+	if (matches == NULL || matches[0] == NULL)
 		return (pattern);
 	ret_str = (char *)ft_calloc(get_str_size(matches), sizeof(char) + 1);
 	if (ret_str == NULL)
