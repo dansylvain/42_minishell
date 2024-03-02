@@ -121,14 +121,10 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 				(*cmd_tab)[*i][j++] = ft_strdup(tab[k]);
 				free(tab[k]);
 				k++;
-<<<<<<< HEAD
-			}			
-=======
 			}
->>>>>>> b5be64f9a2a1147130b870671782c03ce595c81a
 			if ((*node)->start)
 			{
-				ft_printf("YOOO\n");
+				// ft_printf("YOOO\n");
 				free((*node)->start);
 			}
 			free(tab);
