@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:25:16 by dan               #+#    #+#             */
-/*   Updated: 2024/03/01 19:09:47 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/02 16:14:49 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,12 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 			if ((*node)->start)
 				free((*node)->start);
 			free(tab);
+		}
+		else if ((*node)->token == DOLL)
+		{
+			(*cmd_tab)[*i][j++] = get_node_str(data, (*node)->child);
+			if ((*node)->start)
+				free((*node)->start);
 		}
 		else
 			(*cmd_tab)[*i][j++] = get_node_str(data, (*node)->child);
