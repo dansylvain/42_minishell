@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:30:00 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 15:31:44 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/02 17:52:51 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "libft.h"
 # include "minishell.h"
 
+int	set_parenthesis(t_ast_nde *node);
 t_ast_nde	*set_qute_sib(char *str);
 t_ast_nde	*set_operator(t_ast_nde *node);
 void		leaf_tree(t_ast_nde *operator, t_ast_nde **rslt,
