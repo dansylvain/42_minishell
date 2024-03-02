@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
+#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/01 15:31:54 by seblin           ###   ########.fr        #
+#    Updated: 2024/03/02 15:38:24 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRC =	src/main.c \
 		src/fill_command_tab.c \
 		src/exec_pipex.c \
 		src/wildcard_expansion.c \
+		src/wildcard_expansion_2.c \
 		
 OBJ = $(SRC:.c=.o)
 
