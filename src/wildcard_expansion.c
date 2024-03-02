@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 10:14:43 by dan               #+#    #+#             */
-/*   Updated: 2024/03/01 18:36:12 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/02 14:15:46 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,77 @@
 
 int	matches_pattern(const char *filename, const char *pattern);
 
+// int get_matching_elements(const char *pattern, DIR *dir, struct dirent *entry, char ***matches) 
+// {
+// 	size_t count = 0; size_t capacity = 0;
+// 	*matches = NULL;
+// 	while ((entry = readdir(dir)) != NULL) 
+// 	{ 
+// 		if (matches_pattern(entry->d_name, pattern)) 
+// 		{
+// 			if (count >= capacity) 
+// 			{
+// 				size_t new_capacity = capacity == 0 ? 1 : capacity * 2; 
+// 				char **temp = ft_realloc(*matches, new_capacity * sizeof(char *));
+// 				if (temp == NULL) 
+// 				{ 
+// 					perror("realloc"); 
+// 					for (size_t i = 0; i < count; i++)
+// 					{
+// 						free((*matches)[i]);
+// 					} 
+// 					free(*matches); exit(EXIT_FAILURE);
+// 				}
+// 				*matches = temp; capacity = new_capacity;
+// 			} 
+// 			(*matches)[count] = ft_strdup(entry->d_name);
+// 			if ((*matches)[count] == NULL)
+// 			{ 
+// 				perror("strdup"); 
+// 				for (size_t i = 0; i < count; i++) 
+// 				{ 
+// 					free((*matches)[i]); 
+// 				} 
+// 				free(*matches); 
+// 				exit(EXIT_FAILURE);
+// 			} 
+// 			count++;
+// 		} 
+// 	} 
+// 	if (capacity > count)
+// 	{ 
+// 		(*matches)[count] = NULL;
+// 	}
+// 	else
+// 	{
+// 		char **temp = ft_realloc(*matches, (count + 1) * sizeof(char *));
+// 		if (temp == NULL)
+// 		{
+// 			perror("realloc"); 
+// 			for (size_t i = 0; i < count; i++)
+// 			{
+// 				free((*matches)[i]);
+// 			}
+// 			free(*matches);
+// 			exit(EXIT_FAILURE);
+// 		}
+// 	*matches = temp;
+// 	(*matches)[count] = NULL;
+// 	}
+// 	closedir(dir);
+// 	return count;
+// }
+
+
+
+
+
+
 int	get_matching_elements(const char *pattern, DIR *dir,
 	struct dirent *entry, char ***matches)
 {
 	size_t	count;
-
+	
 	count = 0;
 	while (1)
 	{
@@ -35,38 +101,35 @@ int	get_matching_elements(const char *pattern, DIR *dir,
 			}
 			(*matches)[count] = ft_strdup(entry->d_name);
 			count++;
+			(*matches)[count] = NULL;
+			int i = 0;
 		}
 	}
 	closedir(dir);
 	return (count);
 }
 
-char	**expand_wildcards(const char *pattern)
-{
-	DIR				*dir;
-	struct dirent	*entry;
-	char			**matches;
-	size_t			count;
+	char	**expand_wildcards(const char *pattern)
+	{
+		DIR				*dir;
+		struct dirent	*entry = NULL;
+		char			**matches;
+		size_t			count;
 
-	matches = NULL;
-	count = 0;
-	dir = opendir(".");
-	if ((dir) != NULL)
-		count = get_matching_elements(pattern, dir, entry, &matches);
-	else
-	{
-		perror("opendir");
-		exit(EXIT_FAILURE);
+		matches = NULL;
+		count = 0;
+		dir = opendir(".");
+		if ((dir) != NULL)
+		{
+			count = get_matching_elements(pattern, dir, entry, &matches);
+		}
+		else
+		{
+			perror("opendir");
+			exit(EXIT_FAILURE);
+		}
+		return (matches);
 	}
-	matches = ft_realloc(matches, (count + 1) * sizeof(char *));
-	if (matches == NULL)
-	{
-		perror("realloc");
-		exit(EXIT_FAILURE);
-	}
-	matches[count] = NULL;
-	return (matches);
-}
 
 int	matches_pattern(const char *filename, const char *pattern)
 {
@@ -103,9 +166,10 @@ int	get_str_size(char **matches)
 	res = 0;
 	while (matches[i])
 	{
-		res += ft_strlen(matches[i]);
+		res += ft_strlen(matches[i]) + 1;
 		i++;
 	}
+	res -= 1;
 	return (res);
 }
 
@@ -124,7 +188,12 @@ char	*wilcard_func(char *pattern)
 		return (pattern);
 	ret_str = (char *)ft_calloc(get_str_size(matches), sizeof(char) + 1);
 	if (ret_str == NULL)
+	{
+		i = 0;
+		while (matches[i])
+			free(matches[i++]);
 		return (free (matches), NULL);
+	}
 	if (matches[0] != NULL)
 	{
 		i = 0;
@@ -139,6 +208,8 @@ char	*wilcard_func(char *pattern)
 		free(pattern);
 		return (free (matches), ret_str);
 	}
-	
+	i = 0;
+	while (matches[i])
+		free(matches[i++]);
 	return(free (matches), NULL);
 }

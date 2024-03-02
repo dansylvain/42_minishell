@@ -8,6 +8,7 @@
 		"string": "c",
 		"string_view": "c",
 		"errno.h": "c",
-		"fcntl.h": "c"
+		"fcntl.h": "c",
+		"libft.h": "c"
 	}
 }
