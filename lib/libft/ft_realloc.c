@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 11:22:17 by dan               #+#    #+#             */
-/*   Updated: 2024/03/02 14:12:56 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/02 15:48:42 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*ft_realloc(void *ptr, size_t size)
 {
 	void	*new_ptr;
-				
+
 	new_ptr = (void *) malloc(size);
 	if (!new_ptr)
 		return (NULL);
