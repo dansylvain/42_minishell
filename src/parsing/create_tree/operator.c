@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   operator.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/29 14:32:01 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/02 18:53:06 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operator.h"
+int	is_chevron(t_ast_nde *node);
 
 static t_ast_nde	*create_token(t_tok simpl_tok, t_tok doubl_tok,
 	char *actual, char char_tok)
@@ -85,7 +86,7 @@ static int	token_child_handle(t_ast_nde *sib_cont,
 unexpected token ", translate_enum(token->token))), 1);
 	if (raw_rght->child)		
 		return ((set_operator(raw_rght)));	
-	else if (token->token == AND || token->token == OR || token->token == PIPE)
+	else if (token->token == AND || token->token == OR || token->token == PIPE || is_chevron(token))
 		return (display_error_free(ft_strjoin("bash: syntax error near \
 unexpected token ", translate_enum(token->token))), 1);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/01 15:58:50 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/02 18:49:09 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	get_cmd_nbr(t_ast_nde *node)
 				|| is_chevron(node->sibling))
 			{
 				ft_printf("handle this error\n");
+				
 			}
 			if (node->sibling->sibling)
 				node = node->sibling->sibling;

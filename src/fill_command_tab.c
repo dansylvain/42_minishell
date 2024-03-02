@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_command_tab.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/02 18:01:45 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/02 18:43:41 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 			else
 				break ;
 		}
-		if (!is_separator(node) && node->token != DOLL)
+		if (!is_separator(node))
 		{
 			if (create_separator_tab(data, &node, &cmd_tab, &i))
 				continue ;
