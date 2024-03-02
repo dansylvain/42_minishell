@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 10:14:43 by dan               #+#    #+#             */
-/*   Updated: 2024/03/02 14:25:35 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/02 15:25:03 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,21 @@ int	get_str_size(char **matches)
 	res -= 1;
 	return (res);
 }
+void	copy_matches_to_ret_str(char ***matches, char **ret_str, int index, char **pattern)
+{
+	int	i;
+	
+	i = 0;
+	while ((*matches)[i] != NULL)
+		{
+			ft_memcpy(&(*ret_str)[index], (*matches)[i], ft_strlen((*matches)[i]));
+			index += ft_strlen((*matches)[i]);
+			if ((*matches)[i + 1])
+				(*ret_str)[index++] = ' ';
+			free((*matches)[i++]);
+		}
+		free(*pattern);
+}
 
 char	*wilcard_func(char *pattern)
 {
@@ -130,16 +145,7 @@ char	*wilcard_func(char *pattern)
 	}
 	if (matches[0] != NULL)
 	{
-		i = 0;
-		while (matches[i] != NULL)
-		{
-			ft_memcpy(&ret_str[index], matches[i], ft_strlen(matches[i]));
-			index += ft_strlen(matches[i]);
-			if (matches[i + 1])
-				ret_str[index++] = ' ';
-			free(matches[i++]);
-		}
-		free(pattern);
+		copy_matches_to_ret_str(&matches, &ret_str, index, &pattern);
 		return (free (matches), ret_str);
 	}
 	i = 0;
