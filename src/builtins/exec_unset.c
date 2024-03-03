@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:09:58 by dan               #+#    #+#             */
-/*   Updated: 2024/02/19 14:07:25 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 18:16:04 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	unset_var(char **envp, int index)
 	if (!ft_strncmp(envp[index], "_=", 2))
 		return ;
 	i = index;
+	free(envp[i]);
 	while (envp[i])
 	{
 		envp[i] = envp[i + 1];
