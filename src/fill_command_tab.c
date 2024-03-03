@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/02 18:43:41 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 14:30:45 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 		}
 		viva_norminette(&node, &i);
 	}
+	// ft_printf("fill_cmd_tab_tabs i: %i\n", i);
+	cmd_tab[i + 1] = NULL;
 	return (cmd_tab);
 }
 
@@ -61,9 +63,12 @@ int	create_chevron_tab(char ****cmd_tab, int *i, t_ast_nde **node, t_Data *data)
 	if ((*node)->sibling->sibling)
 		(*node) = (*node)->sibling->sibling;
 	else
+	{
 		return (0);
+	}
 	if (!is_separator((*node)))
 		(*i)++;
+
 	return (1);
 }
 
@@ -98,17 +103,8 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 	j = 0;
 	while (!is_separator((*node)) && !is_chevron((*node)))
 	{
-		// if ((*node)->token == RAW)
-		// {
-		// 	if ((*node)->start)
-		// 	{
-		// 		ft_printf("YOOO\n");
-		// 		free((*node)->start);
-		// 	}
-		// }
 		if ((*node)->token == JOKER)
 		{
-			// ft_printf("JOKER : >%s<\n", (*node)->start);
 			char **tab;
 			tab = ft_split((*node)->start, ' ');
 			k = 0;
@@ -118,9 +114,9 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 				free(tab[k]);
 				k++;
 			}
+			(*cmd_tab)[*i][j] = NULL;
 			if ((*node)->start)
 			{
-				// ft_printf("YOOO\n");
 				free((*node)->start);
 			}
 			free(tab);
@@ -138,5 +134,6 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 	(*cmd_tab)[*i][j] = NULL;
 	if (!is_separator((*node)))
 		(*i)++;
+
 	return (1);
 }
