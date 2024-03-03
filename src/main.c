@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/03 16:09:01 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 18:06:46 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	build_prompt(char prompt[])
  * exit builtin implemented without extern function
  * 0 is returned, and the data struct is freed in calling function
  *========================================================================**/
-int	command_is_builtin(char	*cmd_tab[], t_Data *data, char *envp[])
+int	command_is_builtin(char	**cmd_tab, t_Data *data, char *envp[])
 {
 	int	len;
 

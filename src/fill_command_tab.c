@@ -6,11 +6,12 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/03 14:30:45 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 17:52:29 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+void	store_and_free_cmd_tab(char ***cmd_tab);
 
 void	viva_norminette(t_ast_nde **node, int *i)
 {

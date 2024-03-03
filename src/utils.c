@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:22:52 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/03/03 16:27:42 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 18:07:23 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ void	free_command_tab(char ***command_tab)
 {
 	int	i;
 
+	if (!command_tab || !*command_tab)
+        return;
+	
 	i = 0;
 	while ((*command_tab)[i])
 	{
@@ -63,12 +66,9 @@ void	free_command_tab_lg(char ***command_tab)
 	i = 0;
 	while (command_tab[i])
 	{
-		if (command_tab[i])
-		{
-			// ft_printf("command_tab sup[%i][1]: %s\n", i, command_tab[i][0]);
-			free_command_tab(&command_tab[i]);
-			command_tab[i] = NULL;	
-		}
+		// ft_printf("command_tab sup[%i][1]: %s\n", i, command_tab[i][0]);
+		free_command_tab(&(command_tab)[i]);
+		command_tab[i] = NULL;	
 		i++;
 	}
 	if (command_tab)

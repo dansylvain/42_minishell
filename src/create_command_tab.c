@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/03 16:27:22 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 18:04:12 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	build_command_tab(char ****cmd_tab, t_Data *data,
 		t_ast_nde **cmd_tab_node_sav, char *envp[])
 {
 	(*cmd_tab) = create_command_tab(data, (*cmd_tab_node_sav), envp);
+	store_and_free_cmd_tab(*cmd_tab);
 	if (is_pipeline(*cmd_tab_node_sav))
 	{
 		free_sibling_and_child(*cmd_tab_node_sav);		
@@ -93,7 +94,6 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 	cmd_tab = (char ***)ft_calloc(cmd_nbr + 1, sizeof (char **));
 	if (cmd_tab == NULL)
 		return (NULL);
-	store_and_free_cmd_tab(cmd_tab);
 	cmd_tab[cmd_nbr] = NULL;
 	cmd_tab = fill_cmd_tab_tabs(data, node, cmd_tab);
 	return (cmd_tab);

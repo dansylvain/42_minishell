@@ -6,14 +6,14 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/02 17:54:34 by dan              ###   ########.fr        #
+#    Updated: 2024/03/03 17:22:06 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = minishell
 
-CC = cc
+CC = gcc
 
 RLFLAGS = -lreadline -lhistory -I/usr/include/readline
 
