@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/03 10:59:27 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/03 18:25:22 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,24 @@ void	exec_pipex(t_Data *data, char *cmd, char *envp[]);
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data, char *envp[])
 {		
 	t_ast_nde	*token;
-
-	if (raw)
-	{
-		if (raw->child)
-		{
-			token = raw->child->sibling;
-			if (token && token->child)
+	
+	if (raw && raw->child)
+	{		
+		token = raw->child->sibling;
+		if (token && token->child)
+		{	
+						
+			if (leaf_tree_par(token->child->sibling, data, envp))
 			{				
-				if (leaf_tree_par(token->child->sibling, data, envp))
-					exec_pipex(data, ft_strndup(token->start, token->end - token->start + 1), envp);
-				else
-					leaf_tree_par(token->child->sibling->sibling, data, envp);				
+				exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), envp);			
 			}
-		}		
-	}
-	else
-		return (1);
+			else
+				leaf_tree_par(token->child->sibling->sibling, data, envp);				
+		}
+		else
+			return (1);
+				
+	}	
 	return (0);
 }
 
@@ -96,7 +97,7 @@ t_ast_nde	*parse_par(char *str, t_Data *data, char *envp[])
 		;//return (free_tree(root), NULL);
 	leaf_tree_par(root->child, data, envp);
 	//print_tree(root);
-	exit(1);	
+	//exit(1);	
 }
 
 t_ast_nde	*parse(char *str, t_Data *data)
