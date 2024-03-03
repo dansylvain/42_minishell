@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/03 12:18:46 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/03 12:31:41 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	set_all_redir_out(char **argv[], t_redir *redir)
 	return (ret);
 }
 
-static int	set_all_redir_in(char **argv[], t_redir *redir)
+int	set_all_redir_in(char **argv[], t_redir *redir)
 {
 	int	ret;
 

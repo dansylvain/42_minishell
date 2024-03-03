@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/03 12:29:09 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/03 12:42:04 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,15 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 		exit(EXIT_SUCCESS);
 	}
 }
+int	set_all_redir_in(char **argv[], t_redir *redir);
 int	set_all_redir_out(char **argv[], t_redir *redir);
 static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir *redir)
 {
 	pid_t	pid;
 	char 	***argv_sav;
 
+	init_redir(redir);
+	set_pipefd_in(pipefd[0], redir);
 	argv_sav = argv;
 	while (*argv)
 	{
@@ -89,8 +92,8 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 			pid = fork();
 			if (!pid)
 			{
-	init_redir(redir);
-	set_redir_io(argv, redir);
+	if (set_all_redir_in(argv, redir))
+		exit(1);
 	set_pipefd_in(pipefd[0], redir);
 				close_fd(fd_file[1]);
 				set_pipe_forward(pipefd[0], pipefd[1], *redir);
