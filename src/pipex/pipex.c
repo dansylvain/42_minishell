@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/01 11:44:48 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/03 12:29:09 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,13 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 		exit(EXIT_SUCCESS);
 	}
 }
-
+int	set_all_redir_out(char **argv[], t_redir *redir);
 static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir *redir)
 {
 	pid_t	pid;
 	char 	***argv_sav;
 
 	argv_sav = argv;
-	init_redir(redir);
-	set_redir_io(argv, redir);
-	set_pipefd_in(pipefd[0], redir);
 	while (*argv)
 	{
 		if (***argv != '>' && ***argv != '<')
@@ -92,12 +89,20 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 			pid = fork();
 			if (!pid)
 			{
+	init_redir(redir);
+	set_redir_io(argv, redir);
+	set_pipefd_in(pipefd[0], redir);
 				close_fd(fd_file[1]);
 				set_pipe_forward(pipefd[0], pipefd[1], *redir);
 				builtin_or_execve(argv, argv_sav, envp);
 			}
 			else
-				switch_pipes(pipefd);
+			{
+				if(set_all_redir_out(argv, redir))
+					exit(1);
+				switch_pipes(pipefd);				
+			
+			}
 		}
 		argv++;
 	}
@@ -117,6 +122,8 @@ static pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 	pipefd_out[1] = -1;
 	pid = nurcery(argv, envp, redir.fd_file,
 			(int *[]){pipefd_in, pipefd_out}, &redir);
+	
+	//set_redir_io(argv, &redir);
 	close_fd(pipefd_in[1]);
 	pipe_to_screen(pipefd_in[0], redir);
 	close_fd(pipefd_in[0]);

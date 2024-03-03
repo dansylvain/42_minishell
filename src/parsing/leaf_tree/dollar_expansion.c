@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/02 18:42:48 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 10:56:54 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	build_token_and_merge(const t_ast_nde *operator,
 	{
 		if (operator->token == DOLL)
 			str_tok = search_var(operator, data);
-		else if (operator->token == JOKER)
+		else if (operator->token == JOKER) 
 			str_tok = wilcard_func(ft_strndup(operator->start,
 						operator->end - operator->start + 1));
 		if (str_tok)
