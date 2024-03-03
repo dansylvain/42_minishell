@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/03 14:38:12 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 15:21:01 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,6 @@ int	get_cmd_nbr(t_ast_nde *node)
 		if (is_chevron(node))
 		{
 			cmd_nbr++;
-			if (!node->sibling || is_separator(node->sibling)
-				|| is_chevron(node->sibling))
-			{
-				ft_printf("handle this error\n");
-				
-			}
 			if (node->sibling->sibling)
 				node = node->sibling->sibling;
 			else
