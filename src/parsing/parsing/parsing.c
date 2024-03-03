@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/03 18:25:22 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/03 19:27:17 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ int	set_parenthesis(t_ast_nde *node);
 
 // #include "parsing.h"
 // int	set_parenthesis(t_ast_nde *node);
-
+void	print_node(t_ast_nde *node);
 void	exec_pipex(t_Data *data, char *cmd, char *envp[]);
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data, char *envp[])
 {		
 	t_ast_nde	*token;
-	
+	ft_printf("INO\n");
 	if (raw && raw->child)
 	{		
 		token = raw->child->sibling;
@@ -61,14 +61,14 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data, char *envp[])
 						
 			if (leaf_tree_par(token->child->sibling, data, envp))
 			{				
-				exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), envp);			
+				print_node(token);
+				exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), envp);
+				ft_printf("LEAAAAAAAAAAFFFFFF\n");					
 			}
-			else
-				leaf_tree_par(token->child->sibling->sibling, data, envp);				
+			leaf_tree_par(token->child->sibling->sibling, data, envp);			
 		}
 		else
-			return (1);
-				
+			return (1);				
 	}	
 	return (0);
 }
