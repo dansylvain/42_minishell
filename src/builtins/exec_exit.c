@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:30:35 by dan               #+#    #+#             */
-/*   Updated: 2024/03/03 14:40:04 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 16:27:36 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int	exec_exit(t_Data *data, char **command_tab)
 			data->exit_status = 1;
 		}
 	}
-	// store_and_free_cmd_tab(NULL);
-	free_command_tab(command_tab);	
+	free_command_tab(&command_tab);	
 	command_tab = NULL;
 	store_and_free_cmd_tab_node_sav(NULL);
 	store_and_free_cmd_list(NULL);
 	exit_int = data->exit_status;
 	free_data(data);
+	// store_and_free_cmd_tab(NULL);
 	exit(exit_int);
 }
 

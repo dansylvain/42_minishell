@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/28 16:53:05 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 16:10:17 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,15 @@ char	**create_new_env_var(char **envp, char *env_var)
 		new_envp_tab[i] = (char *)ft_calloc((ft_strlen(envp[i]) + 1),
 				sizeof(char));
 		if (new_envp_tab[i] == NULL)
-			return (free_command_tab(new_envp_tab), NULL);
+			return (free_command_tab(&new_envp_tab), NULL);
 		ft_strlcpy(new_envp_tab[i], envp[i], ft_strlen(envp[i]) + 1);
 		i++;
 	}
 	new_envp_tab[i] = (char *)ft_calloc((ft_strlen(env_var) + 1), sizeof(char));
 	if (new_envp_tab[i] == NULL)
-		return (free_command_tab(new_envp_tab), NULL);
+		return (free_command_tab(&new_envp_tab), NULL);
 	ft_strlcpy(new_envp_tab[i], env_var, ft_strlen(env_var) + 1);
-	free_command_tab(envp);
+	free_command_tab(&envp);
 	return (new_envp_tab);
 }
 

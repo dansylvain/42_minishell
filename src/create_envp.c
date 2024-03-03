@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:33:25 by dan               #+#    #+#             */
-/*   Updated: 2024/02/28 18:27:04 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 16:09:26 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 	{
 		envp_tab[i] = (char *)ft_calloc((ft_strlen(envp[i]) + 1), sizeof(char));
 		if (envp_tab[i] == NULL)
-			return (free_command_tab(envp_tab), NULL);
+			return (free_command_tab(&envp_tab), NULL);
 		ft_strlcpy(envp_tab[i], envp[i], ft_strlen(envp[i]) + 1);
 		i++;
 	}
