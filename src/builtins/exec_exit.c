@@ -6,17 +6,20 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:30:35 by dan               #+#    #+#             */
-/*   Updated: 2024/02/27 15:17:04 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 11:45:58 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+void	store_and_free_cmd_list(t_ast_nde *cmd_list);
+void	store_and_free_cmd_tab_node_sav(t_ast_nde *cmd_tab_node_sav);
 
 /**========================================================================
  *                           exec_exit
  *========================================================================**/
 int	exec_exit(t_Data *data, char **command_tab)
 {
+	int exit_int;
 	data->exit_status = 0;
 	ft_printf("exit\n");
 	if (command_tab[1])
@@ -35,7 +38,14 @@ int	exec_exit(t_Data *data, char **command_tab)
 			data->exit_status = 1;
 		}
 	}
-	exit(data->exit_status);
+	free_command_tab(command_tab);	
+	command_tab = NULL;
+	store_and_free_cmd_tab_node_sav(NULL);
+	// store_and_free_cmd_tab(NULL);
+	store_and_free_cmd_list(NULL);
+	exit_int = data->exit_status;
+	free_data(data);
+	exit(exit_int);
 }
 
 /**========================================================================
