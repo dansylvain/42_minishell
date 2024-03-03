@@ -6,13 +6,14 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/03 12:55:31 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 14:38:12 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 t_ast_nde *copy_node_and_child(t_ast_nde *node);
 void	store_and_free_cmd_tab_node_sav(t_ast_nde *cmd_tab_node_sav);
+void	store_and_free_cmd_tab(char ***cmd_tab);
 
 void	launch_command_tab(t_Data *data, t_ast_nde *node,
 		char *envp[], int flag)

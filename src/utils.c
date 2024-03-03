@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:22:52 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/03/03 12:59:54 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 14:32:22 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	free_command_tab(char **command_tab)
 	{
 		if (command_tab[i])
 		{
+			// ft_printf("command_tab[%i]: %s\n", i, command_tab[i]);
 			free(command_tab[i]);
 			command_tab[i] = NULL;
 		}
@@ -65,8 +66,9 @@ void	free_command_tab_lg(char ***command_tab)
 		if (command_tab[i])
 		{
 			free_command_tab(command_tab[i]);
-			command_tab[i++] = NULL;	
+			command_tab[i] = NULL;	
 		}
+		i++;
 	}
 	free(command_tab);
 }
