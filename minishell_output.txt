@@ -1,5 +1,71 @@
 Commande: env | sort | grep -v SHLVL | grep -v ^_
-
+COLORTERM=truecolor
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+DESKTOP_SESSION=ubuntu
+DISPLAY=:0
+GDMSESSION=ubuntu
+GIO_LAUNCHED_DESKTOP_FILE_PID=385263
+GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/terminator.desktop
+GJS_DEBUG_OUTPUT=stderr
+GJS_DEBUG_TOPICS=JS ERROR;JS LOG
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GNOME_SETUP_DISPLAY=:1
+GNOME_SHELL_SESSION_MODE=ubuntu
+GTK_MODULES=gail:atk-bridge
+HOME=/home/dan
+IBUS_DISABLE_SNOOPER=1
+IM_CONFIG_CHECK_ENV=1
+IM_CONFIG_PHASE=1
+INVOCATION_ID=420c3978ca7b408b91777bb21686fb98
+JOURNAL_STREAM=8:578183
+LANG=en_GB.UTF-8
+LANGUAGE=en_GB:en
+LC_ADDRESS=fr_FR.UTF-8
+LC_IDENTIFICATION=fr_FR.UTF-8
+LC_MEASUREMENT=fr_FR.UTF-8
+LC_MONETARY=fr_FR.UTF-8
+LC_NAME=fr_FR.UTF-8
+LC_NUMERIC=fr_FR.UTF-8
+LC_PAPER=fr_FR.UTF-8
+LC_TELEPHONE=fr_FR.UTF-8
+LC_TIME=fr_FR.UTF-8
+LESSCLOSE=/usr/bin/lesspipe %s %s
+LESSOPEN=| /usr/bin/lesspipe %s
+LOGNAME=dan
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+MANAGERPID=831
+NVM_BIN=/home/dan/.nvm/versions/node/v20.10.0/bin
+NVM_CD_FLAGS=
+NVM_DIR=/home/dan/.nvm
+OLDPWD=/home/dan
+PAPERSIZE=a4
+PATH=/home/dan/.nvm/versions/node/v20.10.0/bin:/home/dan/.local/bin:/home/dan/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+PWD=/home/dan/42/minishell_common
+QT_ACCESSIBILITY=1
+QT_IM_MODULE=ibus
+SESSION_MANAGER=local/dan-B315-34:@/tmp/.ICE-unix/376179,unix/dan-B315-34:/tmp/.ICE-unix/376179
+SHELL=/bin/bash
+SSH_AGENT_PID=972
+SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+SYSTEMD_EXEC_PID=376205
+TERMINATOR_DBUS_NAME=net.tenshu.Terminator25ef4b219e3b005583550f2b0f9f990c3
+TERMINATOR_DBUS_PATH=/net/tenshu/Terminator2
+TERMINATOR_UUID=urn:uuid:46a892f5-8e01-4e4b-a06c-14e9f81e98b4
+TERM=xterm-256color
+USER=dan
+USERNAME=dan
+VTE_VERSION=6800
+WAYLAND_DISPLAY=wayland-0
+XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.X1LXJ2
+XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+XDG_CURRENT_DESKTOP=ubuntu:GNOME
+XDG_DATA_DIRS=/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+XDG_MENU_PREFIX=gnome-
+XDG_RUNTIME_DIR=/run/user/1000
+XDG_SESSION_CLASS=user
+XDG_SESSION_DESKTOP=ubuntu
+XDG_SESSION_TYPE=wayland
+XMODIFIERS=@im=ibus
 
 Commande: cat minishell.h | grep ");"$
 /usr/bin/cat: minishell.h: No such file or directory
@@ -8,13 +74,13 @@ Commande: export GHOST=123 | env | grep GHOST
 
 
 Commande: grep hi "<infile" <         ./test_files/infile
-No such file or directory: ./test_files/infile
+
 
 Commande: grep hi "<infile" <         ./test_files/infile
-No such file or directory: ./test_files/infile
+
 
 Commande: echo hi < ./test_files/infile bye bye
-
+hi
 
 Commande: echo <"./test_files/infile" "bonjour       42"
 
@@ -29,133 +95,135 @@ Commande: echo <missing <"./test_files/infile" <missing
 
 
 Commande: cat <"./test_files/infile_big" | cat <"./test_files/infile"
-No such file or directory: ./test_files/infile_big
+
 
 Commande: echo hi | cat <"./test_files/infile"
-No such file or directory: ./test_files/infile
+
 
 Commande: cat <"./test_files/infile" | echo hi
-No such file or directory: ./test_files/infile
+
 
 Commande: cat <"./test_files/infile" | grep hello
-No such file or directory: ./test_files/infile
+
 
 Commande: cat <missing | cat
-No such file or directory: missing
+
 
 Commande: cat <missing | echo oi
-No such file or directory: missing
+
 
 Commande: cat <missing | cat <"./test_files/infile"
-No such file or directory: missing
+
 
 Commande: echo <123 <456 hi | echo 42
 
 
 Commande: echo hi >         ./outfiles/outfile01 bye
-
+free(): invalid next size (fast)
+bye: command not found
+free(): invalid next size (fast)
 
 Commande: ls >"./outfiles/outfile with spaces"
-No such file or directory: ./outfiles/outfile with spaces
+
 
 Commande: ls >"./outfiles/outfile""1""2""3""4""5"
-No such file or directory: ./outfiles/outfile12345
+
 
 Commande: echo hi >./outfiles/outfile01 | echo bye
-No such file or directory: ./outfiles/outfile01
+
 
 Commande: echo hi >./outfiles/outfile01 >>./outfiles/outfile02 | echo bye
-No such file or directory: ./outfiles/outfile01
+
 
 Commande: echo hi | echo >./outfiles/outfile01 bye
-
+bye: command not found
 
 Commande: echo hi >>./outfiles/outfile01 | echo bye
-No such file or directory: ./outfiles/outfile01
+
 
 Commande: echo hi >./outfiles/outfile01 >>./test_files/invalid_permission | echo bye
-No such file or directory: ./outfiles/outfile01
+
 
 Commande: echo hi >./test_files/invalid_permission | echo bye
-No such file or directory: ./test_files/invalid_permission
+
 
 Commande: echo hi >./test_files/invalid_permission >./outfiles/outfile01 | echo bye
-No such file or directory: ./test_files/invalid_permission
+
 
 Commande: echo hi | echo bye >>./test_files/invalid_permission
-No such file or directory: ./test_files/invalid_permission
+
 
 Commande: echo hi | >./outfiles/outfile01 echo bye >./test_files/invalid_permission
-No such file or directory: ./outfiles/outfile01
+
 
 Commande: echo hi | echo bye >./test_files/invalid_permission >./outfiles/outfile01
-No such file or directory: ./test_files/invalid_permission
+
 
 Commande: cat <"./test_files/infile" >./test_files/invalid_permission
-No such file or directory: ./test_files/infile
+
 
 Commande: cat >./test_files/invalid_permission <"./test_files/infile"
-No such file or directory: ./test_files/invalid_permission
+
 
 Commande: cat <missing >./outfiles/outfile01
-No such file or directory: missing
+
 
 Commande: cat >./outfiles/outfile01 <missing
-No such file or directory: ./outfiles/outfile01
+
 
 Commande: cat <missing >./test_files/invalid_permission
-No such file or directory: missing
+
 
 Commande: cat >./test_files/invalid_permission <missing
-No such file or directory: ./test_files/invalid_permission
+
 
 Commande: cat >./outfiles/outfile01 <missing >./test_files/invalid_permission
-No such file or directory: ./outfiles/outfile01
+
 
 Commande: ls >>./test_files/invalid_permission >>./outfiles/outfile02
-No such file or directory: ./test_files/invalid_permission
+
 
 Commande: ls >>./test_files/invalid_permission >>./outfiles/outfile01
-No such file or directory: ./test_files/invalid_permission
+
 
 Commande: ls >>./outfiles/outfile01 >>./test_files/invalid_permission
-No such file or directory: ./outfiles/outfile01
+
 
 Commande: ls >./outfiles/outfile01 >>./test_files/invalid_permission >>./outfiles/outfile02
-No such file or directory: ./outfiles/outfile01
+
 
 Commande: ls <missing >>./test_files/invalid_permission >>./outfiles/outfile02
-No such file or directory: missing
+
 
 Commande: ls >>./test_files/invalid_permission >>./outfiles/outfile02 <missing
-No such file or directory: ./test_files/invalid_permission
+
 
 Commande: echo hi >>./outfiles/outfile01 | echo bye
-No such file or directory: ./outfiles/outfile01
+
 
 Commande: echo hi >>./outfiles/outfile01 >>./outfiles/outfile02 | echo bye
-No such file or directory: ./outfiles/outfile01
+
 
 Commande: echo hi | echo >>./outfiles/outfile01 bye
-
+bye: command not found
 
 Commande: echo hi >>./test_files/invalid_permission | echo bye
-No such file or directory: ./test_files/invalid_permission
+
 
 Commande: echo hi >>./test_files/invalid_permission >./outfiles/outfile01 | echo bye
-No such file or directory: ./test_files/invalid_permission
+
 
 Commande: echo hi | echo bye >>./test_files/invalid_permission
-No such file or directory: ./test_files/invalid_permission
+
 
 Commande: echo hi | echo >>./outfiles/outfile01 bye >./test_files/invalid_permission
 
 
 Commande: cat <minishell.h>./outfiles/outfile
-No such file or directory: minishell.h
+
 
 Commande: cat <minishell.h|ls
-No such file or directory: minishell.h
+
 
 Commande: ./test_files/invalid_permission
 ./test_files/invalid_permission: command not found
@@ -182,9 +250,6 @@ Commande: README.md
 README.md: command not found
 
 Commande: /bin/ls
- 
-Makefile
-README.md
 allowed_functions.md
 bash_output.txt
 compare_bash_and_minishell.sh
@@ -192,36 +257,28 @@ correct_output.txt
 diff_output.txt
 en.subject.pdf
 eval_minishell.pdf
-fichiernul
-fichiernulachier
-file1
-fileout
-fileout2
 gnl_compare_bash_and_minishell.sh
 includes
 lib
+Makefile
 minishell
 minishell_output.txt
 minishell_tester
-not_existing
-notexisting
-outfile
-output.txt
-pouet
-seblin.txt
+mini.svg
+minitest
+myoute2
+outfiles
+README.md
 src
-tes"t
-test1
-test3
 test_commands.txt
-test_lucas
 tester_lucas
 tester_minishell
 testfile
-testfileolala
+test_lucas
 tests.sh
-tet2
+tetat
 to_test
+truc42
 valgrind.supp
 
 Commande: echo 0
@@ -234,71 +291,62 @@ Commande: echo 0
 0
 
 Commande: /bin/ls -al
-total 2096
--rw-r--r--  1 seblin seblin      27 Feb 18 16:54  
-drwxr-xr-x 11 seblin seblin    4096 Feb 26 09:23 .
-drwxr-xr-x 11 seblin seblin    4096 Jan 29 20:52 ..
-drwxr-xr-x  8 seblin seblin    4096 Feb 26 09:22 .git
--rw-r--r--  1 seblin seblin      55 Feb 18 16:49 .gitignore
-drwxr-xr-x  2 seblin seblin    4096 Feb 17 18:33 .vscode
--rw-r--r--  1 seblin seblin    3301 Feb 26 09:22 Makefile
--rw-r--r--  1 seblin seblin     814 Feb 26 09:19 README.md
--rw-r--r--  1 seblin seblin   50859 Feb  3 18:34 allowed_functions.md
--rw-r--r--  1 seblin seblin   13180 Feb 26 09:23 bash_output.txt
--rwxr-xr-x  1 seblin seblin    7680 Feb 21 00:52 compare_bash_and_minishell.sh
--rw-r--r--  1 seblin seblin   27775 Feb  3 18:53 correct_output.txt
--rw-r--r--  1 seblin seblin   59401 Feb  3 18:34 diff_output.txt
--rw-r--r--  1 seblin seblin 1568461 Jan 26 11:14 en.subject.pdf
--rw-r--r--  1 seblin seblin   90973 Feb 14 15:59 eval_minishell.pdf
--rw-r--r--  1 seblin seblin       0 Feb 19 18:25 fichiernul
--rw-r--r--  1 seblin seblin       0 Feb 19 18:25 fichiernulachier
--rw-r--r--  1 seblin seblin    1859 Feb 26 09:19 file1
--rw-r--r--  1 seblin seblin       0 Feb 23 19:42 fileout
--rw-r--r--  1 seblin seblin       0 Feb 26 09:19 fileout2
--rwxr-xr-x  1 seblin seblin    7860 Feb 19 18:48 gnl_compare_bash_and_minishell.sh
-drwxr-xr-x  3 seblin seblin    4096 Feb 26 09:19 includes
-drwxr-xr-x  5 seblin seblin    4096 Jan 25 18:43 lib
--rwxr-xr-x  1 seblin seblin  181040 Feb 26 09:23 minishell
--rw-r--r--  1 seblin seblin    6268 Feb 26 09:23 minishell_output.txt
-drwxr-xr-x  6 seblin seblin    4096 Feb 13 19:37 minishell_tester
--rw-r--r--  1 seblin seblin       6 Feb 14 14:05 not_existing
--rw-r--r--  1 seblin seblin     414 Feb 14 16:56 notexisting
--rw-r--r--  1 seblin seblin       0 Feb 23 19:42 outfile
--rw-r--r--  1 seblin seblin     126 Feb 14 14:02 output.txt
--rw-r--r--  1 seblin seblin       0 Feb 21 00:52 pouet
--rw-r--r--  1 seblin seblin       0 Feb 26 09:19 seblin.txt
-drwxr-xr-x  5 seblin seblin    4096 Feb 26 09:22 src
--rw-r--r--  1 seblin seblin       0 Feb 21 00:52 tes"t
--rw-r--r--  1 seblin seblin      17 Feb 26 09:19 test1
--rw-r--r--  1 seblin seblin       5 Feb 26 09:19 test3
--rw-r--r--  1 seblin seblin     217 Feb  7 18:14 test_commands.txt
-drwxr-xr-x  6 seblin seblin    4096 Feb 26 09:23 test_lucas
-drwxr-xr-x  2 seblin seblin    4096 Feb 26 09:19 tester_lucas
-drwxr-xr-x  2 seblin seblin    4096 Feb 19 18:25 tester_minishell
--rw-r--r--  1 seblin seblin      38 Feb 17 12:46 testfile
--rw-r--r--  1 seblin seblin     102 Feb 21 00:52 testfileolala
--rwxr-xr-x  1 seblin seblin    2595 Feb 14 14:02 tests.sh
--rw-r--r--  1 seblin seblin       6 Feb 26 09:19 tet2
--rw-r--r--  1 seblin seblin    2866 Feb 14 14:05 to_test
--rw-r--r--  1 seblin seblin      70 Feb  3 18:34 valgrind.supp
+total 2384
+drwxrwxrwx 13 dan dan    4096 mars   3 18:19 .
+drwxrwxr-x 14 dan dan    4096 févr. 19 14:31 ..
+-rw-rw-r--  1 dan dan   50859 févr.  2 14:22 allowed_functions.md
+-rw-rw-r--  1 dan dan   12494 mars   4 09:00 bash_output.txt
+-rwxrwxr-x  1 dan dan    7680 févr. 20 16:38 compare_bash_and_minishell.sh
+-rw-rw-r--  1 dan dan   27775 févr.  3 18:49 correct_output.txt
+-rw-rw-r--  1 dan dan   59401 févr.  3 15:52 diff_output.txt
+-rw-rw-r--  1 dan dan 1568461 janv. 26 11:52 en.subject.pdf
+-rw-rw-r--  1 dan dan   90973 févr. 20 11:19 eval_minishell.pdf
+drwxrwxr-x  8 dan dan    4096 mars   4 08:59 .git
+-rw-rw-r--  1 dan dan      71 févr. 28 17:06 .gitignore
+-rwxrwxr-x  1 dan dan    7860 févr. 19 18:48 gnl_compare_bash_and_minishell.sh
+drwxrwxr-x  6 dan dan    4096 mars   3 18:18 includes
+drwxrwxr-x  5 dan dan    4096 janv. 25 09:42 lib
+-rw-rw-r--  1 dan dan    3554 mars   3 18:18 Makefile
+-rwxrwxr-x  1 dan dan  196696 mars   3 18:19 minishell
+-rw-rw-r--  1 dan dan    8012 mars   4 09:00 minishell_output.txt
+drwxrwxr-x  2 dan dan    4096 févr. 26 09:27 minishell_tester
+-rw-rw-r--  1 dan dan  132528 févr. 28 21:00 mini.svg
+drwxrwxr-x  4 dan dan    4096 févr. 26 16:13 minitest
+-rw-rw-r--  1 dan dan      13 mars   3 15:18 myoute2
+-rwxrwxr-x  1 dan dan  156224 févr. 28 17:06 .nfs00000000010e314900000060
+drwxrwxr-x  2 dan dan    4096 mars   4 09:00 outfiles
+-rw-rw-r--  1 dan dan     875 mars   2 19:52 README.md
+drwxrwxr-x  5 dan dan    4096 mars   3 18:19 src
+-rw-rw-r--  1 dan dan     217 févr.  7 16:59 test_commands.txt
+drwxrwxr-x  2 dan dan    4096 févr. 22 09:49 tester_lucas
+drwxrwxr-x  6 dan dan    4096 mars   4 08:58 tester_minishell
+-rw-rw-r--  1 dan dan       6 mars   2 19:52 testfile
+drwxrwxr-x  2 dan dan    4096 févr. 26 09:27 test_lucas
+-rwxrwxr-x  1 dan dan    2595 févr. 14 14:07 tests.sh
+-rw-rw-r--  1 dan dan       1 mars   3 18:18 tetat
+-rw-rw-r--  1 dan dan    2866 févr. 14 13:32 to_test
+-rw-rw-r--  1 dan dan       0 mars   3 15:18 truc42
+-rw-rw-r--  1 dan dan      70 févr.  2 14:22 valgrind.supp
+drwxrwxr-x  2 dan dan    4096 mars   3 15:18 .vscode
 
 Commande: echo 0
 0
 
 Commande: grep -i 'return' src/main.c
-		return 0;
-		return (display_error("Error\n"), 255);
-			return (display_error("Error\n"), free_data(data), 255);
-		return (free_data(data), display_error("Usage: ./minishell\n"), 255);
+		return (display_error("Usage: ./minishell\n"), 255);
+		return (free_data(data), display_error("Error\n"), 255);
 		return (free_data(data), 0);
 	return (0);
+			return (NULL);
+			return (NULL);
+	return (data);	
 			return (ft_printf("exit\n"), 0);
 	return (1);
  * 0 is returned, and the data struct is freed in calling function
-	int	return_pipex;
 		return (1);
-		return (free_command_tab(cmd_tab), 1);
+		return (free_command_tab(&cmd_tab), 1);
 		return (exec_cd(data, cmd_tab), 1);
+		return (ft_printf("HOLLY SHIT!\n"), 1);
 		return (exec_env(data, cmd_tab), 1);
 		return (exec_pwd(data), 1);
 		return (exec_echo(data, cmd_tab), 1);
@@ -310,10 +358,7 @@ Commande: echo 0
 0
 
 Commande: /usr/bin/cat testfile
-test
-motif olala
-motif nononon
-pôuet
+teste
 
 Commande: echo 0
 0
@@ -367,14 +412,8 @@ Commande: echo 0
 0
 
 Commande: ls -a | rev
- 
 .
 ..
-tig.
-erongitig.
-edocsv.
-elifekaM
-dm.EMDAER
 dm.snoitcnuf_dewolla
 txt.tuptuo_hsab
 hs.llehsinim_dna_hsab_erapmoc
@@ -382,37 +421,33 @@ txt.tuptuo_tcerroc
 txt.tuptuo_ffid
 fdp.tcejbus.ne
 fdp.llehsinim_lave
-lunreihcif
-reihcalunreihcif
-1elif
-tuoelif
-2tuoelif
+tig.
+erongitig.
 hs.llehsinim_dna_hsab_erapmoc_lng
 sedulcni
 bil
+elifekaM
 llehsinim
 txt.tuptuo_llehsinim
 retset_llehsinim
-gnitsixe_ton
-gnitsixeton
-eliftuo
-txt.tuptuo
-teuop
-txt.nilbes
+gvs.inim
+tsetinim
+2etuoym
+060000009413e01000000000sfn.
+seliftuo
+dm.EMDAER
 crs
-t"set
-1tset
-3tset
 txt.sdnammoc_tset
-sacul_tset
 sacul_retset
 llehsinim_retset
 eliftset
-alaloeliftset
+sacul_tset
 hs.stset
-2tet
+tatet
 tset_ot
+24curt
 ppus.dnirglav
+edocsv.
 
 Commande: echo 0
 0
@@ -442,14 +477,8 @@ Commande: echo 0
 0
 
 Commande: ls -a
- 
 .
 ..
-.git
-.gitignore
-.vscode
-Makefile
-README.md
 allowed_functions.md
 bash_output.txt
 compare_bash_and_minishell.sh
@@ -457,43 +486,39 @@ correct_output.txt
 diff_output.txt
 en.subject.pdf
 eval_minishell.pdf
-fichiernul
-fichiernulachier
-file1
-fileout
-fileout2
+.git
+.gitignore
 gnl_compare_bash_and_minishell.sh
 includes
 lib
+Makefile
 minishell
 minishell_output.txt
 minishell_tester
-not_existing
-notexisting
-outfile
-output.txt
-pouet
-seblin.txt
+mini.svg
+minitest
+myoute2
+.nfs00000000010e314900000060
+outfiles
+README.md
 src
-tes"t
-test1
-test3
 test_commands.txt
-test_lucas
 tester_lucas
 tester_minishell
 testfile
-testfileolala
+test_lucas
 tests.sh
-tet2
+tetat
 to_test
+truc42
 valgrind.supp
+.vscode
 
 Commande: echo 0
 0
 
 Commande: <noexist cat
-No such file or directory: noexist
+
 
 Commande: echo 0
 0
@@ -511,10 +536,12 @@ Commande: echo 0
 0
 
 Commande: ls includes
+exec_files
 minishell.h
 parsing
-pipex_setup.h
+pipex
 rl_header.h
+root_files
 
 Commande: echo 0
 0
@@ -526,65 +553,53 @@ Commande: echo 0
 0
 
 Commande: ls inclu"des"
+exec_files
 minishell.h
 parsing
-pipex_setup.h
+pipex
 rl_header.h
+root_files
 
 Commande: echo 0
 0
 
 Commande: l's' '-'l
-total 2088
--rw-r--r-- 1 seblin seblin      27 Feb 18 16:54  
--rw-r--r-- 1 seblin seblin    3301 Feb 26 09:22 Makefile
--rw-r--r-- 1 seblin seblin     814 Feb 26 09:19 README.md
--rw-r--r-- 1 seblin seblin   50859 Feb  3 18:34 allowed_functions.md
--rw-r--r-- 1 seblin seblin   19645 Feb 26 09:23 bash_output.txt
--rwxr-xr-x 1 seblin seblin    7680 Feb 21 00:52 compare_bash_and_minishell.sh
--rw-r--r-- 1 seblin seblin   27775 Feb  3 18:53 correct_output.txt
--rw-r--r-- 1 seblin seblin   59401 Feb  3 18:34 diff_output.txt
--rw-r--r-- 1 seblin seblin 1568461 Jan 26 11:14 en.subject.pdf
--rw-r--r-- 1 seblin seblin   90973 Feb 14 15:59 eval_minishell.pdf
--rw-r--r-- 1 seblin seblin       0 Feb 19 18:25 fichiernul
--rw-r--r-- 1 seblin seblin       0 Feb 19 18:25 fichiernulachier
--rw-r--r-- 1 seblin seblin    1859 Feb 26 09:19 file1
--rw-r--r-- 1 seblin seblin       0 Feb 23 19:42 fileout
--rw-r--r-- 1 seblin seblin       0 Feb 26 09:19 fileout2
--rwxr-xr-x 1 seblin seblin    7860 Feb 19 18:48 gnl_compare_bash_and_minishell.sh
-drwxr-xr-x 3 seblin seblin    4096 Feb 26 09:19 includes
-drwxr-xr-x 5 seblin seblin    4096 Jan 25 18:43 lib
--rwxr-xr-x 1 seblin seblin  181040 Feb 26 09:23 minishell
--rw-r--r-- 1 seblin seblin   12411 Feb 26 09:23 minishell_output.txt
-drwxr-xr-x 6 seblin seblin    4096 Feb 13 19:37 minishell_tester
--rw-r--r-- 1 seblin seblin       6 Feb 14 14:05 not_existing
--rw-r--r-- 1 seblin seblin     414 Feb 14 16:56 notexisting
--rw-r--r-- 1 seblin seblin       0 Feb 23 19:42 outfile
--rw-r--r-- 1 seblin seblin     126 Feb 14 14:02 output.txt
--rw-r--r-- 1 seblin seblin       0 Feb 21 00:52 pouet
--rw-r--r-- 1 seblin seblin       0 Feb 26 09:19 seblin.txt
-drwxr-xr-x 5 seblin seblin    4096 Feb 26 09:22 src
--rw-r--r-- 1 seblin seblin       0 Feb 21 00:52 tes"t
--rw-r--r-- 1 seblin seblin      17 Feb 26 09:19 test1
--rw-r--r-- 1 seblin seblin       5 Feb 26 09:19 test3
--rw-r--r-- 1 seblin seblin     217 Feb  7 18:14 test_commands.txt
-drwxr-xr-x 6 seblin seblin    4096 Feb 26 09:23 test_lucas
-drwxr-xr-x 2 seblin seblin    4096 Feb 26 09:19 tester_lucas
-drwxr-xr-x 2 seblin seblin    4096 Feb 19 18:25 tester_minishell
--rw-r--r-- 1 seblin seblin      38 Feb 17 12:46 testfile
--rw-r--r-- 1 seblin seblin     102 Feb 21 00:52 testfileolala
--rwxr-xr-x 1 seblin seblin    2595 Feb 14 14:02 tests.sh
--rw-r--r-- 1 seblin seblin       6 Feb 26 09:19 tet2
--rw-r--r-- 1 seblin seblin    2866 Feb 14 14:05 to_test
--rw-r--r-- 1 seblin seblin      70 Feb  3 18:34 valgrind.supp
+total 2220
+-rw-rw-r-- 1 dan dan   50859 févr.  2 14:22 allowed_functions.md
+-rw-rw-r-- 1 dan dan   18122 mars   4 09:00 bash_output.txt
+-rwxrwxr-x 1 dan dan    7680 févr. 20 16:38 compare_bash_and_minishell.sh
+-rw-rw-r-- 1 dan dan   27775 févr.  3 18:49 correct_output.txt
+-rw-rw-r-- 1 dan dan   59401 févr.  3 15:52 diff_output.txt
+-rw-rw-r-- 1 dan dan 1568461 janv. 26 11:52 en.subject.pdf
+-rw-rw-r-- 1 dan dan   90973 févr. 20 11:19 eval_minishell.pdf
+-rwxrwxr-x 1 dan dan    7860 févr. 19 18:48 gnl_compare_bash_and_minishell.sh
+drwxrwxr-x 6 dan dan    4096 mars   3 18:18 includes
+drwxrwxr-x 5 dan dan    4096 janv. 25 09:42 lib
+-rw-rw-r-- 1 dan dan    3554 mars   3 18:18 Makefile
+-rwxrwxr-x 1 dan dan  196696 mars   3 18:19 minishell
+-rw-rw-r-- 1 dan dan   13284 mars   4 09:00 minishell_output.txt
+drwxrwxr-x 2 dan dan    4096 févr. 26 09:27 minishell_tester
+-rw-rw-r-- 1 dan dan  132528 févr. 28 21:00 mini.svg
+drwxrwxr-x 4 dan dan    4096 févr. 26 16:13 minitest
+-rw-rw-r-- 1 dan dan      13 mars   3 15:18 myoute2
+drwxrwxr-x 2 dan dan    4096 mars   4 09:00 outfiles
+-rw-rw-r-- 1 dan dan     875 mars   2 19:52 README.md
+drwxrwxr-x 5 dan dan    4096 mars   3 18:19 src
+-rw-rw-r-- 1 dan dan     217 févr.  7 16:59 test_commands.txt
+drwxrwxr-x 2 dan dan    4096 févr. 22 09:49 tester_lucas
+drwxrwxr-x 6 dan dan    4096 mars   4 08:58 tester_minishell
+-rw-rw-r-- 1 dan dan       6 mars   2 19:52 testfile
+drwxrwxr-x 2 dan dan    4096 févr. 26 09:27 test_lucas
+-rwxrwxr-x 1 dan dan    2595 févr. 14 14:07 tests.sh
+-rw-rw-r-- 1 dan dan       1 mars   3 18:18 tetat
+-rw-rw-r-- 1 dan dan    2866 févr. 14 13:32 to_test
+-rw-rw-r-- 1 dan dan       0 mars   3 15:18 truc42
+-rw-rw-r-- 1 dan dan      70 févr.  2 14:22 valgrind.supp
 
 Commande: echo 0
 0
 
 Commande: ls 
- 
-Makefile
-README.md
 allowed_functions.md
 bash_output.txt
 compare_bash_and_minishell.sh
@@ -592,40 +607,32 @@ correct_output.txt
 diff_output.txt
 en.subject.pdf
 eval_minishell.pdf
-fichiernul
-fichiernulachier
-file1
-fileout
-fileout2
 gnl_compare_bash_and_minishell.sh
 includes
 lib
+Makefile
 minishell
 minishell_output.txt
 minishell_tester
-not_existing
-notexisting
-outfile
-output.txt
-pouet
-seblin.txt
+mini.svg
+minitest
+myoute2
+outfiles
+README.md
 src
-tes"t
-test1
-test3
 test_commands.txt
-test_lucas
 tester_lucas
 tester_minishell
 testfile
-testfileolala
+test_lucas
 tests.sh
-tet2
+tetat
 to_test
+truc42
 valgrind.supp
 
-Commande: echo 'seblin'
-seblin
+Commande: echo 'dan'
+dan
 
 Commande: echo 0
 0
@@ -639,7 +646,7 @@ Commande: cat includes/minishell.h
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 19:25:32 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 16:28:43 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -666,6 +673,11 @@ typedef struct t_Data
 	int		exit_status;
 }	t_Data;
 
+// extern t_Data	*data;
+
+t_Data	*get_data(char *envp[]);
+
+
 void	build_prompt(char prompt[]);
 void	handle_signals(void);
 int		prompt_loop(t_Data *data, char *envp[]);
@@ -679,7 +691,7 @@ void	exec_pwd(t_Data *data);
 int		exec_cd(t_Data *data, char **command_tab);
 void	exec_echo(t_Data *data, char **command_tab);
 void	exec_unset(t_Data *data, char **command_tab);
-void	free_command_tab(char **command_tab);
+void	free_command_tab(char ***command_tab);
 char	**duplicate_envp(t_Data *data, char *envp[]);
 int		exec_export(char **command_tab, t_Data *data);
 
@@ -689,6 +701,7 @@ char	**create_new_env_var(char **envp, char *env_var);
 char	*get_env_var(t_Data *data, char *to_find);
 void	display_export_tab(char export_tab[][500]);
 void	create_export_tab(t_Data *data, char export_tab[][500]);
+int		are_only_valid_chars(char *str);
 
 /*   exec_echo.c                                  :+:      :+:    :+:   */
 int	is_only_space(char *str);
@@ -713,9 +726,8 @@ char			*wilcard_func(char *pattern);
 
 
 /*   handle_signals.c                                   :+:      :+:    :+:   */
-static void	sigint_handler(int signum);
-static void	sigquit_handler(int signum);
-#endif
+void	sigint_handler(int signum);
+void	sigquit_handler(int signum);
 
 /*   create_command_tab.c                           :+:      :+:    :+:   */
 t_ast_nde 	*copy_sibling(t_ast_nde *node);
@@ -742,6 +754,19 @@ int	create_chevron_tab(char ****cmd_tab, int *i, t_ast_nde **node, t_Data *data)
 void		exec_pipex(t_Data *data, char *cmd, char *envp[]);
 int			exec_exit(t_Data *data, char **command_tab);
 
+
+
+/*   wildcard_expansion.c                               :+:      :+:    :+:   */
+int		get_matching_elements(const char *pattern, DIR *dir,
+			struct dirent *entry, char ***matches);
+int		matches_pattern(const char *filename, const char *pattern);
+char	*wilcard_func(char *pattern);
+char	**expand_wildcards(const char *pattern);
+int		get_str_size(char **matches);
+char	*copy_matches(char ***matches, char **ret_str,
+			int index, char **pattern);
+			
+
 Commande: echo 0
 0
 
@@ -765,518 +790,11 @@ papa
 papa
 maman
 maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-maman
-papa
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-maman
-papa
-maman
-papa
-maman
-papa
-maman
-papa
-maman
-papa
-papa
-maman
-maman
-papa
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
-papa
-papa
-maman
-maman
 
 Commande: echo 0
 0
 
 Commande: cat file1 | grep papa | more
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
-papa
 papa
 papa
 
@@ -1290,7 +808,7 @@ Commande: echo 0
 0
 
 Commande: ls fichiernul | grep bla | more
-
+/usr/bin/ls: cannot access 'fichiernul': No such file or directory
 
 Commande: echo 0
 0
@@ -1329,9 +847,6 @@ Commande: echo 0
 0
 
 Commande: ls
- 
-Makefile
-README.md
 allowed_functions.md
 bash_output.txt
 compare_bash_and_minishell.sh
@@ -1339,36 +854,30 @@ correct_output.txt
 diff_output.txt
 en.subject.pdf
 eval_minishell.pdf
-fichiernul
-fichiernulachier
 file1
 fileout
-fileout2
 gnl_compare_bash_and_minishell.sh
 includes
 lib
+Makefile
 minishell
 minishell_output.txt
 minishell_tester
-not_existing
-notexisting
-outfile
-output.txt
-pouet
-seblin.txt
+mini.svg
+minitest
+myoute2
+outfiles
+README.md
 src
-tes"t
-test1
-test3
 test_commands.txt
-test_lucas
 tester_lucas
 tester_minishell
 testfile
-testfileolala
+test_lucas
 tests.sh
-tet2
+tetat
 to_test
+truc42
 valgrind.supp
 
 Commande: echo 0
@@ -1378,7 +887,7 @@ Commande: cd ..
 
 
 Commande: pwd
-/home/seblin/42/42_minishell
+/home/dan/42/minishell_common
 
 Commande: echo 0
 0
@@ -1390,25 +899,25 @@ Commande: echo 0
 0
 
 Commande: pwd
-/home/seblin/42/42_minishell
+/home/dan/42/minishell_common
 
 Commande: echo 0
 0
 
 Commande: pwd kzbgkbzekgb
-/home/seblin/42/42_minishell
+/home/dan/42/minishell_common
 
 Commande: echo 0
 0
 
 Commande: pwd kzbg  kbzekgb
-/home/seblin/42/42_minishell
+/home/dan/42/minishell_common
 
 Commande: echo 0
 0
 
 Commande: pwd 42 bzekgb
-/home/seblin/42/42_minishell
+/home/dan/42/minishell_common
 
 Commande: echo 0
 0
@@ -1422,7 +931,7 @@ Commande: cat includes/minishell.h
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/02/21 19:25:32 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/03 16:28:43 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1449,6 +958,11 @@ typedef struct t_Data
 	int		exit_status;
 }	t_Data;
 
+// extern t_Data	*data;
+
+t_Data	*get_data(char *envp[]);
+
+
 void	build_prompt(char prompt[]);
 void	handle_signals(void);
 int		prompt_loop(t_Data *data, char *envp[]);
@@ -1462,7 +976,7 @@ void	exec_pwd(t_Data *data);
 int		exec_cd(t_Data *data, char **command_tab);
 void	exec_echo(t_Data *data, char **command_tab);
 void	exec_unset(t_Data *data, char **command_tab);
-void	free_command_tab(char **command_tab);
+void	free_command_tab(char ***command_tab);
 char	**duplicate_envp(t_Data *data, char *envp[]);
 int		exec_export(char **command_tab, t_Data *data);
 
@@ -1472,6 +986,7 @@ char	**create_new_env_var(char **envp, char *env_var);
 char	*get_env_var(t_Data *data, char *to_find);
 void	display_export_tab(char export_tab[][500]);
 void	create_export_tab(t_Data *data, char export_tab[][500]);
+int		are_only_valid_chars(char *str);
 
 /*   exec_echo.c                                  :+:      :+:    :+:   */
 int	is_only_space(char *str);
@@ -1496,9 +1011,8 @@ char			*wilcard_func(char *pattern);
 
 
 /*   handle_signals.c                                   :+:      :+:    :+:   */
-static void	sigint_handler(int signum);
-static void	sigquit_handler(int signum);
-#endif
+void	sigint_handler(int signum);
+void	sigquit_handler(int signum);
 
 /*   create_command_tab.c                           :+:      :+:    :+:   */
 t_ast_nde 	*copy_sibling(t_ast_nde *node);
@@ -1525,11 +1039,151 @@ int	create_chevron_tab(char ****cmd_tab, int *i, t_ast_nde **node, t_Data *data)
 void		exec_pipex(t_Data *data, char *cmd, char *envp[]);
 int			exec_exit(t_Data *data, char **command_tab);
 
+
+
+/*   wildcard_expansion.c                               :+:      :+:    :+:   */
+int		get_matching_elements(const char *pattern, DIR *dir,
+			struct dirent *entry, char ***matches);
+int		matches_pattern(const char *filename, const char *pattern);
+char	*wilcard_func(char *pattern);
+char	**expand_wildcards(const char *pattern);
+int		get_str_size(char **matches);
+char	*copy_matches(char ***matches, char **ret_str,
+			int index, char **pattern);
+			
+
 Commande: echo 0
 0
 
 Commande: cat ../../42/minishell_common/includes/minishell.h
-/usr/bin/cat: ../../42/minishell_common/includes/minishell.h: No such file or directory
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
+/*   Updated: 2024/03/03 16:28:43 by dan              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <signal.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include "../lib/ft_printf/ft_printf.h"
+# include "../lib/libft/libft.h"
+// # include "../lib/get_next_line/get_next_line.h"
+# include "parsing_utils.h"
+# include <dirent.h>
+
+typedef struct t_Data
+{
+	char	**envp_tab;
+	int		exit_status;
+}	t_Data;
+
+// extern t_Data	*data;
+
+t_Data	*get_data(char *envp[]);
+
+
+void	build_prompt(char prompt[]);
+void	handle_signals(void);
+int		prompt_loop(t_Data *data, char *envp[]);
+void	display_error(char *str);
+void	display_error_detail(char *str, char *details, char *str2);
+void	free_data(t_Data *data);
+void	close_minishell(t_Data *data);
+void	exec_env(t_Data *data, char **command_tab);
+int		command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
+void	exec_pwd(t_Data *data);
+int		exec_cd(t_Data *data, char **command_tab);
+void	exec_echo(t_Data *data, char **command_tab);
+void	exec_unset(t_Data *data, char **command_tab);
+void	free_command_tab(char ***command_tab);
+char	**duplicate_envp(t_Data *data, char *envp[]);
+int		exec_export(char **command_tab, t_Data *data);
+
+/*   exec_export.c                                  :+:      :+:    :+:   */
+void	add_env_var_to_envp_tab(char **command_tab, t_Data *data, int *i);
+char	**create_new_env_var(char **envp, char *env_var);
+char	*get_env_var(t_Data *data, char *to_find);
+void	display_export_tab(char export_tab[][500]);
+void	create_export_tab(t_Data *data, char export_tab[][500]);
+int		are_only_valid_chars(char *str);
+
+/*   exec_echo.c                                  :+:      :+:    :+:   */
+int	is_only_space(char *str);
+
+/*   exec_exit.c                                  :+:      :+:    :+:   */
+int	str_is_digit(char *str);
+
+/*   exec_unset.c                                  :+:      :+:    :+:   */
+void	unset_var(char **envp, int index);
+
+
+void		free_command_tab_lg(char ***command_tab);
+int			pipex(char **argv[], char *envp[]);
+t_ast_nde	*copy_node_child(t_ast_nde *node);
+
+/*   exec_pipex.c                                       :+:      :+:    :+:   */
+char		**parse_cmd(char **command, char **env);
+t_ast_nde	*parse(char *str, t_Data *data);
+void		launch_command_tab(t_Data *data, t_ast_nde *node,
+				char *envp[], int flag);
+char			*wilcard_func(char *pattern);
+
+
+/*   handle_signals.c                                   :+:      :+:    :+:   */
+void	sigint_handler(int signum);
+void	sigquit_handler(int signum);
+
+/*   create_command_tab.c                           :+:      :+:    :+:   */
+t_ast_nde 	*copy_sibling(t_ast_nde *node);
+
+/*   create_command_tab.c                               :+:      :+:    :+:   */
+int		is_separator(t_ast_nde *node);
+int		is_chevron(t_ast_nde *node);
+int		is_pipeline(t_ast_nde *cmd_tab_node_sav);
+char	*get_node_str(t_Data *data, t_ast_nde *node);
+void	display_command_tab(char **command_tab);
+void	display_command_tab_big(char ***command_tab);
+void	launch_command_tab(t_Data *data, t_ast_nde *node,
+		char *envp[], int flag);
+char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
+char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab);
+int		get_cmd_nbr(t_ast_nde *node);
+void	build_command_tab(char ****cmd_tab, t_Data *data,
+		t_ast_nde **cmd_tab_node_sav, char *envp[]);
+
+
+int	create_separator_tab(t_Data *data, t_ast_nde **node, char ****cmd_tab, int *i);
+int	create_chevron_tab(char ****cmd_tab, int *i, t_ast_nde **node, t_Data *data);
+
+void		exec_pipex(t_Data *data, char *cmd, char *envp[]);
+int			exec_exit(t_Data *data, char **command_tab);
+
+
+
+/*   wildcard_expansion.c                               :+:      :+:    :+:   */
+int		get_matching_elements(const char *pattern, DIR *dir,
+			struct dirent *entry, char ***matches);
+int		matches_pattern(const char *filename, const char *pattern);
+char	*wilcard_func(char *pattern);
+char	**expand_wildcards(const char *pattern);
+int		get_str_size(char **matches);
+char	*copy_matches(char ***matches, char **ret_str,
+			int index, char **pattern);
+			
 
 Commande: echo 0
 0
@@ -1541,19 +1195,13 @@ Commande: echo 0
 0
 
 Commande: cat <testfile
-test
-motif olala
-motif nononon
-pôuet
+teste
 
 Commande: echo 0
 0
 
 Commande: <outfile cat
-tset
-alalo fitom
-nononon fitom
-teuôp
+etset
 
 Commande: echo 0
 0
@@ -1599,7 +1247,7 @@ Commande: echo 0
 0
 
 Commande: false && echo bbb || echo ccc
-ccc
+
 
 Commande: echo 0
 0
@@ -1641,98 +1289,98 @@ Commande: echo /bin/bash
 Commande: echo 0
 0
 
-Commande: echo seblin/bin/bash$
-seblin/bin/bash$
+Commande: echo dan/bin/bash$
+dan/bin/bash$
 
 Commande: echo 0
 0
 
-Commande: echo seblin/bin/bash
-seblin/bin/bash
+Commande: echo dan/bin/bash
+dan/bin/bash
 
 Commande: echo 0
 0
 
-Commande: echo seblin   /bin/bash $
-seblin /bin/bash $
+Commande: echo dan   /bin/bash $
+dan /bin/bash $
 
 Commande: echo 0
 0
 
-Commande: echo 'seblin/bin/bash$'
-seblin/bin/bash$
+Commande: echo 'dan/bin/bash$'
+dan/bin/bash$
 
 Commande: echo 0
 0
 
-Commande: echo seblin /bin/bash $ 
-seblin /bin/bash $
+Commande: echo dan /bin/bash $ 
+dan /bin/bash $
 
 Commande: echo 0
 0
 
-Commande: echo seblin/bin/bash
-seblin/bin/bash
+Commande: echo dan/bin/bash
+dan/bin/bash
 
 Commande: echo 0
 0
 
-Commande: echo "seblin$  SHELL $ "
-seblin$  SHELL $ 
+Commande: echo "dan$  SHELL $ "
+dan$  SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo "trrtseblin$   SHELL $ "
-trrtseblin$   SHELL $ 
+Commande: echo "trrtdan$   SHELL $ "
+trrtdan$   SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo "trrtseblin   SHELL $ "
-trrtseblin   SHELL $ 
+Commande: echo "trrtdan   SHELL $ "
+trrtdan   SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo "trrtseblin SHELL $ "
-trrtseblin SHELL $ 
+Commande: echo "trrtdan SHELL $ "
+trrtdan SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo trrtseblin$   SHELL $ 
-trrtseblin$ SHELL $
+Commande: echo trrtdan$   SHELL $ 
+trrtdan$ SHELL $
 
 Commande: echo 0
 0
 
-Commande: echo "trrtseblin'Mach' $'LOGNAME'  SHELL $ "
-trrtseblin'Mach' $'LOGNAME'  SHELL $ 
+Commande: echo "trrtdan'Mach' $'LOGNAME'  SHELL $ "
+trrtdan'Mach' $'LOGNAME'  SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo "trrt'Mach' seblin'Mach' $'LOGNA'M''E'  SHELL $ "
-trrt'Mach' seblin'Mach' $'LOGNA'M''E'  SHELL $ 
+Commande: echo "trrt'Mach' dan'Mach' $'LOGNA'M''E'  SHELL $ "
+trrt'Mach' dan'Mach' $'LOGNA'M''E'  SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo "trrt'Mach'p louseblin'Mach' $'LOGNA'M''E'42  SHELL $ "
-trrt'Mach'p louseblin'Mach' $'LOGNA'M''E'42  SHELL $ 
+Commande: echo "trrt'Mach'p loudan'Mach' $'LOGNA'M''E'42  SHELL $ "
+trrt'Mach'p loudan'Mach' $'LOGNA'M''E'42  SHELL $ 
 
 Commande: echo 0
 0
 
-Commande: echo "seblin"
-seblin
+Commande: echo "dan"
+dan
 
 Commande: echo 0
 0
 
-Commande: echo seblin
-seblin
+Commande: echo dan
+dan
 
 Commande: echo 0
 0

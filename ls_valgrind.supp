@@ -1,0 +1,6 @@
+{
+ls_ignore_leaks
+Memcheck:Leak
+...
+obj:*/ls
+}
