@@ -1,10 +1,12 @@
 Commande: /bin/ls
+Makefile
+README.md
 allowed_functions.md
 bash_output.txt
 clear_valgrind.supp
 commands.txt
-compare_bash_and_minishell_copy.sh
 compare_bash_and_minishell.sh
+compare_bash_and_minishell_copy.sh
 correct_output.txt
 diff_output.txt
 en.subject.pdf
@@ -19,13 +21,12 @@ leaks_output.txt
 lib
 lol.c
 ls_valgrind.supp
-Makefile
-memory_check_copy.sh
 memory_check.sh
+memory_check_copy.sh
+mini.svg
 minishell
 minishell_output.txt
 minishell_tester
-mini.svg
 minitest
 myoute2
 outasup
@@ -33,14 +34,13 @@ outasupp
 outeasup
 outfile
 outfiles
-README.md
 seb
 src
 test_commands.txt
+test_lucas
 tester_lucas
 tester_minishell
 testfile
-test_lucas
 tests.sh
 tetat
 to_test
@@ -55,61 +55,61 @@ Commande: "      				"
 ./compare_bash_and_minishell_copy.sh: line 21: $'      \t\t\t\t': command not found
 
 Commande: /bin/ls -a -l
-total 2432
-drwxrwxrwx 14 dan dan    4096 mars   4 16:37 .
-drwxrwxr-x 14 dan dan    4096 févr. 19 14:31 ..
--rw-rw-r--  1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r--  1 dan dan     824 mars   4 16:37 bash_output.txt
--rw-rw-r--  1 dan dan    2186 mars   4 13:52 clear_valgrind.supp
--rwxrwxrwx  1 dan dan    3242 mars   4 15:53 commands.txt
--rwxrwxrwx  1 dan dan    1839 mars   4 16:23 compare_bash_and_minishell_copy.sh
--rwxrwxr-x  1 dan dan    5588 mars   4 15:44 compare_bash_and_minishell.sh
--rw-rw-r--  1 dan dan   27775 févr.  3 18:49 correct_output.txt
--rw-rw-r--  1 dan dan   59401 févr.  3 15:52 diff_output.txt
--rw-rw-r--  1 dan dan 1568461 janv. 26 11:52 en.subject.pdf
--rw-rw-r--  1 dan dan   90973 févr. 20 11:19 eval_minishell.pdf
--rwxrwxrwx  1 dan dan       5 mars   4 13:52 file
--rw-rw-r--  1 dan dan      22 mars   4 16:24 file1
--rw--w----  1 dan dan     270 mars   4 16:24 file2
--rw-rw-r--  1 dan dan       0 mars   4 16:24 fileout
-drwxrwxr-x  8 dan dan    4096 mars   4 16:11 .git
--rw-rw-r--  1 dan dan      71 févr. 28 17:06 .gitignore
--rwxrwxr-x  1 dan dan    7866 mars   4 14:41 gnl_compare_bash_and_minishell.sh
-drwxrwxr-x  6 dan dan    4096 mars   3 18:18 includes
--rw-rw-r--  1 dan dan       0 mars   4 16:37 leaks_output.txt
-drwxrwxr-x  5 dan dan    4096 janv. 25 09:42 lib
--rw-rw-r--  1 dan dan       0 mars   4 16:24 lol.c
--rw-rw-r--  1 dan dan      46 mars   4 13:52 ls_valgrind.supp
--rw-rw-r--  1 dan dan    3610 mars   4 13:52 Makefile
--rwxrwxrwx  1 dan dan    2000 mars   4 16:36 memory_check_copy.sh
--rwxrwxr-x  1 dan dan    5530 mars   4 16:01 memory_check.sh
--rwxrwxr-x  1 dan dan  211632 mars   4 16:37 minishell
--rw-rw-r--  1 dan dan    2051 mars   4 16:37 minishell_output.txt
-drwxrwxr-x  2 dan dan    4096 févr. 26 09:27 minishell_tester
--rw-rw-r--  1 dan dan  132528 févr. 28 21:00 mini.svg
-drwxrwxr-x  4 dan dan    4096 févr. 26 16:13 minitest
--rw-rw-r--  1 dan dan      13 mars   3 15:18 myoute2
--rwxrwxr-x  1 dan dan  156224 févr. 28 17:06 .nfs00000000010e314900000060
--rw-rw-r--  1 dan dan       0 mars   4 13:52 outasup
--rw-rw-r--  1 dan dan       7 mars   4 13:52 outasupp
--rw-rw-r--  1 dan dan       0 mars   4 13:52 outeasup
--rw-rw-r--  1 dan dan       7 mars   4 16:25 outfile
-drwxrwxr-x  2 dan dan    4096 mars   4 13:52 outfiles
--rw-rw-r--  1 dan dan     875 mars   2 19:52 README.md
-drwxrwxr-x  2 dan dan    4096 mars   4 16:36 seb
-drwxrwxr-x  5 dan dan    4096 mars   4 16:37 src
--rw-rw-r--  1 dan dan     217 févr.  7 16:59 test_commands.txt
-drwxrwxr-x  2 dan dan    4096 févr. 22 09:49 tester_lucas
-drwxrwxr-x  6 dan dan    4096 mars   4 16:26 tester_minishell
--rw-rw-r--  1 dan dan       6 mars   2 19:52 testfile
-drwxrwxr-x  2 dan dan    4096 févr. 26 09:27 test_lucas
--rwxrwxr-x  1 dan dan    2595 févr. 14 14:07 tests.sh
--rw-rw-r--  1 dan dan       1 mars   3 18:18 tetat
--rw-rw-r--  1 dan dan    2866 févr. 14 13:32 to_test
--rw-rw-r--  1 dan dan       0 mars   3 15:18 truc42
--rw-rw-r--  1 dan dan     418 mars   4 14:09 valgrind.supp
--rw-rw-r--  1 dan dan       0 mars   4 13:52 voilou
-drwxrwxr-x  2 dan dan    4096 mars   4 13:52 .vscode
+total 2436
+drwxr-xr-x 14 seblin seblin    4096 Mar  4 17:31 .
+drwxr-xr-x 11 seblin seblin    4096 Jan 29 20:52 ..
+drwxr-xr-x  8 seblin seblin    4096 Mar  4 17:43 .git
+-rw-r--r--  1 seblin seblin      71 Feb 28 17:18 .gitignore
+-rwxr-xr-x  1 seblin seblin  156224 Feb 28 17:18 .nfs00000000010e314900000060
+drwxr-xr-x  2 seblin seblin    4096 Mar  4 13:24 .vscode
+-rw-r--r--  1 seblin seblin    3610 Mar  4 13:27 Makefile
+-rw-r--r--  1 seblin seblin     875 Feb 29 17:49 README.md
+-rw-r--r--  1 seblin seblin   50859 Feb  3 18:34 allowed_functions.md
+-rw-r--r--  1 seblin seblin     824 Mar  4 17:47 bash_output.txt
+-rw-r--r--  1 seblin seblin    2186 Mar  4 13:27 clear_valgrind.supp
+-rwxr-xr-x  1 seblin seblin    3242 Mar  4 17:30 commands.txt
+-rwxr-xr-x  1 seblin seblin    5588 Mar  4 17:30 compare_bash_and_minishell.sh
+-rwxr-xr-x  1 seblin seblin    1839 Mar  4 17:30 compare_bash_and_minishell_copy.sh
+-rw-r--r--  1 seblin seblin   27775 Feb  3 18:53 correct_output.txt
+-rw-r--r--  1 seblin seblin   59401 Feb  3 18:34 diff_output.txt
+-rw-r--r--  1 seblin seblin 1568461 Jan 26 11:14 en.subject.pdf
+-rw-r--r--  1 seblin seblin   90973 Feb 14 15:59 eval_minishell.pdf
+-rwxr-xr-x  1 seblin seblin       5 Mar  4 17:30 file
+-rw-r--r--  1 seblin seblin      22 Mar  4 17:46 file1
+-rw-r--r--  1 seblin seblin     310 Mar  4 17:46 file2
+-rw-r--r--  1 seblin seblin       0 Mar  4 17:46 fileout
+-rwxr-xr-x  1 seblin seblin    7866 Mar  4 17:30 gnl_compare_bash_and_minishell.sh
+drwxr-xr-x  4 seblin seblin    4096 Mar  4 13:27 includes
+-rw-r--r--  1 seblin seblin    6516 Mar  4 17:47 leaks_output.txt
+drwxr-xr-x  5 seblin seblin    4096 Jan 25 18:43 lib
+-rw-r--r--  1 seblin seblin       0 Mar  4 17:46 lol.c
+-rw-r--r--  1 seblin seblin      46 Mar  4 13:27 ls_valgrind.supp
+-rwxr-xr-x  1 seblin seblin    5530 Mar  4 17:30 memory_check.sh
+-rwxr-xr-x  1 seblin seblin    2000 Mar  4 17:30 memory_check_copy.sh
+-rw-r--r--  1 seblin seblin  132528 Feb 28 17:17 mini.svg
+-rwxr-xr-x  1 seblin seblin  211632 Mar  4 17:31 minishell
+-rw-r--r--  1 seblin seblin    2039 Mar  4 17:47 minishell_output.txt
+drwxr-xr-x  6 seblin seblin    4096 Feb 13 19:37 minishell_tester
+drwxr-xr-x  2 seblin seblin    4096 Feb 28 17:18 minitest
+-rw-r--r--  1 seblin seblin      13 Mar  3 14:55 myoute2
+-rw-r--r--  1 seblin seblin       0 Mar  4 13:24 outasup
+-rw-r--r--  1 seblin seblin       7 Mar  4 13:24 outasupp
+-rw-r--r--  1 seblin seblin       0 Mar  4 13:24 outeasup
+-rw-r--r--  1 seblin seblin       7 Mar  4 17:47 outfile
+drwxr-xr-x  2 seblin seblin    4096 Mar  4 13:27 outfiles
+drwxr-xr-x  2 seblin seblin    4096 Mar  4 17:30 seb
+drwxr-xr-x  5 seblin seblin    4096 Mar  4 17:31 src
+-rw-r--r--  1 seblin seblin     217 Feb  7 18:14 test_commands.txt
+drwxr-xr-x  6 seblin seblin    4096 Mar  4 13:29 test_lucas
+drwxr-xr-x  2 seblin seblin    4096 Feb 26 09:27 tester_lucas
+drwxr-xr-x  2 seblin seblin    4096 Feb 28 17:18 tester_minishell
+-rw-r--r--  1 seblin seblin       6 Feb 29 17:49 testfile
+-rwxr-xr-x  1 seblin seblin    2595 Feb 14 14:02 tests.sh
+-rw-r--r--  1 seblin seblin       1 Mar  4 13:27 tetat
+-rw-r--r--  1 seblin seblin    2866 Feb 14 14:05 to_test
+-rw-r--r--  1 seblin seblin       0 Mar  3 14:55 truc42
+-rw-r--r--  1 seblin seblin     418 Mar  4 17:30 valgrind.supp
+-rw-r--r--  1 seblin seblin       0 Mar  4 13:24 voilou
 
 Commande: echo -n -n test
 test
@@ -151,75 +151,41 @@ Commande: cat lol.c | cat > lol.c
 
 
 Commande: ls 'includes/' | rev
-selif_cexe
 h.llehsinim
 gnisrap
 xepip
 h.redaeh_lr
-selif_toor
 
 Commande: echo '$USER'
 $USER
 
 Commande: env
 SHELL=/bin/bash
-SESSION_MANAGER=local/dan-B315-34:@/tmp/.ICE-unix/376179,unix/dan-B315-34:/tmp/.ICE-unix/376179
-QT_ACCESSIBILITY=1
-COLORTERM=truecolor
-XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
-XDG_MENU_PREFIX=gnome-
-GNOME_DESKTOP_SESSION_ID=this-is-deprecated
-LANGUAGE=en_GB:en
-LC_ADDRESS=fr_FR.UTF-8
-GNOME_SHELL_SESSION_MODE=ubuntu
-LC_NAME=fr_FR.UTF-8
-SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-XMODIFIERS=@im=ibus
-DESKTOP_SESSION=ubuntu
-LC_MONETARY=fr_FR.UTF-8
-SSH_AGENT_PID=972
-GTK_MODULES=gail:atk-bridge
-PWD=/home/dan/42/minishell_common
-XDG_SESSION_DESKTOP=ubuntu
-LOGNAME=dan
-XDG_SESSION_TYPE=wayland
-SYSTEMD_EXEC_PID=614749
-XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.X1LXJ2
-IM_CONFIG_CHECK_ENV=1
-HOME=/home/dan
-USERNAME=dan
-IM_CONFIG_PHASE=1
-LANG=en_GB.UTF-8
-LC_PAPER=fr_FR.UTF-8
+WSL2_GUI_APPS_ENABLED=1
+WSL_DISTRO_NAME=Ubuntu
+WT_SESSION=3154c942-b91e-4cbd-8540-71cb68de5a54
+NAME=Laptop
+PWD=/home/seblin/42/42_minishell
+LOGNAME=seblin
+HOME=/home/seblin
+LANG=C.UTF-8
+WSL_INTEROP=/run/WSL/2804_interop
 LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
-XDG_CURRENT_DESKTOP=ubuntu:GNOME
-VTE_VERSION=6800
 WAYLAND_DISPLAY=wayland-0
-GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/457a9b7e_0573_4190_8a6a_4a5bf12b09a8
-NVM_DIR=/home/dan/.nvm
-GNOME_SETUP_DISPLAY=:1
 LESSCLOSE=/usr/bin/lesspipe %s %s
-XDG_SESSION_CLASS=user
-LC_IDENTIFICATION=fr_FR.UTF-8
 TERM=xterm-256color
 LESSOPEN=| /usr/bin/lesspipe %s
-USER=dan
-GNOME_TERMINAL_SERVICE=:1.5547
+USER=seblin
 DISPLAY=:0
 SHLVL=2
-NVM_CD_FLAGS=
-LC_TELEPHONE=fr_FR.UTF-8
-QT_IM_MODULE=ibus
-LC_MEASUREMENT=fr_FR.UTF-8
-PAPERSIZE=a4
-XDG_RUNTIME_DIR=/run/user/1000
-LC_TIME=fr_FR.UTF-8
-XDG_DATA_DIRS=/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
-PATH=/home/dan/.nvm/versions/node/v20.10.0/bin:/home/dan/.local/bin:/home/dan/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
-GDMSESSION=ubuntu
-DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
-NVM_BIN=/home/dan/.nvm/versions/node/v20.10.0/bin
-LC_NUMERIC=fr_FR.UTF-8
+XDG_RUNTIME_DIR=/mnt/wslg/runtime-dir
+WSLENV=WT_SESSION:WT_PROFILE_ID:
+XDG_DATA_DIRS=/usr/local/share:/usr/share:/var/lib/snapd/desktop
+PATH=/home/seblin/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Microsoft/jdk-11.0.16.101-hotspot/bin:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Microsoft SQL Server/130/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Program Files/Microsoft/Web Platform Installer/:/mnt/c/Program Files (x86)/Certbot/bin:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Users/sierr/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/sierr/.dotnet/tools:/mnt/c/Users/sierr/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/sierr/.dotnet/tools:/mnt/c/Users/sierr/AppData/Roaming/npm:/mnt/c/mingw64/bin:/mnt/c/Users/sierr/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin
+HOSTTYPE=x86_64
+PULSE_SERVER=unix:/mnt/wslg/PulseServer
+WT_PROFILE_ID={51855cb2-8cce-5362-8f54-464b92b32386}
+OLDPWD=/home/seblin
 _=/usr/bin/env
 
 Commande: export SHELL
@@ -238,16 +204,16 @@ Commande: cd
 
 
 Commande: cd ../../42/minishell_common/includes
-
+./compare_bash_and_minishell_copy.sh: line 21: cd: ../../42/minishell_common/includes: No such file or directory
 
 Commande: cd .
 
 
 Commande: pwd
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: pwd ../..
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: # "./../../42/minishell_common/minishell"
 
@@ -265,27 +231,29 @@ Commande: # "cat | cat | ls"
 
 
 Commande: echo -n -n $USER$LOGNAME
-dandan
+seblinseblin
 
 Commande: echo -n -n "$USER$LOGNAME"
-dandan
+seblinseblin
 
 Commande: echo "$USER"
-dan
+seblin
 
 Commande: $USER
-./compare_bash_and_minishell_copy.sh: line 21: dan: command not found
+./compare_bash_and_minishell_copy.sh: line 21: seblin: command not found
 
 Commande: 
 
 
 Commande: /usr/bin/ls
+Makefile
+README.md
 allowed_functions.md
 bash_output.txt
 clear_valgrind.supp
 commands.txt
-compare_bash_and_minishell_copy.sh
 compare_bash_and_minishell.sh
+compare_bash_and_minishell_copy.sh
 correct_output.txt
 diff_output.txt
 en.subject.pdf
@@ -300,13 +268,12 @@ leaks_output.txt
 lib
 lol.c
 ls_valgrind.supp
-Makefile
-memory_check_copy.sh
 memory_check.sh
+memory_check_copy.sh
+mini.svg
 minishell
 minishell_output.txt
 minishell_tester
-mini.svg
 minitest
 myoute2
 outasup
@@ -314,14 +281,13 @@ outasupp
 outeasup
 outfile
 outfiles
-README.md
 seb
 src
 test_commands.txt
+test_lucas
 tester_lucas
 tester_minishell
 testfile
-test_lucas
 tests.sh
 tetat
 to_test
@@ -339,61 +305,61 @@ Commande: echo $?
 0
 
 Commande: /usr/bin/ls -al
-total 2444
-drwxrwxrwx 14 dan dan    4096 mars   4 16:37 .
-drwxrwxr-x 14 dan dan    4096 févr. 19 14:31 ..
--rw-rw-r--  1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r--  1 dan dan    9652 mars   4 16:37 bash_output.txt
--rw-rw-r--  1 dan dan    2186 mars   4 13:52 clear_valgrind.supp
--rwxrwxrwx  1 dan dan    3242 mars   4 15:53 commands.txt
--rwxrwxrwx  1 dan dan    1839 mars   4 16:23 compare_bash_and_minishell_copy.sh
--rwxrwxr-x  1 dan dan    5588 mars   4 15:44 compare_bash_and_minishell.sh
--rw-rw-r--  1 dan dan   27775 févr.  3 18:49 correct_output.txt
--rw-rw-r--  1 dan dan   59401 févr.  3 15:52 diff_output.txt
--rw-rw-r--  1 dan dan 1568461 janv. 26 11:52 en.subject.pdf
--rw-rw-r--  1 dan dan   90973 févr. 20 11:19 eval_minishell.pdf
--rwxrwxrwx  1 dan dan       5 mars   4 13:52 file
--rw-rw-r--  1 dan dan       0 mars   4 16:37 file1
--rw--w----  1 dan dan     280 mars   4 16:37 file2
--rw-rw-r--  1 dan dan       0 mars   4 16:24 fileout
-drwxrwxr-x  8 dan dan    4096 mars   4 16:11 .git
--rw-rw-r--  1 dan dan      71 févr. 28 17:06 .gitignore
--rwxrwxr-x  1 dan dan    7866 mars   4 14:41 gnl_compare_bash_and_minishell.sh
-drwxrwxr-x  6 dan dan    4096 mars   3 18:18 includes
--rw-rw-r--  1 dan dan       0 mars   4 16:37 leaks_output.txt
-drwxrwxr-x  5 dan dan    4096 janv. 25 09:42 lib
--rw-rw-r--  1 dan dan       0 mars   4 16:37 lol.c
--rw-rw-r--  1 dan dan      46 mars   4 13:52 ls_valgrind.supp
--rw-rw-r--  1 dan dan    3610 mars   4 13:52 Makefile
--rwxrwxrwx  1 dan dan    2000 mars   4 16:36 memory_check_copy.sh
--rwxrwxr-x  1 dan dan    5530 mars   4 16:01 memory_check.sh
--rwxrwxr-x  1 dan dan  211632 mars   4 16:37 minishell
--rw-rw-r--  1 dan dan   10635 mars   4 16:37 minishell_output.txt
-drwxrwxr-x  2 dan dan    4096 févr. 26 09:27 minishell_tester
--rw-rw-r--  1 dan dan  132528 févr. 28 21:00 mini.svg
-drwxrwxr-x  4 dan dan    4096 févr. 26 16:13 minitest
--rw-rw-r--  1 dan dan      13 mars   3 15:18 myoute2
--rwxrwxr-x  1 dan dan  156224 févr. 28 17:06 .nfs00000000010e314900000060
--rw-rw-r--  1 dan dan       0 mars   4 13:52 outasup
--rw-rw-r--  1 dan dan       7 mars   4 13:52 outasupp
--rw-rw-r--  1 dan dan       0 mars   4 13:52 outeasup
--rw-rw-r--  1 dan dan       7 mars   4 16:25 outfile
-drwxrwxr-x  2 dan dan    4096 mars   4 13:52 outfiles
--rw-rw-r--  1 dan dan     875 mars   2 19:52 README.md
-drwxrwxr-x  2 dan dan    4096 mars   4 16:36 seb
-drwxrwxr-x  5 dan dan    4096 mars   4 16:37 src
--rw-rw-r--  1 dan dan     217 févr.  7 16:59 test_commands.txt
-drwxrwxr-x  2 dan dan    4096 févr. 22 09:49 tester_lucas
-drwxrwxr-x  6 dan dan    4096 mars   4 16:26 tester_minishell
--rw-rw-r--  1 dan dan       6 mars   2 19:52 testfile
-drwxrwxr-x  2 dan dan    4096 févr. 26 09:27 test_lucas
--rwxrwxr-x  1 dan dan    2595 févr. 14 14:07 tests.sh
--rw-rw-r--  1 dan dan       1 mars   3 18:18 tetat
--rw-rw-r--  1 dan dan    2866 févr. 14 13:32 to_test
--rw-rw-r--  1 dan dan       0 mars   3 15:18 truc42
--rw-rw-r--  1 dan dan     418 mars   4 14:09 valgrind.supp
--rw-rw-r--  1 dan dan       0 mars   4 13:52 voilou
-drwxrwxr-x  2 dan dan    4096 mars   4 13:52 .vscode
+total 2448
+drwxr-xr-x 14 seblin seblin    4096 Mar  4 17:31 .
+drwxr-xr-x 11 seblin seblin    4096 Jan 29 20:52 ..
+drwxr-xr-x  8 seblin seblin    4096 Mar  4 17:43 .git
+-rw-r--r--  1 seblin seblin      71 Feb 28 17:18 .gitignore
+-rwxr-xr-x  1 seblin seblin  156224 Feb 28 17:18 .nfs00000000010e314900000060
+drwxr-xr-x  2 seblin seblin    4096 Mar  4 13:24 .vscode
+-rw-r--r--  1 seblin seblin    3610 Mar  4 13:27 Makefile
+-rw-r--r--  1 seblin seblin     875 Feb 29 17:49 README.md
+-rw-r--r--  1 seblin seblin   50859 Feb  3 18:34 allowed_functions.md
+-rw-r--r--  1 seblin seblin    9879 Mar  4 17:48 bash_output.txt
+-rw-r--r--  1 seblin seblin    2186 Mar  4 13:27 clear_valgrind.supp
+-rwxr-xr-x  1 seblin seblin    3242 Mar  4 17:30 commands.txt
+-rwxr-xr-x  1 seblin seblin    5588 Mar  4 17:30 compare_bash_and_minishell.sh
+-rwxr-xr-x  1 seblin seblin    1839 Mar  4 17:30 compare_bash_and_minishell_copy.sh
+-rw-r--r--  1 seblin seblin   27775 Feb  3 18:53 correct_output.txt
+-rw-r--r--  1 seblin seblin   59401 Feb  3 18:34 diff_output.txt
+-rw-r--r--  1 seblin seblin 1568461 Jan 26 11:14 en.subject.pdf
+-rw-r--r--  1 seblin seblin   90973 Feb 14 15:59 eval_minishell.pdf
+-rwxr-xr-x  1 seblin seblin       5 Mar  4 17:30 file
+-rw-r--r--  1 seblin seblin       0 Mar  4 17:48 file1
+-rw-r--r--  1 seblin seblin     320 Mar  4 17:48 file2
+-rw-r--r--  1 seblin seblin       0 Mar  4 17:46 fileout
+-rwxr-xr-x  1 seblin seblin    7866 Mar  4 17:30 gnl_compare_bash_and_minishell.sh
+drwxr-xr-x  4 seblin seblin    4096 Mar  4 13:27 includes
+-rw-r--r--  1 seblin seblin    6516 Mar  4 17:47 leaks_output.txt
+drwxr-xr-x  5 seblin seblin    4096 Jan 25 18:43 lib
+-rw-r--r--  1 seblin seblin       0 Mar  4 17:47 lol.c
+-rw-r--r--  1 seblin seblin      46 Mar  4 13:27 ls_valgrind.supp
+-rwxr-xr-x  1 seblin seblin    5530 Mar  4 17:30 memory_check.sh
+-rwxr-xr-x  1 seblin seblin    2000 Mar  4 17:30 memory_check_copy.sh
+-rw-r--r--  1 seblin seblin  132528 Feb 28 17:17 mini.svg
+-rwxr-xr-x  1 seblin seblin  211632 Mar  4 17:31 minishell
+-rw-r--r--  1 seblin seblin   10798 Mar  4 17:48 minishell_output.txt
+drwxr-xr-x  6 seblin seblin    4096 Feb 13 19:37 minishell_tester
+drwxr-xr-x  2 seblin seblin    4096 Feb 28 17:18 minitest
+-rw-r--r--  1 seblin seblin      13 Mar  3 14:55 myoute2
+-rw-r--r--  1 seblin seblin       0 Mar  4 13:24 outasup
+-rw-r--r--  1 seblin seblin       7 Mar  4 13:24 outasupp
+-rw-r--r--  1 seblin seblin       0 Mar  4 13:24 outeasup
+-rw-r--r--  1 seblin seblin       7 Mar  4 17:47 outfile
+drwxr-xr-x  2 seblin seblin    4096 Mar  4 13:27 outfiles
+drwxr-xr-x  2 seblin seblin    4096 Mar  4 17:30 seb
+drwxr-xr-x  5 seblin seblin    4096 Mar  4 17:31 src
+-rw-r--r--  1 seblin seblin     217 Feb  7 18:14 test_commands.txt
+drwxr-xr-x  6 seblin seblin    4096 Mar  4 13:29 test_lucas
+drwxr-xr-x  2 seblin seblin    4096 Feb 26 09:27 tester_lucas
+drwxr-xr-x  2 seblin seblin    4096 Feb 28 17:18 tester_minishell
+-rw-r--r--  1 seblin seblin       6 Feb 29 17:49 testfile
+-rwxr-xr-x  1 seblin seblin    2595 Feb 14 14:02 tests.sh
+-rw-r--r--  1 seblin seblin       1 Mar  4 13:27 tetat
+-rw-r--r--  1 seblin seblin    2866 Feb 14 14:05 to_test
+-rw-r--r--  1 seblin seblin       0 Mar  3 14:55 truc42
+-rw-r--r--  1 seblin seblin     418 Mar  4 17:30 valgrind.supp
+-rw-r--r--  1 seblin seblin       0 Mar  4 13:24 voilou
 
 Commande: echo $?
 0
@@ -480,12 +446,18 @@ Commande: echo $?
 Commande: ls -a | rev
 .
 ..
+tig.
+erongitig.
+060000009413e01000000000sfn.
+edocsv.
+elifekaM
+dm.EMDAER
 dm.snoitcnuf_dewolla
 txt.tuptuo_hsab
 ppus.dnirglav_raelc
 txt.sdnammoc
-hs.ypoc_llehsinim_dna_hsab_erapmoc
 hs.llehsinim_dna_hsab_erapmoc
+hs.ypoc_llehsinim_dna_hsab_erapmoc
 txt.tuptuo_tcerroc
 txt.tuptuo_ffid
 fdp.tcejbus.ne
@@ -494,44 +466,38 @@ elif
 1elif
 2elif
 tuoelif
-tig.
-erongitig.
 hs.llehsinim_dna_hsab_erapmoc_lng
 sedulcni
 txt.tuptuo_skael
 bil
 c.lol
 ppus.dnirglav_sl
-elifekaM
-hs.ypoc_kcehc_yromem
 hs.kcehc_yromem
+hs.ypoc_kcehc_yromem
+gvs.inim
 llehsinim
 txt.tuptuo_llehsinim
 retset_llehsinim
-gvs.inim
 tsetinim
 2etuoym
-060000009413e01000000000sfn.
 pusatuo
 ppusatuo
 pusaetuo
 eliftuo
 seliftuo
-dm.EMDAER
 bes
 crs
 txt.sdnammoc_tset
+sacul_tset
 sacul_retset
 llehsinim_retset
 eliftset
-sacul_tset
 hs.stset
 tatet
 tset_ot
 24curt
 ppus.dnirglav
 uoliov
-edocsv.
 
 Commande: echo $?
 0
@@ -563,12 +529,18 @@ Commande: echo $?
 Commande: ls -a
 .
 ..
+.git
+.gitignore
+.nfs00000000010e314900000060
+.vscode
+Makefile
+README.md
 allowed_functions.md
 bash_output.txt
 clear_valgrind.supp
 commands.txt
-compare_bash_and_minishell_copy.sh
 compare_bash_and_minishell.sh
+compare_bash_and_minishell_copy.sh
 correct_output.txt
 diff_output.txt
 en.subject.pdf
@@ -577,44 +549,38 @@ file
 file1
 file2
 fileout
-.git
-.gitignore
 gnl_compare_bash_and_minishell.sh
 includes
 leaks_output.txt
 lib
 lol.c
 ls_valgrind.supp
-Makefile
-memory_check_copy.sh
 memory_check.sh
+memory_check_copy.sh
+mini.svg
 minishell
 minishell_output.txt
 minishell_tester
-mini.svg
 minitest
 myoute2
-.nfs00000000010e314900000060
 outasup
 outasupp
 outeasup
 outfile
 outfiles
-README.md
 seb
 src
 test_commands.txt
+test_lucas
 tester_lucas
 tester_minishell
 testfile
-test_lucas
 tests.sh
 tetat
 to_test
 truc42
 valgrind.supp
 voilou
-.vscode
 
 Commande: echo $?
 0
@@ -638,12 +604,10 @@ Commande: echo $?
 0
 
 Commande: ls includes
-exec_files
 minishell.h
 parsing
 pipex
 rl_header.h
-root_files
 
 Commande: echo $?
 0
@@ -655,12 +619,10 @@ Commande: echo $?
 0
 
 Commande: ls inclu"des"
-exec_files
 minishell.h
 parsing
 pipex
 rl_header.h
-root_files
 
 Commande: echo $?
 0
@@ -767,12 +729,14 @@ Commande: echo $?
 0
 
 Commande: ls
+Makefile
+README.md
 allowed_functions.md
 bash_output.txt
 clear_valgrind.supp
 commands.txt
-compare_bash_and_minishell_copy.sh
 compare_bash_and_minishell.sh
+compare_bash_and_minishell_copy.sh
 correct_output.txt
 diff_output.txt
 en.subject.pdf
@@ -787,13 +751,12 @@ leaks_output.txt
 lib
 lol.c
 ls_valgrind.supp
-Makefile
-memory_check_copy.sh
 memory_check.sh
+memory_check_copy.sh
+mini.svg
 minishell
 minishell_output.txt
 minishell_tester
-mini.svg
 minitest
 myoute2
 outasup
@@ -801,14 +764,13 @@ outasupp
 outeasup
 outfile
 outfiles
-README.md
 seb
 src
 test_commands.txt
+test_lucas
 tester_lucas
 tester_minishell
 testfile
-test_lucas
 tests.sh
 tetat
 to_test
@@ -823,7 +785,7 @@ Commande: cd ..
 
 
 Commande: pwd
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo $?
 0
@@ -835,25 +797,25 @@ Commande: echo $?
 0
 
 Commande: pwd
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo $?
 0
 
 Commande: pwd kzbgkbzekgb	
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo $?
 0
 
 Commande: pwd kzbg  kbzekgb	
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo $?
 0
 
 Commande: pwd 42 bzekgb	
-/home/dan/42/minishell_common
+/home/seblin/42/42_minishell
 
 Commande: echo $?
 0
@@ -1011,79 +973,79 @@ Commande: echo $?
 0
 
 Commande: echo $LOGNAME$SHELL$
-dan/bin/bash$
+seblin/bin/bash$
 
 Commande: echo $?
 0
 
 Commande: echo $LOGNAME$SHELL$tr
-dan/bin/bash
+seblin/bin/bash
 
 Commande: echo $?
 0
 
 Commande: echo $"$LOGNAME$SHELL$"
-dan/bin/bash$
+seblin/bin/bash$
 
 Commande: echo $?
 0
 
 Commande: echo $"$LOGNAME$  SHELL $"
-dan$  SHELL $
+seblin$  SHELL $
 
 Commande: echo $?
 0
 
 Commande: echo $"trrt$LOGNAME$  $SHELLtruc SHELL $ $thu"
-trrtdan$   SHELL $ 
+trrtseblin$   SHELL $ 
 
 Commande: echo $?
 0
 
 Commande: echo $"trrt$LOGNAME$hyu  $SHELLtruc SHELL $ $thu"
-trrtdan   SHELL $ 
+trrtseblin   SHELL $ 
 
 Commande: echo $?
 0
 
 Commande: echo $"trrt$LOGNAME$hyufr$SHELLtruc SHELL $ $thu"
-trrtdan SHELL $ 
+trrtseblin SHELL $ 
 
 Commande: echo $?
 0
 
 Commande: echo trrt$LOGNAME$  $SHELLtruc SHELL $ $thu
-trrtdan$ SHELL $
+trrtseblin$ SHELL $
 
 Commande: echo $?
 0
 
 Commande: echo $"trrt$LOGNAME'Mach' $'LOGNAME' $SHELLtruc SHELL $ $thu"
-trrtdan'Mach' $'LOGNAME'  SHELL $ 
+trrtseblin'Mach' $'LOGNAME'  SHELL $ 
 
 Commande: echo $?
 0
 
 Commande: echo $"trrt$LOGNA'Mach' $LOGNAME'Mach'$LOG $'LOGNA'M''E' $SHELLtruc SHELL $ $thu"
-trrt'Mach' dan'Mach' $'LOGNA'M''E'  SHELL $ 
+trrt'Mach' seblin'Mach' $'LOGNA'M''E'  SHELL $ 
 
 Commande: echo $?
 0
 
 Commande: echo $"trrt$LOGNA'Mach'p lou$LOGNAME'Mach'$LOG $'LOGNA'M''E'42 $SHELLtruc SHELL $ $thu"
-trrt'Mach'p loudan'Mach' $'LOGNA'M''E'42  SHELL $ 
+trrt'Mach'p louseblin'Mach' $'LOGNA'M''E'42  SHELL $ 
 
 Commande: echo $?
 0
 
 Commande: echo $USER
-dan
+seblin
 
 Commande: echo $?
 0
 
 Commande: echo $USER
-dan
+seblin
 
 Commande: echo $?
 0
