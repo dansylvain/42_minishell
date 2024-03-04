@@ -13,6 +13,10 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
+# Initialiser les compteurs
+total_tests=0
+successful_tests=0
+
 # Fonction pour exécuter une commande avec Valgrind
 run_with_valgrind() {
     command="$1"
@@ -32,7 +36,12 @@ run_with_valgrind() {
         echo "Sortie Valgrind:" >> "$LEAKS_OUTPUT_FILE"
         echo "$valgrind_output" >> "$LEAKS_OUTPUT_FILE"
         echo "" >> "$LEAKS_OUTPUT_FILE"
+	else
+		# Incrémenter le compteur de tests réussis si aucune fuite de mémoire n'a été détectée
+		successful_tests=$((successful_tests + 1))
     fi
+	    total_tests=$((total_tests + 1))
+
 }
 
 # Lire les commandes à partir du fichier spécifié, une ligne à la fois
@@ -41,3 +50,4 @@ while IFS= read -r cmd; do
 done < "$1"
 
 echo "Analyse des fuites de mémoire terminée."
+echo "TESTS : $successful_tests / $total_tests"

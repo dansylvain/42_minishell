@@ -49,42 +49,42 @@ valgrind.supp
 voilou
 
 Commande: ""
-./compare_bash_and_minishell_copy.sh: line 23: : command not found
+./compare_bash_and_minishell_copy.sh: line 21: : command not found
 
 Commande: "      				"
-./compare_bash_and_minishell_copy.sh: line 23: $'      \t\t\t\t': command not found
+./compare_bash_and_minishell_copy.sh: line 21: $'      \t\t\t\t': command not found
 
 Commande: /bin/ls -a -l
-total 2472
-drwxrwxrwx 14 dan dan    4096 mars   4 16:03 .
+total 2432
+drwxrwxrwx 14 dan dan    4096 mars   4 16:37 .
 drwxrwxr-x 14 dan dan    4096 févr. 19 14:31 ..
 -rw-rw-r--  1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r--  1 dan dan     824 mars   4 16:11 bash_output.txt
+-rw-rw-r--  1 dan dan     824 mars   4 16:37 bash_output.txt
 -rw-rw-r--  1 dan dan    2186 mars   4 13:52 clear_valgrind.supp
 -rwxrwxrwx  1 dan dan    3242 mars   4 15:53 commands.txt
--rwxrwxrwx  1 dan dan    1740 mars   4 15:55 compare_bash_and_minishell_copy.sh
+-rwxrwxrwx  1 dan dan    1839 mars   4 16:23 compare_bash_and_minishell_copy.sh
 -rwxrwxr-x  1 dan dan    5588 mars   4 15:44 compare_bash_and_minishell.sh
 -rw-rw-r--  1 dan dan   27775 févr.  3 18:49 correct_output.txt
 -rw-rw-r--  1 dan dan   59401 févr.  3 15:52 diff_output.txt
 -rw-rw-r--  1 dan dan 1568461 janv. 26 11:52 en.subject.pdf
 -rw-rw-r--  1 dan dan   90973 févr. 20 11:19 eval_minishell.pdf
 -rwxrwxrwx  1 dan dan       5 mars   4 13:52 file
--rw-rw-r--  1 dan dan      11 mars   4 16:06 file1
--rw--w----  1 dan dan     200 mars   4 16:04 file2
--rw-rw-r--  1 dan dan       0 mars   4 16:06 fileout
-drwxrwxr-x  8 dan dan    4096 mars   4 16:00 .git
+-rw-rw-r--  1 dan dan      22 mars   4 16:24 file1
+-rw--w----  1 dan dan     270 mars   4 16:24 file2
+-rw-rw-r--  1 dan dan       0 mars   4 16:24 fileout
+drwxrwxr-x  8 dan dan    4096 mars   4 16:11 .git
 -rw-rw-r--  1 dan dan      71 févr. 28 17:06 .gitignore
 -rwxrwxr-x  1 dan dan    7866 mars   4 14:41 gnl_compare_bash_and_minishell.sh
 drwxrwxr-x  6 dan dan    4096 mars   3 18:18 includes
--rw-rw-r--  1 dan dan   35913 mars   4 16:07 leaks_output.txt
+-rw-rw-r--  1 dan dan       0 mars   4 16:37 leaks_output.txt
 drwxrwxr-x  5 dan dan    4096 janv. 25 09:42 lib
--rw-rw-r--  1 dan dan       0 mars   4 16:04 lol.c
+-rw-rw-r--  1 dan dan       0 mars   4 16:24 lol.c
 -rw-rw-r--  1 dan dan      46 mars   4 13:52 ls_valgrind.supp
 -rw-rw-r--  1 dan dan    3610 mars   4 13:52 Makefile
--rwxrwxrwx  1 dan dan    1704 mars   4 16:02 memory_check_copy.sh
+-rwxrwxrwx  1 dan dan    2000 mars   4 16:36 memory_check_copy.sh
 -rwxrwxr-x  1 dan dan    5530 mars   4 16:01 memory_check.sh
--rwxrwxr-x  1 dan dan  211024 mars   4 15:13 minishell
--rw-rw-r--  1 dan dan    2051 mars   4 16:11 minishell_output.txt
+-rwxrwxr-x  1 dan dan  211632 mars   4 16:37 minishell
+-rw-rw-r--  1 dan dan    2051 mars   4 16:37 minishell_output.txt
 drwxrwxr-x  2 dan dan    4096 févr. 26 09:27 minishell_tester
 -rw-rw-r--  1 dan dan  132528 févr. 28 21:00 mini.svg
 drwxrwxr-x  4 dan dan    4096 févr. 26 16:13 minitest
@@ -93,14 +93,14 @@ drwxrwxr-x  4 dan dan    4096 févr. 26 16:13 minitest
 -rw-rw-r--  1 dan dan       0 mars   4 13:52 outasup
 -rw-rw-r--  1 dan dan       7 mars   4 13:52 outasupp
 -rw-rw-r--  1 dan dan       0 mars   4 13:52 outeasup
--rw-rw-r--  1 dan dan       7 mars   4 16:07 outfile
+-rw-rw-r--  1 dan dan       7 mars   4 16:25 outfile
 drwxrwxr-x  2 dan dan    4096 mars   4 13:52 outfiles
 -rw-rw-r--  1 dan dan     875 mars   2 19:52 README.md
-drwxrwxr-x  2 dan dan    4096 mars   4 15:13 seb
-drwxrwxr-x  5 dan dan    4096 mars   4 15:13 src
+drwxrwxr-x  2 dan dan    4096 mars   4 16:36 seb
+drwxrwxr-x  5 dan dan    4096 mars   4 16:37 src
 -rw-rw-r--  1 dan dan     217 févr.  7 16:59 test_commands.txt
 drwxrwxr-x  2 dan dan    4096 févr. 22 09:49 tester_lucas
-drwxrwxr-x  6 dan dan    4096 mars   4 15:45 tester_minishell
+drwxrwxr-x  6 dan dan    4096 mars   4 16:26 tester_minishell
 -rw-rw-r--  1 dan dan       6 mars   2 19:52 testfile
 drwxrwxr-x  2 dan dan    4096 févr. 26 09:27 test_lucas
 -rwxrwxr-x  1 dan dan    2595 févr. 14 14:07 tests.sh
@@ -133,10 +133,10 @@ Commande: exit 42
 
 
 Commande: exit iugef
-./compare_bash_and_minishell_copy.sh: line 23: exit: iugef: numeric argument required
+./compare_bash_and_minishell_copy.sh: line 21: exit: iugef: numeric argument required
 
 Commande: exit 42 test
-./compare_bash_and_minishell_copy.sh: line 23: exit: too many arguments
+./compare_bash_and_minishell_copy.sh: line 21: exit: too many arguments
 
 Commande: echo $?
 0
@@ -195,7 +195,7 @@ LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd
 XDG_CURRENT_DESKTOP=ubuntu:GNOME
 VTE_VERSION=6800
 WAYLAND_DISPLAY=wayland-0
-GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/d37cd1f4_14c0_4912_9d26_89b27677ab99
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/457a9b7e_0573_4190_8a6a_4a5bf12b09a8
 NVM_DIR=/home/dan/.nvm
 GNOME_SETUP_DISPLAY=:1
 LESSCLOSE=/usr/bin/lesspipe %s %s
@@ -220,7 +220,6 @@ GDMSESSION=ubuntu
 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 NVM_BIN=/home/dan/.nvm/versions/node/v20.10.0/bin
 LC_NUMERIC=fr_FR.UTF-8
-OLDPWD=/home/dan/42/minishell_common/tester_minishell
 _=/usr/bin/env
 
 Commande: export SHELL
@@ -275,7 +274,7 @@ Commande: echo "$USER"
 dan
 
 Commande: $USER
-./compare_bash_and_minishell_copy.sh: line 23: dan: command not found
+./compare_bash_and_minishell_copy.sh: line 21: dan: command not found
 
 Commande: 
 
@@ -334,42 +333,42 @@ Commande: echo $?
 0
 
 Commande: ""
-./compare_bash_and_minishell_copy.sh: line 23: : command not found
+./compare_bash_and_minishell_copy.sh: line 21: : command not found
 
 Commande: echo $?
 0
 
 Commande: /usr/bin/ls -al
-total 2484
-drwxrwxrwx 14 dan dan    4096 mars   4 16:03 .
+total 2444
+drwxrwxrwx 14 dan dan    4096 mars   4 16:37 .
 drwxrwxr-x 14 dan dan    4096 févr. 19 14:31 ..
 -rw-rw-r--  1 dan dan   50859 févr.  2 14:22 allowed_functions.md
--rw-rw-r--  1 dan dan    9706 mars   4 16:11 bash_output.txt
+-rw-rw-r--  1 dan dan    9652 mars   4 16:37 bash_output.txt
 -rw-rw-r--  1 dan dan    2186 mars   4 13:52 clear_valgrind.supp
 -rwxrwxrwx  1 dan dan    3242 mars   4 15:53 commands.txt
--rwxrwxrwx  1 dan dan    1740 mars   4 15:55 compare_bash_and_minishell_copy.sh
+-rwxrwxrwx  1 dan dan    1839 mars   4 16:23 compare_bash_and_minishell_copy.sh
 -rwxrwxr-x  1 dan dan    5588 mars   4 15:44 compare_bash_and_minishell.sh
 -rw-rw-r--  1 dan dan   27775 févr.  3 18:49 correct_output.txt
 -rw-rw-r--  1 dan dan   59401 févr.  3 15:52 diff_output.txt
 -rw-rw-r--  1 dan dan 1568461 janv. 26 11:52 en.subject.pdf
 -rw-rw-r--  1 dan dan   90973 févr. 20 11:19 eval_minishell.pdf
 -rwxrwxrwx  1 dan dan       5 mars   4 13:52 file
--rw-rw-r--  1 dan dan       0 mars   4 16:11 file1
--rw--w----  1 dan dan     210 mars   4 16:11 file2
--rw-rw-r--  1 dan dan       0 mars   4 16:06 fileout
-drwxrwxr-x  8 dan dan    4096 mars   4 16:00 .git
+-rw-rw-r--  1 dan dan       0 mars   4 16:37 file1
+-rw--w----  1 dan dan     280 mars   4 16:37 file2
+-rw-rw-r--  1 dan dan       0 mars   4 16:24 fileout
+drwxrwxr-x  8 dan dan    4096 mars   4 16:11 .git
 -rw-rw-r--  1 dan dan      71 févr. 28 17:06 .gitignore
 -rwxrwxr-x  1 dan dan    7866 mars   4 14:41 gnl_compare_bash_and_minishell.sh
 drwxrwxr-x  6 dan dan    4096 mars   3 18:18 includes
--rw-rw-r--  1 dan dan   35913 mars   4 16:07 leaks_output.txt
+-rw-rw-r--  1 dan dan       0 mars   4 16:37 leaks_output.txt
 drwxrwxr-x  5 dan dan    4096 janv. 25 09:42 lib
--rw-rw-r--  1 dan dan       0 mars   4 16:11 lol.c
+-rw-rw-r--  1 dan dan       0 mars   4 16:37 lol.c
 -rw-rw-r--  1 dan dan      46 mars   4 13:52 ls_valgrind.supp
 -rw-rw-r--  1 dan dan    3610 mars   4 13:52 Makefile
--rwxrwxrwx  1 dan dan    1704 mars   4 16:02 memory_check_copy.sh
+-rwxrwxrwx  1 dan dan    2000 mars   4 16:36 memory_check_copy.sh
 -rwxrwxr-x  1 dan dan    5530 mars   4 16:01 memory_check.sh
--rwxrwxr-x  1 dan dan  211024 mars   4 15:13 minishell
--rw-rw-r--  1 dan dan   10689 mars   4 16:11 minishell_output.txt
+-rwxrwxr-x  1 dan dan  211632 mars   4 16:37 minishell
+-rw-rw-r--  1 dan dan   10635 mars   4 16:37 minishell_output.txt
 drwxrwxr-x  2 dan dan    4096 févr. 26 09:27 minishell_tester
 -rw-rw-r--  1 dan dan  132528 févr. 28 21:00 mini.svg
 drwxrwxr-x  4 dan dan    4096 févr. 26 16:13 minitest
@@ -378,14 +377,14 @@ drwxrwxr-x  4 dan dan    4096 févr. 26 16:13 minitest
 -rw-rw-r--  1 dan dan       0 mars   4 13:52 outasup
 -rw-rw-r--  1 dan dan       7 mars   4 13:52 outasupp
 -rw-rw-r--  1 dan dan       0 mars   4 13:52 outeasup
--rw-rw-r--  1 dan dan       7 mars   4 16:07 outfile
+-rw-rw-r--  1 dan dan       7 mars   4 16:25 outfile
 drwxrwxr-x  2 dan dan    4096 mars   4 13:52 outfiles
 -rw-rw-r--  1 dan dan     875 mars   2 19:52 README.md
-drwxrwxr-x  2 dan dan    4096 mars   4 15:13 seb
-drwxrwxr-x  5 dan dan    4096 mars   4 15:13 src
+drwxrwxr-x  2 dan dan    4096 mars   4 16:36 seb
+drwxrwxr-x  5 dan dan    4096 mars   4 16:37 src
 -rw-rw-r--  1 dan dan     217 févr.  7 16:59 test_commands.txt
 drwxrwxr-x  2 dan dan    4096 févr. 22 09:49 tester_lucas
-drwxrwxr-x  6 dan dan    4096 mars   4 15:45 tester_minishell
+drwxrwxr-x  6 dan dan    4096 mars   4 16:26 tester_minishell
 -rw-rw-r--  1 dan dan       6 mars   2 19:52 testfile
 drwxrwxr-x  2 dan dan    4096 févr. 26 09:27 test_lucas
 -rwxrwxr-x  1 dan dan    2595 févr. 14 14:07 tests.sh
@@ -544,19 +543,19 @@ Commande: echo $?
 0
 
 Commande: exit 42hgzef
-./compare_bash_and_minishell_copy.sh: line 23: exit: 42hgzef: numeric argument required
+./compare_bash_and_minishell_copy.sh: line 21: exit: 42hgzef: numeric argument required
 
 Commande: echo $?
 0
 
 Commande: exit 42 jhgzegf
-./compare_bash_and_minishell_copy.sh: line 23: exit: too many arguments
+./compare_bash_and_minishell_copy.sh: line 21: exit: too many arguments
 
 Commande: echo $?
 0
 
 Commande: exit jhzef
-./compare_bash_and_minishell_copy.sh: line 23: exit: jhzef: numeric argument required
+./compare_bash_and_minishell_copy.sh: line 21: exit: jhzef: numeric argument required
 
 Commande: echo $?
 0
@@ -621,7 +620,7 @@ Commande: echo $?
 0
 
 Commande: <noexist cat
-./compare_bash_and_minishell_copy.sh: line 23: noexist: No such file or directory
+./compare_bash_and_minishell_copy.sh: line 21: noexist: No such file or directory
 
 Commande: echo $?
 0
@@ -667,8 +666,8 @@ Commande: echo $?
 0
 
 Commande: l's' '-'l"
-./compare_bash_and_minishell_copy.sh: eval: line 23: unexpected EOF while looking for matching `"'
-./compare_bash_and_minishell_copy.sh: eval: line 24: syntax error: unexpected end of file
+./compare_bash_and_minishell_copy.sh: eval: line 21: unexpected EOF while looking for matching `"'
+./compare_bash_and_minishell_copy.sh: eval: line 22: syntax error: unexpected end of file
 
 Commande: echo $?
 0
@@ -723,7 +722,7 @@ Commande: echo $?
 0
 
 Commande: << end cat|>fileout
-./compare_bash_and_minishell_copy.sh: line 23: warning: here-document at line 23 delimited by end-of-file (wanted `end')
+./compare_bash_and_minishell_copy.sh: line 21: warning: here-document at line 21 delimited by end-of-file (wanted `end')
 
 Commande: echo $?
 0
@@ -890,7 +889,7 @@ Commande: echo $?
 0
 
 Commande: <testfile cat | echeo niania | rev > outfile
-./compare_bash_and_minishell_copy.sh: line 23: echeo: command not found
+./compare_bash_and_minishell_copy.sh: line 21: echeo: command not found
 
 Commande: echo $?
 0
@@ -954,14 +953,14 @@ Commande: echo $?
 0
 
 Commande: <<end <<end
-./compare_bash_and_minishell_copy.sh: line 23: warning: here-document at line 23 delimited by end-of-file (wanted `end')
-./compare_bash_and_minishell_copy.sh: line 23: warning: here-document at line 23 delimited by end-of-file (wanted `end')
+./compare_bash_and_minishell_copy.sh: line 21: warning: here-document at line 21 delimited by end-of-file (wanted `end')
+./compare_bash_and_minishell_copy.sh: line 21: warning: here-document at line 21 delimited by end-of-file (wanted `end')
 
 Commande: <<end cat
-./compare_bash_and_minishell_copy.sh: line 23: warning: here-document at line 23 delimited by end-of-file (wanted `end')
+./compare_bash_and_minishell_copy.sh: line 21: warning: here-document at line 21 delimited by end-of-file (wanted `end')
 
 Commande: <<end 
-./compare_bash_and_minishell_copy.sh: line 23: warning: here-document at line 23 delimited by end-of-file (wanted `end')
+./compare_bash_and_minishell_copy.sh: line 21: warning: here-document at line 21 delimited by end-of-file (wanted `end')
 
 Commande: # cat | cat | ls
 

@@ -1,717 +1,209 @@
-Commande: exit
-Sortie Valgrind:
-==682127== Memcheck, a memory error detector
-==682127== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682127== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682127== Command: ./minishell
-==682127== 
-==682127== 
-==682127== HEAP SUMMARY:
-==682127==     in use at exit: 208,394 bytes in 228 blocks
-==682127==   total heap usage: 511 allocs, 283 frees, 236,234 bytes allocated
-==682127== 
-==682127== 40 bytes in 1 blocks are still reachable in loss record 15 of 69
-==682127==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682127==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682127==    by 0x10C8E0: create_node (utils.c:19)
-==682127==    by 0x10C8E0: copy_node (utils.c:51)
-==682127==    by 0x10C8E0: copy_node_and_child (utils.c:91)
-==682127==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682127==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682127==    by 0x109BE3: prompt_loop (main.c:84)
-==682127==    by 0x10950C: main (main.c:40)
-==682127== 
-==682127== 40 bytes in 1 blocks are still reachable in loss record 16 of 69
-==682127==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682127==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682127==    by 0x10C917: create_node (utils.c:19)
-==682127==    by 0x10C917: copy_node (utils.c:51)
-==682127==    by 0x10C917: copy_node_and_child (utils.c:95)
-==682127==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682127==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682127==    by 0x109BE3: prompt_loop (main.c:84)
-==682127==    by 0x10950C: main (main.c:40)
-==682127== 
-==682127== LEAK SUMMARY:
-==682127==    definitely lost: 0 bytes in 0 blocks
-==682127==    indirectly lost: 0 bytes in 0 blocks
-==682127==      possibly lost: 0 bytes in 0 blocks
-==682127==    still reachable: 80 bytes in 2 blocks
-==682127==         suppressed: 208,314 bytes in 226 blocks
-==682127== 
-==682127== For lists of detected and suppressed errors, rerun with: -s
-==682127== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-
-Commande: exit 42
-Sortie Valgrind:
-==682131== Memcheck, a memory error detector
-==682131== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682131== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682131== Command: ./minishell
-==682131== 
-==682131== 
-==682131== HEAP SUMMARY:
-==682131==     in use at exit: 208,480 bytes in 230 blocks
-==682131==   total heap usage: 523 allocs, 293 frees, 236,691 bytes allocated
-==682131== 
-==682131== 80 bytes in 2 blocks are still reachable in loss record 21 of 69
-==682131==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682131==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682131==    by 0x10C8E0: create_node (utils.c:19)
-==682131==    by 0x10C8E0: copy_node (utils.c:51)
-==682131==    by 0x10C8E0: copy_node_and_child (utils.c:91)
-==682131==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682131==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682131==    by 0x109BE3: prompt_loop (main.c:84)
-==682131==    by 0x10950C: main (main.c:40)
-==682131== 
-==682131== 80 bytes in 2 blocks are still reachable in loss record 22 of 69
-==682131==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682131==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682131==    by 0x10C917: create_node (utils.c:19)
-==682131==    by 0x10C917: copy_node (utils.c:51)
-==682131==    by 0x10C917: copy_node_and_child (utils.c:95)
-==682131==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682131==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682131==    by 0x109BE3: prompt_loop (main.c:84)
-==682131==    by 0x10950C: main (main.c:40)
-==682131== 
-==682131== LEAK SUMMARY:
-==682131==    definitely lost: 0 bytes in 0 blocks
-==682131==    indirectly lost: 0 bytes in 0 blocks
-==682131==      possibly lost: 0 bytes in 0 blocks
-==682131==    still reachable: 160 bytes in 4 blocks
-==682131==         suppressed: 208,320 bytes in 226 blocks
-==682131== 
-==682131== For lists of detected and suppressed errors, rerun with: -s
-==682131== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-
-Commande: exit iugef
-Sortie Valgrind:
-==682135== Memcheck, a memory error detector
-==682135== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682135== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682135== Command: ./minishell
-==682135== 
-minishell: exit: iugef: numeric argument required
-==682135== 
-==682135== HEAP SUMMARY:
-==682135==     in use at exit: 208,486 bytes in 230 blocks
-==682135==   total heap usage: 523 allocs, 293 frees, 236,700 bytes allocated
-==682135== 
-==682135== 80 bytes in 2 blocks are still reachable in loss record 21 of 69
-==682135==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682135==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682135==    by 0x10C8E0: create_node (utils.c:19)
-==682135==    by 0x10C8E0: copy_node (utils.c:51)
-==682135==    by 0x10C8E0: copy_node_and_child (utils.c:91)
-==682135==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682135==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682135==    by 0x109BE3: prompt_loop (main.c:84)
-==682135==    by 0x10950C: main (main.c:40)
-==682135== 
-==682135== 80 bytes in 2 blocks are still reachable in loss record 22 of 69
-==682135==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682135==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682135==    by 0x10C917: create_node (utils.c:19)
-==682135==    by 0x10C917: copy_node (utils.c:51)
-==682135==    by 0x10C917: copy_node_and_child (utils.c:95)
-==682135==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682135==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682135==    by 0x109BE3: prompt_loop (main.c:84)
-==682135==    by 0x10950C: main (main.c:40)
-==682135== 
-==682135== LEAK SUMMARY:
-==682135==    definitely lost: 0 bytes in 0 blocks
-==682135==    indirectly lost: 0 bytes in 0 blocks
-==682135==      possibly lost: 0 bytes in 0 blocks
-==682135==    still reachable: 160 bytes in 4 blocks
-==682135==         suppressed: 208,326 bytes in 226 blocks
-==682135== 
-==682135== For lists of detected and suppressed errors, rerun with: -s
-==682135== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-
-Commande: exit 42 test
-Sortie Valgrind:
-==682139== Memcheck, a memory error detector
-==682139== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682139== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682139== Command: ./minishell
-==682139== 
-minishell: exit: too many arguments
-==682139== 
-==682139== HEAP SUMMARY:
-==682139==     in use at exit: 208,570 bytes in 232 blocks
-==682139==   total heap usage: 535 allocs, 303 frees, 237,154 bytes allocated
-==682139== 
-==682139== 120 bytes in 3 blocks are still reachable in loss record 24 of 69
-==682139==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682139==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682139==    by 0x10C8E0: create_node (utils.c:19)
-==682139==    by 0x10C8E0: copy_node (utils.c:51)
-==682139==    by 0x10C8E0: copy_node_and_child (utils.c:91)
-==682139==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682139==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682139==    by 0x109BE3: prompt_loop (main.c:84)
-==682139==    by 0x10950C: main (main.c:40)
-==682139== 
-==682139== 120 bytes in 3 blocks are still reachable in loss record 25 of 69
-==682139==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682139==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682139==    by 0x10C917: create_node (utils.c:19)
-==682139==    by 0x10C917: copy_node (utils.c:51)
-==682139==    by 0x10C917: copy_node_and_child (utils.c:95)
-==682139==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682139==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682139==    by 0x109BE3: prompt_loop (main.c:84)
-==682139==    by 0x10950C: main (main.c:40)
-==682139== 
-==682139== LEAK SUMMARY:
-==682139==    definitely lost: 0 bytes in 0 blocks
-==682139==    indirectly lost: 0 bytes in 0 blocks
-==682139==      possibly lost: 0 bytes in 0 blocks
-==682139==    still reachable: 240 bytes in 6 blocks
-==682139==         suppressed: 208,330 bytes in 226 blocks
-==682139== 
-==682139== For lists of detected and suppressed errors, rerun with: -s
-==682139== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-
 Commande: export SHELL
 Sortie Valgrind:
-==682177== Memcheck, a memory error detector
-==682177== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682177== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682177== Command: ./minishell
-==682177== 
-==682177== Invalid read of size 1
-==682177==    at 0x1098B6: ft_strlen (get_next_line_utils.c:20)
-==682177==    by 0x10ADE4: add_env_var_to_envp_tab (exec_export.c:64)
-==682177==    by 0x10AF57: exec_export (exec_export.c:39)
-==682177==    by 0x109DFF: command_is_builtin (main.c:145)
-==682177==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
-==682177==    by 0x10EE6A: launch_command_tab (create_command_tab.c:34)
-==682177==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682177==    by 0x109BE3: prompt_loop (main.c:84)
-==682177==    by 0x10950C: main (main.c:40)
-==682177==  Address 0x4b64826 is 0 bytes after a block of size 6 alloc'd
-==682177==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682177==    by 0x110222: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==682177==    by 0x10F00A: get_node_str (create_command_tab_utils.c:65)
-==682177==    by 0x10F284: create_separator_tab (fill_command_tab.c:132)
-==682177==    by 0x10F551: fill_cmd_tab_tabs (fill_command_tab.c:43)
-==682177==    by 0x10ECF8: build_command_tab (create_command_tab.c:55)
-==682177==    by 0x10EE6A: launch_command_tab (create_command_tab.c:34)
-==682177==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682177==    by 0x109BE3: prompt_loop (main.c:84)
-==682177==    by 0x10950C: main (main.c:40)
-==682177== 
-==682177== Invalid read of size 1
-==682177==    at 0x1098B6: ft_strlen (get_next_line_utils.c:20)
-==682177==    by 0x1104DE: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
-==682177==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
-==682177==    by 0x10AF57: exec_export (exec_export.c:39)
-==682177==    by 0x109DFF: command_is_builtin (main.c:145)
-==682177==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
-==682177==    by 0x10EE6A: launch_command_tab (create_command_tab.c:34)
-==682177==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682177==    by 0x109BE3: prompt_loop (main.c:84)
-==682177==    by 0x10950C: main (main.c:40)
-==682177==  Address 0x4b64826 is 0 bytes after a block of size 6 alloc'd
-==682177==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682177==    by 0x110222: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==682177==    by 0x10F00A: get_node_str (create_command_tab_utils.c:65)
-==682177==    by 0x10F284: create_separator_tab (fill_command_tab.c:132)
-==682177==    by 0x10F551: fill_cmd_tab_tabs (fill_command_tab.c:43)
-==682177==    by 0x10ECF8: build_command_tab (create_command_tab.c:55)
-==682177==    by 0x10EE6A: launch_command_tab (create_command_tab.c:34)
-==682177==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682177==    by 0x109BE3: prompt_loop (main.c:84)
-==682177==    by 0x10950C: main (main.c:40)
-==682177== 
-==682177== 
-==682177== HEAP SUMMARY:
-==682177==     in use at exit: 208,317 bytes in 225 blocks
-==682177==   total heap usage: 526 allocs, 301 frees, 236,840 bytes allocated
-==682177== 
-==682177== LEAK SUMMARY:
-==682177==    definitely lost: 0 bytes in 0 blocks
-==682177==    indirectly lost: 0 bytes in 0 blocks
-==682177==      possibly lost: 0 bytes in 0 blocks
-==682177==    still reachable: 0 bytes in 0 blocks
-==682177==         suppressed: 208,317 bytes in 225 blocks
-==682177== 
-==682177== For lists of detected and suppressed errors, rerun with: -s
-==682177== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==721636== Memcheck, a memory error detector
+==721636== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==721636== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==721636== Command: ./minishell
+==721636== 
+==721636== Invalid read of size 1
+==721636==    at 0x1098B6: ft_strlen (get_next_line_utils.c:20)
+==721636==    by 0x10ADE4: add_env_var_to_envp_tab (exec_export.c:64)
+==721636==    by 0x10AF57: exec_export (exec_export.c:39)
+==721636==    by 0x109DFF: command_is_builtin (main.c:145)
+==721636==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
+==721636==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
+==721636==    by 0x10F727: exec_pipex (exec_pipex.c:34)
+==721636==    by 0x109BE3: prompt_loop (main.c:84)
+==721636==    by 0x10950C: main (main.c:40)
+==721636==  Address 0x4b64786 is 0 bytes after a block of size 6 alloc'd
+==721636==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==721636==    by 0x1102C2: ft_strdup (in /home/dan/42/minishell_common/minishell)
+==721636==    by 0x10F0AA: get_node_str (create_command_tab_utils.c:65)
+==721636==    by 0x10F324: create_separator_tab (fill_command_tab.c:132)
+==721636==    by 0x10F5F1: fill_cmd_tab_tabs (fill_command_tab.c:43)
+==721636==    by 0x10ECF8: build_command_tab (create_command_tab.c:55)
+==721636==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
+==721636==    by 0x10F727: exec_pipex (exec_pipex.c:34)
+==721636==    by 0x109BE3: prompt_loop (main.c:84)
+==721636==    by 0x10950C: main (main.c:40)
+==721636== 
+==721636== Invalid read of size 1
+==721636==    at 0x1098B6: ft_strlen (get_next_line_utils.c:20)
+==721636==    by 0x11057E: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
+==721636==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
+==721636==    by 0x10AF57: exec_export (exec_export.c:39)
+==721636==    by 0x109DFF: command_is_builtin (main.c:145)
+==721636==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
+==721636==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
+==721636==    by 0x10F727: exec_pipex (exec_pipex.c:34)
+==721636==    by 0x109BE3: prompt_loop (main.c:84)
+==721636==    by 0x10950C: main (main.c:40)
+==721636==  Address 0x4b64786 is 0 bytes after a block of size 6 alloc'd
+==721636==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==721636==    by 0x1102C2: ft_strdup (in /home/dan/42/minishell_common/minishell)
+==721636==    by 0x10F0AA: get_node_str (create_command_tab_utils.c:65)
+==721636==    by 0x10F324: create_separator_tab (fill_command_tab.c:132)
+==721636==    by 0x10F5F1: fill_cmd_tab_tabs (fill_command_tab.c:43)
+==721636==    by 0x10ECF8: build_command_tab (create_command_tab.c:55)
+==721636==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
+==721636==    by 0x10F727: exec_pipex (exec_pipex.c:34)
+==721636==    by 0x109BE3: prompt_loop (main.c:84)
+==721636==    by 0x10950C: main (main.c:40)
+==721636== 
+==721636== 
+==721636== HEAP SUMMARY:
+==721636==     in use at exit: 208,317 bytes in 225 blocks
+==721636==   total heap usage: 525 allocs, 300 frees, 236,762 bytes allocated
+==721636== 
+==721636== LEAK SUMMARY:
+==721636==    definitely lost: 0 bytes in 0 blocks
+==721636==    indirectly lost: 0 bytes in 0 blocks
+==721636==      possibly lost: 0 bytes in 0 blocks
+==721636==    still reachable: 0 bytes in 0 blocks
+==721636==         suppressed: 208,317 bytes in 225 blocks
+==721636== 
+==721636== For lists of detected and suppressed errors, rerun with: -s
+==721636== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 
 Commande: export DISPLAY=toto LOGNAME= SHELL
 Sortie Valgrind:
-==682181== Memcheck, a memory error detector
-==682181== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682181== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682181== Command: ./minishell
-==682181== 
-==682181== Invalid write of size 1
-==682181==    at 0x110536: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
-==682181==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
-==682181==    by 0x10AF57: exec_export (exec_export.c:39)
-==682181==    by 0x109DFF: command_is_builtin (main.c:145)
-==682181==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
-==682181==    by 0x10EE6A: launch_command_tab (create_command_tab.c:34)
-==682181==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682181==    by 0x109BE3: prompt_loop (main.c:84)
-==682181==    by 0x10950C: main (main.c:40)
-==682181==  Address 0x4b2320b is 0 bytes after a block of size 11 alloc'd
-==682181==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682181==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682181==    by 0x10A054: duplicate_envp (create_envp.c:57)
-==682181==    by 0x109A6B: get_data (main.c:58)
-==682181==    by 0x1094EA: main (main.c:35)
-==682181== 
-==682181== Invalid read of size 1
-==682181==    at 0x1098B6: ft_strlen (get_next_line_utils.c:20)
-==682181==    by 0x10ADE4: add_env_var_to_envp_tab (exec_export.c:64)
-==682181==    by 0x10AF57: exec_export (exec_export.c:39)
-==682181==    by 0x109DFF: command_is_builtin (main.c:145)
-==682181==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
-==682181==    by 0x10EE6A: launch_command_tab (create_command_tab.c:34)
-==682181==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682181==    by 0x109BE3: prompt_loop (main.c:84)
-==682181==    by 0x10950C: main (main.c:40)
-==682181==  Address 0x4b65316 is 0 bytes after a block of size 6 alloc'd
-==682181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682181==    by 0x110222: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==682181==    by 0x10F00A: get_node_str (create_command_tab_utils.c:65)
-==682181==    by 0x10F284: create_separator_tab (fill_command_tab.c:132)
-==682181==    by 0x10F551: fill_cmd_tab_tabs (fill_command_tab.c:43)
-==682181==    by 0x10ECF8: build_command_tab (create_command_tab.c:55)
-==682181==    by 0x10EE6A: launch_command_tab (create_command_tab.c:34)
-==682181==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682181==    by 0x109BE3: prompt_loop (main.c:84)
-==682181==    by 0x10950C: main (main.c:40)
-==682181== 
-==682181== Invalid read of size 1
-==682181==    at 0x1098B6: ft_strlen (get_next_line_utils.c:20)
-==682181==    by 0x1104DE: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
-==682181==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
-==682181==    by 0x10AF57: exec_export (exec_export.c:39)
-==682181==    by 0x109DFF: command_is_builtin (main.c:145)
-==682181==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
-==682181==    by 0x10EE6A: launch_command_tab (create_command_tab.c:34)
-==682181==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682181==    by 0x109BE3: prompt_loop (main.c:84)
-==682181==    by 0x10950C: main (main.c:40)
-==682181==  Address 0x4b65316 is 0 bytes after a block of size 6 alloc'd
-==682181==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682181==    by 0x110222: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==682181==    by 0x10F00A: get_node_str (create_command_tab_utils.c:65)
-==682181==    by 0x10F284: create_separator_tab (fill_command_tab.c:132)
-==682181==    by 0x10F551: fill_cmd_tab_tabs (fill_command_tab.c:43)
-==682181==    by 0x10ECF8: build_command_tab (create_command_tab.c:55)
-==682181==    by 0x10EE6A: launch_command_tab (create_command_tab.c:34)
-==682181==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682181==    by 0x109BE3: prompt_loop (main.c:84)
-==682181==    by 0x10950C: main (main.c:40)
-==682181== 
-==682181== 
-==682181== HEAP SUMMARY:
-==682181==     in use at exit: 208,339 bytes in 225 blocks
-==682181==   total heap usage: 551 allocs, 326 frees, 237,834 bytes allocated
-==682181== 
-==682181== LEAK SUMMARY:
-==682181==    definitely lost: 0 bytes in 0 blocks
-==682181==    indirectly lost: 0 bytes in 0 blocks
-==682181==      possibly lost: 0 bytes in 0 blocks
-==682181==    still reachable: 0 bytes in 0 blocks
-==682181==         suppressed: 208,339 bytes in 225 blocks
-==682181== 
-==682181== For lists of detected and suppressed errors, rerun with: -s
-==682181== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
+==721640== Memcheck, a memory error detector
+==721640== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==721640== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==721640== Command: ./minishell
+==721640== 
+==721640== Invalid write of size 1
+==721640==    at 0x1105D6: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
+==721640==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
+==721640==    by 0x10AF57: exec_export (exec_export.c:39)
+==721640==    by 0x109DFF: command_is_builtin (main.c:145)
+==721640==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
+==721640==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
+==721640==    by 0x10F727: exec_pipex (exec_pipex.c:34)
+==721640==    by 0x109BE3: prompt_loop (main.c:84)
+==721640==    by 0x10950C: main (main.c:40)
+==721640==  Address 0x4b2317b is 0 bytes after a block of size 11 alloc'd
+==721640==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==721640==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
+==721640==    by 0x10A054: duplicate_envp (create_envp.c:57)
+==721640==    by 0x109A6B: get_data (main.c:58)
+==721640==    by 0x1094EA: main (main.c:35)
+==721640== 
+==721640== Invalid read of size 1
+==721640==    at 0x1098B6: ft_strlen (get_next_line_utils.c:20)
+==721640==    by 0x10ADE4: add_env_var_to_envp_tab (exec_export.c:64)
+==721640==    by 0x10AF57: exec_export (exec_export.c:39)
+==721640==    by 0x109DFF: command_is_builtin (main.c:145)
+==721640==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
+==721640==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
+==721640==    by 0x10F727: exec_pipex (exec_pipex.c:34)
+==721640==    by 0x109BE3: prompt_loop (main.c:84)
+==721640==    by 0x10950C: main (main.c:40)
+==721640==  Address 0x4b65276 is 0 bytes after a block of size 6 alloc'd
+==721640==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==721640==    by 0x1102C2: ft_strdup (in /home/dan/42/minishell_common/minishell)
+==721640==    by 0x10F0AA: get_node_str (create_command_tab_utils.c:65)
+==721640==    by 0x10F324: create_separator_tab (fill_command_tab.c:132)
+==721640==    by 0x10F5F1: fill_cmd_tab_tabs (fill_command_tab.c:43)
+==721640==    by 0x10ECF8: build_command_tab (create_command_tab.c:55)
+==721640==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
+==721640==    by 0x10F727: exec_pipex (exec_pipex.c:34)
+==721640==    by 0x109BE3: prompt_loop (main.c:84)
+==721640==    by 0x10950C: main (main.c:40)
+==721640== 
+==721640== Invalid read of size 1
+==721640==    at 0x1098B6: ft_strlen (get_next_line_utils.c:20)
+==721640==    by 0x11057E: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
+==721640==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
+==721640==    by 0x10AF57: exec_export (exec_export.c:39)
+==721640==    by 0x109DFF: command_is_builtin (main.c:145)
+==721640==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
+==721640==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
+==721640==    by 0x10F727: exec_pipex (exec_pipex.c:34)
+==721640==    by 0x109BE3: prompt_loop (main.c:84)
+==721640==    by 0x10950C: main (main.c:40)
+==721640==  Address 0x4b65276 is 0 bytes after a block of size 6 alloc'd
+==721640==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==721640==    by 0x1102C2: ft_strdup (in /home/dan/42/minishell_common/minishell)
+==721640==    by 0x10F0AA: get_node_str (create_command_tab_utils.c:65)
+==721640==    by 0x10F324: create_separator_tab (fill_command_tab.c:132)
+==721640==    by 0x10F5F1: fill_cmd_tab_tabs (fill_command_tab.c:43)
+==721640==    by 0x10ECF8: build_command_tab (create_command_tab.c:55)
+==721640==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
+==721640==    by 0x10F727: exec_pipex (exec_pipex.c:34)
+==721640==    by 0x109BE3: prompt_loop (main.c:84)
+==721640==    by 0x10950C: main (main.c:40)
+==721640== 
+==721640== 
+==721640== HEAP SUMMARY:
+==721640==     in use at exit: 208,339 bytes in 225 blocks
+==721640==   total heap usage: 550 allocs, 325 frees, 237,756 bytes allocated
+==721640== 
+==721640== LEAK SUMMARY:
+==721640==    definitely lost: 0 bytes in 0 blocks
+==721640==    indirectly lost: 0 bytes in 0 blocks
+==721640==      possibly lost: 0 bytes in 0 blocks
+==721640==    still reachable: 0 bytes in 0 blocks
+==721640==         suppressed: 208,339 bytes in 225 blocks
+==721640== 
+==721640== For lists of detected and suppressed errors, rerun with: -s
+==721640== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
 
 Commande: cd ../../42/minishell_common/includes
 Sortie Valgrind:
-==682197== Memcheck, a memory error detector
-==682197== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682197== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682197== Command: ./minishell
-==682197== 
-==682197== Invalid write of size 1
-==682197==    at 0x110504: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
-==682197==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
-==682197==    by 0x10A685: update_home_env_var (exec_cd.c:28)
-==682197==    by 0x10A734: exec_cd (exec_cd.c:51)
-==682197==    by 0x109E5A: command_is_builtin (main.c:131)
-==682197==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
-==682197==    by 0x10EE6A: launch_command_tab (create_command_tab.c:34)
-==682197==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682197==    by 0x109BE3: prompt_loop (main.c:84)
-==682197==    by 0x10950C: main (main.c:40)
-==682197==  Address 0x4b23ee2 is 0 bytes after a block of size 34 alloc'd
-==682197==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682197==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682197==    by 0x10A054: duplicate_envp (create_envp.c:57)
-==682197==    by 0x109A6B: get_data (main.c:58)
-==682197==    by 0x1094EA: main (main.c:35)
-==682197== 
-==682197== Invalid write of size 1
-==682197==    at 0x110536: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
-==682197==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
-==682197==    by 0x10A685: update_home_env_var (exec_cd.c:28)
-==682197==    by 0x10A734: exec_cd (exec_cd.c:51)
-==682197==    by 0x109E5A: command_is_builtin (main.c:131)
-==682197==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
-==682197==    by 0x10EE6A: launch_command_tab (create_command_tab.c:34)
-==682197==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682197==    by 0x109BE3: prompt_loop (main.c:84)
-==682197==    by 0x10950C: main (main.c:40)
-==682197==  Address 0x4b23ee9 is 7 bytes after a block of size 34 alloc'd
-==682197==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682197==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682197==    by 0x10A054: duplicate_envp (create_envp.c:57)
-==682197==    by 0x109A6B: get_data (main.c:58)
-==682197==    by 0x1094EA: main (main.c:35)
-==682197== 
-==682197== 
-==682197== HEAP SUMMARY:
-==682197==     in use at exit: 208,360 bytes in 225 blocks
-==682197==   total heap usage: 529 allocs, 304 frees, 241,069 bytes allocated
-==682197== 
-==682197== LEAK SUMMARY:
-==682197==    definitely lost: 0 bytes in 0 blocks
-==682197==    indirectly lost: 0 bytes in 0 blocks
-==682197==      possibly lost: 0 bytes in 0 blocks
-==682197==    still reachable: 0 bytes in 0 blocks
-==682197==         suppressed: 208,360 bytes in 225 blocks
-==682197== 
-==682197== For lists of detected and suppressed errors, rerun with: -s
-==682197== ERROR SUMMARY: 8 errors from 2 contexts (suppressed: 0 from 0)
-
-Commande: exit 42
-Sortie Valgrind:
-==682400== Memcheck, a memory error detector
-==682400== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682400== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682400== Command: ./minishell
-==682400== 
-==682400== 
-==682400== HEAP SUMMARY:
-==682400==     in use at exit: 208,480 bytes in 230 blocks
-==682400==   total heap usage: 523 allocs, 293 frees, 236,691 bytes allocated
-==682400== 
-==682400== 80 bytes in 2 blocks are still reachable in loss record 21 of 69
-==682400==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682400==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682400==    by 0x10C8E0: create_node (utils.c:19)
-==682400==    by 0x10C8E0: copy_node (utils.c:51)
-==682400==    by 0x10C8E0: copy_node_and_child (utils.c:91)
-==682400==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682400==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682400==    by 0x109BE3: prompt_loop (main.c:84)
-==682400==    by 0x10950C: main (main.c:40)
-==682400== 
-==682400== 80 bytes in 2 blocks are still reachable in loss record 22 of 69
-==682400==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682400==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682400==    by 0x10C917: create_node (utils.c:19)
-==682400==    by 0x10C917: copy_node (utils.c:51)
-==682400==    by 0x10C917: copy_node_and_child (utils.c:95)
-==682400==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682400==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682400==    by 0x109BE3: prompt_loop (main.c:84)
-==682400==    by 0x10950C: main (main.c:40)
-==682400== 
-==682400== LEAK SUMMARY:
-==682400==    definitely lost: 0 bytes in 0 blocks
-==682400==    indirectly lost: 0 bytes in 0 blocks
-==682400==      possibly lost: 0 bytes in 0 blocks
-==682400==    still reachable: 160 bytes in 4 blocks
-==682400==         suppressed: 208,320 bytes in 226 blocks
-==682400== 
-==682400== For lists of detected and suppressed errors, rerun with: -s
-==682400== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-
-Commande: exit 42hgzef
-Sortie Valgrind:
-==682408== Memcheck, a memory error detector
-==682408== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682408== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682408== Command: ./minishell
-==682408== 
-minishell: exit: 42hgzef: numeric argument required
-==682408== 
-==682408== HEAP SUMMARY:
-==682408==     in use at exit: 208,490 bytes in 230 blocks
-==682408==   total heap usage: 523 allocs, 293 frees, 236,706 bytes allocated
-==682408== 
-==682408== 80 bytes in 2 blocks are still reachable in loss record 21 of 69
-==682408==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682408==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682408==    by 0x10C8E0: create_node (utils.c:19)
-==682408==    by 0x10C8E0: copy_node (utils.c:51)
-==682408==    by 0x10C8E0: copy_node_and_child (utils.c:91)
-==682408==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682408==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682408==    by 0x109BE3: prompt_loop (main.c:84)
-==682408==    by 0x10950C: main (main.c:40)
-==682408== 
-==682408== 80 bytes in 2 blocks are still reachable in loss record 22 of 69
-==682408==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682408==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682408==    by 0x10C917: create_node (utils.c:19)
-==682408==    by 0x10C917: copy_node (utils.c:51)
-==682408==    by 0x10C917: copy_node_and_child (utils.c:95)
-==682408==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682408==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682408==    by 0x109BE3: prompt_loop (main.c:84)
-==682408==    by 0x10950C: main (main.c:40)
-==682408== 
-==682408== LEAK SUMMARY:
-==682408==    definitely lost: 0 bytes in 0 blocks
-==682408==    indirectly lost: 0 bytes in 0 blocks
-==682408==      possibly lost: 0 bytes in 0 blocks
-==682408==    still reachable: 160 bytes in 4 blocks
-==682408==         suppressed: 208,330 bytes in 226 blocks
-==682408== 
-==682408== For lists of detected and suppressed errors, rerun with: -s
-==682408== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-
-Commande: exit 42 jhgzegf
-Sortie Valgrind:
-==682416== Memcheck, a memory error detector
-==682416== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682416== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682416== Command: ./minishell
-==682416== 
-minishell: exit: too many arguments
-==682416== 
-==682416== HEAP SUMMARY:
-==682416==     in use at exit: 208,576 bytes in 232 blocks
-==682416==   total heap usage: 535 allocs, 303 frees, 237,163 bytes allocated
-==682416== 
-==682416== 120 bytes in 3 blocks are still reachable in loss record 24 of 69
-==682416==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682416==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682416==    by 0x10C8E0: create_node (utils.c:19)
-==682416==    by 0x10C8E0: copy_node (utils.c:51)
-==682416==    by 0x10C8E0: copy_node_and_child (utils.c:91)
-==682416==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682416==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682416==    by 0x109BE3: prompt_loop (main.c:84)
-==682416==    by 0x10950C: main (main.c:40)
-==682416== 
-==682416== 120 bytes in 3 blocks are still reachable in loss record 25 of 69
-==682416==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682416==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682416==    by 0x10C917: create_node (utils.c:19)
-==682416==    by 0x10C917: copy_node (utils.c:51)
-==682416==    by 0x10C917: copy_node_and_child (utils.c:95)
-==682416==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682416==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682416==    by 0x109BE3: prompt_loop (main.c:84)
-==682416==    by 0x10950C: main (main.c:40)
-==682416== 
-==682416== LEAK SUMMARY:
-==682416==    definitely lost: 0 bytes in 0 blocks
-==682416==    indirectly lost: 0 bytes in 0 blocks
-==682416==      possibly lost: 0 bytes in 0 blocks
-==682416==    still reachable: 240 bytes in 6 blocks
-==682416==         suppressed: 208,336 bytes in 226 blocks
-==682416== 
-==682416== For lists of detected and suppressed errors, rerun with: -s
-==682416== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-
-Commande: exit jhzef
-Sortie Valgrind:
-==682424== Memcheck, a memory error detector
-==682424== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682424== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682424== Command: ./minishell
-==682424== 
-minishell: exit: jhzef: numeric argument required
-==682424== 
-==682424== HEAP SUMMARY:
-==682424==     in use at exit: 208,486 bytes in 230 blocks
-==682424==   total heap usage: 523 allocs, 293 frees, 236,700 bytes allocated
-==682424== 
-==682424== 80 bytes in 2 blocks are still reachable in loss record 21 of 69
-==682424==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682424==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682424==    by 0x10C8E0: create_node (utils.c:19)
-==682424==    by 0x10C8E0: copy_node (utils.c:51)
-==682424==    by 0x10C8E0: copy_node_and_child (utils.c:91)
-==682424==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682424==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682424==    by 0x109BE3: prompt_loop (main.c:84)
-==682424==    by 0x10950C: main (main.c:40)
-==682424== 
-==682424== 80 bytes in 2 blocks are still reachable in loss record 22 of 69
-==682424==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==682424==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==682424==    by 0x10C917: create_node (utils.c:19)
-==682424==    by 0x10C917: copy_node (utils.c:51)
-==682424==    by 0x10C917: copy_node_and_child (utils.c:95)
-==682424==    by 0x10EE07: launch_command_tab (create_command_tab.c:29)
-==682424==    by 0x10F687: exec_pipex (exec_pipex.c:34)
-==682424==    by 0x109BE3: prompt_loop (main.c:84)
-==682424==    by 0x10950C: main (main.c:40)
-==682424== 
-==682424== LEAK SUMMARY:
-==682424==    definitely lost: 0 bytes in 0 blocks
-==682424==    indirectly lost: 0 bytes in 0 blocks
-==682424==      possibly lost: 0 bytes in 0 blocks
-==682424==    still reachable: 160 bytes in 4 blocks
-==682424==         suppressed: 208,326 bytes in 226 blocks
-==682424== 
-==682424== For lists of detected and suppressed errors, rerun with: -s
-==682424== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-
-Commande: <testfile cat | echeo niania | rev > outfile
-Sortie Valgrind:
-==682744== Memcheck, a memory error detector
-==682744== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682744== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682744== Command: ./minishell
-==682744== 
-echeo: command not found
-==682745== Memcheck, a memory error detector
-==682745== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682745== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682745== Command: /usr/bin/cat
-==682745== 
-==682747== Memcheck, a memory error detector
-==682747== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682747== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682747== Command: /usr/bin/rev
-==682747== 
-==682746== 
-==682746== HEAP SUMMARY:
-==682746==     in use at exit: 208,394 bytes in 226 blocks
-==682746==   total heap usage: 670 allocs, 444 frees, 241,557 bytes allocated
-==682746== 
-==682746== LEAK SUMMARY:
-==682746==    definitely lost: 0 bytes in 0 blocks
-==682746==    indirectly lost: 0 bytes in 0 blocks
-==682746==      possibly lost: 0 bytes in 0 blocks
-==682746==    still reachable: 0 bytes in 0 blocks
-==682746==         suppressed: 208,394 bytes in 226 blocks
-==682746== 
-==682746== For lists of detected and suppressed errors, rerun with: -s
-==682746== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==682745== 
-==682745== Process terminating with default action of signal 13 (SIGPIPE)
-==682745==    at 0x4985887: write (write.c:26)
-==682745==    by 0x10DAE7: ??? (in /usr/bin/cat)
-==682745==    by 0x10B4C3: ??? (in /usr/bin/cat)
-==682745==    by 0x489AD8F: (below main) (libc_start_call_main.h:58)
-==682745== 
-==682745== HEAP SUMMARY:
-==682745==     in use at exit: 143,356 bytes in 44 blocks
-==682745==   total heap usage: 46 allocs, 2 frees, 143,366 bytes allocated
-==682745== 
-==682745== LEAK SUMMARY:
-==682745==    definitely lost: 0 bytes in 0 blocks
-==682745==    indirectly lost: 0 bytes in 0 blocks
-==682745==      possibly lost: 0 bytes in 0 blocks
-==682745==    still reachable: 0 bytes in 0 blocks
-==682745==         suppressed: 143,356 bytes in 44 blocks
-==682745== 
-==682745== For lists of detected and suppressed errors, rerun with: -s
-==682745== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==682747== 
-==682747== HEAP SUMMARY:
-==682747==     in use at exit: 0 bytes in 0 blocks
-==682747==   total heap usage: 51 allocs, 51 frees, 61,897 bytes allocated
-==682747== 
-==682747== All heap blocks were freed -- no leaks are possible
-==682747== 
-==682747== For lists of detected and suppressed errors, rerun with: -s
-==682747== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==682744== 
-==682744== HEAP SUMMARY:
-==682744==     in use at exit: 208,349 bytes in 225 blocks
-==682744==   total heap usage: 633 allocs, 408 frees, 240,909 bytes allocated
-==682744== 
-==682744== LEAK SUMMARY:
-==682744==    definitely lost: 0 bytes in 0 blocks
-==682744==    indirectly lost: 0 bytes in 0 blocks
-==682744==      possibly lost: 0 bytes in 0 blocks
-==682744==    still reachable: 0 bytes in 0 blocks
-==682744==         suppressed: 208,349 bytes in 225 blocks
-==682744== 
-==682744== For lists of detected and suppressed errors, rerun with: -s
-==682744== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-
-Commande: <testfile cat | echo niania | rev > outfile
-Sortie Valgrind:
-==682764== Memcheck, a memory error detector
-==682764== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682764== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682764== Command: ./minishell
-==682764== 
-==682765== Memcheck, a memory error detector
-==682765== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682765== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682765== Command: /usr/bin/cat
-==682765== 
-==682767== Memcheck, a memory error detector
-==682767== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==682767== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==682767== Command: /usr/bin/rev
-==682767== 
-==682766== 
-==682766== HEAP SUMMARY:
-==682766==     in use at exit: 208,392 bytes in 226 blocks
-==682766==   total heap usage: 630 allocs, 404 frees, 240,772 bytes allocated
-==682766== 
-==682766== LEAK SUMMARY:
-==682766==    definitely lost: 0 bytes in 0 blocks
-==682766==    indirectly lost: 0 bytes in 0 blocks
-==682766==      possibly lost: 0 bytes in 0 blocks
-==682766==    still reachable: 0 bytes in 0 blocks
-==682766==         suppressed: 208,392 bytes in 226 blocks
-==682766== 
-==682766== For lists of detected and suppressed errors, rerun with: -s
-==682766== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==682765== 
-==682765== Process terminating with default action of signal 13 (SIGPIPE)
-==682765==    at 0x4985887: write (write.c:26)
-==682765==    by 0x10DAE7: ??? (in /usr/bin/cat)
-==682765==    by 0x10B4C3: ??? (in /usr/bin/cat)
-==682765==    by 0x489AD8F: (below main) (libc_start_call_main.h:58)
-==682765== 
-==682765== HEAP SUMMARY:
-==682765==     in use at exit: 143,356 bytes in 44 blocks
-==682765==   total heap usage: 46 allocs, 2 frees, 143,366 bytes allocated
-==682765== 
-==682765== LEAK SUMMARY:
-==682765==    definitely lost: 0 bytes in 0 blocks
-==682765==    indirectly lost: 0 bytes in 0 blocks
-==682765==      possibly lost: 0 bytes in 0 blocks
-==682765==    still reachable: 0 bytes in 0 blocks
-==682765==         suppressed: 143,356 bytes in 44 blocks
-==682765== 
-==682765== For lists of detected and suppressed errors, rerun with: -s
-==682765== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==682767== 
-==682767== HEAP SUMMARY:
-==682767==     in use at exit: 0 bytes in 0 blocks
-==682767==   total heap usage: 53 allocs, 53 frees, 82,377 bytes allocated
-==682767== 
-==682767== All heap blocks were freed -- no leaks are possible
-==682767== 
-==682767== For lists of detected and suppressed errors, rerun with: -s
-==682767== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==682764== 
-==682764== HEAP SUMMARY:
-==682764==     in use at exit: 208,348 bytes in 225 blocks
-==682764==   total heap usage: 633 allocs, 408 frees, 240,906 bytes allocated
-==682764== 
-==682764== LEAK SUMMARY:
-==682764==    definitely lost: 0 bytes in 0 blocks
-==682764==    indirectly lost: 0 bytes in 0 blocks
-==682764==      possibly lost: 0 bytes in 0 blocks
-==682764==    still reachable: 0 bytes in 0 blocks
-==682764==         suppressed: 208,348 bytes in 225 blocks
-==682764== 
-==682764== For lists of detected and suppressed errors, rerun with: -s
-==682764== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==721656== Memcheck, a memory error detector
+==721656== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==721656== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==721656== Command: ./minishell
+==721656== 
+==721656== Invalid write of size 1
+==721656==    at 0x1105A4: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
+==721656==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
+==721656==    by 0x10A685: update_home_env_var (exec_cd.c:28)
+==721656==    by 0x10A734: exec_cd (exec_cd.c:51)
+==721656==    by 0x109E5A: command_is_builtin (main.c:131)
+==721656==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
+==721656==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
+==721656==    by 0x10F727: exec_pipex (exec_pipex.c:34)
+==721656==    by 0x109BE3: prompt_loop (main.c:84)
+==721656==    by 0x10950C: main (main.c:40)
+==721656==  Address 0x4b23e52 is 0 bytes after a block of size 34 alloc'd
+==721656==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==721656==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
+==721656==    by 0x10A054: duplicate_envp (create_envp.c:57)
+==721656==    by 0x109A6B: get_data (main.c:58)
+==721656==    by 0x1094EA: main (main.c:35)
+==721656== 
+==721656== Invalid write of size 1
+==721656==    at 0x1105D6: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
+==721656==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
+==721656==    by 0x10A685: update_home_env_var (exec_cd.c:28)
+==721656==    by 0x10A734: exec_cd (exec_cd.c:51)
+==721656==    by 0x109E5A: command_is_builtin (main.c:131)
+==721656==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
+==721656==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
+==721656==    by 0x10F727: exec_pipex (exec_pipex.c:34)
+==721656==    by 0x109BE3: prompt_loop (main.c:84)
+==721656==    by 0x10950C: main (main.c:40)
+==721656==  Address 0x4b23e59 is 7 bytes after a block of size 34 alloc'd
+==721656==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==721656==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
+==721656==    by 0x10A054: duplicate_envp (create_envp.c:57)
+==721656==    by 0x109A6B: get_data (main.c:58)
+==721656==    by 0x1094EA: main (main.c:35)
+==721656== 
+==721656== 
+==721656== HEAP SUMMARY:
+==721656==     in use at exit: 208,360 bytes in 225 blocks
+==721656==   total heap usage: 528 allocs, 303 frees, 240,991 bytes allocated
+==721656== 
+==721656== LEAK SUMMARY:
+==721656==    definitely lost: 0 bytes in 0 blocks
+==721656==    indirectly lost: 0 bytes in 0 blocks
+==721656==      possibly lost: 0 bytes in 0 blocks
+==721656==    still reachable: 0 bytes in 0 blocks
+==721656==         suppressed: 208,360 bytes in 225 blocks
+==721656== 
+==721656== For lists of detected and suppressed errors, rerun with: -s
+==721656== ERROR SUMMARY: 8 errors from 2 contexts (suppressed: 0 from 0)
 

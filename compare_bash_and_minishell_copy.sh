@@ -11,13 +11,11 @@ MINISHELL_OUTPUT_FILE="minishell_output.txt"
 > "$BASH_OUTPUT_FILE"
 > "$MINISHELL_OUTPUT_FILE"
 
-# Vérifier si le fichier d'entrée des commandes est spécifié en argument
-if [ -z "$1" ]; then
-    echo "Usage: $0 <fichier_commandes>"
-    exit 1
-fi
+# Initialiser les compteurs
+total_tests=0
+successful_tests=0
 
-# Fonction pour comparer les sorties
+# Fonction pour comparer les sorties et compter les tests
 compare_outputs() {
     command="$1"
     command_output=$(eval "$command" 2>&1)
@@ -32,7 +30,11 @@ compare_outputs() {
         echo "Sortie Minishell: $minishell_output"
         echo "Sortie Bash: $command_output"
         echo "---------------------------------------"
+    else
+        successful_tests=$((successful_tests + 1))
     fi
+
+    total_tests=$((total_tests + 1))
 
     # Ajouter les sorties dans les fichiers correspondants
     echo "Commande: $command" >> "$BASH_OUTPUT_FILE"
@@ -49,4 +51,6 @@ while IFS= read -r cmd; do
     compare_outputs "$cmd"
 done < "$1"
 
+# Afficher les résultats
+echo "TESTS $successful_tests / $total_tests"
 echo "Comparaison terminée."
