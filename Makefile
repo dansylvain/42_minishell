@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
+#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/02 17:54:34 by dan              ###   ########.fr        #
+#    Updated: 2024/03/04 13:16:41 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,13 @@ FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 GET_NEXT_LINE = $(GET_NEXT_LINE_DIR)/get_next_line.a
 
 # lib flags
-LIBS = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf -L$(GET_NEXT_LINE_DIR) -l:get_next_line.a
+LIBS = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
+# -L$(GET_NEXT_LINE_DIR) -l:get_next_line.a
 
 # Source files
-SRC =	src/main.c \
+SRC =	seb/get_next_line.c \
+		seb/get_next_line_utils.c \
+		src/main.c \
 		src/create_envp.c \
 		src/utils.c \
 		src/utils_2.c \

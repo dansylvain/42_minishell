@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/04 10:16:08 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/04 11:50:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,82 @@ int	set_parenthesis(t_ast_nde *node);
 // int	set_parenthesis(t_ast_nde *node);
 void	print_node(t_ast_nde *node);
 void	exec_pipex(t_Data *data, char *cmd, char *envp[]);
+
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data, char *envp[])
+{
+	t_ast_nde	*token;
+	t_ast_nde	*raw_lft;
+	t_ast_nde	*middle;
+	t_ast_nde	*raw_rght;
+	
+	token = NULL;
+	raw_lft = NULL;;
+	middle= NULL;
+	raw_rght = NULL;
+	ft_printf("leaf!\n");
+	if (raw && raw->child)
+	{	
+		ft_printf("le raw fournit est ok\n");
+		token = raw->child->sibling;	
+		if (token)
+		{		
+			ft_printf("il y a un nouveau token\n");
+			raw_lft = token->child;
+			if (raw_lft)
+			{
+				middle = raw_lft->sibling;
+				if (raw_lft->child)
+				{
+					ft_printf("il y a un raw_left\n");
+					raw_lft->start++;
+					print_node(raw_lft);
+					ft_printf("\n");
+					ft_printf("je vais executer pipex avec raw_left\n");
+					exec_pipex(data, ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1), envp);
+				
+				}
+			}
+			if (middle)
+			{
+				ft_printf("il y a un middle\n");
+				middle->start++;
+				middle->end--; 
+				print_node(middle);
+				ft_printf("\n");
+				ft_printf("je vais utiliser la recursive, donc si pas de nouveau token, il y aura pipex avec le raw middle, sans par\n");
+				leaf_tree_par(middle, data, envp);
+				//exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), envp);
+				raw_rght = middle->sibling;
+			}			
+			if (raw_rght && raw_rght->child)
+			{
+				ft_printf("il y a un raw_rght\n");
+				raw_rght->end--;
+				print_node(raw_rght);
+				ft_printf("\n");
+				ft_printf("je vais utiliser la recursive, donc si pas de nouveau token, il y aura pipex avec le raw right, mais entier\n");
+				ft_printf("si pas de raw, return 0\n");
+				leaf_tree_par(raw_rght, data, envp);
+				//exec_pipex(data, ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1), envp);				
+			}		
+			//leaf_tree_par(token->child->sibling->sibling, data, envp);			
+		}
+		else
+		{	
+			ft_printf("il n'y a pas de nouveau token\n");
+			ft_printf("je vais donc executer pipex avec le raw fournit\n");
+			print_node(raw);
+			ft_printf("\n");
+			exec_pipex(data, ft_strndup(raw->start, raw->end - raw->start + 1), envp);
+			return (0);				
+		}
+	}
+	else
+		ft_printf("le raw fournit est null\n");
+	return (0);
+}
+
+int	leaf_tree_par2(t_ast_nde	*raw, t_Data *data, char *envp[])
 {		
 	t_ast_nde	*token;
 	int			state;
@@ -59,7 +134,8 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data, char *envp[])
 	{			ft_printf("INO 2\n");
 		token = raw->child->sibling;
 		if (token && token->child)
-		{		ft_printf("INO 3\n");				
+		{		
+			ft_printf("il y a un nouveau token\n");				
 			if (leaf_tree_par(token->child->sibling, data, envp))
 			{			
 				print_node(token);
@@ -70,7 +146,8 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data, char *envp[])
 			leaf_tree_par(token->child->sibling->sibling, data, envp);			
 		}
 		else
-		{	ft_printf("pas de nouveau token\n");
+		{	
+			ft_printf("pas de nouveau token\n");
 			exec_pipex(data, ft_strndup(raw->start, raw->end - raw->start + 1), envp);
 			return (0);				
 		}
