@@ -1,0 +1,4 @@
+export SHELL
+export DISPLAY=toto LOGNAME= SHELL
+<testfile cat | echeo niania | rev > outfile
+<testfile cat | echo niania | rev > outfile
