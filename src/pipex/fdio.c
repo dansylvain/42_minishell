@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 15:55:31 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/04 22:34:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,13 @@ void	close_fds(int fd[])
 static char	*create_strerror(char *error_str, char *filepath)
 {
 	char	*tmp;
-
-	tmp = ft_strjoin_up(strerror(errno), ": ", 0, 0);
-	tmp = ft_strjoin_up(tmp, filepath, 1, 0);
+	
+//	tmp = ft_strjoin_up("bash: ", filepath, 0, 0);
+	tmp = ft_strjoin_up(filepath, ": ", 0, 0);
+	tmp = ft_strjoin_up(tmp, strerror(errno), 1, 0);
 	tmp = ft_strjoin_up(tmp, "\n", 1, 0);
+	// tmp = ft_strjoin_up(tmp, filepath, 1, 0);
+	// tmp = ft_strjoin_up(tmp, "\n", 1, 0);
 	if (*error_str)
 		error_str = ft_strjoin_up(error_str, tmp, 1, 1);
 	else
