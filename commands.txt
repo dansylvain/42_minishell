@@ -3,7 +3,7 @@
 "      				"
 /bin/ls -a -l
 echo -n -n test
-rev
+rev pouet
 cat file
 echo hello world
 echo -n -n I love pizza
@@ -19,6 +19,23 @@ ls 'includes/' | rev
 echo '$USER'
 env
 export SHELL
+export DISPLAY=toto LOGNAME= SHELL
+unset SHELL DISPLAY PATH
+env jnzf
+cd
+cd ../../42/minishell_common/includes
+cd .
+pwd
+pwd ../..
+# "./../../42/minishell_common/minishell"
+echo test >file1 >> file2
+cat file | grep bla | more
+ls fichiernul | grep bla | more
+# "cat | cat | ls"
+echo -n -n $USER$LOGNAME
+echo -n -n "$USER$LOGNAME"
+echo "$USER"
+$USER
 
 /usr/bin/ls
 echo $?
@@ -40,7 +57,7 @@ echo $?
 echo $?
 echo bonjour
 echo $?
-echo     	
+echo
 echo $?
 echo
 echo $?
@@ -64,15 +81,15 @@ echo $?
 echo $?
 echo $? + $?
 echo $?
-ls "includes"
+ls includes
 echo $?
 echo "cat lol.c | cat > lol.c"
 echo $?
 ls inclu"des"
 echo $?
-l's' '-'"l"
+l's' '-'l"
 echo $?
-ls 
+ls ""
 echo '$USER'
 echo $?
 # cat includes/minishell.h
@@ -126,7 +143,7 @@ echo $?
 cat <testfile
 echo $?
 <outfile cat
-echo $?
+echo $? 
 <testfile cat | echeo niania | rev > outfile
 echo $?
 <outfile cat
@@ -134,7 +151,7 @@ echo $?
 <testfile cat | echo niania | rev > outfile
 echo $?
 <outfile cat
-echo $?
+echo $? 
 echo aaa && echo bbb || echo ccc
 echo $?
 echo aaa || echo bbb || echo ccc
@@ -153,38 +170,43 @@ echo $?
 <<end 
 # cat | cat | ls
 echo $?
-
+echo $"LOGNAME"
+echo $?
+echo $'L'OGNAME
+echo $?
+echo $"L"OGNAME
+echo $?
+echo $LOGNAMEGNAME
+echo $?
 echo $SHELL
+echo $?
+echo $LOGNAMESHELL$
+echo $?
+echo $LOGNAMESHELL$ju
 echo $?
 echo $LOGNAME$SHELL$
 echo $?
-echo $LOGNAME$SHELL$ju
+echo $LOGNAME$SHELL$tr
 echo $?
-echo $LOGNAME   $SHELL $
+echo $"$LOGNAME$SHELL$"
 echo $?
-echo '$LOGNAME$SHELL$'
+echo $"$LOGNAME$  SHELL $"
 echo $?
-echo $LOGNAME $SHELL $ $tr
+echo $"trrt$LOGNAME$  $SHELLtruc SHELL $ $thu"
 echo $?
-echo "$LOGNAME$SHELL$"
+echo $"trrt$LOGNAME$hyu  $SHELLtruc SHELL $ $thu"
 echo $?
-echo "$LOGNAME$  SHELL $ $thu"
-echo $?
-echo "trrt$LOGNAME$  $SHELLtruc SHELL $ $thu"
-echo $?
-echo "trrt$LOGNAME$hyu  $SHELLtruc SHELL $ $thu"
-echo $?
-echo "trrt$LOGNAME$hyufr$SHELLtruc SHELL $ $thu"
+echo $"trrt$LOGNAME$hyufr$SHELLtruc SHELL $ $thu"
 echo $?
 echo trrt$LOGNAME$  $SHELLtruc SHELL $ $thu
 echo $?
-echo "trrt$LOGNAME'Mach' $'LOGNAME' $SHELLtruc SHELL $ $thu"
+echo $"trrt$LOGNAME'Mach' $'LOGNAME' $SHELLtruc SHELL $ $thu"
 echo $?
-echo "trrt$LOGNA'Mach' $LOGNAME'Mach'$LOG $'LOGNA'M''E' $SHELLtruc SHELL $ $thu"
+echo $"trrt$LOGNA'Mach' $LOGNAME'Mach'$LOG $'LOGNA'M''E' $SHELLtruc SHELL $ $thu"
 echo $?
-echo "trrt$LOGNA'Mach'p lou$LOGNAME'Mach'$LOG $'LOGNA'M''E'42 $SHELLtruc SHELL $ $thu"
+echo $"trrt$LOGNA'Mach'p lou$LOGNAME'Mach'$LOG $'LOGNA'M''E'42 $SHELLtruc SHELL $ $thu"
 echo $?
-echo "$USER"
+echo $USER
 echo $?
 echo $USER
 echo $?

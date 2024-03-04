@@ -7,8 +7,11 @@ MINISHELL_EXECUTABLE="./minishell"
 LEAKS_OUTPUT_FILE="leaks_output.txt"
 > "$LEAKS_OUTPUT_FILE"
 
-# Liste des commandes à tester
-commands="$1"
+# Vérifier si le fichier d'entrée des commandes est spécifié en argument
+if [ -z "$1" ]; then
+    echo "Usage: $0 <fichier_commandes>"
+    exit 1
+fi
 
 # Fonction pour exécuter une commande avec Valgrind
 run_with_valgrind() {
@@ -32,11 +35,9 @@ run_with_valgrind() {
     fi
 }
 
-commands=$(<commands.txt)
-
-# Exécutez les commandes avec Valgrind et recherchez les fuites de mémoire
-for cmd in $commands; do
-	run_with_valgrind "$cmd"
-done
+# Lire les commandes à partir du fichier spécifié, une ligne à la fois
+while IFS= read -r cmd; do
+    run_with_valgrind "$cmd"
+done < "$1"
 
 echo "Analyse des fuites de mémoire terminée."
