@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/03 19:27:17 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/04 10:16:08 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,28 @@ void	exec_pipex(t_Data *data, char *cmd, char *envp[]);
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data, char *envp[])
 {		
 	t_ast_nde	*token;
+	int			state;
+	
 	ft_printf("INO\n");
 	if (raw && raw->child)
-	{		
+	{			ft_printf("INO 2\n");
 		token = raw->child->sibling;
 		if (token && token->child)
-		{	
-						
+		{		ft_printf("INO 3\n");				
 			if (leaf_tree_par(token->child->sibling, data, envp))
-			{				
+			{			
 				print_node(token);
-				exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), envp);
+				 exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), envp);
+			//	if (state)
 				ft_printf("LEAAAAAAAAAAFFFFFF\n");					
 			}
 			leaf_tree_par(token->child->sibling->sibling, data, envp);			
 		}
 		else
-			return (1);				
+		{	ft_printf("pas de nouveau token\n");
+			exec_pipex(data, ft_strndup(raw->start, raw->end - raw->start + 1), envp);
+			return (0);				
+		}
 	}	
 	return (0);
 }

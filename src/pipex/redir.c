@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/03 12:31:41 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/04 09:24:01 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,27 @@ void	set_redir_io(char **argv[], t_redir *redir)
 		exit(1);
 }
 
+int	set_io(char **argv[], t_redir *redir)
+{
+	// redir->fd_file[0] = -1;
+	// redir->fd_file[1] = -1;
+	// redir->pipe[0] = -1;
+	// redir->pipe[1] = -1;
+	// redir->redir[0] = 0;	
+	// redir->redir[1] = 0;
+	// redir->delim = NULL;
+	// redir->filepath[0] = NULL;
+	// redir->filepath[1] = NULL;
+	while (*argv)
+	{
+		if (set_redir_in(*argv, redir))
+			return (1);
+		if (set_redir_out(*argv, redir))
+			return (1);
+		argv++;
+	}
+	return (0);
+}
 void	init_redir( t_redir *redir)
 {
 	redir->fd_file[0] = -1;

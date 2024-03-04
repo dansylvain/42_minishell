@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/03 14:53:19 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/04 09:30:48 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 		exit(EXIT_SUCCESS);
 	}
 }
+int	set_io(char **argv[], t_redir *redir);
 int	set_all_redir_in(char **argv[], t_redir *redir);
 int	set_all_redir_out(char **argv[], t_redir *redir);
 static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir *redir)
@@ -81,7 +82,8 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 	char 	***argv_sav;
 
 	init_redir(redir);
-	set_redir_io(argv, redir);
+	if (set_io(argv, redir))
+		return (-1);
 	set_pipefd_in(pipefd[0], redir);
 	argv_sav = argv;
 	while (*argv)
@@ -126,7 +128,8 @@ static pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 	pipefd_out[1] = -1;
 	pid = nurcery(argv, envp, redir.fd_file,
 			(int *[]){pipefd_in, pipefd_out}, &redir);
-	
+	if (pid < 0)
+		return (pid);
 	//set_redir_io(argv, &redir);
 	close_fd(pipefd_in[1]);
 	pipe_to_screen(pipefd_in[0], redir);
@@ -134,17 +137,28 @@ static pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 	close_fds(pipefd_out);
 	return (pid);
 }
+// int	arr_len(const void *arr[])
+// {
+// 	int	i;
 
+// 	i = 0;
+// 	while(arr[i])
+// 		i++;
+// 	return (i);
+// }
 int	pipex(char **argv[], char *envp[])
 {
 	t_redir	redir;
 	pid_t	pid;
 	int		status;
 	int		exit_status;
-
+	// if (arr_len((void *) *argv))
+	// return (
 	exit_status = -1;
 	pid = -1;
 	pid = create_pipeline(argv, envp, redir);
+	if (pid < 0)
+		return (1);
 	if (waitpid(pid, &status, 0) > 0)
 	{
 		if (WIFEXITED(status))
