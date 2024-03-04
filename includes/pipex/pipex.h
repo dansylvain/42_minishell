@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:20:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 15:22:56 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/04 13:20:17 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 # include <stdlib.h>
 # include "ft_printf.h"
 # include "libft.h"
-# include "../../lib/get_next_line/get_next_line.h"
+#include "../../seb/get_next_line.h"
+//# include "../../lib/get_next_line/get_next_line.h"
+
 # include "pipex_utils.h"
 # include "../../includes/minishell.h"
 

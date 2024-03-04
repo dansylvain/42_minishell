@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/03 18:04:12 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/04 13:25:39 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 			add_sibling(copy_node_and_child(node), &cmd_tab_node, &cmd_tab_node_sav);
 		node = node->sibling;
 	}
-	store_and_free_cmd_tab_node_sav(cmd_tab_node_sav);
+	//store_and_free_cmd_tab_node_sav(cmd_tab_node_sav);
 	if (cmd_tab_node_sav)
 		build_command_tab(&cmd_tab, data, &cmd_tab_node_sav, envp);
 	flag = data->exit_status;
