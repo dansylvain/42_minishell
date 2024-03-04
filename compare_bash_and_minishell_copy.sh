@@ -12,13 +12,13 @@ MINISHELL_OUTPUT_FILE="minishell_output.txt"
 > "$MINISHELL_OUTPUT_FILE"
 
 # Liste des commandes à tester
-commands=(
+commands=commands=(
 	"/bin/ls"
 	""
 	"      				"
 	"/bin/ls -a -l"
 	"echo -n -n test"
-	"rev pouet"
+	"rev"
 	"cat file"
 	"echo hello world"
 	"echo -n -n I love pizza"
@@ -42,11 +42,11 @@ commands=(
 	"cd ."
 	"pwd"
 	"pwd ../.."
-	# "./../../42/minishell_common/minishell"
+	"./../../42/minishell_common/minishell"
 	"echo test >file1 >> file2"
 	"cat file | grep bla | more"
 	"ls fichiernul | grep bla | more"
-	# "cat | cat | ls"
+	"cat | cat | ls"
 	"echo -n -n $USER$LOGNAME"
 	"echo -n -n "$USER$LOGNAME""
 	"echo "$USER""
@@ -102,9 +102,9 @@ commands=(
 	"echo $?"
 	"ls inclu\"des\""
 	"echo $?"
-	"l's' '-'\"l\""
+	"l's' '-'"l""
 	"echo $?"
-	"ls \"\""
+	"ls """
 	"echo '$USER'"
 	"echo $?"
 	# "cat includes/minishell.h"
@@ -185,11 +185,9 @@ commands=(
 	"<<end" 
 	#"cat | cat | ls"
 	"echo $?"
-	"echo $\"LOGNAME\""
+	"echo $"LOGNAME""
 	"echo $?"
-	"echo $'L'OGNAME"
-	"echo $?"
-	"echo $\"L\"OGNAME"
+	"echo $"L"OGNAME"
 	"echo $?"
 	"echo $LO"G"NAME"
 	"echo $?"
@@ -205,7 +203,7 @@ commands=(
 	"echo $?"
 	"echo $LOGNAME $SHELL $ $tr"
 	"echo $?"
-	"echo \"$LOGNAME$SHELL$\""
+	"echo "$LOGNAME$SHELL$""
 	"echo $?"
 	"echo \"$LOGNAME$  SHELL $ $thu\""
 	"echo $?"
@@ -260,8 +258,8 @@ compare_outputs() {
 }
 
 # Exécutez les commandes et comparez les sorties
-for cmd in "${commands[@]}"; do
-    compare_outputs "$cmd"
+for cmd in $commands; do
+    run_with_valgrind "$cmd"
 done
 
 echo "Comparaison terminée."
