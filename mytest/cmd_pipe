@@ -1,7 +1,7 @@
 # cat includes/minishell.h
-echo $?
+# echo $?
 # cat <includes/minishell.h
-echo $?
+# echo $?
 echo papa >> file1
 echo $?
 echo maman >> file1

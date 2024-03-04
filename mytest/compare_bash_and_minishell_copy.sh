@@ -18,14 +18,15 @@ successful_tests=0
 # Fonction pour comparer les sorties et compter les tests
 compare_outputs() {
     command="$1"
-    command_output=$(eval "$command" 2>&1)
+    
+	command_output=$(eval "$command" 2>&1 | sed 's|./mytest/compare_bash_and_minishell_copy.sh: line 22: ||g')
     minishell_output=$($MINISHELL_EXECUTABLE <<< "$command" 2>&1 | tail -n +2 | sed '$d')
 
     # Filtrer les sorties pour ignorer les différences non significatives
-    filtered_command_output=$(echo "$command_output" | sed 's/ //g')
-    filtered_minishell_output=$(echo "$minishell_output" | sed 's/ //g')
+    # filtered_command_output=$(echo "$command_output" | sed 's/ //g')
+    # filtered_minishell_output=$(echo "$minishell_output" | sed 's/ //g')
 
-    if [ "$filtered_command_output" != "$filtered_minishell_output" ]; then
+    if [ "$command_output" != "$minishell_output" ]; then
         echo "Différence détectée pour la commande: $command"
         echo "Sortie Minishell: $minishell_output"
         echo "Sortie Bash: $command_output"

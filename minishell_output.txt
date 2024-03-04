@@ -1,117 +1,515 @@
-Commande: echo $"LOGNAME"
-$LOGNAME
+Commande: # cat includes/minishell.h
+#: command not found
 
-Commande: echo $?
-0
+Commande: # echo $?
+#: command not found
 
-Commande: echo $'L'OGNAME
-$LOGNAME
+Commande: # cat <includes/minishell.h
+#: command not found
 
-Commande: echo $?
-0
+Commande: # echo $?
+#: command not found
 
-Commande: echo $"L"OGNAME
-$LOGNAME
-
-Commande: echo $?
-0
-
-Commande: echo $LOGNAMEGNAME
+Commande: echo papa >> file1
 
 
 Commande: echo $?
 0
 
-Commande: echo $SHELL
-/bin/bash
-
-Commande: echo $?
-0
-
-Commande: echo $LOGNAMESHELL$
-$
-
-Commande: echo $?
-0
-
-Commande: echo $LOGNAMESHELL$ju
+Commande: echo maman >> file1
 
 
 Commande: echo $?
 0
 
-Commande: echo $LOGNAME$SHELL$
-seblin/bin/bash$
+Commande: cat file1
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
 
 Commande: echo $?
 0
 
-Commande: echo $LOGNAME$SHELL$tr
-seblin/bin/bash
+Commande: cat file1 | grep papa | more
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
 
 Commande: echo $?
 0
 
-Commande: echo $"$LOGNAME$SHELL$"
-$seblin/bin/bash$
+Commande: << end cat|>fileout
+heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
 
 Commande: echo $?
 0
 
-Commande: echo $"$LOGNAME$  SHELL $"
-$seblin$  SHELL $
+Commande: ls fichiernul | grep bla | more
+/usr/bin/ls: cannot access 'fichiernul': No such file or directory
 
 Commande: echo $?
 0
 
-Commande: echo $"trrt$LOGNAME$  $SHELLtruc SHELL $ $thu"
-$trrtseblin$   SHELL $ 
+Commande: 
+
+
+Commande: <testfile cat | rev > outfile
+
 
 Commande: echo $?
 0
 
-Commande: echo $"trrt$LOGNAME$hyu  $SHELLtruc SHELL $ $thu"
-$trrtseblin   SHELL $ 
+Commande: cat <testfile
+teste
 
 Commande: echo $?
 0
 
-Commande: echo $"trrt$LOGNAME$hyufr$SHELLtruc SHELL $ $thu"
-$trrtseblin SHELL $ 
+Commande: <outfile cat
+etset
+
+Commande: echo $? 
+0
+
+Commande: <testfile cat | echeo niania | rev > outfile
+echeo: command not found
 
 Commande: echo $?
 0
 
-Commande: echo trrt$LOGNAME$  $SHELLtruc SHELL $ $thu
-trrtseblin$ SHELL $
+Commande: <outfile cat
+
 
 Commande: echo $?
 0
 
-Commande: echo $"trrt$LOGNAME'Mach' $'LOGNAME' $SHELLtruc SHELL $ $thu"
-$trrtseblin'Mach' $'LOGNAME'  SHELL $ 
+Commande: <testfile cat | echo niania | rev > outfile
+
 
 Commande: echo $?
 0
 
-Commande: echo $"trrt$LOGNA'Mach' $LOGNAME'Mach'$LOG $'LOGNA'M''E' $SHELLtruc SHELL $ $thu"
-$trrt'Mach' seblin'Mach' $'LOGNA'M''E'  SHELL $ 
+Commande: <outfile cat
+ainain
+
+Commande: echo $? 
+0
+
+Commande: 
+
+
+Commande: <<end <<end
+heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
 
 Commande: echo $?
 0
 
-Commande: echo $"trrt$LOGNA'Mach'p lou$LOGNAME'Mach'$LOG $'LOGNA'M''E'42 $SHELLtruc SHELL $ $thu"
-$trrt'Mach'p louseblin'Mach' $'LOGNA'M''E'42  SHELL $ 
+Commande: <<end cat
+heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
 
 Commande: echo $?
 0
 
-Commande: echo $USER
-seblin
+Commande: <<end 
+heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
 
 Commande: echo $?
 0
 
-Commande: echo $USER
-seblin
+Commande: # cat | cat | ls
+Makefile
+README.md
+allowed_functions.md
+bash_output.txt
+clear_valgrind.supp
+compare_bash_and_minishell_copy.sh
+correct_output.txt
+diff_output.txt
+en.subject.pdf
+eval_minishell.pdf
+file1
+fileout
+includes
+leaks_output.txt
+lib
+lol.c
+ls_valgrind.supp
+mini.svg
+minishell
+minishell_output.txt
+minishell_tester
+minitest
+mytest
+outfile
+outfiles
+seb
+src
+test_commands.txt
+test_lucas
+tester_lucas
+tester_minishell
+testfile
+to_test
+valgrind.supp
+#: command not found
+
+Commande: echo $?
+0
+
+Commande: < outfile | rev
+niania
 

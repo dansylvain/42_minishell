@@ -36,5 +36,3 @@ echo $"trrt$LOGNA'Mach'p lou$LOGNAME'Mach'$LOG $'LOGNA'M''E'42 $SHELLtruc SHELL 
 echo $?
 echo $USER
 echo $?
-echo $USER
-echo $?
