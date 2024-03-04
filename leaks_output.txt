@@ -1,209 +1,151 @@
-Commande: export SHELL
+Commande: <testfile cat | echeo niania | rev > outfile
 Sortie Valgrind:
-==721636== Memcheck, a memory error detector
-==721636== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==721636== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==721636== Command: ./minishell
-==721636== 
-==721636== Invalid read of size 1
-==721636==    at 0x1098B6: ft_strlen (get_next_line_utils.c:20)
-==721636==    by 0x10ADE4: add_env_var_to_envp_tab (exec_export.c:64)
-==721636==    by 0x10AF57: exec_export (exec_export.c:39)
-==721636==    by 0x109DFF: command_is_builtin (main.c:145)
-==721636==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
-==721636==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
-==721636==    by 0x10F727: exec_pipex (exec_pipex.c:34)
-==721636==    by 0x109BE3: prompt_loop (main.c:84)
-==721636==    by 0x10950C: main (main.c:40)
-==721636==  Address 0x4b64786 is 0 bytes after a block of size 6 alloc'd
-==721636==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==721636==    by 0x1102C2: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==721636==    by 0x10F0AA: get_node_str (create_command_tab_utils.c:65)
-==721636==    by 0x10F324: create_separator_tab (fill_command_tab.c:132)
-==721636==    by 0x10F5F1: fill_cmd_tab_tabs (fill_command_tab.c:43)
-==721636==    by 0x10ECF8: build_command_tab (create_command_tab.c:55)
-==721636==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
-==721636==    by 0x10F727: exec_pipex (exec_pipex.c:34)
-==721636==    by 0x109BE3: prompt_loop (main.c:84)
-==721636==    by 0x10950C: main (main.c:40)
-==721636== 
-==721636== Invalid read of size 1
-==721636==    at 0x1098B6: ft_strlen (get_next_line_utils.c:20)
-==721636==    by 0x11057E: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
-==721636==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
-==721636==    by 0x10AF57: exec_export (exec_export.c:39)
-==721636==    by 0x109DFF: command_is_builtin (main.c:145)
-==721636==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
-==721636==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
-==721636==    by 0x10F727: exec_pipex (exec_pipex.c:34)
-==721636==    by 0x109BE3: prompt_loop (main.c:84)
-==721636==    by 0x10950C: main (main.c:40)
-==721636==  Address 0x4b64786 is 0 bytes after a block of size 6 alloc'd
-==721636==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==721636==    by 0x1102C2: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==721636==    by 0x10F0AA: get_node_str (create_command_tab_utils.c:65)
-==721636==    by 0x10F324: create_separator_tab (fill_command_tab.c:132)
-==721636==    by 0x10F5F1: fill_cmd_tab_tabs (fill_command_tab.c:43)
-==721636==    by 0x10ECF8: build_command_tab (create_command_tab.c:55)
-==721636==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
-==721636==    by 0x10F727: exec_pipex (exec_pipex.c:34)
-==721636==    by 0x109BE3: prompt_loop (main.c:84)
-==721636==    by 0x10950C: main (main.c:40)
-==721636== 
-==721636== 
-==721636== HEAP SUMMARY:
-==721636==     in use at exit: 208,317 bytes in 225 blocks
-==721636==   total heap usage: 525 allocs, 300 frees, 236,762 bytes allocated
-==721636== 
-==721636== LEAK SUMMARY:
-==721636==    definitely lost: 0 bytes in 0 blocks
-==721636==    indirectly lost: 0 bytes in 0 blocks
-==721636==      possibly lost: 0 bytes in 0 blocks
-==721636==    still reachable: 0 bytes in 0 blocks
-==721636==         suppressed: 208,317 bytes in 225 blocks
-==721636== 
-==721636== For lists of detected and suppressed errors, rerun with: -s
-==721636== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==2845== Memcheck, a memory error detector
+==2845== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2845== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2845== Command: ./minishell
+==2845== 
+==2856== Memcheck, a memory error detector
+==2856== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2856== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2856== Command: /usr/bin/cat
+==2856== 
+==2861== Memcheck, a memory error detector
+==2861== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2861== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2861== Command: /usr/bin/rev
+==2861== 
+echeo: command not found
+==2860== 
+==2860== HEAP SUMMARY:
+==2860==     in use at exit: 208,253 bytes in 224 blocks
+==2860==   total heap usage: 701 allocs, 477 frees, 250,195 bytes allocated
+==2860== 
+==2860== LEAK SUMMARY:
+==2860==    definitely lost: 0 bytes in 0 blocks
+==2860==    indirectly lost: 0 bytes in 0 blocks
+==2860==      possibly lost: 0 bytes in 0 blocks
+==2860==    still reachable: 0 bytes in 0 blocks
+==2860==         suppressed: 208,253 bytes in 224 blocks
+==2860== 
+==2860== For lists of detected and suppressed errors, rerun with: -s
+==2860== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2856== 
+==2856== Process terminating with default action of signal 13 (SIGPIPE)
+==2856==    at 0x497A697: write (write.c:26)
+==2856==    by 0x10DB47: ??? (in /usr/bin/cat)
+==2856==    by 0x10B4D3: ??? (in /usr/bin/cat)
+==2856==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==2856== 
+==2856== HEAP SUMMARY:
+==2856==     in use at exit: 148,589 bytes in 146 blocks
+==2856==   total heap usage: 228 allocs, 82 frees, 156,326 bytes allocated
+==2856== 
+==2856== LEAK SUMMARY:
+==2856==    definitely lost: 0 bytes in 0 blocks
+==2856==    indirectly lost: 0 bytes in 0 blocks
+==2856==      possibly lost: 0 bytes in 0 blocks
+==2856==    still reachable: 0 bytes in 0 blocks
+==2856==         suppressed: 148,589 bytes in 146 blocks
+==2856== 
+==2856== For lists of detected and suppressed errors, rerun with: -s
+==2856== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2861== 
+==2861== HEAP SUMMARY:
+==2861==     in use at exit: 0 bytes in 0 blocks
+==2861==   total heap usage: 233 allocs, 233 frees, 74,857 bytes allocated
+==2861== 
+==2861== All heap blocks were freed -- no leaks are possible
+==2861== 
+==2861== For lists of detected and suppressed errors, rerun with: -s
+==2861== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2845== 
+==2845== HEAP SUMMARY:
+==2845==     in use at exit: 208,208 bytes in 223 blocks
+==2845==   total heap usage: 604 allocs, 381 frees, 246,683 bytes allocated
+==2845== 
+==2845== LEAK SUMMARY:
+==2845==    definitely lost: 0 bytes in 0 blocks
+==2845==    indirectly lost: 0 bytes in 0 blocks
+==2845==      possibly lost: 0 bytes in 0 blocks
+==2845==    still reachable: 0 bytes in 0 blocks
+==2845==         suppressed: 208,208 bytes in 223 blocks
+==2845== 
+==2845== For lists of detected and suppressed errors, rerun with: -s
+==2845== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 
-Commande: export DISPLAY=toto LOGNAME= SHELL
+Commande: <testfile cat | echo niania | rev > outfile
 Sortie Valgrind:
-==721640== Memcheck, a memory error detector
-==721640== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==721640== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==721640== Command: ./minishell
-==721640== 
-==721640== Invalid write of size 1
-==721640==    at 0x1105D6: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
-==721640==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
-==721640==    by 0x10AF57: exec_export (exec_export.c:39)
-==721640==    by 0x109DFF: command_is_builtin (main.c:145)
-==721640==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
-==721640==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
-==721640==    by 0x10F727: exec_pipex (exec_pipex.c:34)
-==721640==    by 0x109BE3: prompt_loop (main.c:84)
-==721640==    by 0x10950C: main (main.c:40)
-==721640==  Address 0x4b2317b is 0 bytes after a block of size 11 alloc'd
-==721640==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==721640==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==721640==    by 0x10A054: duplicate_envp (create_envp.c:57)
-==721640==    by 0x109A6B: get_data (main.c:58)
-==721640==    by 0x1094EA: main (main.c:35)
-==721640== 
-==721640== Invalid read of size 1
-==721640==    at 0x1098B6: ft_strlen (get_next_line_utils.c:20)
-==721640==    by 0x10ADE4: add_env_var_to_envp_tab (exec_export.c:64)
-==721640==    by 0x10AF57: exec_export (exec_export.c:39)
-==721640==    by 0x109DFF: command_is_builtin (main.c:145)
-==721640==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
-==721640==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
-==721640==    by 0x10F727: exec_pipex (exec_pipex.c:34)
-==721640==    by 0x109BE3: prompt_loop (main.c:84)
-==721640==    by 0x10950C: main (main.c:40)
-==721640==  Address 0x4b65276 is 0 bytes after a block of size 6 alloc'd
-==721640==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==721640==    by 0x1102C2: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==721640==    by 0x10F0AA: get_node_str (create_command_tab_utils.c:65)
-==721640==    by 0x10F324: create_separator_tab (fill_command_tab.c:132)
-==721640==    by 0x10F5F1: fill_cmd_tab_tabs (fill_command_tab.c:43)
-==721640==    by 0x10ECF8: build_command_tab (create_command_tab.c:55)
-==721640==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
-==721640==    by 0x10F727: exec_pipex (exec_pipex.c:34)
-==721640==    by 0x109BE3: prompt_loop (main.c:84)
-==721640==    by 0x10950C: main (main.c:40)
-==721640== 
-==721640== Invalid read of size 1
-==721640==    at 0x1098B6: ft_strlen (get_next_line_utils.c:20)
-==721640==    by 0x11057E: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
-==721640==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
-==721640==    by 0x10AF57: exec_export (exec_export.c:39)
-==721640==    by 0x109DFF: command_is_builtin (main.c:145)
-==721640==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
-==721640==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
-==721640==    by 0x10F727: exec_pipex (exec_pipex.c:34)
-==721640==    by 0x109BE3: prompt_loop (main.c:84)
-==721640==    by 0x10950C: main (main.c:40)
-==721640==  Address 0x4b65276 is 0 bytes after a block of size 6 alloc'd
-==721640==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==721640==    by 0x1102C2: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==721640==    by 0x10F0AA: get_node_str (create_command_tab_utils.c:65)
-==721640==    by 0x10F324: create_separator_tab (fill_command_tab.c:132)
-==721640==    by 0x10F5F1: fill_cmd_tab_tabs (fill_command_tab.c:43)
-==721640==    by 0x10ECF8: build_command_tab (create_command_tab.c:55)
-==721640==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
-==721640==    by 0x10F727: exec_pipex (exec_pipex.c:34)
-==721640==    by 0x109BE3: prompt_loop (main.c:84)
-==721640==    by 0x10950C: main (main.c:40)
-==721640== 
-==721640== 
-==721640== HEAP SUMMARY:
-==721640==     in use at exit: 208,339 bytes in 225 blocks
-==721640==   total heap usage: 550 allocs, 325 frees, 237,756 bytes allocated
-==721640== 
-==721640== LEAK SUMMARY:
-==721640==    definitely lost: 0 bytes in 0 blocks
-==721640==    indirectly lost: 0 bytes in 0 blocks
-==721640==      possibly lost: 0 bytes in 0 blocks
-==721640==    still reachable: 0 bytes in 0 blocks
-==721640==         suppressed: 208,339 bytes in 225 blocks
-==721640== 
-==721640== For lists of detected and suppressed errors, rerun with: -s
-==721640== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 0 from 0)
-
-Commande: cd ../../42/minishell_common/includes
-Sortie Valgrind:
-==721656== Memcheck, a memory error detector
-==721656== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==721656== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==721656== Command: ./minishell
-==721656== 
-==721656== Invalid write of size 1
-==721656==    at 0x1105A4: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
-==721656==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
-==721656==    by 0x10A685: update_home_env_var (exec_cd.c:28)
-==721656==    by 0x10A734: exec_cd (exec_cd.c:51)
-==721656==    by 0x109E5A: command_is_builtin (main.c:131)
-==721656==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
-==721656==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
-==721656==    by 0x10F727: exec_pipex (exec_pipex.c:34)
-==721656==    by 0x109BE3: prompt_loop (main.c:84)
-==721656==    by 0x10950C: main (main.c:40)
-==721656==  Address 0x4b23e52 is 0 bytes after a block of size 34 alloc'd
-==721656==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==721656==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==721656==    by 0x10A054: duplicate_envp (create_envp.c:57)
-==721656==    by 0x109A6B: get_data (main.c:58)
-==721656==    by 0x1094EA: main (main.c:35)
-==721656== 
-==721656== Invalid write of size 1
-==721656==    at 0x1105D6: ft_strlcpy (in /home/dan/42/minishell_common/minishell)
-==721656==    by 0x10ADFC: add_env_var_to_envp_tab (exec_export.c:64)
-==721656==    by 0x10A685: update_home_env_var (exec_cd.c:28)
-==721656==    by 0x10A734: exec_cd (exec_cd.c:51)
-==721656==    by 0x109E5A: command_is_builtin (main.c:131)
-==721656==    by 0x10ED50: build_command_tab (create_command_tab.c:62)
-==721656==    by 0x10EE7A: launch_command_tab (create_command_tab.c:34)
-==721656==    by 0x10F727: exec_pipex (exec_pipex.c:34)
-==721656==    by 0x109BE3: prompt_loop (main.c:84)
-==721656==    by 0x10950C: main (main.c:40)
-==721656==  Address 0x4b23e59 is 7 bytes after a block of size 34 alloc'd
-==721656==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==721656==    by 0x1099CB: ft_calloc (get_next_line_utils.c:70)
-==721656==    by 0x10A054: duplicate_envp (create_envp.c:57)
-==721656==    by 0x109A6B: get_data (main.c:58)
-==721656==    by 0x1094EA: main (main.c:35)
-==721656== 
-==721656== 
-==721656== HEAP SUMMARY:
-==721656==     in use at exit: 208,360 bytes in 225 blocks
-==721656==   total heap usage: 528 allocs, 303 frees, 240,991 bytes allocated
-==721656== 
-==721656== LEAK SUMMARY:
-==721656==    definitely lost: 0 bytes in 0 blocks
-==721656==    indirectly lost: 0 bytes in 0 blocks
-==721656==      possibly lost: 0 bytes in 0 blocks
-==721656==    still reachable: 0 bytes in 0 blocks
-==721656==         suppressed: 208,360 bytes in 225 blocks
-==721656== 
-==721656== For lists of detected and suppressed errors, rerun with: -s
-==721656== ERROR SUMMARY: 8 errors from 2 contexts (suppressed: 0 from 0)
+==5336== Memcheck, a memory error detector
+==5336== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==5336== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==5336== Command: ./minishell
+==5336== 
+==5348== Memcheck, a memory error detector
+==5348== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==5348== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==5348== Command: /usr/bin/rev
+==5348== 
+==5346== Memcheck, a memory error detector
+==5346== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==5346== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==5346== Command: /usr/bin/cat
+==5346== 
+==5347== 
+==5347== HEAP SUMMARY:
+==5347==     in use at exit: 208,393 bytes in 226 blocks
+==5347==   total heap usage: 602 allocs, 376 frees, 246,567 bytes allocated
+==5347== 
+==5347== LEAK SUMMARY:
+==5347==    definitely lost: 0 bytes in 0 blocks
+==5347==    indirectly lost: 0 bytes in 0 blocks
+==5347==      possibly lost: 0 bytes in 0 blocks
+==5347==    still reachable: 0 bytes in 0 blocks
+==5347==         suppressed: 208,393 bytes in 226 blocks
+==5347== 
+==5347== For lists of detected and suppressed errors, rerun with: -s
+==5347== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==5348== 
+==5348== HEAP SUMMARY:
+==5348==     in use at exit: 0 bytes in 0 blocks
+==5348==   total heap usage: 235 allocs, 235 frees, 95,337 bytes allocated
+==5348== 
+==5348== All heap blocks were freed -- no leaks are possible
+==5348== 
+==5348== For lists of detected and suppressed errors, rerun with: -s
+==5348== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==5346== 
+==5346== Process terminating with default action of signal 13 (SIGPIPE)
+==5346==    at 0x497A697: write (write.c:26)
+==5346==    by 0x10DB47: ??? (in /usr/bin/cat)
+==5346==    by 0x10B4D3: ??? (in /usr/bin/cat)
+==5346==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==5346== 
+==5346== HEAP SUMMARY:
+==5346==     in use at exit: 148,589 bytes in 146 blocks
+==5346==   total heap usage: 228 allocs, 82 frees, 156,326 bytes allocated
+==5346== 
+==5346== LEAK SUMMARY:
+==5346==    definitely lost: 0 bytes in 0 blocks
+==5346==    indirectly lost: 0 bytes in 0 blocks
+==5346==      possibly lost: 0 bytes in 0 blocks
+==5346==    still reachable: 0 bytes in 0 blocks
+==5346==         suppressed: 148,589 bytes in 146 blocks
+==5346== 
+==5346== For lists of detected and suppressed errors, rerun with: -s
+==5346== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==5336== 
+==5336== HEAP SUMMARY:
+==5336==     in use at exit: 208,349 bytes in 225 blocks
+==5336==   total heap usage: 605 allocs, 380 frees, 246,693 bytes allocated
+==5336== 
+==5336== LEAK SUMMARY:
+==5336==    definitely lost: 0 bytes in 0 blocks
+==5336==    indirectly lost: 0 bytes in 0 blocks
+==5336==      possibly lost: 0 bytes in 0 blocks
+==5336==    still reachable: 0 bytes in 0 blocks
+==5336==         suppressed: 208,349 bytes in 225 blocks
+==5336== 
+==5336== For lists of detected and suppressed errors, rerun with: -s
+==5336== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 
