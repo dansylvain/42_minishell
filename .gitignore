@@ -3,4 +3,7 @@
 minishell
 bash_output.txt
 minishell_output.txt
-.devcontainer/  
+.devcontainer/ 
+file1
+file2
+lol.c
