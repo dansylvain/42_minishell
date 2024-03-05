@@ -49,11 +49,23 @@ papa
 papa
 maman
 maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
 
 Commande: echo $?
 0
 
 Commande: cat file1 | grep papa | more
+papa
+papa
+papa
+papa
 papa
 papa
 papa
@@ -218,24 +230,10 @@ ainain
 Commande: echo $?
 0
 
-Commande: 
-
-
-Commande: <<end <<end
-heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
-heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
-
-Commande: echo $?
-0
-
-Commande: <<end cat
-heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
-
-Commande: echo $?
-0
-
-Commande: <<end 
-heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+Commande: < outfile | rev
+niania
+niania
+niania
 
 Commande: echo $?
 0

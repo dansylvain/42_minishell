@@ -14,9 +14,9 @@ echo $?
 # echo $?
 # diff but validated
 
-# << end cat|>fileout 
+<< end cat|>fileout 
 #!! ne fonctionne pas ou trop, le vrai necrit rien ds fileout pb redir globale
-# echo $? 
+echo $? 
 
 ls fichiernul | grep bla | more
 echo $? 
@@ -53,16 +53,22 @@ echo $?
 <outfile cat
 echo $?
 
-<<end <<end
+< outfile | rev
 echo $?
+#!! ne marche pas car ne devrait rien afficher pb redir globale
+cat | cat | ls
+echo $?
+
 <<end cat
+echo $?
+ok mais verif manuelle
+
+<<end <<end
 echo $?
 <<end 
 echo $?
-cat | cat | ls
-echo $?
-< outfile | rev
-echo $?
+#!! pb return -1! et reaffiche la string + a veriff manuellement peut etre redir globale
+
 
 
 
