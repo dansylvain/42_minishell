@@ -1,12 +1,3 @@
-/bin/ls
-""
-"      				"
-/bin/ls -a -l
-echo -n -n test
-rev pouet
-cat file
-echo hello world
-echo -n -n I love pizza
 exit
 exit 42
 exit iugef

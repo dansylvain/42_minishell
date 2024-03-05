@@ -19,7 +19,7 @@ successful_tests=0
 compare_outputs() {
     command="$1"
     
-	command_output=$(eval "$command" 2>&1 | sed 's|./mytest/compare_bash_and_minishell_copy.sh: line 22: ||g')
+	command_output=$(eval "$command" 2>&1 | sed 's|./mytest/compare_bash_and_minishell.sh: line 22: ||g')
     minishell_output=$($MINISHELL_EXECUTABLE <<< "$command" 2>&1 | tail -n +2 | sed '$d')
 
     # Filtrer les sorties pour ignorer les différences non significatives
