@@ -57,11 +57,113 @@ papa
 papa
 maman
 maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
+papa
+papa
+maman
+maman
 
 Commande: echo $?
 0
 
 Commande: cat file1 | grep papa | more
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
+papa
 papa
 papa
 papa
@@ -113,15 +215,14 @@ Commande: # diff but validated
 Commande: 
 
 
-Commande: # << end cat|>fileout 
+Commande: << end cat|>fileout 
 heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
-#: command not found
 
 Commande: #!! ne fonctionne pas ou trop, le vrai necrit rien ds fileout pb redir globale
 #!!: command not found
 
-Commande: # echo $? 
-#: command not found
+Commande: echo $? 
+0
 
 Commande: 
 
@@ -230,6 +331,9 @@ ainain
 Commande: echo $?
 0
 
+Commande: 
+
+
 Commande: < outfile | rev
 niania
 niania
@@ -238,10 +342,14 @@ niania
 Commande: echo $?
 0
 
-Commande: cat | cat | ls
+Commande: #!! ne marche pas car ne devrait rien afficher pb redir globale
+#!!: command not found
+
+Commande: # cat | cat | ls
 Makefile
 README.md
 allowed_functions.md
+asup
 bash_output.txt
 clear_valgrind.supp
 compare_bash_and_minishell_copy.sh
@@ -273,4 +381,68 @@ tester_minishell
 testfile
 to_test
 valgrind.supp
+#: command not found
+
+Commande: # echo $?
+#: command not found
+
+Commande: <<end cat
+heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+
+Commande: echo $?
+0
+
+Commande: # ok mais verif manuelle
+#: command not found
+
+Commande: 
+
+
+Commande: <<end <<end
+heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+
+Commande: echo $?
+0
+
+Commande: <<end 
+heredoc> warning: here-document at line 1 delimited by end-of-file (wanted 'end')
+
+Commande: echo $?
+0
+
+Commande: # pb reglé!! pb return -1! et reaffiche la string + a veriff manuellement peut etre redir globale
+#: command not found
+
+Commande: 
+
+
+Commande: # >>asup echo
+free(): invalid pointer
+#: command not found
+free(): invalid pointer
+
+Commande: 
+
+
+Commande: echo $?
+0
+
+Commande: # ok mais verif manuellement asup est crée mais naffiche qu'une seule fois le cat entrée
+quote error
+
+Commande: >>asup >>asup
+
+
+Commande: echo $?
+0
+
+Commande: # ok mais verif manuellement asup est crée mais naffiche rien
+#: command not found
+
+Commande: # fin
+#: command not found
+
+Commande: 
+
 
