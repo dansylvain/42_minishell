@@ -40,3 +40,18 @@ obj:*/ls
 	...
 	obj:/usr/bin/mv
 }
+{
+   <write suppression>
+   Memcheck:Signal
+   ...
+   obj:/usr/lib/libc.so.6
+   fun:write
+   ...
+
+   <cat suppression>
+   Memcheck:Signal
+   ...
+   obj:/usr/bin/cat
+   fun:???
+   ...
+}

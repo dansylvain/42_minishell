@@ -152,6 +152,19 @@ echo $?
 echo $?
 <outfile cat
 echo $? 
+echo aaa && echo bbb || echo ccc
+echo $?
+echo aaa || echo bbb || echo ccc
+echo $?
+echo $?
+false && echo bbb || echo ccc
+echo $?
+false || echo bbb || echo ccc
+echo $?
+false && echo bbb && echo ccc
+echo $?
+echo aaa && false && echo ccc
+echo $?
 <<end <<end
 <<end cat
 <<end 
