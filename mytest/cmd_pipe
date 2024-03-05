@@ -13,8 +13,8 @@ echo $?
 # cat <includes/minishell.h
 # echo $?
 # diff but validated
-exp.sh
-cat
+./mytest/exp.sh
+
 
 
 # YOLO
