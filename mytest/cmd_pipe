@@ -8,36 +8,37 @@ echo maman >> file1
 echo $?
 cat file1
 echo $?
-cat file1 | grep papa | more
-echo $?
-<< end cat|>fileout
-echo $?
-ls fichiernul | grep bla | more
-echo $?
-cat <noexist
-echo $?
-<testfile cat | rev > outfile
-echo $?
-cat <testfile
-echo $?
-<outfile cat
-echo $? 
-<testfile cat | echeo niania | rev > outfile
-echo $?
-<outfile cat
-echo $?
-<testfile cat | echo niania | rev > outfile
-echo $?
-<outfile cat
-echo $? 
+# cat file1 | grep papa | more
+# echo $?
+# << end cat|>fileout
+# echo $?
+# ls fichiernul | grep bla | more
+# echo $?
+# cat <noexist
+# echo $?
+# <testfile cat | rev > outfile
+# echo $?
 
-<<end <<end
-echo $?
-<<end cat
-echo $?
-<<end 
-echo $?
-cat | cat | ls
-echo $?
-< outfile | rev
-echo $?
+# cat <testfile
+# echo $?
+# <outfile cat
+# echo $? 
+# <testfile cat | echeo niania | rev > outfile
+# echo $?
+# <outfile cat
+# echo $?
+# <testfile cat | echo niania | rev > outfile
+# echo $?
+# <outfile cat
+# echo $? 
+
+# <<end <<end
+# echo $?
+# <<end cat
+# echo $?
+# <<end 
+# echo $?
+# cat | cat | ls
+# echo $?
+# < outfile | rev
+# echo $?
