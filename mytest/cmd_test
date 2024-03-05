@@ -1,1 +1,4 @@
 ./mytest/exp.sh
+/bin/wc
+/bin/grep tata
+/b'in/'wc

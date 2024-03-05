@@ -16,3 +16,5 @@ echo $?
 echo $?
 /bin"/cat file"
 echo $?
+/"bin"/gr'ep ta'ta
+/bin"/cat file"

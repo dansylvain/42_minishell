@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:30:35 by dan               #+#    #+#             */
-/*   Updated: 2024/03/03 18:05:43 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/05 18:02:31 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	exec_exit(t_Data *data, char **command_tab)
 			data->exit_status = 1;
 		}
 	}
+
 	// free_command_tab(&command_tab);	
 	command_tab = NULL;
 	store_and_free_cmd_tab_node_sav(NULL);
