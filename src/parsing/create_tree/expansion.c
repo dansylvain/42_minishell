@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 07:42:44 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 16:09:55 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/05 09:15:42 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,21 @@ static t_ast_nde	*search_token_joker(t_ast_nde *sib, char *actual)
 	}
 	return (token_nde);
 }
-
+#include <stdio.h>
 static t_ast_nde	*search_token_dollar(t_ast_nde *sib, char *actual)
 {
 	t_ast_nde	*token_nde;
 
-	if (*actual == '$' && actual + 1 <= sib->end
+	if ((*actual == '$' && actual + 1 <= sib->end
 		&& *(actual + 1) != ' ' && *(actual + 1) != '\''
 		&& *(actual + 1) != '*' && *(actual + 1) != '.')
+		|| (*actual == '$' && actual == sib->end && sib->sibling && (sib->sibling->token == IN_DQUTE || sib->sibling->token == IN_SQUTE)
+		))
 	{
 		token_nde = create_node(DOLL);
 		token_nde->start = actual;
-		token_nde->end = actual++;
-		if (*actual == '?')
+		token_nde->end = actual;
+		if (*++actual == '?')
 		{
 			token_nde->end = actual;
 			return (token_nde);
