@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/03/03 16:10:17 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/05 10:22:36 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,30 @@ int	exec_export(char **command_tab, t_Data *data)
 	return (0);
 }
 
+int	realloc_env_var(t_Data *data, char var[], char *new_var_command)
+{
+	int	i;
+	int	len;
+	
+	len = ft_strlen(var);
+	i = 0;
+	while (data->envp_tab[i])
+	{
+		if (!ft_strncmp(var, data->envp_tab[i], len) && var[len - 1] == '=')
+		{
+			free(data->envp_tab[i]);
+			data->envp_tab[i] = (char *)malloc(len + sizeof(new_var_command) + 2);
+			ft_strlcpy(data->envp_tab[i], var, len);
+			ft_strcat(data->envp_tab[i], "=");
+
+			ft_strcat(data->envp_tab[i], new_var_command);
+			
+			break ;
+		}
+		i++;
+	}
+}
+
 /**========================================================================
  *                      add_env_var_to_envp_tab
  *========================================================================**/
@@ -59,10 +83,16 @@ void	add_env_var_to_envp_tab(char **command_tab, t_Data *data, int *i)
 		j++;
 	}
 	env_var = get_env_var(data, var);
+	if (command_tab[*i][j] == '=')
+		var[j++] = '=';
+	else
+	{
+		data->envp_tab = create_new_env_var(data->envp_tab, command_tab[*i]);
+		return ;
+	}
 	if (env_var && ft_strncmp(command_tab[*i], "_=", 2))
 	{
-		ft_strlcpy(env_var, &(command_tab[*i][j + 1]),
-			ft_strlen(&(command_tab[*i][j + 1])));
+		realloc_env_var(data, var, command_tab[*i] + ft_strlen(var));
 	}
 	else if (ft_strncmp(command_tab[*i], "_=", 2))
 		data->envp_tab = create_new_env_var(data->envp_tab, command_tab[*i]);
@@ -95,7 +125,8 @@ char	**create_new_env_var(char **envp, char *env_var)
 	new_envp_tab[i] = (char *)ft_calloc((ft_strlen(env_var) + 1), sizeof(char));
 	if (new_envp_tab[i] == NULL)
 		return (free_command_tab(&new_envp_tab), NULL);
-	ft_strlcpy(new_envp_tab[i], env_var, ft_strlen(env_var) + 1);
+	ft_strlcpy(new_envp_tab[i++], env_var, ft_strlen(env_var) + 1);
+	new_envp_tab[i] = NULL;
 	free_command_tab(&envp);
 	return (new_envp_tab);
 }
