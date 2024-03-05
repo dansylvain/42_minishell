@@ -1,10 +1,45 @@
 /bin/ls
+echo $?
+echo $?
+/bin/tr
+echo $?
+/bin/wc
+echo $?
+/bin/grep tata
+echo $?
+/bin/cut
+echo $?
+/bin/echo test
+echo $?
+/bin/cat file
+echo $?
 ""
+echo $?
 "      				"
-/bin/ls -a -l
-echo -n -n test
-rev pouet
-cat file
+echo $?
+/bi"n/l"s
+echo $?
+/"bin/tr"
+echo $?
+/b'in/'wc
+echo $?
+/"bin"/gr'ep ta'ta
+echo $?
+/bi"n/cu"t
+echo $?
+/bi'n/'ec"ho "test
+echo $?
+/bin"/cat file"
+echo $?
+""
+echo $?
+"      				"
+echo $?
+"      	caca			pouet      				"
+echo $?
+
+
+
 echo hello world
 echo -n -n I love pizza
 exit
