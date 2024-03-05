@@ -4,8 +4,8 @@
 MINISHELL_EXECUTABLE="./minishell"
 
 # Définir les chemins des fichiers de sortie
-BASH_OUTPUT_FILE="bash_output.txt"
-MINISHELL_OUTPUT_FILE="minishell_output.txt"
+BASH_OUTPUT_FILE="mytest/outfile/bash_output.txt"
+MINISHELL_OUTPUT_FILE="mytest/outfile/minishell_output.txt"
 
 # Vider les fichiers de sortie avant chaque exécution
 > "$BASH_OUTPUT_FILE"
