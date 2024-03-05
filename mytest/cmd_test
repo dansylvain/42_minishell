@@ -1,1 +1,2 @@
-./mytest/exp.sh
+./mytest/expect/hdoc.sh
+./mytest/expect/rev.sh
