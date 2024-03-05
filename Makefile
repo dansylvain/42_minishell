@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
+#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/04 13:25:28 by seblin           ###   ########.fr        #
+#    Updated: 2024/03/05 12:21:18 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,20 +25,17 @@ CFLAGS = -g -Iincludes -Iincludes/parsing/parsing -Iincludes/parsing/create_tree
 # Directories
 LIBFT_DIR = lib/libft
 FT_PRINTF_DIR = lib/ft_printf
-GET_NEXT_LINE_DIR = lib/get_next_line
 
 # lib paths
 LIBFT = $(LIBFT_DIR)/libft.a
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
-GET_NEXT_LINE = $(GET_NEXT_LINE_DIR)/get_next_line.a
 
 # lib flags
 LIBS = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
-# -L$(GET_NEXT_LINE_DIR) -l:get_next_line.a
 
 # Source files
-SRC =	seb/get_next_line.c \
-		seb/get_next_line_utils.c \
+SRC =	lib/gnl/get_next_line.c \
+		lib/gnl/get_next_line_utils.c \
 		src/main.c \
 		src/create_envp.c \
 		src/utils.c \
@@ -81,7 +78,7 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(FT_PRINTF) $(GET_NEXT_LINE)
+$(NAME): $(OBJ) $(LIBFT) $(FT_PRINTF)
 	@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(RLFLAGS) $(LIBS)
 	@echo "\033[0;32mCompilation successful\033[0m"
 $(LIBFT):
@@ -89,9 +86,6 @@ $(LIBFT):
 
 $(FT_PRINTF):
 	@make -s -C $(FT_PRINTF_DIR)
-
-$(GET_NEXT_LINE):
-	@make -s -C $(GET_NEXT_LINE_DIR)
 
 %.o: %.c
 	@printf "%-80s" $<
@@ -103,13 +97,11 @@ clean:
 	@rm	-f	$(OBJ) $(OBJ_BONUS)
 	@make -s -C $(LIBFT_DIR) clean 
 	@make -s -C $(FT_PRINTF_DIR) clean 
-	@make -s -C $(GET_NEXT_LINE_DIR) clean 
 
 fclean: clean
 	@rm	-f	$(NAME) $(NAME_BONUS)
 	@make -s -C $(LIBFT_DIR) fclean
 	@make -s -C $(FT_PRINTF_DIR) fclean 
-	@make -s -C $(GET_NEXT_LINE_DIR) fclean 
 
 re:	fclean	all	
 

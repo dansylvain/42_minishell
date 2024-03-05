@@ -1,9 +1,0 @@
-ls -l | grep .txt | sort | less
-
-ps aux | grep root | sort -rnk 4 | head -10
-
-du -ah includes | sort -rh | head -n 10
-
-ls -lS | grep ".txt" | tee -a fichiers.txt
-
-<fichier1.txt cat | sort | uniq >fichiers_uniques.txt

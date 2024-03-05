@@ -123,7 +123,6 @@ echo $?
 echo $?
 # cat ../../42/minishell_common/includes/minishell.h
 echo $?
-<<<<<<< HEAD:commands.txt
 <testfile cat | rev > outfile
 echo $?
 cat <testfile
@@ -184,8 +183,3 @@ echo $?
 echo $USER
 echo $?
 < outfile | rev
-=======
-
-
-
->>>>>>> seb:mytest/commands.txt
