@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/06 13:15:00 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:31:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,17 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 	{
 		if (access(**argv, X_OK))
 		{
+		
+			if (errno == EISDIR)		
+			{
+				// Cible est un répertoire
+					exit(127); // Ou un autre code de votre choix
+			}
+			else if (errno == EACCES)
+			{
+				// Commande non exécutable ou permissions insuffisantes
+				exit(126);
+			}
 			if (search_path(*argv, envp))
 			{
 				store_and_free_cmd_list(NULL);
@@ -70,8 +81,58 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 				exit(127);
 			}
 		}
+		
+		
+		
 		execve(**argv, *argv, envp);
-		exit(EXIT_FAILURE);
+		
+		if (errno == ENOENT)
+		{
+			// Commande non trouvée
+			exit(127);
+		} 
+		else if (errno == EISDIR)		
+		{
+    // Cible est un répertoire
+   			 exit(127); // Ou un autre code de votre choix
+		}
+		else if (errno == EACCES)
+		{
+			// Commande non exécutable ou permissions insuffisantes
+			exit(126);
+		}
+		else if (errno == EINVAL)
+		{
+			// Argument invalide
+			exit(13);
+		}
+		else if (errno == ETXTBSY)
+		{
+			// Texte occupé
+			exit(14);
+		}
+		else if (errno == E2BIG)
+		{
+			// Liste d'arguments trop longue
+			exit(15);
+		}
+		else if (errno == ENOMEM)
+		{
+			// Pas assez d'espace mémoire
+			exit(16);
+		}
+		else if (errno == EFAULT)
+		{
+			// Mauvaise adresse
+			exit(17);
+		}
+		else
+		{
+			// Autres erreurs
+			exit(18);
+		}
+
+	
 	}
 	else
 	{
