@@ -6,12 +6,15 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/03/06 06:14:30 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/06 06:23:52 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/**========================================================================
+ *                           store_and_free_cmd_list
+ *========================================================================**/
 void	store_and_free_cmd_list(t_ast_nde *cmd_list)
 {
 	static t_ast_nde	*cmd_list_lcl;
@@ -22,6 +25,9 @@ void	store_and_free_cmd_list(t_ast_nde *cmd_list)
 		free_sibling_and_child(cmd_list_lcl);
 }
 
+/**========================================================================
+ *                           exec_pipex
+ *========================================================================**/
 void	exec_pipex(t_Data *data, char *cmd, char *envp[])
 {
 	t_ast_nde	*cmd_list;
