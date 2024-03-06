@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:53:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/06 09:03:25 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/06 16:18:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
 {
 	while (cmd_tab_node_sav)
 	{
-		if (cmd_tab_node_sav->token == PIPE || cmd_tab_node_sav->token
-			== DCHEV_RGTH || cmd_tab_node_sav->token == SCHEV_RGTH)
+		if (cmd_tab_node_sav->token == PIPE || is_chevron(cmd_tab_node_sav))
 			return (1);
 		cmd_tab_node_sav = cmd_tab_node_sav->sibling;
 	}

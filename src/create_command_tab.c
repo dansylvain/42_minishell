@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/06 12:47:24 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/06 16:19:55 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	build_command_tab(char ****cmd_tab, t_Data *data,
 	(*cmd_tab) = create_command_tab(data, (*cmd_tab_node_sav), envp);
 	store_and_free_cmd_tab(*cmd_tab);
 	if (is_pipeline(*cmd_tab_node_sav))
-	{
+	{ //ft_printf("je suis un putain de pipeline\n");
 		free_sibling_and_child(*cmd_tab_node_sav);
 		data->exit_status = pipex(*cmd_tab, envp);
 	}

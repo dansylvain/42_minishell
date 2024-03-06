@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/06 15:43:52 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/06 16:19:11 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,8 +170,7 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 				exit(1);
 			pid = fork();
 			if (!pid)
-			{
-			
+			{			
 				//gerer a chaque pipe savoir si une redir 
 	// if (set_all_redir_in(argv, redir))
 	// 	exit(1);
