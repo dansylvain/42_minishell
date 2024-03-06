@@ -6,11 +6,36 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:11:13 by dan               #+#    #+#             */
-/*   Updated: 2024/02/28 13:34:01 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/06 05:57:02 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/**========================================================================
+ *                           create_export_tab
+ *========================================================================**/
+void	create_export_tab(t_Data *data, char export_tab[][500])
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	ft_memset(export_tab, '\0', sizeof(char) * 500 * 100);
+	while (data->envp_tab[i])
+	{
+		if (ft_strncmp(data->envp_tab[i], "_=", 2)
+			&& has_var(data->envp_tab[i]))
+		{
+			ft_strlcpy(export_tab[j], data->envp_tab[i], sizeof(export_tab[j]));
+			insert_quote(export_tab[j]);
+			j++;
+		}
+		i++;
+	}
+	format_export_tab(export_tab);
+}
 
 /**========================================================================
  *                           format_export_tab
@@ -82,31 +107,6 @@ int	has_var(char *str)
 		i++;
 	}
 	return (0);
-}
-
-/**========================================================================
- *                           create_export_tab
- *========================================================================**/
-void	create_export_tab(t_Data *data, char export_tab[][500])
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	ft_memset(export_tab, '\0', sizeof(char) * 500 * 100);
-	while (data->envp_tab[i])
-	{
-		if (ft_strncmp(data->envp_tab[i], "_=", 2)
-			&& has_var(data->envp_tab[i]))
-		{
-			ft_strlcpy(export_tab[j], data->envp_tab[i], sizeof(export_tab[j]));
-			insert_quote(export_tab[j]);
-			j++;
-		}
-		i++;
-	}
-	format_export_tab(export_tab);
 }
 
 /**========================================================================

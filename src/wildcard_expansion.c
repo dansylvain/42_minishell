@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 10:14:43 by dan               #+#    #+#             */
-/*   Updated: 2024/03/02 18:03:12 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/06 06:28:01 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/**========================================================================
+ *                           wilcard_func
+ *========================================================================**/
 char	*wilcard_func(char *pattern)
 {
 	size_t	i;
@@ -41,6 +44,9 @@ char	*wilcard_func(char *pattern)
 	return (free(matches), NULL);
 }
 
+/**========================================================================
+ *                           expand_wildcards
+ *========================================================================**/
 char	**expand_wildcards(const char *pattern)
 {
 	DIR				*dir;
@@ -64,6 +70,9 @@ char	**expand_wildcards(const char *pattern)
 	return (matches);
 }
 
+/**========================================================================
+ *                           get_str_size
+ *========================================================================**/
 int	get_str_size(char **matches)
 {
 	int	i;
@@ -80,6 +89,9 @@ int	get_str_size(char **matches)
 	return (res);
 }
 
+/**========================================================================
+ *                           copy_matches
+ *========================================================================**/
 char	*copy_matches(char ***matches, char **ret_str,
 		int index, char **pattern)
 {

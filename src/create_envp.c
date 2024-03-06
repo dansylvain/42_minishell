@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_envp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:33:25 by dan               #+#    #+#             */
-/*   Updated: 2024/03/03 16:09:26 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/06 06:14:05 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	update_shlvl(char	**envp_tab)
-{
-	int		i;
-	int		shlvl;
-	char	*new_shlvl;
-
-	i = 0;
-	if (envp_tab == NULL)
-		return ;
-	while (envp_tab[i])
-	{
-		if (!ft_strncmp(envp_tab[i], "SHLVL=", 6))
-		{
-			shlvl = ft_atoi(&(envp_tab[i][6]));
-			shlvl++;
-			new_shlvl = ft_itoa(shlvl);
-			ft_strlcpy(&envp_tab[i][6], new_shlvl, ft_strlen (new_shlvl) + 1);
-			free(new_shlvl);
-		}
-		i++;
-	}
-}
 
 /**========================================================================
  *                           duplicate_envp
@@ -42,7 +19,7 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 {
 	char	**envp_tab;
 	int		i;
-	
+
 	if (envp[0] == NULL)
 		return (ft_printf("No env var... no fun!\n"), NULL);
 	i = 0;
@@ -64,4 +41,30 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 	update_shlvl(envp_tab);
 	return (envp_tab);
 	(void)data;
+}
+
+/**========================================================================
+ *                           update_shlvl
+ *========================================================================**/
+void	update_shlvl(char	**envp_tab)
+{
+	int		i;
+	int		shlvl;
+	char	*new_shlvl;
+
+	i = 0;
+	if (envp_tab == NULL)
+		return ;
+	while (envp_tab[i])
+	{
+		if (!ft_strncmp(envp_tab[i], "SHLVL=", 6))
+		{
+			shlvl = ft_atoi(&(envp_tab[i][6]));
+			shlvl++;
+			new_shlvl = ft_itoa(shlvl);
+			ft_strlcpy(&envp_tab[i][6], new_shlvl, ft_strlen (new_shlvl) + 1);
+			free(new_shlvl);
+		}
+		i++;
+	}
 }

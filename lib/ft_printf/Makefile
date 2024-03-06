@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
+#    By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 10:40:29 by dsylvain          #+#    #+#              #
-#    Updated: 2024/01/17 16:18:22 by dan              ###   ########.fr        #
+#    Updated: 2024/03/06 05:38:29 by dsylvain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -Wno-unused-result
+CFLAGS = -Wall -Wextra -Werror -Wno-unused-result -fPIE
 
 SRC =	source_files/ft_printf.c \
 		source_files/ft_printf_utils.c \

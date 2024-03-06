@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/03/03 16:28:43 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/06 08:33:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,13 @@ char	*get_env_var(t_Data *data, char *to_find);
 void	display_export_tab(char export_tab[][500]);
 void	create_export_tab(t_Data *data, char export_tab[][500]);
 int		are_only_valid_chars(char *str);
+int		are_only_valid_chars(char *str);
+char	*get_env_var(t_Data *data, char *to_find);
+int		has_var(char *str);
+void	insert_quote(char *str);
+void	format_export_tab(char export_tab[][500]);
+
+
 
 /*   exec_echo.c                                  :+:      :+:    :+:   */
 int	is_only_space(char *str);
@@ -83,6 +90,7 @@ t_ast_nde	*parse(char *str, t_Data *data);
 void		launch_command_tab(t_Data *data, t_ast_nde *node,
 				char *envp[], int flag);
 char			*wilcard_func(char *pattern);
+void	store_and_free_cmd_list(t_ast_nde *cmd_list);
 
 
 /*   handle_signals.c                                   :+:      :+:    :+:   */
@@ -113,6 +121,9 @@ int	create_chevron_tab(char ****cmd_tab, int *i, t_ast_nde **node, t_Data *data)
 
 void		exec_pipex(t_Data *data, char *cmd, char *envp[]);
 int			exec_exit(t_Data *data, char **command_tab);
+
+/*   create_envp.c                                      :+:      :+:    :+:   */
+void	update_shlvl(char	**envp_tab);
 
 
 

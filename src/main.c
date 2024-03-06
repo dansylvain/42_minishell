@@ -6,15 +6,15 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/05 20:08:17 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/06 09:23:33 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/rl_header.h"
 
-int	is_not_empty_prompt(char *str);
-
+int			is_not_empty_prompt(char *str);
+t_ast_nde	*parse_par(char *str, t_Data *data, char *envp[]);
 
 /**========================================================================
  *                             COMMENTS POLICY
@@ -32,7 +32,7 @@ int	is_not_empty_prompt(char *str);
 int	main(int argc, char **argv, char *envp[])
 {
 	t_Data	*data;
-	
+
 	if (argc != 1)
 		return (display_error("Usage: ./minishell\n"), 255);
 	data = get_data(envp);
@@ -51,8 +51,8 @@ int	main(int argc, char **argv, char *envp[])
  *========================================================================**/
 t_Data	*get_data(char *envp[])
 {
-	static t_Data *data = NULL;
-	
+	static t_Data	*data = NULL;
+
 	if (data == NULL)
 	{
 		data = (t_Data *)ft_calloc(sizeof(t_Data), 1);
@@ -62,13 +62,12 @@ t_Data	*get_data(char *envp[])
 		if (!data->envp_tab)
 			return (NULL);
 	}
-	return (data);	
+	return (data);
 }
 
 /**========================================================================
  *                           prompt_loop
  *========================================================================**/
-	t_ast_nde	*parse_par(char *str, t_Data *data, char *envp[]);
 int	prompt_loop(t_Data *data, char *envp[])
 {
 	char	*cmd;
@@ -79,7 +78,6 @@ int	prompt_loop(t_Data *data, char *envp[])
 	{
 		build_prompt(prompt);
 		cmd = readline(prompt);
-		// printf("HELLO TA MERE\n");
 		if (cmd && *cmd)
 			add_history(cmd);
 		if (cmd == NULL)
@@ -91,7 +89,6 @@ int	prompt_loop(t_Data *data, char *envp[])
 			cmd = NULL;
 			continue ;
 		}
-		//parse_par(cmd, data, envp);
 		exec_pipex(data, cmd, data->envp_tab);
 		free(cmd);
 	}
