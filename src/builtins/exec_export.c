@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/03/06 05:52:37 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/06 05:57:28 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	realloc_env_var(t_Data *data, char var[], char *new_var_command)
 		if (!ft_strncmp(var, data->envp_tab[i], len) && var[len - 1] == '=')
 		{
 			free(data->envp_tab[i]);
-			data->envp_tab[i] = (char *)malloc(len + ft_strlen(new_var_command) + 2);
+			data->envp_tab[i] = (char *)malloc(len
+					+ ft_strlen(new_var_command) + 2);
 			ft_strlcpy(data->envp_tab[i], var, len);
 			ft_strcat(data->envp_tab[i], "=");
 			ft_strcat(data->envp_tab[i], new_var_command);
