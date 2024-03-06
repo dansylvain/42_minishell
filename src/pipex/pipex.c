@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/06 18:03:30 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/06 18:51:10 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,23 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 	{
 		if (access(**argv, X_OK))
 		{
-		
+			//ft_printf("-%i-", errno);
+			 
 			if (errno == EISDIR)		
 			{
 				// Cible est un répertoire
-					exit(127); // Ou un autre code de votre choix
+				exit(127); // Ou un autre code de votre choix
 			}
 			else if (errno == EACCES)
 			{
 				// Commande non exécutable ou permissions insuffisantes
-				exit(126);
+				exit(127);
 			}
 			if (search_path(*argv, envp))
 			{
 				store_and_free_cmd_list(NULL);
 				free_command_tab_lg(argv_sav);	
+				
 				exit(127);
 			}
 		}
