@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/03/01 11:52:14 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/06 06:14:30 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	store_and_free_cmd_list(t_ast_nde *cmd_list)
 {
 	static t_ast_nde	*cmd_list_lcl;
-	
+
 	if (cmd_list)
 		cmd_list_lcl = cmd_list;
 	else
@@ -31,6 +31,6 @@ void	exec_pipex(t_Data *data, char *cmd, char *envp[])
 	if (!cmd_list)
 		return ;
 	store_and_free_cmd_list(cmd_list);
-	launch_command_tab(data, cmd_list, envp, 0);	
+	launch_command_tab(data, cmd_list, envp, 0);
 	store_and_free_cmd_list(NULL);
 }

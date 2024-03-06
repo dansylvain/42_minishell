@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   fill_command_tab.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/03 17:52:29 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/06 06:16:51 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
 void	store_and_free_cmd_tab(char ***cmd_tab);
 
 void	viva_norminette(t_ast_nde **node, int *i)
@@ -47,7 +48,6 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 		}
 		viva_norminette(&node, &i);
 	}
-	// ft_printf("fill_cmd_tab_tabs i: %i\n", i);
 	cmd_tab[i + 1] = NULL;
 	return (cmd_tab);
 }
@@ -69,7 +69,6 @@ int	create_chevron_tab(char ****cmd_tab, int *i, t_ast_nde **node, t_Data *data)
 	}
 	if (!is_separator((*node)))
 		(*i)++;
-
 	return (1);
 }
 
@@ -79,6 +78,7 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 	t_ast_nde	*current;
 	int			k;
 	int			j;
+	char		**tab;
 
 	current = (*node);
 	k = 0;
@@ -97,7 +97,6 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 		k++;
 		current = current->sibling;
 	}
-	// ft_printf("k: %i\n", k);
 	(*cmd_tab)[*i] = (char **)ft_calloc(k + 1, sizeof(char *));
 	if ((*cmd_tab)[*i] == NULL)
 		return (0);
@@ -106,7 +105,6 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 	{
 		if ((*node)->token == JOKER)
 		{
-			char **tab;
 			tab = ft_split((*node)->start, ' ');
 			k = 0;
 			while (tab[k])
@@ -135,6 +133,5 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 	(*cmd_tab)[*i][j] = NULL;
 	if (!is_separator((*node)))
 		(*i)++;
-
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/03/06 05:55:54 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/06 06:13:23 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,9 @@ int	create_chevron_tab(char ****cmd_tab, int *i, t_ast_nde **node, t_Data *data)
 
 void		exec_pipex(t_Data *data, char *cmd, char *envp[]);
 int			exec_exit(t_Data *data, char **command_tab);
+
+/*   create_envp.c                                      :+:      :+:    :+:   */
+void	update_shlvl(char	**envp_tab);
 
 
 
