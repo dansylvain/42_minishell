@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/06 11:43:32 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/06 11:58:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 	// if (set_io(argv, redir))
 	// 	return (-1);
 	// set_pipefd_in(pipefd[0], redir);
-	if (set_all_redir_in(argv, redir))
-		return (-1);
+	// if (set_all_redir_in(argv, redir))
+	// 	return (-1);
 	
-	set_pipefd_in(pipefd[0], redir);
+	// set_pipefd_in(pipefd[0], redir);
 	argv_sav = argv;
 	while (*argv)
 	{
@@ -172,7 +172,7 @@ static pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 	if (pid < 0)
 		return (pid);
 	close_fd(pipefd_in[1]);
-	// pipe_to_screen(pipefd_in[0], redir);
+	pipe_to_screen(pipefd_in[0], redir);
 	close_fd(pipefd_in[0]);
 	close_fds(pipefd_out);
 	return (pid);
