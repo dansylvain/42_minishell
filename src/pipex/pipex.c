@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/06 16:19:11 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/06 18:03:30 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,72 +149,33 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 {
 	pid_t	pid;
 	char 	***argv_sav;
+	char 	***argv_redir;
+
 	pid = -42;
-	init_redir(redir);
-	// if (set_io(argv, redir))
-	// 	return (-1);
-	// set_pipefd_in(pipefd[0], redir);
-	// if (set_all_redir_in(argv, redir))
-	// 	return (-1);
-	
-	// set_pipefd_in(pipefd[0], redir);
 	argv_sav = argv;
+	argv_redir = argv;
+	init_redir(redir);
 	while (*argv)
-	{
-		//init_redir(redir);
-	
-		
+	{	
+		if (***argv == '|')
+			argv_redir = argv + 1;
 		if (***argv != '>' && ***argv != '<' && ***argv != '|')
 		{
 			if (pipe(pipefd[1]) < 0)
 				exit(1);
 			pid = fork();
 			if (!pid)
-			{			
-				//gerer a chaque pipe savoir si une redir 
-	// if (set_all_redir_in(argv, redir))
-	// 	exit(1);
-	// set_pipefd_in(pipefd[0], redir);
-				//close_fd(fd_file[1]);
-				//redir->redir[1] = 0;
-				set_io(argv, redir);
-				// if (set_all_redir_in(argv, redir))
-				// 	exit(1);
-				
+			{				
+				set_io(argv_redir, redir);		
 				if (redir->redir[0])
 					set_pipefd_in(pipefd[0], redir);
-					
-				// if (set_all_redir_out(argv, redir))
-				// 	exit(1);
-					//return (-1);
-				if (redir->redir[1])
-				{				
-					pipefd[1][1] = redir->fd_file[1];
-				}
-				
+				if (redir->redir[1])							
+					pipefd[1][1] = redir->fd_file[1];							
 				set_pipe_forward(pipefd[0], pipefd[1], *redir);
 				builtin_or_execve(argv, argv_sav, envp);
 			}
-			else
-			{
-				
-				//verif si une redir out est prevue our ce
-				// si une redir out grere une nouvelle fonction qui ecrira sur le pipe de sortie 
-				// if(set_all_redir_out(argv, redir))
-				// 	exit(1);
-				switch_pipes(pipefd);
-			
-				// if (redir->redir[1])
-				// {
-				// 	ft_printf("yea -%s-\n", **argv);
-				// 	close_fd(pipefd[0][1]);	
-				// 	pipe_to_screen(pipefd[0][0], *redir);
-				
-				// 	// if (pipe(pipefd[0]) < 0)
-				// 	// 	exit(1);			
-				// }
-			
-			}
+			else					
+				switch_pipes(pipefd);			
 		}
 		argv++;
 	}
@@ -235,7 +196,7 @@ static pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 	if (pid < 0)
 		return (pid);
 	close_fd(pipefd_in[1]);
-	pipe_to_screen(pipefd_in[0], redir);
+	pipe_to_screen_or_file(pipefd_in[0], redir);
 	close_fd(pipefd_in[0]);
 	close_fds(pipefd_out);
 	return (pid);
