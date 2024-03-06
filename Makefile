@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
+#    By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/05 12:21:18 by dan              ###   ########.fr        #
+#    Updated: 2024/03/06 05:54:07 by dsylvain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRC =	lib/gnl/get_next_line.c \
 		src/builtins/exec_unset.c \
 		src/builtins/exec_export.c \
 		src/builtins/exec_export_utils.c \
+		src/builtins/exec_export_utils_2.c \
 		src/builtins/exec_exit.c \
 		src/parsing/parsing/parsing.c \
 		src/parsing/parsing/free_tree.c \

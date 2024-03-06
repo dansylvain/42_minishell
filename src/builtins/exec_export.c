@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/03/05 11:39:10 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/06 05:52:37 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ int	exec_export(char **command_tab, t_Data *data)
 	return (0);
 }
 
+/**========================================================================
+ *                           realloc_env_var
+ *========================================================================**/
 int	realloc_env_var(t_Data *data, char var[], char *new_var_command)
 {
 	int	i;
@@ -125,49 +128,5 @@ char	**create_new_env_var(char **envp, char *env_var)
 		return (free_command_tab(&new_envp_tab), NULL);
 	ft_strlcpy(new_envp_tab[i++], env_var, ft_strlen(env_var) + 1);
 	new_envp_tab[i] = NULL;
-	free_command_tab(&envp);
-	return (new_envp_tab);
-}
-
-/**========================================================================
- *                           get_env_var
- *========================================================================**/
-char	*get_env_var(t_Data *data, char *to_find)
-{
-	char	*env_var;
-	int		len;
-	int		j;
-	char	*var;
-
-	env_var = NULL;
-	len = ft_strlen(to_find);
-	j = 0;
-	while (data->envp_tab[j])
-	{
-		var = data->envp_tab[j];
-		if (!ft_strncmp(var, to_find, len) && var[len] == '=')
-		{
-			env_var = &var[len + 1];
-			break ;
-		}
-		j++;
-	}
-	return (env_var);
-}
-
-int	are_only_valid_chars(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (ft_isdigit(str[0]) || str[0] == '=')
-		return (0);
-	while (str[i] && str[i] != '=')
-	{
-		if (!ft_isalnum(str[i]) && str[i] != '_' && str[i] != '='
-			&& str[i] != '\"' && str[i] != ' ')
-			return (0);
-		i++;
-	}
-	return (1);
+	return (free_command_tab(&envp), new_envp_tab);
 }

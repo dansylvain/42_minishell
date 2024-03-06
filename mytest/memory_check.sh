@@ -4,7 +4,7 @@
 MINISHELL_EXECUTABLE="./minishell"
 
 # Créer un fichier pour stocker les commandes avec fuites de mémoire
-LEAKS_OUTPUT_FILE="mytest/outfile/leaks_output.txt"
+LEAKS_OUTPUT_FILE="outfile/leaks_output.txt"
 > "$LEAKS_OUTPUT_FILE"
 
 # Vérifier si le fichier d'entrée des commandes est spécifié en argument

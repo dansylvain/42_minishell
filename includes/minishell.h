@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/03/03 16:28:43 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/06 05:55:54 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,13 @@ char	*get_env_var(t_Data *data, char *to_find);
 void	display_export_tab(char export_tab[][500]);
 void	create_export_tab(t_Data *data, char export_tab[][500]);
 int		are_only_valid_chars(char *str);
+int		are_only_valid_chars(char *str);
+char	*get_env_var(t_Data *data, char *to_find);
+int		has_var(char *str);
+void	insert_quote(char *str);
+void	format_export_tab(char export_tab[][500]);
+
+
 
 /*   exec_echo.c                                  :+:      :+:    :+:   */
 int	is_only_space(char *str);
