@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/06 11:58:37 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/06 14:31:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,17 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 	{
 		if (access(**argv, X_OK))
 		{
+		
+			if (errno == EISDIR)		
+			{
+				// Cible est un répertoire
+					exit(127); // Ou un autre code de votre choix
+			}
+			else if (errno == EACCES)
+			{
+				// Commande non exécutable ou permissions insuffisantes
+				exit(126);
+			}
 			if (search_path(*argv, envp))
 			{
 				store_and_free_cmd_list(NULL);
@@ -70,8 +81,58 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 				exit(127);
 			}
 		}
+		
+		
+		
 		execve(**argv, *argv, envp);
-		exit(EXIT_FAILURE);
+		
+		if (errno == ENOENT)
+		{
+			// Commande non trouvée
+			exit(127);
+		} 
+		else if (errno == EISDIR)		
+		{
+    // Cible est un répertoire
+   			 exit(127); // Ou un autre code de votre choix
+		}
+		else if (errno == EACCES)
+		{
+			// Commande non exécutable ou permissions insuffisantes
+			exit(126);
+		}
+		else if (errno == EINVAL)
+		{
+			// Argument invalide
+			exit(13);
+		}
+		else if (errno == ETXTBSY)
+		{
+			// Texte occupé
+			exit(14);
+		}
+		else if (errno == E2BIG)
+		{
+			// Liste d'arguments trop longue
+			exit(15);
+		}
+		else if (errno == ENOMEM)
+		{
+			// Pas assez d'espace mémoire
+			exit(16);
+		}
+		else if (errno == EFAULT)
+		{
+			// Mauvaise adresse
+			exit(17);
+		}
+		else
+		{
+			// Autres erreurs
+			exit(18);
+		}
+
+	
 	}
 	else
 	{
@@ -118,12 +179,14 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 				//close_fd(fd_file[1]);
 				//redir->redir[1] = 0;
 				if (set_all_redir_in(argv, redir))
-					return (-1);
+					exit(1);
+					//return (-27);
 				if (redir->redir[0])
 					set_pipefd_in(pipefd[0], redir);
 					
 				if (set_all_redir_out(argv, redir))
-					return (-1);
+					exit(1);
+					//return (-1);
 				if (redir->redir[1])
 				{				
 					pipefd[1][1] = redir->fd_file[1];
@@ -194,19 +257,19 @@ int	pipex(char **argv[], char *envp[])
 	int		exit_status;
 	// if (arr_len((void *) *argv))
 	// return (
-	exit_status = -1;
+	exit_status = 1;
 	pid = -1;
 	pid = create_pipeline(argv, envp, redir);
 	if (pid == -42)
 		return (0);
-	if (pid < 0)
-		return (1);
+	// if (pid < 0)
+	// 	return (1);
 	if (waitpid(pid, &status, 0) > 0)
 	{
 		if (WIFEXITED(status))
 			exit_status = WEXITSTATUS(status);
-		if (exit_status >= 1)
-			exit_status = 127;
+		// if (exit_status >= 1)
+		// 	exit_status = 127;
 	}
 	while (wait(&(int){0}) > 0)
 		;
