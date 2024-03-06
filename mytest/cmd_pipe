@@ -13,11 +13,7 @@ echo $?
 # cat <includes/minishell.h
 # echo $?
 # diff but validated
-./mytest/exp.sh
 
-
-
-# YOLO
 << end cat|>fileout 
 #!! ne fonctionne pas ou trop, le vrai necrit rien ds fileout pb redir globale
 echo $? 

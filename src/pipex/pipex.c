@@ -6,11 +6,19 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/05 11:01:44 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/06 09:18:50 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	init_pipes_io(int pipefd_in[2], int pipefd_out[2])
+{
+	pipefd_in[0] = -1;
+	pipefd_in[1] = -1;
+	pipefd_out[0] = -1;
+	pipefd_out[1] = -1;
+}
 
 void	here_doc_handle(int pipefd_in[], t_redir redir) //argv!!
 {
@@ -95,6 +103,7 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 			pid = fork();
 			if (!pid)
 			{
+				//gerer a chaque pipe savoir si une redir 
 	// if (set_all_redir_in(argv, redir))
 	// 	exit(1);
 	// set_pipefd_in(pipefd[0], redir);
@@ -104,6 +113,8 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 			}
 			else
 			{
+				//verif si une redir out est prevue our ce
+				// si une redir out grere une nouvelle fonction qui ecrira sur le pipe de sortie 
 				// if(set_all_redir_out(argv, redir))
 				// 	exit(1);
 				switch_pipes(pipefd);				
@@ -115,6 +126,7 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 	return (pid);
 }
 
+
 static pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 {
 	int		pipefd_in[2];
@@ -122,15 +134,11 @@ static pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 	pid_t	pid;
 
 	pid = -1;
-	pipefd_in[0] = -1;
-	pipefd_in[1] = -1;
-	pipefd_out[0] = -1;
-	pipefd_out[1] = -1;
+	init_pipes_io(pipefd_in, pipefd_out);
 	pid = nurcery(argv, envp, redir.fd_file,
 			(int *[]){pipefd_in, pipefd_out}, &redir);
 	if (pid < 0)
 		return (pid);
-	//set_redir_io(argv, &redir);
 	close_fd(pipefd_in[1]);
 	pipe_to_screen(pipefd_in[0], redir);
 	close_fd(pipefd_in[0]);
