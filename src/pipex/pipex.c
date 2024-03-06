@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/06 14:31:02 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/06 15:43:52 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,14 +178,15 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 	// set_pipefd_in(pipefd[0], redir);
 				//close_fd(fd_file[1]);
 				//redir->redir[1] = 0;
-				if (set_all_redir_in(argv, redir))
-					exit(1);
-					//return (-27);
+				set_io(argv, redir);
+				// if (set_all_redir_in(argv, redir))
+				// 	exit(1);
+				
 				if (redir->redir[0])
 					set_pipefd_in(pipefd[0], redir);
 					
-				if (set_all_redir_out(argv, redir))
-					exit(1);
+				// if (set_all_redir_out(argv, redir))
+				// 	exit(1);
 					//return (-1);
 				if (redir->redir[1])
 				{				
