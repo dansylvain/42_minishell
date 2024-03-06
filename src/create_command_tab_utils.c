@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:53:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/06 06:10:23 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/06 09:03:25 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,42 +97,41 @@ int	get_cmd_nbr(t_ast_nde *node)
 			continue ;
 		}
 		if (node->token == PIPE)
-			cmd_nbr++;
+			cmd_nbr += 2;
 		node = node->sibling;
 	}
+	// ft_printf("cmd_nbr: %i\n", cmd_nbr);
 	return (cmd_nbr);
 }
 
-// void	display_command_tab(char **command_tab)
-// {
-// 	int	i;
+void	display_command_tab(char **command_tab)
+{
+	int	i;
 
-// 	i = 0;
-// 	ft_printf("command_tab: \n");
-// 	while (command_tab[i])
-// 	{
-// 		ft_printf("cmd_tab[%i]: >%s<\n", i, command_tab[i]);
-// 		i++;
-// 	}
-// }
+	i = 0;
+	ft_printf("command_tab: \n");
+	while (command_tab[i])
+	{
+		ft_printf("cmd_tab[%i]: >%s<\n", i, command_tab[i]);
+		i++;
+	}
+}
 
-// void	display_command_tab_big(char ***command_tab)
-// {
-// 	int	i;
-// 	int	j;
+void	display_command_tab_big(char ***command_tab)
+{
+	int	i;
+	int	j;
 
-// 	i = 0;
-// 	ft_printf("command_tab: \n");
-// 	while (command_tab[i])
-// 	{
-// 		j = 0;
-// 		while (command_tab[i][j])
-// 		{
-// 			ft_printf("cmd_tab[%i][%i]: >%s<\n", i, j, command_tab[i][j]);
-// 			j++;
-// 		}
-// 		i++;
-// 		ft_printf("after\n");
-// 	}
-// 	ft_printf("command_tab end: \n");
-// }
+	i = 0;
+	ft_printf("command_tab: \n");
+	while (command_tab[i])
+	{
+		j = 0;
+		while (command_tab[i][j])
+		{
+			ft_printf("cmd_tab[%i][%i]: >%s<\n", i, j, command_tab[i][j]);
+			j++;
+		}
+		i++;
+	}
+}

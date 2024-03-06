@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/03/06 06:13:23 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/06 08:33:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ t_ast_nde	*parse(char *str, t_Data *data);
 void		launch_command_tab(t_Data *data, t_ast_nde *node,
 				char *envp[], int flag);
 char			*wilcard_func(char *pattern);
+void	store_and_free_cmd_list(t_ast_nde *cmd_list);
 
 
 /*   handle_signals.c                                   :+:      :+:    :+:   */
