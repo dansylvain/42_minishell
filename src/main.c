@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/05 17:48:25 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/05 20:08:17 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	prompt_loop(t_Data *data, char *envp[])
 	{
 		build_prompt(prompt);
 		cmd = readline(prompt);
-		//printf("HELLO TA MERE\n");
+		// printf("HELLO TA MERE\n");
 		if (cmd && *cmd)
 			add_history(cmd);
 		if (cmd == NULL)
