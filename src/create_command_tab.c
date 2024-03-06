@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/06 09:19:37 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/06 09:33:06 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 		return (NULL);
 	cmd_tab[cmd_nbr] = NULL;
 	cmd_tab = fill_cmd_tab_tabs(data, node, cmd_tab);
-	display_command_tab_big(cmd_tab);
+	//display_command_tab_big(cmd_tab);
 
 	return (cmd_tab);
 }

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/04 22:34:59 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/06 11:11:35 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ static char	*get_fd_outfile(char *error_str, t_redir *redir)
 	if (redir->redir[1] == 1)
 	{
 		redir->fd_file[1] = open(redir->filepath[1], O_WRONLY | O_CREAT
-				| O_TRUNC, 400);
+				| O_TRUNC, 0600);
+			// ft_putstr_fd("coucou", redir->fd_file[1]);
+			// close(redir->fd_file[1]);
 		if (redir->fd_file[1] < 0)
 			error_str = create_strerror(error_str, redir->filepath[1]);
 	}

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/04 09:24:01 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/06 09:47:20 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	set_all_redir_out(char **argv[], t_redir *redir)
 	int	ret;
 
 	ret = 0;
-	while (*argv)
+	while (*argv && ***argv != '|')
 	{
 		ret += set_redir_out(*argv, redir);
 		if (ret)
@@ -76,7 +76,7 @@ int	set_all_redir_in(char **argv[], t_redir *redir)
 	int	ret;
 
 	ret = 0;
-	while (*argv)
+	while (*argv && ***argv != '|')
 	{
 		ret += set_redir_in(*argv, redir);
 		if (ret)
