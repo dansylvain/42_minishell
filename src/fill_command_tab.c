@@ -6,148 +6,186 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/06 09:19:15 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/07 17:00:40 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
+void	print_node(t_ast_nde *node);
 void	store_and_free_cmd_tab(char ***cmd_tab);
+int	is_raw(t_ast_nde *node);
+void	print_ast_sib(t_ast_nde *sib);
 
-// void	viva_norminette(t_ast_nde **node, int *i)
-// {
-// 	if (is_separator(*node) || ((*node)->sibling
-// 			&& is_chevron((*node)->sibling)))
-// 		(*i)++;
-// 	(*node) = (*node)->sibling;
-// }
+int	is_raw(t_ast_nde *node)
+{
+	if (node->token == RAW)
+		return (1);
+	return (0);
+}
+
 
 void	add_pipe_tab_to_tab(char ****cmd_tab, int *i)
 {
-	(*i)++;
-	(*cmd_tab)[*i] = (char **)malloc(sizeof(char *));
-	(*cmd_tab)[*i][0] = (char *)ft_calloc(2, sizeof(char));
+	int j;
+	
+	j = 0;
+	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
+		j++;
+	(*cmd_tab)[*i][j] = NULL;
+	// ft_printf("I found this: >%s<", (*cmd_tab)[*i][j - 1]);
+	if ((*cmd_tab)[*i][0][0])
+		(*i)++;
 	(*cmd_tab)[*i][0][0] = '|';
+	(*cmd_tab)[*i][0][1] = '\0';
+	(*cmd_tab)[*i][1] = NULL;
+	(*i)++;
+}
+
+void	create_chev_tab(char ****cmd_tab, t_ast_nde **current, int *i)
+{
+	char *chev;
+	if ((*cmd_tab)[*i][0][0])
+		(*i)++;
+		
+	if ((*current)->token == SCHEV_LFT)
+		chev = "<";
+	if ((*current)->token == SCHEV_RGTH)
+		chev = ">";
+	if ((*current)->token == DCHEV_LFT)
+		chev = "<<";
+	if ((*current)->token == DCHEV_RGTH)
+		chev = ">>";
+	(*current)->sibling->token = CHEV_FILE;
+	ft_memcpy(&(*cmd_tab)[*i][0][0], chev, ft_strlen(chev));
+	ft_memcpy(&(*cmd_tab)[*i][1][0], (*current)->sibling->child->start, (*current)->sibling->child->end - (*current)->sibling->child->start + 1);
+	(*cmd_tab)[*i][2] = NULL;	
+	(*i)++;
+}
+
+void	add_raw_to_cmd_tab(t_Data *data, char ****cmd_tab, t_ast_nde *current, int *i)
+{
+	int j;
+	
+	j = 0;
+	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
+		j++;
+	(*cmd_tab)[*i][j] = get_node_str(data, current->child);
+	// (*cmd_tab)[*i][j + 1] = NULL;
+	// (*cmd_tab)[*i][j + 1] = NULL;
+	// ft_printf("tageted node: %s\n", (*cmd_tab)[*i][j + 1]);
+
+
+}
+
+int	cmd_tab_error_check(t_ast_nde *node)
+{
+	//error management to be added here...
+	return (1);
+}
+
+void	create_dollar_tab(t_Data *data, t_ast_nde **node, char ****cmd_tab, int *i)
+{
+	// ft_printf("DOLLAR FOUND\n");
+	int j;
+	char *env_var;
+	env_var = get_node_str(data, (*node)->child);
+	int	len;
+
+	len = ft_strlen(env_var);
+	
+	j = 0;
+	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
+		j++;
+	// if ((*cmd_tab)[*i][j][0])
+	ft_memcpy((*cmd_tab)[*i][j], env_var, len + 1);
+	// (*cmd_tab)[*i][j] = env_var;
+		// if ((*node)->start)
+		// 	free((*node)->start);
+	(*cmd_tab)[*i][j + 1] = NULL;
 }
 
 char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 {
+	t_ast_nde	*current;
 	int			i;
 
-	i = 0;
-	while (node)
+	current = node;
+	while (current)
 	{
-		if (!node)
-			break ;
-		if (is_chevron(node))
+		if (cmd_tab_error_check(node) == 0)
 		{
-			if (create_chevron_tab(&cmd_tab, &i, &node, data))
-				continue ;
-			else
-				break ;
+			ft_printf("ERROR!!!\n");
 		}
-		if (!is_separator(node))
-		{
-			if (create_separator_tab(data, &node, &cmd_tab, &i))
-				continue ;
-			else
-				break ;
-		}
-		if (is_separator(node) || ((node)->sibling
-			&& is_chevron((node)->sibling)))
-		{
-			// ft_printf("add_pipe_tab_to_tab\n");
-			add_pipe_tab_to_tab(&cmd_tab, &i);
-			(i)++;
-		}
-		(node) = (node)->sibling;
-		// viva_norminette(&node, &i);
+		current = current->sibling;
 	}
+	
+	i = 0;
+	current = node;
+	while (current && node)
+	{
+		while (!is_separator(current))
+		{
+			if (is_chevron(current))
+			{
+				create_chev_tab(&cmd_tab, &current, &i);
+			}
+			
+			current = current->sibling;
+		}
+		while (node && !is_separator(node))
+		{
+			if (is_raw(node))
+				add_raw_to_cmd_tab(data, &cmd_tab, node, &i);
+			else if (node->child->token == DOLL)
+				create_dollar_tab(data, &node, &cmd_tab, &i);
+			node = node->sibling;
+		}
+		if (node && node->token == PIPE)
+		{
+			add_pipe_tab_to_tab(&cmd_tab, &i);
+			node = node->sibling;
+		}
+		if (current && current->sibling)
+			current = current->sibling;
+		
+	}
+	int j;
+	
+	j = 0;
+	while ((cmd_tab)[i][j] && (cmd_tab)[i][j][0])
+		j++;
+	(cmd_tab)[i][j] = NULL;
+	// ft_printf("i: %i\n", i);
 	cmd_tab[i + 1] = NULL;
 	return (cmd_tab);
 }
-
-int	create_chevron_tab(char ****cmd_tab, int *i, t_ast_nde **node, t_Data *data)
+/* 
+while (!is_separator((*node)) && !is_chevron((*node)))
 {
-	(*cmd_tab)[*i] = (char **)malloc(sizeof(char *) * 3);
-	if ((*cmd_tab)[*i] == NULL)
-		return (0);
-	(*cmd_tab)[*i][0] = ft_strndup((*node)->start,
-			(*node)->end - (*node)->start + 1);
-	(*cmd_tab)[*i][1] = get_node_str(data, (*node)->sibling->child);
-	(*cmd_tab)[*i][2] = NULL;
-	if ((*node)->sibling->sibling)
-		(*node) = (*node)->sibling->sibling;
+	if ((*node)->token == JOKER)
+	{
+		tab = ft_split((*node)->start, ' ');
+		k = 0;
+		while (tab[k])
+		{
+			(*cmd_tab)[*i][j++] = ft_strdup(tab[k]);
+			free(tab[k]);
+			k++;
+		}
+		(*cmd_tab)[*i][j] = NULL;
+		if ((*node)->start)
+		{
+			free((*node)->start);
+		}
+		free(tab);
+	}
+	else if ((*node)->token == DOLL)
+	{
+		(*cmd_tab)[*i][j++] = get_node_str(data, (*node)->child);
+		if ((*node)->start)
+			free((*node)->start);
+	}
 	else
-	{
-		return (0);
-	}
-	if (!is_separator((*node)))
-		(*i)++;
-	return (1);
-}
-
-int	create_separator_tab(t_Data *data, t_ast_nde **node,
-	char ****cmd_tab, int *i)
-{
-	t_ast_nde	*current;
-	int			k;
-	int			j;
-	char		**tab;
-
-	current = (*node);
-	k = 0;
-	while (!is_separator(current) && !is_chevron(current))
-	{
-		if (current->token)
-		{
-			j = 0;
-			while (current->start[j])
-			{
-				if (current->start[j] == ' ')
-					k++;
-				j++;
-			}
-		}
-		k++;
-		current = current->sibling;
-	}
-	// ft_printf("k: %i\n", k);
-	(*cmd_tab)[*i] = (char **)ft_calloc(k + 1, sizeof(char *));
-	if ((*cmd_tab)[*i] == NULL)
-		return (0);
-	j = 0;
-	while (!is_separator((*node)) && !is_chevron((*node)))
-	{
-		if ((*node)->token == JOKER)
-		{
-			tab = ft_split((*node)->start, ' ');
-			k = 0;
-			while (tab[k])
-			{
-				(*cmd_tab)[*i][j++] = ft_strdup(tab[k]);
-				free(tab[k]);
-				k++;
-			}
-			(*cmd_tab)[*i][j] = NULL;
-			if ((*node)->start)
-			{
-				free((*node)->start);
-			}
-			free(tab);
-		}
-		else if ((*node)->token == DOLL)
-		{
-			(*cmd_tab)[*i][j++] = get_node_str(data, (*node)->child);
-			if ((*node)->start)
-				free((*node)->start);
-		}
-		else
-			(*cmd_tab)[*i][j++] = get_node_str(data, (*node)->child);
-		(*node) = (*node)->sibling;
-	}
-	(*cmd_tab)[*i][j] = NULL;
-	if (!is_separator((*node)))
-		(*i)++;
-	return (1);
-}
+		(*cmd_tab)[*i][j++] = get_node_str(data, (*node)->child);
+	(*node) = (*node)->sibling;
+} */
