@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 10:03:27 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/02 17:36:23 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/07 13:25:33 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ typedef enum e_tok
 	CMD,
 	ARG_CMD,
 	OPT_CMD,
-	ARG_OPT	
+	ARG_OPT,
+	CHEV_FILE
 }	t_tok;
 
 typedef struct s_ast_nde

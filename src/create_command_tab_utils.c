@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:53:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/06 16:18:37 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/07 13:18:16 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	display_command_tab_big(char ***command_tab)
 		j = 0;
 		while (command_tab[i][j])
 		{
+			
 			ft_printf("cmd_tab[%i][%i]: >%s<\n", i, j, command_tab[i][j]);
 			j++;
 		}
