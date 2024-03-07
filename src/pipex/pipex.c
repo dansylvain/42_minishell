@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/07 14:58:35 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/07 15:08:49 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 	t_Data	*data;
 
 	data = get_data(NULL);
-	if (acces)
+	if (!access(**argv, F_OK))
 	{
 		if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
 			exit (126);
