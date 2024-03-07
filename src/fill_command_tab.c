@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/06 09:19:15 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/07 11:20:41 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,9 @@
 
 void	store_and_free_cmd_tab(char ***cmd_tab);
 
-// void	viva_norminette(t_ast_nde **node, int *i)
-// {
-// 	if (is_separator(*node) || ((*node)->sibling
-// 			&& is_chevron((*node)->sibling)))
-// 		(*i)++;
-// 	(*node) = (*node)->sibling;
-// }
-
 void	add_pipe_tab_to_tab(char ****cmd_tab, int *i)
 {
 	(*i)++;
-	(*cmd_tab)[*i] = (char **)malloc(sizeof(char *));
-	(*cmd_tab)[*i][0] = (char *)ft_calloc(2, sizeof(char));
 	(*cmd_tab)[*i][0][0] = '|';
 }
 
@@ -69,9 +59,6 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 
 int	create_chevron_tab(char ****cmd_tab, int *i, t_ast_nde **node, t_Data *data)
 {
-	(*cmd_tab)[*i] = (char **)malloc(sizeof(char *) * 3);
-	if ((*cmd_tab)[*i] == NULL)
-		return (0);
 	(*cmd_tab)[*i][0] = ft_strndup((*node)->start,
 			(*node)->end - (*node)->start + 1);
 	(*cmd_tab)[*i][1] = get_node_str(data, (*node)->sibling->child);
@@ -113,9 +100,6 @@ int	create_separator_tab(t_Data *data, t_ast_nde **node,
 		current = current->sibling;
 	}
 	// ft_printf("k: %i\n", k);
-	(*cmd_tab)[*i] = (char **)ft_calloc(k + 1, sizeof(char *));
-	if ((*cmd_tab)[*i] == NULL)
-		return (0);
 	j = 0;
 	while (!is_separator((*node)) && !is_chevron((*node)))
 	{
