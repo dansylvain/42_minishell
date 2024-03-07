@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/06 18:51:10 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/07 06:48:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 	{
 		if (access(**argv, X_OK))
 		{
-			//ft_printf("-%i-", errno);
+			//ft_printf("non executable -%i-", errno);
 			 
 			if (errno == EISDIR)		
 			{
@@ -79,15 +79,15 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 			{
 				store_and_free_cmd_list(NULL);
 				free_command_tab_lg(argv_sav);	
-				
+			//	ft_printf("chemin non trouvé -%i-", errno);
 				exit(127);
 			}
 		}
 		
-		
+		//ft_printf("avant execve -%i-", errno);
 		
 		execve(**argv, *argv, envp);
-		
+		//ft_printf("erreur de exeve -%i-", errno);
 		if (errno == ENOENT)
 		{
 			// Commande non trouvée
