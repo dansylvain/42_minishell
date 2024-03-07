@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/07 09:48:06 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/07 10:35:47 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	is_dir(char *path)
 	struct stat path_stat;
 	if (stat(path, &path_stat) == 0) {
         if (S_ISREG(path_stat.st_mode)) {
-          	return (0);
+          	return (1);
         } else if (S_ISDIR(path_stat.st_mode)) {
             return (1);
         } else {
@@ -82,7 +82,15 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 			exit (126);
 		else 
 			exit (127);
-	}	
+	}
+	// else
+	// {
+	// 	ft_printf("NODIR!!!\n");	
+	// }
+		// if (access(**argv, X_OK))
+		// {
+		// 	exit (126);
+		// }	
 	if (!command_is_builtin(*argv, data, envp))
 	{
 		// ft_printf("la commande n'est pas un builtin -%i-\n", errno);
@@ -103,9 +111,14 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 			}
 			if (search_path(*argv, envp))
 			{
+				if (!access(**argv, F_OK) && access(**argv, X_OK) )
+				{
+				//	ft_printf("le fichier n'existe pas dans le rep courant-%i-\n", errno);
+					exit (126);
+				}
 				store_and_free_cmd_list(NULL);
 				free_command_tab_lg(argv_sav);	
-				// ft_printf("chemin non trouvé... exit -%i-\n", errno);
+				//  ft_printf("chemin non trouvé... exit -%i-\n", errno);
 				exit(127);
 			}
 			// else
