@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/07 15:08:49 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/07 15:22:42 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,26 @@ void	free_data(t_Data *data);
 int	is_dir(char *path)
 {
 	struct stat path_stat;
-	if (stat(path, &path_stat) == 0) {
-        if (S_ISREG(path_stat.st_mode)) {
+	
+	if (stat(path, &path_stat) == 0) 
+	{
+        if (S_ISREG(path_stat.st_mode)) 
+		{
           	return (0);
-        } else if (S_ISDIR(path_stat.st_mode)) {
+        } 
+		else if (S_ISDIR(path_stat.st_mode)) 
+		{
             return (1);
-        } else {
+        } 
+		else 
+		{
             return (0);
         }
-    } else {
-        ;//perror("stat a échoué pour le chemin");
+    } 
+	else 
+	{
+		return (0);
+        //perror("stat a échoué pour le chemin");
     }   
 }
 
@@ -76,13 +86,13 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 	t_Data	*data;
 
 	data = get_data(NULL);
-	if (!access(**argv, F_OK))
-	{
-		if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
-			exit (126);
-		else 
-			exit (127);
-	}
+	// if (!access(**argv, F_OK))
+	// {
+	// 	if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
+	// 		exit (126);
+	// 	else 
+	// 		exit (127);
+	// }
 	// else
 	// {
 	// 	ft_printf("NODIR!!!\n");	
