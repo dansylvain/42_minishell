@@ -6,11 +6,13 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/06 15:54:34 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/07 15:02:48 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redir.h"
+int	get_fd_in(t_redir *redir);
+int	get_fd_out(t_redir *redir);
 
 static int	set_redir_out(char **argv, t_redir *redir)
 {
@@ -20,7 +22,7 @@ static int	set_redir_out(char **argv, t_redir *redir)
 		if (!ft_strcmp(*argv, ">>"))
 			redir->redir[1] = 2;
 		redir->filepath[1] = argv[1];
-		if (get_fdio(redir))
+		if (get_fd_out(redir))
 		{
 			redir->redir[1] = 0;
 			return (1);
@@ -46,7 +48,7 @@ static int	set_redir_in(char **argv, t_redir *redir)
 		else
 		{
 			redir->filepath[0] = argv[1];
-			if (get_fdio(redir))
+			if (get_fd_in(redir))
 			{
 				redir->redir[0] = 0;
 				return (1);

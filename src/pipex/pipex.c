@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/07 10:35:47 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/07 14:58:35 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ int	is_dir(char *path)
 	struct stat path_stat;
 	if (stat(path, &path_stat) == 0) {
         if (S_ISREG(path_stat.st_mode)) {
-          	return (1);
+          	return (0);
         } else if (S_ISDIR(path_stat.st_mode)) {
             return (1);
         } else {
             return (0);
         }
     } else {
-        perror("stat a échoué pour le chemin");
+        ;//perror("stat a échoué pour le chemin");
     }   
 }
 
@@ -76,7 +76,7 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 	t_Data	*data;
 
 	data = get_data(NULL);
-	if (is_dir(**argv))
+	if (acces)
 	{
 		if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
 			exit (126);
