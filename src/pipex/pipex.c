@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/07 17:45:37 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/07 18:57:00 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,26 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 		if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
 		{
 			if (access(**argv, X_OK))
+			{
+				// if (is_dir)
+				display_error(" Permission denied\n");
 				exit (126);			
+			}
 		}
 		else 
-		{				
+		{	
+			display_error(" command not found\n");		
 			exit (127);
 		}
 	}
+	else if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
+	{
+		
+		display_error(" No such file or directory\n");
+		//exit (126);			
+		
+	}
+		
 	// else
 	// {
 	// 	ft_printf("NODIR!!!\n");	
@@ -118,9 +131,10 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 			//  	ft_printf("le fichier n'existe pas dans le rep courant-%i-\n", errno);
 				
 			// }
-		
+		 
 			if (errno == EISDIR)		
 			{
+				//!!
 				//Cible est un répertoire
 				exit(127); // Ou un autre code de votre choix
 			}
@@ -128,11 +142,13 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 			{
 				if (!access(**argv, F_OK) && access(**argv, X_OK) )
 				{
+					//!!
 				//	ft_printf("le fichier n'existe pas dans le rep courant-%i-\n", errno);
 					exit (126);
 				}
 				store_and_free_cmd_list(NULL);
 				free_command_tab_lg(argv_sav);	
+				//!!
 				//  ft_printf("chemin non trouvé... exit -%i-\n", errno);
 				exit(127);
 			}
@@ -140,6 +156,7 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 			// 	ft_printf("chemin trouvé! execve -%i-\n", errno);
 			if (errno == EACCES)
 			{
+				//!!
 				// Commande non exécutable ou permissions insuffisantes
 				exit(127);
 			}
@@ -159,16 +176,20 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 	//	ft_printf("erreur de exeve -%i-\n", errno);
 		if (errno == ENOENT)
 		{
+			display_error(" BOOOUUM !!\n");
+			//!!
 			// Commande non trouvée
 			exit(127);
 		} 
 		else if (errno == EISDIR)		
 		{
+			//!!
     		// Cible est un répertoire
    			 exit(127); // Ou un autre code de votre choix
 		}
 		else if (errno == EACCES)
 		{
+			display_error(" Is a directory\n");
 			// Commande non exécutable ou permissions insuffisantes
 			exit(126);
 		}

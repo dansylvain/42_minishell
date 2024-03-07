@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:30:35 by dan               #+#    #+#             */
-/*   Updated: 2024/03/06 06:02:02 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:05:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	display_exit_stuff(t_Data *data, char **command_tab)
 		{
 			display_error_detail("minishell: exit: ", command_tab[1],
 				": numeric argument required\n");
+			//ft_putstr_fd("numeric argument required\n", 2);
 			data->exit_status = 2;
 		}
 		else
