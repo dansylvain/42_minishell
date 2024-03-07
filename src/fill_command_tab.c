@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/07 15:07:34 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/07 16:05:44 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ int	is_raw(t_ast_nde *node)
 
 void	add_pipe_tab_to_tab(char ****cmd_tab, int *i)
 {
+	int j;
+	
+	j = 0;
+	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
+		j++;
+	(*cmd_tab)[*i][j] = NULL;
+	// ft_printf("I found this: >%s<", (*cmd_tab)[*i][j - 1]);
 	if ((*cmd_tab)[*i][0][0])
 		(*i)++;
 	(*cmd_tab)[*i][0][0] = '|';
@@ -63,7 +70,7 @@ void	add_raw_to_cmd_tab(t_Data *data, char ****cmd_tab, t_ast_nde *current, int 
 	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
 		j++;
 	(*cmd_tab)[*i][j] = get_node_str(data, current->child);
-	(*cmd_tab)[*i][j + 1] = NULL;
+	// (*cmd_tab)[*i][j + 1] = NULL;
 	// (*cmd_tab)[*i][j + 1] = NULL;
 	// ft_printf("tageted node: %s\n", (*cmd_tab)[*i][j + 1]);
 
@@ -80,14 +87,21 @@ void	create_dollar_tab(t_Data *data, t_ast_nde **node, char ****cmd_tab, int *i)
 {
 	// ft_printf("DOLLAR FOUND\n");
 	int j;
+	char *env_var;
+	env_var = get_node_str(data, (*node)->child);
+	int	len;
+
+	len = ft_strlen(env_var);
 	
 	j = 0;
 	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
 		j++;
-	(*cmd_tab)[*i][j] = get_node_str(data, (*node)->child);
+	// if ((*cmd_tab)[*i][j][0])
+	ft_memcpy((*cmd_tab)[*i][j], env_var, len + 1);
+	// (*cmd_tab)[*i][j] = env_var;
 		// if ((*node)->start)
 		// 	free((*node)->start);
-	
+	(*cmd_tab)[*i][j + 1] = NULL;
 }
 
 char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
@@ -135,6 +149,12 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 			current = current->sibling;
 		
 	}
+	int j;
+	
+	j = 0;
+	while ((cmd_tab)[i][j] && (cmd_tab)[i][j][0])
+		j++;
+	(cmd_tab)[i][j] = NULL;
 	// ft_printf("i: %i\n", i);
 	cmd_tab[i + 1] = NULL;
 	return (cmd_tab);
