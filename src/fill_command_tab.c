@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/07 16:05:44 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/07 17:00:40 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	create_chev_tab(char ****cmd_tab, t_ast_nde **current, int *i)
 		chev = ">>";
 	(*current)->sibling->token = CHEV_FILE;
 	ft_memcpy(&(*cmd_tab)[*i][0][0], chev, ft_strlen(chev));
-	ft_memcpy(&(*cmd_tab)[*i][1][0], (*current)->sibling->start, (*current)->sibling->end - (*current)->sibling->start + 1);
+	ft_memcpy(&(*cmd_tab)[*i][1][0], (*current)->sibling->child->start, (*current)->sibling->child->end - (*current)->sibling->child->start + 1);
 	(*cmd_tab)[*i][2] = NULL;	
 	(*i)++;
 }

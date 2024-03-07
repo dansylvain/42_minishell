@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/07 16:03:16 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/07 16:58:25 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,14 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 	store_and_free_cmd_tab_node_sav(cmd_tab_node_sav);
 	if (cmd_tab_node_sav)
 		build_command_tab(&cmd_tab, data, &cmd_tab_node_sav, envp);
+
 	flag = data->exit_status;
 	if (node && node->token == OR)
 		flag = !flag;
 	if (node)
 		launch_command_tab(data, node->sibling, envp, flag);
+	// if (cmd_tab)
+	// 	display_command_tab_big(cmd_tab);
 }
 
 /**========================================================================
@@ -64,7 +67,6 @@ void	build_command_tab(char ****cmd_tab, t_Data *data,
 		t_ast_nde **cmd_tab_node_sav, char *envp[])
 {
 	(*cmd_tab) = create_command_tab(data, (*cmd_tab_node_sav), envp);
-	// display_command_tab_big(*cmd_tab);
 	store_and_free_cmd_tab(*cmd_tab);
 	if (is_pipeline(*cmd_tab_node_sav))
 	{ //ft_printf("je suis un putain de pipeline\n");
@@ -143,7 +145,7 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 	if (alloc_memory_for_command_tab(node, &cmd_tab) == 0)
 		free_command_tab_lg(cmd_tab);
 	cmd_tab = fill_cmd_tab_tabs(data, node, cmd_tab);
-	//display_command_tab_big(cmd_tab);
+	// display_command_tab_big(cmd_tab);
 
 	return (cmd_tab);
 }
