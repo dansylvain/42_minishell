@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/07 17:00:40 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/07 19:43:00 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,22 @@ void	add_raw_to_cmd_tab(t_Data *data, char ****cmd_tab, t_ast_nde *current, int 
 	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
 		j++;
 	(*cmd_tab)[*i][j] = get_node_str(data, current->child);
+	// ft_printf("sibling0: ");
+	// print_node(current->child);
+	// ft_printf("sibling1: ");
+	// print_node(current->sibling->child);
+	// ft_printf("sibling2->child: ");
+	// print_node(current->sibling->sibling->child);
+	// ft_printf("sibling3: ");
+	// print_node(current->sibling->sibling->child->sibling);
+	// ft_printf("sibling4: ");
+	// print_node(current->sibling->sibling->child->sibling->sibling);
+	// ft_printf("sibling5: ");
+	// print_node(current->sibling->sibling->child->sibling->sibling->sibling);
+	// // ft_printf("sibling2: ");
+	// // print_node(current->sibling->sibling->sibling->sibling->child);
+	// ft_printf("\n");
+	
 	// (*cmd_tab)[*i][j + 1] = NULL;
 	// (*cmd_tab)[*i][j + 1] = NULL;
 	// ft_printf("tageted node: %s\n", (*cmd_tab)[*i][j + 1]);
@@ -104,6 +120,25 @@ void	create_dollar_tab(t_Data *data, t_ast_nde **node, char ****cmd_tab, int *i)
 	(*cmd_tab)[*i][j + 1] = NULL;
 }
 
+void complete_raw_tab(t_Data *data, char ****cmd_tab, t_ast_nde *node, int *i)
+{
+	t_ast_nde *current;
+	int j;
+	
+	j = 0;
+	while ((*cmd_tab)[*i - 1][j] && (*cmd_tab)[*i - 1][j][0])
+		j++;
+	current = node->child->sibling;
+	
+		// (*cmd_tab)[*i - 1][j] = ft_strcat((*cmd_tab)[*i - 1][j], get_node_str(data, current));
+		ft_strcat((*cmd_tab)[*i - 1][j - 1], get_node_str(data, current));
+		// (*cmd_tab)[*i - 1][j] = ;
+		// ft_printf("node: ");
+		// print_node(current);
+		// ft_printf("i: %i\n", *i);
+	
+}
+
 char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 {
 	t_ast_nde	*current;
@@ -128,18 +163,36 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 			if (is_chevron(current))
 			{
 				create_chev_tab(&cmd_tab, &current, &i);
+				if (current && is_separator(current->sibling->sibling) && current->sibling->child->sibling)
+				{
+					complete_raw_tab(data, &cmd_tab, current->sibling, &i);
+					// ft_printf("la choucroute: ");
+					// if (current->sibling)
+					// 	print_node(current->sibling->child->sibling);
+					// ft_printf("\n");
+				}
 			}
 			
 			current = current->sibling;
 		}
+		// ft_printf("mon salaud!\n");
 		while (node && !is_separator(node))
 		{
 			if (is_raw(node))
 				add_raw_to_cmd_tab(data, &cmd_tab, node, &i);
 			else if (node->child->token == DOLL)
 				create_dollar_tab(data, &node, &cmd_tab, &i);
+			// if (node && is_separator(node->sibling) && node->child->sibling)
+			// {
+			// 	complete_raw_tab(data, &cmd_tab, node, &i);
+			// 	ft_printf("la choucroute: ");
+			// 	if (node)
+			// 		print_node(node->child->sibling);
+			// 	ft_printf("\n");
+			// }
 			node = node->sibling;
 		}
+		
 		if (node && node->token == PIPE)
 		{
 			add_pipe_tab_to_tab(&cmd_tab, &i);
@@ -154,6 +207,7 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 	j = 0;
 	while ((cmd_tab)[i][j] && (cmd_tab)[i][j][0])
 		j++;
+	
 	(cmd_tab)[i][j] = NULL;
 	// ft_printf("i: %i\n", i);
 	cmd_tab[i + 1] = NULL;
