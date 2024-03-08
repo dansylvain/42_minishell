@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_fwrd.h                                        :+:      :+:    :+:   */
+/*   pipex_global_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 14:18:04 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 18:20:37 by seblin           ###   ########.fr       */
+/*   Created: 2023/12/21 15:27:14 by svidot            #+#    #+#             */
+/*   Updated: 2024/03/08 18:18:52 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPE_FWRD_H
-# define PIPE_FWRD_H
+#ifndef PIPEX_GLOBAL_UTILS_H
+# define PIPEX_GLOBAL_UTILS_H
 
-# include <unistd.h>
-# include "pipex_global_utils.h"
-# include "libft.h"
+typedef struct set_redir
+{
+	int		redir[2];
+	int		pipe_io[2][2];
+	int		pipe_hd[2];
+	int		fd_file[2];
+	char	*filepath[2];
+	char	*delim;
+}	t_redir;
+
+void	close_fd(int fd);
+void	close_fds(int fd[]);
 
 #endif

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:59:08 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 21:10:21 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 10:42:55 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "free_tree.h"
+#include "free_tree.h"
 
 void	free_sibling(t_ast_nde *sib)
 {
@@ -33,8 +33,8 @@ static void	free_branch(t_ast_nde *raw)
 	if (cont)
 	{
 		free_sibling(cont->child);
-		if (cont->sibling)		
-			free_tree(cont->sibling);		
+		if (cont->sibling)
+			free_tree(cont->sibling);
 		free(cont);
 	}
 }

@@ -16,6 +16,8 @@
 		"initializer_list": "c",
 		"get_next_line.h": "c",
 		"redir.h": "c",
-		"main.h": "c"
+		"main.h": "c",
+		"operator.h": "c",
+		"pipex.h": "c"
 	}
 }

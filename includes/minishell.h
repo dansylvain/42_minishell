@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/03/06 08:33:28 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 13:35:43 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	display_error_detail(char *str, char *details, char *str2);
 void	free_data(t_Data *data);
 void	close_minishell(t_Data *data);
 void	exec_env(t_Data *data, char **command_tab);
-int		command_is_builtin(char	*cmd[], t_Data *data, char *envp[]);
+int		command_is_builtin(char	*cmd[], t_Data *data);
 void	exec_pwd(t_Data *data);
 int		exec_cd(t_Data *data, char **command_tab);
 void	exec_echo(t_Data *data, char **command_tab);
@@ -81,7 +81,7 @@ void	unset_var(char **envp, int index);
 
 
 void		free_command_tab_lg(char ***command_tab);
-int			pipex(char **argv[], char *envp[]);
+int			pipex(char **argv[]);
 t_ast_nde	*copy_node_child(t_ast_nde *node);
 
 /*   exec_pipex.c                                       :+:      :+:    :+:   */

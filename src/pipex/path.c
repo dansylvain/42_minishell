@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/07 18:57:54 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 17:29:35 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,31 +52,27 @@ static char	*search_env_var(char *envp[], char *env_to_find)
 			env_find = *--envp;
 			break ;
 		}
-	}		
+	}
 	if (env_find)
 		env_find += ft_strlen(env_to_find);
 	return (env_find);
 }
 
 int	search_path(char *argv[], char *envp[])
-{	
+{
 	char	*env_find;
-	t_Data	*data;
 
-	data = get_data(NULL);
 	if (!**argv)
 		return (1);
 	env_find = search_env_var(envp, "PATH=");
 	if (!env_find)
 	{
 		ft_putstr_fd("env PATH not found.\n", 2);
-		free_data(data);
 		return (1);
 	}
 	if (!try_paths(argv, env_find))
 	{
 		display_error_detail(argv[0], ": command ", "not found\n");
-		free_data(data);	
 		return (1);
 	}
 	return (0);
@@ -87,7 +83,7 @@ char	*search_var(const t_ast_nde *node, t_Data *data)
 	char	*str;
 	char	*var;
 	char	*tmp;
-	
+
 	str = ft_strndup(node->start, node->end - node->start + 1);
 	if (*(str + 1) == '?')
 		var = ft_itoa(data->exit_status);
@@ -95,8 +91,8 @@ char	*search_var(const t_ast_nde *node, t_Data *data)
 	{
 		tmp = ft_strjoin_up(str + 1, "=", 0, 0);
 		var = search_env_var(data->envp_tab, tmp);
-		if (var)		
-			var = ft_strdup(var);		
+		if (var)
+			var = ft_strdup(var);
 		free(tmp);
 	}
 	if (str)

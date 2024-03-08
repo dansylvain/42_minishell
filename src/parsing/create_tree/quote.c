@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:36:13 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/29 14:39:37 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 10:52:47 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	set_qute_nde(t_ast_nde *qute_nde, char qute,
 	}
 	if (!qute_nde->end)
 	{
-		display_error("quote error\n");	
+		display_error("quote error\n");
 		free_sibling(sibling_sav);
 		free_sibling(qute_nde);
 		return (1);
@@ -81,16 +81,16 @@ t_ast_nde	*set_qute_sib(char *str)
 	while (*str)
 	{
 		if (is_qute(str, '\''))
-		{			
+		{
 			if (link_inqute_node(IN_SQUTE, '\'', &qute_sibling,
-				&qute_sibling_sav, &str))
-					return (NULL);
+					&qute_sibling_sav, &str))
+				return (NULL);
 		}
 		else if (is_qute(str, '\"'))
-		{			
+		{
 			if (link_inqute_node(IN_DQUTE, '\"', &qute_sibling,
-				&qute_sibling_sav, &str))
-					return (NULL);
+					&qute_sibling_sav, &str))
+				return (NULL);
 		}
 		else
 		{

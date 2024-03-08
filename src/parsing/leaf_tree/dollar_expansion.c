@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/03 10:56:54 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 10:45:44 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ t_ast_nde	*rebuild_dollar_str_node(char *str, t_tok token)
 	if (str)
 	{
 		if (token == JOKER)
-			str_node = create_node(JOKER);		
+			str_node = create_node(JOKER);
 		else if (token == DOLL)
 			str_node = create_node(DOLL);
 		else
-			str_node = create_node(RAW);	
+			str_node = create_node(RAW);
 		str_node->start = str;
 		str_node->end = str + ft_strlen(str) - 1;
 		str_node->child = copy_node(str_node);
@@ -80,15 +80,15 @@ static void	build_token_and_merge(const t_ast_nde *operator,
 	{
 		if (operator->token == DOLL)
 			str_tok = search_var(operator, data);
-		else if (operator->token == JOKER) 
+		else if (operator->token == JOKER)
 			str_tok = wilcard_func(ft_strndup(operator->start,
 						operator->end - operator->start + 1));
 		if (str_tok)
 		{
-			if (str && *str)			
-				*str = ft_strjoin_up(*str, str_tok, 1, 1);				
-			else if (str)			
-				*str = str_tok;							
+			if (str && *str)
+				*str = ft_strjoin_up(*str, str_tok, 1, 1);
+			else if (str)
+				*str = str_tok;
 		}
 	}
 }

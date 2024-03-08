@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 07:42:44 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/05 09:15:42 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 10:54:58 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,17 @@ static t_ast_nde	*search_token_joker(t_ast_nde *sib, char *actual)
 	}
 	return (token_nde);
 }
-#include <stdio.h>
+
 static t_ast_nde	*search_token_dollar(t_ast_nde *sib, char *actual)
 {
 	t_ast_nde	*token_nde;
 
 	if ((*actual == '$' && actual + 1 <= sib->end
-		&& *(actual + 1) != ' ' && *(actual + 1) != '\''
-		&& *(actual + 1) != '*' && *(actual + 1) != '.')
-		|| (*actual == '$' && actual == sib->end && sib->sibling && (sib->sibling->token == IN_DQUTE || sib->sibling->token == IN_SQUTE)
+			&& *(actual + 1) != ' ' && *(actual + 1) != '\''
+			&& *(actual + 1) != '*' && *(actual + 1) != '.')
+		|| (*actual == '$' && actual == sib->end && sib->sibling
+			&& (sib->sibling->token == IN_DQUTE
+				|| sib->sibling->token == IN_SQUTE)
 		))
 	{
 		token_nde = create_node(DOLL);

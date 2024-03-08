@@ -5,24 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/21 15:27:14 by svidot            #+#    #+#             */
-/*   Updated: 2024/02/28 15:22:29 by seblin           ###   ########.fr       */
+/*   Created: 2024/03/08 18:01:34 by seblin            #+#    #+#             */
+/*   Updated: 2024/03/08 18:28:09 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_UTILS_H
 # define PIPEX_UTILS_H
 
-typedef struct set_redir
-{
-	int		redir[2];
-	int		fd_file[2];
-	char	*filepath[2];
-	char	*delim;
-	int		pipe[2];
-}	t_redir;
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include "pipex_global_utils.h"
+#include "ft_printf.h"
+#include "../../lib/gnl/get_next_line.h"
+#include "libft.h"
+#include "parsing_utils.h"
+#include "minishell.h"
 
-void	close_fd(int fd);
-void	close_fds(int fd[]);
+void	display_error(char *str);
+void	store_and_free_cmd_list(t_ast_nde *cmd_list);
+void	free_command_tab_lg(char ***command_tab);
+void	free_data(t_Data *data);
+t_Data	*get_data(char *envp[]);
 
 #endif

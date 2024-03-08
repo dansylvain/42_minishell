@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 17:31:29 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 18:39:12 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ void	build_command_tab(char ****cmd_tab, t_Data *data,
 	if (is_pipeline(*cmd_tab_node_sav))
 	{
 		free_sibling_and_child(*cmd_tab_node_sav);
-		data->exit_status = pipex(*cmd_tab, envp);
+		data->exit_status = pipex(*cmd_tab);
 	}
-	else if (!command_is_builtin(*(*cmd_tab), data, envp))
+	else if (!command_is_builtin(*(*cmd_tab), data))
 	{
 		free_sibling_and_child(*cmd_tab_node_sav);
-		data->exit_status = pipex(*cmd_tab, envp);
+		data->exit_status = pipex(*cmd_tab);
 	}
 	else
 	{
