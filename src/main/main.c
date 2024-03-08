@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 18:38:58 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 19:52:30 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	build_prompt(char prompt[])
 int	command_is_builtin(char	**cmd_tab, t_Data *data)
 {
 	int	len;
-	
+
 	len = ft_strlen(cmd_tab[0]);
 	if (!cmd_tab || is_only_space(cmd_tab[0]))
 		return (1);
@@ -151,5 +151,5 @@ int	command_is_builtin(char	**cmd_tab, t_Data *data)
 		return (exec_unset(data, cmd_tab), 1);
 	if (len >= 6 && !ft_strncmp(&(cmd_tab[0][len - 6]), "export", 7))
 		return (exec_export(cmd_tab, data), 1);
-	return (0);	
+	return (0);
 }
