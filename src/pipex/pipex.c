@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 13:35:00 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 13:53:12 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,18 +156,18 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[])
 	}
 }
 
-void	child_area(char **argv[], char **argv_sav[], char **argv_redir[], int *pipefd[], t_redir *redir)
+void	child_area(char **argv[], char **argv_sav[], char **argv_redir[], t_redir *redir)
 {
 	set_redir_io(argv_redir, redir);
 	if (redir->redir[0])
-		set_pipefd_in(pipefd[0], redir);
+		set_pipefd_in(redir->pipe_io[0], redir);
 	if (redir->redir[1])
-		pipefd[1][1] = redir->fd_file[1];
-	set_pipe_forward(pipefd[0], pipefd[1], *redir);
+		redir->pipe_io[1][1] = redir->fd_file[1];
+	set_pipe_forward(redir->pipe_io[0], redir->pipe_io[1], *redir);
 	builtin_or_execve(argv, argv_sav);
 }
 
-static pid_t	nurcery(char **argv[], int fd_file[], int *pipefd[], t_redir *redir)
+static pid_t	nurcery(char **argv[], t_redir *redir)
 {
 	pid_t	pid;
 	char 	***argv_sav;
@@ -182,13 +182,13 @@ static pid_t	nurcery(char **argv[], int fd_file[], int *pipefd[], t_redir *redir
 			argv_redir = argv + 1;
 		if (***argv != '>' && ***argv != '<' && ***argv != '|')
 		{
-			if (pipe(pipefd[1]) < 0)
+			if (pipe(redir->pipe_io[1]) < 0)
 				exit(1);
 			pid = fork();
 			if (!pid)
-				child_area(argv, argv_sav, argv_redir, pipefd, redir);
+				child_area(argv, argv_sav, argv_redir, redir);
 			else
-				switch_pipes(pipefd);
+				switch_pipes(redir->pipe_io);
 		}
 		argv++;
 	}
@@ -202,8 +202,7 @@ static pid_t	create_pipeline(char **argv[])
 	
 	pid = -1;	
 	init_redir(&redir);	
-	pid = nurcery(argv, redir.fd_file,
-			(int *[]){redir.pipe_io[0], redir.pipe_io[1]}, &redir);
+	pid = nurcery(argv, &redir);
 	if (pid < 0)
 		return (pid);
 	close_fd(redir.pipe_io[0][1]);
