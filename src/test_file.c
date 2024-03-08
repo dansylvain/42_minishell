@@ -29,6 +29,7 @@ char	**create_command_tab(t_ast_nde *node)
 		i++;
 	}
 	commands_tab[i] = NULL;
+	display_command_tab(commands_tab);
 	return (commands_tab);
 }
 
@@ -38,7 +39,7 @@ void	display_command_tab(char **command_tab)
 
 	while (command_tab[i])
 	{
-		ft_printf("%s\n", command_tab[i]);
+		ft_printf("display_command_tab: %s\n", command_tab[i]);
 		i++;
 	}
 }
