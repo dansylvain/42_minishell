@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
+#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/08 18:37:38 by seblin           ###   ########.fr        #
+#    Updated: 2024/03/08 20:36:24 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,12 @@ FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 LIBS = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
 
 # Source files
-SRC =	lib/gnl/get_next_line.c \
+SRC =	src/main/main.c \
+		src/main/utils.c \
+		src/main/utils_2.c \
+		src/main/utils_3.c \
+		src/main/handle_signals.c \
+		lib/gnl/get_next_line.c \
 		lib/gnl/get_next_line_utils.c \
 		src/builtins/exec_env.c \
 		src/builtins/exec_pwd.c \
@@ -66,17 +71,14 @@ SRC =	lib/gnl/get_next_line.c \
 		src/pipex/utils.c \
 		src/pipex/redir.c \
 		src/pipex/fdio.c \
-		src/post_parsing/create_command_tab.c \
 		src/post_parsing/create_command_tab_utils.c \
 		src/post_parsing/fill_command_tab.c \
 		src/post_parsing/exec_pipex.c \
+		src/post_parsing/launch_command_tab.c \
+		src/post_parsing/create_command_tab.c \
+		src/post_parsing/fill_command_tab_utils.c \
 		src/wildcard/wildcard_expansion.c \
 		src/wildcard/wildcard_expansion_2.c \
-		src/main/main.c \
-		src/main/utils.c \
-		src/main/utils_2.c \
-		src/main/utils_3.c \
-		src/main/handle_signals.c \
 		
 OBJ = $(SRC:.c=.o)
 

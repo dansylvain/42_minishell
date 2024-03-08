@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_struct.h                                 :+:      :+:    :+:   */
+/*   rl_header.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 16:21:37 by dan              ###   ########.fr       */
+/*   Created: 2024/02/21 12:27:05 by dsylvain          #+#    #+#             */
+/*   Updated: 2024/03/08 19:24:01 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_STRUCT_H
-# define MINISHELL_STRUCT_H
+#ifndef RL_HEADER_H
+# define RL_HEADER_H
 
-typedef struct t_Data
-{
-	char	**envp_tab;
-	int		exit_status;
-}	t_Data;
-		
+# include <readline/readline.h>
+# include <readline/history.h>
+
 #endif

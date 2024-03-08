@@ -1,14 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rl_header.h                                        :+:      :+:    :+:   */
+/*   fill_command_tab_utils.h                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 12:27:05 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/02/21 12:27:14 by dsylvain         ###   ########.fr       */
+/*   Created: 2024/03/08 20:35:21 by dan               #+#    #+#             */
+/*   Updated: 2024/03/08 20:40:12 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <readline/readline.h>
-# include <readline/history.h>
+#ifndef FILL_COMMAND_TAB_UTILS_H
+# define FILL_COMMAND_TAB_UTILS_H
+
+# include "minishell.h"
+# include "parsing_utils.h"
+# include <stddef.h>
+# include "libft.h"
+
+char	*get_node_str(t_Data *data, t_ast_nde *node);
+
+#endif

@@ -6,15 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:30:35 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 16:23:19 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 20:25:33 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_exit.h"
-
-void	store_and_free_cmd_list(t_ast_nde *cmd_list);
-void	store_and_free_cmd_tab_node_sav(t_ast_nde *cmd_tab_node_sav);
-void	store_and_free_cmd_tab(char ***cmd_tab);
 
 void	display_exit_stuff(t_Data *data, char **command_tab)
 {

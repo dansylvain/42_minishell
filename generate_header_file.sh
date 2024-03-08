@@ -10,7 +10,7 @@ generate_header_file() {
 #ifndef $include_guard
 #define $include_guard
 
-#include <minishell_struct.h>
+#include <minishell.h>
 
 EOF
 
