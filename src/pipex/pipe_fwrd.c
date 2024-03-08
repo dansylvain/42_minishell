@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:20:41 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 13:21:43 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 13:30:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,18 @@ void	switch_pipes(int *pipefd[])
 	pipefd[0][1] = pipefd[1][1];
 }
 
-void	pipe_to_screen_or_file(int pipe, t_redir redir)
+void	pipe_to_screen_or_file(t_redir redir)
 {
 	char	buf;
 
 	if (redir.redir[1])
 	{
-		while (read(pipe, &buf, 1))
+		while (read(redir.pipe_io[0][0], &buf, 1))
 			ft_putchar_fd(buf, redir.fd_file[1]);
 	}
 	else
 	{
-		while (read(pipe, &buf, 1))
+		while (read(redir.pipe_io[0][0], &buf, 1))
 			ft_putchar_fd(buf, 1);
 	}
 }

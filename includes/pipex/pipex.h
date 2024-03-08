@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:20:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 13:25:44 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 13:31:34 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**search_path(char *argv[], char *envp[]);
 t_Data	*get_data(char *envp[]);
 void	init_redir( t_redir *redir);
 int		set_redir_io(char **argv[], t_redir *redir);
-void	pipe_to_screen_or_file(int pipe, t_redir redir);
+void	pipe_to_screen_or_file(t_redir redir);
 void	switch_pipes(int *pipefd[]);
 void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir);
 void	set_pipefd_in(int pipefd_in[], t_redir *redir);

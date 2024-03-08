@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 13:25:00 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 13:31:16 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,8 +175,7 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 
 	pid = -42;
 	argv_sav = argv;
-	argv_redir = argv;
-	
+	argv_redir = argv;	
 	while (*argv)
 	{	
 		if (***argv == '|')
@@ -197,21 +196,18 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 }
 
 static pid_t	create_pipeline(char **argv[], char *envp[])
-{
-	
+{	
 	pid_t	pid;
 	t_redir redir;
 	
-	pid = -1;
-	
-	init_redir(&redir);
-	
+	pid = -1;	
+	init_redir(&redir);	
 	pid = nurcery(argv, envp, redir.fd_file,
 			(int *[]){redir.pipe_io[0], redir.pipe_io[1]}, &redir);
 	if (pid < 0)
 		return (pid);
 	close_fd(redir.pipe_io[0][1]);
-	pipe_to_screen_or_file(redir.pipe_io[0][0], redir);
+	pipe_to_screen_or_file(redir);
 	close_fd(redir.pipe_io[0][0]);
 	close_fds(redir.pipe_io[1]);
 	return (pid);
