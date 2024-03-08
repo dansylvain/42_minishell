@@ -6,7 +6,7 @@
 /*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 12:16:56 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:25:26 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,12 +162,12 @@ void	child_area(char **argv[], char **argv_sav[], char **argv_redir[], int *pipe
 	if (redir->redir[0])
 		set_pipefd_in(pipefd[0], redir);
 	if (redir->redir[1])
-		pipefd[1][1] = redir->file_fd[1];
+		pipefd[1][1] = redir->fd_file[1];
 	set_pipe_forward(pipefd[0], pipefd[1], *redir);
 	builtin_or_execve(argv, argv_sav);
 }
 
-static pid_t	nurcery(char **argv[], char *envp[], int file_fd[], int *pipefd[], t_redir *redir)
+static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir *redir)
 {
 	pid_t	pid;
 	char 	***argv_sav;
@@ -204,7 +204,7 @@ static pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
 
 	pid = -1;
 	init_pipes_io(pipefd_in, pipefd_out);
-	pid = nurcery(argv, envp, redir.file_fd,
+	pid = nurcery(argv, envp, redir.fd_file,
 			(int *[]){pipefd_in, pipefd_out}, &redir);
 	if (pid < 0)
 		return (pid);

@@ -6,7 +6,7 @@
 /*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:20:41 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 12:19:19 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:25:52 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	set_pipefd_in(int pipefd_in[], t_redir *redir)
 	if (!redir->redir[0])
 		pipefd_in[0] = 0;
 	else if (redir->redir[0] == 1)
-		pipefd_in[0] = redir->file_fd[0];
+		pipefd_in[0] = redir->fd_file[0];
 	else if (redir->redir[0] == 2)
 	{
-		pipefd_in[0] = redir->hd_pipe[0];
-		pipefd_in[1] = redir->hd_pipe[1];
+		pipefd_in[0] = redir->pipe_hd[0];
+		pipefd_in[1] = redir->pipe_hd[1];
 	}
 }
 
@@ -47,7 +47,7 @@ void	pipe_to_screen_or_file(int pipe, t_redir redir)
 	if (redir.redir[1])
 	{
 		while (read(pipe, &buf, 1))
-			ft_putchar_fd(buf, redir.file_fd[1]);
+			ft_putchar_fd(buf, redir.fd_file[1]);
 	}
 	else
 	{

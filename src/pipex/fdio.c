@@ -6,7 +6,7 @@
 /*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:45:59 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 12:17:03 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:25:26 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ int	get_fd_in(t_redir *redir)
 	char	*error_str;
 
 	error_str = "";
-	redir->file_fd[0] = -1;
+	redir->fd_file[0] = -1;
 	if (redir->redir[0] == 1)
 	{
-		redir->file_fd[0] = open(redir->filepath[0], O_RDONLY);
-		if (redir->file_fd[0] < 0)
+		redir->fd_file[0] = open(redir->filepath[0], O_RDONLY);
+		if (redir->fd_file[0] < 0)
 			error_str = create_strerror(error_str, redir->filepath[0]);
 	}
 	if (*error_str)
@@ -63,19 +63,19 @@ int	get_fd_out(t_redir *redir)
 	char	*error_str;
 
 	error_str = "";
-	redir->file_fd[1] = -1;
+	redir->fd_file[1] = -1;
 	if (redir->redir[1] == 1)
 	{
-		redir->file_fd[1] = open(redir->filepath[1], O_WRONLY | O_CREAT
+		redir->fd_file[1] = open(redir->filepath[1], O_WRONLY | O_CREAT
 				| O_TRUNC, 0600);
-		if (redir->file_fd[1] < 0)
+		if (redir->fd_file[1] < 0)
 			error_str = create_strerror(error_str, redir->filepath[1]);
 	}
 	else if (redir->redir[1] == 2)
 	{
-		redir->file_fd[1] = open(redir->filepath[1], O_WRONLY | O_CREAT
+		redir->fd_file[1] = open(redir->filepath[1], O_WRONLY | O_CREAT
 				| O_APPEND, 400);
-		if (redir->file_fd[1] < 0)
+		if (redir->fd_file[1] < 0)
 			error_str = create_strerror(error_str, redir->filepath[1]);
 	}
 	if (*error_str)
