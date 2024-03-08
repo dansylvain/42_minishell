@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:20:41 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 13:10:13 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 13:21:43 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,6 @@ void	pipe_to_screen_or_file(int pipe, t_redir redir)
 	}
 }
 
-void	init_pipes_io(int pipefd_in[2], int pipefd_out[2])
-{
-	pipefd_in[0] = -1;
-	pipefd_in[1] = -1;
-	pipefd_out[0] = -1;
-	pipefd_out[1] = -1;
-}
 void	init_pipe_io(t_redir *redir)
 {
 	redir->pipe_io[0][0] = -1;
