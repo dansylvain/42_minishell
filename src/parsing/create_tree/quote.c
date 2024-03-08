@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:36:13 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 21:52:05 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 22:30:57 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,14 @@ static int	link_inqute_node(t_tok tok, char qute, t_ast_nde **qute_sibling,
 	return (0);
 }
 
+static void	create_raw_node(t_ast_nde **raw_nde, char **str,
+	t_ast_nde **qute_sibling, t_ast_nde **qute_sibling_sav)
+{
+	*raw_nde = create_node(RAW);
+	set_raw_nde(*raw_nde, str);
+	add_sibling(*raw_nde, qute_sibling, qute_sibling_sav);
+}
+
 t_ast_nde	*set_qute_sib(char *str)
 {
 	t_ast_nde	*qute_sibling_sav;
@@ -93,11 +101,7 @@ t_ast_nde	*set_qute_sib(char *str)
 				return (NULL);
 		}
 		else
-		{
-			raw_nde = create_node(RAW);
-			set_raw_nde(raw_nde, &str);
-			add_sibling(raw_nde, &qute_sibling, &qute_sibling_sav);
-		}
+			create_raw_node(&raw_nde, &str, &qute_sibling, &qute_sibling_sav);			
 	}
 	return (qute_sibling_sav);
 }
