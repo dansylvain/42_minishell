@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utiles.h                                           :+:      :+:    :+:   */
+/*   pipex_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:01:34 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 18:20:37 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:28:09 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILES_H
-# define UTILES_H
+#ifndef PIPEX_UTILS_H
+# define PIPEX_UTILS_H
 
 #include <stdlib.h>
 #include <sys/stat.h>
