@@ -19,6 +19,7 @@
 		"main.h": "c",
 		"operator.h": "c",
 		"pipex.h": "c",
-		"ft_printf.h": "c"
+		"ft_printf.h": "c",
+		"launch_command_tab.h": "c"
 	}
 }
