@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:13:27 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 21:20:13 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 21:25:07 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	free_all(t_redir *redir, char **argv_sav[])
 	free_data(get_data(NULL));
 	free_command_tab_lg(argv_sav);
 	store_and_free_cmd_list(NULL);
-	//if (redir->delim)
-		//;//free(redir->delim);
+	if (redir->delim)
+		free(redir->delim);
 }
 
 void	free_and_exit(t_redir *redir, char **argv_sav[], int n_exit, char *err_str)
@@ -71,10 +71,10 @@ void	here_doc_handle(t_redir *redir)
 		line = get_next_line(0);
 		if (line)
 		{
-			line[ft_strlen(line) - 1] = 0; //optimisable ... ajout \n a delim
+			//line[ft_strlen(line) - 1] = 0; //optimisable ... ajout \n a delim
 			if (ft_strcmp(line, redir->delim))
 			{
-				line[ft_strlen(line)] = '\n';
+				//line[ft_strlen(line)] = '\n';
 				ft_putstr_fd(line, redir->pipe_hd[1]);
 			}
 			else

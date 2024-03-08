@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 20:57:34 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 21:24:51 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	set_redir_in(char **argv, t_redir *redir)
 		redir->redir[0] = 1;
 		if (!ft_strcmp(*argv, "<<"))
 		{
-			redir->delim = argv[1];//ft_strjoin(argv[1], "\n");
+			redir->delim = ft_strjoin(argv[1], "\n");
 			redir->redir[0] = 2;
 			close_fds(redir->pipe_hd);
 			if (pipe(redir->pipe_hd) < 0)
