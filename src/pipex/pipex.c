@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 15:12:39 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 15:40:43 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	is_dir(char *path)
     } 
 	return (0);
 }
+
 void	check_filedir_error(char **argv[])
 {
 	if (!access(**argv, F_OK))
@@ -82,6 +83,14 @@ void	check_filedir_error(char **argv[])
 	else if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')	
 		display_error(" No such file or directory\n");
 }
+
+void	free_all(char **argv_sav[])
+{
+	free_data(get_data(NULL));
+	free_command_tab_lg(argv_sav);
+	store_and_free_cmd_list(NULL);
+}
+
 static void	builtin_or_execve(char **argv[], char **argv_sav[])
 {
 	t_Data	*data;
@@ -92,58 +101,28 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[])
 	{		
 		if (access(**argv, X_OK))
 		{				 
-			if (errno == EISDIR)		
-			{					
-				exit(127); // Ou un autre code de votre choix
-			}
+		
 			if (search_path(*argv, data->envp_tab))
 			{
-				if (!access(**argv, F_OK) && access(**argv, X_OK) )
-				{					
-				//	ft_printf("le fichier n'existe pas dans le rep courant-%i-\n", errno);
-					exit (126);
-				}
+				if (!access(**argv, F_OK) && access(**argv, X_OK) )				
+					exit (126);				
 				store_and_free_cmd_list(NULL);
 				free_command_tab_lg(argv_sav);					
-				//  ft_printf("chemin non trouvé... exit -%i-\n", errno);
 				exit(127);
 			}
-			// else
-			// 	ft_printf("chemin trouvé! execve -%i-\n", errno);
-			if (errno == EACCES)
-			{			
-				// Commande non exécutable ou permissions insuffisantes
-				exit(127);
-			}
-		}
-	
+		
+		}	
 		execve(**argv, *argv, data->envp_tab);
-	//	ft_printf("erreur de exeve -%i-\n", errno);
-		if (errno == ENOENT)
-		{
-			display_error(" BOOOUUM !!\n");
-			//!!
-			// Commande non trouvée
-			exit(127);
-		} 
-		else if (errno == EISDIR)		
-		{
-			//!!
-    		// Cible est un répertoire
-   			 exit(127); // Ou un autre code de votre choix
-		}
-		else if (errno == EACCES)
+	
+		 if (errno == EACCES)
 		{
 			display_error(" Is a directory\n");
-			// Commande non exécutable ou permissions insuffisantes
 			exit(126);
-		}	
+		}
 	}
 	else
 	{
-		free_data(data);
-		free_command_tab_lg(argv_sav);
-		store_and_free_cmd_list(NULL);
+		free_all(argv_sav);
 		exit(EXIT_SUCCESS);
 	}
 }
