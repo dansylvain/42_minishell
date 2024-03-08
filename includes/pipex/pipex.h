@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:20:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/06 17:53:50 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 10:59:52 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdlib.h>
 # include "ft_printf.h"
 # include "libft.h"
-#include "../../lib/gnl/get_next_line.h"
+# include "../../lib/gnl/get_next_line.h"
 # include "pipex_utils.h"
 # include "../../includes/minishell.h"
 

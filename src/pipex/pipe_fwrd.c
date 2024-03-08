@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_fwrd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:20:41 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/06 17:54:32 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 11:02:26 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	pipe_to_screen_or_file(int pipe, t_redir redir)
 	char	buf;
 
 	if (redir.redir[1])
-	{	
+	{
 		while (read(pipe, &buf, 1))
-			ft_putchar_fd(buf, redir.fd_file[1]);	
+			ft_putchar_fd(buf, redir.fd_file[1]);
 	}
 	else
 	{
