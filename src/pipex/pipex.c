@@ -6,31 +6,31 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 17:31:04 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 21:21:30 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	builtin_or_execve(char **argv[], char **argv_sav[])
+static void	builtin_or_execve(char **argv[], char **argv_sav[], t_redir *redir)
 {
 	t_Data	*data;
 
 	data = get_data(NULL);
-	check_filedir_error(argv, argv_sav);
+	check_filedir_error(argv, argv_sav, redir);
 	if (!command_is_builtin(*argv, data))
 	{
 		if (access(**argv, X_OK))
 		{
 			if (search_path(*argv, data->envp_tab))
-				free_and_exit(argv_sav, 127, NULL);
+				free_and_exit(redir, argv_sav, 127, NULL);
 		}
 		execve(**argv, *argv, data->envp_tab);
 		if (errno == EACCES)
-			free_and_exit(argv_sav, 126, " Is a directory\n");
+			free_and_exit(redir, argv_sav, 126, " Is a directory\n");
 	}
 	else
-		free_and_exit(argv_sav, EXIT_SUCCESS, NULL);
+		free_and_exit(redir, argv_sav, EXIT_SUCCESS, NULL);
 }
 
 static void	child_area(char **argv[], char **argv_sav[], char **argv_redir[],
@@ -42,7 +42,7 @@ static void	child_area(char **argv[], char **argv_sav[], char **argv_redir[],
 	if (redir->redir[1])
 		redir->pipe_io[1][1] = redir->fd_file[1];
 	set_pipe_forward(redir->pipe_io[0], redir->pipe_io[1], *redir);
-	builtin_or_execve(argv, argv_sav);
+	builtin_or_execve(argv, argv_sav, redir);
 }
 
 static pid_t	nurcery(char **argv[], t_redir *redir)

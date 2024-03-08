@@ -6,24 +6,26 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:13:27 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 18:36:09 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 21:20:13 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_utils.h"
 
-void	free_all(char **argv_sav[])
+static void	free_all(t_redir *redir, char **argv_sav[])
 {
 	free_data(get_data(NULL));
 	free_command_tab_lg(argv_sav);
 	store_and_free_cmd_list(NULL);
+	//if (redir->delim)
+		//;//free(redir->delim);
 }
 
-void	free_and_exit(char **argv_sav[], int n_exit, char *err_str)
+void	free_and_exit(t_redir *redir, char **argv_sav[], int n_exit, char *err_str)
 {
 	if (err_str)
 		display_error(err_str);
-	free_all(argv_sav);
+	free_all(redir, argv_sav);
 	exit(n_exit);
 }
 
@@ -43,23 +45,23 @@ int	is_dir(char *path)
 	return (0);
 }
 
-void	check_filedir_error(char **argv[], char **argv_sav[])
+void	check_filedir_error(char **argv[], char **argv_sav[], t_redir *redir)
 {
 	if (!access(**argv, F_OK))
 	{
 		if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
 		{
 			if (access(**argv, X_OK))
-				free_and_exit(argv_sav, 126, " Permission denied\n");
+				free_and_exit(redir, argv_sav, 126, " Permission denied\n");
 		}
 		else
-			free_and_exit(argv_sav, 127, " command not found\n");
+			free_and_exit(redir, argv_sav, 127, " command not found\n");
 	}
 	else if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
 		display_error(" No such file or directory\n");
 }
 
-void	here_doc_handle(int pipefd_in[], t_redir redir)
+void	here_doc_handle(t_redir *redir)
 {
 	char	*line;
 
@@ -70,10 +72,10 @@ void	here_doc_handle(int pipefd_in[], t_redir redir)
 		if (line)
 		{
 			line[ft_strlen(line) - 1] = 0; //optimisable ... ajout \n a delim
-			if (ft_strcmp(line, redir.delim))
+			if (ft_strcmp(line, redir->delim))
 			{
 				line[ft_strlen(line)] = '\n';
-				ft_putstr_fd(line, pipefd_in[1]);
+				ft_putstr_fd(line, redir->pipe_hd[1]);
 			}
 			else
 			{
@@ -85,7 +87,7 @@ void	here_doc_handle(int pipefd_in[], t_redir redir)
 		else
 		{
 			ft_printf("\rwarning: here-document at line 1 \
-delimited by end-of-file (wanted '%s')\n", redir.delim);
+delimited by end-of-file (wanted '%s')\n", redir->delim);
 			break ;
 		}
 		free(line); //opti

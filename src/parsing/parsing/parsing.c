@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/04 11:50:02 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 20:10:13 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int	set_parenthesis(t_ast_nde *node);
 // 	//print_cmd(cmd_sav);	
 // 	return (free_tree(root), cmd_sav);
 // }
-
-
 
 // #include "parsing.h"
 // int	set_parenthesis(t_ast_nde *node);
@@ -139,7 +137,7 @@ int	leaf_tree_par2(t_ast_nde	*raw, t_Data *data, char *envp[])
 			if (leaf_tree_par(token->child->sibling, data, envp))
 			{			
 				print_node(token);
-				 exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), envp);
+				exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), envp);
 			//	if (state)
 				ft_printf("LEAAAAAAAAAAFFFFFF\n");					
 			}

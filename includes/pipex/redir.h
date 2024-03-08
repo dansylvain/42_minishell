@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:22:59 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 18:20:37 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 20:54:38 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 int		get_fd_in(t_redir *redir);
 int		get_fd_out(t_redir *redir);
-void	here_doc_handle(int pipefd_in[], t_redir redir);
+void	here_doc_handle(t_redir *redir);
 void	init_pipe_io(t_redir *redir);
 
 #endif
