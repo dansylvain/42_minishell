@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/07 15:02:48 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 11:16:55 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redir.h"
-int	get_fd_in(t_redir *redir);
-int	get_fd_out(t_redir *redir);
 
 static int	set_redir_out(char **argv, t_redir *redir)
 {
@@ -58,45 +56,7 @@ static int	set_redir_in(char **argv, t_redir *redir)
 	return (0);
 }
 
-int	set_all_redir_out(char **argv[], t_redir *redir)
-{
-	int	ret;
-
-	ret = 0;
-	while (*argv && ***argv != '|')
-	{
-		ret += set_redir_out(*argv, redir);
-		if (ret)
-			return (ret);
-		argv++;
-	}
-	return (ret);
-}
-
-int	set_all_redir_in(char **argv[], t_redir *redir)
-{
-	int	ret;
-
-	ret = 0;
-	while (*argv && ***argv != '|')
-	{
-		ret += set_redir_in(*argv, redir);
-		if (ret)
-			return (ret);
-		argv++;
-	}
-	return (ret);
-}
-
-void	set_redir_io(char **argv[], t_redir *redir)
-{
-	if (set_all_redir_in(argv, redir))
-		exit(1);
-	if (set_all_redir_out(argv, redir))
-		exit(1);
-}
-
-int	set_io(char **argv[], t_redir *redir)
+int	set_redir_io(char **argv[], t_redir *redir)
 {
 	
 	while (*argv  && ***argv != '|')

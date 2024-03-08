@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/07 18:57:00 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 11:17:38 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,9 +234,8 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[],  char *envp[])
 		exit(EXIT_SUCCESS);
 	}
 }
-int	set_io(char **argv[], t_redir *redir);
-int	set_all_redir_in(char **argv[], t_redir *redir);
-int	set_all_redir_out(char **argv[], t_redir *redir);
+int	set_redir_io(char **argv[], t_redir *redir);
+
 static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir *redir)
 {
 	pid_t	pid;
@@ -258,7 +257,7 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 			pid = fork();
 			if (!pid)
 			{				
-				set_io(argv_redir, redir);		
+				set_redir_io(argv_redir, redir);		
 				if (redir->redir[0])
 					set_pipefd_in(pipefd[0], redir);
 				if (redir->redir[1])							
