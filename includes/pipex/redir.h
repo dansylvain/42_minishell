@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:22:59 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 11:14:42 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/08 13:25:30 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 int		get_fd_in(t_redir *redir);
 int		get_fd_out(t_redir *redir);
 void	here_doc_handle(int pipefd_in[], t_redir redir);
+void	init_pipe_io(t_redir *redir);
 
 #endif

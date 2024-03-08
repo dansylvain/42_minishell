@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 12:25:52 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/08 13:26:30 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	set_redir_io(char **argv[], t_redir *redir)
 
 void	init_redir( t_redir *redir)
 {
+	init_pipe_io(redir);
 	redir->fd_file[0] = -1;
 	redir->fd_file[1] = -1;
 	redir->pipe_hd[0] = -1;
