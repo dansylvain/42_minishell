@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:13:27 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 21:25:07 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 21:31:40 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	free_all(t_redir *redir, char **argv_sav[])
 		free(redir->delim);
 }
 
-void	free_and_exit(t_redir *redir, char **argv_sav[], int n_exit, char *err_str)
+void	free_and_exit(t_redir *redir, char **argv_sav[], int n_exit,
+	char *err_str)
 {
 	if (err_str)
 		display_error(err_str);
@@ -65,18 +66,14 @@ void	here_doc_handle(t_redir *redir)
 {
 	char	*line;
 
-	while (1) //argv!!
+	while (1)
 	{
 		ft_printf("heredoc> ");
 		line = get_next_line(0);
 		if (line)
 		{
-			//line[ft_strlen(line) - 1] = 0; //optimisable ... ajout \n a delim
 			if (ft_strcmp(line, redir->delim))
-			{
-				//line[ft_strlen(line)] = '\n';
 				ft_putstr_fd(line, redir->pipe_hd[1]);
-			}
 			else
 			{
 				free(line);
@@ -90,6 +87,6 @@ void	here_doc_handle(t_redir *redir)
 delimited by end-of-file (wanted '%s')\n", redir->delim);
 			break ;
 		}
-		free(line); //opti
+		free(line);
 	}
 }
