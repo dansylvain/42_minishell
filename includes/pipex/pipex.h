@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:20:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 13:52:26 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 14:03:20 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ void	pipe_to_screen_or_file(t_redir redir);
 void	switch_pipes(int pipefd[][2]);
 void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir);
 void	set_pipefd_in(int pipefd_in[], t_redir *redir);
-
+void	store_and_free_cmd_list(t_ast_nde *cmd_list);
+void	free_data(t_Data *data);
 #endif

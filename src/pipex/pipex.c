@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 13:53:12 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 14:09:50 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,22 @@ delimited by end-of-file (wanted '%s')\n", redir.delim);
 		free(line); //opti
 	}
 }
-void	store_and_free_cmd_list(t_ast_nde *cmd_list);
-void	free_data(t_Data *data);
+
 #include <sys/stat.h>
 int	is_dir(char *path)
 {
 	struct stat path_stat;
-	
-	if (stat(path, &path_stat) == 0) 
+
+	if (stat(path, &path_stat) == 0)
 	{
-        if (S_ISREG(path_stat.st_mode)) 
-		{
+        if (S_ISREG(path_stat.st_mode))
           	return (0);
-        } 
-		else if (S_ISDIR(path_stat.st_mode)) 
-		{
+		else if (S_ISDIR(path_stat.st_mode))
             return (1);
-        } 
-		else 
-		{
+		else
             return (0);
-        }
     } 
-	return (0);     
+	return (0);
 }
 
 static void	builtin_or_execve(char **argv[], char **argv_sav[])
@@ -93,15 +86,11 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[])
 	else if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')		
 		display_error(" No such file or directory\n");
 	if (!command_is_builtin(*argv, data))
-	{
-		// ft_printf("la commande n'est pas un builtin -%i-\n", errno);
-		
+	{		
 		if (access(**argv, X_OK))
-		{
-				 
+		{				 
 			if (errno == EISDIR)		
-			{				
-				//Cible est un répertoire
+			{					
 				exit(127); // Ou un autre code de votre choix
 			}
 			if (search_path(*argv, data->envp_tab))
@@ -156,7 +145,8 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[])
 	}
 }
 
-void	child_area(char **argv[], char **argv_sav[], char **argv_redir[], t_redir *redir)
+void	child_area(char **argv[], char **argv_sav[], char **argv_redir[],
+	t_redir *redir)
 {
 	set_redir_io(argv_redir, redir);
 	if (redir->redir[0])
@@ -170,14 +160,14 @@ void	child_area(char **argv[], char **argv_sav[], char **argv_redir[], t_redir *
 static pid_t	nurcery(char **argv[], t_redir *redir)
 {
 	pid_t	pid;
-	char 	***argv_sav;
-	char 	***argv_redir;
+	char	***argv_sav;
+	char	***argv_redir;
 
 	pid = -42;
 	argv_sav = argv;
-	argv_redir = argv;	
+	argv_redir = argv;
 	while (*argv)
-	{	
+	{
 		if (***argv == '|')
 			argv_redir = argv + 1;
 		if (***argv != '>' && ***argv != '<' && ***argv != '|')
@@ -196,12 +186,12 @@ static pid_t	nurcery(char **argv[], t_redir *redir)
 }
 
 static pid_t	create_pipeline(char **argv[])
-{	
+{
 	pid_t	pid;
-	t_redir redir;
-	
-	pid = -1;	
-	init_redir(&redir);	
+	t_redir	redir;
+
+	pid = -1;
+	init_redir(&redir);
 	pid = nurcery(argv, &redir);
 	if (pid < 0)
 		return (pid);
