@@ -6,7 +6,7 @@
 #    By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/06 05:54:07 by dsylvain         ###   ########.fr        #
+#    Updated: 2024/03/08 08:18:25 by dsylvain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,11 +36,6 @@ LIBS = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
 # Source files
 SRC =	lib/gnl/get_next_line.c \
 		lib/gnl/get_next_line_utils.c \
-		src/main.c \
-		src/create_envp.c \
-		src/utils.c \
-		src/utils_2.c \
-		src/handle_signals.c \
 		src/builtins/exec_env.c \
 		src/builtins/exec_pwd.c \
 		src/builtins/exec_cd.c \
@@ -68,12 +63,17 @@ SRC =	lib/gnl/get_next_line.c \
 		src/pipex/pipex.c \
 		src/pipex/redir.c \
 		src/pipex/fdio.c \
-		src/create_command_tab.c \
-		src/create_command_tab_utils.c \
-		src/fill_command_tab.c \
-		src/exec_pipex.c \
-		src/wildcard_expansion.c \
-		src/wildcard_expansion_2.c \
+		src/post_parsing/create_command_tab.c \
+		src/post_parsing/create_command_tab_utils.c \
+		src/post_parsing/fill_command_tab.c \
+		src/post_parsing/exec_pipex.c \
+		src/wildcard/wildcard_expansion.c \
+		src/wildcard/wildcard_expansion_2.c \
+		src/main/main.c \
+		src/main/utils.c \
+		src/main/utils_2.c \
+		src/main/utils_3.c \
+		src/main/handle_signals.c \
 		
 OBJ = $(SRC:.c=.o)
 
