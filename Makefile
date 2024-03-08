@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+         #
+#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/06 05:54:07 by dsylvain         ###   ########.fr        #
+#    Updated: 2024/03/08 17:45:11 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ SRC =	lib/gnl/get_next_line.c \
 		src/pipex/pipe_fwrd.c \
 		src/pipex/path.c \
 		src/pipex/pipex.c \
+		src/pipex/utils.c \
 		src/pipex/redir.c \
 		src/pipex/fdio.c \
 		src/create_command_tab.c \
