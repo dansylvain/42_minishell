@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
+#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 07:30:24 by dsylvain          #+#    #+#              #
-#    Updated: 2024/02/03 07:42:51 by dan              ###   ########.fr        #
+#    Updated: 2024/02/25 16:08:02 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,11 @@ SRC =		ft_atoi.c \
 			ft_memmove.c \
 			ft_memset.c \
 			ft_split.c \
-			ft_strchr.c \
 			ft_strdup.c \
 			ft_strndup.c \
 			ft_striteri.c \
 			ft_strjoin.c \
+			ft_strjoin_up.c \
 			ft_strlcat.c \
 			ft_strlcpy.c \
 			ft_strlen.c \
@@ -43,6 +43,7 @@ SRC =		ft_atoi.c \
 			ft_strmapi.c \
 			ft_strnstr.c \
 			ft_strrchr.c \
+			ft_strstr.c \
 			ft_strtrim.c \
 			ft_substr.c \
 			ft_tolower.c \
@@ -53,6 +54,10 @@ SRC =		ft_atoi.c \
 			ft_putnbr_fd.c \
 			ft_putstr_fd.c \
 			ft_strcmp.c \
+			ft_strcat.c \
+			ft_realloc.c \
+			ft_free_ptr_arr.c \
+			# ft_strchr.c \
 
 SRC_BONUS = ft_lstnew_bonus.c \
 			ft_lstadd_front_bonus.c \

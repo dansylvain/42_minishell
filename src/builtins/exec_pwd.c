@@ -6,22 +6,22 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:12:50 by dan               #+#    #+#             */
-/*   Updated: 2024/01/27 09:14:52 by dan              ###   ########.fr       */
+/*   Updated: 2024/02/26 09:22:27 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	exec_pwd(void)
+/**========================================================================
+ *                           exec_pwd
+ *========================================================================**/
+void	exec_pwd(t_Data *data)
 {
 	char	buffer[1024];
 
 	if (getcwd(buffer, sizeof(buffer)) != NULL)
-	{
 		printf("%s\n", buffer);
-	}
 	else
-	{
 		perror("getcwd");
-	}
+	(void)data;
 }

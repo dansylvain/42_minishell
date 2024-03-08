@@ -3,28 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   exec_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 18:46:30 by dan               #+#    #+#             */
-/*   Updated: 2024/01/27 09:14:44 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/01 10:54:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	exec_env(char **envp, char **command_tab)
+/**========================================================================
+ *                           exec_env
+ *========================================================================**/
+void	exec_env(t_Data *data, char **command_tab)
 {
 	int	i;
 
 	if (command_tab[1] != NULL)
 	{
-		ft_printf("env: ‘%s’: No such file or directory\n", command_tab[1]);
+		display_error_detail("env: ", command_tab[1],
+			"’: No such file or directory\n");
+		if (data)
+			data->exit_status = 126;
+		if (waitpid(-1, NULL, WNOHANG) != -1)
+			exit(42);
 		return ;
 	}
 	else
 	{
 		i = 0;
-		while (envp[i])
-			ft_printf("%s\n", envp[i++]);
+		if (data)
+		{
+			while (data->envp_tab[i])
+				ft_printf("%s\n", data->envp_tab[i++]);
+		}
 	}
+	if (data)
+		data->exit_status = 0;
 }

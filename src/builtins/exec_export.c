@@ -3,127 +3,131 @@
 /*                                                        :::      ::::::::   */
 /*   exec_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:08:19 by dan               #+#    #+#             */
-/*   Updated: 2024/02/02 14:18:17 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/06 05:57:28 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	create_export_tab(t_Data *data);
-int		exec_export(char **command_tab, t_Data *data);
-int		is_valid_var(char *export_arg);
-
+/**========================================================================
+ *                           exec_export
+ *========================================================================**/
 int	exec_export(char **command_tab, t_Data *data)
 {
-	int	i;
-	int	j;
+	char	export_tab[100][500];
+	int		i;
 
 	if (command_tab[1] == NULL)
-		create_export_tab(data);
+	{
+		create_export_tab(data, export_tab);
+		display_export_tab(export_tab);
+		return (0);
+	}
 	i = 1;
 	while (command_tab[i])
 	{
-		if (is_valid_var(command_tab[i]))
+		if (!are_only_valid_chars(command_tab[i]))
 		{
-			j = 0;
-			while (data->envp_tab[j])
-				j++;
-			data->envp_tab[j] = (char *)
-				ft_calloc((ft_strlen(command_tab[i]) + 1), sizeof(char));
-			if (data->envp_tab[j] == NULL)
-				return (0);
-			ft_strlcpy(data->envp_tab[j], command_tab[i],
-				ft_strlen(command_tab[i]) + 1);
-			data->envp_tab[j + 1] = NULL;
+			display_error_detail("minishell: export: `", command_tab[i],
+				"': not a valid identifier\n");
+			data->exit_status = 1;
+			return (0);
 		}
-		i++;
-	}
-}
-
-int	is_valid_var(char *export_arg)
-{
-	int	i;
-
-	i = 1;
-	while (export_arg[i])
-	{
-		if (export_arg[i] == '=')
-			return (1);
+		add_env_var_to_envp_tab(command_tab, data, &i);
 		i++;
 	}
 	return (0);
 }
 
-void	bubble_sort_and_create_export_tab(char export_tab[][500])
+/**========================================================================
+ *                           realloc_env_var
+ *========================================================================**/
+int	realloc_env_var(t_Data *data, char var[], char *new_var_command)
 {
-	int		i;
-	char	temp[500];
+	int	i;
+	int	len;
 
-	ft_bzero(temp, 500);
-	i = 0;
-	while (export_tab[i][0] && export_tab[i + 1][0])
-	{
-		if (strcmp(export_tab[i], export_tab[i + 1]) > 0)
-		{
-			ft_strlcpy(temp, export_tab[i], sizeof(temp));
-			ft_strlcpy(export_tab[i], export_tab[i + 1], sizeof(export_tab[i]));
-			ft_strlcpy(export_tab[i + 1], temp, sizeof(export_tab[i + 1]));
-			i = -1;
-		}
-		i++;
-	}
-	i = 0;
-	while (export_tab[i][0])
-	{
-		if (export_tab[i][11] != '_')
-			ft_printf("%s\n", export_tab[i]);
-		i++;
-	}
-}
-
-void	format_vars_for_export_tab(t_Data *data, char export_tab[][500], int *i)
-{
-	int	j;
-	int	k;
-	int	equal_was_done;
-
-	equal_was_done = 0;
-	k = 11;
-	j = 0;
-	while (data->envp_tab[*i][j])
-	{
-		export_tab[*i][k] = data->envp_tab[*i][j];
-		if (data->envp_tab[*i][j] == '=' && equal_was_done == 0)
-		{
-			equal_was_done = 1;
-			export_tab[*i][k++ + 1] = '"';
-		}
-		j++;
-		k++;
-	}
-	export_tab[*i][k++] = '"';
-	export_tab[*i][k] = '\0';
-}
-
-void	create_export_tab(t_Data *data)
-{
-	int		i;
-	int		j;
-	int		k;
-	char	export_tab[100][500];
-
-	i = 0;
-	while (i < 100)
-		ft_bzero(export_tab[i++], 500);
+	len = ft_strlen(var);
 	i = 0;
 	while (data->envp_tab[i])
 	{
-		ft_strlcpy(export_tab[i], "declare -x ", 12);
-		format_vars_for_export_tab(data, export_tab, &i);
+		if (!ft_strncmp(var, data->envp_tab[i], len) && var[len - 1] == '=')
+		{
+			free(data->envp_tab[i]);
+			data->envp_tab[i] = (char *)malloc(len
+					+ ft_strlen(new_var_command) + 2);
+			ft_strlcpy(data->envp_tab[i], var, len);
+			ft_strcat(data->envp_tab[i], "=");
+			ft_strcat(data->envp_tab[i], new_var_command);
+			break ;
+		}
 		i++;
 	}
-	bubble_sort_and_create_export_tab(export_tab);
+}
+
+/**========================================================================
+ *                      add_env_var_to_envp_tab
+ *========================================================================**/
+void	add_env_var_to_envp_tab(char **command_tab, t_Data *data, int *i)
+{
+	int		j;
+	char	var[500];
+	char	*env_var;
+
+	ft_bzero(var, 500);
+	j = 0;
+	while (command_tab[*i][j] && command_tab[*i][j] != '=')
+	{
+		var[j] = command_tab[*i][j];
+		j++;
+	}
+	env_var = get_env_var(data, var);
+	if (command_tab[*i][j] == '=')
+		var[j++] = '=';
+	else
+	{
+		data->envp_tab = create_new_env_var(data->envp_tab, command_tab[*i]);
+		return ;
+	}
+	if (env_var && ft_strncmp(command_tab[*i], "_=", 2))
+	{
+		realloc_env_var(data, var, command_tab[*i] + ft_strlen(var));
+	}
+	else if (ft_strncmp(command_tab[*i], "_=", 2))
+		data->envp_tab = create_new_env_var(data->envp_tab, command_tab[*i]);
+}
+
+/**========================================================================
+ *                           create_new_env_var
+ *========================================================================**/
+char	**create_new_env_var(char **envp, char *env_var)
+{
+	char	**new_envp_tab;
+	int		i;
+
+	i = 0;
+	while (envp[i])
+		i++;
+	new_envp_tab = (char **)ft_calloc(i + 2, sizeof(char *));
+	if (new_envp_tab == NULL)
+		return (NULL);
+	i = 0;
+	while (envp[i])
+	{
+		new_envp_tab[i] = (char *)ft_calloc((ft_strlen(envp[i]) + 1),
+				sizeof(char));
+		if (new_envp_tab[i] == NULL)
+			return (free_command_tab(&new_envp_tab), NULL);
+		ft_strlcpy(new_envp_tab[i], envp[i], ft_strlen(envp[i]) + 1);
+		i++;
+	}
+	new_envp_tab[i] = (char *)ft_calloc((ft_strlen(env_var) + 1), sizeof(char));
+	if (new_envp_tab[i] == NULL)
+		return (free_command_tab(&new_envp_tab), NULL);
+	ft_strlcpy(new_envp_tab[i++], env_var, ft_strlen(env_var) + 1);
+	new_envp_tab[i] = NULL;
+	return (free_command_tab(&envp), new_envp_tab);
 }

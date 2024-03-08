@@ -1,0 +1,40 @@
+/bin/ls
+echo $?
+echo $?
+/bin/tr
+echo $?
+/bin/cut
+echo $?
+/bin/echo test
+echo $?
+/bin/cat file
+echo $?
+""
+echo $?
+"      "
+echo $?
+/bi"n/l"s
+echo $?
+/"bin/tr"
+echo $?
+echo $?
+/bi"n/cu"t
+echo $?
+/bi'n/'ec"ho "test
+echo $?
+"      caca pouet    "
+echo $?
+echo hello world
+echo $?
+echo "-n '-n' I "lov'e p'izza
+echo $?
+echo h"ell"o wo"rl"d
+echo $?
+exit
+echo $?
+exit 42
+echo $?
+exit iugef
+echo $?
+exit 42 test
+echo $?

@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:22:52 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/02/03 17:37:37 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/06 06:19:53 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-/**========================================================================
- *                           display_error
- * takes the error message as argument
- *! error message should not be longer than 1000 chars
- *========================================================================**/
-void	display_error(char *str)
-{
-	if (write(2, str, ft_strlen(str)) == -1)
-		perror("display_error\n");
-}
 
 /**========================================================================
  *                           close_minishell
@@ -38,7 +27,7 @@ void	close_minishell(t_Data *data)
 void	free_data(t_Data *data)
 {
 	if (data->envp_tab)
-		free_command_tab(data->envp_tab);
+		free_command_tab(&data->envp_tab);
 	if (data)
 		free(data);
 }
@@ -46,16 +35,38 @@ void	free_data(t_Data *data)
 /**========================================================================
  *                           free_command_tab
  *========================================================================**/
-void	free_command_tab(char **command_tab)
+void	free_command_tab(char ***command_tab)
+{
+	int	i;
+
+	if (!command_tab || !*command_tab)
+		return ;
+	i = 0;
+	while ((*command_tab)[i])
+	{
+		free((*command_tab)[i]);
+		(*command_tab)[i] = NULL;
+		i++;
+	}
+	if (*command_tab)
+		free(*command_tab);
+	*command_tab = NULL;
+}
+
+/**========================================================================
+ *                           free_command_tab_lg
+ *========================================================================**/
+void	free_command_tab_lg(char ***command_tab)
 {
 	int	i;
 
 	i = 0;
 	while (command_tab[i])
 	{
-		if (command_tab[i])
-			free(command_tab[i]);
+		free_command_tab(&(command_tab)[i]);
+		command_tab[i] = NULL;
 		i++;
 	}
-	free(command_tab);
+	if (command_tab)
+		free(command_tab);
 }
