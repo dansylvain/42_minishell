@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:01:34 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 18:28:09 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 19:32:24 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include "../../lib/gnl/get_next_line.h"
 #include "libft.h"
 #include "parsing_utils.h"
-#include "minishell.h"
+#include "minishell_struct.h"
 
 void	display_error(char *str);
 void	store_and_free_cmd_list(t_ast_nde *cmd_list);

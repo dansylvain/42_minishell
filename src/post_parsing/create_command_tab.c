@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 18:39:12 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 19:33:45 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-t_ast_nde	*copy_node_and_child(t_ast_nde *node);
-void		store_and_free_cmd_tab_node_sav(t_ast_nde *cmd_tab_node_sav);
-void		store_and_free_cmd_tab(char ***cmd_tab);
+#include "create_command_tab.h"
 
 /**========================================================================
  *                           launch_command_tab

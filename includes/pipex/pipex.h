@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:20:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 18:25:40 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 19:40:47 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # include <stdlib.h>
 # include "ft_printf.h"
 # include "libft.h"
-
+# include "minishell_struct.h"
 # include "pipex_global_utils.h"
-# include "../../includes/minishell.h"
 
+t_Data	*get_data(char *envp[]);
 int		command_is_builtin(char	*cmd[], t_Data *data);
 char	**search_path(char *argv[], char *envp[]);
 void	init_redir( t_redir *redir);

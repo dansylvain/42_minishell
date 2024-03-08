@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   leaf.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:29:53 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/01 16:15:02 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 19:40:42 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "parsing_utils.h"
 # include <unistd.h>
-# include "minishell.h"
+#include "minishell_struct.h"
 
 void		leaf_tree(t_ast_nde *oper, t_ast_nde **rslt,
 				t_ast_nde **rslt_sav, t_Data *data);
