@@ -6,15 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 16:40:39 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 17:41:08 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fill_command_tab.h"
-void	print_node(t_ast_nde *node);
-void	store_and_free_cmd_tab(char ***cmd_tab);
-int	is_raw(t_ast_nde *node);
-void	print_ast_sib(t_ast_nde *sib);
 
 int	is_raw(t_ast_nde *node)
 {
@@ -23,11 +19,10 @@ int	is_raw(t_ast_nde *node)
 	return (0);
 }
 
-
 void	add_pipe_tab_to_tab(char ****cmd_tab, int *i)
 {
-	int j;
-	
+	int	j;
+
 	j = 0;
 	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
 		j++;
@@ -42,10 +37,10 @@ void	add_pipe_tab_to_tab(char ****cmd_tab, int *i)
 
 void	create_chev_tab(char ****cmd_tab, t_ast_nde **current, int *i)
 {
-	char *chev;
+	char	*chev;
+
 	if ((*cmd_tab)[*i][0][0])
 		(*i)++;
-		
 	if ((*current)->token == SCHEV_LFT)
 		chev = "<";
 	if ((*current)->token == SCHEV_RGTH)
@@ -56,15 +51,18 @@ void	create_chev_tab(char ****cmd_tab, t_ast_nde **current, int *i)
 		chev = ">>";
 	(*current)->sibling->token = CHEV_FILE;
 	ft_memcpy(&(*cmd_tab)[*i][0][0], chev, ft_strlen(chev));
-	ft_memcpy(&(*cmd_tab)[*i][1][0], (*current)->sibling->child->start, (*current)->sibling->child->end - (*current)->sibling->child->start + 1);
-	(*cmd_tab)[*i][2] = NULL;	
+	ft_memcpy(&(*cmd_tab)[*i][1][0], (*current)->sibling->child->start,
+		(*current)->sibling->child->end
+		- (*current)->sibling->child->start + 1);
+	(*cmd_tab)[*i][2] = NULL;
 	(*i)++;
 }
 
-void	add_raw_to_cmd_tab(t_Data *data, char ****cmd_tab, t_ast_nde *current, int *i)
+void	add_raw_to_cmd_tab(t_Data *data, char ****cmd_tab,
+		t_ast_nde *current, int *i)
 {
-	int j;
-	
+	int	j;
+
 	j = 0;
 	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
 		j++;
@@ -77,13 +75,14 @@ int	cmd_tab_error_check(t_ast_nde *node)
 	return (1);
 }
 
-void	create_dollar_tab(t_Data *data, t_ast_nde **node, char ****cmd_tab, int *i)
+void	create_dollar_tab(t_Data *data,
+		t_ast_nde **node, char ****cmd_tab, int *i)
 {
-	int j;
-	char *env_var;
-	env_var = get_node_str(data, (*node)->child);
-	int	len;
+	int		j;
+	char	*env_var;
+	int		len;
 
+	env_var = get_node_str(data, (*node)->child);
 	len = ft_strlen(env_var);
 	j = 0;
 	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
@@ -92,11 +91,12 @@ void	create_dollar_tab(t_Data *data, t_ast_nde **node, char ****cmd_tab, int *i)
 	(*cmd_tab)[*i][j + 1] = NULL;
 }
 
-void complete_raw_tab(t_Data *data, char ****cmd_tab, t_ast_nde *node, int *i)
+void	complete_raw_tab(t_Data *data, char ****cmd_tab,
+		t_ast_nde *node, int *i)
 {
-	t_ast_nde *current;
-	int j;
-	
+	t_ast_nde	*current;
+	int			j;
+
 	j = 0;
 	while ((*cmd_tab)[*i - 1][j] && (*cmd_tab)[*i - 1][j][0])
 		j++;
@@ -108,8 +108,8 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 {
 	t_ast_nde	*current;
 	int			i;
-	int 		j;
-	
+	int			j;
+
 	current = node;
 	while (current)
 	{
@@ -128,12 +128,12 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 			if (is_chevron(current))
 			{
 				create_chev_tab(&cmd_tab, &current, &i);
-				if (current && is_separator(current->sibling->sibling) && current->sibling->child->sibling)
+				if (current && is_separator(current->sibling->sibling)
+					&& current->sibling->child->sibling)
 				{
 					complete_raw_tab(data, &cmd_tab, current->sibling, &i);
 				}
 			}
-			
 			current = current->sibling;
 		}
 		while (node && !is_separator(node))
@@ -144,7 +144,6 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 				create_dollar_tab(data, &node, &cmd_tab, &i);
 			node = node->sibling;
 		}
-		
 		if (node && node->token == PIPE)
 		{
 			add_pipe_tab_to_tab(&cmd_tab, &i);
@@ -152,7 +151,6 @@ char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 		}
 		if (current && current->sibling)
 			current = current->sibling;
-		
 	}
 	j = 0;
 	while ((cmd_tab)[i][j] && (cmd_tab)[i][j][0])

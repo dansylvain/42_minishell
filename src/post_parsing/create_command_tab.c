@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/07 19:42:24 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 17:31:29 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,11 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 	store_and_free_cmd_tab_node_sav(cmd_tab_node_sav);
 	if (cmd_tab_node_sav)
 		build_command_tab(&cmd_tab, data, &cmd_tab_node_sav, envp);
-
 	flag = data->exit_status;
 	if (node && node->token == OR)
 		flag = !flag;
 	if (node)
 		launch_command_tab(data, node->sibling, envp, flag);
-	// if (cmd_tab)
-	// 	display_command_tab_big(cmd_tab);
 }
 
 /**========================================================================
@@ -69,7 +66,7 @@ void	build_command_tab(char ****cmd_tab, t_Data *data,
 	(*cmd_tab) = create_command_tab(data, (*cmd_tab_node_sav), envp);
 	store_and_free_cmd_tab(*cmd_tab);
 	if (is_pipeline(*cmd_tab_node_sav))
-	{ //ft_printf("je suis un putain de pipeline\n");
+	{
 		free_sibling_and_child(*cmd_tab_node_sav);
 		data->exit_status = pipex(*cmd_tab, envp);
 	}
@@ -100,18 +97,16 @@ void	store_and_free_cmd_tab(char ***cmd_tab)
 
 int	alloc_memory_for_command_tab(t_ast_nde *node, char ****cmd_tab)
 {
-	int lstsize;
-	int i;
+	int	lstsize;
+	int	i;
 	int	j;
 
 	lstsize = 0;
-	// ft_printf("cmd_nbr: %i\n", cmd_nbr);
 	while (node)
 	{
 		lstsize++;
 		node = node->sibling;
 	}
-	// ft_printf("lst_size: %i\n", lstsize);
 	*cmd_tab = (char ***)ft_calloc(lstsize + 1, sizeof (char **));
 	if (*cmd_tab == NULL)
 		return (0);
@@ -141,11 +136,9 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 {
 	char		***cmd_tab;
 	int			cmd_nbr;
-	
+
 	if (alloc_memory_for_command_tab(node, &cmd_tab) == 0)
 		free_command_tab_lg(cmd_tab);
 	cmd_tab = fill_cmd_tab_tabs(data, node, cmd_tab);
-	// display_command_tab_big(cmd_tab);
-
 	return (cmd_tab);
 }
