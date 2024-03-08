@@ -6,7 +6,7 @@
 /*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 11:22:19 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:20:20 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ static int	set_redir_in(char **argv, t_redir *redir)
 		{
 			redir->delim = argv[1];
 			redir->redir[0] = 2;
-			close_fds(redir->pipe);
-			if (pipe(redir->pipe) < 0)
+			close_fds(redir->hd_pipe);
+			if (pipe(redir->hd_pipe) < 0)
 				exit(1);
-			here_doc_handle(redir->pipe, *redir);
+			here_doc_handle(redir->hd_pipe, *redir);
 		}
 		else
 		{
@@ -71,10 +71,10 @@ int	set_redir_io(char **argv[], t_redir *redir)
 
 void	init_redir( t_redir *redir)
 {
-	redir->fd_file[0] = -1;
-	redir->fd_file[1] = -1;
-	redir->pipe[0] = -1;
-	redir->pipe[1] = -1;
+	redir->file_fd[0] = -1;
+	redir->file_fd[1] = -1;
+	redir->hd_pipe[0] = -1;
+	redir->hd_pipe[1] = -1;
 	redir->redir[0] = 0;
 	redir->redir[1] = 0;
 	redir->delim = NULL;
