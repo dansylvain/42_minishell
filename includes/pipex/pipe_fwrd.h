@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:18:04 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 15:23:23 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:20:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PIPE_FWRD_H
 
 # include <unistd.h>
-# include "pipex_utils.h"
+# include "pipex_global_utils.h"
 # include "libft.h"
 
 #endif

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.h                                      :+:      :+:    :+:   */
+/*   pipex_global_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 15:27:14 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 13:11:45 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:18:52 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_UTILS_H
-# define PIPEX_UTILS_H
+#ifndef PIPEX_GLOBAL_UTILS_H
+# define PIPEX_GLOBAL_UTILS_H
 
 typedef struct set_redir
 {

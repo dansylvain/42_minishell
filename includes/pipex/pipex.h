@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:20:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 17:52:42 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:20:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "ft_printf.h"
 # include "libft.h"
 
-# include "pipex_utils.h"
+# include "pipex_global_utils.h"
 # include "../../includes/minishell.h"
 
 int		command_is_builtin(char	*cmd[], t_Data *data);

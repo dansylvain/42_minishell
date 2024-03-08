@@ -6,14 +6,14 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:22:59 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 13:25:30 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:20:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REDIR_H
 # define REDIR_H
 
-# include "pipex_utils.h"
+# include "pipex_global_utils.h"
 # include <stdlib.h>
 # include "libft.h"
 

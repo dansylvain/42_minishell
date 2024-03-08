@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:01:34 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 18:07:34 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:20:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include "pipex_utils.h"
+#include "pipex_global_utils.h"
 #include "ft_printf.h"
 #include "../../lib/gnl/get_next_line.h"
 #include "libft.h"

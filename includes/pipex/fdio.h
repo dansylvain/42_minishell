@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:12:27 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 15:23:40 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:20:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 # include <stdio.h>
 # include <string.h>
 # include "libft.h"
-# include "pipex_utils.h"
+# include "pipex_global_utils.h"
 
 #endif
