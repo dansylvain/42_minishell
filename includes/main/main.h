@@ -14,7 +14,7 @@ int			is_not_empty_prompt(char *str);;
 int	main(int argc, char **argv, char *envp[]);
 int	prompt_loop(t_Data *data, char *envp[]);
 void	build_prompt(char prompt[]);
-int	command_is_builtin(char	**cmd_tab, t_Data *data, char *envp[]);
+int	command_is_builtin(char	**cmd_tab, t_Data *data);
 void	display_error(char *str);
 t_Data	*get_data(char *envp[]);
 void	free_data(t_Data *data);
