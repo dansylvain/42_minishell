@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 12:01:32 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/08 13:35:43 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	unset_var(char **envp, int index);
 
 
 void		free_command_tab_lg(char ***command_tab);
-int			pipex(char **argv[], char *envp[]);
+int			pipex(char **argv[]);
 t_ast_nde	*copy_node_child(t_ast_nde *node);
 
 /*   exec_pipex.c                                       :+:      :+:    :+:   */

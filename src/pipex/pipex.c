@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 13:31:16 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 13:35:00 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ void	child_area(char **argv[], char **argv_sav[], char **argv_redir[], int *pipe
 	builtin_or_execve(argv, argv_sav);
 }
 
-static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], t_redir *redir)
+static pid_t	nurcery(char **argv[], int fd_file[], int *pipefd[], t_redir *redir)
 {
 	pid_t	pid;
 	char 	***argv_sav;
@@ -195,14 +195,14 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 	return (pid);
 }
 
-static pid_t	create_pipeline(char **argv[], char *envp[])
+static pid_t	create_pipeline(char **argv[])
 {	
 	pid_t	pid;
 	t_redir redir;
 	
 	pid = -1;	
 	init_redir(&redir);	
-	pid = nurcery(argv, envp, redir.fd_file,
+	pid = nurcery(argv, redir.fd_file,
 			(int *[]){redir.pipe_io[0], redir.pipe_io[1]}, &redir);
 	if (pid < 0)
 		return (pid);
@@ -213,7 +213,7 @@ static pid_t	create_pipeline(char **argv[], char *envp[])
 	return (pid);
 }
 
-int	pipex(char **argv[], char *envp[])
+int	pipex(char **argv[])
 {
 	pid_t	pid;
 	int		status;
@@ -221,7 +221,7 @@ int	pipex(char **argv[], char *envp[])
 
 	exit_status = 1;
 	pid = -1;
-	pid = create_pipeline(argv, envp);
+	pid = create_pipeline(argv);
 	if (pid == -42)
 		return (0);
 	if (waitpid(pid, &status, 0) > 0)
