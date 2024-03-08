@@ -6,7 +6,7 @@
 /*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 11:16:55 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/08 11:22:19 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,17 @@ static int	set_redir_in(char **argv, t_redir *redir)
 
 int	set_redir_io(char **argv[], t_redir *redir)
 {
-	
-	while (*argv  && ***argv != '|')
+	while (*argv && ***argv != '|')
 	{
-		if (set_redir_in(*argv, redir))		
+		if (set_redir_in(*argv, redir))
 			exit (1);
-		if (set_redir_out(*argv, redir))		
+		if (set_redir_out(*argv, redir))
 			exit (1);
 		argv++;
 	}
 	return (0);
 }
+
 void	init_redir( t_redir *redir)
 {
 	redir->fd_file[0] = -1;

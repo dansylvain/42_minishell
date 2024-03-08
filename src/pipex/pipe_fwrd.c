@@ -6,7 +6,7 @@
 /*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:20:41 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 11:02:26 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/08 11:36:56 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,12 @@ void	pipe_to_screen_or_file(int pipe, t_redir redir)
 		while (read(pipe, &buf, 1))
 			ft_putchar_fd(buf, 1);
 	}
+}
+
+void	init_pipes_io(int pipefd_in[2], int pipefd_out[2])
+{
+	pipefd_in[0] = -1;
+	pipefd_in[1] = -1;
+	pipefd_out[0] = -1;
+	pipefd_out[1] = -1;
 }

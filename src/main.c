@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/07 14:14:49 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 12:00:47 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,10 @@ void	build_prompt(char prompt[])
  * exit builtin implemented without extern function
  * 0 is returned, and the data struct is freed in calling function
  *========================================================================**/
-int	command_is_builtin(char	**cmd_tab, t_Data *data, char *envp[])
+int	command_is_builtin(char	**cmd_tab, t_Data *data)
 {
 	int	len;
-
+	
 	len = ft_strlen(cmd_tab[0]);
 	if (!cmd_tab || is_only_space(cmd_tab[0]))
 		return (1);
@@ -151,6 +151,5 @@ int	command_is_builtin(char	**cmd_tab, t_Data *data, char *envp[])
 		return (exec_unset(data, cmd_tab), 1);
 	if (len >= 6 && !ft_strncmp(&(cmd_tab[0][len - 6]), "export", 7))
 		return (exec_export(cmd_tab, data), 1);
-	return (0);
-	(void)envp;
+	return (0);	
 }
