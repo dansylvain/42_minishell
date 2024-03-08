@@ -1,11 +1,23 @@
-#ifndef UTILS_2_H
-#define UTILS_2_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_2.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/08 18:57:07 by dan               #+#    #+#             */
+/*   Updated: 2024/03/08 18:57:07 by dan              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <minishell_struct.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include "libft.h"
+#ifndef UTILS_2_H
+# define UTILS_2_H
+
+# include <minishell_struct.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <unistd.h>
+# include "libft.h"
 
 void	display_error(char *str);
 void	display_error_free(char *str);

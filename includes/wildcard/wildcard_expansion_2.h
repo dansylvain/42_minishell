@@ -1,11 +1,23 @@
-#ifndef WILDCARD_EXPANSION_2_H
-#define WILDCARD_EXPANSION_2_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wildcard_expansion_2.h                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/08 19:10:36 by dan               #+#    #+#             */
+/*   Updated: 2024/03/08 19:10:36 by dan              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <minishell_struct.h>
-#include <stdlib.h>
-#include <dirent.h>
-#include <stdio.h>
-#include "libft.h"
+#ifndef WILDCARD_EXPANSION_2_H
+# define WILDCARD_EXPANSION_2_H
+
+# include <minishell_struct.h>
+# include <stdlib.h>
+# include <dirent.h>
+# include <stdio.h>
+# include "libft.h"
 
 int	matches_pattern(const char *filename, const char *pattern);
 

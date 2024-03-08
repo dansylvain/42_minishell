@@ -18,6 +18,7 @@
 		"redir.h": "c",
 		"main.h": "c",
 		"operator.h": "c",
-		"pipex.h": "c"
+		"pipex.h": "c",
+		"ft_printf.h": "c"
 	}
 }
