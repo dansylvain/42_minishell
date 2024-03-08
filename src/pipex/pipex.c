@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 16:22:33 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 16:51:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,14 @@ int	is_dir(char *path)
 	return (0);
 }
 
-void	check_filedir_error(char **argv[])
+void	free_all(char **argv_sav[])
+{
+	free_data(get_data(NULL));
+	free_command_tab_lg(argv_sav);
+	store_and_free_cmd_list(NULL);
+}
+
+void	check_filedir_error(char **argv[], char **argv_sav[])
 {
 	if (!access(**argv, F_OK))
 	{
@@ -71,12 +78,14 @@ void	check_filedir_error(char **argv[])
 			if (access(**argv, X_OK))
 			{				
 				display_error(" Permission denied\n");
+				free_all(argv_sav);	
 				exit (126);
 			}
 		}
 		else
 		{
 			display_error(" command not found\n");
+			free_all(argv_sav);	
 			exit (127);
 		}
 	}
@@ -84,26 +93,19 @@ void	check_filedir_error(char **argv[])
 		display_error(" No such file or directory\n");
 }
 
-void	free_all(char **argv_sav[])
-{
-	//free_data(get_data(NULL));
-	free_command_tab_lg(argv_sav);
-	store_and_free_cmd_list(NULL);
-}
-
 static void	builtin_or_execve(char **argv[], char **argv_sav[])
 {
 	t_Data	*data;
 
 	data = get_data(NULL);
-	check_filedir_error(argv);
+	check_filedir_error(argv, argv_sav);
 	if (!command_is_builtin(*argv, data))
 	{		
 		if (access(**argv, X_OK))
-		{	
+		{		
 			if (search_path(*argv, data->envp_tab))
 			{				
-				free_all(argv_sav);									
+				free_all(argv_sav);											
 				exit(127);
 			}		
 		}	
@@ -111,8 +113,8 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[])
 	
 		 if (errno == EACCES)
 		{
-			free_all(argv_sav);
 			display_error(" Is a directory\n");
+			free_all(argv_sav);
 			exit(126);
 		}
 	}
