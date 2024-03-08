@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 12:25:26 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/08 13:19:05 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,35 +196,36 @@ static pid_t	nurcery(char **argv[], char *envp[], int fd_file[], int *pipefd[], 
 	return (pid);
 }
 
-static pid_t	create_pipeline(char **argv[], char *envp[], t_redir redir)
+static pid_t	create_pipeline(char **argv[], char *envp[])
 {
-	int		pipefd_in[2];
-	int		pipefd_out[2];
+	// int		pipefd_in[2];
+	// int		pipefd_out[2];
 	pid_t	pid;
-
+	t_redir redir;
+	
 	pid = -1;
-	init_pipes_io(pipefd_in, pipefd_out);
+	init_pipe_io(&redir);
+	//init_pipes_io(pipefd_in, pipefd_out);
 	pid = nurcery(argv, envp, redir.fd_file,
-			(int *[]){pipefd_in, pipefd_out}, &redir);
+			(int *[]){redir.pipe_io[0], redir.pipe_io[1]}, &redir);
 	if (pid < 0)
 		return (pid);
-	close_fd(pipefd_in[1]);
-	pipe_to_screen_or_file(pipefd_in[0], redir);
-	close_fd(pipefd_in[0]);
-	close_fds(pipefd_out);
+	close_fd(redir.pipe_io[0][1]);
+	pipe_to_screen_or_file(redir.pipe_io[0][0], redir);
+	close_fd(redir.pipe_io[0][0]);
+	close_fds(redir.pipe_io[1]);
 	return (pid);
 }
 
 int	pipex(char **argv[], char *envp[])
 {
-	t_redir	redir;
 	pid_t	pid;
 	int		status;
 	int		exit_status;
 
 	exit_status = 1;
 	pid = -1;
-	pid = create_pipeline(argv, envp, redir);
+	pid = create_pipeline(argv, envp);
 	if (pid == -42)
 		return (0);
 	if (waitpid(pid, &status, 0) > 0)

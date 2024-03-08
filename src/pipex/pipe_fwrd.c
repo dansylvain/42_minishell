@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_fwrd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:20:41 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 12:25:52 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/08 13:10:13 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,11 @@ void	init_pipes_io(int pipefd_in[2], int pipefd_out[2])
 	pipefd_in[1] = -1;
 	pipefd_out[0] = -1;
 	pipefd_out[1] = -1;
+}
+void	init_pipe_io(t_redir *redir)
+{
+	redir->pipe_io[0][0] = -1;
+	redir->pipe_io[0][1] = -1;
+	redir->pipe_io[0][0] = -1;
+	redir->pipe_io[0][1] = -1;
 }
