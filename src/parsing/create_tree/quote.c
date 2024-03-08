@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:36:13 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 10:52:47 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/08 21:52:05 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,15 @@ t_ast_nde	*set_qute_sib(char *str)
 	qute_sibling_sav = NULL;
 	while (*str)
 	{
-		if (is_qute(str, '\''))
+		if (*str == '\'')
 		{
 			if (link_inqute_node(IN_SQUTE, '\'', &qute_sibling,
 					&qute_sibling_sav, &str))
 				return (NULL);
 		}
-		else if (is_qute(str, '\"'))
+		else if (*str == '"')
 		{
-			if (link_inqute_node(IN_DQUTE, '\"', &qute_sibling,
+			if (link_inqute_node(IN_DQUTE, '"', &qute_sibling,
 					&qute_sibling_sav, &str))
 				return (NULL);
 		}
