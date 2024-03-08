@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 14:09:50 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 15:12:39 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,8 @@ int	is_dir(char *path)
     } 
 	return (0);
 }
-
-static void	builtin_or_execve(char **argv[], char **argv_sav[])
+void	check_filedir_error(char **argv[])
 {
-	t_Data	*data;
-
-	data = get_data(NULL);
 	if (!access(**argv, F_OK))
 	{
 		if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
@@ -74,17 +70,24 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[])
 			if (access(**argv, X_OK))
 			{				
 				display_error(" Permission denied\n");
-				exit (126);			
+				exit (126);
 			}
 		}
-		else 
-		{	
-			display_error(" command not found\n");		
+		else
+		{
+			display_error(" command not found\n");
 			exit (127);
 		}
 	}
-	else if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')		
+	else if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')	
 		display_error(" No such file or directory\n");
+}
+static void	builtin_or_execve(char **argv[], char **argv_sav[])
+{
+	t_Data	*data;
+
+	data = get_data(NULL);
+	check_filedir_error(argv);
 	if (!command_is_builtin(*argv, data))
 	{		
 		if (access(**argv, X_OK))
