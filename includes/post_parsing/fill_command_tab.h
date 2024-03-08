@@ -6,14 +6,14 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:03:28 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 19:09:42 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 19:42:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILL_COMMAND_TAB_H
 # define FILL_COMMAND_TAB_H
 
-# include <minishell_struct.h>
+# include <minishell.h>
 # include <stdlib.h>
 # include "parsing_utils.h"
 # include "libft.h"

@@ -6,14 +6,14 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:57:07 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 18:57:07 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 19:42:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_2_H
 # define UTILS_2_H
 
-# include <minishell_struct.h>
+# include <minishell.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>

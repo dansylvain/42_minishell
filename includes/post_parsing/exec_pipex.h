@@ -6,14 +6,14 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:03:33 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 19:07:50 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 19:42:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_PIPEX_H
 # define EXEC_PIPEX_H
 
-# include <minishell_struct.h>
+# include <minishell.h>
 # include "parsing_utils.h"
 # include <stddef.h>
 

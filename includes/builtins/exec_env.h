@@ -6,14 +6,14 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:54:41 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 18:54:41 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 19:42:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_ENV_H
 # define EXEC_ENV_H
 
-# include <minishell_struct.h>
+# include <minishell.h>
 # include <stdlib.h>
 # include <sys/wait.h>
 # include "ft_printf.h"

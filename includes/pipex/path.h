@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:15:20 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 19:30:57 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 19:42:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include "libft.h"
 # include "ft_printf.h"
-# include "minishell_struct.h"
+# include "minishell.h"
 # include "parsing_utils.h"
 
 void	display_error(char *str);

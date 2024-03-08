@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_struct.h                                 :+:      :+:    :+:   */
+/*   minishell.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_STRUCT_H
-# define MINISHELL_STRUCT_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 typedef struct t_Data
 {

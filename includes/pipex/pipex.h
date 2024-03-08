@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:20:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 19:40:47 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 19:42:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdlib.h>
 # include "ft_printf.h"
 # include "libft.h"
-# include "minishell_struct.h"
+# include "minishell.h"
 # include "pipex_global_utils.h"
 
 t_Data	*get_data(char *envp[]);

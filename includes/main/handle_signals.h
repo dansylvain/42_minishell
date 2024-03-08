@@ -6,14 +6,14 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:56:19 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 18:56:24 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 19:42:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HANDLE_SIGNALS_H
 # define HANDLE_SIGNALS_H
 
-# include <minishell_struct.h>
+# include <minishell.h>
 # include "rl_header.h"
 # include <signal.h>
 # include <sys/wait.h>

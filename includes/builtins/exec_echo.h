@@ -6,14 +6,14 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:52:53 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 18:53:03 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 19:42:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_ECHO_H
 # define EXEC_ECHO_H
 
-# include <minishell_struct.h>
+# include <minishell.h>
 # include "ft_printf.h"
 # include "libft.h"
 

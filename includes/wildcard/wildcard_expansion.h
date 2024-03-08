@@ -6,14 +6,14 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:11:06 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 19:11:07 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 19:42:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WILDCARD_EXPANSION_H
 # define WILDCARD_EXPANSION_H
 
-# include <minishell_struct.h>
+# include <minishell.h>
 # include <stdlib.h>
 # include <dirent.h>
 # include <stdio.h>

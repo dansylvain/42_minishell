@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:29:50 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 19:40:37 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 19:45:25 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # include <unistd.h>
 # include "parsing_utils.h"
-#include "minishell_struct.h"
-#include "libft.h"
+# include "minishell.h"
+# include "libft.h"
 
-char			*wilcard_func(char *pattern);
+char	*wilcard_func(char *pattern);
 void	display_error_detail(char *str, char *details, char *str2);
-char		*search_var(const t_ast_nde *node, t_Data *data);
+char	*search_var(const t_ast_nde *node, t_Data *data);
 
 #endif

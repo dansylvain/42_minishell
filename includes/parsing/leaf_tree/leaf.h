@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:29:53 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 19:40:42 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 19:45:37 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "parsing_utils.h"
 # include <unistd.h>
-#include "minishell_struct.h"
+# include "minishell.h"
 
 void		leaf_tree(t_ast_nde *oper, t_ast_nde **rslt,
 				t_ast_nde **rslt_sav, t_Data *data);
