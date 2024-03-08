@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:30:00 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/02 17:52:51 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 15:13:20 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include <unistd.h>
 # include "parsing_utils.h"
 # include "libft.h"
-# include "minishell.h"
+# include "minishell_struct.h"
+# include "ft_printf.h"
 
 int	set_parenthesis(t_ast_nde *node);
 t_ast_nde	*set_qute_sib(char *str);

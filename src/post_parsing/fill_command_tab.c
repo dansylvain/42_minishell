@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fill_command_tab.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 08:10:48 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:40:39 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "fill_command_tab.h"
 void	print_node(t_ast_nde *node);
 void	store_and_free_cmd_tab(char ***cmd_tab);
 int	is_raw(t_ast_nde *node);

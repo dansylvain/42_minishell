@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+         #
+#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/08 08:18:25 by dsylvain         ###   ########.fr        #
+#    Updated: 2024/03/08 17:17:28 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,11 @@ CC = gcc
 
 RLFLAGS = -lreadline -lhistory -I/usr/include/readline
 
-CFLAGS = -g -Iincludes -Iincludes/parsing/parsing -Iincludes/parsing/create_tree \
--Iincludes/parsing/leaf_tree -Iincludes/pipex -Iincludes/root_files \
--Iincludes/exec_files
+CFLAGS = -g -Iincludes -Iincludes/main -Iincludes/parsing/parsing \
+-Iincludes/parsing/create_tree \
+-Iincludes/parsing/leaf_tree -Iincludes/pipex \
+-Iincludes/exec_files -Iincludes/wildcard -Iincludes/builtins \
+-Iincludes/post_parsing \
 # -Wall -Wextra -Werror
 
 # Directories

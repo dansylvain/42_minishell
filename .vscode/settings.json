@@ -15,6 +15,7 @@
 		"vector": "c",
 		"initializer_list": "c",
 		"get_next_line.h": "c",
-		"redir.h": "c"
+		"redir.h": "c",
+		"main.h": "c"
 	}
 }

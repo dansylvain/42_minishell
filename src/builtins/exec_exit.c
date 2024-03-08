@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:30:35 by dan               #+#    #+#             */
-/*   Updated: 2024/03/07 19:08:07 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 16:23:19 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "exec_exit.h"
 
 void	store_and_free_cmd_list(t_ast_nde *cmd_list);
 void	store_and_free_cmd_tab_node_sav(t_ast_nde *cmd_tab_node_sav);

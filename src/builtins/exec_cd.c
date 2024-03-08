@@ -6,11 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:29:47 by dan               #+#    #+#             */
-/*   Updated: 2024/03/05 11:38:54 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 16:22:20 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "exec_cd.h"
 
 void	update_home_env_var(t_Data *data)
 {

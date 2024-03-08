@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:09:48 by dan               #+#    #+#             */
-/*   Updated: 2024/02/29 14:31:23 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 16:16:38 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "utils_2.h"
 
 /**========================================================================
  *                           display_error
@@ -44,13 +44,13 @@ void	display_error_detail(char *str, char *details, char *str2)
 	len = 0;
 	ft_bzero(tmp, 2000);
 	len1 = ft_strlen(str);
-	memcpy(tmp, str, len1);
+	ft_memcpy(tmp, str, len1);
 	len += len1;
 	len2 = ft_strlen(details);
-	memcpy(&tmp[len + 1], details, len2);
+	ft_memcpy(&tmp[len + 1], details, len2);
 	len += len2 + 1;
 	len3 = ft_strlen(str2);
-	memcpy(&tmp[len + 1], str2, len3);
+	ft_memcpy(&tmp[len + 1], str2, len3);
 	len += len3 + 1;
 	if (write(2, tmp, len) == -1)
 		perror("display_error");

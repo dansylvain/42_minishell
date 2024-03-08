@@ -6,15 +6,14 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/07 14:14:49 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 14:50:20 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../includes/rl_header.h"
+#include "main.h"
 
-int			is_not_empty_prompt(char *str);
-t_ast_nde	*parse_par(char *str, t_Data *data, char *envp[]);
+// int			is_not_empty_prompt(char *str);
+// t_ast_nde	*parse_par(char *str, t_Data *data, char *envp[]);
 
 /**========================================================================
  *                             COMMENTS POLICY
@@ -95,7 +94,10 @@ int	prompt_loop(t_Data *data, char *envp[])
 	return (1);
 	(void)envp;
 }
-
+/**========================================================================
+ *                           build_prompt
+ *!!! strstr a changer!!! 
+ *========================================================================**/ 
 void	build_prompt(char prompt[])
 {
 	char	cwd[1024];
@@ -110,7 +112,7 @@ void	build_prompt(char prompt[])
 		if (shortened_cwd != NULL)
 		{
 			ft_strcat(prompt, "\033[1;37m");
-			ft_strcat(prompt, shortened_cwd + strlen(home));
+			ft_strcat(prompt, shortened_cwd + ft_strlen(home));
 			ft_strcat(prompt, "\033[0m");
 		}
 		else

@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_pwd.c                                         :+:      :+:    :+:   */
+/*   minishell_struct.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 19:12:50 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 16:24:03 by dan              ###   ########.fr       */
+/*   Created: 2024/01/12 08:59:03 by dan               #+#    #+#             */
+/*   Updated: 2024/03/08 16:21:37 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec_pwd.h"
+#ifndef MINISHELL_STRUCT_H
+# define MINISHELL_STRUCT_H
 
-/**========================================================================
- *                           exec_pwd
- *========================================================================**/
-void	exec_pwd(t_Data *data)
+typedef struct t_Data
 {
-	char	buffer[1024];
-
-	if (getcwd(buffer, sizeof(buffer)) != NULL)
-		ft_printf("%s\n", buffer);
-	else
-		perror("getcwd");
-	(void)data;
-}
+	char	**envp_tab;
+	int		exit_status;
+}	t_Data;
+		
+#endif
