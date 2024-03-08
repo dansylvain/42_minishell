@@ -6,15 +6,26 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 20:41:23 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/08 21:00:08 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fill_command_tab.h"
 
 //error management to be added here...
+// if (cmd_tab_error_check(node) == 0)
+// {
+// 	ft_printf("ERROR!!!\n");
+// }
 int	cmd_tab_error_check(t_ast_nde *node)
 {
+	t_ast_nde	*current;
+
+	current = node;
+	while (current)
+	{
+		current = current->sibling;
+	}
 	return (1);
 }
 
@@ -34,51 +45,55 @@ void	create_dollar_tab(t_Data *data,
 	(*cmd_tab)[*i][j + 1] = NULL;
 }
 
+void	handle_redirections(t_Data *data,
+		t_ast_nde **current, char ****cmd_tab, int *i)
+{
+	while (!is_separator(*current))
+	{
+		if (is_chevron(*current))
+		{
+			create_chev_tab(&(*cmd_tab), &(*current), &(*i));
+			if (*current && is_separator((*current)->sibling->sibling)
+				&& (*current)->sibling->child->sibling)
+			{
+				complete_raw_tab(data, &(*cmd_tab), (*current)->sibling, &(*i));
+			}
+		}
+		*current = (*current)->sibling;
+	}
+}
+
+void	handle_remaining_commands(t_Data *data,
+		t_ast_nde **node, char ****cmd_tab, int *i)
+{
+	while (*node && !is_separator(*node))
+	{
+		if (is_raw(*node))
+			add_raw_to_cmd_tab(data, &(*cmd_tab), *node, &(*i));
+		else if ((*node)->child->token == DOLL)
+			create_dollar_tab(data, &(*node), &(*cmd_tab), &(*i));
+		*node = (*node)->sibling;
+	}
+	if (*node && (*node)->token == PIPE)
+	{
+		add_pipe_tab_to_tab(&(*cmd_tab), &(*i));
+		*node = (*node)->sibling;
+	}
+}
+
 char	***fill_cmd_tab_tabs(t_Data *data, t_ast_nde *node, char ***cmd_tab)
 {
 	t_ast_nde	*current;
 	int			i;
 	int			j;
 
-	current = node;
-	while (current)
-	{
-		if (cmd_tab_error_check(node) == 0)
-		{
-			ft_printf("ERROR!!!\n");
-		}
-		current = current->sibling;
-	}
+	cmd_tab_error_check(node);
 	i = 0;
 	current = node;
 	while (current && node)
 	{
-		while (!is_separator(current))
-		{
-			if (is_chevron(current))
-			{
-				create_chev_tab(&cmd_tab, &current, &i);
-				if (current && is_separator(current->sibling->sibling)
-					&& current->sibling->child->sibling)
-				{
-					complete_raw_tab(data, &cmd_tab, current->sibling, &i);
-				}
-			}
-			current = current->sibling;
-		}
-		while (node && !is_separator(node))
-		{
-			if (is_raw(node))
-				add_raw_to_cmd_tab(data, &cmd_tab, node, &i);
-			else if (node->child->token == DOLL)
-				create_dollar_tab(data, &node, &cmd_tab, &i);
-			node = node->sibling;
-		}
-		if (node && node->token == PIPE)
-		{
-			add_pipe_tab_to_tab(&cmd_tab, &i);
-			node = node->sibling;
-		}
+		handle_redirections(data, &current, &cmd_tab, &i);
+		handle_remaining_commands(data, &node, &cmd_tab, &i);
 		if (current && current->sibling)
 			current = current->sibling;
 	}
