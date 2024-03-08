@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:13:27 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 18:27:11 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 18:36:09 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,23 @@ void	free_and_exit(char **argv_sav[], int n_exit, char *err_str)
 {
 	if (err_str)
 		display_error(err_str);
-	free_all(argv_sav);	
+	free_all(argv_sav);
 	exit(n_exit);
 }
 
 int	is_dir(char *path)
 {
-	struct stat path_stat;
+	struct stat	path_stat;
 
 	if (stat(path, &path_stat) == 0)
 	{
-        if (S_ISREG(path_stat.st_mode))
-          	return (0);
+		if (S_ISREG(path_stat.st_mode))
+			return (0);
 		else if (S_ISDIR(path_stat.st_mode))
-            return (1);
+			return (1);
 		else
-            return (0);
-    } 
+			return (0);
+	}
 	return (0);
 }
 
@@ -49,21 +49,21 @@ void	check_filedir_error(char **argv[], char **argv_sav[])
 	{
 		if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
 		{
-			if (access(**argv, X_OK))			
-				free_and_exit(argv_sav, 126, " Permission denied\n");			
+			if (access(**argv, X_OK))
+				free_and_exit(argv_sav, 126, " Permission denied\n");
 		}
-		else		
-			free_and_exit(argv_sav, 127, " command not found\n");		
+		else
+			free_and_exit(argv_sav, 127, " command not found\n");
 	}
-	else if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')	
+	else if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
 		display_error(" No such file or directory\n");
 }
 
 void	here_doc_handle(int pipefd_in[], t_redir redir)
-{ //argv!!
+{
 	char	*line;
 
-	while (1)
+	while (1) //argv!!
 	{
 		ft_printf("heredoc> ");
 		line = get_next_line(0);
