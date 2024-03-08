@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 16:51:21 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 17:04:13 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ void	free_all(char **argv_sav[])
 	free_command_tab_lg(argv_sav);
 	store_and_free_cmd_list(NULL);
 }
+void	free_and_exit(char **argv_sav[], int n_exit, char *err_str)
+{
+	if (err_str)
+		display_error(err_str);
+	free_all(argv_sav);	
+	exit(n_exit);
+}
 
 void	check_filedir_error(char **argv[], char **argv_sav[])
 {
@@ -75,19 +82,11 @@ void	check_filedir_error(char **argv[], char **argv_sav[])
 	{
 		if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
 		{
-			if (access(**argv, X_OK))
-			{				
-				display_error(" Permission denied\n");
-				free_all(argv_sav);	
-				exit (126);
-			}
+			if (access(**argv, X_OK))			
+				free_and_exit(argv_sav, 126, " Permission denied\n");			
 		}
-		else
-		{
-			display_error(" command not found\n");
-			free_all(argv_sav);	
-			exit (127);
-		}
+		else		
+			free_and_exit(argv_sav, 127, " command not found\n");		
 	}
 	else if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')	
 		display_error(" No such file or directory\n");
@@ -103,26 +102,15 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[])
 	{		
 		if (access(**argv, X_OK))
 		{		
-			if (search_path(*argv, data->envp_tab))
-			{				
-				free_all(argv_sav);											
-				exit(127);
-			}		
+			if (search_path(*argv, data->envp_tab))			
+				free_and_exit(argv_sav, 127, NULL);						
 		}	
-		execve(**argv, *argv, data->envp_tab);
-	
-		 if (errno == EACCES)
-		{
-			display_error(" Is a directory\n");
-			free_all(argv_sav);
-			exit(126);
-		}
+		execve(**argv, *argv, data->envp_tab);	
+		if (errno == EACCES)		
+			free_and_exit(argv_sav, 126, " Is a directory\n");
 	}
-	else
-	{
-		free_all(argv_sav);
-		exit(EXIT_SUCCESS);
-	}
+	else	
+		free_and_exit(argv_sav, EXIT_SUCCESS, NULL);
 }
 
 void	child_area(char **argv[], char **argv_sav[], char **argv_redir[],
