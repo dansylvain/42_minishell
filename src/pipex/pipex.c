@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 15:40:43 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/08 16:22:33 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	check_filedir_error(char **argv[])
 
 void	free_all(char **argv_sav[])
 {
-	free_data(get_data(NULL));
+	//free_data(get_data(NULL));
 	free_command_tab_lg(argv_sav);
 	store_and_free_cmd_list(NULL);
 }
@@ -100,22 +100,18 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[])
 	if (!command_is_builtin(*argv, data))
 	{		
 		if (access(**argv, X_OK))
-		{				 
-		
+		{	
 			if (search_path(*argv, data->envp_tab))
-			{
-				if (!access(**argv, F_OK) && access(**argv, X_OK) )				
-					exit (126);				
-				store_and_free_cmd_list(NULL);
-				free_command_tab_lg(argv_sav);					
+			{				
+				free_all(argv_sav);									
 				exit(127);
-			}
-		
+			}		
 		}	
 		execve(**argv, *argv, data->envp_tab);
 	
 		 if (errno == EACCES)
 		{
+			free_all(argv_sav);
 			display_error(" Is a directory\n");
 			exit(126);
 		}
