@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
+#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/08 20:36:24 by dan              ###   ########.fr        #
+#    Updated: 2024/03/09 11:11:01 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,12 +54,10 @@ SRC =	src/main/main.c \
 		src/builtins/exec_exit.c \
 		src/parsing/parsing/parsing.c \
 		src/parsing/parsing/free_tree.c \
-		src/parsing/parsing/test.c \
 		src/parsing/parsing/utils.c \
 		src/parsing/parsing/utils2.c \
 		src/parsing/create_tree/expansion.c \
 		src/parsing/create_tree/operator.c \
-		src/parsing/create_tree/parenthesis.c \
 		src/parsing/create_tree/quote.c \
 		src/parsing/create_tree/space.c \
 		src/parsing/create_tree/token_child.c \
