@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:30 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/09 20:48:53 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 00:11:30 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,27 +82,50 @@ void	here_doc_handle(t_redir *redir)
 {
 	char	*line;
 
-	while (1)
-	{
-		ft_printf("heredoc> ");
+	//ft_printf("heredoc> ");
+		ft_printf("heredoc> ");	
 		line = get_next_line(0);
+	while (1)
+	{	
 		if (line)
 		{
-			if (ft_strcmp(line, redir->delim))
-				ft_putstr_fd(line, redir->pipe_hd[1]);
-			else
-			{
-				free(line);
-				get_next_line(42);
-				break ;
+			if (line[ft_strlen(line) - 1] == '\n')
+			{					
+					//	ft_printf("CRAPEAU\n> ");	
+				if (ft_strcmp(line, redir->delim))
+					ft_putstr_fd(line, redir->pipe_hd[1]);
+				else
+				{
+					free(line);
+					get_next_line(42);
+					break ;
+				}		
 			}
+				
 		}
-		else
+		else if (line[ft_strlen(line) - 1] == '\n')
 		{
-			ft_printf("\rwarning: here-document at line 1 \
-delimited by end-of-file (wanted '%s')\n", redir->delim);
+			free(line);
+			get_next_line(42);
+			char	*ctrl_d = ft_strdup(redir->delim);
+			ctrl_d[ft_strlen(redir->delim) - 1] = 0;
+			ft_printf("\nwarning: here-document at line 1 \
+delimited by end-of-file (wanted '%s\')\n", ctrl_d);
+			free(ctrl_d);
 			break ;
 		}
-		free(line);
+		if (line[ft_strlen(line) - 1] == '\n')
+		{
+			ft_printf("heredoc> ");	
+		}					
+		//free(line);
+		if (line[ft_strlen(line) - 1] != '\n')
+		{
+			char * tmp = line;
+			line = get_next_line(0);
+			line = tmp;
+		}
+		line = get_next_line(0);		
+		
 	}
 }

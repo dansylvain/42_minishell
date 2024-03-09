@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/09 21:34:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/09 21:46:54 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,7 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[], t_redir *redir)
 {
 	t_Data	*data;
 
-	data = get_data(NULL);
-	//check_filedir_error(argv, argv_sav, redir);
-	// if (is_path)
-	// {
-		
-	// }
+	data = get_data(NULL);	
 	if (!command_is_builtin(*argv, data))
 	{
 		if (!is_path(**argv))
