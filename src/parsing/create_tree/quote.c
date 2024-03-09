@@ -6,21 +6,11 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:36:13 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/09 10:23:47 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/09 10:28:12 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "quote.h"
-
-// static int	is_raw(char *str)
-// {
-// 	return (!(*str == '\'' || *str == '\"'));
-// }
-
-// static int	is_qute(char *str, char qute)
-// {
-// 	return (*str == qute);
-// }
 
 static void	set_raw_nde(t_ast_nde *raw, char **str)
 {
