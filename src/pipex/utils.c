@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:30 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/09 18:27:38 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/09 20:48:53 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ int	is_dir(char *path)
 	}
 	return (0);
 }
-// static int	is_path(char *path)
-// {
-// 	while (path)	
-// 		if (*path++ == '/')
-// 			return (1);
-// 	return (0);	
-// }
+int	is_path(char *path)
+{
+	while (*path)	
+		if (*path++ == '/')
+			return (1);
+	return (0);	
+}
 
 void	check_filedir_error(char **argv[], char **argv_sav[], t_redir *redir)
 {

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/09 18:25:29 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/09 21:17:05 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,47 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[], t_redir *redir)
 	t_Data	*data;
 
 	data = get_data(NULL);
-	check_filedir_error(argv, argv_sav, redir);
+	//check_filedir_error(argv, argv_sav, redir);
+	// if (is_path)
+	// {
+		
+	// }
 	if (!command_is_builtin(*argv, data))
 	{
-		if (access(**argv, X_OK))
-		{
+		if (!is_path(**argv))
+		{		
 			if (search_path(*argv, data->envp_tab))
 				free_and_exit(redir, argv_sav, 127, NULL);
 		}
+		//perror("acces");
 		execve(**argv, *argv, data->envp_tab);
+		//ft_printf("%i\n", errno);	
+		//perror("execve"); // Utilise errno pour générer un message d'erreur explicite
+	//	exit(EXIT_FAILURE); // Termine le programme avec un code d'erreur
+
 		if (errno == EACCES)
 		{
+			if (access(**argv, X_OK))
+			{
+				display_error("minishell: ");
+				display_error(**argv);
+				free_and_exit(redir, argv_sav, 126, ": Permission denied\n");
+			}	
+			else			
+			{	
+				display_error("minishell: ");
+				display_error(**argv);
+				free_and_exit(redir, argv_sav, 126, ": Is a directory\n");
+			}
+		}
+		if (errno == ENOENT)
+		{		
 			display_error("minishell: ");
 			display_error(**argv);
-			free_and_exit(redir, argv_sav, 126, ": Is a directory\n");
+			free_and_exit(redir, argv_sav, 127, ": No such file or directory\n");			
 		}
+		
+		exit(EXIT_FAILURE);
 	}
 	else
 		free_and_exit(redir, argv_sav, EXIT_SUCCESS, NULL);

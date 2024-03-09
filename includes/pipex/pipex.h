@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:20:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/09 17:36:31 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/09 20:36:50 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ void	free_and_exit(t_redir *redir, char **argv_sav[], int n_exit,
 			char *err_str);
 void	check_filedir_error(char **argv[], char **argv_sav[], t_redir *redir);
 void	display_error(char *str);
+int		is_path(char *path);
 
 #endif
