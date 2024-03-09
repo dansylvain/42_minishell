@@ -6,7 +6,11 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:13:27 by seblin            #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2024/03/08 21:31:40 by seblin           ###   ########.fr       */
+=======
+/*   Updated: 2024/03/09 18:22:01 by seblin           ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +41,7 @@ int	is_dir(char *path)
 	if (stat(path, &path_stat) == 0)
 	{
 		if (S_ISREG(path_stat.st_mode))
-			return (0);
+			return (1);
 		else if (S_ISDIR(path_stat.st_mode))
 			return (1);
 		else
@@ -45,17 +49,27 @@ int	is_dir(char *path)
 	}
 	return (0);
 }
+// static int	is_path(char *path)
+// {
+// 	while (path)	
+// 		if (*path++ == '/')
+// 			return (1);
+// 	return (0);	
+// }
 
 void	check_filedir_error(char **argv[], char **argv_sav[], t_redir *redir)
 {
-	if (!access(**argv, F_OK))
+	if (!access(**argv, F_OK)) // n'est pas un fichier
 	{
-		if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
+		if ((***argv == '.' && argv[0][0][1] == '/') || argv[0][0][0] == '/')  // est un path    vis_path(**argv)
 		{
 			if (access(**argv, X_OK))
 				free_and_exit(redir, argv_sav, 126, " Permission denied\n");
 		}
 		else
+		{									// est un path
+			display_error(**argv);
+			display_error(":");	
 			free_and_exit(redir, argv_sav, 127, " command not found\n");
 	}
 	else if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')

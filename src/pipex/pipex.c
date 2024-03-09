@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 21:21:30 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/09 18:24:52 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[], t_redir *redir)
 		}
 		execve(**argv, *argv, data->envp_tab);
 		if (errno == EACCES)
-			free_and_exit(redir, argv_sav, 126, " Is a directory\n");
+		{
+			display_error("minishell: ");
+			display_error(**argv);
+			free_and_exit(redir, argv_sav, 126, ": Is a directory\n");
+		}
 	}
 	else
 		free_and_exit(redir, argv_sav, EXIT_SUCCESS, NULL);
