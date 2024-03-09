@@ -6,21 +6,21 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:36:13 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/09 10:14:54 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/09 10:23:47 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "quote.h"
 
-static int	is_raw(char *str)
-{
-	return (!(*str == '\'' || *str == '\"'));
-}
+// static int	is_raw(char *str)
+// {
+// 	return (!(*str == '\'' || *str == '\"'));
+// }
 
-static int	is_qute(char *str, char qute)
-{
-	return (*str == qute);
-}
+// static int	is_qute(char *str, char qute)
+// {
+// 	return (*str == qute);
+// }
 
 static void	set_raw_nde(t_ast_nde *raw, char **str)
 {
@@ -28,7 +28,7 @@ static void	set_raw_nde(t_ast_nde *raw, char **str)
 	raw->end = *str;
 	while (*++(*str))
 	{
-		if (!is_raw(*str))
+		if (**str == '\'' || **str == '"')
 			break ;
 		raw->end = *str;
 	}
@@ -40,7 +40,7 @@ static int	set_qute_nde(t_ast_nde *qute_nde, char qute,
 	qute_nde->start = *str;
 	while (**str)
 	{
-		if (is_qute(*str, qute))
+		if (**str == qute)
 		{
 			qute_nde->end = (*str - 1);
 			break ;
