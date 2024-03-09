@@ -42,16 +42,16 @@ obj:*/ls
 }
 {
    <write suppression>
-   Memcheck:Signal
+   Memcheck:Leak
    ...
    obj:/usr/lib/libc.so.6
    fun:write
    ...
-
-   <cat suppression>
-   Memcheck:Signal
+}
+{
+   <ncurses suppression>
+   Memcheck:Leak
    ...
-   obj:/usr/bin/cat
-   fun:???
+   obj:/usr/lib/x86_64-linux-gnu/libtinfo.so.*
    ...
 }
