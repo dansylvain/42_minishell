@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_fwrd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:20:41 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 13:52:22 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/09 12:52:42 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
 	close_fds(pipefd_in);
 	dup2(pipefd_out[1], STDOUT_FILENO);
 	close_fds(pipefd_out);
+	(void)redir;
 }
 
 void	set_pipefd_in(int pipefd_in[], t_redir *redir)

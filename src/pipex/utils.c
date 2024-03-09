@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:13:27 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 21:31:40 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/09 12:53:35 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	check_filedir_error(char **argv[], char **argv_sav[], t_redir *redir)
 {
 	if (!access(**argv, F_OK))
 	{
-		if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
+		if ((***argv == '.' && argv[0][0][1] == '/') || argv[0][0][0] == '/')
 		{
 			if (access(**argv, X_OK))
 				free_and_exit(redir, argv_sav, 126, " Permission denied\n");
@@ -58,7 +58,7 @@ void	check_filedir_error(char **argv[], char **argv_sav[], t_redir *redir)
 		else
 			free_and_exit(redir, argv_sav, 127, " command not found\n");
 	}
-	else if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
+	else if ((***argv == '.' && argv[0][0][1] == '/') || argv[0][0][0] == '/')
 		display_error(" No such file or directory\n");
 }
 

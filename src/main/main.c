@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 19:52:30 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/09 12:50:24 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int	command_is_builtin(char	**cmd_tab, t_Data *data)
 	if (len >= 4 && !ft_strncmp(&(cmd_tab[0][len - 4]), "echo", 5))
 		return (exec_echo(data, cmd_tab), 1);
 	if (len >= 4 && !ft_strncmp(&(cmd_tab[0][len - 4]), "exit", 5))
-		(exec_exit(data, cmd_tab), 1);
+		(exec_exit(data, cmd_tab));
 	if (len >= 5 && !ft_strncmp(&(cmd_tab[0][len - 5]), "unset", 6))
 		return (exec_unset(data, cmd_tab), 1);
 	if (len >= 6 && !ft_strncmp(&(cmd_tab[0][len - 6]), "export", 7))

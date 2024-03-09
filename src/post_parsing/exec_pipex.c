@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 19:39:36 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/09 12:57:48 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	exec_pipex(t_Data *data, char *cmd, char *envp[])
 	store_and_free_cmd_list(cmd_list);
 	launch_command_tab(data, cmd_list, envp, 0);
 	store_and_free_cmd_list(NULL);
+	(void)current;
 }
 
 /**========================================================================
