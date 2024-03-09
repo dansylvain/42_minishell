@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:36:13 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 22:33:45 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/09 10:14:54 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ static int	set_qute_nde(t_ast_nde *qute_nde, char qute,
 	return (0);
 }
 
-static int	link_inqute_node(t_tok tok, char qute, t_ast_nde **qute_sibling,
-	t_ast_nde **qute_sibling_sav, char **str)
+static int	link_inqute_node(t_tok tok, char qute, t_ast_nde **qute_sibling[],
+	char **str)
 {
 	t_ast_nde	*new_nde;
 
 	(*str)++;
 	new_nde = create_node(tok);
-	if (set_qute_nde(new_nde, qute, *qute_sibling_sav, str))
+	if (set_qute_nde(new_nde, qute, *qute_sibling[1], str))
 		return (1);
-	add_sibling(new_nde, qute_sibling, qute_sibling_sav);
+	add_sibling(new_nde, qute_sibling[0], qute_sibling[1]);
 	(*str)++;
 	return (0);
 }
@@ -90,14 +90,14 @@ t_ast_nde	*set_qute_sib(char *str)
 	{
 		if (*str == '\'')
 		{
-			if (link_inqute_node(IN_SQUTE, '\'', &qute_sibling,
-					&qute_sibling_sav, &str))
+			if (link_inqute_node(IN_SQUTE, '\'', (t_ast_nde **[]){&qute_sibling,
+					&qute_sibling_sav}, &str))
 				return (NULL);
 		}
 		else if (*str == '"')
 		{
-			if (link_inqute_node(IN_DQUTE, '"', &qute_sibling,
-					&qute_sibling_sav, &str))
+			if (link_inqute_node(IN_DQUTE, '"', (t_ast_nde **[]){&qute_sibling,
+					&qute_sibling_sav}, &str))
 				return (NULL);
 		}
 		else
