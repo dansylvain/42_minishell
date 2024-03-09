@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/09 21:17:05 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/09 21:34:36 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[], t_redir *redir)
 		//ft_printf("%i\n", errno);	
 		//perror("execve"); // Utilise errno pour générer un message d'erreur explicite
 	//	exit(EXIT_FAILURE); // Termine le programme avec un code d'erreur
-
+// ft_printf("%i\n", errno);	
 		if (errno == EACCES)
 		{
 			if (access(**argv, X_OK))
@@ -50,14 +50,15 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[], t_redir *redir)
 				free_and_exit(redir, argv_sav, 126, ": Is a directory\n");
 			}
 		}
-		if (errno == ENOENT)
+		else if (errno == ENOENT)
 		{		
 			display_error("minishell: ");
 			display_error(**argv);
 			free_and_exit(redir, argv_sav, 127, ": No such file or directory\n");			
 		}
-		
-		exit(EXIT_FAILURE);
+		else if (errno == ENOEXEC)					
+			free_and_exit(redir, argv_sav, EXIT_SUCCESS, NULL);
+		free_and_exit(redir, argv_sav, EXIT_FAILURE, NULL);		
 	}
 	else
 		free_and_exit(redir, argv_sav, EXIT_SUCCESS, NULL);
