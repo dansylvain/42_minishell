@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_fwrd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:20:41 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/09 12:52:42 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/09 17:36:13 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipe_fwrd.h"
 
-void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
+void	set_pipe_forward(int pipefd_in[], int pipefd_out[])
 {
 	dup2(pipefd_in[0], STDIN_FILENO);
 	close_fds(pipefd_in);
 	dup2(pipefd_out[1], STDOUT_FILENO);
 	close_fds(pipefd_out);
-	(void)redir;
 }
 
 void	set_pipefd_in(int pipefd_in[], t_redir *redir)
