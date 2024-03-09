@@ -40,18 +40,3 @@ obj:*/ls
 	...
 	obj:/usr/bin/mv
 }
-{
-   <write suppression>
-   Memcheck:Leak
-   ...
-   obj:/usr/lib/libc.so.6
-   fun:write
-   ...
-}
-{
-   <ncurses suppression>
-   Memcheck:Leak
-   ...
-   obj:/usr/lib/x86_64-linux-gnu/libtinfo.so.*
-   ...
-}
