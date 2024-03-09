@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:20:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 22:04:06 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/09 17:36:31 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ void	init_redir( t_redir *redir);
 int		set_redir_io(char **argv[], t_redir *redir);
 void	pipe_to_screen_or_file(t_redir redir);
 void	switch_pipes(int pipefd[][2]);
-void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir);
+void	set_pipe_forward(int pipefd_in[], int pipefd_out[]);
 void	set_pipefd_in(int pipefd_in[], t_redir *redir);
 void	free_and_exit(t_redir *redir, char **argv_sav[], int n_exit,
 			char *err_str);
 void	check_filedir_error(char **argv[], char **argv_sav[], t_redir *redir);
+void	display_error(char *str);
 
 #endif

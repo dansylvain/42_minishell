@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 20:31:56 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/09 12:59:03 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	alloc_memo(char *****cmd_tab, int lstsize, int *i, int *j)
 		(*j)++;
 	}
 	(*i)++;
+	return (1);
 }
 
 int	alloc_memory_for_command_tab(t_ast_nde *node, char ****cmd_tab)
@@ -77,4 +78,6 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 		free_command_tab_lg(cmd_tab);
 	cmd_tab = fill_cmd_tab_tabs(data, node, cmd_tab);
 	return (cmd_tab);
+	(void)cmd_nbr;
+	(void)envp;
 }

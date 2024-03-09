@@ -6,11 +6,15 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:13:27 by seblin            #+#    #+#             */
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 /*   Updated: 2024/03/08 21:31:40 by seblin           ###   ########.fr       */
 =======
 /*   Updated: 2024/03/09 18:22:01 by seblin           ###   ########.fr       */
 >>>>>>> Stashed changes
+=======
+/*   Updated: 2024/03/09 17:48:37 by seblin           ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +71,19 @@ void	check_filedir_error(char **argv[], char **argv_sav[], t_redir *redir)
 				free_and_exit(redir, argv_sav, 126, " Permission denied\n");
 		}
 		else
-		{									// est un path
+		{
 			display_error(**argv);
 			display_error(":");	
 			free_and_exit(redir, argv_sav, 127, " command not found\n");
+		}
 	}
-	else if (***argv == '.' && argv[0][0][1] == '/' || argv[0][0][0] == '/')
-		display_error(" No such file or directory\n");
+	else if ((***argv == '.' && argv[0][0][1] == '/') || argv[0][0][0] == '/')
+	{
+		display_error("minishell: ");
+		display_error(**argv);
+		display_error(":");
+		free_and_exit(redir, argv_sav, 127, " No such file or directory\n");
+	}
 }
 
 void	here_doc_handle(t_redir *redir)

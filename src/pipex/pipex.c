@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/09 18:24:52 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/09 18:25:29 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	child_area(char **argv[], char **argv_sav[], char **argv_redir[],
 		set_pipefd_in(redir->pipe_io[0], redir);
 	if (redir->redir[1])
 		redir->pipe_io[1][1] = redir->fd_file[1];
-	set_pipe_forward(redir->pipe_io[0], redir->pipe_io[1], *redir);
+	set_pipe_forward(redir->pipe_io[0], redir->pipe_io[1]);
 	builtin_or_execve(argv, argv_sav, redir);
 }
 

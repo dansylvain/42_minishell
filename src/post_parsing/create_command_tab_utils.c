@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:53:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 17:28:56 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/09 13:05:40 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char	*get_node_str(t_Data *data, t_ast_nde *node)
 		}
 		node = node->sibling;
 	}
+	(void)data;
 	return (ft_strdup(str));
 }
 

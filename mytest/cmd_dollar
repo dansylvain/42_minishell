@@ -1,3 +1,5 @@
+$PWD
+echo $?
 echo $"LOGNAME"
 echo $?
 echo $'L'OGNAME
@@ -36,3 +38,6 @@ echo $"trrt$LOGNA'Mach'p lou$LOGNAME'Mach'$LOG $'LOGNA'M''E'42 $SHELLtruc SHELL 
 echo $?
 echo $USER
 echo $?
+ls $PWD
+ls $HOME
+ls $HOME | rev

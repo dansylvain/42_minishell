@@ -6,13 +6,13 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:20:41 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 13:52:22 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/09 17:36:13 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipe_fwrd.h"
 
-void	set_pipe_forward(int pipefd_in[], int pipefd_out[], t_redir redir)
+void	set_pipe_forward(int pipefd_in[], int pipefd_out[])
 {
 	dup2(pipefd_in[0], STDIN_FILENO);
 	close_fds(pipefd_in);
