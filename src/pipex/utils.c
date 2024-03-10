@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:30 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/10 11:17:08 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 15:04:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,17 @@ void	check_filedir_error(char **argv[], char **argv_sav[], t_redir *redir)
 		free_and_exit(redir, argv_sav, 127, " No such file or directory\n");
 	}
 }
+
+void	handle_ctrl_d(char *line, t_redir *redir)
+{
+	free(line);
+	get_next_line(42);
+	char	*ctrl_d = ft_strdup(redir->delim);
+	ctrl_d[ft_strlen(redir->delim) - 1] = 0;
+	ft_printf("\nwarning: here-document at line 1 \
+delimited by end-of-file (wanted '%s\')\n", ctrl_d);
+	free(ctrl_d);
+}
 void	here_doc_handle(t_redir *redir)
 {
 	char	*line;
@@ -84,10 +95,12 @@ void	here_doc_handle(t_redir *redir)
 	while (1)
 	{
 		ft_printf("heredoc> ");
-		line = get_next_line(0); ft_printf("SEGGGFOTE \n");
+		line = get_next_line(0);
 		if (line)
-		{ft_printf("SEGGGFOTE \n");
-			if (ft_strcmp(line, redir->delim))
+		{
+			if (line[ft_strlen(line) - 1] != '\n')
+				ft_printf("\n");
+			else if (ft_strcmp(line, redir->delim))
 				ft_putstr_fd(line, redir->pipe_hd[1]);
 			else
 			{
@@ -97,63 +110,85 @@ void	here_doc_handle(t_redir *redir)
 			}
 		}
 		else
-		{
-			ft_printf("\rwarning: here-document at line 1 \
-delimited by end-of-file (wanted '%s')\n", redir->delim);
-			break ;
-		}
-		ft_printf("SEGGGFOTE ZZ \n");
+			return (handle_ctrl_d(line, redir));
 		free(line);
 	}
 }
-void	here_doc_handle2(t_redir *redir)
-{
-	char	*line;
+// void	here_doc_handle2(t_redir *redir)
+// {
+// 	char	*line;
 
-	//ft_printf("heredoc> ");
-		ft_printf("heredoc> ");	
-		line = get_next_line(0);
-	while (1)
-	{	
-		if (line)
-		{
-			if (line[ft_strlen(line) - 1] == '\n')
-			{					
-					//	ft_printf("CRAPEAU\n> ");	
-				if (ft_strcmp(line, redir->delim))
-					ft_putstr_fd(line, redir->pipe_hd[1]);
-				else
-				{
-					free(line);
-					get_next_line(42);
-					break ;
-				}		
-			}
+// 	while (1)
+// 	{
+// 		ft_printf("heredoc> ");		
+// 		if (line)
+// 		{
+// 			if (ft_strcmp(line, redir->delim))
+// 				ft_putstr_fd(line, redir->pipe_hd[1]);
+// 			else
+// 			{
+// 				free(line);
+// 				get_next_line(42);
+// 				break ;
+// 			}
+// 		}
+// 		else 
+// 		{
+// 			ft_printf("\rwarning: here-document at line 1 
+// delimited by end-of-file (wanted '%s')\n", redir->delim);
+// 			break ;
+// 		}	
+// 		free(line);
+// 	}
+// }
+// void	here_doc_handle3(t_redir *redir)
+// {
+// 	char	*line;
+
+// 	//ft_printf("heredoc> ");
+// 		ft_printf("heredoc> ");	
+// 		line = get_next_line(0);
+// 	while (1)
+// 	{	
+// 		if (line)
+// 		{
+// 			if (line[ft_strlen(line) - 1] == '\n')
+// 			{					
+// 					//	ft_printf("CRAPEAU\n> ");	
+// 				if (ft_strcmp(line, redir->delim))
+// 					ft_putstr_fd(line, redir->pipe_hd[1]);
+// 				else
+// 				{
+// 					free(line);
+// 					get_next_line(42);
+// 					break ;
+// 				}		
+// 			}
 				
-		}
-		else if (line[ft_strlen(line) - 1] == '\n')
-		{
-			free(line);
-			get_next_line(42);
-			char	*ctrl_d = ft_strdup(redir->delim);
-			ctrl_d[ft_strlen(redir->delim) - 1] = 0;
-			ft_printf("\nwarning: here-document at line 1 \
-delimited by end-of-file (wanted '%s\')\n", ctrl_d);
-			free(ctrl_d);
-			break ;
-		}
-		if (line[ft_strlen(line) - 1] == '\n')
-		{
-			ft_printf("heredoc> ");	
-		}					
-		//free(line);
-		if (line[ft_strlen(line) - 1] != '\n')
-		{
-			char * tmp = line;
-			line = get_next_line(0);
-			line = tmp;
-		}
-		line = get_next_line(0);		
+// 		}
+// 		else if (line[ft_strlen(line) - 1] == '\n')
+// 		{
+// 			free(line);
+// 			get_next_line(42);
+// 			char	*ctrl_d = ft_strdup(redir->delim);
+// 			ctrl_d[ft_strlen(redir->delim) - 1] = 0;
+// 			ft_printf("\nwarning: here-document at line 1 
+// delimited by end-of-file (wanted '%s\')\n", ctrl_d);
+// 			free(ctrl_d);
+// 			break ;
+// 		}
+// 		if (line[ft_strlen(line) - 1] == '\n')
+// 		{
+// 			ft_printf("heredoc> ");	
+// 		}					
+// 		//free(line);
+// 		if (line[ft_strlen(line) - 1] != '\n')
+// 		{
+// 			char * tmp = line;
+// 			line = get_next_line(0);
+// 			line = tmp;
+// 		}
+// 		line = get_next_line(0);		
 		
-	}
-}
+// 	}
+// }
