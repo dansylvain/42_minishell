@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/10 16:46:17 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 18:00:04 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,42 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[], t_redir *redir)
 		free_and_exit(redir, argv_sav, EXIT_SUCCESS, NULL);
 }
 
-static int	forward_next_cmd(char ***argv[])
+static char	***forward_next_cmd(char **argv[])
 {	
-	while (**argv && ****argv != '|')
+	//ft_putstr_fd("LAAAA\n", 2);
+	while (*argv && **argv && ***argv != '|')
 	{	
-		if (****argv != '>' && ****argv != '<' )
-			return (1);
-		(*argv)++;		
-	}	
-	return (0);
+		if (***argv != '>' && ***argv != '<' )
+			return (argv);
+		argv++;		
+	}
+	//ft_putstr_fd("LAAAA NULL\n", 2);
+	return (NULL);
 }
 
 static void	child_area(char **argv[], char **argv_sav[], t_redir *redir)
 {	
-	set_redir_io(argv, redir);	
-	if (redir->redir[0])
+	char ***cmd;
+//ft_printf("HOOO -%s-\n)", **argv);
+	cmd = forward_next_cmd(argv);
+	// if (cmd)
+	// 	ft_printf("ily a cmd -%s-\n)", **cmd);
+	// else
+	// 	if(write(2, "pas!!! de com", 8))
+	// 	{
+	// 		;
+	// 	}
+	set_redir_io(argv, redir);
+	
+	if (cmd && redir->redir[0])
 		set_pipefd_in(redir->pipe_io[0], redir);
 	if (redir->redir[1])
 		redir->pipe_io[1][1] = redir->fd_file[1];
-	set_pipe_forward(redir->pipe_io[0], redir->pipe_io[1]);
-	if (forward_next_cmd(&argv))
-		builtin_or_execve(argv, argv_sav, redir);
+	if (cmd)
+		set_pipe_forward(redir->pipe_io[0], redir->pipe_io[1]);
+	if (cmd)
+		builtin_or_execve(cmd, argv_sav, redir);
+	
 }
 static int	forward_next_pipe(char ***argv[])
 {
@@ -155,13 +170,13 @@ static pid_t	create_pipeline(char **argv[])
 	close_fds(redir.pipe_io[1]);
 	return (pid);
 }
-
+void	display_command_tab_big(char ***argv);
 int	pipex(char **argv[])
 {
 	pid_t	pid;
 	int		status;
 	int		exit_status;
-
+//display_command_tab_big(argv);
 	exit_status = 1;
 	pid = -1;
 	pid = create_pipeline(argv);

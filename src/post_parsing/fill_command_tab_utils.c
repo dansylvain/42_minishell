@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/10 16:25:18 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 17:08:12 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,16 @@ void	add_pipe_tab_to_tab(char ****cmd_tab, int *i)
 		j++;
 	(*cmd_tab)[*i][j] = NULL;
 //printf("hello im add pipe to tab and looking for my segfaut did you see?\n");
-	if ((*cmd_tab)[*i][0][0])
+	if (cmd_tab && i && (*cmd_tab)[*i] && (*cmd_tab)[*i][0] && (*cmd_tab)[*i][0][0])
 		(*i)++;
 //printf("hello im after add pipe to tab and looking for my segfaut did you see?\n");
-	(*cmd_tab)[*i][0][0] = '|';
-	(*cmd_tab)[*i][0][1] = '\0';
-	(*cmd_tab)[*i][1] = NULL;
-	(*i)++;
+	if ((cmd_tab && i && (*cmd_tab)[*i] && (*cmd_tab)[*i][0]))
+	{			
+		(*cmd_tab)[*i][0][0] = '|';
+		(*cmd_tab)[*i][0][1] = '\0';
+		(*cmd_tab)[*i][1] = NULL;
+		(*i)++;
+	}
 }
 
 void	create_chev_tab(char ****cmd_tab, t_ast_nde **current, int *i)
