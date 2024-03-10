@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:30 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/10 15:04:59 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 16:22:57 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int	is_path(char *path)
 
 void	check_filedir_error(char **argv[], char **argv_sav[], t_redir *redir)
 {
-	if (!access(**argv, F_OK)) // n'est pas un fichier
+	if (!access(**argv, F_OK)) 
 	{
-		if ((***argv == '.' && argv[0][0][1] == '/') || argv[0][0][0] == '/')  // est un path    vis_path(**argv)
+		if ((***argv == '.' && argv[0][0][1] == '/') || argv[0][0][0] == '/') 
 		{
 			if (access(**argv, X_OK))
 				free_and_exit(redir, argv_sav, 126, " Permission denied\n");
@@ -89,19 +89,19 @@ delimited by end-of-file (wanted '%s\')\n", ctrl_d);
 	free(ctrl_d);
 }
 void	here_doc_handle(t_redir *redir)
-{
+{ 
 	char	*line;
 
 	while (1)
 	{
-		ft_printf("heredoc> ");
-		line = get_next_line(0);
+		ft_printf("heredoc> ");			
+		line = get_next_line(0);		
 		if (line)
 		{
 			if (line[ft_strlen(line) - 1] != '\n')
 				ft_printf("\n");
 			else if (ft_strcmp(line, redir->delim))
-				ft_putstr_fd(line, redir->pipe_hd[1]);
+				ft_putstr_fd(line, redir->pipe_io[0][1]);
 			else
 			{
 				free(line);

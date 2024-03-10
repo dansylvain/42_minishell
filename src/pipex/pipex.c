@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/10 13:37:58 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 16:46:17 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,7 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[], t_redir *redir)
 			if (search_path(*argv, data->envp_tab))
 				free_and_exit(redir, argv_sav, 127, NULL);
 		}
-		execve(**argv, *argv, data->envp_tab);
-		execve(**argv, *argv, data->envp_tab);
-		//ft_printf("%i\n", errno);	
-		//perror("execve"); // Utilise errno pour générer un message d'erreur explicite
-	//	exit(EXIT_FAILURE); // Termine le programme avec un code d'erreur
-// ft_printf("%i\n", errno);	
-		execve(**argv, *argv, data->envp_tab);			
-		//ft_printf("%i\n", errno);	
-		//perror("execve"); // Utilise errno pour générer un message d'erreur explicite
-	//	exit(EXIT_FAILURE); // Termine le programme avec un code d'erreur
-// ft_printf("%i\n", errno);	
+		execve(**argv, *argv, data->envp_tab);	
 		if (errno == EACCES)
 		{
 			if (access(**argv, X_OK))
@@ -65,40 +55,32 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[], t_redir *redir)
 }
 
 static int	forward_next_cmd(char ***argv[])
-{
-	while  (**argv && ****argv != '|')
+{	
+	while (**argv && ****argv != '|')
 	{	
 		if (****argv != '>' && ****argv != '<' )
 			return (1);
 		(*argv)++;		
-	}
+	}	
 	return (0);
 }
 
-static void	child_area(char **argv[], char **argv_sav[], char **argv_redir[],
-	t_redir *redir)
+static void	child_area(char **argv[], char **argv_sav[], t_redir *redir)
 {	
-	set_redir_io(argv_redir, redir);
+	set_redir_io(argv, redir);	
 	if (redir->redir[0])
 		set_pipefd_in(redir->pipe_io[0], redir);
 	if (redir->redir[1])
 		redir->pipe_io[1][1] = redir->fd_file[1];
 	set_pipe_forward(redir->pipe_io[0], redir->pipe_io[1]);
-	if (forward_next_cmd(&argv))			
+	if (forward_next_cmd(&argv))
 		builtin_or_execve(argv, argv_sav, redir);
-	// else//	ft_printf("je vais execve ou builtin, je dois etre une commande: -%s-\n", **argv);
-	// 	{
-			
-	// 	exit(-175);
-	// 	}
 }
 static int	forward_next_pipe(char ***argv[])
 {
-	while  (**argv)
-	{	
-		if (***(*argv)++ == '|')	
-			return (1);			
-	}
+	while (**argv && ***argv && ****argv)	
+		if (***(*argv)++ == '|')		
+			return (1);		
 	return (0);	
 }
 
@@ -106,26 +88,22 @@ static pid_t	nurcery(char **argv[], t_redir *redir)
 {
 	pid_t	pid;
 	char	***argv_sav;
-	char	***argv_redir;
 
 	pid = -42;
 	argv_sav = argv;
-	argv_redir = argv;
-
-	while(*argv)
+	while(argv && *argv && **argv && ***argv)
 	{
 		if (pipe(redir->pipe_io[1]) < 0)
 			exit(1);
 		pid = fork();
 		if (!pid)		
-			child_area(argv, argv_sav, argv_redir, redir);		
+			child_area(argv, argv_sav, redir);		
 		else
-		{
-			switch_pipes(redir->pipe_io);		
-			if (forward_next_pipe(&argv))			
-				argv_redir = argv;	
+		{	
+			switch_pipes(redir->pipe_io);			
+			forward_next_pipe(&argv);					
 		}
-	}
+	}	
 	return (pid);
 }
 
