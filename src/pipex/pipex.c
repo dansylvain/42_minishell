@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/10 12:45:29 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 13:37:58 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	forward_next_cmd(char ***argv[])
 
 static void	child_area(char **argv[], char **argv_sav[], char **argv_redir[],
 	t_redir *redir)
-{
+{	
 	set_redir_io(argv_redir, redir);
 	if (redir->redir[0])
 		set_pipefd_in(redir->pipe_io[0], redir);
@@ -86,8 +86,11 @@ static void	child_area(char **argv[], char **argv_sav[], char **argv_redir[],
 	set_pipe_forward(redir->pipe_io[0], redir->pipe_io[1]);
 	if (forward_next_cmd(&argv))			
 		builtin_or_execve(argv, argv_sav, redir);
-	else	//	ft_printf("je vais execve ou builtin, je dois etre une commande: -%s-\n", **argv);
-		exit(-175);
+	// else//	ft_printf("je vais execve ou builtin, je dois etre une commande: -%s-\n", **argv);
+	// 	{
+			
+	// 	exit(-175);
+	// 	}
 }
 static int	forward_next_pipe(char ***argv[])
 {
@@ -108,41 +111,19 @@ static pid_t	nurcery(char **argv[], t_redir *redir)
 	pid = -42;
 	argv_sav = argv;
 	argv_redir = argv;
+
 	while(*argv)
-	{	//ft_putstr_fd("TROUC\n", 2);
-	
-			
+	{
 		if (pipe(redir->pipe_io[1]) < 0)
 			exit(1);
 		pid = fork();
-		if (!pid)
-		{
-			child_area(argv, argv_sav, argv_redir, redir);
-		}
+		if (!pid)		
+			child_area(argv, argv_sav, argv_redir, redir);		
 		else
 		{
-			switch_pipes(redir->pipe_io);
-			
-			if (!*++argv)
-				break;
-			if (forward_next_pipe(&argv))
-			{
-				argv_redir = argv;
-			}
-			
-			// if (*argv && ***argv == '|')				
-			// 	argv_redir = argv;
-			// while  (*argv && (***argv == '>' || ***argv == '<'))
-			// {					
-			// 	argv++;
-			// }
-			// if (***argv == '|')
- 			// 	argv_redir = argv + 1;
-			//ft_printf("je suis ds le parent, je dois etre une commande: -%s-\n", **argv);
-			// if (*argv && ***argv == '|')
-			// {
-			// 	argv++;
-			// }
+			switch_pipes(redir->pipe_io);		
+			if (forward_next_pipe(&argv))			
+				argv_redir = argv;	
 		}
 	}
 	return (pid);

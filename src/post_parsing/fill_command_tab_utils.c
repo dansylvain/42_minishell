@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_command_tab_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 21:03:11 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/10 13:36:52 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ int	is_raw(t_ast_nde *node)
 void	add_pipe_tab_to_tab(char ****cmd_tab, int *i)
 {
 	int	j;
-
 	j = 0;
 	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
 		j++;
 	(*cmd_tab)[*i][j] = NULL;
+//printf("hello im add pipe to tab and looking for my segfaut did you see?\n");
 	if ((*cmd_tab)[*i][0][0])
 		(*i)++;
+//printf("hello im after add pipe to tab and looking for my segfaut did you see?\n");
 	(*cmd_tab)[*i][0][0] = '|';
 	(*cmd_tab)[*i][0][1] = '\0';
 	(*cmd_tab)[*i][1] = NULL;
