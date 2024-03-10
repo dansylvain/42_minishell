@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/09 21:46:54 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 12:45:29 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,13 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[], t_redir *redir)
 			if (search_path(*argv, data->envp_tab))
 				free_and_exit(redir, argv_sav, 127, NULL);
 		}
-		//perror("acces");
 		execve(**argv, *argv, data->envp_tab);
+		execve(**argv, *argv, data->envp_tab);
+		//ft_printf("%i\n", errno);	
+		//perror("execve"); // Utilise errno pour générer un message d'erreur explicite
+	//	exit(EXIT_FAILURE); // Termine le programme avec un code d'erreur
+// ft_printf("%i\n", errno);	
+		execve(**argv, *argv, data->envp_tab);			
 		//ft_printf("%i\n", errno);	
 		//perror("execve"); // Utilise errno pour générer un message d'erreur explicite
 	//	exit(EXIT_FAILURE); // Termine le programme avec un code d'erreur
@@ -59,6 +64,17 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[], t_redir *redir)
 		free_and_exit(redir, argv_sav, EXIT_SUCCESS, NULL);
 }
 
+static int	forward_next_cmd(char ***argv[])
+{
+	while  (**argv && ****argv != '|')
+	{	
+		if (****argv != '>' && ****argv != '<' )
+			return (1);
+		(*argv)++;		
+	}
+	return (0);
+}
+
 static void	child_area(char **argv[], char **argv_sav[], char **argv_redir[],
 	t_redir *redir)
 {
@@ -68,7 +84,19 @@ static void	child_area(char **argv[], char **argv_sav[], char **argv_redir[],
 	if (redir->redir[1])
 		redir->pipe_io[1][1] = redir->fd_file[1];
 	set_pipe_forward(redir->pipe_io[0], redir->pipe_io[1]);
-	builtin_or_execve(argv, argv_sav, redir);
+	if (forward_next_cmd(&argv))			
+		builtin_or_execve(argv, argv_sav, redir);
+	else	//	ft_printf("je vais execve ou builtin, je dois etre une commande: -%s-\n", **argv);
+		exit(-175);
+}
+static int	forward_next_pipe(char ***argv[])
+{
+	while  (**argv)
+	{	
+		if (***(*argv)++ == '|')	
+			return (1);			
+	}
+	return (0);	
 }
 
 static pid_t	nurcery(char **argv[], t_redir *redir)
@@ -80,24 +108,77 @@ static pid_t	nurcery(char **argv[], t_redir *redir)
 	pid = -42;
 	argv_sav = argv;
 	argv_redir = argv;
-	while (*argv)
-	{
-		if (***argv == '|')
-			argv_redir = argv + 1;
-		if (***argv != '>' && ***argv != '<' && ***argv != '|')
+	while(*argv)
+	{	//ft_putstr_fd("TROUC\n", 2);
+	
+			
+		if (pipe(redir->pipe_io[1]) < 0)
+			exit(1);
+		pid = fork();
+		if (!pid)
 		{
-			if (pipe(redir->pipe_io[1]) < 0)
-				exit(1);
-			pid = fork();
-			if (!pid)
-				child_area(argv, argv_sav, argv_redir, redir);
-			else
-				switch_pipes(redir->pipe_io);
+			child_area(argv, argv_sav, argv_redir, redir);
 		}
-		argv++;
+		else
+		{
+			switch_pipes(redir->pipe_io);
+			
+			if (!*++argv)
+				break;
+			if (forward_next_pipe(&argv))
+			{
+				argv_redir = argv;
+			}
+			
+			// if (*argv && ***argv == '|')				
+			// 	argv_redir = argv;
+			// while  (*argv && (***argv == '>' || ***argv == '<'))
+			// {					
+			// 	argv++;
+			// }
+			// if (***argv == '|')
+ 			// 	argv_redir = argv + 1;
+			//ft_printf("je suis ds le parent, je dois etre une commande: -%s-\n", **argv);
+			// if (*argv && ***argv == '|')
+			// {
+			// 	argv++;
+			// }
+		}
 	}
 	return (pid);
 }
+
+// static pid_t	nurcery2(char **argv[], t_redir *redir)
+// {
+// 	pid_t	pid;
+// 	char	***argv_sav;
+// 	char	***argv_redir;
+
+// 	pid = -42;
+// 	argv_sav = argv;
+// 	argv_redir = argv;
+// 	while (*argv)
+// 	{
+// 		if (***argv == '|')
+// 			argv_redir = argv + 1;
+// 	//	if (***argv != '>' && ***argv != '<' && ***argv != '|')
+// 	//	{
+// 		//if (***argv != '>' && ***argv != '<' && ***argv != '|')
+// 			if (pipe(redir->pipe_io[1]) < 0)
+// 				exit(1);
+// 			pid = fork();
+// 			if (!pid)
+// 			{
+// 				//if (***argv != '>' && ***argv != '<' && ***argv != '|')
+// 				child_area(argv, argv_sav, argv_redir, redir);
+// 			}
+// 			else
+// 				switch_pipes(redir->pipe_io);
+// 		}
+// 		argv++;
+// 	}
+// 	return (pid);
+// }
 
 static pid_t	create_pipeline(char **argv[])
 {

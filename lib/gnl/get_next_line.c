@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:29:55 by svidot            #+#    #+#             */
-/*   Updated: 2023/10/27 11:24:00 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/10 10:34:20 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*manage_prequel(char **buffer)
 {
 	if (!*buffer)
 	{
-		*buffer = (char *) ft_calloc(1, sizeof(char));
+		*buffer = (char *) ft_calloc_gnl(1, sizeof(char));
 		if (!*buffer)
 			return (NULL);
 	}
@@ -74,7 +74,7 @@ static char	*manage_no_newline(int fd, char **buffer, char **newline)
 
 	while (!*newline)
 	{
-		ext = (char *) ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+		ext = (char *) ft_calloc_gnl(BUFFER_SIZE + 1, sizeof(char));
 		if (!ext)
 			return (free_buffer(buffer));
 		read_size = read(fd, ext, BUFFER_SIZE);

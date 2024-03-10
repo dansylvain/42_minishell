@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:14:05 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/05 12:21:36 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/10 10:35:36 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc_gnl(size_t nmemb, size_t size)
 {
 	unsigned char	*ptr;
 	size_t			len;
