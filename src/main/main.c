@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/09 14:23:16 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:00:38 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ int	prompt_loop(t_Data *data, char *envp[])
 			cmd = NULL;
 			continue ;
 		}
-		exec_pipex(data, cmd, data->envp_tab);
+		parse_par(cmd, data);
+		//exec_pipex(data, cmd, data->envp_tab);
 		free(cmd);
 	}
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:56:32 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 19:42:28 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/10 23:01:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include "libft.h"
 # include "ft_printf.h"
+# include "parsing_utils.h"
 
 int		is_not_empty_prompt(char *str);;
 int		main(int argc, char **argv, char *envp[]);
@@ -42,5 +43,6 @@ void	exec_unset(t_Data *data, char **command_tab);
 void	exec_env(t_Data *data, char **command_tab);
 int		exec_exit(t_Data *data, char **command_tab);
 int		exec_export(char **command_tab, t_Data *data);
+t_ast_nde	*parse_par(char *str, t_Data *data);
 
 #endif
