@@ -6,10 +6,9 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/10 21:40:37 by seblin           ###   ########.fr        #
+#    Updated: 2024/03/10 22:47:33 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 NAME = minishell
 
@@ -22,7 +21,7 @@ CFLAGS = -g -Iincludes -Iincludes/main -Iincludes/parsing/parsing \
 -Iincludes/parsing/leaf_tree -Iincludes/pipex \
 -Iincludes/exec_files -Iincludes/wildcard -Iincludes/builtins \
 -Iincludes/post_parsing \
--Wall -Wextra -Werror \
+#-Wall -Wextra -Werror \
 
 # Directories
 LIBFT_DIR = lib/libft
@@ -56,6 +55,8 @@ SRC =	src/main/main.c \
 		src/parsing/parsing/free_tree.c \
 		src/parsing/parsing/utils.c \
 		src/parsing/parsing/utils2.c \
+		src/parsing/parsing/test.c \
+		src/parsing/create_tree/parenthesis.c \
 		src/parsing/create_tree/expansion.c \
 		src/parsing/create_tree/operator.c \
 		src/parsing/create_tree/quote.c \
