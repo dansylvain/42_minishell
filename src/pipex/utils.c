@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:30 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/10 00:11:30 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 10:00:17 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,35 @@ void	check_filedir_error(char **argv[], char **argv_sav[], t_redir *redir)
 		free_and_exit(redir, argv_sav, 127, " No such file or directory\n");
 	}
 }
-
 void	here_doc_handle(t_redir *redir)
+{
+	char	*line;
+
+	while (1)
+	{
+		ft_printf("heredoc> ");
+		line = get_next_line(0);
+		if (line)
+		{
+			if (ft_strcmp(line, redir->delim))
+				ft_putstr_fd(line, redir->pipe_hd[1]);
+			else
+			{
+				free(line);
+				get_next_line(42);
+				break ;
+			}
+		}
+		else
+		{
+			ft_printf("\rwarning: here-document at line 1 \
+delimited by end-of-file (wanted '%s')\n", redir->delim);
+			break ;
+		}
+		free(line);
+	}
+}
+void	here_doc_handle2(t_redir *redir)
 {
 	char	*line;
 
