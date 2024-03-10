@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 21:14:14 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/10 21:44:16 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 22:22:44 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	free_and_exit(t_redir *redir, char **argv_sav[], int n_exit,
 	free_all(redir, argv_sav);
 	exit(n_exit);
 }
+
 void	errno_handle(char **argv[], char **argv_sav[], t_redir *redir)
 {
 	if (errno == EACCES)
@@ -38,20 +39,20 @@ void	errno_handle(char **argv[], char **argv_sav[], t_redir *redir)
 			display_error("minishell: ");
 			display_error(**argv);
 			free_and_exit(redir, argv_sav, 126, ": Permission denied\n");
-		}	
-		else			
-		{	
+		}
+		else
+		{
 			display_error("minishell: ");
 			display_error(**argv);
 			free_and_exit(redir, argv_sav, 126, ": Is a directory\n");
 		}
 	}
 	else if (errno == ENOENT)
-	{		
+	{
 		display_error("minishell: ");
 		display_error(**argv);
-		free_and_exit(redir, argv_sav, 127, ": No such file or directory\n");			
+		free_and_exit(redir, argv_sav, 127, ": No such file or directory\n");
 	}
-	else if (errno == ENOEXEC)					
+	else if (errno == ENOEXEC)
 		free_and_exit(redir, argv_sav, EXIT_SUCCESS, NULL);
 }

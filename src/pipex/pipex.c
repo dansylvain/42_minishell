@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/10 21:16:56 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 22:25:35 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,27 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[], t_redir *redir)
 		}
 		execve(**argv, *argv, data->envp_tab);
 		errno_handle(argv, argv_sav, redir);
-		free_and_exit(redir, argv_sav, EXIT_FAILURE, NULL);	
+		free_and_exit(redir, argv_sav, EXIT_FAILURE, NULL);
 	}
 	else
 		free_and_exit(redir, argv_sav, EXIT_SUCCESS, NULL);
 }
 
 static void	child_area(char **argv[], char **argv_sav[], t_redir *redir)
-{	
-	char ***cmd;
+{
+	char	***cmd;
 
-	cmd = forward_next_cmd(argv);	
-	set_redir_io(argv, redir);	
+	cmd = forward_next_cmd(argv);
+	set_redir_io(argv, redir);
 	if (redir->redir[0])
 		set_pipefd_in(redir->pipe_io[0], redir);
 	if (redir->redir[1])
-		redir->pipe_io[1][1] = redir->fd_file[1];	
+		redir->pipe_io[1][1] = redir->fd_file[1];
 	set_pipe_forward(redir->pipe_io[0], redir->pipe_io[1]);
 	if (cmd)
 		builtin_or_execve(cmd, argv_sav, redir);
 	else
-		free_and_exit(redir, argv_sav, EXIT_SUCCESS, NULL);	
+		free_and_exit(redir, argv_sav, EXIT_SUCCESS, NULL);
 }
 
 static pid_t	nurcery(char **argv[], t_redir *redir)
@@ -56,19 +56,19 @@ static pid_t	nurcery(char **argv[], t_redir *redir)
 
 	pid = -42;
 	argv_sav = argv;
-	while(argv && *argv && **argv && ***argv)
+	while (argv && *argv && **argv && ***argv)
 	{
 		if (pipe(redir->pipe_io[1]) < 0)
 			exit(1);
 		pid = fork();
-		if (!pid)		
-			child_area(argv, argv_sav, redir);		
+		if (!pid)
+			child_area(argv, argv_sav, redir);
 		else
-		{	
-			switch_pipes(redir->pipe_io);			
-			forward_next_pipe(&argv);					
+		{
+			switch_pipes(redir->pipe_io);
+			forward_next_pipe(&argv);
 		}
-	}	
+	}
 	return (pid);
 }
 
