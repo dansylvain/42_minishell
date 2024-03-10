@@ -21,6 +21,8 @@
 		"pipex.h": "c",
 		"ft_printf.h": "c",
 		"launch_command_tab.h": "c",
-		"fill_command_tab_utils.h": "c"
+		"fill_command_tab_utils.h": "c",
+		"here_doc.h": "c",
+		"parsing_utils.h": "c"
 	}
 }

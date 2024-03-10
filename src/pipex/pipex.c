@@ -6,68 +6,30 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/10 20:49:57 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 21:16:56 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	errno_handle(char **argv[], char **argv_sav[], t_redir *redir)
-{
-	if (errno == EACCES)
-	{
-		if (access(**argv, X_OK))
-		{
-			display_error("minishell: ");
-			display_error(**argv);
-			free_and_exit(redir, argv_sav, 126, ": Permission denied\n");
-		}	
-		else			
-		{	
-			display_error("minishell: ");
-			display_error(**argv);
-			free_and_exit(redir, argv_sav, 126, ": Is a directory\n");
-		}
-	}
-	else if (errno == ENOENT)
-	{		
-		display_error("minishell: ");
-		display_error(**argv);
-		free_and_exit(redir, argv_sav, 127, ": No such file or directory\n");			
-	}
-	else if (errno == ENOEXEC)					
-		free_and_exit(redir, argv_sav, EXIT_SUCCESS, NULL);
-}
-
 static void	builtin_or_execve(char **argv[], char **argv_sav[], t_redir *redir)
 {
 	t_Data	*data;
 
-	data = get_data(NULL);	
+	data = get_data(NULL);
 	if (!command_is_builtin(*argv, data))
 	{
 		if (!is_path(**argv))
-		{		
+		{
 			if (search_path(*argv, data->envp_tab))
 				free_and_exit(redir, argv_sav, 127, NULL);
 		}
-		execve(**argv, *argv, data->envp_tab);	
-		errno_handle(argv, argv_sav, redir);	
+		execve(**argv, *argv, data->envp_tab);
+		errno_handle(argv, argv_sav, redir);
 		free_and_exit(redir, argv_sav, EXIT_FAILURE, NULL);	
 	}
 	else
 		free_and_exit(redir, argv_sav, EXIT_SUCCESS, NULL);
-}
-
-static char	***forward_next_cmd(char **argv[])
-{	
-	while (*argv && **argv && ***argv != '|')
-	{	
-		if (***argv != '>' && ***argv != '<' )
-			return (argv);
-		argv++;		
-	}
-	return (NULL);
 }
 
 static void	child_area(char **argv[], char **argv_sav[], t_redir *redir)
@@ -85,13 +47,6 @@ static void	child_area(char **argv[], char **argv_sav[], t_redir *redir)
 		builtin_or_execve(cmd, argv_sav, redir);
 	else
 		free_and_exit(redir, argv_sav, EXIT_SUCCESS, NULL);	
-}
-static int	forward_next_pipe(char ***argv[])
-{
-	while (**argv && ***argv && ****argv)	
-		if (***(*argv)++ == '|')		
-			return (1);		
-	return (0);	
 }
 
 static pid_t	nurcery(char **argv[], t_redir *redir)
@@ -134,7 +89,6 @@ static pid_t	create_pipeline(char **argv[])
 	return (pid);
 }
 
-void	display_command_tab_big(char ***argv);
 int	pipex(char **argv[])
 {
 	pid_t	pid;

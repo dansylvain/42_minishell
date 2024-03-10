@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+         #
+#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/09 13:04:51 by dsylvain         ###   ########.fr        #
+#    Updated: 2024/03/10 21:40:37 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,8 @@ SRC =	src/main/main.c \
 		src/pipex/utils.c \
 		src/pipex/redir.c \
 		src/pipex/fdio.c \
+		src/pipex/here_doc.c \
+		src/pipex/exit.c \
 		src/post_parsing/create_command_tab_utils.c \
 		src/post_parsing/fill_command_tab.c \
 		src/post_parsing/exec_pipex.c \
