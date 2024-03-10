@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 18:27:30 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/10 16:22:57 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 16:55:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	here_doc_handle(t_redir *redir)
 			if (line[ft_strlen(line) - 1] != '\n')
 				ft_printf("\n");
 			else if (ft_strcmp(line, redir->delim))
-				ft_putstr_fd(line, redir->pipe_io[0][1]);
+				ft_putstr_fd(line, redir->pipe_hd[1]);
 			else
 			{
 				free(line);
