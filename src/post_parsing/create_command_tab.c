@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/11 09:57:49 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/11 10:01:51 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,11 @@ char **alloc_memory_for_pipe_elements(char **cmd_tab, int pipe_elements_nbr)
 	cmd_tab[pipe_elements_nbr] = NULL;
 	return (cmd_tab);
 }
+
+char	**add_redirections(char **cmd_tab, t_ast_nde *node)
+{
+	return (cmd_tab);
+}
 /**========================================================================
  *                           create_command_tab
  *========================================================================**/
@@ -105,8 +110,8 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 	cmd_tab = alloc_memory_for_pipe_parts(cmd_tab, pipe_parts_nbr);
 	pipe_elements_nbr = get_pipe_elements_nbr(node);
 	cmd_tab[0] = alloc_memory_for_pipe_elements(cmd_tab[0], pipe_elements_nbr);
-	/* add_redirections(); // malloc included
-	add_remaining_cmds(); // malloc included
+	cmd_tab[0] = add_redirections(cmd_tab[0], node); // malloc included
+	/* add_remaining_cmds(); // malloc included
 	insert_separator(); // malloc included */
 	
 	
