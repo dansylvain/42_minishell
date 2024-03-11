@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:53:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/10 17:53:03 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/11 09:41:58 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,19 @@ int	get_cmd_nbr(t_ast_nde *node)
 		node = node->sibling;
 	}
 	return (cmd_nbr);
+}
+
+void	print_node(t_ast_nde *node)
+{
+	int	i;
+	int	back_color;
+	
+	back_color = 41;
+	i = 0;
+	while (node->start + i <= node->end)
+		ft_printf("\033[%dm%c\033[0m", back_color, node->start[i++]);			
+	back_color = (back_color - 41 + 1) % 7 + 41;
+	ft_printf("\n");
 }
 
 // void	display_command_tab(char **command_tab)

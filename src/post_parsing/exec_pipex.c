@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/03/11 08:32:36 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/11 09:25:01 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	exec_pipex(t_Data *data, char *cmd, char *envp[])
 	
 	char ***cmd_tab;
 	cmd_tab = create_command_tab(data, cmd_list, envp);
-	display_command_tab_big(cmd_tab);
 	
 	store_and_free_cmd_list(cmd_list);
 	store_and_free_cmd_list(NULL);
