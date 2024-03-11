@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/03/11 16:50:16 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/11 17:08:39 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset)
 		or_flag = 0;
 		return (0);
 	}
-	printf("orflag: %i\n", or_flag);
+	//printf("orflag: %i\n", or_flag);
 	cmd_list = NULL;
 	cmd_list = parse(cmd, data);
 	if (!cmd_list)

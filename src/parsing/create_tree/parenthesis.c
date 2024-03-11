@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:52:11 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/11 15:49:28 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/11 17:07:46 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,23 +209,23 @@ void	token_child_handle(t_ast_nde *sib_cont,
 		raw_rght = raw_lft->sibling->sibling;
 		token->child = raw_lft;
 	
-		ft_printf("raw_left\n");
-		print_raw(raw_lft);
-		ft_printf("\nmiddle\n");
-		print_raw(raw_lft->sibling);		
-		ft_printf("\nraw_right\n");
-		print_raw(raw_rght);
-		ft_printf("\nend\n");
+		// ft_printf("raw_left\n");
+		// print_raw(raw_lft);
+		// ft_printf("\nmiddle\n");
+		// print_raw(raw_lft->sibling);		
+		// ft_printf("\nraw_right\n");
+		// print_raw(raw_rght);
+		// ft_printf("\nend\n");
 		
 		fill_child_par(sib, raw_lft->child, raw_lft->sibling->child, raw_rght->child, token);
 
-		ft_printf("raw_left\n");
-		print_raw(raw_lft);
-		ft_printf("\nmiddle\n");
-		print_raw(raw_lft->sibling);
-		ft_printf("\nraw_right\n");
-		print_raw(raw_rght);
-		ft_printf("\nend\n");
+		// ft_printf("raw_left\n");
+		// print_raw(raw_lft);
+		// ft_printf("\nmiddle\n");
+		// print_raw(raw_lft->sibling);
+		// ft_printf("\nraw_right\n");
+		// print_raw(raw_rght);
+		// ft_printf("\nend\n");
 		//exit(1);
 		// if (set_operator(raw_lft))
 		// {	
