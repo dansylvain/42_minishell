@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:36:13 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/09 10:28:12 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/11 13:45:43 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static int	set_qute_nde(t_ast_nde *qute_nde, char qute,
 	}
 	if (!qute_nde->end)
 	{
-		display_error("quote error\n");
+		display_error("minishell: Quote error\n");
+		get_data(NULL)->exit_status = 2;
 		free_sibling(sibling_sav);
 		free_sibling(qute_nde);
 		return (1);

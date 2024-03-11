@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/10 22:47:33 by seblin           ###   ########.fr        #
+#    Updated: 2024/03/11 14:06:05 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 LIBS = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
 
 # Source files
-SRC =	src/main/main.c \
+SRC =	test.c \
+		src/main/main.c \
 		src/main/utils.c \
 		src/main/utils_2.c \
 		src/main/utils_3.c \
@@ -55,7 +56,6 @@ SRC =	src/main/main.c \
 		src/parsing/parsing/free_tree.c \
 		src/parsing/parsing/utils.c \
 		src/parsing/parsing/utils2.c \
-		src/parsing/parsing/test.c \
 		src/parsing/create_tree/parenthesis.c \
 		src/parsing/create_tree/expansion.c \
 		src/parsing/create_tree/operator.c \

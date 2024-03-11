@@ -23,6 +23,9 @@
 		"launch_command_tab.h": "c",
 		"fill_command_tab_utils.h": "c",
 		"here_doc.h": "c",
-		"parsing_utils.h": "c"
+		"parsing_utils.h": "c",
+		"utils_2.h": "c",
+		"parsing.h": "c",
+		"quote.h": "c"
 	}
 }

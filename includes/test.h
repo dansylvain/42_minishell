@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operator.h                                         :+:      :+:    :+:   */
+/*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 14:27:56 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/11 10:19:56 by seblin           ###   ########.fr       */
+/*   Created: 2024/03/11 11:28:26 by seblin            #+#    #+#             */
+/*   Updated: 2024/03/11 11:32:58 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OPERATOR_H
-# define OPERATOR_H
+#ifndef TEST_C
+# define TEST_C
 
+# include <stdio.h>
 # include <stdlib.h>
 # include "parsing_utils.h"
-# include "libft.h"
+# include "ft_printf.h"
 
-void		display_error_free(char *str);
-int			set_space(t_ast_nde *node);
-int			set_operator(t_ast_nde *node);
-char		*translate_enum(t_tok token);
-t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token);
-void		fill_child(t_ast_nde *sib, t_ast_nde *raw_lft,
-				t_ast_nde *raw_rght, t_ast_nde *token);
-int			is_chevron(t_ast_nde *node);
+void	print_space_tree(t_ast_nde *node);
+void	print_tree(t_ast_nde *node);
+void	print_raw(t_ast_nde *raw);
+void	print_descend(t_ast_nde *node);
+void	print_cmd(t_ast_nde *cmd);
+void	print_sibling(t_ast_nde *sib);
+void	print_node(t_ast_nde *node);
+void	print_qute_sib(t_ast_nde *sib);
+void	print_raw(t_ast_nde *raw);
 
 #endif
