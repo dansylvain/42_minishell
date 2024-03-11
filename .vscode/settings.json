@@ -25,6 +25,7 @@
 		"here_doc.h": "c",
 		"parsing_utils.h": "c",
 		"utils_2.h": "c",
-		"parsing.h": "c"
+		"parsing.h": "c",
+		"quote.h": "c"
 	}
 }
