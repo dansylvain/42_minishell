@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/10 22:46:24 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 23:23:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	print_cmd(t_ast_nde *cmd)
 
 void	print_descend(t_ast_nde *node)
 {
-		if (node)
+	if (node)
 	{		
 		print_sibling(node);					
 		ft_printf("\n");

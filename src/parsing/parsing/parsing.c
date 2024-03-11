@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/10 23:05:35 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/10 23:23:28 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 					print_node(raw_lft);
 					ft_printf("\n");
 					ft_printf("je vais executer pipex avec raw_left\n");
-					exec_pipex(data, ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1), data->envp_tab);
-				
+					exec_pipex(data, ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1), data->envp_tab);				
 				}
 			}
 			if (middle)
