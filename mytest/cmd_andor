@@ -11,3 +11,15 @@ false && echo bbb && echo ccc
 echo $?
 echo aaa && false && echo ccc
 echo $?
+false || (echo aaa && false) || echo cc
+echo $?
+echo xxx || (echo aaa || false) && echo cc
+echo $?
+false || (echo aaa && false) || echo $?
+echo $?
+false || (echo aaa && true) || echo $?
+echo $?
+false || (echo aaa && false) && echo $?
+echo $?
+false || (echo aaa && echo $?) && echo $?
+echo $?
