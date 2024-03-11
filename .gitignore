@@ -9,5 +9,5 @@ file2
 lol.c
 mytest/outfile/
 outfile
-tester_minishell
+tester_minishell/*
 minitest/
