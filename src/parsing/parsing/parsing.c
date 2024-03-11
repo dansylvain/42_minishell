@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/11 13:43:15 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/11 14:00:25 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 
 static int	is_double_token(t_ast_nde *node)
 {
-	t_tok d_tok;
-	
+	t_tok	d_tok;
+
 	d_tok = RAW;
 	while (node)
 	{
-		if (node->token != RAW && !is_chevron(node)) 
+		if (node->token != RAW && !is_chevron(node))
 		{
 			if (node->token == d_tok)
 				return (display_error_free(ft_strjoin("minishell: syntax \
-error near unexpected token ", translate_enum(d_tok))), 1);			
+error near unexpected token ", translate_enum(d_tok))), 1);
 		}
 		d_tok = node->token;
 		node = node->sibling;
@@ -59,8 +59,6 @@ t_ast_nde	*parse(char *str, t_Data *data)
 	if (set_operator(root->child))
 		return (free_tree(root), NULL);
 	leaf_tree(root, &cmd, &cmd_sav, data);
-//	print_cmd(cmd_sav);
-//	(void) is_double_token;
 	if (is_double_token(cmd_sav))
 		return (free_sibling_and_child(cmd_sav), free_tree(root), NULL);
 	return (free_tree(root), cmd_sav);
