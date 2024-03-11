@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:09:48 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 16:16:38 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/11 10:21:47 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	display_error_free(char *str)
 {
 	if (write(2, str, ft_strlen(str)) == -1)
 		perror("display_error");
+	get_data(NULL)->exit_status = 2;
 	free(str);
 }
 

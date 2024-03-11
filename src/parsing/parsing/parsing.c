@@ -6,11 +6,30 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/09 10:34:04 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/11 11:19:35 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+static int	is_double_token(t_ast_nde *node)
+{
+	t_tok d_tok;
+	
+	d_tok = RAW;
+	while (node)
+	{
+		if (node->token != RAW)
+		{
+			if (node->token == d_tok)
+				return (display_error_free(ft_strjoin("minishell: syntax error near \
+unexpected token ", translate_enum(d_tok))), 1);			
+			d_tok = node->token;
+		}
+		node = node->sibling;
+	}
+	return (0);
+}
 
 t_ast_nde	*parse(char *str, t_Data *data)
 {
@@ -34,5 +53,7 @@ t_ast_nde	*parse(char *str, t_Data *data)
 	if (set_operator(root->child))
 		return (free_tree(root), NULL);
 	leaf_tree(root, &cmd, &cmd_sav, data);
+	if (is_double_token(cmd_sav))
+		return (free_tree(root), NULL);
 	return (free_tree(root), cmd_sav);
 }
