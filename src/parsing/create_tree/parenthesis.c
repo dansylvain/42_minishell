@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:52:11 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/04 11:35:05 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/11 15:49:28 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 			if (token_nde)
 			{
 				search_token(NULL, 0, NULL, 1);
+				//ft_printf("here node\n");
 				//print_node(token_nde);
 				return (token_nde);
 			}
@@ -211,7 +212,7 @@ void	token_child_handle(t_ast_nde *sib_cont,
 		ft_printf("raw_left\n");
 		print_raw(raw_lft);
 		ft_printf("\nmiddle\n");
-		print_raw(raw_lft->sibling);
+		print_raw(raw_lft->sibling);		
 		ft_printf("\nraw_right\n");
 		print_raw(raw_rght);
 		ft_printf("\nend\n");
@@ -230,10 +231,10 @@ void	token_child_handle(t_ast_nde *sib_cont,
 		// {	
 		// 	;// ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
 		// }
-		if (set_parenthesis(raw_lft->sibling))
-		{			
-			;// ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
-		}
+		// if (set_parenthesis(raw_lft->sibling)) // middle
+		// {			
+		// 	;// ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
+		// }
 		if (set_parenthesis(raw_rght))
 		{
 			;// ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
@@ -253,14 +254,17 @@ int	set_parenthesis(t_ast_nde *node)
 	{		
 		cont_sib = node->child;
 		sib = cont_sib->child;	
-		//ft_printf("yea 1\n");
-		//print_sibling(sib);
-		//ft_printf("\nyea 2\n");
-		token = create_token_node(sib);
-				
+	//	ft_printf("\nyea 1\n");
+	//	print_sibling(sib);
+	//	ft_printf("\nyea 2\n");
+		token = create_token_node(sib);	
+	//	ft_printf("\nyea 3\n");		
 		cont_sib->sibling = token;
 		if (token)
+		{
+			//print_raw(token);
 			return (token_child_handle(cont_sib, raw_lft, raw_rght, token), 1);
+		}
 		//set_operator(node);
 	}
 	else 

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/11 14:06:59 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/11 17:06:43 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	set_root(t_ast_nde **root, char *str)
 int	set_parenthesis(t_ast_nde *node);
 
 
-void	exec_pipex(t_Data *data, char *cmd, char *envp[]);
+int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
 
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 {
@@ -52,53 +52,57 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 	t_ast_nde	*raw_lft;
 	t_ast_nde	*middle;
 	t_ast_nde	*raw_rght;
-	
+	int	or_flag;
+
+	or_flag = 0;
 	token = NULL;
 	raw_lft = NULL;;
 	middle= NULL;
 	raw_rght = NULL;
-	ft_printf("leaf!\n");
+	//ft_printf("leaf!\n");
 	if (raw && raw->child)
 	{	
-		ft_printf("le raw fournit est ok\n");
+		///ft_printf("le raw fournit est ok\n");
 		token = raw->child->sibling;	
 		if (token)
 		{		
-			ft_printf("il y a un nouveau token\n");
+			//ft_printf("il y a un nouveau token\n");
 			raw_lft = token->child;
 			if (raw_lft)
 			{
 				middle = raw_lft->sibling;
 				if (raw_lft->child)
 				{
-					ft_printf("il y a un raw_left\n");
-					raw_lft->start++;
+					//ft_printf("il y a un raw_left\n");
+					//raw_lft->start++;
 					print_node(raw_lft);
 					ft_printf("\n");
-					ft_printf("je vais executer pipex avec raw_left\n");
-					exec_pipex(data, ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1), data->envp_tab);				
+					//ft_printf("je vais executer pipex avec raw_left\n");
+					or_flag = exec_pipex(data, ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1), data->envp_tab, 0);				
 				}
 			}
 			if (middle)
 			{
-				ft_printf("il y a un middle\n");
+				//ft_printf("il y a un middle\n");
 				middle->start++;
 				middle->end--; 
-				print_node(middle);
-				ft_printf("\n");
-				ft_printf("je vais utiliser la recursive, donc si pas de nouveau token, il y aura pipex avec le raw middle, sans par\n");
-				leaf_tree_par(middle, data);
-				//exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), envp);
+				// print_node(middle);
+				// ft_printf("\n");
+				//ft_printf("je vais utiliser la recursive, donc si pas de nouveau token, il y aura pipex avec le raw middle, sans par\n");
+				//leaf_tree_par(middle, data);
+				if (!or_flag)
+					or_flag = exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), data->envp_tab, 0);
+				
 				raw_rght = middle->sibling;
 			}			
 			if (raw_rght && raw_rght->child)
 			{
-				ft_printf("il y a un raw_rght\n");
-				raw_rght->end--;
-				print_node(raw_rght);
-				ft_printf("\n");
-				ft_printf("je vais utiliser la recursive, donc si pas de nouveau token, il y aura pipex avec le raw right, mais entier\n");
-				ft_printf("si pas de raw, return 0\n");
+				//ft_printf("il y a un raw_rght\n");
+				//raw_rght->end--;
+				// print_node(raw_rght);
+				// ft_printf("\n");
+				// ft_printf("je vais utiliser la recursive, donc si pas de nouveau token, il y aura pipex avec le raw right, mais entier\n");
+				// ft_printf("si pas de raw, return 0\n");
 				leaf_tree_par(raw_rght, data);
 				//exec_pipex(data, ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1), envp);				
 			}		
@@ -110,7 +114,7 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 			ft_printf("je vais donc executer pipex avec le raw fournit\n");
 			print_node(raw);
 			ft_printf("\n");
-			exec_pipex(data, ft_strndup(raw->start, raw->end - raw->start + 1), data->envp_tab);
+			or_flag = exec_pipex(data, ft_strndup(raw->start, raw->end - raw->start + 1), data->envp_tab, 0);
 			return (0);				
 		}
 	}
@@ -134,7 +138,7 @@ int	leaf_tree_par2(t_ast_nde	*raw, t_Data *data)
 			if (leaf_tree_par(token->child->sibling, data))
 			{			
 				print_node(token);
-				exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1),  data->envp_tab);;
+				exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1),  data->envp_tab, 0);;
 			//	if (state)
 				ft_printf("LEAAAAAAAAAAFFFFFF\n");					
 			}
@@ -143,7 +147,7 @@ int	leaf_tree_par2(t_ast_nde	*raw, t_Data *data)
 		else
 		{	
 			ft_printf("pas de nouveau token\n");
-			exec_pipex(data, ft_strndup(raw->start, raw->end - raw->start + 1), data->envp_tab);
+			exec_pipex(data, ft_strndup(raw->start, raw->end - raw->start + 1), data->envp_tab, 0);
 			return (0);				
 		}
 	}	
@@ -160,6 +164,9 @@ t_ast_nde	*parse_par(char *str, t_Data *data)
 	if (!*str)
 		return (NULL);
 	cmd_sav = NULL;
+
+	exec_pipex(NULL, NULL, NULL, 1);
+
 	set_root(&root, str);
 	quote = set_qute_sib(str);
 	if (!quote)

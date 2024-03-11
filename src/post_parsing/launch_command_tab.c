@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 19:58:38 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/11 16:24:13 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 /**========================================================================
  *                           launch_command_tab
  *========================================================================**/
-void	launch_command_tab(t_Data *data, t_ast_nde *node,
+int	launch_command_tab(t_Data *data, t_ast_nde *node,
 		char *envp[], int flag)
 {
 	t_ast_nde	*cmd_tab_node;
 	t_ast_nde	*cmd_tab_node_sav;
 	char		***cmd_tab;
-
+	
 	cmd_tab_node_sav = NULL;
 	while (node && node->token != AND && node->token != OR)
 	{
@@ -30,7 +30,7 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 				&cmd_tab_node_sav);
 		node = node->sibling;
 	}
-	store_and_free_cmd_tab_node_sav(cmd_tab_node_sav);
+	//store_and_free_cmd_tab_node_sav(cmd_tab_node_sav);
 	if (cmd_tab_node_sav)
 		build_command_tab(&cmd_tab, data, &cmd_tab_node_sav, envp);
 	flag = data->exit_status;
@@ -38,6 +38,7 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 		flag = !flag;
 	if (node)
 		launch_command_tab(data, node->sibling, envp, flag);
+	return (flag);
 }
 
 /**========================================================================

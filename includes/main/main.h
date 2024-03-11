@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:56:32 by dan               #+#    #+#             */
-/*   Updated: 2024/03/10 23:01:59 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/11 16:47:35 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	free_data(t_Data *data);
 void	handle_signals(void);
 char	**duplicate_envp(t_Data *data, char *envp[]);
 void	display_error_detail(char *str, char *details, char *str2);
-void	exec_pipex(t_Data *data, char *cmd, char *envp[]);
+int		exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
 int		is_only_space(char *str);
 void	free_command_tab(char ***command_tab);
 void	exec_pwd(t_Data *data);
