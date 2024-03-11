@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 14:43:41 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/11 11:32:34 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/11 11:37:26 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	print_qute_sib(t_ast_nde *sib)
 	int	i;	
 	int	back_color;
 	
+	back_color = 42;
 	ft_printf("\n");
 	while (sib)
 	{
