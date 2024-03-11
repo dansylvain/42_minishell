@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:30:00 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/11 10:48:50 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/11 13:12:34 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void		print_tree(t_ast_nde *node);
 void		print_cmd(t_ast_nde *cmd);
 void		display_error_free(char *str);
 char		*translate_enum(t_tok token);
+int			is_chevron(t_ast_nde *node);
 
 #endif
