@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:52:11 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/12 14:47:11 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 17:36:03 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void print_sibling(t_ast_nde *sib);
 void	print_node_and_childs(t_ast_nde *sib);
 void	print_node(t_ast_nde *sib);
 void	print_raw(t_ast_nde *raw);
+void	display_error_free(char *str);
 
 #include "ft_printf.h"
 static t_ast_nde	*search_token(char *actual, t_tok token, int *err, int reset)
@@ -74,9 +75,8 @@ static t_ast_nde	*search_token(char *actual, t_tok token, int *err, int reset)
 	return (NULL);
 }
 
-static t_ast_nde	*create_token_node(t_ast_nde *sib)
-{
-	t_ast_nde	*token_nde;
+static int	create_token_node(t_ast_nde *sib, t_ast_nde **token_nde)
+{	
 	char		*actual;
 	int			err;
 
@@ -87,21 +87,21 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 		while (actual <= sib->end)//! raw
 		{
 			//ft_printf("actual :%c-\n", *actual);
-			token_nde = search_token(actual, sib->token, &err, 0);
+			*token_nde = search_token(actual, sib->token, &err, 0);
 			
-			if (token_nde)
+			if (*token_nde)
 			{
 				search_token(NULL, 0, NULL, 1);
 				// ft_printf("here node\n");
 				// print_node(token_nde);
 				// ft_printf("end here node\n");
-				return (token_nde);
+				return (0);
 			}
 			if (err == 1)
 			{
 				search_token(NULL, 0, NULL, 1);
 				ft_printf("err 1\n");
-				return (NULL);//! data status ?
+				return (-1);//! data status ?
 			}
 			actual++;
 		}
@@ -111,9 +111,9 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 	{
 		ft_printf("err 2\n");
 		search_token(NULL, 0, NULL, 1);
-		return (NULL);//! data status ?
+		return (-1);//! data status ?
 	}
-	return (NULL);
+	return (0);
 }
 static int	fill_child_entire_par(t_ast_nde *sib, t_ast_nde *raw_lft_child,  t_ast_nde *middle_child, t_ast_nde *raw_rght_child, t_ast_nde *token, t_ast_nde **raw_lft_child_sav, t_ast_nde **middle_child_sav, t_ast_nde **raw_rght_child_sav)
 {
@@ -201,9 +201,10 @@ static t_ast_nde	*create_token_child_par(t_ast_nde *cont_sib, t_ast_nde *token)
 }
 
 void	token_child_handle(t_ast_nde *sib_cont,
-	t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
+	t_ast_nde *raw_lft, t_ast_nde *token)
 {
 	t_ast_nde	*sib;
+	t_ast_nde 	*raw_rght;
 	
 	if (token)
 	{			
@@ -253,8 +254,9 @@ int	set_parenthesis(t_ast_nde *node)
 	t_ast_nde	*cont_sib;
 	t_ast_nde	*token;
 	t_ast_nde	*raw_lft;
-	t_ast_nde	*raw_rght;
+	int			is_token;
 	//ft_printf("YOUOUOUOU\n");
+	token = NULL;
 	if (node && node->child && node->child->child)
 	{		
 		cont_sib = node->child;
@@ -263,13 +265,15 @@ int	set_parenthesis(t_ast_nde *node)
 	//	print_sibling(sib);
 	//	ft_printf("\nyea 2\n");
 	//search_token(NULL, 0, NULL, 1);
-		token = create_token_node(sib);	
+		is_token = create_token_node(sib, &token);
+		if (is_token < 0)
+			;
 	//	ft_printf("\nyea 3\n");		
 		cont_sib->sibling = token;
 		if (token)
 		{
 			//print_raw(token);
-			return (token_child_handle(cont_sib, raw_lft, raw_rght, token), 1);
+			return (token_child_handle(cont_sib, raw_lft, token), 1);
 		}
 		//set_operator(node);
 	}

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 15:50:45 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 17:11:19 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	store_and_free_cmd_tab_node_sav(t_ast_nde *cmd_tab_node_sav)
 	else
 		free_sibling_and_child(cmd_tab_lcl);
 }
-
 
 /**========================================================================
  *                           build_command_tab
