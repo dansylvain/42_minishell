@@ -28,6 +28,7 @@
 		"parsing.h": "c",
 		"quote.h": "c",
 		"exec_pipex.h": "c",
-		"wildcard_expansion.h": "c"
+		"wildcard_expansion.h": "c",
+		"free_tree.h": "c"
 	}
 }

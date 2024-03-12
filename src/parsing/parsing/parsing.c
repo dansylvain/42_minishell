@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/12 15:37:55 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 16:24:52 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 					// print_node(raw_lft);
 					// ft_printf("\n");
 				//ft_printf("je vais executer pipex avec raw_left\n");
-					or_flag = exec_pipex(data, ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1), data->envp_tab, 0);	
+					char *tmp = ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1);
+					or_flag = exec_pipex(data, tmp, data->envp_tab, 0);
+					free(tmp);
 					// ft_printf("je vais executer pipex avec raw_left %d\n", or_flag);			
 				}
 			}
@@ -98,7 +100,9 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 					// while (*actual != '(' || actual != middle->end)
 					// 	actual++;
 					// or_flag = exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), data->envp_tab, 0);
-					parse_par(ft_strndup(middle->start, middle->end - middle->start + 1), data);	
+					char * tmp = ft_strndup(middle->start, middle->end - middle->start + 1);
+					parse_par(tmp, data);
+					free(tmp);
 				}
 				
 				raw_rght = middle->sibling;
@@ -123,7 +127,9 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 			// print_node(raw);
 			//  ft_printf("\n");
 			// if (!or_flag)
-				or_flag = exec_pipex(data, ft_strndup(raw->start, raw->end - raw->start + 1), data->envp_tab, 0);
+			char * tmp = ft_strndup(raw->start, raw->end - raw->start + 1);
+				or_flag = exec_pipex(data, tmp, data->envp_tab, 0);
+				free(tmp);
 			return (0);				
 		}
 	}
@@ -185,7 +191,7 @@ t_ast_nde	*parse_par(char *str, t_Data *data)
 	if (set_parenthesis(root->child))
 		;//return (free_tree(root), NULL);
 	leaf_tree_par(root->child, data);
-	free_tree(root);
+	free_tree_par(root);
 	//print_tree(root);
 	//exit(1);	
 }
