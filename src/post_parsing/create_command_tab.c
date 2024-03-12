@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 16:03:13 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/12 16:16:18 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	get_pipe_parts_nbr(t_ast_nde *node);
 char ***alloc_memory_for_pipe_parts(char ***cmd_tab, int pipe_parts_nbr);
 int	get_pipe_elements_nbr(t_ast_nde *node);
 char **alloc_memory_for_pipe_elements(char **cmd_tab, int pipe_elements_nbr);
+char	***alloc_memory_for_tab_tabs(char ***cmd_tab, t_ast_nde *node);
 
 
 
@@ -43,6 +44,8 @@ char	**add_redirections(char **cmd_tab, t_ast_nde *node)
 {
 	return (cmd_tab);
 }
+
+
 /**========================================================================
  *                           create_command_tab
  *========================================================================**/
@@ -50,35 +53,13 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 {
 	char ***cmd_tab;
 	int	pipe_parts_nbr;
-	int	pipe_elements_nbr;
 	
 	// check_pipeline_validity();
 	pipe_parts_nbr = get_pipe_parts_nbr(node);
 	cmd_tab = alloc_memory_for_pipe_parts(cmd_tab, pipe_parts_nbr);
-	ft_printf("pipe_parts_nbr: %i\n", pipe_parts_nbr);	
+	// ft_printf("pipe_parts_nbr: %i\n", pipe_parts_nbr);	
 	
-	
-	t_ast_nde *current;
-	int	i;
-	i = 0;
-	current = node;
-	while (current)
-	{
-		if (current == node || is_separator(current))
-		{
-			if (is_separator(current))
-			{
-				current = current->sibling;
-				i++;
-			}
-			pipe_elements_nbr = get_pipe_elements_nbr(current);
-			ft_printf("pipe_elements_nbr: %i\ni: %i\n", pipe_elements_nbr, i);
-			cmd_tab[i] = alloc_memory_for_pipe_elements(cmd_tab[i], pipe_elements_nbr);
-		}
-		print_node(current);
-		current = current->sibling;
-	}
-	
+	alloc_memory_for_tab_tabs(cmd_tab, node);
 	
 	
 	display_command_tab_big(cmd_tab);

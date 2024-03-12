@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:43:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 14:11:46 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/12 16:15:01 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,32 @@ char **alloc_memory_for_pipe_elements(char **cmd_tab, int pipe_elements_nbr)
 		return (NULL);
 	}
 	cmd_tab[pipe_elements_nbr] = NULL;
+	return (cmd_tab);
+}
+
+char	***alloc_memory_for_tab_tabs(char ***cmd_tab, t_ast_nde *node)
+{
+	int	pipe_elements_nbr;
+	t_ast_nde *current;
+	int	i;
+	
+	i = 0;
+	current = node;
+	while (current)
+	{
+		if (current == node || is_separator(current))
+		{
+			if (is_separator(current))
+			{
+				current = current->sibling;
+				i++;
+			}
+			pipe_elements_nbr = get_pipe_elements_nbr(current);
+			// ft_printf("pipe_elements_nbr: %i\ni: %i\n", pipe_elements_nbr, i);
+			cmd_tab[i] = alloc_memory_for_pipe_elements(cmd_tab[i], pipe_elements_nbr);
+		}
+		// print_node(current);
+		current = current->sibling;
+	}
 	return (cmd_tab);
 }
