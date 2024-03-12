@@ -6,13 +6,13 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:14:05 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/10 10:35:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 15:22:15 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen_gnl(const char *s)
 {
 	size_t	i;
 
@@ -22,14 +22,14 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strndup(const char *s, size_t n)
+char	*ft_strndup_gnl(const char *s, size_t n)
 {
 	char	*s2;
 	size_t	s_len;
 	size_t	size;
 	size_t	size_save;
 
-	s_len = ft_strlen(s);
+	s_len = ft_strlen_gnl(s);
 	if (n > s_len)
 		size = s_len;
 	else
@@ -44,7 +44,7 @@ char	*ft_strndup(const char *s, size_t n)
 	return (s2 - size_save);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr_gnl(const char *s, int c)
 {
 	unsigned char	c_uc;
 
@@ -75,7 +75,7 @@ void	*ft_calloc_gnl(size_t nmemb, size_t size)
 	return ((void *) ptr - len_save);
 }
 
-void	*free_buffer(char **buffer)
+void	*free_buffer_gnl(char **buffer)
 {
 	if (*buffer)
 		free(*buffer);

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/12 14:44:07 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 15:37:55 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ t_ast_nde	*parse_par(char *str, t_Data *data)
 	if (set_parenthesis(root->child))
 		;//return (free_tree(root), NULL);
 	leaf_tree_par(root->child, data);
+	free_tree(root);
 	//print_tree(root);
 	//exit(1);	
 }

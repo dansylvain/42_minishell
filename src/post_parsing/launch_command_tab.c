@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 12:06:21 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 15:50:45 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	launch_command_tab(t_Data *data, t_ast_nde *node,
 			{
 				// ft_printf("here\n");
 				// print_node(node);
-				// ft_printf("end here\n");			
+				// ft_printf("end here\n");	
+				free(node->start);					
 				node->start = ft_itoa(get_data(NULL)->exit_status);
 				node->end = node->start;
 				node->child->start = node->start;
@@ -87,6 +88,7 @@ void	store_and_free_cmd_tab_node_sav(t_ast_nde *cmd_tab_node_sav)
 void	build_command_tab(char ****cmd_tab, t_Data *data,
 		t_ast_nde **cmd_tab_node_sav, char *envp[])
 {
+	
 	(*cmd_tab) = create_command_tab(data, (*cmd_tab_node_sav), envp);
 	store_and_free_cmd_tab(*cmd_tab);
 	if (is_pipeline(*cmd_tab_node_sav))
@@ -116,4 +118,5 @@ void	build_command_tab(char ****cmd_tab, t_Data *data,
 		free_sibling_and_child(*cmd_tab_node_sav);
 	}
 	free_command_tab_lg(*cmd_tab);
+	
 }
