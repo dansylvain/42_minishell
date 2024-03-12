@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 11:53:42 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 12:06:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	launch_command_tab(t_Data *data, t_ast_nde *node,
 	{
 		if (!flag)
 		{
-			if (node->token == DOLL && node->start == node->end)
+			if (node->token == DOLL && node->start == node->end && *node->start != '$')
 			{
 				// ft_printf("here\n");
 				// print_node(node);
