@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:43:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 16:15:01 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/12 17:06:26 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,10 @@ char	***alloc_memory_for_tab_tabs(char ***cmd_tab, t_ast_nde *node)
 				i++;
 			}
 			pipe_elements_nbr = get_pipe_elements_nbr(current);
-			// ft_printf("pipe_elements_nbr: %i\ni: %i\n", pipe_elements_nbr, i);
+			ft_printf("pipe_elements_nbr: %i\ni: %i\n", pipe_elements_nbr, i);
 			cmd_tab[i] = alloc_memory_for_pipe_elements(cmd_tab[i], pipe_elements_nbr);
 		}
-		// print_node(current);
+		print_node(current);
 		current = current->sibling;
 	}
 	return (cmd_tab);
