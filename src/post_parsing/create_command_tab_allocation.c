@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:43:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 20:46:36 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/12 22:04:00 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,31 @@ int	get_pipe_elements_nbr(t_ast_nde *node);
 char **alloc_memory_for_pipe_elements(char **cmd_tab, int pipe_elements_nbr);
 
 
+
+//! FUNC DOES NOT COUNT RIGHT ELEMENTS
 int	get_pipe_parts_nbr(t_ast_nde *node)
 {
+	t_ast_nde *start;
 	int pipe_parts_nbr;
+	int	cmd_was_counted;
 	
-	pipe_parts_nbr = 1;
+	cmd_was_counted = 0;
+	pipe_parts_nbr = 0;
+	start = node;
 	while (node)
 	{
+		if (!is_chevron(node) && !cmd_was_counted++)
+		{
+			pipe_parts_nbr += 1;
+			cmd_was_counted++;
+		}
 		if (is_separator(node))
-			pipe_parts_nbr += 2;
+		{
+			pipe_parts_nbr += 1;
+			cmd_was_counted = 0;
+		}
+		if (is_chevron(node))
+			pipe_parts_nbr += 1;
 		node = node->sibling;
 	}
 	return (pipe_parts_nbr);
