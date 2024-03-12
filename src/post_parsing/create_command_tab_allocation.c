@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:43:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 17:41:57 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/12 18:27:01 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,30 +103,63 @@ char	**add_sep_tab(char **cmd_tab_sep, t_ast_nde *node)
 	return (cmd_tab_sep);
 }
 
+char ***add_redir_tabs(char ***cmd_tab, t_ast_nde **node, int *i)
+{
+	char *chev;
+	
+	if ((*node)->token == SCHEV_LFT)
+		chev = "<";
+	if ((*node)->token == SCHEV_RGTH)
+		chev = ">";
+	if ((*node)->token == DCHEV_LFT)
+		chev = "<<";
+	if ((*node)->token == DCHEV_RGTH)
+		chev = ">>";
+	cmd_tab[*i] = ft_calloc(3, sizeof(char *));
+	cmd_tab[*i][0] = ft_strdup(chev);
+	cmd_tab[*i][1] = get_node_str((*node)->sibling->child);
+	cmd_tab[*i][2] = NULL;
+	(*node)->sibling->token = CMD;
+	(*i)++;
+	return (cmd_tab);
+}
 
 char	***alloc_memory_for_tab_tabs(char ***cmd_tab, t_ast_nde *node)
 {
 	int	pipe_elements_nbr;
 	t_ast_nde *current;
+	t_ast_nde *start;
 	int	i;
 	
 	i = 0;
-	current = node;
-	while (current)
+	start = node;
+	while (node)
 	{
-		if (current == node || is_separator(current))
+		if (node == start || is_separator(node))
 		{
-			if (is_separator(current))
+			if (is_separator(node))
 			{
-				cmd_tab[i] = add_sep_tab(cmd_tab[i], current);
+				cmd_tab[i] = add_sep_tab(cmd_tab[i], node);
 				ft_printf("i: %i\n", i);
 				ft_printf("%s\n", cmd_tab[i][0]);
-				current = current->sibling;
+				node = node->sibling;
 				i++;
 			}
+			current = node;
+			while (!is_separator(current))
+			{
+				if (is_chevron(current))
+				{
+					cmd_tab = add_redir_tabs(cmd_tab, &current, &i);
+					// current = current->sibling;
+				}
+				current = current->sibling;
+			}
+			ft_printf("i: %i\n", i);
+
 		}
-		print_node(current);
-		current = current->sibling;
+		print_node(node);
+		node = node->sibling;
 	}
 	return (cmd_tab);
 }
