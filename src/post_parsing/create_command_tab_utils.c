@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:53:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 17:31:17 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/12 20:14:15 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,28 @@ char	*get_node_str(t_ast_nde *node)
 /**========================================================================
  *                           get_cmd_nbr
  *========================================================================**/
-int	get_cmd_nbr(t_ast_nde *node)
-{
-	int	cmd_nbr;
+	// int	get_cmd_nbr(t_ast_nde *node)
+	// {
+	// 	int	cmd_nbr;
 
-	cmd_nbr = 1;
-	while (node)
-	{
-		if (is_chevron(node))
-		{
-			cmd_nbr++;
-			if (node->sibling->sibling)
-				node = node->sibling->sibling;
-			else
-				break ;
-			continue ;
-		}
-		if (node->token == PIPE)
-			cmd_nbr += 2;
-		node = node->sibling;
-	}
-	return (cmd_nbr);
-}
+	// 	cmd_nbr = 1;
+	// 	while (node)
+	// 	{
+	// 		if (is_chevron(node))
+	// 		{
+	// 			cmd_nbr++;
+	// 			if (node->sibling->sibling)
+	// 				node = node->sibling->sibling;
+	// 			else
+	// 				break ;
+	// 			continue ;
+	// 		}
+	// 		if (node->token == PIPE)
+	// 			cmd_nbr += 2;
+	// 		node = node->sibling;
+	// 	}
+	// 	return (cmd_nbr);
+	// }
 
 void	print_node(t_ast_nde *node)
 {
@@ -137,12 +137,12 @@ void	display_command_tab_big(char ***command_tab)
 	ft_printf("command_tab: \n");
 	if (!command_tab || !command_tab[i])
 		return ;
-	while (command_tab[i])
+	while (command_tab && command_tab[i])
 	{
 		j = 0;
 		while (command_tab[i][j])
 		{
-			if (command_tab[i][j])
+			if (command_tab && command_tab[i] && command_tab[i][j])
 				ft_printf("cmd_tab[%i][%i]: >%s<\n", i, j, command_tab[i][j]);
 			j++;
 		}

@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:43:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 18:27:01 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/12 20:46:36 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,41 +124,90 @@ char ***add_redir_tabs(char ***cmd_tab, t_ast_nde **node, int *i)
 	return (cmd_tab);
 }
 
+int	get_cmd_nbr(t_ast_nde *node)
+{
+	int	nbr;
+	
+	nbr = 0;
+	while(!is_separator(node))
+	{
+		if (!is_chevron(node->child) && node->token != CMD)
+			nbr++;
+		node = node->sibling;
+	}
+	ft_printf("get_cmd_nbr: %i\n", nbr);
+	return (nbr);
+}
+
+char **add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
+{
+	int	nbr;
+	int i;
+	
+	nbr = get_cmd_nbr(node);
+	cmd_tab_tab = ft_calloc(nbr + 1, sizeof(char *));
+	cmd_tab_tab[nbr] = NULL;
+	i = 0;
+	while (!is_separator(node))
+	{
+		if (!is_chevron(node) && node->token != CMD)
+			cmd_tab_tab[i++] = get_node_str(node->child);
+		node = node->sibling;
+	}
+
+	return (cmd_tab_tab);
+}
+
 char	***alloc_memory_for_tab_tabs(char ***cmd_tab, t_ast_nde *node)
 {
 	int	pipe_elements_nbr;
 	t_ast_nde *current;
 	t_ast_nde *start;
 	int	i;
+	int	redir_were_added;
+	int	cmd_was_added;
 	
+	cmd_was_added = 0;
+	redir_were_added = 0;
 	i = 0;
 	start = node;
 	while (node)
 	{
 		if (node == start || is_separator(node))
 		{
+			ft_printf("reset flags %i\n", i);
 			if (is_separator(node))
 			{
 				cmd_tab[i] = add_sep_tab(cmd_tab[i], node);
-				ft_printf("i: %i\n", i);
 				ft_printf("%s\n", cmd_tab[i][0]);
 				node = node->sibling;
 				i++;
 			}
+			redir_were_added = 0;
+			cmd_was_added = 0;
+		}
+		if (redir_were_added == 0)
+		{
 			current = node;
 			while (!is_separator(current))
 			{
 				if (is_chevron(current))
 				{
 					cmd_tab = add_redir_tabs(cmd_tab, &current, &i);
-					// current = current->sibling;
 				}
 				current = current->sibling;
 			}
-			ft_printf("i: %i\n", i);
-
+			redir_were_added = 1;
 		}
-		print_node(node);
+		ft_printf("i: %i\n", i);
+		if (cmd_was_added == 0)
+		{
+			cmd_tab[i] = add_remaining_tabs(cmd_tab[i], node);
+			cmd_was_added = 1;
+			i++;
+		}
+		
+			
 		node = node->sibling;
 	}
 	return (cmd_tab);
