@@ -33,3 +33,25 @@ false || (echo aaa && true) && echo zzz
 echo $?
 false || (echo aaa && false && true) && echo zzz
 echo $?
+(( false || echo bbb ) || echo zzz)
+echo $?
+(( false || (echo bbb || echo xxx ) || echo zzz) //err a gerer
+echo $?
+ (( false || (echo bbb || echo xxx )) || echo zzz)
+echo $?
+ (( true || (echo bbb || echo xxx )) || echo zzz)
+echo $?
+ (( false || (echo bbb || echo xxx) ) || echo zzz)
+echo $?
+(( false || echo bbb && echo xxx ) || echo zzz)
+echo $?
+(( false || echo bbb && echo $? ) || echo zzz)
+echo $?
+(( echo ggg && false && (echo bbb && echo $?) ) || echo zzz)
+echo $?
+(( echo ggg && false || echo bbb && echo $? ) || echo zzz)
+echo $?
+(( echo ggg && true || echo bbb && echo $? ) || echo zzz)
+echo $?
+(( echo ggg && true || (echo bbb && echo $?) ) || echo zzz)
+echo $?
