@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   fill_command_tab_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/10 17:08:12 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 17:31:10 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fill_command_tab_utils.h"
+char	*get_node_str(t_ast_nde *node);
 
 int	is_raw(t_ast_nde *node)
 {
@@ -70,7 +71,7 @@ void	add_raw_to_cmd_tab(t_Data *data, char ****cmd_tab,
 	j = 0;
 	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
 		j++;
-	(*cmd_tab)[*i][j] = get_node_str(data, current->child);
+	(*cmd_tab)[*i][j] = get_node_str(current->child);
 }
 
 void	complete_raw_tab(t_Data *data, char ****cmd_tab,
@@ -83,5 +84,5 @@ void	complete_raw_tab(t_Data *data, char ****cmd_tab,
 	while ((*cmd_tab)[*i - 1][j] && (*cmd_tab)[*i - 1][j][0])
 		j++;
 	current = node->child->sibling;
-	ft_strcat((*cmd_tab)[*i - 1][j - 1], get_node_str(data, current));
+	ft_strcat((*cmd_tab)[*i - 1][j - 1], get_node_str(current));
 }

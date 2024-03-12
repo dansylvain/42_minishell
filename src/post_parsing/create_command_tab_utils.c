@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:53:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/11 09:41:58 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/12 17:31:17 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
 /**========================================================================
  *                           get_node_str
  *========================================================================**/
-char	*get_node_str(t_Data *data, t_ast_nde *node)
+char	*get_node_str(t_ast_nde *node)
 {
 	char	str[20000];
 	int		index;
@@ -73,7 +73,6 @@ char	*get_node_str(t_Data *data, t_ast_nde *node)
 		}
 		node = node->sibling;
 	}
-	(void)data;
 	return (ft_strdup(str));
 }
 

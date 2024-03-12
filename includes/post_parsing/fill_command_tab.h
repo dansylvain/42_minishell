@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:03:28 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 19:42:28 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/12 17:30:14 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	create_dollar_tab(t_Data *data, t_ast_nde **node,
 			char ****cmd_tab, int *i);
 void	complete_raw_tab(t_Data *data, char ****cmd_tab,
 			t_ast_nde *node, int *i);
-char	*get_node_str(t_Data *data, t_ast_nde *node);
+char	*get_node_str(t_ast_nde *node);
 int		is_separator(t_ast_nde *node);
 int		is_chevron(t_ast_nde *node);
 

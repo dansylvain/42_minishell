@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 20:35:21 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 20:40:12 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/12 17:30:08 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@
 # include <stddef.h>
 # include "libft.h"
 
-char	*get_node_str(t_Data *data, t_ast_nde *node);
+char	*get_node_str(t_ast_nde *node);
 
 #endif

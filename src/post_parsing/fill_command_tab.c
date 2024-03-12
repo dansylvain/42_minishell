@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 21:00:08 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/12 17:30:51 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	create_dollar_tab(t_Data *data,
 	char	*env_var;
 	int		len;
 
-	env_var = get_node_str(data, (*node)->child);
+	env_var = get_node_str((*node)->child);
 	len = ft_strlen(env_var);
 	j = 0;
 	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
@@ -127,11 +127,11 @@ while (!is_separator((*node)) && !is_chevron((*node)))
 	}
 	else if ((*node)->token == DOLL)
 	{
-		(*cmd_tab)[*i][j++] = get_node_str(data, (*node)->child);
+		(*cmd_tab)[*i][j++] = get_node_str((*node)->child);
 		if ((*node)->start)
 			free((*node)->start);
 	}
 	else
-		(*cmd_tab)[*i][j++] = get_node_str(data, (*node)->child);
+		(*cmd_tab)[*i][j++] = get_node_str((*node)->child);
 	(*node) = (*node)->sibling;
 } */
