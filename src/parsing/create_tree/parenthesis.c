@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:52:11 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/11 17:07:46 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 13:15:38 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,6 +257,7 @@ int	set_parenthesis(t_ast_nde *node)
 	//	ft_printf("\nyea 1\n");
 	//	print_sibling(sib);
 	//	ft_printf("\nyea 2\n");
+	search_token(NULL, 0, NULL, 1);
 		token = create_token_node(sib);	
 	//	ft_printf("\nyea 3\n");		
 		cont_sib->sibling = token;
