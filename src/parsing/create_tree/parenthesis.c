@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:52:11 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/12 17:36:03 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 23:11:55 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_raw(t_ast_nde *raw);
 void	display_error_free(char *str);
 
 #include "ft_printf.h"
-static t_ast_nde	*search_token(char *actual, t_tok token, int *err, int reset)
+static t_ast_nde	*search_token(char *actual, t_tok token, int *err, int reset, int free_flag)
 {
 	static t_ast_nde	*token_nde;
 	static int	count;
@@ -39,6 +39,11 @@ static t_ast_nde	*search_token(char *actual, t_tok token, int *err, int reset)
 	if (reset)
 	{
 		count = 0;
+		if (token_nde && free_flag)
+		{			
+			free(token_nde->start);
+			free(token_nde);
+		}
 		token_nde = NULL;
 		return (NULL);	
 	}
@@ -58,8 +63,7 @@ static t_ast_nde	*search_token(char *actual, t_tok token, int *err, int reset)
 		count--;
 		if (count < 0)
 		{
-			*err = 1;//!
-			ft_printf("ERROUR\n");
+			*err = 1;//!			
 		}
 		else if (!count)
 		{		
@@ -87,20 +91,21 @@ static int	create_token_node(t_ast_nde *sib, t_ast_nde **token_nde)
 		while (actual <= sib->end)//! raw
 		{
 			//ft_printf("actual :%c-\n", *actual);
-			*token_nde = search_token(actual, sib->token, &err, 0);
+			*token_nde = search_token(actual, sib->token, &err, 0, 0);
 			
 			if (*token_nde)
 			{
-				search_token(NULL, 0, NULL, 1);
+				search_token(NULL, 0, NULL, 1, 0);
 				// ft_printf("here node\n");
 				// print_node(token_nde);
 				// ft_printf("end here node\n");
 				return (0);
 			}
 			if (err == 1)
-			{
-				search_token(NULL, 0, NULL, 1);
-				ft_printf("err 1\n");
+			{			
+				search_token(NULL, 0, NULL, 1, 1);
+				display_error_free(ft_strjoin("minishell: syntax error near \
+unexpected token ", "`)'\n"));
 				return (-1);//! data status ?
 			}
 			actual++;
@@ -108,9 +113,10 @@ static int	create_token_node(t_ast_nde *sib, t_ast_nde **token_nde)
 		sib = sib->sibling;
 	}
 	if (err == 2)
-	{
-		ft_printf("err 2\n");
-		search_token(NULL, 0, NULL, 1);
+	{	
+		display_error_free(ft_strjoin("minishell: syntax error near \
+unexpected token ", "`('\n"));
+		search_token(NULL, 0, NULL, 1, 0);
 		return (-1);//! data status ?
 	}
 	return (0);
@@ -200,7 +206,7 @@ static t_ast_nde	*create_token_child_par(t_ast_nde *cont_sib, t_ast_nde *token)
 	return (raw_lft);
 }
 
-void	token_child_handle(t_ast_nde *sib_cont,
+int	token_child_handle(t_ast_nde *sib_cont,
 	t_ast_nde *raw_lft, t_ast_nde *token)
 {
 	t_ast_nde	*sib;
@@ -241,10 +247,7 @@ void	token_child_handle(t_ast_nde *sib_cont,
 		// {			
 		// 	;// ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
 		// }
-		if (set_parenthesis(raw_rght))
-		{
-			;// ft_putstr_fd("\nsyntax error near unexpected token\n", 2);
-		}
+		return (set_parenthesis(raw_rght));		
 	}	
 }
 
@@ -267,13 +270,21 @@ int	set_parenthesis(t_ast_nde *node)
 	//search_token(NULL, 0, NULL, 1);
 		is_token = create_token_node(sib, &token);
 		if (is_token < 0)
-			;
+		{
+			// if (token)
+			// {
+			// 	if (token->start)
+			// 		free(token->start);
+			// 	free(token);				
+			// }
+			return (-1);
+		}
 	//	ft_printf("\nyea 3\n");		
 		cont_sib->sibling = token;
 		if (token)
 		{
 			//print_raw(token);
-			return (token_child_handle(cont_sib, raw_lft, token), 1);
+			return (token_child_handle(cont_sib, raw_lft, token));
 		}
 		//set_operator(node);
 	}

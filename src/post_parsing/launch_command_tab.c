@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 17:11:19 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 21:16:13 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	launch_command_tab(t_Data *data, t_ast_nde *node,
 		}
 		node = node->sibling;
 	}
-	//store_and_free_cmd_tab_node_sav(cmd_tab_node_sav);
+//	store_and_free_cmd_tab_node_sav(cmd_tab_node_sav);
 	if (cmd_tab_node_sav)
 		build_command_tab(&cmd_tab, data, &cmd_tab_node_sav, envp);
 	flag = data->exit_status;

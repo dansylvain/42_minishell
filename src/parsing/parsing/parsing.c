@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/12 16:24:52 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 22:18:14 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	set_parenthesis(t_ast_nde *node);
 
 
 int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
-t_ast_nde	*parse_par(char *str, t_Data *data);
+int	parse_par(char *str, t_Data *data);
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 {
 	t_ast_nde	*token;
@@ -100,9 +100,15 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 					// while (*actual != '(' || actual != middle->end)
 					// 	actual++;
 					// or_flag = exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), data->envp_tab, 0);
-					char * tmp = ft_strndup(middle->start, middle->end - middle->start + 1);
-					parse_par(tmp, data);
+					char *tmp = ft_strndup(middle->start, middle->end - middle->start + 1);
+					if (parse_par(tmp, data))
+					{
+						free(tmp);
+						return (1);
+					}
 					free(tmp);
+					
+								
 				}
 				
 				raw_rght = middle->sibling;
@@ -115,7 +121,8 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 				// ft_printf("\n");
 				// ft_printf("je vais utiliser la recursive, donc si pas de nouveau token, il y aura pipex avec le raw right, mais entier\n");
 				// ft_printf("si pas de raw, return 0\n");
-				leaf_tree_par(raw_rght, data);
+				if (leaf_tree_par(raw_rght, data))
+					return (1);
 				//exec_pipex(data, ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1), envp);				
 			}		
 			//leaf_tree_par(token->child->sibling->sibling, data, envp);			
@@ -128,8 +135,8 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 			//  ft_printf("\n");
 			// if (!or_flag)
 			char * tmp = ft_strndup(raw->start, raw->end - raw->start + 1);
-				or_flag = exec_pipex(data, tmp, data->envp_tab, 0);
-				free(tmp);
+			or_flag = exec_pipex(data, tmp, data->envp_tab, 0);
+			free(tmp);
 			return (0);				
 		}
 	}
@@ -169,7 +176,7 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 // 	return (0);
 // }
 
-t_ast_nde	*parse_par(char *str, t_Data *data)
+int	parse_par(char *str, t_Data *data)
 {
 	t_ast_nde	*root;
 	t_ast_nde	*cmd_sav;
@@ -177,23 +184,21 @@ t_ast_nde	*parse_par(char *str, t_Data *data)
 	t_ast_nde	*quote;
 	
 	if (!*str)
-		return (NULL);
+		return (1);
 	cmd_sav = NULL;
-
 	exec_pipex(NULL, NULL, NULL, 1);
-
 	set_root(&root, str);
 	quote = set_qute_sib(str);
-	if (!quote)
-		return (free_tree(root), NULL);
-	//print_qute_sib(quote);
 	root->child->child->child = quote;
-	if (set_parenthesis(root->child))
-		;//return (free_tree(root), NULL);
-	leaf_tree_par(root->child, data);
-	free_tree_par(root);
-	//print_tree(root);
-	//exit(1);	
+	if (!quote)
+		return (free_tree(root), 1);
+	//print_qute_sib(quote);
+	if (set_parenthesis(root->child) < 0)	
+		return (free_tree_par(root), 1);		
+	if (leaf_tree_par(root->child, data))
+		return (free_tree_par(root), 1);
+	return (free_tree_par(root), 0);
+	//print_tree(root);	
 }
 
 t_ast_nde	*parse(char *str, t_Data *data)
@@ -206,15 +211,12 @@ t_ast_nde	*parse(char *str, t_Data *data)
 	if (!*str)
 		return (NULL);
 	cmd_sav = NULL;
-	root = create_node(RAW);
-	root->start = str;
-	root->end = str + ft_strlen(str) - 1;
-	root->child = copy_node(root);
-	root->child->child = copy_node(root);
+	
+	set_root(&root, str);
 	quote = set_qute_sib(str);
+	root->child->child->child = quote;		
 	if (!quote)
 		return (free_tree(root), NULL);	
-	root->child->child->child = quote;		
 	if (set_operator(root->child))
 		return (free_tree(root), NULL);	
 	leaf_tree(root, &cmd, &cmd_sav, data);
