@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:52:11 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/12 13:15:38 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 14:47:11 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static t_ast_nde	*search_token(char *actual, t_tok token, int *err, int reset)
 		{		
 		//	ft_printf("search token in 2 before actual\n");
 			//if 
+			//ft_printf("ERROUR 222\n");
+			// *err = 0;
 			token_nde->end = actual;
 			// ft_printf("search token in 2 after actual\n");
 			return (token_nde);
@@ -84,29 +86,32 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 		actual = sib->start;
 		while (actual <= sib->end)//! raw
 		{
-		//	ft_printf("actual :%c\n", *actual);
+			//ft_printf("actual :%c-\n", *actual);
 			token_nde = search_token(actual, sib->token, &err, 0);
 			
 			if (token_nde)
 			{
 				search_token(NULL, 0, NULL, 1);
-				//ft_printf("here node\n");
-				//print_node(token_nde);
+				// ft_printf("here node\n");
+				// print_node(token_nde);
+				// ft_printf("end here node\n");
 				return (token_nde);
 			}
 			if (err == 1)
 			{
+				search_token(NULL, 0, NULL, 1);
 				ft_printf("err 1\n");
 				return (NULL);//! data status ?
 			}
 			actual++;
 		}
-		if (err == 2)
-		{
-			ft_printf("err 2\n");
-			return (NULL);//! data status ?
-		}
 		sib = sib->sibling;
+	}
+	if (err == 2)
+	{
+		ft_printf("err 2\n");
+		search_token(NULL, 0, NULL, 1);
+		return (NULL);//! data status ?
 	}
 	return (NULL);
 }
@@ -249,7 +254,7 @@ int	set_parenthesis(t_ast_nde *node)
 	t_ast_nde	*token;
 	t_ast_nde	*raw_lft;
 	t_ast_nde	*raw_rght;
-	
+	//ft_printf("YOUOUOUOU\n");
 	if (node && node->child && node->child->child)
 	{		
 		cont_sib = node->child;
@@ -257,7 +262,7 @@ int	set_parenthesis(t_ast_nde *node)
 	//	ft_printf("\nyea 1\n");
 	//	print_sibling(sib);
 	//	ft_printf("\nyea 2\n");
-	search_token(NULL, 0, NULL, 1);
+	//search_token(NULL, 0, NULL, 1);
 		token = create_token_node(sib);	
 	//	ft_printf("\nyea 3\n");		
 		cont_sib->sibling = token;

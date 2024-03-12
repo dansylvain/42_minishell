@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/12 13:12:12 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 14:44:07 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 				middle = raw_lft->sibling;
 				if (raw_lft->child)
 				{
-					ft_printf("il y a un raw_left\n");					
-					print_node(raw_lft);
-					ft_printf("\n");
+					// ft_printf("il y a un raw_left\n");					
+					// print_node(raw_lft);
+					// ft_printf("\n");
 				//ft_printf("je vais executer pipex avec raw_left\n");
 					or_flag = exec_pipex(data, ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1), data->envp_tab, 0);	
 					// ft_printf("je vais executer pipex avec raw_left %d\n", or_flag);			
@@ -85,9 +85,9 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 			{
 				middle->start++;
 				middle->end--; 
-				ft_printf("il y a un middle\n");
-				print_node(middle);
-				ft_printf("\n");
+				// ft_printf("il y a un middle\n");
+				// print_node(middle);
+				// ft_printf("\n");
 				// ft_printf("je vais utiliser la recursive, donc si pas de nouveau token, il y aura pipex avec le raw middle, sans par\n");
 			
 				if (!or_flag)
@@ -106,9 +106,9 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 			if (raw_rght && raw_rght->child)
 			{
 				
-				ft_printf("il y a un raw_rght\n");
-				print_node(raw_rght);
-				ft_printf("\n");
+				// ft_printf("il y a un raw_rght\n");
+				// print_node(raw_rght);
+				// ft_printf("\n");
 				// ft_printf("je vais utiliser la recursive, donc si pas de nouveau token, il y aura pipex avec le raw right, mais entier\n");
 				// ft_printf("si pas de raw, return 0\n");
 				leaf_tree_par(raw_rght, data);
@@ -118,10 +118,10 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 		}
 		else
 		{	
-			ft_printf("il n'y a pas de nouveau token\n");
-			ft_printf("je vais donc executer pipex avec le raw fournit\n");
-			print_node(raw);
-			 ft_printf("\n");
+			// ft_printf("il n'y a pas de nouveau token\n");
+			// ft_printf("je vais donc executer pipex avec le raw fournit\n");
+			// print_node(raw);
+			//  ft_printf("\n");
 			// if (!or_flag)
 				or_flag = exec_pipex(data, ft_strndup(raw->start, raw->end - raw->start + 1), data->envp_tab, 0);
 			return (0);				
