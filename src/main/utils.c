@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:22:52 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/03/09 17:38:27 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 15:38:51 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,19 @@ void	free_command_tab(char ***command_tab)
 void	free_command_tab_lg(char ***command_tab)
 {
 	int	i;
-
+	int	j;
+	
 	i = 0;
 	while (command_tab[i])
 	{
-		free_command_tab(&(command_tab)[i]);
-		command_tab[i] = NULL;
+		j = 0;
+		while (command_tab[i][j])
+		{
+			free(command_tab[i][j]);
+			j++;
+		}
+		free(command_tab[i]);
 		i++;
 	}
-	if (command_tab)
-		free(command_tab);
+	free(command_tab);
 }
