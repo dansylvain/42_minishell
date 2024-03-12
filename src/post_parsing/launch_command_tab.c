@@ -6,11 +6,12 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/11 16:24:13 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 09:06:41 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "launch_command_tab.h"
+#include <test.h>
 
 /**========================================================================
  *                           launch_command_tab
@@ -21,7 +22,9 @@ int	launch_command_tab(t_Data *data, t_ast_nde *node,
 	t_ast_nde	*cmd_tab_node;
 	t_ast_nde	*cmd_tab_node_sav;
 	char		***cmd_tab;
-	
+	//ft_printf("in flag: %d\n", flag);
+	//print_node(node);
+	//ft_printf("\n");
 	cmd_tab_node_sav = NULL;
 	while (node && node->token != AND && node->token != OR)
 	{
@@ -36,8 +39,12 @@ int	launch_command_tab(t_Data *data, t_ast_nde *node,
 	flag = data->exit_status;
 	if (node && node->token == OR)
 		flag = !flag;
-	if (node)
-		launch_command_tab(data, node->sibling, envp, flag);
+	// if (node)
+	// 	print_node(node);
+//	ft_printf("\n");
+//	ft_printf("af flag: %d\n", flag);
+	if (node && node->sibling)
+		flag = launch_command_tab(data, node->sibling, envp, flag);
 	return (flag);
 }
 

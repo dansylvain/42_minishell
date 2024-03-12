@@ -6,13 +6,13 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/03/11 17:08:39 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 08:57:31 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_pipex.h"
 
-#include <stdio.h>
+#include <test.h>
 /**========================================================================
  *                           exec_pipex
  *========================================================================**/
@@ -20,6 +20,8 @@ int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset)
 {
 	t_ast_nde	*cmd_list;
 	static int	or_flag;
+
+	//ft_printf("cmd: %s\n", cmd);
 	if (reset)
 	{
 		or_flag = 0;

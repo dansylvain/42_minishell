@@ -21,5 +21,15 @@ false || (echo aaa && true) || echo $?
 echo $?
 false || (echo aaa && false) && echo $?
 echo $?
-false || (echo aaa && echo $?) && echo $?
+false || (echo aaa && echo $?) && echo $? //pb
+echo $?
+false || (false || echo $?) && echo $?
+echo $?
+false || echo aaa && echo $?
+echo $?
+false || (echo aaa && false) && echo zzz
+echo $?
+false || (echo aaa && true) && echo zzz
+echo $?
+false || (echo aaa && false && true) && echo zzz
 echo $?
