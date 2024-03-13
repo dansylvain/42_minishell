@@ -6,11 +6,18 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:40:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 08:32:42 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 10:14:40 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fill_command_tab.h"
+#include "ft_printf.h"
+
+void	free_node(t_ast_nde *node)
+{
+	if (node && node->start)
+		free(node->start);
+}
 
 /**========================================================================
  *                           fill_command_tab
@@ -36,6 +43,8 @@ char	***fill_command_tab(char ***cmd_tab, t_ast_nde *node)
 		}
 		cmd_tab = add_redir_tabs_loop(cmd_tab, &node, &redir_were_added, &i);
 		cmd_tab = add_remaining_tabs_loop(cmd_tab, node, &cmd_was_added, &i);
+		if (node->token == DOLL || node->token == JOKER)
+			free_node(node);
 		node = node->sibling;
 	}
 	return (cmd_tab);
