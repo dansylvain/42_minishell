@@ -6,55 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:40:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 08:28:12 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 08:32:42 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fill_command_tab.h"
-
-char	***add_redir_tabs_loop(char ***cmd_tab, t_ast_nde **node,
-		int *redir_were_added, int *i)
-{
-	t_ast_nde	*current;
-
-	if (*redir_were_added == 0)
-	{
-		current = *node;
-		while (!is_separator(current))
-		{
-			if (is_chevron(current))
-			{
-				cmd_tab = add_redir_tabs(cmd_tab, &current, i);
-			}
-			current = current->sibling;
-		}
-		*redir_were_added = 1;
-	}
-	return (cmd_tab);
-}
-
-char	***add_remaining_tabs_loop(char ***cmd_tab, t_ast_nde *node,
-		int *cmd_was_added, int *i)
-{
-	if (*cmd_was_added == 0)
-	{
-		cmd_tab[*i] = add_remaining_tabs(cmd_tab[*i], node);
-		*cmd_was_added = 1;
-		(*i)++;
-	}
-	return (cmd_tab);
-}
-
-char	***add_sep_tab_loop(char ****cmd_tab, t_ast_nde **node, int *i)
-{
-	if (is_separator(*node))
-	{
-		(*cmd_tab)[*i] = add_sep_tab((*cmd_tab)[*i], *node);
-		*node = (*node)->sibling;
-		(*i)++;
-	}
-	return (*cmd_tab);
-}
 
 /**========================================================================
  *                           fill_command_tab
@@ -83,4 +39,57 @@ char	***fill_command_tab(char ***cmd_tab, t_ast_nde *node)
 		node = node->sibling;
 	}
 	return (cmd_tab);
+}
+
+/**========================================================================
+ *                           add_redir_tabs_loop
+ *========================================================================**/
+char	***add_redir_tabs_loop(char ***cmd_tab, t_ast_nde **node,
+		int *redir_were_added, int *i)
+{
+	t_ast_nde	*current;
+
+	if (*redir_were_added == 0)
+	{
+		current = *node;
+		while (!is_separator(current))
+		{
+			if (is_chevron(current))
+			{
+				cmd_tab = add_redir_tabs(cmd_tab, &current, i);
+			}
+			current = current->sibling;
+		}
+		*redir_were_added = 1;
+	}
+	return (cmd_tab);
+}
+
+/**========================================================================
+ *                           add_remaining_tabs_loop
+ *========================================================================**/
+char	***add_remaining_tabs_loop(char ***cmd_tab, t_ast_nde *node,
+		int *cmd_was_added, int *i)
+{
+	if (*cmd_was_added == 0)
+	{
+		cmd_tab[*i] = add_remaining_tabs(cmd_tab[*i], node);
+		*cmd_was_added = 1;
+		(*i)++;
+	}
+	return (cmd_tab);
+}
+
+/**========================================================================
+ *                           add_sep_tab_loop
+ *========================================================================**/
+char	***add_sep_tab_loop(char ****cmd_tab, t_ast_nde **node, int *i)
+{
+	if (is_separator(*node))
+	{
+		(*cmd_tab)[*i] = add_sep_tab((*cmd_tab)[*i], *node);
+		*node = (*node)->sibling;
+		(*i)++;
+	}
+	return (*cmd_tab);
 }
