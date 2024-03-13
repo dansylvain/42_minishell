@@ -63,3 +63,5 @@ echo $?
 echo $?
 (fghf
 echo $?
+(echo aaa && (echo bbb && (echo ccc)
+echo $?

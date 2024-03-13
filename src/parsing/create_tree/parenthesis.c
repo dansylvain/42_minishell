@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:52:11 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/12 23:11:55 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 23:57:45 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ static t_ast_nde	*search_token(char *actual, t_tok token, int *err, int reset, i
 	{
 		count = 0;
 		if (token_nde && free_flag)
-		{			
-			free(token_nde->start);
+		{	
+			// if (token_nde->start)
+			// 	free(token_nde->start);
 			free(token_nde);
+			token_nde = NULL;
 		}
-		token_nde = NULL;
 		return (NULL);	
 	}
 	//ft_printf("search token\n count :%d, actual:%c\n", count, *actual);
@@ -85,6 +86,7 @@ static int	create_token_node(t_ast_nde *sib, t_ast_nde **token_nde)
 	int			err;
 
 	err = 0;
+	search_token(NULL, 0, NULL, 1, 1);
 	while (sib)
 	{
 		actual = sib->start;
@@ -116,7 +118,7 @@ unexpected token ", "`)'\n"));
 	{	
 		display_error_free(ft_strjoin("minishell: syntax error near \
 unexpected token ", "`('\n"));
-		search_token(NULL, 0, NULL, 1, 0);
+		search_token(NULL, 0, NULL, 1, 1);
 		return (-1);//! data status ?
 	}
 	return (0);
