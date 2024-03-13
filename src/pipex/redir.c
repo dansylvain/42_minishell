@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/13 09:57:43 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 10:42:38 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int	set_redir_io(char **argv[], t_redir *redir)
 	while (*argv && **argv && ***argv != '|')
 	{
 		if (set_redir_in(*argv, redir))
-			return (1);	
+			return (1);
 		if (set_redir_out(*argv, redir))
-			return (1);		
+			return (1);
 		argv++;
 	}
 	return (0);
