@@ -29,6 +29,7 @@
 		"quote.h": "c",
 		"exec_pipex.h": "c",
 		"wildcard_expansion.h": "c",
-		"free_tree.h": "c"
+		"free_tree.h": "c",
+		"test.h": "c"
 	}
 }

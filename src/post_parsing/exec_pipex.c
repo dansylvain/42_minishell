@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 10:22:40 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 10:57:58 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset)
 	if (!cmd_list)
 		return (0) ;
 	store_and_free_cmd_list(cmd_list);
-	or_flag = launch_command_tab(data, cmd_list, envp, or_flag);	
-	store_and_free_cmd_list(NULL);
+	or_flag = launch_command_tab(data, cmd_list, envp, or_flag);
+	store_and_free_cmd_list(NULL);	
 	return (or_flag);
 }
 

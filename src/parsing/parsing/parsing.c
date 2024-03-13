@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/13 10:27:40 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 14:38:36 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	set_root(t_ast_nde **root, char *str)
 
 int	set_parenthesis(t_ast_nde *node);
 
-
+t_Data	*get_data(char *envp[]);
 int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
 int	parse_par(char *str, t_Data *data);
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
@@ -80,6 +80,11 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 					char *tmp = ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1);
 					or_flag = exec_pipex(data, tmp, data->envp_tab, 0);
 					free(tmp);
+					if (get_data(NULL)->exit_status)
+					{
+						ft_printf("ERROR PIEX\n");	
+						//return (1);
+					}
 					// ft_printf("je vais executer pipex avec raw_left %d\n", or_flag);			
 				}
 			}
@@ -137,6 +142,11 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 			char * tmp = ft_strndup(raw->start, raw->end - raw->start + 1);
 			or_flag = exec_pipex(data, tmp, data->envp_tab, 0);
 			free(tmp);
+			if (get_data(NULL)->exit_status)
+			{
+				ft_printf("ERROR PIEX 2\n");
+				//return (1);
+			}
 			return (0);				
 		}
 	}
@@ -193,7 +203,8 @@ int	parse_par(char *str, t_Data *data)
 		return (free_tree(root), 1);
 	//print_qute_sib(quote);
 	if (set_parenthesis(root->child) < 0)	
-		return (free_tree_par(root), 1);		
+		return (free_tree_par(root), 1);
+	store_or_free_tree_par(root);
 	if (leaf_tree_par(root->child, data))
 		return (free_tree_par(root), 1);
 	return (free_tree_par(root), 0);

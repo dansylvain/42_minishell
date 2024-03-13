@@ -65,3 +65,7 @@ echo $?
 echo $?
 (echo aaa && (echo bbb && (echo ccc)
 echo $?
+(echo test && false || echo$?)
+echo $?
+(echo aaa && (echdqfdqf dk))
+echo $?
