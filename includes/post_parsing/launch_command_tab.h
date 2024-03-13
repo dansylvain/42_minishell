@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:59:07 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 07:06:28 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 07:25:01 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
 void	build_command_tab(char ****cmd_tab, t_Data *data,
 			t_ast_nde **cmd_tab_node_sav, char *envp[]);
 void	store_and_free_cmd_tab(char ***cmd_tab);
-int	is_chevron(t_ast_nde *node);
+int		is_chevron(t_ast_nde *node);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:22:52 by dsylvain          #+#    #+#             */
-/*   Updated: 2024/03/12 15:38:51 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 07:24:17 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	free_command_tab_lg(char ***command_tab)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	while (command_tab[i])
 	{
