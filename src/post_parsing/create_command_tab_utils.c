@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:53:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 07:21:04 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 07:27:40 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,39 +60,4 @@ char	*get_node_str(t_ast_nde *node)
 		node = node->sibling;
 	}
 	return (ft_strdup(str));
-}
-
-void	print_node(t_ast_nde *node)
-{
-	int	i;
-	int	back_color;
-
-	back_color = 41;
-	i = 0;
-	while (node->start + i <= node->end)
-		ft_printf("\033[%dm%c\033[0m", back_color, node->start[i++]);
-	back_color = (back_color - 41 + 1) % 7 + 41;
-	ft_printf("\n");
-}
-
-void	display_command_tab_big(char ***command_tab)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	ft_printf("command_tab: \n");
-	if (!command_tab || !command_tab[i])
-		return ;
-	while (command_tab && command_tab[i])
-	{
-		j = 0;
-		while (command_tab[i][j])
-		{
-			if (command_tab && command_tab[i] && command_tab[i][j])
-				ft_printf("cmd_tab[%i][%i]: >%s<\n", i, j, command_tab[i][j]);
-			j++;
-		}
-		i++;
-	}
 }

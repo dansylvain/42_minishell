@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 07:16:21 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 07:29:15 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 
 	pipe_parts_nbr = get_pipe_parts_nbr(&node);
 	cmd_tab = alloc_memory_for_pipe_parts(cmd_tab, pipe_parts_nbr);
-	alloc_memory_for_tab_tabs(cmd_tab, node);
+	fill_command_tab(cmd_tab, node);
 	return (cmd_tab);
 }

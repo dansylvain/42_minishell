@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:43:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 07:13:58 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 07:32:20 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,9 +155,9 @@ char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
 }
 
 /**========================================================================
- *                           alloc_memory_for_tab_tabs
+ *                           fill_command_tab
  *========================================================================**/
-char	***alloc_memory_for_tab_tabs(char ***cmd_tab, t_ast_nde *node)
+char	***fill_command_tab(char ***cmd_tab, t_ast_nde *node)
 {
 	int			pipe_elements_nbr;
 	t_ast_nde	*current;
