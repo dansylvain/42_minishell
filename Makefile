@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/12 13:45:51 by dan              ###   ########.fr        #
+#    Updated: 2024/03/13 06:27:47 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,11 +71,9 @@ SRC =	src/main/main.c \
 		src/pipex/redir.c \
 		src/pipex/fdio.c \
 		src/post_parsing/create_command_tab_utils.c \
-		src/post_parsing/fill_command_tab.c \
 		src/post_parsing/exec_pipex.c \
 		src/post_parsing/launch_command_tab.c \
 		src/post_parsing/create_command_tab.c \
-		src/post_parsing/fill_command_tab_utils.c \
 		src/wildcard/wildcard_expansion.c \
 		src/wildcard/wildcard_expansion_2.c \
 		
