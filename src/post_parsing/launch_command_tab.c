@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 19:58:38 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 07:05:50 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,18 @@ void	build_command_tab(char ****cmd_tab, t_Data *data,
 		free_sibling_and_child(*cmd_tab_node_sav);
 	}
 	free_command_tab_lg(*cmd_tab);
+}
+
+/**========================================================================
+ *                           is_pipeline
+ *========================================================================**/
+int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
+{
+	while (cmd_tab_node_sav)
+	{
+		if (cmd_tab_node_sav->token == PIPE || is_chevron(cmd_tab_node_sav))
+			return (1);
+		cmd_tab_node_sav = cmd_tab_node_sav->sibling;
+	}
+	return (0);
 }
