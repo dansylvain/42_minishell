@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Définir le chemin de votre exécutable Minishell
-MINISHELL_EXECUTABLE="./minishell"
+MINISHELL_EXECUTABLE="../minishell"
 
 # Créer un fichier pour stocker les commandes avec fuites de mémoire
 LEAKS_OUTPUT_FILE="outfile/leaks_output.txt"
@@ -21,7 +21,7 @@ successful_tests=0
 run_with_valgrind() {
     command="$1"
     # Exécute la commande avec Valgrind dans un sous-shell pour isoler la redirection de la sortie
-    valgrind_output=$( (valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --suppressions=valgrind.supp --suppressions=ls_valgrind.supp "$MINISHELL_EXECUTABLE" <<< "$command") 2>&1 >/dev/null )
+    valgrind_output=$( (valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --suppressions=valgrind.supp "$MINISHELL_EXECUTABLE" <<< "$command") 2>&1 >/dev/null )
 
     # Vérifier s'il y a des fuites de mémoire dans la sortie de Valgrind
     if echo "$valgrind_output" | grep -q "0x"; then
