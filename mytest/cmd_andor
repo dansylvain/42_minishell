@@ -69,3 +69,7 @@ echo $?
 echo $?
 (echo aaa && (echdqfdqf dk))
 echo $?
+(( false || (echo bbb || echfo xxx) ) || echo zzz)
+echo $?
+echo truc &&(echo troc)
+echo $?

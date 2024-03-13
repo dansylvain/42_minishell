@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:56:32 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 21:05:27 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 14:58:29 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void	exec_unset(t_Data *data, char **command_tab);
 void	exec_env(t_Data *data, char **command_tab);
 int		exec_exit(t_Data *data, char **command_tab);
 int		exec_export(char **command_tab, t_Data *data);
-int		parse_par(char *str, t_Data *data);
+int		parse_par(char *str, t_Data *data, t_ast_nde *root);
 
 #endif

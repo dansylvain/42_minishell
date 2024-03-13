@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 10:21:47 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 14:58:45 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	prompt_loop(t_Data *data, char *envp[])
 			cmd = NULL;
 			continue ;
 		}
-		parse_par(cmd, data);
+		parse_par(cmd, data, NULL);
 		//exec_pipex(data, cmd, data->envp_tab);
 		free(cmd);
 	}

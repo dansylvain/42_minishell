@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:59:08 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/13 14:14:35 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 15:49:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	free_sibling(t_ast_nde *sib)
 static void	free_branch(t_ast_nde *raw, void (*rec) (t_ast_nde *nde))
 {
 	t_ast_nde	*cont;
-	ft_printf("free branch\n");
+
 	cont = raw->child;
 	free(raw);
 	if (cont)
@@ -103,8 +103,6 @@ void	free_tree_par(t_ast_nde *operator)
 
 void	store_or_free_tree_par(t_ast_nde *root)
 {
-	ft_printf("IN STORE FREE\n");
-	ft_putstr_fd("IN STORE (2) FREE\n", 2);
 	static t_ast_nde	*lcl_root;
 
 	if (!root && lcl_root)

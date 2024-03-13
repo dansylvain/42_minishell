@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/13 14:38:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 17:46:55 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	set_parenthesis(t_ast_nde *node);
 
 t_Data	*get_data(char *envp[]);
 int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
-int	parse_par(char *str, t_Data *data);
+int	parse_par(char *str, t_Data *data, t_ast_nde *root);
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 {
 	t_ast_nde	*token;
@@ -78,20 +78,25 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 					// ft_printf("\n");
 				//ft_printf("je vais executer pipex avec raw_left\n");
 					char *tmp = ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1);
+					//
 					or_flag = exec_pipex(data, tmp, data->envp_tab, 0);
 					free(tmp);
-					if (get_data(NULL)->exit_status)
-					{
-						ft_printf("ERROR PIEX\n");	
-						//return (1);
-					}
+					// if (get_data(NULL)->exit_status)
+					// {
+					// 	ft_printf("il y a un ouille 1\n");
+					// 	//ft_printf("ERROR PIEX\n");	
+					// 	return (1);
+					// }
 					// ft_printf("je vais executer pipex avec raw_left %d\n", or_flag);			
 				}
 			}
 			if (middle)
 			{
 				middle->start++;
-				middle->end--; 
+				middle->end--;
+				middle->child->start++;
+				middle->child->end--;
+			
 				// ft_printf("il y a un middle\n");
 				// print_node(middle);
 				// ft_printf("\n");
@@ -104,14 +109,16 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 					// actual = middle->start;
 					// while (*actual != '(' || actual != middle->end)
 					// 	actual++;
-					// or_flag = exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), data->envp_tab, 0);
+					//or_flag = exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), data->envp_tab, 0);
 					char *tmp = ft_strndup(middle->start, middle->end - middle->start + 1);
-					if (parse_par(tmp, data))
+					//	ft_printf("tmp: -%s-\n", tmp);
+					if (parse_par(tmp, data, middle))
 					{
-						free(tmp);
+						//ft_printf("il y a un ouille 2\n");
+						//free(tmp);
 						return (1);
 					}
-					free(tmp);
+					//free(tmp);
 					
 								
 				}
@@ -140,13 +147,14 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 			//  ft_printf("\n");
 			// if (!or_flag)
 			char * tmp = ft_strndup(raw->start, raw->end - raw->start + 1);
+			//ft_printf("tmp2: -%s-\n", tmp);
 			or_flag = exec_pipex(data, tmp, data->envp_tab, 0);
 			free(tmp);
-			if (get_data(NULL)->exit_status)
-			{
-				ft_printf("ERROR PIEX 2\n");
-				//return (1);
-			}
+			// if (get_data(NULL)->exit_status)
+			// {
+		
+			// 	return (1);
+			// }
 			return (0);				
 		}
 	}
@@ -185,30 +193,60 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 // 	return (0);
 // }
 
-int	parse_par(char *str, t_Data *data)
+int	parse_par(char *str, t_Data *data, t_ast_nde *root)
 {
-	t_ast_nde	*root;
+	
 	t_ast_nde	*cmd_sav;
 	t_ast_nde	*cmd;
 	t_ast_nde	*quote;
-	
+	int			first_rec;
+	// if (root)
+	// {
+	// 	ft_printf("parse par\n");
+	// 	print_node(root);
+	// 	ft_printf("\n");
+	// }
+	first_rec = 0;
 	if (!*str)
 		return (1);
 	cmd_sav = NULL;
 	exec_pipex(NULL, NULL, NULL, 1);
-	set_root(&root, str);
-	quote = set_qute_sib(str);
-	root->child->child->child = quote;
-	if (!quote)
-		return (free_tree(root), 1);
+	if (!root)
+	{
+		first_rec = 1;
+		set_root(&root, str);
+		quote = set_qute_sib(str);		
+		root->child->child->child = quote;
+		if (!quote)
+			return (free_tree(root), 1);
+		store_or_free_tree_par(root);
+		root = root->child;
+	}
 	//print_qute_sib(quote);
-	if (set_parenthesis(root->child) < 0)	
-		return (free_tree_par(root), 1);
-	store_or_free_tree_par(root);
-	if (leaf_tree_par(root->child, data))
-		return (free_tree_par(root), 1);
-	return (free_tree_par(root), 0);
-	//print_tree(root);	
+	if (set_parenthesis(root) < 0)
+	{	
+		if (first_rec)		
+			store_or_free_tree_par(NULL);		
+		else if (str)
+			free(str);
+		return (1);
+	}
+		
+	if (leaf_tree_par(root, data))
+	{	
+		if (first_rec)		
+			store_or_free_tree_par(NULL);		
+		else if (str)
+			free(str);
+		return (1);
+	}
+	//return (store_or_free_tree_par(NULL), 0);
+	if (first_rec)	
+		store_or_free_tree_par(NULL);	
+	else if (str)
+		free(str);
+	return (0);
+	//print_tree(root);
 }
 
 t_ast_nde	*parse(char *str, t_Data *data)
