@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:03:28 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 08:31:00 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 10:21:13 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include "parsing_utils.h"
 # include "libft.h"
+# include "ft_printf.h"
 
+void	free_node(t_ast_nde *node);
 char	*get_node_str(t_ast_nde *node);
 int		is_separator(t_ast_nde *node);
 int		is_chevron(t_ast_nde *node);

@@ -6,18 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:40:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 10:14:40 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 10:20:25 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fill_command_tab.h"
-#include "ft_printf.h"
-
-void	free_node(t_ast_nde *node)
-{
-	if (node && node->start)
-		free(node->start);
-}
 
 /**========================================================================
  *                           fill_command_tab
