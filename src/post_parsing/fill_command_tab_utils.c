@@ -6,20 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:50:04 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 07:51:20 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 07:54:43 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_utils.h"
-#include "libft.h"
-
-char	*get_node_str(t_ast_nde *node);
-int		is_separator(t_ast_nde *node);
-int		is_chevron(t_ast_nde *node);
-char	**add_sep_tab(char **cmd_tab_sep, t_ast_nde *node);
-char	***add_redir_tabs(char ***cmd_tab, t_ast_nde **node, int *i);
-char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node);
-int		get_cmd_nbr(t_ast_nde *node);
+#include "fill_command_tab_utils.h"
 
 /**========================================================================
  *                           add_sep_tab
