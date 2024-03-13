@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/13 06:27:47 by dan              ###   ########.fr        #
+#    Updated: 2024/03/13 07:50:39 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,8 @@ SRC =	src/main/main.c \
 		src/post_parsing/create_command_tab.c \
 		src/wildcard/wildcard_expansion.c \
 		src/wildcard/wildcard_expansion_2.c \
+		src/post_parsing/fill_command_tab.c \
+		src/post_parsing/fill_command_tab_utils.c \
 		
 OBJ = $(SRC:.c=.o)
 
