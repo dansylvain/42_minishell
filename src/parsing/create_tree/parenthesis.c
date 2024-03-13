@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:52:11 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/12 23:57:45 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 10:35:29 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static t_ast_nde	*search_token(char *actual, t_tok token, int *err, int reset, i
 			free(token_nde);
 			token_nde = NULL;
 		}
+		token_nde = NULL;
 		return (NULL);	
 	}
 	//ft_printf("search token\n count :%d, actual:%c\n", count, *actual);
@@ -86,7 +87,7 @@ static int	create_token_node(t_ast_nde *sib, t_ast_nde **token_nde)
 	int			err;
 
 	err = 0;
-	search_token(NULL, 0, NULL, 1, 1);
+	//search_token(NULL, 0, NULL, 1, 1);
 	while (sib)
 	{
 		actual = sib->start;

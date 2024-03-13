@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/12 22:18:14 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 10:27:40 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,7 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 			return (0);				
 		}
 	}
-	else
-		;//ft_printf("le raw fournit est null\n");
+
 	return (0);
 }
 

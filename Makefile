@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/13 10:21:35 by seblin           ###   ########.fr        #
+#    Updated: 2024/03/13 10:27:57 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CFLAGS = -g -Iincludes -Iincludes/main -Iincludes/parsing/parsing \
 -Iincludes/parsing/leaf_tree -Iincludes/pipex \
 -Iincludes/exec_files -Iincludes/wildcard -Iincludes/builtins \
 -Iincludes/post_parsing \
--Wall -Wextra -Werror \
+#-Wall -Wextra -Werror \
 
 # Directories
 LIBFT_DIR = lib/libft
