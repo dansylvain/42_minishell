@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/12 15:00:05 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 10:21:58 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static void	child_area(char **argv[], char **argv_sav[], t_redir *redir)
 	char	***cmd;
 
 	cmd = forward_next_cmd(argv);
-	set_redir_io(argv, redir);
+	if (set_redir_io(argv, redir))
+		free_and_exit(redir, argv_sav, EXIT_FAILURE, NULL);
 	if (redir->redir[0])
 		set_pipefd_in(redir->pipe_io[0], redir);
 	if (redir->redir[1])

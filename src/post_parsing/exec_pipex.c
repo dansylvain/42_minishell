@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:33:40 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 22:17:20 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 10:22:40 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	store_and_free_cmd_list(t_ast_nde *cmd_list)
 	else
 	{
 		free_sibling_and_child(cmd_list_lcl);
-		cmd_list_lcl = NULL;	
+		cmd_list_lcl = NULL;
 	}
 }

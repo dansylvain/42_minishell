@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:28:26 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/11 11:32:58 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 09:01:28 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_C
-# define TEST_C
+#ifndef TEST_H
+# define TEST_H
 
 # include <stdio.h>
 # include <stdlib.h>

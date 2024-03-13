@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 15:00:49 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 10:22:07 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,59 +25,19 @@ void	store_and_free_cmd_tab(char ***cmd_tab)
 		free_command_tab_lg(cmd_tab_lcl);
 }
 
-int	alloc_memo(char *****cmd_tab, int lstsize, int *i, int *j)
-{
-	(**cmd_tab)[*i] = (char **)ft_calloc(lstsize + 1, sizeof (char *));
-	if ((**cmd_tab)[*i] == NULL)
-		return (0);
-	*j = 0;
-	while (*j < lstsize)
-	{
-		(**cmd_tab)[*i][*j] = (char *)ft_calloc(100, sizeof (char));
-		if ((**cmd_tab)[*i][*j] == NULL)
-			return (0);
-		(*j)++;
-	}
-	(*i)++;
-	return (1);
-}
-
-int	alloc_memory_for_command_tab(t_ast_nde *node, char ****cmd_tab)
-{
-	int	lstsize;
-	int	i;
-	int	j;
-
-	lstsize = 0;
-	while (node)
-	{
-		lstsize++;
-		node = node->sibling;
-	}
-	*cmd_tab = (char ***)ft_calloc(lstsize + 1, sizeof (char **));
-	if (*cmd_tab == NULL)
-		return (0);
-	i = 0;
-	while (i < lstsize)
-	{
-		if (alloc_memo(&cmd_tab, lstsize, &i, &j) == 0)
-			return (0);
-	}
-	return (1);
-}
-
 /**========================================================================
  *                           create_command_tab
  *========================================================================**/
 char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 {
-	char		***cmd_tab;
-	int			cmd_nbr;
+	char	***cmd_tab;
+	int		pipe_parts_nbr;
 
-	if (alloc_memory_for_command_tab(node, &cmd_tab) == 0)
-		free_command_tab_lg(cmd_tab);
-	cmd_tab = fill_cmd_tab_tabs(data, node, cmd_tab);
+	cmd_tab = NULL;
+	pipe_parts_nbr = get_pipe_parts_nbr(&node);
+	cmd_tab = alloc_memory_for_pipe_parts(cmd_tab, pipe_parts_nbr);
+	fill_command_tab(cmd_tab, node);
 	return (cmd_tab);
-	(void)cmd_nbr;
+	(void)data;
 	(void)envp;
 }

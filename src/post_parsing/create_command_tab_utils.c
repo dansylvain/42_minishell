@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_command_tab_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:53:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/10 17:53:03 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 07:27:40 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,9 @@ int	is_chevron(t_ast_nde *node)
 }
 
 /**========================================================================
- *                           is_pipeline
- *========================================================================**/
-int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
-{
-	while (cmd_tab_node_sav)
-	{
-		if (cmd_tab_node_sav->token == PIPE || is_chevron(cmd_tab_node_sav))
-			return (1);
-		cmd_tab_node_sav = cmd_tab_node_sav->sibling;
-	}
-	return (0);
-}
-
-/**========================================================================
  *                           get_node_str
  *========================================================================**/
-char	*get_node_str(t_Data *data, t_ast_nde *node)
+char	*get_node_str(t_ast_nde *node)
 {
 	char	str[20000];
 	int		index;
@@ -73,67 +59,5 @@ char	*get_node_str(t_Data *data, t_ast_nde *node)
 		}
 		node = node->sibling;
 	}
-	(void)data;
 	return (ft_strdup(str));
-}
-
-/**========================================================================
- *                           get_cmd_nbr
- *========================================================================**/
-int	get_cmd_nbr(t_ast_nde *node)
-{
-	int	cmd_nbr;
-
-	cmd_nbr = 1;
-	while (node)
-	{
-		if (is_chevron(node))
-		{
-			cmd_nbr++;
-			if (node->sibling->sibling)
-				node = node->sibling->sibling;
-			else
-				break ;
-			continue ;
-		}
-		if (node->token == PIPE)
-			cmd_nbr += 2;
-		node = node->sibling;
-	}
-	return (cmd_nbr);
-}
-
-// void	display_command_tab(char **command_tab)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	ft_printf("command_tab: \n");
-// 	while (command_tab[i])
-// 	{
-// 		ft_printf("cmd_tab[%i]: >%s<\n", i, command_tab[i]);
-// 		i++;
-// 	}
-// }
-
-void	display_command_tab_big(char ***command_tab)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	ft_printf("command_tab: \n");
-	if (!command_tab || !command_tab[i])
-		return ;
-	while (command_tab[i])
-	{
-		j = 0;
-		while (command_tab[i][j])
-		{
-			if (command_tab[i][j])
-				ft_printf("cmd_tab[%i][%i]: >%s<\n", i, j, command_tab[i][j]);
-			j++;
-		}
-		i++;
-	}
 }

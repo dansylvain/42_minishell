@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/11 14:06:05 by seblin           ###   ########.fr        #
+#    Updated: 2024/03/13 10:21:35 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CFLAGS = -g -Iincludes -Iincludes/main -Iincludes/parsing/parsing \
 -Iincludes/parsing/leaf_tree -Iincludes/pipex \
 -Iincludes/exec_files -Iincludes/wildcard -Iincludes/builtins \
 -Iincludes/post_parsing \
-#-Wall -Wextra -Werror \
+-Wall -Wextra -Werror \
 
 # Directories
 LIBFT_DIR = lib/libft
@@ -64,6 +64,7 @@ SRC =	test.c \
 		src/parsing/create_tree/token_child.c \
 		src/parsing/leaf_tree/leaf.c \
 		src/parsing/leaf_tree/dollar_expansion.c \
+		src/post_parsing/create_command_tab_allocation.c \
 		src/pipex/pipe_fwrd.c \
 		src/pipex/path.c \
 		src/pipex/pipex.c \
@@ -73,13 +74,13 @@ SRC =	test.c \
 		src/pipex/here_doc.c \
 		src/pipex/exit.c \
 		src/post_parsing/create_command_tab_utils.c \
-		src/post_parsing/fill_command_tab.c \
 		src/post_parsing/exec_pipex.c \
 		src/post_parsing/launch_command_tab.c \
 		src/post_parsing/create_command_tab.c \
-		src/post_parsing/fill_command_tab_utils.c \
 		src/wildcard/wildcard_expansion.c \
 		src/wildcard/wildcard_expansion_2.c \
+		src/post_parsing/fill_command_tab.c \
+		src/post_parsing/fill_command_tab_utils.c \
 		
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 11:50:35 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 10:21:47 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,6 @@ int	command_is_builtin(char	**cmd_tab, t_Data *data)
 		return (free_command_tab(&cmd_tab), 1);
 	if (len >= 2 && !ft_strncmp(&(cmd_tab[0][len - 2]), "cd", 3))
 		return (exec_cd(data, cmd_tab), 1);
-	// if (len >= 2 && !ft_strncmp(&(cmd_tab[0][len - 2]), "$?", 3))
-	// 	return (ft_printf("HOLLY COW : %s\n", cmd_tab[0]), 1);
 	if (len >= 3 && !ft_strncmp(&(cmd_tab[0][len - 3]), "env", 4))
 		return (exec_env(data, cmd_tab), 1);
 	if (len >= 3 && !ft_strncmp(&(cmd_tab[0][len - 3]), "pwd", 4))
