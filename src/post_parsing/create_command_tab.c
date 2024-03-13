@@ -6,25 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 22:23:12 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 07:16:21 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "create_command_tab.h"
-#include "ft_printf.h"
-int		is_separator(t_ast_nde *node);
-int		is_chevron(t_ast_nde *node);
-void	display_command_tab_big(char ***command_tab);
-void	print_node(t_ast_nde *node);
-void	print_tree(t_ast_nde *node);
-
-int	get_pipe_parts_nbr(t_ast_nde **node);
-char ***alloc_memory_for_pipe_parts(char ***cmd_tab, int pipe_parts_nbr);
-int	get_pipe_elements_nbr(t_ast_nde *node);
-char **alloc_memory_for_pipe_elements(char **cmd_tab, int pipe_elements_nbr);
-char	***alloc_memory_for_tab_tabs(char ***cmd_tab, t_ast_nde *node);
-
-
 
 /**========================================================================
  *                           store_and_free_cmd_tab
@@ -39,31 +25,16 @@ void	store_and_free_cmd_tab(char ***cmd_tab)
 		free_command_tab_lg(cmd_tab_lcl);
 }
 
-
-char	**add_redirections(char **cmd_tab, t_ast_nde *node)
-{
-	return (cmd_tab);
-}
-
-
 /**========================================================================
  *                           create_command_tab
  *========================================================================**/
 char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 {
-	char ***cmd_tab;
-	int	pipe_parts_nbr;
-	
-	// check_pipeline_validity();
+	char	***cmd_tab;
+	int		pipe_parts_nbr;
+
 	pipe_parts_nbr = get_pipe_parts_nbr(&node);
 	cmd_tab = alloc_memory_for_pipe_parts(cmd_tab, pipe_parts_nbr);
-	// ft_printf("pipe_parts_nbr: %i\n", pipe_parts_nbr);	
-	
 	alloc_memory_for_tab_tabs(cmd_tab, node);
-	
-	
-	// display_command_tab_big(cmd_tab);
-	// free_command_tab_lg(cmd_tab);
-
 	return (cmd_tab);
 }
