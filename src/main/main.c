@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 07:23:54 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 18:06:50 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,6 @@ int	prompt_loop(t_Data *data, char *envp[])
 			add_history(cmd);
 		if (cmd == NULL)
 			return (ft_printf("exit\n"), 0);
-		if (is_not_empty_prompt(cmd))
-		{
-			display_error_detail("", cmd, " : command not found\n");
-			free(cmd);
-			cmd = NULL;
-			continue ;
-		}
 		exec_pipex(data, cmd, data->envp_tab);
 		free(cmd);
 	}
