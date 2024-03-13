@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operator.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/08 10:50:23 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/11 13:10:36 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ static int	token_child_handle(t_ast_nde *sib_cont,
 	if (raw_lft->child)
 		set_space(raw_lft);
 	else if (token->token == AND || token->token == OR || token->token == PIPE)
-		return (display_error_free(ft_strjoin("bash: syntax error near \
+		return (display_error_free(ft_strjoin("minishell: syntax error near \
 unexpected token ", translate_enum(token->token))), 1);
 	if (raw_rght->child)
 		return ((set_operator(raw_rght)));
 	else if (token->token == AND || token->token == OR || token->token == PIPE
 		|| is_chevron(token))
-		return (display_error_free(ft_strjoin("bash: syntax error near \
+		return (display_error_free(ft_strjoin("minishell: syntax error near \
 unexpected token ", translate_enum(token->token))), 1);
 	return (0);
 }

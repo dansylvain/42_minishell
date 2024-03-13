@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operator.h                                         :+:      :+:    :+:   */
+/*   exit.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 14:27:56 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/11 10:19:56 by seblin           ###   ########.fr       */
+/*   Created: 2024/03/10 21:35:40 by seblin            #+#    #+#             */
+/*   Updated: 2024/03/10 22:06:44 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OPERATOR_H
-# define OPERATOR_H
+#ifndef EXIT_H
+# define EXIT_H
 
+# include "pipex_global_utils.h"
+# include <errno.h>
+# include <unistd.h>
 # include <stdlib.h>
 # include "parsing_utils.h"
-# include "libft.h"
+# include "minishell.h"
 
-void		display_error_free(char *str);
-int			set_space(t_ast_nde *node);
-int			set_operator(t_ast_nde *node);
-char		*translate_enum(t_tok token);
-t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token);
-void		fill_child(t_ast_nde *sib, t_ast_nde *raw_lft,
-				t_ast_nde *raw_rght, t_ast_nde *token);
-int			is_chevron(t_ast_nde *node);
+void	display_error(char *str);
+void	store_and_free_cmd_list(t_ast_nde *cmd_list);
+void	free_command_tab_lg(char ***command_tab);
+void	free_data(t_Data *data);
+t_Data	*get_data(char *envp[]);
 
 #endif

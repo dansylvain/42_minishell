@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/13 07:50:39 by dan              ###   ########.fr        #
+#    Updated: 2024/03/13 08:51:49 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CFLAGS = -g -Iincludes -Iincludes/main -Iincludes/parsing/parsing \
 -Iincludes/parsing/leaf_tree -Iincludes/pipex \
 -Iincludes/exec_files -Iincludes/wildcard -Iincludes/builtins \
 -Iincludes/post_parsing \
-# -Wall -Wextra -Werror \
+#-Wall -Wextra -Werror \
 
 # Directories
 LIBFT_DIR = lib/libft
@@ -36,7 +36,8 @@ FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 LIBS = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
 
 # Source files
-SRC =	src/main/main.c \
+SRC =	test.c \
+		src/main/main.c \
 		src/main/utils.c \
 		src/main/utils_2.c \
 		src/main/utils_3.c \
@@ -70,6 +71,8 @@ SRC =	src/main/main.c \
 		src/pipex/utils.c \
 		src/pipex/redir.c \
 		src/pipex/fdio.c \
+		src/pipex/here_doc.c \
+		src/pipex/exit.c \
 		src/post_parsing/create_command_tab_utils.c \
 		src/post_parsing/exec_pipex.c \
 		src/post_parsing/launch_command_tab.c \

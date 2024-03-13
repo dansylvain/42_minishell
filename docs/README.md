@@ -23,6 +23,6 @@ valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --suppress
 I silenced the pipex warning with a flag in file src/pipex/pipex.c
 because it sucks. Let us not forget to remove it by the end of the project!
 
-git add . && git commit -m "modif forward cmd" && git push && git status
+git add . && git commit -m "add test.c/.h and id double token" && git push && git status
 
 env -i ./minishell !!!--
