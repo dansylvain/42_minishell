@@ -40,3 +40,9 @@ obj:*/ls
 	...
 	obj:/usr/bin/mv
 }
+{
+   clear_command_memory_leaks
+   Memcheck:Leak
+   ...
+   obj:/usr/bin/clear
+}
