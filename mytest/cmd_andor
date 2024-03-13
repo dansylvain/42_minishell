@@ -73,3 +73,7 @@ echo $?
 echo $?
 echo truc &&(echo troc)
 echo $?
+(echo aaa && echo bbb && (echo zzz | echo iii)) && echo$?
+echo $?
+(echo aaa && echo bbb && (echo zzz | echo iii)) && echo $?
+echo $?

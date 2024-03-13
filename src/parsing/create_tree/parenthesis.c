@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:52:11 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/13 17:00:18 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 20:57:43 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_ast_nde	*search_token(char *actual, t_tok token, int *err, int reset, i
 			// if (token_nde->start)
 			// 	free(token_nde->start);
 			free(token_nde);
-			token_nde = NULL;
+			//token_nde = NULL;
 		}
 		token_nde = NULL;
 		return (NULL);	

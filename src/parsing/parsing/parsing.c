@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/13 17:46:55 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 21:18:10 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,10 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 					// ft_printf("\n");
 				//ft_printf("je vais executer pipex avec raw_left\n");
 					char *tmp = ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1);
-					//
+					store_or_free_cmd(tmp);
 					or_flag = exec_pipex(data, tmp, data->envp_tab, 0);
-					free(tmp);
+					store_or_free_cmd(NULL);
+					//free(tmp);
 					// if (get_data(NULL)->exit_status)
 					// {
 					// 	ft_printf("il y a un ouille 1\n");
@@ -111,14 +112,19 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 					// 	actual++;
 					//or_flag = exec_pipex(data, ft_strndup(token->start + 1, token->end - token->start - 1), data->envp_tab, 0);
 					char *tmp = ft_strndup(middle->start, middle->end - middle->start + 1);
+					store_or_free_cmd_par(tmp);
 					//	ft_printf("tmp: -%s-\n", tmp);
 					if (parse_par(tmp, data, middle))
 					{
 						//ft_printf("il y a un ouille 2\n");
 						//free(tmp);
+						//store_or_free_cmd(NULL);
+						store_or_free_cmd_par(NULL);
 						return (1);
 					}
-					//free(tmp);
+					store_or_free_cmd_par(NULL);
+				//	store_or_free_cmd(NULL);
+				//	free(tmp);
 					
 								
 				}
@@ -134,10 +140,8 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 				// ft_printf("je vais utiliser la recursive, donc si pas de nouveau token, il y aura pipex avec le raw right, mais entier\n");
 				// ft_printf("si pas de raw, return 0\n");
 				if (leaf_tree_par(raw_rght, data))
-					return (1);
-				//exec_pipex(data, ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1), envp);				
-			}		
-			//leaf_tree_par(token->child->sibling->sibling, data, envp);			
+					return (1);								
+			}						
 		}
 		else
 		{	
@@ -146,10 +150,12 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 			// print_node(raw);
 			//  ft_printf("\n");
 			// if (!or_flag)
-			char * tmp = ft_strndup(raw->start, raw->end - raw->start + 1);
+			char *tmp = ft_strndup(raw->start, raw->end - raw->start + 1);			
+			store_or_free_cmd(tmp);
 			//ft_printf("tmp2: -%s-\n", tmp);
 			or_flag = exec_pipex(data, tmp, data->envp_tab, 0);
-			free(tmp);
+			store_or_free_cmd(NULL);
+			//free(tmp);
 			// if (get_data(NULL)->exit_status)
 			// {
 		
@@ -227,8 +233,8 @@ int	parse_par(char *str, t_Data *data, t_ast_nde *root)
 	{	
 		if (first_rec)		
 			store_or_free_tree_par(NULL);		
-		else if (str)
-			free(str);
+		// else if (str)
+		// 	free(str);
 		return (1);
 	}
 		
@@ -236,15 +242,16 @@ int	parse_par(char *str, t_Data *data, t_ast_nde *root)
 	{	
 		if (first_rec)		
 			store_or_free_tree_par(NULL);		
-		else if (str)
-			free(str);
+		// else if (str)
+		// 	free(str);
 		return (1);
 	}
+	//store_or_free_cmd_par(NULL);
 	//return (store_or_free_tree_par(NULL), 0);
 	if (first_rec)	
 		store_or_free_tree_par(NULL);	
-	else if (str)
-		free(str);
+	// else if (str)
+	// 	free(str);
 	return (0);
 	//print_tree(root);
 }

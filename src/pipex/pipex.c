@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 15:23:23 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/13 15:49:15 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 20:37:43 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ static void	builtin_or_execve(char **argv[], char **argv_sav[], t_redir *redir)
 	{
 		if (!is_path(**argv))
 		{
-			if (search_path(*argv, data->envp_tab))
-			{			
-				free_and_exit(redir, argv_sav, 127, NULL);
-			}
+			if (search_path(*argv, data->envp_tab))					
+				free_and_exit(redir, argv_sav, 127, NULL);			
 		}
 		execve(**argv, *argv, data->envp_tab);
 		errno_handle(argv, argv_sav, redir);

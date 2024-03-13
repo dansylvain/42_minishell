@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 10:03:27 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/13 11:22:48 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 20:33:52 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void		ft_lstadd_back_sib(t_ast_nde **lst, t_ast_nde *new);
 t_ast_nde	*sib_last(t_ast_nde *sib);
 
 void		store_or_free_tree_par(t_ast_nde *root);
+void		store_or_free_cmd(char *cmd);
+void		store_or_free_cmd_par(char *cmd);
 void		free_tree_par(t_ast_nde *operator);
 void		free_tree(t_ast_nde *operator);
 void		free_sibling(t_ast_nde *sib);
