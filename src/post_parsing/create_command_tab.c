@@ -6,17 +6,15 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 14:37:15 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/14 16:40:20 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "create_command_tab.h"
-int		is_not_empty_prompt(char *str);
-void	display_error_detail(char *str, char *details, char *str2);
-char	*get_node_str(t_ast_nde *node);
 
 /**========================================================================
  *                           store_and_free_cmd_tab
+ *! FUNCTION TO REMOVE BEFORE END OF PROJECT 
  *========================================================================**/
 void	store_and_free_cmd_tab(char ***cmd_tab)
 {
@@ -28,10 +26,14 @@ void	store_and_free_cmd_tab(char ***cmd_tab)
 		free_command_tab_lg(cmd_tab_lcl);
 }
 
+/**========================================================================
+ *                           display_command_tab
+ *! FUNCTION TO REMOVE BEFORE END OF PROJECT 
+ *========================================================================**/
 void	display_command_tab(char ***cmd_tab)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (cmd_tab && cmd_tab[i])
@@ -70,7 +72,6 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 		return (cmd_tab);
 	}
 	fill_command_tab(cmd_tab, node);
-	display_command_tab(cmd_tab);
 	return (cmd_tab);
 	(void)data;
 	(void)envp;

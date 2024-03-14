@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:36:26 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 14:04:23 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/14 16:55:38 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	get_matching_elements(const char *pattern, DIR *dir,
 			break ;
 		if (matches_pattern(entry->d_name, pattern))
 		{
-			*matches = ft_realloc(*matches, (count + 2) * sizeof(char *), (count) * sizeof(char *));
+			*matches = ft_realloc(*matches, (count + 2)
+					* sizeof(char *), (count) * sizeof(char *));
 			if (*matches == NULL)
 			{
 				perror("realloc");

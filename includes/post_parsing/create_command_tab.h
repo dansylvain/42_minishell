@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:07:23 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 07:29:15 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/14 16:40:29 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,8 @@ char	***alloc_memory_for_pipe_parts(char ***cmd_tab, int pipe_parts_nbr);
 int		get_pipe_elements_nbr(t_ast_nde *node);
 char	**alloc_memory_for_pipe_elements(char **cmd_tab, int pipe_elements_nbr);
 char	***fill_command_tab(char ***cmd_tab, t_ast_nde *node);
+int		is_not_empty_prompt(char *str);
+void	display_error_detail(char *str, char *details, char *str2);
+char	*get_node_str(t_ast_nde *node);
 
 #endif
