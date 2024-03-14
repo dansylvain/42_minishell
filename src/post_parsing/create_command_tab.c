@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 13:37:07 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/14 14:06:44 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	store_and_free_cmd_tab(char ***cmd_tab)
 		free_command_tab_lg(cmd_tab_lcl);
 }
 
-void	dispay_cmd_tab(char ***cmd_tab)
+void	display_command_tab(char ***cmd_tab)
 {
 	int i;
 	int j;
-	
+
 	i = 0;
 	while (cmd_tab[i])
 	{
@@ -43,7 +43,7 @@ void	dispay_cmd_tab(char ***cmd_tab)
 			j++;
 		}
 		i++;
-	}	
+	}
 }
 
 /**========================================================================
@@ -70,7 +70,7 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[])
 		return (cmd_tab);
 	}
 	fill_command_tab(cmd_tab, node);
-	dispay_cmd_tab(cmd_tab);
+	display_command_tab(cmd_tab);
 	return (cmd_tab);
 	(void)data;
 	(void)envp;

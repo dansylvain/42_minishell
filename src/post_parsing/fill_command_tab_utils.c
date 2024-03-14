@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:50:04 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 14:02:42 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/14 14:07:39 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
 	int new_size;
 	
 	nbr = get_cmd_nbr(node);
+	ft_printf("nbr = %i\n", nbr);
 	cmd_tab_tab = ft_calloc(nbr + 1, sizeof(char *));
 	cmd_tab_tab[nbr] = NULL;
 	i = 0;
