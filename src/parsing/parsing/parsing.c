@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/14 09:43:14 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/14 11:42:27 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	is_double_token(t_ast_nde *node)
 	d_tok = RAW;
 	while (node)
 	{
-		if (node->token != RAW && !is_chevron(node))
+		if (node->token != RAW && !is_chevron(node) && node->token != JOKER && node->token != DOLL)
 		{
 			// if (d_tok < 0)
 // 				return (display_error_free(ft_strjoin("minishell: syntax 
