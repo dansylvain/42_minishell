@@ -6,11 +6,12 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:50:04 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 07:54:43 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/14 13:38:41 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fill_command_tab_utils.h"
+#include "ft_printf.h"
 
 /**========================================================================
  *                           add_sep_tab
@@ -69,6 +70,10 @@ char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
 	i = 0;
 	while (!is_separator(node))
 	{
+		if (node->token == JOKER)
+		{
+			ft_printf("found JOKER\n");
+		}
 		if (!is_chevron(node) && node->token != CMD)
 			cmd_tab_tab[i++] = get_node_str(node->child);
 		node = node->sibling;
