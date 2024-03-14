@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/14 11:42:27 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/14 16:26:57 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	is_double_token(t_ast_nde *node)
 // error near unexpected token DTOK 0 ", translate_enum(d_tok))), 1);
 			if (node->token == d_tok)
 				return (display_error_free(ft_strjoin("minishell: syntax \
-error near unexpected token ", translate_enum(d_tok))), 1);
+error near DOUBLEunexpected token ", translate_enum(d_tok))), 1);
 		}
 		d_tok = node->token;
 		node = node->sibling;
@@ -49,20 +49,28 @@ int	set_parenthesis(t_ast_nde *node);
 t_Data	*get_data(char *envp[]);
 int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
 int	parse_par(char *str, t_Data *data, t_ast_nde *root);
+
+int m_flag = 0;
+int	f_flag = 0;
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 {
+	
+	extern int p_flag;
 	t_ast_nde	*token;
 	t_ast_nde	*raw_lft;
 	t_ast_nde	*middle;
 	t_ast_nde	*raw_rght;
 	int	or_flag;
-
+	//p_flag = 0;
 	or_flag = 0;
 	token = NULL;
 	raw_lft = NULL;;
 	middle= NULL;
 	raw_rght = NULL;
 	//ft_printf("leaf!\n");
+	
+	
+	f_flag++;
 	if (raw && raw->child)
 	{	
 		///ft_printf("le raw fournit est ok\n");
@@ -82,7 +90,15 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 				//ft_printf("je vais executer pipex avec raw_left\n");
 					char *tmp = ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1);
 					store_or_free_cmd(tmp);
+					// if (m_flag)
+					// 	p_flag = 0;
+					// else
+					// 	p_flag = 1;
+					m_flag = 0;
+					p_flag = 2;
 					or_flag = exec_pipex(data, tmp, data->envp_tab, 0);
+					p_flag = 0;
+					m_flag = 0;
 					store_or_free_cmd(NULL);
 					//free(tmp);
 					// if (get_data(NULL)->exit_status)
@@ -100,7 +116,7 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 				middle->end--;
 				middle->child->start++;
 				middle->child->end--;
-			
+		//	p_flag = 0;
 				// ft_printf("il y a un middle\n");
 				// print_node(middle);
 				// ft_printf("\n");
@@ -117,14 +133,19 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 					char *tmp = ft_strndup(middle->start, middle->end - middle->start + 1);
 					store_or_free_cmd_par(tmp);
 					//	ft_printf("tmp: -%s-\n", tmp);
+					m_flag = 1;	
 					if (parse_par(tmp, data, middle))
 					{
 						//ft_printf("il y a un ouille 2\n");
 						//free(tmp);
 						//store_or_free_cmd(NULL);
 						store_or_free_cmd_par(NULL);
+						m_flag = 0;
 						return (1);
 					}
+					m_flag = 0;
+					
+					//f_flag = 0;
 					store_or_free_cmd_par(NULL);
 				//	store_or_free_cmd(NULL);
 				//	free(tmp);
@@ -142,8 +163,16 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 				// ft_printf("\n");
 				// ft_printf("je vais utiliser la recursive, donc si pas de nouveau token, il y aura pipex avec le raw right, mais entier\n");
 				// ft_printf("si pas de raw, return 0\n");
+				m_flag = 0;
 				if (leaf_tree_par(raw_rght, data))
+				{
+					m_flag = 0;
+					//f_flag = 0;
 					return (1);								
+				}
+				m_flag = 0;
+				
+				
 			}						
 		}
 		else
@@ -153,10 +182,22 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 			// print_node(raw);
 			//  ft_printf("\n");
 			// if (!or_flag)
+			// if (f_flag)			
+			// 	p_flag = 2;			
+			// else if (f_flag)
+				
+			if (m_flag)
+				p_flag = 0;
+			else
+				p_flag = 1;
+			
 			char *tmp = ft_strndup(raw->start, raw->end - raw->start + 1);			
 			store_or_free_cmd(tmp);
+			//p_flag = 1;
 			//ft_printf("tmp2: -%s-\n", tmp);
 			or_flag = exec_pipex(data, tmp, data->envp_tab, 0);
+			m_flag = 0;
+		//	p_flag = 0;
 			store_or_free_cmd(NULL);
 			//free(tmp);
 			// if (get_data(NULL)->exit_status)
@@ -243,6 +284,7 @@ int	parse_par(char *str, t_Data *data, t_ast_nde *root)
 		
 	if (leaf_tree_par(root, data))
 	{	
+		
 		if (first_rec)		
 			store_or_free_tree_par(NULL);		
 		// else if (str)
@@ -251,8 +293,11 @@ int	parse_par(char *str, t_Data *data, t_ast_nde *root)
 	}
 	//store_or_free_cmd_par(NULL);
 	//return (store_or_free_tree_par(NULL), 0);
-	if (first_rec)	
+	if (first_rec)
+	{
 		store_or_free_tree_par(NULL);	
+		f_flag = 0;	
+	}
 	// else if (str)
 	// 	free(str);
 	return (0);
