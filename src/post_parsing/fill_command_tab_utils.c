@@ -6,12 +6,13 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:50:04 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 13:46:52 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/14 14:02:42 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fill_command_tab_utils.h"
 #include "ft_printf.h"
+void *ft_realloc(void *ptr, size_t size, size_t old_size);
 
 /**========================================================================
  *                           add_sep_tab
@@ -81,7 +82,8 @@ char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
 {
 	int	nbr;
 	int	i;
-
+	int new_size;
+	
 	nbr = get_cmd_nbr(node);
 	cmd_tab_tab = ft_calloc(nbr + 1, sizeof(char *));
 	cmd_tab_tab[nbr] = NULL;
@@ -93,9 +95,10 @@ char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
 			// count realloc size
 			ft_printf("i: %i, nbr: %i\n", i, nbr);
 			// use i as the index where to start adding new strs
-			int new_size = get_new_realloc_size(i, node->start);
+			new_size = get_new_realloc_size(i, node->start);
 			ft_printf("new_size: %i\n", new_size);
 			
+			cmd_tab_tab = ft_realloc(cmd_tab_tab, (new_size + 1) * sizeof(char *), i * sizeof(char *));
 			// realloc ptr (NULL terminated)
 			// split wildcard_str in str tab
 			// add str tb strs to cmd_tab
