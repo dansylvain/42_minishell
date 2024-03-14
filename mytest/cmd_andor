@@ -77,3 +77,22 @@ echo $?
 echo $?
 (echo aaa && echo bbb && (echo zzz | echo iii)) && echo $?
 echo $?
+(echo ttt) || (echo kkk)
+echo $?
+( false ) || (echo zz &&( echo kk )&&  echo hhh  )
+echo $?
+( false ) || (echo zz &&( echo kk )  echo hhh && )
+echo $?
+( false ) || (echo zz &&( echo kk )  echo hhh && ) &&
+echo $?
+( false ) || (echo zz &&( echo kk )  echo hhh&& )
+echo $?
+( false ) || (echo zz &&( echo kk ) && echo hhh )
+echo $?
+( false ) || (echo zz &&( echo kk )&& echo hhh )
+echo $?
+( false ) || (echo zz &&( echo kk ) )&&
+echo $?
+( false ) || (echo zz &&( echo kk ) &&)
+echo $?
+( false ) || (echo zz &&( echo kk )  echo hhh && )

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/14 16:26:57 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/14 23:53:59 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 	//ft_printf("leaf!\n");
 	
 	
-	f_flag++;
+	// f_flag++;
 	if (raw && raw->child)
 	{	
 		///ft_printf("le raw fournit est ok\n");
@@ -90,12 +90,12 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 				//ft_printf("je vais executer pipex avec raw_left\n");
 					char *tmp = ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1);
 					store_or_free_cmd(tmp);
-					// if (m_flag)
-					// 	p_flag = 0;
-					// else
-					// 	p_flag = 1;
+					if (f_flag)
+						p_flag = 3;
+					else
+						p_flag = 1;
 					m_flag = 0;
-					p_flag = 2;
+				//	p_flag = 2;
 					or_flag = exec_pipex(data, tmp, data->envp_tab, 0);
 					p_flag = 0;
 					m_flag = 0;
@@ -112,6 +112,7 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 			}
 			if (middle)
 			{
+				f_flag++;
 				middle->start++;
 				middle->end--;
 				middle->child->start++;
@@ -125,7 +126,6 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 				if (!or_flag)
 				{
 					// char *actual;
-
 					// actual = middle->start;
 					// while (*actual != '(' || actual != middle->end)
 					// 	actual++;
@@ -141,18 +141,16 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 						//store_or_free_cmd(NULL);
 						store_or_free_cmd_par(NULL);
 						m_flag = 0;
+						//f_flag = 0;
 						return (1);
 					}
-					m_flag = 0;
-					
+					//m_flag = 0;					
 					//f_flag = 0;
 					store_or_free_cmd_par(NULL);
 				//	store_or_free_cmd(NULL);
 				//	free(tmp);
-					
-								
 				}
-				
+				//f_flag = 0;				
 				raw_rght = middle->sibling;
 			}			
 			if (raw_rght && raw_rght->child)
@@ -163,16 +161,13 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 				// ft_printf("\n");
 				// ft_printf("je vais utiliser la recursive, donc si pas de nouveau token, il y aura pipex avec le raw right, mais entier\n");
 				// ft_printf("si pas de raw, return 0\n");
-				m_flag = 0;
+				m_flag = 2;
 				if (leaf_tree_par(raw_rght, data))
 				{
 					m_flag = 0;
 					//f_flag = 0;
 					return (1);								
-				}
-				m_flag = 0;
-				
-				
+				}				
 			}						
 		}
 		else
@@ -185,12 +180,13 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 			// if (f_flag)			
 			// 	p_flag = 2;			
 			// else if (f_flag)
-				
-			if (m_flag)
-				p_flag = 0;
-			else
-				p_flag = 1;
 			
+			if (m_flag == 1)
+				p_flag = 0;
+			else if (m_flag == 2)
+				p_flag = 2;
+			else
+				p_flag = 1;	
 			char *tmp = ft_strndup(raw->start, raw->end - raw->start + 1);			
 			store_or_free_cmd(tmp);
 			//p_flag = 1;
@@ -205,10 +201,11 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 		
 			// 	return (1);
 			// }
+		//	f_flag = 0;
 			return (0);				
 		}
 	}
-
+	//f_flag = 0;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/14 16:44:02 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/14 23:50:45 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ unexpected token ", translate_enum(token->token))), 1);
 	// 		return (display_error_free(ft_strjoin("minishell: syntax error near 
 	// unexpected token ", translate_enum(token->token))), 1);
 	}
+
 // 	else
 // 	{
 // 			ft_printf(" else raw right flag: %d\n", p_flag);
@@ -188,6 +189,16 @@ unexpected token ", translate_enum(token->token))), 1);
 	// 		return (display_error_free(ft_strjoin("minishell: syntax error near 
 	// unexpected token ", translate_enum(token->token))), 1);
 	}
+
+		if (p_flag == 3)
+		{
+			if (raw_lft->child)// && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
+ 				set_space(raw_lft);
+
+			if (raw_rght->child)// && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))
+				return ((set_operator(raw_rght)));
+			
+		}
 // 	else
 // 	{
 // 			ft_printf(" else raw right flag: %d\n", p_flag);
