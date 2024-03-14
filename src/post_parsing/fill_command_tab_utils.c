@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:50:04 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 14:48:04 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/14 16:30:48 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
 	int new_size;
 	
 	nbr = get_cmd_nbr(node);
-	cmd_tab_tab = ft_calloc(nbr + 1, sizeof(char *));
+	cmd_tab_tab = ft_calloc(nbr + 100, sizeof(char *));
 	cmd_tab_tab[nbr] = NULL;
 	i = 0;
 	while (!is_separator(node))
@@ -99,7 +99,7 @@ char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
 			
 			// realloc ptr (NULL terminated)
 			ft_printf("realloc size: %i\n", new_size + 1);
-			cmd_tab_tab = ft_realloc(cmd_tab_tab, (new_size + 1) * sizeof(char *), i * sizeof(char *));
+			// cmd_tab_tab = ft_realloc(cmd_tab_tab, (new_size + 1) * sizeof(char *), i * sizeof(char *));
 			cmd_tab_tab[new_size] = NULL;
 			
 			char **tab = ft_split(node->start, ' ');
