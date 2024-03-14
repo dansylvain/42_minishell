@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/13 21:18:10 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/14 09:43:14 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ static int	is_double_token(t_ast_nde *node)
 	{
 		if (node->token != RAW && !is_chevron(node))
 		{
+			// if (d_tok < 0)
+// 				return (display_error_free(ft_strjoin("minishell: syntax 
+// error near unexpected token DTOK 0 ", translate_enum(d_tok))), 1);
 			if (node->token == d_tok)
 				return (display_error_free(ft_strjoin("minishell: syntax \
 error near unexpected token ", translate_enum(d_tok))), 1);
@@ -65,7 +68,7 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 		///ft_printf("le raw fournit est ok\n");
 		token = raw->child->sibling;	
 		if (token)
-		{		
+		{
 			//ft_printf("il y a un nouveau token\n");
 			raw_lft = token->child;
 			if (raw_lft)

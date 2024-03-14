@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/11 13:10:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/14 10:59:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,28 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 	return (NULL);
 }
 
+static int		is_only_space(char *start, char *end)
+{	
+	while (start != end)
+	{
+		if (!ft_isspace(*start))
+			return (0);
+		start++;
+	}
+	return (1);
+}
+#include "test.h"
+int	is_sibling_only_space(t_ast_nde *sib)
+{	
+	while (sib)
+	{			
+		if (sib->start && !is_only_space(sib->start, sib->end))		
+			return (0);		
+		sib = sib->sibling;
+	}	
+	return (1);
+}
+
 static int	token_child_handle(t_ast_nde *sib_cont,
 	t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
 {
@@ -78,13 +100,13 @@ static int	token_child_handle(t_ast_nde *sib_cont,
 	raw_rght = raw_lft->sibling;
 	token->child = raw_lft;
 	fill_child(sib, raw_lft->child, raw_rght->child, token);
-	if (raw_lft->child)
-		set_space(raw_lft);
+	if (raw_lft->child && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))	
+		set_space(raw_lft);	
 	else if (token->token == AND || token->token == OR || token->token == PIPE)
 		return (display_error_free(ft_strjoin("minishell: syntax error near \
 unexpected token ", translate_enum(token->token))), 1);
-	if (raw_rght->child)
-		return ((set_operator(raw_rght)));
+	if (raw_rght->child && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))	
+		return ((set_operator(raw_rght)));	
 	else if (token->token == AND || token->token == OR || token->token == PIPE
 		|| is_chevron(token))
 		return (display_error_free(ft_strjoin("minishell: syntax error near \
