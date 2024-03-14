@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 14:06:44 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/14 14:37:15 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	display_command_tab(char ***cmd_tab)
 	int j;
 
 	i = 0;
-	while (cmd_tab[i])
+	while (cmd_tab && cmd_tab[i])
 	{
 		j = 0;
-		while (cmd_tab[i][j])
+		while (cmd_tab && cmd_tab[i] && cmd_tab[i][j])
 		{
 			ft_printf("cmd_tab[%i][%i]: %s\n", i, j, cmd_tab[i][j]);
 			j++;

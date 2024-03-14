@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:50:04 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 14:07:39 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/14 14:30:59 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
 	int new_size;
 	
 	nbr = get_cmd_nbr(node);
-	ft_printf("nbr = %i\n", nbr);
 	cmd_tab_tab = ft_calloc(nbr + 1, sizeof(char *));
 	cmd_tab_tab[nbr] = NULL;
 	i = 0;
@@ -97,14 +96,30 @@ char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
 			ft_printf("i: %i, nbr: %i\n", i, nbr);
 			// use i as the index where to start adding new strs
 			new_size = get_new_realloc_size(i, node->start);
-			ft_printf("new_size: %i\n", new_size);
 			
-			cmd_tab_tab = ft_realloc(cmd_tab_tab, (new_size + 1) * sizeof(char *), i * sizeof(char *));
 			// realloc ptr (NULL terminated)
+			ft_printf("realloc size: %i\n", new_size + 1);
+			cmd_tab_tab = ft_realloc(cmd_tab_tab, (new_size + 1) * sizeof(char *), i * sizeof(char *));
+			cmd_tab_tab[new_size] = NULL;
+			
+			char **tab = ft_split(node->start, ' ');
+
+			int j = 0;
+			while (tab[j])
+			{
+				// cmd_tab_tab[i] = ft_strdup(tab[j]);
+				ft_printf("tab[%i]: %s\n",j , tab[j]);
+				free(tab[j]);
+				j++;
+				// i++;
+			}
+			cmd_tab_tab[i] = NULL;
+			free(tab);
+
 			// split wildcard_str in str tab
 			// add str tb strs to cmd_tab
 			
-			ft_printf("found JOKER\n");
+			ft_printf("found JOKER: %s\n", node->start);
 		}
 		if (!is_chevron(node) && node->token != CMD)
 			cmd_tab_tab[i++] = get_node_str(node->child);

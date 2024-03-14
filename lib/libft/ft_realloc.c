@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 11:22:17 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 14:08:04 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/14 14:33:20 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void *ft_realloc(void *ptr, size_t size, size_t old_size)
 	void *new_ptr = ft_calloc(1, size);
 	if (new_ptr == NULL)
 		return NULL;
-	copy_size = size < old_size ? size : old_size;
+	if (size < old_size)
+		copy_size = size;
+	else
+		copy_size = old_size;
 	memcpy(new_ptr, ptr, copy_size);
 	free(ptr);
 	return new_ptr;
