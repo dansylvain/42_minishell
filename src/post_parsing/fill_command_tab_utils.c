@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:50:04 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 13:38:41 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/14 13:46:52 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,24 @@ char	***add_redir_tabs(char ***cmd_tab, t_ast_nde **node, int *i)
 	return (cmd_tab);
 }
 
+int	get_new_realloc_size(int i, char *wild_str)
+{
+	int	new_size;
+	int	j;
+
+	
+	new_size = i;
+	j = 0;
+	while (wild_str[j])
+	{
+		if (wild_str[j] == ' ')
+			new_size++;
+		j++;
+	}
+	return (new_size + 1);
+}
+
+
 /**========================================================================
  *                           add_remaining_tabs
  *========================================================================**/
@@ -72,6 +90,16 @@ char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
 	{
 		if (node->token == JOKER)
 		{
+			// count realloc size
+			ft_printf("i: %i, nbr: %i\n", i, nbr);
+			// use i as the index where to start adding new strs
+			int new_size = get_new_realloc_size(i, node->start);
+			ft_printf("new_size: %i\n", new_size);
+			
+			// realloc ptr (NULL terminated)
+			// split wildcard_str in str tab
+			// add str tb strs to cmd_tab
+			
 			ft_printf("found JOKER\n");
 		}
 		if (!is_chevron(node) && node->token != CMD)
