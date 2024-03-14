@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:50:04 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 14:30:59 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/14 14:48:04 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,14 @@ char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
 			int j = 0;
 			while (tab[j])
 			{
-				// cmd_tab_tab[i] = ft_strdup(tab[j]);
-				ft_printf("tab[%i]: %s\n",j , tab[j]);
+				
+				cmd_tab_tab[i++] = ft_strdup(tab[j]);
+				ft_printf("tab[%i]: %s\n", j , tab[j]);
 				free(tab[j]);
 				j++;
 				// i++;
 			}
-			cmd_tab_tab[i] = NULL;
+			// cmd_tab_tab[i] = NULL;
 			free(tab);
 
 			// split wildcard_str in str tab
@@ -121,7 +122,7 @@ char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
 			
 			ft_printf("found JOKER: %s\n", node->start);
 		}
-		if (!is_chevron(node) && node->token != CMD)
+		if (!is_chevron(node) && node->token != CMD && node->token != JOKER)
 			cmd_tab_tab[i++] = get_node_str(node->child);
 		node = node->sibling;
 	}
