@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/15 20:03:43 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/15 22:47:41 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,27 @@ int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
 int	parse_par(char *str, t_Data *data, t_ast_nde *root);
 
 int m_flag = 0;
-int	f_flag = 0;
+
+int	is_next_token(t_ast_nde *raw_lft)
+{
+	return ((raw_lft && raw_lft->sibling && raw_lft->sibling->child
+		&& raw_lft->sibling->child->sibling));
+}
 
 int	raw_left_area(t_ast_nde *raw_lft, t_Data *data, int *or_flag)
 {
-	char	*tmp_str;
+	char		*tmp_str;
 
 	if (raw_lft && raw_lft->child)
-	{			
+	{	
+			
+		if (is_next_token(raw_lft))
+			p_flag = 3;
+		else
+			p_flag = 1;			
 		tmp_str = ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1);
 		store_or_free_cmd(tmp_str);
-		if (f_flag == 1)
-			p_flag = 0;
-		else
-			p_flag = 3;
-		m_flag = 0;		
-		*or_flag = exec_pipex(data, tmp_str, data->envp_tab, 0);
-		p_flag = 0;
-		m_flag = 0;
+		*or_flag = exec_pipex(data, tmp_str, data->envp_tab, 0);			
 		store_or_free_cmd(NULL);		
 	}
 }
@@ -77,6 +80,7 @@ int	middle_area(t_ast_nde *middle, t_Data *data, int or_flag)
 {
 	char	*tmp_str;
 	
+	m_flag = 1;	
 	if (middle && middle->child && !or_flag)
 	{		
 		middle->start++;
@@ -85,7 +89,6 @@ int	middle_area(t_ast_nde *middle, t_Data *data, int or_flag)
 		middle->child->end--;			
 		tmp_str = ft_strndup(middle->start, middle->end - middle->start + 1);
 		store_or_free_cmd_par(tmp_str);
-		m_flag = 1;	
 		if (parse_par(tmp_str, data, middle))
 		{
 			store_or_free_cmd_par(NULL);
@@ -99,8 +102,7 @@ int	middle_area(t_ast_nde *middle, t_Data *data, int or_flag)
 int	raw_right_area(t_ast_nde *raw_rght, t_Data *data)
 {
 	if (raw_rght && raw_rght->child)
-	{		
-		m_flag = 2;
+	{			
 		if (leaf_tree_par(raw_rght, data))
 		{
 			m_flag = 0;			
@@ -115,16 +117,16 @@ int	token_zone(t_ast_nde *token, t_Data *data)
 	t_ast_nde	*middle;
 	t_ast_nde	*raw_rght;
 	int			or_flag;
-	
+		
 	if (token)
-	{		
+	{			
 		raw_lft = token->child;
 		if (raw_lft)
 		{				
 			raw_left_area(raw_lft, data, &or_flag);
 			middle = raw_lft->sibling;
 			if (middle)
-			{					
+			{										
 				middle_area(middle, data, or_flag);
 				raw_rght = middle->sibling;
 				if (raw_rght)
@@ -137,27 +139,24 @@ int	token_zone(t_ast_nde *token, t_Data *data)
 int	no_token_zone(t_ast_nde *raw, t_Data *data)
 {
 	char	*tmp_str;
-
-	if (m_flag == 1 || f_flag)
+		
+	if (m_flag)
 		p_flag = 0;
-	else if (m_flag == 2)
+	else 
 		p_flag = 2;
-	else
-		p_flag = 1;	
-	tmp_str = ft_strndup(raw->start, raw->end - raw->start + 1);			
+	m_flag = 0;		
+	tmp_str = ft_strndup(raw->start, raw->end - raw->start + 1);
 	store_or_free_cmd(tmp_str);
 	exec_pipex(data, tmp_str, data->envp_tab, 0);
-	m_flag = 0;
 	store_or_free_cmd(NULL);
-	return (0);		
+	return (0);
 }
 
+extern int	p_flag;
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
-{	
-	extern int	p_flag;
-	t_ast_nde	*token;
-		
-	f_flag++;
+{
+	t_ast_nde	*token;	
+
 	if (raw && raw->child)
 	{		
 		token = raw->child->sibling;	
