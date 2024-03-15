@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/15 22:47:41 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/15 22:55:57 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ int	set_parenthesis(t_ast_nde *node);
 t_Data	*get_data(char *envp[]);
 int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
 int	parse_par(char *str, t_Data *data, t_ast_nde *root);
+int	leaf_tree_par(t_ast_nde	*raw, t_Data *data);
 
 int m_flag = 0;
+extern int	p_flag;
 
 int	is_next_token(t_ast_nde *raw_lft)
 {
@@ -130,7 +132,7 @@ int	token_zone(t_ast_nde *token, t_Data *data)
 				middle_area(middle, data, or_flag);
 				raw_rght = middle->sibling;
 				if (raw_rght)
-					raw_rght_area(raw_rght, data);					
+					raw_right_area(raw_rght, data);					
 			}
 		}
 	}
@@ -152,7 +154,7 @@ int	no_token_zone(t_ast_nde *raw, t_Data *data)
 	return (0);
 }
 
-extern int	p_flag;
+
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 {
 	t_ast_nde	*token;	
@@ -408,8 +410,7 @@ int	parse_par(char *str, t_Data *data, t_ast_nde *root)
 	//return (store_or_free_tree_par(NULL), 0);
 	if (first_rec)
 	{
-		store_or_free_tree_par(NULL);	
-		f_flag = 0;	
+		store_or_free_tree_par(NULL);				
 	}
 	// else if (str)
 	// 	free(str);
