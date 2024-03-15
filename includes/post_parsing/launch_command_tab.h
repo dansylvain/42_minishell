@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:59:07 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 07:25:01 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/15 12:13:32 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # include "minishell.h"
 # include "parsing_utils.h"
 # include <stddef.h>
+# include "ft_printf.h"
 
+void	display_error(char *str);
 void	store_and_free_cmd_tab_node_sav(t_ast_nde *cmd_tab_node_sav);
 int		is_pipeline(t_ast_nde *cmd_tab_node_sav);
 int		pipex(char **argv[]);

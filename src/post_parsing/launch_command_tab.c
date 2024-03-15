@@ -6,13 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/15 12:04:34 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/15 12:13:00 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "launch_command_tab.h"
-#include "ft_printf.h"
-void	display_error(char *str);
 
 /**========================================================================
  *                           launch_command_tab
@@ -31,20 +29,17 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 			add_sibling(copy_node_and_child(node), &cmd_tab_node,
 				&cmd_tab_node_sav);
 		node = node->sibling;
-	}	
+	}
 	store_and_free_cmd_tab_node_sav(cmd_tab_node_sav);
-	if ( node && (node->token == AND || node->token == OR))
+	if (node && (node->token == AND || node->token == OR))
 	{
 		display_error("minishell: && and || operators not supported\n");
 		data->exit_status = 1;
-		store_and_free_cmd_tab_node_sav(NULL);
-		return ;
+		return (store_and_free_cmd_tab_node_sav(NULL));
 	}
 	if (cmd_tab_node_sav)
 		build_command_tab(&cmd_tab, data, &cmd_tab_node_sav, envp);
 	flag = data->exit_status;
-	if (node && node->token == OR)
-		flag = !flag;
 	if (node)
 		launch_command_tab(data, node->sibling, envp, flag);
 }
