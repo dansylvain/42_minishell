@@ -6,14 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 18:41:11 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/15 11:29:11 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "create_command_tab.h"
-int		is_not_empty_prompt(char *str);
-void	display_error_detail(char *str, char *details, char *str2);
-char	*get_node_str(t_ast_nde *node);
 
 /**========================================================================
  *                           store_and_free_cmd_tab
