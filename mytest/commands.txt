@@ -37,7 +37,7 @@ echo $?
 echo $?
 /usr/bin/ls -al
 echo $?
-grep -i 'return' src/main.c
+grep -i 'return' src/main/main.c
 echo $?
 /usr/bin/cat testfile
 echo $?
@@ -74,6 +74,8 @@ echo $?
 /bin/ls fichiernulachier
 echo $?
 echo $? + $?
+echo $?
+$? + $?
 echo $?
 ls includes
 echo $?
