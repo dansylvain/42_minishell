@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/15 09:42:04 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/15 09:43:38 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,16 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 		sib = sib->sibling;
 	}
 	return (NULL);
+}
+static int		is_only_space(char *start, char *end)
+{	
+	while (start != end)
+	{
+		if (!ft_isspace(*start))
+			return (0);
+		start++;
+	}
+	return (1);
 }
 int	is_sibling_only_space(t_ast_nde *sib)
 {	
