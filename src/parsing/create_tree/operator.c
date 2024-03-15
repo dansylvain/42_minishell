@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/15 10:10:21 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/15 10:51:38 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,14 @@ static int	token_child_handle(t_ast_nde *sib_cont,
 	raw_rght = raw_lft->sibling;
 	token->child = raw_lft;
 	fill_child(sib, raw_lft->child, raw_rght->child, token);
-	if (raw_lft->child && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
+	if (raw_lft->child && raw_lft->child->child && !is_sibling_only_space(raw_lft->child))
 		set_space(raw_lft);
 	else if (token->token == AND || token->token == OR || token->token == PIPE)
 		return (display_error_free(ft_strjoin("minishell: syntax error near \
 unexpected token ", translate_enum(token->token))), 1);
-	if (raw_rght->child  && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))
+	if (raw_rght->child && raw_rght->child->child && !is_sibling_only_space(raw_rght->child))
 		return ((set_operator(raw_rght)));
-	else if (token->token == AND || token->token == OR || token->token == PIPE) //|| is_chevron(token))		
+	else if (token->token == AND || token->token == OR || token->token == PIPE || is_chevron(token))		
 		return (display_error_free(ft_strjoin("minishell: syntax error near \
 unexpected token ", translate_enum(token->token))), 1);
 	return (0);
