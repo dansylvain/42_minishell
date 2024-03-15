@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   leaf.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:01:47 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 10:46:29 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/15 12:06:56 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt,
 		raw_lft = operator->child;
 	if (raw_lft)
 		raw_rght = raw_lft->sibling;
-	if (operator && (operator->token == DOLL || operator->token == JOKER))
+	if (operator && (operator->token == DOLL))
 		return (add_sibling(rebuild_dollar_str_node
 				(rebuild_dollar_str(operator, NULL, data),
 					operator->token), rslt, rslt_sav));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/15 11:34:45 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/15 12:07:36 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	is_double_token(t_ast_nde *node)
 	d_tok = RAW;
 	while (node)
 	{
-		if (node->token != RAW && !is_chevron(node) && node->token != JOKER
+		if (node->token != RAW && !is_chevron(node)
 			&& node->token != DOLL)
 		{
 			if (node->token == d_tok)

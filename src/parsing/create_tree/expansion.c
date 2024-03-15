@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 07:42:44 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 10:54:58 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/15 12:08:11 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,10 @@
 static t_ast_nde	*search_token_joker(t_ast_nde *sib, char *actual)
 {
 	t_ast_nde	*token_nde;
-	char		*start;
 
-	start = actual;
 	token_nde = NULL;
 	while (actual <= sib->end)
 	{
-		if (*actual == '*')
-		{
-			token_nde = create_node(JOKER);
-			token_nde->start = start;
-		}
 		if (token_nde)
 			token_nde->end = actual;
 		actual++;
