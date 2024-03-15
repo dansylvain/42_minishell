@@ -1,0 +1,37 @@
+| echo test
+echo test |
+< echo test
+> echo test
+&& echo test
+|| echo test
+echo test ||
+echo test &&
+>> echo test
+echo test >>
+<< echo test
+echo test <<
+|
+||
+&
+&&
+*
+frite
+echo test > | rev | ls
+echo test | > rev | ls
+echo test | rev < | ls
+echo test | rev > | ls
+echo test | rev | ls >
+echo test | rev | ls <
+echo test | rev | ls &&
+echo test | rev | ls ||
+echo test | && rev | ls
+echo test | >> rev | ls
+echo test | << rev | ls
+echo test | . rev | ls
+. echo test | rev | ls
+echo test | rev | ls .
+echo test | iuygf rev | ls
+echo test | rev | ls ygf
+kjhrgf echo test | rev | ls
+
+
