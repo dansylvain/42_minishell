@@ -1,5 +1,7 @@
 echo papa >> file1
 echo $?
+echo maman >>
+echo $?
 echo maman >> file1
 echo $?
 cat file1
@@ -32,6 +34,7 @@ echo $?
 cat <testfile
 echo $?
 
+<testfile cat | | rev > outfile
 <testfile cat | rev > outfile
 echo $? 
 <outfile cat
