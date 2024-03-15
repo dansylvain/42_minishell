@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 20:57:31 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/15 09:54:45 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/15 11:36:03 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ char	*translate_enum(t_tok token)
 		return ("'>>'\n");
 	return (NULL);
 }
+
 int	is_only_space_no_term(char *start, char *end)
-{	
+{
 	while (start != end)
 	{
 		if (!ft_isspace(*start))
@@ -40,38 +41,14 @@ int	is_only_space_no_term(char *start, char *end)
 	}
 	return (1);
 }
+
 int	is_sibling_only_space(t_ast_nde *sib)
-{	
+{
 	while (sib)
-	{			
+	{
 		if (sib->start && !is_only_space_no_term(sib->start, sib->end))
-			return (0);		
+			return (0);
 		sib = sib->sibling;
-	}	
+	}
 	return (1);
 }
-// t_ast_nde	*ft_lstlast_sib(t_ast_nde *lst)
-// {
-// 	if (!lst)
-// 		return (NULL);
-// 	while (lst->sibling)
-// 		lst = lst->sibling;
-// 	return (lst);
-// }
-
-// void	ft_lstadd_back_sib(t_ast_nde **lst, t_ast_nde *new)
-// {
-// 	if (!lst || !new)
-// 		return ;
-// 	if (!*lst)
-// 		*lst = new;
-// 	else
-// 		ft_lstlast_sib(*lst)->sibling = new;
-// }
-
-// t_ast_nde	*sib_last(t_ast_nde *sib)
-// {
-// 	while (sib && sib->sibling)
-// 		sib = sib->sibling;
-// 	return (sib);
-// }

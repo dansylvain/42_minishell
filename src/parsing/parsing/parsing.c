@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/15 10:04:54 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/15 11:34:45 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int	is_double_token(t_ast_nde *node)
 	d_tok = RAW;
 	while (node)
 	{
-		if (node->token != RAW && !is_chevron(node) && node->token != JOKER && node->token != DOLL)
+		if (node->token != RAW && !is_chevron(node) && node->token != JOKER
+			&& node->token != DOLL)
 		{
 			if (node->token == d_tok)
 				return (display_error_free(ft_strjoin("minishell: syntax \
@@ -29,30 +30,8 @@ error near unexpected token ", translate_enum(d_tok))), 1);
 		d_tok = node->token;
 		node = node->sibling;
 	}
-	return (0);//
+	return (0);
 }
-
-// static int	is_double_token(t_ast_nde *node)
-// {
-// 	t_tok	d_tok;
-
-// 	d_tok = RAW;
-// 	while (node)
-// 	{
-// 		if (node->token != RAW && !is_chevron(node) && node->token != JOKER && node->token != DOLL)
-// 		{
-// 			// if (d_tok < 0)
-// // 				return (display_error_free(ft_strjoin("minishell: syntax 
-// // error near unexpected token DTOK 0 ", translate_enum(d_tok))), 1);
-// 			if (node->token == d_tok)
-// 				return (display_error_free(ft_strjoin("minishell: syntax 
-// error near DOUBLEunexpected token ", translate_enum(d_tok))), 1);
-// 		}
-// 		d_tok = node->token;
-// 		node = node->sibling;
-// 	}
-// 	return (0);
-// }
 
 static void	set_root(t_ast_nde **root, char *str)
 {
