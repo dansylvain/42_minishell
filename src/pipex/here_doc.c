@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 21:01:17 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/10 22:20:03 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 09:55:57 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	here_doc_handle(t_redir *redir)
 
 	while (1)
 	{
-		ft_printf("heredoc> ");
+		ft_printf("> ");
 		line = get_next_line(0);
 		if (line)
 		{
