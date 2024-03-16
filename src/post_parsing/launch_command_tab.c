@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 21:37:39 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 10:09:14 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,52 +17,48 @@ t_ast_nde	*rebuild_dollar_str_node(char *str, t_tok token);
 #include "parsing_utils.h"
 #include "libft.h"
 t_Data	*get_data(char *envp[]);
+
+/**========================================================================
+ *                          build_command_tab_node
+ *========================================================================**/
+
+void	build_command_tab_node(t_ast_nde *node, t_ast_nde **cmd_tab_node, t_ast_nde **cmd_tab_node_sav)
+{
+	if (node->token == DOLL && node->start == node->end && *node->start != '$')
+	{				
+		free(node->start);					
+		node->start = ft_itoa(get_data(NULL)->exit_status);
+		node->end = node->start;
+		node->child->start = node->start;
+		node->child->end = node->start;		
+	}				
+	add_sibling(copy_node_and_child(node), cmd_tab_node,
+		cmd_tab_node_sav);
+}
+
 /**========================================================================
  *                           launch_command_tab
  *========================================================================**/
+
 int	launch_command_tab(t_Data *data, t_ast_nde *node,
 		char *envp[], int flag)
 {
 	t_ast_nde	*cmd_tab_node;
 	t_ast_nde	*cmd_tab_node_sav;
 	char		***cmd_tab;
-	//ft_printf("in flag: %d\n", flag);
-	//print_node(node);
-	//ft_printf("\n");
+
 	cmd_tab_node_sav = NULL;
 	while (node && node->token != AND && node->token != OR)
 	{
 		if (!flag)
-		{
-			if (node->token == DOLL && node->start == node->end && *node->start != '$')
-			{
-				// ft_printf("here\n");
-				// print_node(node);
-				// ft_printf("end here\n");	
-				free(node->start);					
-				node->start = ft_itoa(get_data(NULL)->exit_status);
-				node->end = node->start;
-				node->child->start = node->start;
-				node->child->end = node->start;
-				// ft_printf("here2\n");
-				// print_node(node);
-				// ft_printf("end here2\n");
-			}				
-			add_sibling(copy_node_and_child(node), &cmd_tab_node,
-				&cmd_tab_node_sav);				
-		}
+			build_command_tab_node(node, &cmd_tab_node, &cmd_tab_node_sav);
 		node = node->sibling;
-	}
-	//store_and_free_cmd_tab_node_sav(cmd_tab_node_sav);
+	}	
 	if (cmd_tab_node_sav)
 		build_command_tab(&cmd_tab, data, &cmd_tab_node_sav, envp);
 	flag = data->exit_status;
 	if (node && node->token == OR)
 		flag = !flag;
-	// if (node)
-	// 	print_node(node);
-//	ft_printf("\n");
-//	ft_printf("af flag: %d\n", flag);
 	if (node && node->sibling)
 		flag = launch_command_tab(data, node->sibling, envp, flag);
 	return (flag);
