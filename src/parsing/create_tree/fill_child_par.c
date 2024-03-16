@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:33:24 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 13:57:43 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 14:03:28 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,18 @@ static void	fill_child_overlap_par(t_ast_nde *sib, t_ast_nde *raw_lft_child, t_a
 			raw_overlap->end = token->start - 1;
 			add_sibling(raw_overlap, &raw_lft_child->child, raw_child_sav[0]);
 		}
+		if (sib->end > token->end)
+		{
+			raw_overlap = copy_node(sib);
+			raw_overlap->start = token->end + 1;
+			add_sibling(raw_overlap, &raw_rght_child->child, raw_child_sav[2]);
+		}
 		if (sib->start <= token->start && sib->end >= token->end)		
 		{	
 			raw_overlap = copy_node(sib);			
 			raw_overlap->start = token->start + 1;
 			raw_overlap->end =  token->end - 1;			
 			add_sibling(raw_overlap, &middle_child->child, raw_child_sav[1]);	
-		}
-		if (sib->end > token->end)
-		{
-			raw_overlap = copy_node(sib);
-			raw_overlap->start = token->end + 1;
-			add_sibling(raw_overlap, &raw_rght_child->child, raw_child_sav[2]);
 		}
 	}
 }
