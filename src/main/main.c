@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 13:17:12 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 08:15:33 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_Data	*get_data(char *envp[])
  *========================================================================**/
 void	cmd_error(char *cmd);
 int	p_flag = 0;
+int m_flag = 1;
 int	prompt_loop(t_Data *data, char *envp[])
 {
 	char	*cmd;
@@ -89,6 +90,7 @@ int	prompt_loop(t_Data *data, char *envp[])
 		}
 	//	cmd_error(cmd);
 		parse_par(cmd, data, NULL);
+		m_flag = 1;
 		//exec_pipex(data, cmd, data->envp_tab);
 		free(cmd);
 	}

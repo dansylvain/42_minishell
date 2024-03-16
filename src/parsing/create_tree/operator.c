@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/15 16:33:54 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 09:50:12 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static int	token_child_handle(t_ast_nde *sib_cont,
 	raw_rght = raw_lft->sibling;
 	token->child = raw_lft;
 	fill_child(sib, raw_lft->child, raw_rght->child, token);
-	
+	p_flag = 3;
 	if (!p_flag) // middle ou ext
 	{	
 			ft_putstr_fd("je suis pflag 0\n", 2);
@@ -191,17 +191,14 @@ unexpected token ", translate_enum(token->token))), 1);
 	}
 
 		if (p_flag == 3)
-		{ft_putstr_fd("je suis pflag 3\n", 2);
+		{//ft_putstr_fd("je suis pflag 3\n", 2);
 			if (raw_lft->child)// && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
  				set_space(raw_lft);
 
 			if (raw_rght->child)// && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))
 				return ((set_operator(raw_rght)));			
 		}
-		else
-		{
-			ft_putstr_fd("je sais pas ce que je fou la\n", 2);
-		}
+	
 // 	else
 // 	{
 // 			ft_printf(" else raw right flag: %d\n", p_flag);

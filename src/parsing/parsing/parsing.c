@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/15 22:55:57 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 09:49:11 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
 int	parse_par(char *str, t_Data *data, t_ast_nde *root);
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data);
 
-int m_flag = 0;
+extern int m_flag;//!! remetre a un ds prompt loop
 extern int	p_flag;
 
 int	is_next_token(t_ast_nde *raw_lft)
 {
 	return ((raw_lft && raw_lft->sibling && raw_lft->sibling->child
-		&& raw_lft->sibling->child->sibling));
+		&& raw_lft->sibling->child));//->sibling));
 }
 
 int	raw_left_area(t_ast_nde *raw_lft, t_Data *data, int *or_flag)
@@ -66,11 +66,14 @@ int	raw_left_area(t_ast_nde *raw_lft, t_Data *data, int *or_flag)
 
 	if (raw_lft && raw_lft->child)
 	{	
-			
+		//ft_printf("on raw left!\n");
+		// print_node(raw_lft);
+		// ft_printf("\n");
 		if (is_next_token(raw_lft))
 			p_flag = 3;
 		else
-			p_flag = 1;			
+			p_flag = 2;
+		//ft_printf("is tk, p_flag :%d\n", p_flag);		
 		tmp_str = ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1);
 		store_or_free_cmd(tmp_str);
 		*or_flag = exec_pipex(data, tmp_str, data->envp_tab, 0);			
@@ -82,9 +85,9 @@ int	middle_area(t_ast_nde *middle, t_Data *data, int or_flag)
 {
 	char	*tmp_str;
 	
-	m_flag = 1;	
 	if (middle && middle->child && !or_flag)
 	{		
+		m_flag = 1;	
 		middle->start++;
 		middle->end--;
 		middle->child->start++;
@@ -119,7 +122,9 @@ int	token_zone(t_ast_nde *token, t_Data *data)
 	t_ast_nde	*middle;
 	t_ast_nde	*raw_rght;
 	int			or_flag;
-		
+
+	or_flag = 0;
+	//ft_printf("token zone!\n");
 	if (token)
 	{			
 		raw_lft = token->child;
@@ -141,11 +146,11 @@ int	token_zone(t_ast_nde *token, t_Data *data)
 int	no_token_zone(t_ast_nde *raw, t_Data *data)
 {
 	char	*tmp_str;
-		
+	//ft_printf("no token zone\n");
 	if (m_flag)
 		p_flag = 0;
 	else 
-		p_flag = 2;
+		p_flag = 1;
 	m_flag = 0;		
 	tmp_str = ft_strndup(raw->start, raw->end - raw->start + 1);
 	store_or_free_cmd(tmp_str);
@@ -158,7 +163,9 @@ int	no_token_zone(t_ast_nde *raw, t_Data *data)
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 {
 	t_ast_nde	*token;	
-
+	// ft_printf("leaf!\n");
+	// print_node(raw);
+	// ft_printf("\n");
 	if (raw && raw->child)
 	{		
 		token = raw->child->sibling;	
@@ -364,7 +371,7 @@ int	parse_par(char *str, t_Data *data, t_ast_nde *root)
 	t_ast_nde	*cmd_sav;
 	t_ast_nde	*cmd;
 	t_ast_nde	*quote;
-	int			first_rec;
+	int			first_rec;//!! possible fsrect zero perdu
 	// if (root)
 	// {
 	// 	ft_printf("parse par\n");
