@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/16 15:05:14 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/16 15:06:53 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	prompt_loop(t_Data *data, char *envp[])
 	while (1)
 	{
 		build_prompt(prompt);
-		
 		cmd = readline(prompt);
 		if (cmd && *cmd)
 			add_history(cmd);
