@@ -6,12 +6,19 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 11:31:31 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 15:00:15 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "test.h"
+
+int	set_parenthesis(t_ast_nde *node);
+int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
+int	leaf_tree_par(t_ast_nde	*raw, t_Data *data);
+
+extern int	m_flag;//!! remetre a un ds prompt loop
+extern int	p_flag;
 
 static int	is_double_token(t_ast_nde *node)
 {
@@ -44,17 +51,6 @@ static void	set_root(t_ast_nde **root, char *str)
 	(*root)->child->child = copy_node(*root);
 }
 
-int	set_parenthesis(t_ast_nde *node);
-
-t_Data	*get_data(char *envp[]);
-
-
-extern int m_flag;//!! remetre a un ds prompt loop
-extern int	p_flag;
-int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
-int	leaf_tree_par(t_ast_nde	*raw, t_Data *data);
-
-
 int	parse_par(char *str, t_Data *data, t_ast_nde *root)
 {
 	
@@ -83,36 +79,22 @@ int	parse_par(char *str, t_Data *data, t_ast_nde *root)
 			return (free_tree(root), 1);
 		store_or_free_tree_par(root);
 		root = root->child;
-	}
-	//print_qute_sib(quote);
+	}	
 	if (set_parenthesis(root) < 0)
 	{	
 		if (first_rec)		
 			store_or_free_tree_par(NULL);		
-		// else if (str)
-		// 	free(str);
 		return (1);
-	}
-		
+	}		
 	if (leaf_tree_par(root, data))
-	{	
-		
+	{			
 		if (first_rec)		
 			store_or_free_tree_par(NULL);		
-		// else if (str)
-		// 	free(str);
 		return (1);
 	}
-	//store_or_free_cmd_par(NULL);
-	//return (store_or_free_tree_par(NULL), 0);
-	if (first_rec)
-	{
-		store_or_free_tree_par(NULL);				
-	}
-	// else if (str)
-	// 	free(str);
-	return (0);
-	//print_tree(root);
+	if (first_rec)	
+		store_or_free_tree_par(NULL);	
+	return (0);	
 }
 
 t_ast_nde	*parse(char *str, t_Data *data)

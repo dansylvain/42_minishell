@@ -6,11 +6,12 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/16 11:04:22 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 14:50:12 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operator.h"
+#include "test.h"
 
 static t_ast_nde	*create_token(t_tok simpl_tok, t_tok doubl_tok,
 	char *actual, char char_tok)
@@ -79,7 +80,6 @@ static int		is_only_space(char *start, char *end)
 	return (1);
 }
 
-#include "test.h"
 int	is_sibling_only_space(t_ast_nde *sib)
 {	
 	while (sib)
