@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 15:00:15 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 20:38:24 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	parse_par(char *str, t_Data *data, t_ast_nde *root)
 	// 	print_node(root);
 	// 	ft_printf("\n");
 	// }
+	//m_flag = 0;
 	first_rec = 0;
 	if (!*str)
 		return (1);

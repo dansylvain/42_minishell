@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:12:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 14:29:20 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 21:57:34 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,25 @@
 extern int	m_flag;
 extern int	p_flag;
 
-static int	is_next_token(t_ast_nde *raw_lft)
+static t_ast_nde *get_next_right_token(t_ast_nde *raw_lft) //token ds le noeud right
+{	 
+	if ((raw_lft && raw_lft->sibling && raw_lft->sibling->sibling
+			&& raw_lft->sibling->sibling->child && raw_lft->sibling->sibling
+				->child));//->sibling));
+	return (raw_lft->sibling->sibling->child);//->sibling);
+	return (NULL);
+}
+
+static int	is_prev_token(t_ast_nde *raw_lft, t_ast_nde *root)
 {
+	t_ast_nde	*ex_token;
+		
+	while (root && root != raw_lft)
+	{
+		ex_token = root;
+		if (get_next_right_token(raw_lft) )
+		root = get_next_right_token(raw_lft);
+	}
 	return ((raw_lft && raw_lft->sibling && raw_lft->sibling->child
 			&& raw_lft->sibling->child));//->sibling));
 }
@@ -30,7 +47,7 @@ int	raw_left_area(t_ast_nde *raw_lft, t_Data *data, int *or_flag)
 		//ft_printf("on raw left!\n");
 		// print_node(raw_lft);
 		// ft_printf("\n");
-		if (is_next_token(raw_lft))
+		if (get_next_right_token(raw_lft))
 			p_flag = 3;
 		else
 			p_flag = 2;

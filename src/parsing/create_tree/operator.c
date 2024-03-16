@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/16 14:50:12 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 00:05:11 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,49 @@ int	is_sibling_only_space(t_ast_nde *sib)
 	return (1);
 }
 
+char	*forward_token_to_sib_quote(t_ast_nde *sib_quote, char *token)
+{
+	char	*actual;
+	
+	while (sib_quote)
+	{
+		actual = sib_quote->start;
+		while (actual <= sib_quote->end)
+		{
+			if (actual == token)
+				return (actual);
+			actual++;
+		}
+		sib_quote = sib_quote->sibling;
+	}
+	return (NULL);
+}
+
+int	is_near_par(char *cmd_start, t_ast_nde *sib_quote, t_ast_nde *token)
+{	
+	int			sense;
+	int			i;	
+	char		*actual;
+
+	if (cmd_start)
+		actual = forward_token_to_sib_quote(sib_quote, token->start);
+	else
+		actual = forward_token_to_sib_quote(sib_quote, token->end);
+	i = 0;
+	sense = 1;
+	if (cmd_start)
+		sense = -sense;	
+	while (actual + (i * sense) || actual + (i * sense) >= cmd_start)
+	{
+		if (cmd_start && *actual == '(')
+			return (1);
+		else if (!cmd_start && *actual == ')')
+			return (0);
+		i++;
+	}
+	return (0);	
+}
+
 static int	token_child_handle(t_ast_nde *sib_cont,
 	t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
 {
@@ -102,27 +145,29 @@ static int	token_child_handle(t_ast_nde *sib_cont,
 	raw_rght = raw_lft->sibling;
 	token->child = raw_lft;
 	fill_child(sib, raw_lft->child, raw_rght->child, token);
-	p_flag = 3;
+	p_flag = 0;	
 	if (!p_flag) 
 	{	
-			ft_putstr_fd("je suis pflag 0\n", 2);
+			ft_putstr_fd("je suis pflag 0, 1-1\n", 2);
 		if (raw_lft->child && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
 			set_space(raw_lft);
-		else if (token->token == AND || token->token == OR || token->token == PIPE)
+		else if ((token->token == AND || token->token == OR || token->token == PIPE) && 
+			!is_near_par(store_or_free_tree_par((t_ast_nde *){0})->child->child->child->start, 
+				store_or_free_tree_par((t_ast_nde *){0})->child->child->child, token))
 			return (display_error_free(ft_strjoin("minishell: MID0 raw letf syntax error near \
 unexpected token ", translate_enum(token->token))), 1);
 
 			ft_printf(" else raw right flag: %d\n", p_flag);
 		if (raw_rght->child && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))
 			return ((set_operator(raw_rght)));	
-		else if (token->token == AND || token->token == OR || token->token == PIPE
-			|| is_chevron(token))
+		else if ((token->token == AND || token->token == OR || token->token == PIPE
+			|| is_chevron(token)) && !is_near_par(NULL, store_or_free_tree_par((t_ast_nde *){0})->child->child->child, token))
 			return (display_error_free(ft_strjoin("minishell: MID0 raw right syntax error near \
 unexpected token ", translate_enum(token->token))), 1);
 
 	}	
 	if (p_flag == 1)
-	{	ft_putstr_fd("je suis pflag 1\n", 2);
+	{	ft_putstr_fd("je suis pflag 1, 0-1\n", 2);
 		if (raw_lft->child)
  			set_space(raw_lft);
 			
@@ -134,7 +179,7 @@ unexpected token ", translate_enum(token->token))), 1);
 unexpected token ", translate_enum(token->token))), 1);	
 	}	
 	if (p_flag == 2)
-	{	ft_putstr_fd("je suis pflag 2\n", 2);
+	{	ft_putstr_fd("je suis pflag 2, 1-0\n", 2);
 		if (raw_lft->child && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
 			set_space(raw_lft);
 		else if (token->token == AND || token->token == OR || token->token == PIPE)
@@ -145,7 +190,7 @@ unexpected token ", translate_enum(token->token))), 1);
 			return ((set_operator(raw_rght)));
 	}
 	if (p_flag == 3)
-	{//ft_putstr_fd("je suis pflag 3\n", 2);
+	{ft_putstr_fd("je suis pflag 3, 0-0\n", 2);
 		if (raw_lft->child)
 			set_space(raw_lft);
 

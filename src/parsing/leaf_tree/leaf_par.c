@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:10:42 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 14:25:49 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 20:15:35 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	no_token_zone(t_ast_nde *raw, t_Data *data)
 		p_flag = 0;
 	else
 		p_flag = 1;
-	m_flag = 0;
+	//m_flag = 0;
 	tmp_str = ft_strndup(raw->start, raw->end - raw->start + 1);
 	store_or_free_cmd(tmp_str);
 	exec_pipex(data, tmp_str, data->envp_tab, 0);

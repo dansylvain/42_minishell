@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 10:14:59 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 10:23:34 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 22:49:08 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,17 @@ void	free_sibling_cmd(t_ast_nde *sib)
 	}
 }
 
-void	store_or_free_tree_par(t_ast_nde *root)
+t_ast_nde	*store_or_free_tree_par(t_ast_nde *root)
 {
 	static t_ast_nde	*lcl_root;
 
 	if (!root && lcl_root)
 		free_tree_par(lcl_root);
-	else if (root)
+	else if (root && !lcl_root)
 		lcl_root = root;
+	else if (root && lcl_root)
+		return (lcl_root);
+	return (NULL);
 }
 
 void	store_or_free_cmd(char *cmd)
