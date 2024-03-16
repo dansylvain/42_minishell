@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 16:38:44 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/16 15:05:14 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	prompt_loop(t_Data *data, char *envp[])
 	while (1)
 	{
 		build_prompt(prompt);
+		
 		cmd = readline(prompt);
 		if (cmd && *cmd)
 			add_history(cmd);
@@ -97,22 +98,20 @@ void	build_prompt(char prompt[])
 	char	*shortened_cwd;
 
 	home = getenv("HOME");
-	ft_strlcpy(prompt, "\033[1;33mminishell: \033[0m", 18);
+	ft_strlcpy(prompt, "minishell: ", 18);
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		shortened_cwd = strstr(cwd, home);
 		if (shortened_cwd != NULL)
 		{
-			ft_strcat(prompt, "\033[1;37m");
 			ft_strcat(prompt, shortened_cwd + ft_strlen(home));
-			ft_strcat(prompt, "\033[0m");
 		}
 		else
 			ft_strcat(prompt, cwd);
 	}
 	else
 		perror("getcwd");
-	ft_strcat(prompt, "\033[1;36m $\033[0m ");
+	ft_strcat(prompt, " $ ");
 }
 
 /**========================================================================
