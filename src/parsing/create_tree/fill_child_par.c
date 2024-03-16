@@ -6,13 +6,14 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:33:24 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 14:12:41 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 14:20:28 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fill_child_par.h"
 
-static int	fill_child_entire_par(t_ast_nde *sib, t_ast_nde **raw_child, t_ast_nde *token, t_ast_nde ***raw_child_sav)
+static int	fill_child_entire_par(t_ast_nde *sib, t_ast_nde **raw_child,
+	t_ast_nde *token, t_ast_nde ***raw_child_sav)
 {
 	if (sib->end < token->start)
 		add_sibling(copy_node(sib), &raw_child[0]->child, raw_child_sav[0]);
@@ -23,7 +24,8 @@ static int	fill_child_entire_par(t_ast_nde *sib, t_ast_nde **raw_child, t_ast_nd
 	return (1);
 }
 
-static void	fill_child_overlap_par(t_ast_nde *sib, t_ast_nde **raw_child, t_ast_nde *token, t_ast_nde ***raw_child_sav)
+static void	fill_child_overlap_par(t_ast_nde *sib, t_ast_nde **raw_child,
+	t_ast_nde *token, t_ast_nde ***raw_child_sav)
 {
 	t_ast_nde	*raw_overlap;
 
@@ -41,12 +43,12 @@ static void	fill_child_overlap_par(t_ast_nde *sib, t_ast_nde **raw_child, t_ast_
 			raw_overlap->start = token->end + 1;
 			add_sibling(raw_overlap, &raw_child[2]->child, raw_child_sav[2]);
 		}
-		if (sib->start <= token->start && sib->end >= token->end)		
-		{	
-			raw_overlap = copy_node(sib);			
+		if (sib->start <= token->start && sib->end >= token->end)
+		{
+			raw_overlap = copy_node(sib);
 			raw_overlap->start = token->start + 1;
-			raw_overlap->end =  token->end - 1;			
-			add_sibling(raw_overlap, &raw_child[1]->child, raw_child_sav[1]);	
+			raw_overlap->end = token->end - 1;
+			add_sibling(raw_overlap, &raw_child[1]->child, raw_child_sav[1]);
 		}
 	}
 }
@@ -62,12 +64,14 @@ void	fill_child_par(t_ast_nde *sib, t_ast_nde **raw_child, t_ast_nde *token)
 	raw_rght_child_sav = NULL;
 	while (sib)
 	{
-		if (fill_child_entire_par(sib, raw_child, token, (t_ast_nde **[]){&raw_lft_child_sav,
-			&middle_child_sav, &raw_rght_child_sav}))
+		if (fill_child_entire_par(sib, raw_child, token,
+				(t_ast_nde **[]){&raw_lft_child_sav,
+				&middle_child_sav, &raw_rght_child_sav}))
 			;
 		else
-			fill_child_overlap_par(sib, raw_child, token, (t_ast_nde **[]){&raw_lft_child_sav,
-			&middle_child_sav, &raw_rght_child_sav});
+			fill_child_overlap_par(sib, raw_child, token,
+				(t_ast_nde **[]){&raw_lft_child_sav,
+				&middle_child_sav, &raw_rght_child_sav});
 		sib = sib->sibling;
 	}
 	if (raw_child[0])

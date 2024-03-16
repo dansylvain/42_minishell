@@ -6,14 +6,14 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:10:42 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 11:36:02 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 14:25:49 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "leaf_par.h"
 
-extern int p_flag;
-extern int m_flag;
+extern int	p_flag;
+extern int	m_flag;
 
 int	token_zone(t_ast_nde *token, t_Data *data)
 {
@@ -25,18 +25,18 @@ int	token_zone(t_ast_nde *token, t_Data *data)
 	or_flag = 0;
 	//ft_printf("token zone!\n");
 	if (token)
-	{			
+	{
 		raw_lft = token->child;
 		if (raw_lft)
-		{				
+		{
 			raw_left_area(raw_lft, data, &or_flag);
 			middle = raw_lft->sibling;
 			if (middle)
-			{										
+			{
 				middle_area(middle, data, or_flag);
 				raw_rght = middle->sibling;
 				if (raw_rght)
-					raw_right_area(raw_rght, data);					
+					raw_right_area(raw_rght, data);
 			}
 		}
 	}
@@ -48,7 +48,7 @@ int	no_token_zone(t_ast_nde *raw, t_Data *data)
 	//ft_printf("no token zone\n");
 	if (m_flag)
 		p_flag = 0;
-	else 
+	else
 		p_flag = 1;
 	m_flag = 0;
 	tmp_str = ft_strndup(raw->start, raw->end - raw->start + 1);
@@ -65,8 +65,8 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 	// print_node(raw);
 	// ft_printf("\n");
 	if (raw && raw->child)
-	{		
-		token = raw->child->sibling;	
+	{
+		token = raw->child->sibling;
 		if (token)
 			token_zone(token, data);
 		else
