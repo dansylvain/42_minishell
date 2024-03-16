@@ -6,39 +6,63 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:36:26 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 16:55:38 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/16 14:12:35 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard_expansion_2.h"
 
+void	check_pattern()
+{
+
+}
+
 /**========================================================================
  *                           matches_pattern 
  *========================================================================**/
-int	matches_pattern(const char *filename, const char *pattern)
+int matches_pattern(const char *filename, const char *pattern)
 {
-	size_t	i;
-	size_t	j;
+    const char *f = filename;
+    const char *p = pattern;
+    const char *last_star = NULL;
+    const char *last_match = NULL;
 
-	i = 0;
-	j = 0;
-	while (i < ft_strlen(filename) && j < ft_strlen(pattern))
+    while (*f && *p != '*')
 	{
-		if (pattern[j] == '*')
+        if (*p != '?' && *f != *p)
+            return 0;
+        f++;
+        p++;
+    }
+    if (!*p)
+        return !*f;
+    last_star = p;
+    while (*f)
+	{
+		check_pattern();
+        if (*p == '?' || *p == *f)
 		{
-			if (pattern[j + 1] == '\0')
-				return (1);
-			while (i < ft_strlen(filename) && filename[i] != pattern[j + 1])
-				i++;
-			j++;
-		}
+            f++;
+            p++;
+            if (!*p) {
+                return 1;
+            }
+        }
+		else if (*p == '*')
+		{
+            last_match = f;
+            last_star = p;
+            p++;
+        }
 		else
 		{
-			if (filename[i++] != pattern[j++])
-				return (0);
-		}
-	}
-	return (i == ft_strlen(filename) && j == ft_strlen(pattern));
+            p = last_star + 1;
+            f = ++last_match;
+        }
+    }
+    while (*p == '*')
+        p++;
+    return !*p;
 }
 
 /**========================================================================
