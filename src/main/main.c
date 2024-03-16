@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/16 15:11:52 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/16 18:25:47 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	build_prompt(char prompt[])
 	ft_strlcpy(prompt, "minishell: ", 18);
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
-		shortened_cwd = strstr(cwd, home);
+		shortened_cwd = ft_strstr(cwd, home);
 		if (shortened_cwd != NULL)
 		{
 			ft_strcat(prompt, shortened_cwd + ft_strlen(home));
