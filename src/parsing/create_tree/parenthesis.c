@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:52:11 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 13:05:59 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 14:13:56 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	print_node(t_ast_nde *sib);
 void	print_raw(t_ast_nde *raw);
 
 #include "ft_printf.h"
-void	fill_child_par(t_ast_nde *sib, t_ast_nde *raw_lft_child, t_ast_nde *middle_child, t_ast_nde *raw_rght_child,
-	t_ast_nde *token);
+void	fill_child_par(t_ast_nde *sib, t_ast_nde **raw_child, t_ast_nde *token);
 int	create_token_node(t_ast_nde *sib, t_ast_nde **token_nde);
 
 static t_ast_nde	*create_token_child_par(t_ast_nde *cont_sib, t_ast_nde *token)
@@ -67,7 +66,7 @@ int	token_child_handle(t_ast_nde *sib_cont,
 		raw_lft = create_token_child_par(sib_cont, token);		
 		raw_rght = raw_lft->sibling->sibling;
 		token->child = raw_lft;		
-		fill_child_par(sib, raw_lft->child, raw_lft->sibling->child, raw_rght->child, token);	
+		fill_child_par(sib,(t_ast_nde *[]) {raw_lft->child, raw_lft->sibling->child, raw_rght->child}, token);	
 		return (set_parenthesis(raw_rght));		
 	}	
 }
