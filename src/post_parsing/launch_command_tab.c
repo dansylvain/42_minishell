@@ -6,32 +6,28 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/16 10:09:14 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 10:39:20 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "launch_command_tab.h"
-#include <test.h>
-char	*rebuild_dollar_str(const t_ast_nde *operator, char *str, t_Data *data);
-t_ast_nde	*rebuild_dollar_str_node(char *str, t_tok token);
-#include "parsing_utils.h"
-#include "libft.h"
-t_Data	*get_data(char *envp[]);
+#include "test.h"
 
 /**========================================================================
  *                          build_command_tab_node
  *========================================================================**/
 
-void	build_command_tab_node(t_ast_nde *node, t_ast_nde **cmd_tab_node, t_ast_nde **cmd_tab_node_sav)
+void	build_command_tab_node(t_ast_nde *node, t_ast_nde **cmd_tab_node,
+	t_ast_nde **cmd_tab_node_sav)
 {
 	if (node->token == DOLL && node->start == node->end && *node->start != '$')
-	{				
-		free(node->start);					
+	{
+		free(node->start);
 		node->start = ft_itoa(get_data(NULL)->exit_status);
 		node->end = node->start;
 		node->child->start = node->start;
-		node->child->end = node->start;		
-	}				
+		node->child->end = node->start;
+	}
 	add_sibling(copy_node_and_child(node), cmd_tab_node,
 		cmd_tab_node_sav);
 }
@@ -53,7 +49,7 @@ int	launch_command_tab(t_Data *data, t_ast_nde *node,
 		if (!flag)
 			build_command_tab_node(node, &cmd_tab_node, &cmd_tab_node_sav);
 		node = node->sibling;
-	}	
+	}
 	if (cmd_tab_node_sav)
 		build_command_tab(&cmd_tab, data, &cmd_tab_node_sav, envp);
 	flag = data->exit_status;
@@ -83,37 +79,21 @@ void	store_and_free_cmd_tab_node_sav(t_ast_nde *cmd_tab_node_sav)
 void	build_command_tab(char ****cmd_tab, t_Data *data,
 		t_ast_nde **cmd_tab_node_sav, char *envp[])
 {
-	
 	(*cmd_tab) = create_command_tab(data, (*cmd_tab_node_sav), envp);
 	store_and_free_cmd_tab(*cmd_tab);
 	if (is_pipeline(*cmd_tab_node_sav))
 	{
-	// ft_printf("AVANT PIPEX compa data: %d\n,", data->exit_status);
-	// ft_printf("AVANT PIPEX la cmd est un ds un pipeline exit status:%d\n", get_data(NULL)->exit_status);
 		free_sibling_and_child(*cmd_tab_node_sav);
 		get_data(NULL)->exit_status = pipex(*cmd_tab);
-		
-		// ft_printf("APRES PIPEX la cmd est un ds un pipeline exit status:%d\n", get_data(NULL)->exit_status);
 	}
 	else if (!command_is_builtin(*(*cmd_tab), get_data(NULL)))
 	{
-		// ft_printf("AVANT PIPEX compa data: %d\n,",  data->exit_status);
-		// ft_printf("AVANT PIPEX la cmd nest pas  ds un plpeline et nest pas un builtin exit status:%d, -%s-\n", get_data(NULL)->exit_status, ***cmd_tab);
-
-		//ft_printf("la cmd nest pas un buitin\n");
 		free_sibling_and_child(*cmd_tab_node_sav);
 		get_data(NULL)->exit_status = pipex(*cmd_tab);
-		
-		// ft_printf("APRES PIPEX la cmd nest pas  ds un plpeline et nest pas un builtin exit status:%d, -%s-\n", get_data(NULL)->exit_status, ***cmd_tab);
 	}
 	else
-	{
-		// ft_printf("compa data: %d\n",  data->exit_status);
-		// ft_printf("la cmd etait un buitin exit status:%d\n", get_data(NULL)->exit_status);
 		free_sibling_and_child(*cmd_tab_node_sav);
-	}
 	free_command_tab_lg(*cmd_tab);
-	
 }
 
 /**========================================================================

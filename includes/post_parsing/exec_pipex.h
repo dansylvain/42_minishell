@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:03:33 by dan               #+#    #+#             */
-/*   Updated: 2024/03/11 16:45:48 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 10:41:39 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int			launch_command_tab(t_Data *data, t_ast_nde *node,
 				char *envp[], int flag);
 void		build_command_tab(char ****cmd_tab, t_Data *data,
 				t_ast_nde **cmd_tab_node_sav, char *envp[]);
+t_Data		*get_data(char *envp[]);
 
 #endif

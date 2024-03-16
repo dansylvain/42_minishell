@@ -6,30 +6,11 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:59:08 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 10:14:01 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 10:20:08 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "free_tree.h"
-
-void	free_start(t_ast_nde *node)
-{
-	if (node && node->start)
-		free(node->start);
-}
-
-void	free_sibling_cmd(t_ast_nde *sib)
-{
-	t_ast_nde	*tmp;
-
-	while (sib)
-	{
-		tmp = sib->sibling;
-		free_start(sib);
-		free(sib);
-		sib = tmp;
-	}
-}
 
 void	free_sibling(t_ast_nde *sib)
 {
@@ -102,54 +83,6 @@ void	free_tree_par(t_ast_nde *operator)
 		free_branch(middle, free_tree_par);
 	if (raw_rght)
 		free_branch(raw_rght, free_tree_par);
-}
-
-void	store_or_free_tree_par(t_ast_nde *root)
-{
-	static t_ast_nde	*lcl_root;
-
-	if (!root && lcl_root)
-		free_tree_par(lcl_root);
-	else if (root)
-		lcl_root = root;
-}
-
-void	store_or_free_cmd(char *cmd)
-{
-	t_ast_nde			*new_cmd;
-	static t_ast_nde	*lcl_cmds;
-	static t_ast_nde	*lcl_cmds_sav;
-
-	if (!cmd && lcl_cmds_sav)
-	{
-		free_sibling_cmd(lcl_cmds_sav);
-		lcl_cmds_sav = NULL;
-	}
-	else if (cmd)
-	{
-		new_cmd = create_node(RAW);
-		new_cmd->start = cmd;
-		add_sibling(new_cmd, &lcl_cmds, &lcl_cmds_sav);
-	}
-}
-
-void	store_or_free_cmd_par(char *cmd)
-{
-	t_ast_nde			*new_cmd;
-	static t_ast_nde	*lcl_cmds;
-	static t_ast_nde	*lcl_cmds_sav;
-
-	if (!cmd && lcl_cmds_sav)
-	{
-		free_sibling_cmd(lcl_cmds_sav);
-		lcl_cmds_sav = NULL;
-	}
-	else if (cmd)
-	{
-		new_cmd = create_node(RAW);
-		new_cmd->start = cmd;
-		add_sibling(new_cmd, &lcl_cmds, &lcl_cmds_sav);
-	}
 }
 
 void	free_sibling_and_child(t_ast_nde *sib)

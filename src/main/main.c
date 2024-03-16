@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/16 08:15:33 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 10:38:04 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,10 @@ t_Data	*get_data(char *envp[])
 /**========================================================================
  *                           prompt_loop
  *========================================================================**/
-void	cmd_error(char *cmd);
+
 int	p_flag = 0;
-int m_flag = 1;
+int	m_flag = 1;
+
 int	prompt_loop(t_Data *data, char *envp[])
 {
 	char	*cmd;
@@ -88,10 +89,8 @@ int	prompt_loop(t_Data *data, char *envp[])
 			cmd = NULL;
 			continue ;
 		}
-	//	cmd_error(cmd);
 		parse_par(cmd, data, NULL);
 		m_flag = 1;
-		//exec_pipex(data, cmd, data->envp_tab);
 		free(cmd);
 	}
 	return (1);
@@ -135,7 +134,7 @@ void	build_prompt(char prompt[])
 int	command_is_builtin(char	**cmd_tab, t_Data *data)
 {
 	int	len;
-//ft_printf("la cmd etait un buitin exit status:%d\n", get_data(NULL)->exit_status);
+
 	len = ft_strlen(cmd_tab[0]);
 	if (!cmd_tab || is_only_space(cmd_tab[0]))
 		return (1);

@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/14 13:11:19 by seblin           ###   ########.fr        #
+#    Updated: 2024/03/16 10:49:46 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ LIBS = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
 
 # Source files
 SRC =	test.c \
-		src/main/cmd_error.c \
 		src/main/main.c \
 		src/main/utils.c \
 		src/main/utils_2.c \
@@ -55,6 +54,7 @@ SRC =	test.c \
 		src/builtins/exec_exit.c \
 		src/parsing/parsing/parsing.c \
 		src/parsing/parsing/free_tree.c \
+		src/parsing/parsing/free_utils.c \
 		src/parsing/parsing/utils.c \
 		src/parsing/parsing/utils2.c \
 		src/parsing/create_tree/parenthesis.c \
