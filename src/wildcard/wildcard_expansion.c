@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 10:14:43 by dan               #+#    #+#             */
-/*   Updated: 2024/03/09 12:59:36 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:38:38 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,18 @@ char	**expand_wildcards(const char *pattern)
 	DIR				*dir;
 	struct dirent	*entry;
 	char			**matches;
-	size_t			count;
 
 	entry = NULL;
 	matches = NULL;
-	count = 0;
 	dir = opendir(".");
 	if ((dir) != NULL)
-	{
-		count = get_matching_elements(pattern, dir, entry, &matches);
-	}
+		get_matching_elements(pattern, dir, entry, &matches);
 	else
 	{
 		perror("opendir");
 		exit(EXIT_FAILURE);
 	}
 	return (matches);
-	(void)count;
 }
 
 /**========================================================================

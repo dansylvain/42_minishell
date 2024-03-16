@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:53:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 07:27:40 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/16 18:33:43 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,9 @@ int	is_chevron(t_ast_nde *node)
 {
 	if (node->token == SCHEV_LFT || node->token == DCHEV_LFT
 		|| node->token == SCHEV_RGTH || node->token == DCHEV_RGTH)
-	{
 		return (1);
-	}
 	else
-	{
 		return (0);
-	}
 }
 
 /**========================================================================

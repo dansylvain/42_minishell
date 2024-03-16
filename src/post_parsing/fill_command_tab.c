@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:40:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/15 12:07:46 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/16 18:35:59 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ char	***add_redir_tabs_loop(char ***cmd_tab, t_ast_nde **node,
 		while (!is_separator(current))
 		{
 			if (is_chevron(current))
-			{
 				cmd_tab = add_redir_tabs(cmd_tab, &current, i);
-			}
 			current = current->sibling;
 		}
 		*redir_were_added = 1;

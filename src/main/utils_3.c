@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:33:25 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 14:47:21 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/16 18:31:01 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**duplicate_envp(t_Data *data, char *envp[])
 	int		i;
 
 	if (envp[0] == NULL)
-		return (ft_printf("No env var... no fun!\n"), NULL);
+		return (ft_printf("Error: no env var\n"), NULL);
 	i = 0;
 	while (envp[i])
 		i++;

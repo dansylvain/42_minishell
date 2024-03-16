@@ -27,6 +27,7 @@
 		"utils_2.h": "c",
 		"parsing.h": "c",
 		"quote.h": "c",
-		"utils2.h": "c"
+		"utils2.h": "c",
+		"create_command_tab_utils.h": "c"
 	}
 }
