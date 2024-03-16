@@ -30,6 +30,7 @@
 		"exec_pipex.h": "c",
 		"wildcard_expansion.h": "c",
 		"free_tree.h": "c",
-		"test.h": "c"
+		"test.h": "c",
+		"leaf_par.h": "c"
 	}
 }

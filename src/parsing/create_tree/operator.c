@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/16 09:50:12 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/16 11:04:22 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int		is_only_space(char *start, char *end)
 	}
 	return (1);
 }
-// int		is_only_space(char *start, char *end);
+
 #include "test.h"
 int	is_sibling_only_space(t_ast_nde *sib)
 {	
@@ -103,7 +103,7 @@ static int	token_child_handle(t_ast_nde *sib_cont,
 	token->child = raw_lft;
 	fill_child(sib, raw_lft->child, raw_rght->child, token);
 	p_flag = 3;
-	if (!p_flag) // middle ou ext
+	if (!p_flag) 
 	{	
 			ft_putstr_fd("je suis pflag 0\n", 2);
 		if (raw_lft->child && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
@@ -120,27 +120,10 @@ unexpected token ", translate_enum(token->token))), 1);
 			return (display_error_free(ft_strjoin("minishell: MID0 raw right syntax error near \
 unexpected token ", translate_enum(token->token))), 1);
 
-
-		// ft_printf("raw left flag: %d\n", p_flag);
-		// if (raw_lft->child && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
-		// 	set_space(raw_lft);
-	// 	else if (token->token == AND || token->token == OR || token->token == PIPE)
-	// 		return (display_error_free(ft_strjoin("minishell: syntax error near 
-	// unexpected token ", translate_enum(token->token))), 1);
-	}
-// 	else // midlle
-// 	{
-// 			ft_printf("else raw left flag : %d\n", p_flag);
-// 		if (raw_lft->child && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
-// 			set_space(raw_lft);
-// 		else if (token->token == AND || token->token == OR || token->token == PIPE)
-// 			return (display_error_free(ft_strjoin("minishell: MIDsyntax error near \
-// unexpected token ", translate_enum(token->token))), 1);		
-// 	}
-	
+	}	
 	if (p_flag == 1)
 	{	ft_putstr_fd("je suis pflag 1\n", 2);
-		if (raw_lft->child)// && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
+		if (raw_lft->child)
  			set_space(raw_lft);
 			
 		if (raw_rght->child && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))
@@ -149,27 +132,7 @@ unexpected token ", translate_enum(token->token))), 1);
 			|| is_chevron(token))
 			return (display_error_free(ft_strjoin("minishell: MID 1 raw right syntax error near \
 unexpected token ", translate_enum(token->token))), 1);	
-
-			
-		// if (raw_rght->child && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))
-		// 	return ((set_operator(raw_rght)));	
-	// 	else if (token->token == AND || token->token == OR || token->token == PIPE
-	// 		|| is_chevron(token))
-	// 		return (display_error_free(ft_strjoin("minishell: syntax error near 
-	// unexpected token ", translate_enum(token->token))), 1);
-	}
-
-// 	else
-// 	{
-// 			ft_printf(" else raw right flag: %d\n", p_flag);
-// 		if (raw_rght->child && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))
-// 			return ((set_operator(raw_rght)));	
-// 		else if (token->token == AND || token->token == OR || token->token == PIPE
-// 			|| is_chevron(token))
-// 			return (display_error_free(ft_strjoin("minishell: MID2 syntax error near \
-// unexpected token ", translate_enum(token->token))), 1);
-// 	}
-	
+	}	
 	if (p_flag == 2)
 	{	ft_putstr_fd("je suis pflag 2\n", 2);
 		if (raw_lft->child && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
@@ -178,38 +141,17 @@ unexpected token ", translate_enum(token->token))), 1);
 			return (display_error_free(ft_strjoin("minishell: MID 2 raw left syntax error near \
 unexpected token ", translate_enum(token->token))), 1);
 
-		if (raw_rght->child)// && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))
-			return ((set_operator(raw_rght)));	
-
-		// 	ft_printf("raw right flag: %d\n", p_flag);
-		// if (raw_rght->child && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))
-		// 	return ((set_operator(raw_rght)));	
-	// 	else if (token->token == AND || token->token == OR || token->token == PIPE
-	// 		|| is_chevron(token))
-	// 		return (display_error_free(ft_strjoin("minishell: syntax error near 
-	// unexpected token ", translate_enum(token->token))), 1);
+		if (raw_rght->child)
+			return ((set_operator(raw_rght)));
 	}
+	if (p_flag == 3)
+	{//ft_putstr_fd("je suis pflag 3\n", 2);
+		if (raw_lft->child)
+			set_space(raw_lft);
 
-		if (p_flag == 3)
-		{//ft_putstr_fd("je suis pflag 3\n", 2);
-			if (raw_lft->child)// && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
- 				set_space(raw_lft);
-
-			if (raw_rght->child)// && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))
-				return ((set_operator(raw_rght)));			
-		}
-	
-// 	else
-// 	{
-// 			ft_printf(" else raw right flag: %d\n", p_flag);
-// 		if (raw_rght->child && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))
-// 			return ((set_operator(raw_rght)));	
-// 		else if (token->token == AND || token->token == OR || token->token == PIPE
-// 			|| is_chevron(token))
-// 			return (display_error_free(ft_strjoin("minishell: MID2 syntax error near \
-// unexpected token ", translate_enum(token->token))), 1);
-// 	}
-	
+		if (raw_rght->child)
+			return ((set_operator(raw_rght)));			
+	}
 	return (0);
 }
 

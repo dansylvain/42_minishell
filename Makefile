@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/16 10:49:46 by seblin           ###   ########.fr        #
+#    Updated: 2024/03/16 11:20:53 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,8 @@ SRC =	test.c \
 		src/parsing/create_tree/token_child.c \
 		src/parsing/leaf_tree/leaf.c \
 		src/parsing/leaf_tree/dollar_expansion.c \
+		src/parsing/leaf_tree/leaf_par.c \
+		src/parsing/leaf_tree/leaf_par_raw.c \
 		src/post_parsing/create_command_tab_allocation.c \
 		src/pipex/pipe_fwrd.c \
 		src/pipex/path.c \
