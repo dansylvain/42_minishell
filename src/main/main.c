@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/17 11:22:58 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 11:28:02 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,22 +102,20 @@ void	build_prompt(char prompt[])
 	char	*shortened_cwd;
 
 	home = getenv("HOME");
-	ft_strlcpy(prompt, "\033[1;33mminishell: \033[0m", 18);
+	ft_strlcpy(prompt, "minishell: ", 18);
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		shortened_cwd = strstr(cwd, home);
 		if (shortened_cwd != NULL)
 		{
-			ft_strcat(prompt, "\033[1;37m");
 			ft_strcat(prompt, shortened_cwd + ft_strlen(home));
-			ft_strcat(prompt, "\033[0m");
 		}
 		else
 			ft_strcat(prompt, cwd);
 	}
 	else
 		perror("getcwd");
-	ft_strcat(prompt, "\033[1;36m $\033[0m ");
+	ft_strcat(prompt, " $ ");
 }
 
 /**========================================================================
