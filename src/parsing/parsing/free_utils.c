@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 10:14:59 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 22:49:08 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 09:57:31 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ t_ast_nde	*store_or_free_tree_par(t_ast_nde *root)
 	static t_ast_nde	*lcl_root;
 
 	if (!root && lcl_root)
+	{
 		free_tree_par(lcl_root);
+		lcl_root = NULL;
+	}
 	else if (root && !lcl_root)
 		lcl_root = root;
 	else if (root && lcl_root)
