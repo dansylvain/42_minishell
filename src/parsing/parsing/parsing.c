@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/17 15:55:39 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 16:28:17 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,6 @@ extern int	m_flag;//!! remetre a un ds prompt loop
 extern int	p_flag;
 extern int	r_flag;
 
-// static int	is_double_token(t_ast_nde *node)
-// {
-// 	t_tok	d_tok;
-
-// 	d_tok = RAW;
-// 	while (node)
-// 	{
-// 		if (node->token != RAW && !is_chevron(node) && node->token != JOKER && node->token != DOLL)
-// 		{
-// 			// if (d_tok < 0)
-// // 				return (display_error_free(ft_strjoin("minishell: syntax 
-// // error near unexpected token DTOK 0 ", translate_enum(d_tok))), 1); //!pas bonn ne marche pas si token diff
-// 			if (node->token == d_tok)
-// 				return (display_error_free(ft_strjoin("minishell: syntax \
-// error near DOUBLEunexpected token ", translate_enum(d_tok))), 1);
-// 		}
-// 		d_tok = node->token;
-// 		node = node->sibling;
-// 	}
-// 	return (0);
-// }
-
 static void	set_root(t_ast_nde **root, char *str)
 {
 	*root = create_node(RAW);
@@ -52,46 +30,44 @@ static void	set_root(t_ast_nde **root, char *str)
 	(*root)->child->child = copy_node(*root);
 }
 
-int	parse_par(char *str, t_Data *data, t_ast_nde *root)
+int	first_init_root(char *str, int *first_rec, t_ast_nde **root)
 {
-	
-	t_ast_nde	*cmd_sav;
-	t_ast_nde	*cmd;
 	t_ast_nde	*quote;
-	int			first_rec;
+	
+	*first_rec = 1;
+	set_root(root, str);
+	quote = set_qute_sib(str);
+	(*root)->child->child->child = quote;
+	if (!quote)
+		return (free_tree(*root), 1);
+	store_or_free_tree_par(*root);
+	*root = (*root)->child;
+	return (0);
+}
 
-	r_flag = 0;
-	first_rec = 0;
+int	clean_par(int first_rec, int ret)
+{
+	if (first_rec)
+		store_or_free_tree_par(NULL);
+	return (ret);
+}
+
+int	parse_par(char *str, t_Data *data, t_ast_nde *root)
+{		
+	int	first_rec;
+
 	if (!*str)
 		return (1);
-	cmd_sav = NULL;
+	r_flag = 0;
+	first_rec = 0;
 	exec_pipex(NULL, NULL, NULL, 1);
-	if (!root)
-	{
-		first_rec = 1;
-		set_root(&root, str);
-		quote = set_qute_sib(str);
-		root->child->child->child = quote;
-		if (!quote)
-			return (free_tree(root), 1);
-		store_or_free_tree_par(root);
-		root = root->child;
-	}	
-	if (set_parenthesis(root) < 0)
-	{	
-		if (first_rec)		
-			store_or_free_tree_par(NULL);		
+	if (!root && first_init_root(str, &first_rec, &root))
 		return (1);
-	}		
+	if (set_parenthesis(root) < 0)	
+		return (clean_par(first_rec, 1));			
 	if (leaf_tree_par(root, data))
-	{			
-		if (first_rec)		
-			store_or_free_tree_par(NULL);		
-		return (1);
-	}
-	if (first_rec)	
-		store_or_free_tree_par(NULL);	
-	return (0);	
+		return (clean_par(first_rec, 1));
+	clean_par(first_rec, 0);
 }
 
 t_ast_nde	*parse(char *str, t_Data *data)
@@ -113,7 +89,5 @@ t_ast_nde	*parse(char *str, t_Data *data)
 	if (set_operator(root->child))
 		return (free_tree(root), NULL);	
 	leaf_tree(root, &cmd, &cmd_sav, data);
-	// if (is_double_token(cmd_sav))
-	// 	return (free_sibling_and_child(cmd_sav), free_tree(root), NULL);
 	return (free_tree(root), cmd_sav);
 }
