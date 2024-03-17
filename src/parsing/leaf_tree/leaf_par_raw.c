@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:12:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/17 18:24:19 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:27:29 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ extern int	m_flag;
 extern int	p_flag;
 
 static int	is_next_middle(t_ast_nde *raw_lft)
-{	 
+{
 	return (raw_lft && raw_lft->sibling && raw_lft->sibling->child);
 }
 
