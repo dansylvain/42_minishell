@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/17 11:15:40 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 14:11:07 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ static int	token_child_handle(t_ast_nde *sib_cont,
 	raw_rght = raw_lft->sibling;
 	token->child = raw_lft;
 	fill_child(sib, raw_lft->child, raw_rght->child, token);
-	p_flag = 3;	
+	//p_flag = 3;	
 	if (!p_flag) 
 	{	
 			//ft_putstr_fd("je suis pflag 0, 1-1\n", 2);

@@ -96,3 +96,6 @@ echo $?
 ( false ) || (echo zz &&( echo kk ) &&)
 echo $?
 ( false ) || (echo zz &&( echo kk )  echo hhh && )
+echo $?
+( ( echo bb && echo bb ) && (echo hhh) )&&(echo hh)&& echo truc
+echo $?

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/17 11:25:04 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 14:08:49 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data);
 
 extern int	m_flag;//!! remetre a un ds prompt loop
 extern int	p_flag;
+extern int	r_flag;
 
 static int	is_double_token(t_ast_nde *node)
 {
@@ -65,6 +66,7 @@ int	parse_par(char *str, t_Data *data, t_ast_nde *root)
 	// 	ft_printf("\n");
 	// }
 	//m_flag = 0;
+	r_flag = 0;
 	first_rec = 0;
 	if (!*str)
 		return (1);

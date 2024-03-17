@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:10:42 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 20:15:35 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 14:07:27 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	no_token_zone(t_ast_nde *raw, t_Data *data)
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 {
 	t_ast_nde	*token;	
+	
 	// ft_printf("leaf!\n");
 	// print_node(raw);
 	// ft_printf("\n");
