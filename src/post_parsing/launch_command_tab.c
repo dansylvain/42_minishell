@@ -3,19 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   launch_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 07:05:50 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/16 10:39:20 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "launch_command_tab.h"
+#include "test.h"
+
+/**========================================================================
+ *                          build_command_tab_node
+ *========================================================================**/
+
+void	build_command_tab_node(t_ast_nde *node, t_ast_nde **cmd_tab_node,
+	t_ast_nde **cmd_tab_node_sav)
+{
+	if (node->token == DOLL && node->start == node->end && *node->start != '$')
+	{
+		free(node->start);
+		node->start = ft_itoa(get_data(NULL)->exit_status);
+		node->end = node->start;
+		node->child->start = node->start;
+		node->child->end = node->start;
+	}
+	add_sibling(copy_node_and_child(node), cmd_tab_node,
+		cmd_tab_node_sav);
+}
 
 /**========================================================================
  *                           launch_command_tab
  *========================================================================**/
-void	launch_command_tab(t_Data *data, t_ast_nde *node,
+
+int	launch_command_tab(t_Data *data, t_ast_nde *node,
 		char *envp[], int flag)
 {
 	t_ast_nde	*cmd_tab_node;
@@ -26,18 +47,17 @@ void	launch_command_tab(t_Data *data, t_ast_nde *node,
 	while (node && node->token != AND && node->token != OR)
 	{
 		if (!flag)
-			add_sibling(copy_node_and_child(node), &cmd_tab_node,
-				&cmd_tab_node_sav);
+			build_command_tab_node(node, &cmd_tab_node, &cmd_tab_node_sav);
 		node = node->sibling;
 	}
-	store_and_free_cmd_tab_node_sav(cmd_tab_node_sav);
 	if (cmd_tab_node_sav)
 		build_command_tab(&cmd_tab, data, &cmd_tab_node_sav, envp);
 	flag = data->exit_status;
 	if (node && node->token == OR)
 		flag = !flag;
-	if (node)
-		launch_command_tab(data, node->sibling, envp, flag);
+	if (node && node->sibling)
+		flag = launch_command_tab(data, node->sibling, envp, flag);
+	return (flag);
 }
 
 /**========================================================================
@@ -64,17 +84,15 @@ void	build_command_tab(char ****cmd_tab, t_Data *data,
 	if (is_pipeline(*cmd_tab_node_sav))
 	{
 		free_sibling_and_child(*cmd_tab_node_sav);
-		data->exit_status = pipex(*cmd_tab);
+		get_data(NULL)->exit_status = pipex(*cmd_tab);
 	}
-	else if (!command_is_builtin(*(*cmd_tab), data))
+	else if (!command_is_builtin(*(*cmd_tab), get_data(NULL)))
 	{
 		free_sibling_and_child(*cmd_tab_node_sav);
-		data->exit_status = pipex(*cmd_tab);
+		get_data(NULL)->exit_status = pipex(*cmd_tab);
 	}
 	else
-	{
 		free_sibling_and_child(*cmd_tab_node_sav);
-	}
 	free_command_tab_lg(*cmd_tab);
 }
 

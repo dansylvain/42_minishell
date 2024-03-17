@@ -3,13 +3,12 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
+#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/13 08:53:59 by dan              ###   ########.fr        #
+#    Updated: 2024/03/16 13:02:44 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 NAME = minishell
 
@@ -22,7 +21,7 @@ CFLAGS = -g -Iincludes -Iincludes/main -Iincludes/parsing/parsing \
 -Iincludes/parsing/leaf_tree -Iincludes/pipex \
 -Iincludes/exec_files -Iincludes/wildcard -Iincludes/builtins \
 -Iincludes/post_parsing \
--Wall -Wextra -Werror \
+#-Wall -Wextra -Werror \
 
 # Directories
 LIBFT_DIR = lib/libft
@@ -55,15 +54,21 @@ SRC =	test.c \
 		src/builtins/exec_exit.c \
 		src/parsing/parsing/parsing.c \
 		src/parsing/parsing/free_tree.c \
+		src/parsing/parsing/free_utils.c \
 		src/parsing/parsing/utils.c \
 		src/parsing/parsing/utils2.c \
+		src/parsing/create_tree/parenthesis.c \
 		src/parsing/create_tree/expansion.c \
 		src/parsing/create_tree/operator.c \
 		src/parsing/create_tree/quote.c \
 		src/parsing/create_tree/space.c \
 		src/parsing/create_tree/token_child.c \
+		src/parsing/create_tree/search_par.c \
+		src/parsing/create_tree/fill_child_par.c \
 		src/parsing/leaf_tree/leaf.c \
 		src/parsing/leaf_tree/dollar_expansion.c \
+		src/parsing/leaf_tree/leaf_par.c \
+		src/parsing/leaf_tree/leaf_par_raw.c \
 		src/post_parsing/create_command_tab_allocation.c \
 		src/pipex/pipe_fwrd.c \
 		src/pipex/path.c \

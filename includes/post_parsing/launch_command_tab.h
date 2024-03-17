@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_command_tab.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:59:07 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 07:25:01 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/16 10:29:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "minishell.h"
 # include "parsing_utils.h"
+# include "libft.h"
 # include <stddef.h>
 
 void	store_and_free_cmd_tab_node_sav(t_ast_nde *cmd_tab_node_sav);
@@ -27,5 +28,6 @@ void	build_command_tab(char ****cmd_tab, t_Data *data,
 			t_ast_nde **cmd_tab_node_sav, char *envp[]);
 void	store_and_free_cmd_tab(char ***cmd_tab);
 int		is_chevron(t_ast_nde *node);
+t_Data	*get_data(char *envp[]);
 
 #endif

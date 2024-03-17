@@ -3,34 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:14:05 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/14 11:25:03 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/17 11:21:18 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen_gnl(const char *s)
 {
 	size_t	i;
 
-	i = 0;
-	
+	i = 0;	
 	while (s && *s++)
 		i++;
 	return (i);
 }
 
-char	*ft_strndup(const char *s, size_t n)
+char	*ft_strndup_gnl(const char *s, size_t n)
 {
 	char	*s2;
 	size_t	s_len;
 	size_t	size;
 	size_t	size_save;
 
-	s_len = ft_strlen(s);
+	s_len = ft_strlen_gnl(s);
 	if (n > s_len)
 		size = s_len;
 	else
@@ -45,7 +44,7 @@ char	*ft_strndup(const char *s, size_t n)
 	return (s2 - size_save);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr_gnl(const char *s, int c)
 {
 	unsigned char	c_uc;
 
@@ -76,7 +75,7 @@ void	*ft_calloc_gnl(size_t nmemb, size_t size)
 	return ((void *) ptr - len_save);
 }
 
-void	*free_buffer(char **buffer)
+void	*free_buffer_gnl(char **buffer)
 {
 	if (*buffer)
 		free(*buffer);

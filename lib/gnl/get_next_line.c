@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:29:55 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/10 10:34:20 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/12 15:21:45 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ static char	*manage_endfile(char **buffer, char *ext)
 	free(ext);
 	if (**buffer)
 	{
-		line = ft_strndup(*buffer, ft_strlen(*buffer));
+		line = ft_strndup_gnl(*buffer, ft_strlen_gnl(*buffer));
 		if (!line)
-			return (free_buffer(buffer));
+			return (free_buffer_gnl(buffer));
 		(*buffer)[0] = '\0';
 		return (line);
 	}
 	else
-		return (free_buffer(buffer));
+		return (free_buffer_gnl(buffer));
 }
 
 static char	*manage_prequel(char **buffer)
@@ -47,13 +47,13 @@ static char	*merge_buffers(char **buffer, char *ext)
 	size_t	buffer_len;
 	size_t	ext_len;
 
-	buffer_len = ft_strlen(*buffer);
-	ext_len = ft_strlen(ext);
+	buffer_len = ft_strlen_gnl(*buffer);
+	ext_len = ft_strlen_gnl(ext);
 	new_buff = (char *) malloc((buffer_len + ext_len + 1) * sizeof (char));
 	if (!new_buff)
 	{
 		free(ext);
-		return (free_buffer(buffer));
+		return (free_buffer_gnl(buffer));
 	}
 	while (**buffer)
 		*new_buff++ = *(*buffer)++;
@@ -76,20 +76,20 @@ static char	*manage_no_newline(int fd, char **buffer, char **newline)
 	{
 		ext = (char *) ft_calloc_gnl(BUFFER_SIZE + 1, sizeof(char));
 		if (!ext)
-			return (free_buffer(buffer));
+			return (free_buffer_gnl(buffer));
 		read_size = read(fd, ext, BUFFER_SIZE);
 		if (read_size > 0)
 		{
 			if (!merge_buffers(buffer, ext))
 				return (NULL);
-			*newline = ft_strchr(*buffer, '\n');
+			*newline = ft_strchr_gnl(*buffer, '\n');
 		}
 		else if (read_size == 0)
 			return (manage_endfile(buffer, ext));
 		else
 		{
 			free(ext);
-			return (free_buffer(buffer));
+			return (free_buffer_gnl(buffer));
 		}
 	}
 	return (NULL);
@@ -105,17 +105,17 @@ char	*get_next_line(int fd)
 
 	if (!manage_prequel(&buffer))
 		return (NULL);
-	newline = ft_strchr(buffer, '\n');
+	newline = ft_strchr_gnl(buffer, '\n');
 	if (!newline)
 	{
 		rslt_nonewl = manage_no_newline(fd, &buffer, &newline);
 		if ((!rslt_nonewl && !newline) || rslt_nonewl)
 			return (rslt_nonewl);
 	}
-	line = ft_strndup(buffer, ++newline - buffer);
+	line = ft_strndup_gnl(buffer, ++newline - buffer);
 	if (!line)
-		return (free_buffer(&buffer));
-	newline_len = ft_strlen(newline);
+		return (free_buffer_gnl(&buffer));
+	newline_len = ft_strlen_gnl(newline);
 	while (*newline)
 		*buffer++ = *newline++;
 	*buffer = '\0';

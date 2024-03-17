@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 21:14:14 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/10 22:22:44 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 20:40:54 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ static void	free_all(t_redir *redir, char **argv_sav[])
 	free_data(get_data(NULL));
 	free_command_tab_lg(argv_sav);
 	store_and_free_cmd_list(NULL);
+	store_or_free_tree_par(NULL);
+	store_or_free_cmd(NULL);
+	store_or_free_cmd_par(NULL);
 	if (redir->delim)
 		free(redir->delim);
 }

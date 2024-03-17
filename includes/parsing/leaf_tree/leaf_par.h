@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parenthesis.h                                      :+:      :+:    :+:   */
+/*   leaf_par.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 14:28:02 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 14:42:10 by seblin           ###   ########.fr       */
+/*   Created: 2024/03/16 11:13:57 by seblin            #+#    #+#             */
+/*   Updated: 2024/03/16 11:33:07 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARENTHESIS_H
-# define PARENTHESIS_H
+#ifndef LEAF_PAR_H
+# define LEAF_PAR_H
 
-# include <stdlib.h>
 # include "parsing_utils.h"
+# include "minishell.h"
 # include "libft.h"
+# include <stdlib.h>
 
-t_ast_nde	*copy_node(t_ast_nde *node);
-int			set_parenthesis(t_ast_nde *node);
-void		fill_child_par(t_ast_nde *sib, t_ast_nde **raw_child,
-				t_ast_nde *token);
-int			create_token_node(t_ast_nde *sib, t_ast_nde **token_nde);
+int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
+int	raw_left_area(t_ast_nde *raw_lft, t_Data *data, int *or_flag);
+int	middle_area(t_ast_nde *middle, t_Data *data, int or_flag);
+int	raw_right_area(t_ast_nde *raw_rght, t_Data *data);
 
 #endif

@@ -39,7 +39,11 @@ echo $?
 echo $USER
 echo $?
 ls $PWD
+echo $?
 ls $HOME
+echo $?
 ls $HOME | rev
-$LOGNAME $LOGNAME
 $LOGNAME$LOGNAME
+echo $?
+$LOGNAME $LOGNAME
+echo $?

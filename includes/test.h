@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:28:26 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/13 09:01:28 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 14:03:56 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include "parsing_utils.h"
 # include "ft_printf.h"
+# include "libft.h"
 
 void	print_space_tree(t_ast_nde *node);
 void	print_tree(t_ast_nde *node);

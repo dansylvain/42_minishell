@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/14 16:38:44 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/17 11:22:58 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ t_Data	*get_data(char *envp[])
 /**========================================================================
  *                           prompt_loop
  *========================================================================**/
+
+int	p_flag = 0;
+int	m_flag = 1;
+
 int	prompt_loop(t_Data *data, char *envp[])
 {
 	char	*cmd;
@@ -78,8 +82,9 @@ int	prompt_loop(t_Data *data, char *envp[])
 		if (cmd && *cmd)
 			add_history(cmd);
 		if (cmd == NULL)
-			return (ft_printf("exit\n"), 0);
-		exec_pipex(data, cmd, data->envp_tab);
+			return (ft_printf("exit\n"), 0);	
+		parse_par(cmd, data, NULL);
+		m_flag = 1;
 		free(cmd);
 	}
 	return (1);

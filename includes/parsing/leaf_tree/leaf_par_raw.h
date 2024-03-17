@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parenthesis.h                                      :+:      :+:    :+:   */
+/*   leaf_par_raw.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 14:28:02 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 14:42:10 by seblin           ###   ########.fr       */
+/*   Created: 2024/03/16 11:14:01 by seblin            #+#    #+#             */
+/*   Updated: 2024/03/16 11:31:19 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARENTHESIS_H
-# define PARENTHESIS_H
+#ifndef LEAF_PAR_RAW_H
+# define LEAF_PAR_RAW_H
 
-# include <stdlib.h>
 # include "parsing_utils.h"
+# include "minishell.h"
 # include "libft.h"
+# include <stdlib.h>
 
-t_ast_nde	*copy_node(t_ast_nde *node);
-int			set_parenthesis(t_ast_nde *node);
-void		fill_child_par(t_ast_nde *sib, t_ast_nde **raw_child,
-				t_ast_nde *token);
-int			create_token_node(t_ast_nde *sib, t_ast_nde **token_nde);
+int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
+int	leaf_tree_par(t_ast_nde	*raw, t_Data *data);
+int	parse_par(char *str, t_Data *data, t_ast_nde *root);
 
 #endif

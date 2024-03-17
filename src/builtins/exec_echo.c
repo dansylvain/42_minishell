@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exec_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:43:09 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 18:24:57 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/17 11:22:06 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_echo.h"
-
+t_Data	*get_data(char *envp[]);
 /**========================================================================
  *                           exec_echo
  *========================================================================**/
@@ -40,8 +40,13 @@ void	exec_echo(t_Data *data, char **command_tab)
 	}
 	if (j == 1)
 		ft_printf("\n");
+	data = get_data(NULL);
 	if (data)
-		data->exit_status = 0;
+	{
+		// ft_printf("je suis ds echo builtin je vais mettre data_status a zero: %d", get_data(NULL)->exit_status)	;
+		data->exit_status = 0;		
+		// ft_printf("je suis ds echo builtin je vais mettre data_status a zero: %d", get_data(NULL)->exit_status)	;
+	}
 }
 
 /**========================================================================

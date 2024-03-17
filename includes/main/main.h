@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:56:32 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 19:42:28 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/13 14:58:29 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include "libft.h"
 # include "ft_printf.h"
+# include "parsing_utils.h"
 
 int		is_not_empty_prompt(char *str);;
 int		main(int argc, char **argv, char *envp[]);
@@ -32,7 +33,7 @@ void	free_data(t_Data *data);
 void	handle_signals(void);
 char	**duplicate_envp(t_Data *data, char *envp[]);
 void	display_error_detail(char *str, char *details, char *str2);
-void	exec_pipex(t_Data *data, char *cmd, char *envp[]);
+int		exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
 int		is_only_space(char *str);
 void	free_command_tab(char ***command_tab);
 void	exec_pwd(t_Data *data);
@@ -42,5 +43,6 @@ void	exec_unset(t_Data *data, char **command_tab);
 void	exec_env(t_Data *data, char **command_tab);
 int		exec_exit(t_Data *data, char **command_tab);
 int		exec_export(char **command_tab, t_Data *data);
+int		parse_par(char *str, t_Data *data, t_ast_nde *root);
 
 #endif
