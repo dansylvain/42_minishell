@@ -1,0 +1,136 @@
+Commande: false || (echo aaa && true) || echo $?
+Sortie Valgrind:
+==821619== Memcheck, a memory error detector
+==821619== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==821619== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==821619== Command: ../minishell
+==821619== 
+==821620== Memcheck, a memory error detector
+==821620== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==821620== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==821620== Command: /usr/bin/false
+==821620== 
+==821620== 
+==821620== HEAP SUMMARY:
+==821620==     in use at exit: 0 bytes in 0 blocks
+==821620==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==821620== 
+==821620== All heap blocks were freed -- no leaks are possible
+==821620== 
+==821620== For lists of detected and suppressed errors, rerun with: -s
+==821620== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==821622== Memcheck, a memory error detector
+==821622== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==821622== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==821622== Command: /usr/bin/true
+==821622== 
+==821622== 
+==821622== HEAP SUMMARY:
+==821622==     in use at exit: 0 bytes in 0 blocks
+==821622==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==821622== 
+==821622== All heap blocks were freed -- no leaks are possible
+==821622== 
+==821622== For lists of detected and suppressed errors, rerun with: -s
+==821622== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==821619== 
+==821619== HEAP SUMMARY:
+==821619==     in use at exit: 208,303 bytes in 226 blocks
+==821619==   total heap usage: 638 allocs, 412 frees, 243,250 bytes allocated
+==821619== 
+==821619== 2 bytes in 1 blocks are definitely lost in loss record 1 of 67
+==821619==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==821619==    by 0x110728: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==821619==    by 0x11095B: ft_itoa (in /home/dan/42/minishell_common/minishell)
+==821619==    by 0x10E94E: search_var (path.c:90)
+==821619==    by 0x10E0CD: build_token_and_merge (dollar_expansion.c:82)
+==821619==    by 0x10E0CD: rebuild_dollar_str (dollar_expansion.c:114)
+==821619==    by 0x10DE4E: leaf_tree (leaf.c:55)
+==821619==    by 0x10DD4F: leaf_raw_lft (leaf.c:21)
+==821619==    by 0x10DD4F: leaf_tree (leaf.c:58)
+==821619==    by 0x10C2EE: parse (parsing.c:119)
+==821619==    by 0x10F4EF: exec_pipex (exec_pipex.c:30)
+==821619==    by 0x10E325: no_token_zone (leaf_par.c:56)
+==821619==    by 0x10E325: leaf_tree_par (leaf_par.c:73)
+==821619==    by 0x10E4A8: raw_right_area (leaf_par_raw.c:89)
+==821619==    by 0x10E2BC: token_zone (leaf_par.c:39)
+==821619==    by 0x10E2BC: leaf_tree_par (leaf_par.c:71)
+==821619== 
+==821619== LEAK SUMMARY:
+==821619==    definitely lost: 2 bytes in 1 blocks
+==821619==    indirectly lost: 0 bytes in 0 blocks
+==821619==      possibly lost: 0 bytes in 0 blocks
+==821619==    still reachable: 0 bytes in 0 blocks
+==821619==         suppressed: 208,301 bytes in 225 blocks
+==821619== 
+==821619== For lists of detected and suppressed errors, rerun with: -s
+==821619== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+
+Commande: false || (echo aaa && false) && echo $?
+Sortie Valgrind:
+==821630== Memcheck, a memory error detector
+==821630== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==821630== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==821630== Command: ../minishell
+==821630== 
+==821631== Memcheck, a memory error detector
+==821631== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==821631== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==821631== Command: /usr/bin/false
+==821631== 
+==821631== 
+==821631== HEAP SUMMARY:
+==821631==     in use at exit: 0 bytes in 0 blocks
+==821631==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==821631== 
+==821631== All heap blocks were freed -- no leaks are possible
+==821631== 
+==821631== For lists of detected and suppressed errors, rerun with: -s
+==821631== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==821632== Memcheck, a memory error detector
+==821632== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==821632== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==821632== Command: /usr/bin/false
+==821632== 
+==821632== 
+==821632== HEAP SUMMARY:
+==821632==     in use at exit: 0 bytes in 0 blocks
+==821632==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==821632== 
+==821632== All heap blocks were freed -- no leaks are possible
+==821632== 
+==821632== For lists of detected and suppressed errors, rerun with: -s
+==821632== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==821630== 
+==821630== HEAP SUMMARY:
+==821630==     in use at exit: 208,304 bytes in 226 blocks
+==821630==   total heap usage: 638 allocs, 412 frees, 243,255 bytes allocated
+==821630== 
+==821630== 2 bytes in 1 blocks are definitely lost in loss record 1 of 67
+==821630==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==821630==    by 0x110728: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==821630==    by 0x11095B: ft_itoa (in /home/dan/42/minishell_common/minishell)
+==821630==    by 0x10E94E: search_var (path.c:90)
+==821630==    by 0x10E0CD: build_token_and_merge (dollar_expansion.c:82)
+==821630==    by 0x10E0CD: rebuild_dollar_str (dollar_expansion.c:114)
+==821630==    by 0x10DE4E: leaf_tree (leaf.c:55)
+==821630==    by 0x10DD4F: leaf_raw_lft (leaf.c:21)
+==821630==    by 0x10DD4F: leaf_tree (leaf.c:58)
+==821630==    by 0x10C2EE: parse (parsing.c:119)
+==821630==    by 0x10F4EF: exec_pipex (exec_pipex.c:30)
+==821630==    by 0x10E325: no_token_zone (leaf_par.c:56)
+==821630==    by 0x10E325: leaf_tree_par (leaf_par.c:73)
+==821630==    by 0x10E4A8: raw_right_area (leaf_par_raw.c:89)
+==821630==    by 0x10E2BC: token_zone (leaf_par.c:39)
+==821630==    by 0x10E2BC: leaf_tree_par (leaf_par.c:71)
+==821630== 
+==821630== LEAK SUMMARY:
+==821630==    definitely lost: 2 bytes in 1 blocks
+==821630==    indirectly lost: 0 bytes in 0 blocks
+==821630==      possibly lost: 0 bytes in 0 blocks
+==821630==    still reachable: 0 bytes in 0 blocks
+==821630==         suppressed: 208,302 bytes in 225 blocks
+==821630== 
+==821630== For lists of detected and suppressed errors, rerun with: -s
+==821630== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+

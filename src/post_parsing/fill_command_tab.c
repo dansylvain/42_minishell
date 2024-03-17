@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:40:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 10:20:25 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/17 17:21:44 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ char	***fill_command_tab(char ***cmd_tab, t_ast_nde *node)
 	int			i;
 	int			redir_were_added;
 	int			cmd_was_added;
+	int			jok_flag;
 
+	jok_flag = 0;
 	cmd_was_added = 0;
 	redir_were_added = 0;
 	i = 0;
@@ -37,7 +39,9 @@ char	***fill_command_tab(char ***cmd_tab, t_ast_nde *node)
 		cmd_tab = add_redir_tabs_loop(cmd_tab, &node, &redir_were_added, &i);
 		cmd_tab = add_remaining_tabs_loop(cmd_tab, node, &cmd_was_added, &i);
 		if (node->token == DOLL || node->token == JOKER)
-			free_node(node);
+		{
+			free(node->start);
+		}
 		node = node->sibling;
 	}
 	return (cmd_tab);

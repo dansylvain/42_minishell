@@ -3,26 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 07:42:44 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 10:54:58 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/17 17:52:32 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expansion.h"
-
+#include "ft_printf.h"
+/**========================================================================
+ *                           search_token_joker
+ *? flag added to avoid excessive allocation in case of multiple '*' in node 
+ *========================================================================**/
 static t_ast_nde	*search_token_joker(t_ast_nde *sib, char *actual)
 {
 	t_ast_nde	*token_nde;
 	char		*start;
+	int			flag;
 
+	flag = 0;
 	start = actual;
 	token_nde = NULL;
 	while (actual <= sib->end)
 	{
-		if (*actual == '*')
+		if (*actual == '*' && flag == 0)
 		{
+			flag = 1;
 			token_nde = create_node(JOKER);
 			token_nde->start = start;
 		}
