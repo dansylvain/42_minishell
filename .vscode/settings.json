@@ -32,6 +32,7 @@
 		"free_tree.h": "c",
 		"test.h": "c",
 		"leaf_par.h": "c",
-		"parenthesis.h": "c"
+		"parenthesis.h": "c",
+		"utils2.h": "c"
 	}
 }

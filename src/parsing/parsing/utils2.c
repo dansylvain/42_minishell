@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 20:57:31 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/12 23:06:03 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 16:43:29 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,24 @@ char	*translate_enum(t_tok token)
 	return (NULL);
 }
 
-t_ast_nde	*ft_lstlast_sib(t_ast_nde *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->sibling)
-		lst = lst->sibling;
-	return (lst);
+int		is_only_space_op(char *start, char *end)
+{	
+	while (start <= end)
+	{
+		if (!ft_isspace(*start))
+			return (0);
+		start++;
+	}
+	return (1);
 }
 
-void	ft_lstadd_back_sib(t_ast_nde **lst, t_ast_nde *new)
-{
-	if (!lst || !new)
-		return ;
-	if (!*lst)
-		*lst = new;
-	else
-		ft_lstlast_sib(*lst)->sibling = new;
-}
-
-t_ast_nde	*sib_last(t_ast_nde *sib)
-{
-	while (sib && sib->sibling)
+int	is_sibling_only_space(t_ast_nde *sib)
+{	
+	while (sib)
+	{			
+		if (sib->start && !is_only_space_op(sib->start, sib->end))		
+			return (0);		
 		sib = sib->sibling;
-	return (sib);
+	}	
+	return (1);
 }

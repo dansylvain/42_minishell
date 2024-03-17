@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:27:56 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/11 10:19:56 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 16:44:30 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ t_ast_nde	*create_token_child(t_ast_nde *raw, t_ast_nde *token);
 void		fill_child(t_ast_nde *sib, t_ast_nde *raw_lft,
 				t_ast_nde *raw_rght, t_ast_nde *token);
 int			is_chevron(t_ast_nde *node);
+int			is_only_space_op(char *start, char *end);
+int			is_sibling_only_space(t_ast_nde *sib);
 
 #endif

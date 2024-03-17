@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:30:08 by seblin            #+#    #+#             */
-/*   Updated: 2024/02/28 14:45:19 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 17:10:24 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 
 # include <stdlib.h>
 # include "parsing_utils.h"
+# include "libft.h"
 
 #endif
