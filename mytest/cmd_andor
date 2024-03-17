@@ -105,3 +105,7 @@ echo $?
 echo $?
 && echo aa && echo kk
 echo $?
+&& echo aa && echo kk &&
+echo $?
+echo aa && echo kk &&
+echo $?

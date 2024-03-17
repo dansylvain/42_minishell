@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/17 17:29:38 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 17:35:32 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,10 +138,9 @@ static int	token_child_handle(t_ast_nde *sib_cont,
 	raw_rght = raw_lft->sibling;
 	token->child = raw_lft;
 	fill_child(sib, raw_lft->child, raw_rght->child, token);
-	if (error_policy_and_forwarding(raw_lft, raw_rght, token))
-		return (1);
-	if (error_policy_and_forwarding_2(raw_lft, raw_rght, token))
-		return (1);
+	if (error_policy_and_forwarding(raw_lft, raw_rght, token)
+		|| error_policy_and_forwarding_2(raw_lft, raw_rght, token))
+		return (1);	
 	return (0);
 }
 
