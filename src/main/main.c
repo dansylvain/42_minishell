@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/17 15:17:39 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:12:05 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	prompt_loop(t_Data *data, char *envp[])
 		if (cmd && *cmd)
 			add_history(cmd);
 		if (cmd == NULL)
-			return (ft_printf("exit\n"), 0);	
+			return (ft_printf("exit\n"), 0);
 		parse_par(cmd, data, NULL);
 		m_flag = 1;
 		free(cmd);

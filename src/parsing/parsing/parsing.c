@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/17 16:28:17 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:07:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	set_root(t_ast_nde **root, char *str)
 int	first_init_root(char *str, int *first_rec, t_ast_nde **root)
 {
 	t_ast_nde	*quote;
-	
+
 	*first_rec = 1;
 	set_root(root, str);
 	quote = set_qute_sib(str);
@@ -53,7 +53,7 @@ int	clean_par(int first_rec, int ret)
 }
 
 int	parse_par(char *str, t_Data *data, t_ast_nde *root)
-{		
+{
 	int	first_rec;
 
 	if (!*str)
@@ -63,8 +63,8 @@ int	parse_par(char *str, t_Data *data, t_ast_nde *root)
 	exec_pipex(NULL, NULL, NULL, 1);
 	if (!root && first_init_root(str, &first_rec, &root))
 		return (1);
-	if (set_parenthesis(root) < 0)	
-		return (clean_par(first_rec, 1));			
+	if (set_parenthesis(root) < 0)
+		return (clean_par(first_rec, 1));
 	if (leaf_tree_par(root, data))
 		return (clean_par(first_rec, 1));
 	clean_par(first_rec, 0);
@@ -76,18 +76,17 @@ t_ast_nde	*parse(char *str, t_Data *data)
 	t_ast_nde	*cmd_sav;
 	t_ast_nde	*cmd;
 	t_ast_nde	*quote;
-	
+
 	if (!*str)
 		return (NULL);
 	cmd_sav = NULL;
-	
 	set_root(&root, str);
 	quote = set_qute_sib(str);
-	root->child->child->child = quote;		
+	root->child->child->child = quote;
 	if (!quote)
-		return (free_tree(root), NULL);	
+		return (free_tree(root), NULL);
 	if (set_operator(root->child))
-		return (free_tree(root), NULL);	
+		return (free_tree(root), NULL);
 	leaf_tree(root, &cmd, &cmd_sav, data);
 	return (free_tree(root), cmd_sav);
 }

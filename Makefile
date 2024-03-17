@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/16 13:02:44 by seblin           ###   ########.fr        #
+#    Updated: 2024/03/17 17:50:45 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC =	test.c \
 		src/parsing/parsing/free_utils.c \
 		src/parsing/parsing/utils.c \
 		src/parsing/parsing/utils2.c \
+		src/parsing/create_tree/error_policy_and_fwrd.c \
 		src/parsing/create_tree/parenthesis.c \
 		src/parsing/create_tree/expansion.c \
 		src/parsing/create_tree/operator.c \

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:14:05 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/17 11:21:18 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:13:50 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ size_t	ft_strlen_gnl(const char *s)
 {
 	size_t	i;
 
-	i = 0;	
+	i = 0;
 	while (s && *s++)
 		i++;
 	return (i);

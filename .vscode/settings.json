@@ -33,6 +33,7 @@
 		"test.h": "c",
 		"leaf_par.h": "c",
 		"parenthesis.h": "c",
-		"utils2.h": "c"
+		"utils2.h": "c",
+		"error_policy_and_fwrd.h": "c"
 	}
 }

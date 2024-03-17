@@ -6,14 +6,12 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/17 17:35:32 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:11:17 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operator.h"
 #include "test.h"
-
-extern int p_flag;
 
 static t_ast_nde	*create_token(t_tok simpl_tok, t_tok doubl_tok,
 	char *actual, char char_tok)
@@ -71,68 +69,11 @@ static t_ast_nde	*create_token_node(t_ast_nde *sib)
 	return (NULL);
 }
 
-int	protected_left(t_ast_nde *raw_lft, t_ast_nde *token)
-{
-	if (raw_lft && raw_lft->child && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
-		set_space(raw_lft);
-	else if (token && (token->token == AND || token->token == OR || token->token == PIPE))
-		return (display_error_free(ft_strjoin("minishell: syntax error near \
-unexpected token ", translate_enum(token->token))), 1);
-	return (0);
-}
-
-int	protected_right(t_ast_nde *raw_rght, t_ast_nde *token)
-{
-	if (raw_rght->child && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))
-		return ((set_operator(raw_rght)));	
-	else if ((token->token == AND || token->token == OR || token->token == PIPE
-		|| is_chevron(token)))
-		return (display_error_free(ft_strjoin("minishell: syntax error near \
-unexpected token ", translate_enum(token->token))), 1);
-	return (0);
-}
-int	error_policy_and_forwarding(t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
-{	
-	if (!p_flag) 
-	{	
-		if (protected_left(raw_lft, token))
-			return (1);
-		return (protected_right(raw_rght, token));
-	}		
-	if (p_flag == 3)
-	{
-		if (raw_lft->child)
-			set_space(raw_lft);
-		if (raw_rght->child)
-			return ((set_operator(raw_rght)));			
-	}	
-	return (0);
-}
-
-int	error_policy_and_forwarding_2(t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
-{	
-	if (p_flag == 1)
-	{	
-		if (raw_lft->child)
- 			set_space(raw_lft);
-		return (protected_right(raw_rght, token));
-	}
-	if (p_flag == 2)
-	{
-		if (protected_left(raw_lft, token))
-			return (1);
-		if (raw_rght->child)
-			return ((set_operator(raw_rght)));
-	}
-	return (0);
-}
-
 static int	token_child_handle(t_ast_nde *sib_cont,
 	t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
 {
 	t_ast_nde	*sib;
 
-	
 	sib = sib_cont->child;
 	raw_lft = create_token_child(sib_cont, token);
 	raw_rght = raw_lft->sibling;
@@ -140,7 +81,7 @@ static int	token_child_handle(t_ast_nde *sib_cont,
 	fill_child(sib, raw_lft->child, raw_rght->child, token);
 	if (error_policy_and_forwarding(raw_lft, raw_rght, token)
 		|| error_policy_and_forwarding_2(raw_lft, raw_rght, token))
-		return (1);	
+		return (1);
 	return (0);
 }
 
@@ -161,68 +102,3 @@ int	set_operator(t_ast_nde *node)
 	set_space(node);
 	return (0);
 }
-
-
-// static int	token_child_handle(t_ast_nde *sib_cont,
-// 	t_ast_nde *raw_lft, t_ast_nde *raw_rght, t_ast_nde *token)
-// {
-// 	t_ast_nde	*sib;
-// 	extern int p_flag;
-	
-// 	sib = sib_cont->child;
-// 	raw_lft = create_token_child(sib_cont, token);
-// 	raw_rght = raw_lft->sibling;
-// 	token->child = raw_lft;
-// 	fill_child(sib, raw_lft->child, raw_rght->child, token);
-	
-// 	if (!p_flag) 
-// 	{	
-// 			//ft_putstr_fd("je suis pflag 0, 1-1\n", 2);
-// 		if (raw_lft->child && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
-// 			set_space(raw_lft);
-// 		else if ((token->token == AND || token->token == OR || token->token == PIPE))
-// 			return (display_error_free(ft_strjoin("minishell: syntax error near \
-// unexpected token ", translate_enum(token->token))), 1);
-
-	
-// 		if (raw_rght->child && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))
-// 			return ((set_operator(raw_rght)));	
-// 		else if ((token->token == AND || token->token == OR || token->token == PIPE
-// 			|| is_chevron(token)))
-// 			return (display_error_free(ft_strjoin("minishell: syntax error near \
-// unexpected token ", translate_enum(token->token))), 1);
-
-// 	}	
-// 	if (p_flag == 1)
-// 	{	//ft_putstr_fd("je suis pflag 1, 0-1\n", 2);
-// 		if (raw_lft->child)
-//  			set_space(raw_lft);
-			
-// 		if (raw_rght->child && raw_rght->child->child && !is_sibling_only_space(raw_rght->child->child))
-// 			return ((set_operator(raw_rght)));	
-// 		else if (token->token == AND || token->token == OR || token->token == PIPE
-// 			|| is_chevron(token))
-// 			return (display_error_free(ft_strjoin("minishell: syntax error near \
-// unexpected token ", translate_enum(token->token))), 1);	
-// 	}	
-// 	if (p_flag == 2)
-// 	{	//ft_putstr_fd("je suis pflag 2, 1-0\n", 2);
-// 		if (raw_lft->child && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
-// 			set_space(raw_lft);
-// 		else if (token->token == AND || token->token == OR || token->token == PIPE)
-// 			return (display_error_free(ft_strjoin("minishell: syntax error near \
-// unexpected token ", translate_enum(token->token))), 1);
-
-// 		if (raw_rght->child)
-// 			return ((set_operator(raw_rght)));
-// 	}
-// 	if (p_flag == 3)
-// 	{//ft_putstr_fd("je suis pflag 3, 0-0\n", 2);
-// 		if (raw_lft->child)
-// 			set_space(raw_lft);
-
-// 		if (raw_rght->child)
-// 			return ((set_operator(raw_rght)));			
-// 	}
-// 	return (0);
-// }

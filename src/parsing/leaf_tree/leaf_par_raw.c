@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:12:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/17 14:57:36 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:24:19 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,14 @@ extern int	r_flag;
 extern int	m_flag;
 extern int	p_flag;
 
-static t_ast_nde *get_next_right_token(t_ast_nde *raw_lft) //token ds le noeud right
-{	 
-	if ((raw_lft && raw_lft->sibling && raw_lft->sibling->sibling
-			&& raw_lft->sibling->sibling->child && raw_lft->sibling->sibling
-				->child->sibling));
-	return (raw_lft->sibling->sibling->child->sibling);
-	return (NULL);
-}
-
-static int	is_next_right_token(t_ast_nde *raw_lft) //token ds le noeud right
-{	 
-	return ((raw_lft && raw_lft->sibling && raw_lft->sibling->sibling
-			&& raw_lft->sibling->sibling->child && raw_lft->sibling->sibling
-				->child));//->sibling));
-}
-static int	is_next_middle(t_ast_nde *raw_lft) //token ds le noeud right
+static int	is_next_middle(t_ast_nde *raw_lft)
 {	 
 	return (raw_lft && raw_lft->sibling && raw_lft->sibling->child);
 }
-// static int	is_prev_token(t_ast_nde *raw_lft, t_ast_nde *root)
-// {
-// 	t_ast_nde	*ex_token;
-		
-// 	while (root && root != raw_lft)
-// 	{
-// 		ex_token = root;
-// 		if (get_next_right_token(raw_lft) )
-// 		root = get_next_right_token(raw_lft);
-// 	}
-// 	return ((raw_lft && raw_lft->sibling && raw_lft->sibling->child
-// 			&& raw_lft->sibling->child));//->sibling));
-// }
 
 int	raw_left_area(t_ast_nde *raw_lft, t_Data *data, int *or_flag)
 {
-	char		*tmp_str;
+	char	*tmp_str;
 
 	if (raw_lft && raw_lft->child)
 	{
@@ -64,7 +36,7 @@ int	raw_left_area(t_ast_nde *raw_lft, t_Data *data, int *or_flag)
 			p_flag = 3;
 		else
 			p_flag = 2;
-		//ft_printf("is tk, p_flag :%d\n", p_flag);		
+		//ft_printf("is tk, p_flag :%d\n", p_flag);
 		tmp_str = ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1);
 		store_or_free_cmd(tmp_str);
 		*or_flag = exec_pipex(data, tmp_str, data->envp_tab, 0);

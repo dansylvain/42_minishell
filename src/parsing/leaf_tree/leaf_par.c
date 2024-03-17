@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:10:42 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/17 15:14:12 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 18:00:28 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	no_token_zone(t_ast_nde *raw, t_Data *data)
 {
 	char	*tmp_str;
 	//ft_printf("no token zone\n");
-	 if (m_flag && !r_flag)
+	if (m_flag && !r_flag)
 		p_flag = 0;
 	else
 		p_flag = 1;
@@ -61,8 +61,7 @@ int	no_token_zone(t_ast_nde *raw, t_Data *data)
 
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 {
-	t_ast_nde	*token;	
-	
+	t_ast_nde	*token;
 	// ft_printf("leaf!\n");
 	// print_node(raw);
 	// ft_printf("\n");
