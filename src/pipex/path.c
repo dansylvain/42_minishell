@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/12 09:24:43 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 22:24:46 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	search_path(char *argv[], char *envp[])
 	env_find = search_env_var(envp, "PATH=");
 	if (!env_find)
 	{
-		ft_putstr_fd("env PATH not found.\n", 2);
+		ft_putstr_fd("PATH: not found.\n", 2);
 		return (1);
 	}
 	if (!try_paths(argv, env_find))
@@ -77,7 +77,6 @@ int	search_path(char *argv[], char *envp[])
 	}
 	return (0);
 }
-t_Data	*get_data(char *envp[]);
 
 char	*search_var(const t_ast_nde *node, t_Data *data)
 {
@@ -87,7 +86,7 @@ char	*search_var(const t_ast_nde *node, t_Data *data)
 
 	str = ft_strndup(node->start, node->end - node->start + 1);
 	if (*(str + 1) == '?')
-		var = ft_itoa(get_data(NULL)->exit_status);
+		var = ft_itoa(get_data(NULL)->exit_status);// ft_strdup("$?");
 	else
 	{
 		tmp = ft_strjoin_up(str + 1, "=", 0, 0);

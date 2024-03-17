@@ -47,3 +47,6 @@ $LOGNAME$LOGNAME
 echo $?
 $LOGNAME $LOGNAME
 echo $?
+false || echo $?ki
+echo $?
+
