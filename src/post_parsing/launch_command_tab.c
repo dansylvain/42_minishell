@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/16 10:39:20 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 11:46:30 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	build_command_tab_node(t_ast_nde *node, t_ast_nde **cmd_tab_node,
 	}
 	add_sibling(copy_node_and_child(node), cmd_tab_node,
 		cmd_tab_node_sav);
+	store_and_free_cmd_tab_node_sav(*cmd_tab_node_sav);
 }
 
 /**========================================================================

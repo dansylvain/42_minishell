@@ -6,11 +6,15 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 19:30:35 by dan               #+#    #+#             */
-/*   Updated: 2024/03/08 20:25:33 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/17 11:34:18 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_exit.h"
+t_ast_nde	*store_or_free_tree_par(t_ast_nde *root);
+void		store_or_free_cmd(char *cmd);
+void		store_or_free_cmd_par(char *cmd);
+
 
 void	display_exit_stuff(t_Data *data, char **command_tab)
 {
@@ -43,6 +47,9 @@ int	exec_exit(t_Data *data, char **command_tab)
 	data->exit_status = 0;
 	display_exit_stuff(data, command_tab);
 	command_tab = NULL;
+	store_or_free_tree_par(NULL);
+	store_or_free_cmd(NULL);
+	store_or_free_cmd_par(NULL);
 	store_and_free_cmd_tab_node_sav(NULL);
 	store_and_free_cmd_list(NULL);
 	exit_int = data->exit_status;
