@@ -99,3 +99,9 @@ echo $?
 echo $?
 ( ( echo bb && echo bb ) && (echo hhh) )&&(echo hh)&& echo truc
 echo $?
+( (&& echo bb && echo bb ) && (echo hhh) )&&(echo hh)&& echo truc
+echo $?
+(( true || (echo bbb || echo xxx )) || echo zzz)
+echo $?
+&& echo aa && echo kk
+echo $?

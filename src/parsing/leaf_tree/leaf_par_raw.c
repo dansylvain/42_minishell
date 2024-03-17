@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:12:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/17 14:29:14 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 14:57:36 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	raw_left_area(t_ast_nde *raw_lft, t_Data *data, int *or_flag)
 		//ft_printf("on raw left!\n");
 		// print_node(raw_lft);
 		// ft_printf("\n");
-		ft_printf("rflag: %d, is middle: %d\n",r_flag, is_next_middle(raw_lft));
+	//	ft_printf("rflag: %d, is middle: %d\n",r_flag, is_next_middle(raw_lft));
 		if (is_next_middle(raw_lft) && r_flag)
 			p_flag = 3;
 		else

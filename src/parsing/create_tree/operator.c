@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/17 14:11:07 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 14:57:21 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ unexpected token ", translate_enum(token->token))), 1);
 
 	}	
 	if (p_flag == 1)
-	{	ft_putstr_fd("je suis pflag 1, 0-1\n", 2);
+	{	//ft_putstr_fd("je suis pflag 1, 0-1\n", 2);
 		if (raw_lft->child)
  			set_space(raw_lft);
 			
@@ -193,7 +193,7 @@ unexpected token ", translate_enum(token->token))), 1);
 unexpected token ", translate_enum(token->token))), 1);	
 	}	
 	if (p_flag == 2)
-	{	ft_putstr_fd("je suis pflag 2, 1-0\n", 2);
+	{	//ft_putstr_fd("je suis pflag 2, 1-0\n", 2);
 		if (raw_lft->child && raw_lft->child->child && !is_sibling_only_space(raw_lft->child->child))
 			set_space(raw_lft);
 		else if (token->token == AND || token->token == OR || token->token == PIPE)
