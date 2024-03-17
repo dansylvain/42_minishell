@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_expansion.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 10:14:43 by dan               #+#    #+#             */
-/*   Updated: 2024/03/12 15:24:53 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/17 12:17:50 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wildcard_expansion.h"
 
 /**========================================================================
- *                           wilcard_func
+ *                           wildcard_func
  *========================================================================**/
-char	*wilcard_func(char *pattern)
+char	*wildcard_func(char *pattern)
 {
 	size_t	i;
 	char	**matches;

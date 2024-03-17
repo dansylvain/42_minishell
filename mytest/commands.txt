@@ -28,6 +28,7 @@ echo -n -n "$USER$LOGNAME"
 echo "$USER"
 $USER
 
+ls *le* *.txt | rev >> file_fion.txt
 /usr/bin/ls
 echo $?
 
