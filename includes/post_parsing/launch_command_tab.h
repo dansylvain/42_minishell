@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:59:07 by dan               #+#    #+#             */
-/*   Updated: 2024/03/16 10:29:37 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 17:00:47 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ char	***create_command_tab(t_Data *data, t_ast_nde *node, char *envp[]);
 void	build_command_tab(char ****cmd_tab, t_Data *data,
 			t_ast_nde **cmd_tab_node_sav, char *envp[]);
 void	store_and_free_cmd_tab(char ***cmd_tab);
-int		is_chevron(t_ast_nde *node);
 t_Data	*get_data(char *envp[]);
+char	*ft_delchar(char *s);
+int		is_pipeline(t_ast_nde *cmd_tab_node_sav);
 
 #endif

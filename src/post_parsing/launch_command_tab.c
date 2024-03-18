@@ -3,55 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   launch_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/18 13:01:01 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 17:35:06 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "launch_command_tab.h"
-#include "test.h"
-
-
-void	store_and_free_exit_status_var(char *var_exit_status)
-{
-	static char	*var_exit_status_lcl = NULL;
-	
-
-
-	// ft_printf("enter store_and_free_exit_status_var\n");
-	// ft_printf("var: %s\n", var);
-	if (var_exit_status)
-		var_exit_status_lcl = var_exit_status;
-	if (var_exit_status)
-		var_exit_status_lcl = var_exit_status;
-	else if (var_exit_status_lcl)
-	{
-	// ft_printf("exec store_and_free_exit_status_var!!!\n");
-		free(var_exit_status_lcl);
-		var_exit_status_lcl = NULL;
-	}
-}
-
+#include "test.h"//
 
 /**========================================================================
- *                          build_command_tab_node
+ *                          replace_exit_status
  *========================================================================**/
-
-char	*ft_delchar(char *s)
-{
-	char	*s_save;
-		//	ft_printf("del\n");
-	s_save = s;
-	while (s && *s)
-	{
-		*s = *(s + 1);
-		s++;
-	}
-	//ft_printf("del\n, s_save: -%s-\n", s_save);
-	return (s_save);
-}
 
 char	*replace_exit_status(char *str)
 {
@@ -63,42 +27,32 @@ char	*replace_exit_status(char *str)
 	status_len = ft_strlen(status);
 	while (*str)
 	{
-		i = 0;
+		i = -1;
 		status_len = ft_strlen(status);
-		if (*str == '$' && str + 1 && *(str + 1) == '$' && str + 2 && *(str + 2) == '$')
+		if (*str == '$' && str + 1 && *(str + 1) == '$'
+			&& str + 2 && *(str + 2) == '$')
 		{
-			//ft_printf("une fois par triplet\n");
-			while (str[i] && i < status_len)
-			{
+			while (str[++i] && i < status_len)
 				str[i] = status[i];
-				i++;			
-			}
 			status_len = 3 - i;
-			//ft_printf("status_len %d\n", status_len);
-			while (str[i] && status_len--) 
+			while (str[i] && status_len--)
 				ft_delchar(&str[i]);
-			continue;
+			continue ;
 		}
 		str++;
 	}
 	free(status);
 }
 
+/**========================================================================
+ *                          build_command_tab_node
+ *========================================================================**/
+
 void	build_command_tab_node(t_ast_nde *node, t_ast_nde **cmd_tab_node,
 	t_ast_nde **cmd_tab_node_sav)
 {
-	//if (node->token == DOLL && node->start == node->end && *node->start != '$')
 	if (node->token == STAT)
-	{//ft_printf("tes la ? %s\n", node->start);
-		
 		replace_exit_status(node->start);
-		//ft_printf("tes la suite ? %s\n", node->start);
-		//free(node->start);
-		// node->start = ft_itoa(get_data(NULL)->exit_status);
-		// node->end = node->start + ft_strlen(node->start) - 1;
-		node->child->start = node->start;
-		node->child->end = node->end;
-	}
 	add_sibling(copy_node_and_child(node), cmd_tab_node,
 		cmd_tab_node_sav);
 	store_and_free_cmd_tab_node_sav(*cmd_tab_node_sav);
@@ -121,7 +75,7 @@ int	launch_command_tab(t_Data *data, t_ast_nde *node,
 		if (!flag)
 			build_command_tab_node(node, &cmd_tab_node, &cmd_tab_node_sav);
 		else if (node->token == STAT || node->token == DOLL)
-			free(node->start);//store_and_free_exit_status_var(NULL);
+			free(node->start);
 		node = node->sibling;
 	}
 	if (cmd_tab_node_sav)
@@ -168,18 +122,4 @@ void	build_command_tab(char ****cmd_tab, t_Data *data,
 	else
 		free_sibling_and_child(*cmd_tab_node_sav);
 	free_command_tab_lg(*cmd_tab);
-}
-
-/**========================================================================
- *                           is_pipeline
- *========================================================================**/
-int	is_pipeline(t_ast_nde *cmd_tab_node_sav)
-{
-	while (cmd_tab_node_sav)
-	{
-		if (cmd_tab_node_sav->token == PIPE || is_chevron(cmd_tab_node_sav))
-			return (1);
-		cmd_tab_node_sav = cmd_tab_node_sav->sibling;
-	}
-	return (0);
 }

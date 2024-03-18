@@ -6,16 +6,12 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:12:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/17 18:27:29 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:18:25 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "leaf_par_raw.h"
 #include "test.h"
-
-extern int	r_flag;
-extern int	m_flag;
-extern int	p_flag;
 
 static int	is_next_middle(t_ast_nde *raw_lft)
 {
@@ -25,18 +21,15 @@ static int	is_next_middle(t_ast_nde *raw_lft)
 int	raw_left_area(t_ast_nde *raw_lft, t_Data *data, int *or_flag)
 {
 	char	*tmp_str;
+	int		*policy;
 
+	policy = get_err_policy();
 	if (raw_lft && raw_lft->child)
 	{
-		//ft_printf("on raw left!\n");
-		// print_node(raw_lft);
-		// ft_printf("\n");
-	//	ft_printf("rflag: %d, is middle: %d\n",r_flag, is_next_middle(raw_lft));
-		if (is_next_middle(raw_lft) && r_flag)
-			p_flag = 3;
+		if (is_next_middle(raw_lft) && policy[2])
+			policy[0] = 3;
 		else
-			p_flag = 2;
-		//ft_printf("is tk, p_flag :%d\n", p_flag);
+			policy[0] = 2;
 		tmp_str = ft_strndup(raw_lft->start, raw_lft->end - raw_lft->start + 1);
 		store_or_free_cmd(tmp_str);
 		*or_flag = exec_pipex(data, tmp_str, data->envp_tab, 0);
@@ -47,10 +40,12 @@ int	raw_left_area(t_ast_nde *raw_lft, t_Data *data, int *or_flag)
 int	middle_area(t_ast_nde *middle, t_Data *data, int or_flag)
 {
 	char	*tmp_str;
+	int		*policy;
 
+	policy = get_err_policy();
 	if (middle && middle->child && !or_flag)
 	{
-		m_flag = 1;
+		policy[1] = 1;
 		middle->start++;
 		middle->end--;
 		middle->child->start++;
@@ -60,7 +55,7 @@ int	middle_area(t_ast_nde *middle, t_Data *data, int or_flag)
 		if (parse_par(tmp_str, data, middle))
 		{
 			store_or_free_cmd_par(NULL);
-			m_flag = 0;
+			policy[1] = 0;
 			return (1);
 		}
 		store_or_free_cmd_par(NULL);
@@ -69,12 +64,15 @@ int	middle_area(t_ast_nde *middle, t_Data *data, int or_flag)
 
 int	raw_right_area(t_ast_nde *raw_rght, t_Data *data)
 {
+	int	*policy;
+
+	policy = get_err_policy();
 	if (raw_rght && raw_rght->child)
 	{
-		r_flag = 1;
+		policy[2] = 1;
 		if (leaf_tree_par(raw_rght, data))
 		{
-			m_flag = 0;
+			policy[1] = 0;
 			return (1);
 		}
 	}

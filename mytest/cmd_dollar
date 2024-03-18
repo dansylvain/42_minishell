@@ -53,4 +53,5 @@ echo $?
 echo $?
 (( echo ggg && true || echo $LOGNAME || echo bbb && echo $LOGNAME ) || echo $LOGNAME)
 echo $?
+echo aa || echo $? || echo *.txt || echo *.txt
 

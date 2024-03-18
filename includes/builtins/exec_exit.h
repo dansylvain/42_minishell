@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_exit.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 18:55:11 by dan               #+#    #+#             */
-/*   Updated: 2024/03/18 05:31:08 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 16:32:05 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "ft_printf.h"
 # include "libft.h"
 # include "parsing_utils.h"
-
 
 t_ast_nde	*store_or_free_tree_par(t_ast_nde *root);
 void		store_or_free_cmd(char *cmd);

@@ -6,13 +6,18 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:43:52 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/17 18:20:24 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:28:33 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error_policy_and_fwrd.h"
 
-extern int	p_flag;
+int	*get_err_policy(void)
+{
+	static int	policy_flags[3] = {0, 1, 0};
+
+	return (policy_flags);
+}
 
 static int	protected_left(t_ast_nde *raw_lft, t_ast_nde *token)
 {
@@ -41,13 +46,16 @@ unexpected token ", translate_enum(token->token))), 1);
 int	error_policy_and_forwarding(t_ast_nde *raw_lft, t_ast_nde *raw_rght,
 	t_ast_nde *token)
 {
-	if (!p_flag)
+	int	*policy;
+
+	policy = get_err_policy();
+	if (!policy[0])
 	{
 		if (protected_left(raw_lft, token))
 			return (1);
 		return (protected_right(raw_rght, token));
 	}
-	if (p_flag == 3)
+	if (policy[0] == 3)
 	{
 		if (raw_lft->child)
 			set_space(raw_lft);
@@ -60,13 +68,16 @@ int	error_policy_and_forwarding(t_ast_nde *raw_lft, t_ast_nde *raw_rght,
 int	error_policy_and_forwarding_2(t_ast_nde *raw_lft, t_ast_nde *raw_rght,
 	t_ast_nde *token)
 {
-	if (p_flag == 1)
+	int	*policy;
+
+	policy = get_err_policy();
+	if (policy[0] == 1)
 	{
 		if (raw_lft->child)
 			set_space(raw_lft);
 		return (protected_right(raw_rght, token));
 	}
-	if (p_flag == 2)
+	if (policy[0] == 2)
 	{
 		if (protected_left(raw_lft, token))
 			return (1);

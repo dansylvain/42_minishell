@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:03:28 by dan               #+#    #+#             */
-/*   Updated: 2024/03/18 17:17:04 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 17:43:24 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ char	***add_remaining_tabs_loop(char ***cmd_tab, t_ast_nde *node,
 char	***add_redir_tabs_loop(char ***cmd_tab, t_ast_nde **node,
 			int *redir_were_added, int *i);
 int		intitialize_variables(int *jok_flag, int *cmd_was_added,
-		int *redir_were_added);
+			int *redir_were_added);
 
 #endif

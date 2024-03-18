@@ -6,7 +6,7 @@
 #    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/17 17:50:45 by seblin           ###   ########.fr        #
+#    Updated: 2024/03/18 16:55:48 by seblin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ SRC =	test.c \
 		src/post_parsing/create_command_tab_utils.c \
 		src/post_parsing/exec_pipex.c \
 		src/post_parsing/launch_command_tab.c \
+		src/post_parsing/post_parsing_utils.c \
 		src/post_parsing/create_command_tab.c \
 		src/wildcard/wildcard_expansion.c \
 		src/wildcard/wildcard_expansion_2.c \
