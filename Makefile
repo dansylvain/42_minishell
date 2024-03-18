@@ -6,7 +6,7 @@
 #    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/13 08:53:59 by dan              ###   ########.fr        #
+#    Updated: 2024/03/18 08:45:17 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,7 @@ FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 LIBS = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
 
 # Source files
-SRC =	test.c \
-		src/main/main.c \
+SRC =	src/main/main.c \
 		src/main/utils.c \
 		src/main/utils_2.c \
 		src/main/utils_3.c \
