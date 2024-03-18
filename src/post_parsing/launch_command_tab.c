@@ -6,31 +6,12 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/18 14:22:17 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 15:56:18 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "launch_command_tab.h"
 #include "test.h"//
-
-// void	store_and_free_exit_status_var(char *var_exit_status)
-// {
-// 	static char	*var_exit_status_lcl = NULL;
-
-// 	// ft_printf("enter store_and_free_exit_status_var\n");
-// 	// ft_printf("var: %s\n", var);
-// 	if (var_exit_status)
-// 		var_exit_status_lcl = var_exit_status;
-// 	if (var_exit_status)
-// 		var_exit_status_lcl = var_exit_status;
-// 	else if (var_exit_status_lcl)
-// 	{
-// 	// ft_printf("exec store_and_free_exit_status_var!!!\n");
-// 		free(var_exit_status_lcl);
-// 		var_exit_status_lcl = NULL;
-// 	}
-// }
-
 
 /**========================================================================
  *                          build_command_tab_node
@@ -39,14 +20,13 @@
 char	*ft_delchar(char *s)
 {
 	char	*s_save;
-		//	ft_printf("del\n");
+
 	s_save = s;
 	while (s && *s)
 	{
 		*s = *(s + 1);
 		s++;
 	}
-	//ft_printf("del\n, s_save: -%s-\n", s_save);
 	return (s_save);
 }
 
@@ -64,14 +44,12 @@ char	*replace_exit_status(char *str)
 		status_len = ft_strlen(status);
 		if (*str == '$' && str + 1 && *(str + 1) == '$' && str + 2 && *(str + 2) == '$')
 		{
-			//ft_printf("une fois par triplet\n");
 			while (str[i] && i < status_len)
 			{
 				str[i] = status[i];
 				i++;			
 			}
 			status_len = 3 - i;
-			//ft_printf("status_len %d\n", status_len);
 			while (str[i] && status_len--) 
 				ft_delchar(&str[i]);
 			continue;
@@ -84,17 +62,12 @@ char	*replace_exit_status(char *str)
 void	build_command_tab_node(t_ast_nde *node, t_ast_nde **cmd_tab_node,
 	t_ast_nde **cmd_tab_node_sav)
 {
-	//if (node->token == DOLL && node->start == node->end && *node->start != '$')
 	if (node->token == STAT)
-	{//ft_printf("tes la ? %s\n", node->start);
-		
+	{		
 		replace_exit_status(node->start);
-		//ft_printf("tes la suite ? %s\n", node->start);
-		//free(node->start);
-		// node->start = ft_itoa(get_data(NULL)->exit_status);
 		// node->end = node->start + ft_strlen(node->start) - 1;
-		node->child->start = node->start;
-		node->child->end = node->end;
+		// node->child->start = node->start;
+		// node->child->end = node->end;
 	}
 	add_sibling(copy_node_and_child(node), cmd_tab_node,
 		cmd_tab_node_sav);
