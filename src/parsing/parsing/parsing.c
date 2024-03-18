@@ -6,12 +6,11 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/15 12:07:36 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 19:53:34 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "test.h"
 
 static int	is_double_token(t_ast_nde *node)
 {
