@@ -3,36 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   launch_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/18 12:55:55 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 14:22:17 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "launch_command_tab.h"
-#include "test.h"
+#include "test.h"//
 
+// void	store_and_free_exit_status_var(char *var_exit_status)
+// {
+// 	static char	*var_exit_status_lcl = NULL;
 
-void	store_and_free_exit_status_var(char *var_exit_status)
-{
-	static char	*var_exit_status_lcl = NULL;
-	
-
-
-	// ft_printf("enter store_and_free_exit_status_var\n");
-	// ft_printf("var: %s\n", var);
-	if (var_exit_status)
-		var_exit_status_lcl = var_exit_status;
-	if (var_exit_status)
-		var_exit_status_lcl = var_exit_status;
-	else if (var_exit_status_lcl)
-	{
-	// ft_printf("exec store_and_free_exit_status_var!!!\n");
-		free(var_exit_status_lcl);
-		var_exit_status_lcl = NULL;
-	}
-}
+// 	// ft_printf("enter store_and_free_exit_status_var\n");
+// 	// ft_printf("var: %s\n", var);
+// 	if (var_exit_status)
+// 		var_exit_status_lcl = var_exit_status;
+// 	if (var_exit_status)
+// 		var_exit_status_lcl = var_exit_status;
+// 	else if (var_exit_status_lcl)
+// 	{
+// 	// ft_printf("exec store_and_free_exit_status_var!!!\n");
+// 		free(var_exit_status_lcl);
+// 		var_exit_status_lcl = NULL;
+// 	}
+// }
 
 
 /**========================================================================

@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/17 18:07:21 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 15:34:28 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@
 int	set_parenthesis(t_ast_nde *node);
 int	exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
 int	leaf_tree_par(t_ast_nde	*raw, t_Data *data);
-
-extern int	m_flag;//!! remetre a un ds prompt loop
-extern int	p_flag;
-extern int	r_flag;
 
 static void	set_root(t_ast_nde **root, char *str)
 {
@@ -55,10 +51,14 @@ int	clean_par(int first_rec, int ret)
 int	parse_par(char *str, t_Data *data, t_ast_nde *root)
 {
 	int	first_rec;
-
+	int	*policy;
+	
 	if (!*str)
 		return (1);
-	r_flag = 0;
+	policy = get_err_policy();
+	policy[1] = 1;
+	policy[2] = 0;
+	//r_flag = 0;
 	first_rec = 0;
 	exec_pipex(NULL, NULL, NULL, 1);
 	if (!root && first_init_root(str, &first_rec, &root))
