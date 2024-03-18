@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:39:15 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 13:32:22 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 17:59:45 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,12 @@ int	create_token_node(t_ast_nde *sib, t_ast_nde **token_nde)
 				return (0);
 			}
 			if (err == 1)
-				err_par_handle("`)'\n");
+				return (err_par_handle("`)'\n"));
 			actual++;
 		}
 		sib = sib->sibling;
 	}
 	if (err == 2)
-		err_par_handle("`('\n");
+		return (err_par_handle("`('\n"));
 	return (0);
 }
