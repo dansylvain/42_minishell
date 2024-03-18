@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   leaf.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:01:47 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 10:46:29 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/18 07:33:46 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,11 @@ void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt,
 	if (raw_lft)
 		raw_rght = raw_lft->sibling;
 	if (operator && (operator->token == DOLL || operator->token == JOKER))
-		return (add_sibling(rebuild_dollar_str_node
-				(rebuild_dollar_str(operator, NULL, data),
-					operator->token), rslt, rslt_sav));
+	{
+		char *s = rebuild_dollar_str(operator, NULL, data);
+		t_ast_nde	*n = rebuild_dollar_str_node(s, operator->token);		
+		return (add_sibling(n, rslt, rslt_sav));
+	}
 	leaf_raw_lft(raw_lft, rslt, rslt_sav, data);
 	if (operator && operator->token != SPCE && operator->token != RAW)
 	{

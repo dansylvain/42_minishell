@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/17 11:46:30 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 10:01:34 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,64 @@
  *                          build_command_tab_node
  *========================================================================**/
 
+char	*ft_delchar(char *s)
+{
+	char	*s_save;
+		//	ft_printf("del\n");
+	s_save = s;
+	while (s && *s)
+	{
+		*s = *(s + 1);
+		s++;
+	}
+	//ft_printf("del\n, s_save: -%s-\n", s_save);
+	return (s_save);
+}
+
+char	*replace_exit_status(char *str)
+{
+	char	*status;
+	int		status_len;
+	int		i;
+
+	status = ft_itoa(get_data(NULL)->exit_status);
+	status_len = ft_strlen(status);
+	while (*str)
+	{
+		i = 0;
+		status_len = ft_strlen(status);
+		if (*str == '$' && str + 1 && *(str + 1) == '$' && str + 2 && *(str + 2) == '$')
+		{
+			//ft_printf("une fois par triplet\n");
+			while (str[i] && i < status_len)
+			{
+				str[i] = status[i];
+				i++;			
+			}
+			status_len = 3 - i;
+			//ft_printf("status_len %d\n", status_len);
+			while (str[i] && status_len--) 
+				ft_delchar(&str[i]);
+			continue;
+		}
+		str++;
+	}
+}
+
 void	build_command_tab_node(t_ast_nde *node, t_ast_nde **cmd_tab_node,
 	t_ast_nde **cmd_tab_node_sav)
 {
-	if (node->token == DOLL && node->start == node->end && *node->start != '$')
-	{
-		free(node->start);
-		node->start = ft_itoa(get_data(NULL)->exit_status);
-		node->end = node->start;
+	//if (node->token == DOLL && node->start == node->end && *node->start != '$')
+	if (node->token == STAT)
+	{//ft_printf("tes la ? %s\n", node->start);
+		
+		replace_exit_status(node->start);	
+		//ft_printf("tes la suite ? %s\n", node->start);
+		//free(node->start);
+		// node->start = ft_itoa(get_data(NULL)->exit_status);
+		// node->end = node->start + ft_strlen(node->start) - 1;
 		node->child->start = node->start;
-		node->child->end = node->start;
+		node->child->end = node->end;
 	}
 	add_sibling(copy_node_and_child(node), cmd_tab_node,
 		cmd_tab_node_sav);

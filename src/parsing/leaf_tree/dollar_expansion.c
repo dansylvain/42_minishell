@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/17 12:17:50 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 07:24:19 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ t_ast_nde	*rebuild_dollar_str_node(char *str, t_tok token)
 	str_node = NULL;
 	if (str)
 	{
-		if (token == JOKER)
+		if (token == STAT)
+			str_node = create_node(STAT);
+		else if (token == JOKER)
 			str_node = create_node(JOKER);
 		else if (token == DOLL)
 			str_node = create_node(DOLL);
@@ -93,11 +95,11 @@ static void	build_token_and_merge(const t_ast_nde *operator,
 	}
 }
 
-char	*rebuild_dollar_str(const t_ast_nde *operator, char *str, t_Data *data)
+char	*rebuild_dollar_str(t_ast_nde *operator, char *str, t_Data *data)
 {
-	const t_ast_nde	*sibling_lft = NULL;
-	const t_ast_nde	*sibling_rght = NULL;
-	const t_ast_nde	*next_operator = NULL;
+	t_ast_nde	*sibling_lft = NULL;
+	t_ast_nde	*sibling_rght = NULL;
+	t_ast_nde	*next_operator = NULL;
 
 	if (operator && operator->child)
 	{

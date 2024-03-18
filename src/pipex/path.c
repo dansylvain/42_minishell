@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/17 22:24:46 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 08:12:56 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	search_path(char *argv[], char *envp[])
 	return (0);
 }
 
-char	*search_var(const t_ast_nde *node, t_Data *data)
+char	*search_var(t_ast_nde *node, t_Data *data)
 {
 	char	*str;
 	char	*var;
@@ -86,7 +86,10 @@ char	*search_var(const t_ast_nde *node, t_Data *data)
 
 	str = ft_strndup(node->start, node->end - node->start + 1);
 	if (*(str + 1) == '?')
-		var = ft_itoa(get_data(NULL)->exit_status);// ft_strdup("$?");
+	{
+		node->token = STAT;
+		var =  ft_strdup("$$$");//ft_itoa(get_data(NULL)->exit_status);// ft_strdup("$?");
+	}
 	else
 	{
 		tmp = ft_strjoin_up(str + 1, "=", 0, 0);
