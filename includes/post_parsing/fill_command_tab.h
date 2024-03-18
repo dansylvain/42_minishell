@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 19:03:28 by dan               #+#    #+#             */
-/*   Updated: 2024/03/18 17:43:24 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 19:40:26 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	***add_redir_tabs(char ***cmd_tab, t_ast_nde **node, int *i);
 char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node);
 int		get_cmd_nbr(t_ast_nde *node);
 char	***add_sep_tab_loop(char ****cmd_tab, t_ast_nde **node,
-	int *i, int	*redir_were_added);
+			int *i, int	*redir_were_added);
 char	***add_remaining_tabs_loop(char ***cmd_tab, t_ast_nde *node,
 			int *cmd_was_added, int *i);
 char	***add_redir_tabs_loop(char ***cmd_tab, t_ast_nde **node,

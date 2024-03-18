@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/18 19:26:09 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 19:41:04 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	launch_command_tab(t_Data *data, t_ast_nde *node,
 	{
 		if (!flag)
 			build_command_tab_node(node, &cmd_tab_node, &cmd_tab_node_sav);
-		else if (node->token == STAT || node->token == DOLL || node->token == JOKER)
+		else if (node->token == STAT || node->token == DOLL
+			|| node->token == JOKER)
 			free(node->start);
 		node = node->sibling;
 	}
