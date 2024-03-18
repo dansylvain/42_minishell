@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:40:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/18 16:19:19 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 17:16:20 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ char	***fill_command_tab(char ***cmd_tab, t_ast_nde *node)
 	{
 		if (node == start || is_separator(node))
 		{
-			cmd_tab = add_sep_tab_loop(&cmd_tab, &node, &i);
-			redir_were_added = 0;
+			cmd_tab = add_sep_tab_loop(&cmd_tab, &node, &i, &redir_were_added);
 			cmd_was_added = 0;
 		}
 		cmd_tab = add_redir_tabs_loop(cmd_tab, &node, &redir_were_added, &i);
@@ -102,7 +101,8 @@ char	***add_remaining_tabs_loop(char ***cmd_tab, t_ast_nde *node,
 /**========================================================================
  *                           add_sep_tab_loop
  *========================================================================**/
-char	***add_sep_tab_loop(char ****cmd_tab, t_ast_nde **node, int *i)
+char	***add_sep_tab_loop(char ****cmd_tab, t_ast_nde **node,
+	int *i, int	*redir_were_added)
 {
 	if (is_separator(*node) && (*node)->sibling)
 	{
@@ -110,5 +110,6 @@ char	***add_sep_tab_loop(char ****cmd_tab, t_ast_nde **node, int *i)
 		*node = (*node)->sibling;
 		(*i)++;
 	}
+	*redir_were_added = 0;
 	return (*cmd_tab);
 }
