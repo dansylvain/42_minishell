@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:40:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/18 10:48:50 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 11:52:52 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ char	***fill_command_tab(char ***cmd_tab, t_ast_nde *node)
 		cmd_tab = add_remaining_tabs_loop(cmd_tab, node, &cmd_was_added, &i);
 		if (node->token == DOLL || node->token == JOKER || node->token == STAT)
 		{
-			free(node->start);
+			if (node->start)
+			{
+				free(node->start);
+				// node->start = NULL;
+			}
 		}
 		node = node->sibling;
 	}

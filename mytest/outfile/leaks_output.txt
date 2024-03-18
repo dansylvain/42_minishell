@@ -1,1742 +1,914 @@
-Commande: (( false || echo bbb && echo $? ) || echo zzz)
-Sortie Valgrind:
-==942893== Memcheck, a memory error detector
-==942893== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==942893== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==942893== Command: ../minishell
-==942893== 
-==942904== Memcheck, a memory error detector
-==942904== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==942904== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==942904== Command: /usr/bin/false
-==942904== 
-==942904== 
-==942904== HEAP SUMMARY:
-==942904==     in use at exit: 0 bytes in 0 blocks
-==942904==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
-==942904== 
-==942904== All heap blocks were freed -- no leaks are possible
-==942904== 
-==942904== For lists of detected and suppressed errors, rerun with: -s
-==942904== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==942893== Invalid free() / delete / delete[] / realloc()
-==942893==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942893==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:27)
-==942893==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:17)
-==942893==    by 0x10FA16: launch_command_tab (launch_command_tab.c:119)
-==942893==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942893==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942893==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942893==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942893==    by 0x10E5F2: raw_right_area (leaf_par_raw.c:75)
-==942893==    by 0x10E3EC: token_zone (leaf_par.c:40)
-==942893==    by 0x10E3EC: leaf_tree_par (leaf_par.c:72)
-==942893==    by 0x10C2A8: parse_par (parsing.c:68)
-==942893==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942893==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942893==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942893==    by 0x10C2EA: parse_par (parsing.c:68)
-==942893==    by 0x10A291: prompt_loop (main.c:87)
-==942893==  Address 0x4b69af0 is 0 bytes inside a block of size 4 free'd
-==942893==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942893==    by 0x1103CB: fill_command_tab (fill_command_tab.c:40)
-==942893==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
-==942893==    by 0x10F90C: build_command_tab (launch_command_tab.c:151)
-==942893==    by 0x10FB72: launch_command_tab (launch_command_tab.c:123)
-==942893==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942893==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942893==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942893==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942893==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942893==    by 0x10C2A8: parse_par (parsing.c:68)
-==942893==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942893==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942893==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942893==  Block was alloc'd at
-==942893==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942893==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==942893==    by 0x10EAA1: search_var (path.c:92)
-==942893==    by 0x10E1ED: build_token_and_merge (dollar_expansion.c:84)
-==942893==    by 0x10E1ED: rebuild_dollar_str (dollar_expansion.c:116)
-==942893==    by 0x10DF2C: leaf_tree (leaf.c:56)
-==942893==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942893==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942893==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942893==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942893==    by 0x10C3DB: parse (parsing.c:90)
-==942893==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==942893==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942893==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942893==    by 0x10C2A8: parse_par (parsing.c:68)
-==942893==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942893== 
-==942893== 
-==942893== HEAP SUMMARY:
-==942893==     in use at exit: 208,309 bytes in 225 blocks
-==942893==   total heap usage: 664 allocs, 440 frees, 244,296 bytes allocated
-==942893== 
-==942893== LEAK SUMMARY:
-==942893==    definitely lost: 0 bytes in 0 blocks
-==942893==    indirectly lost: 0 bytes in 0 blocks
-==942893==      possibly lost: 0 bytes in 0 blocks
-==942893==    still reachable: 0 bytes in 0 blocks
-==942893==         suppressed: 208,309 bytes in 225 blocks
-==942893== 
-==942893== For lists of detected and suppressed errors, rerun with: -s
-==942893== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
-
-Commande: (( echo ggg && false || echo bbb && echo $? ) || echo zzz)
-Sortie Valgrind:
-==942960== Memcheck, a memory error detector
-==942960== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==942960== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==942960== Command: ../minishell
-==942960== 
-==942970== Memcheck, a memory error detector
-==942970== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==942970== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==942970== Command: /usr/bin/false
-==942970== 
-==942970== 
-==942970== HEAP SUMMARY:
-==942970==     in use at exit: 0 bytes in 0 blocks
-==942970==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
-==942970== 
-==942970== All heap blocks were freed -- no leaks are possible
-==942970== 
-==942970== For lists of detected and suppressed errors, rerun with: -s
-==942970== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==942960== Invalid free() / delete / delete[] / realloc()
-==942960==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942960==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:27)
-==942960==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:17)
-==942960==    by 0x10FA16: launch_command_tab (launch_command_tab.c:119)
-==942960==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942960==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942960==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942960==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942960==    by 0x10E5F2: raw_right_area (leaf_par_raw.c:75)
-==942960==    by 0x10E3EC: token_zone (leaf_par.c:40)
-==942960==    by 0x10E3EC: leaf_tree_par (leaf_par.c:72)
-==942960==    by 0x10C2A8: parse_par (parsing.c:68)
-==942960==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942960==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942960==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942960==    by 0x10C2EA: parse_par (parsing.c:68)
-==942960==    by 0x10A291: prompt_loop (main.c:87)
-==942960==  Address 0x4b6a860 is 0 bytes inside a block of size 4 free'd
-==942960==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942960==    by 0x1103CB: fill_command_tab (fill_command_tab.c:40)
-==942960==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
-==942960==    by 0x10F90C: build_command_tab (launch_command_tab.c:151)
-==942960==    by 0x10FB72: launch_command_tab (launch_command_tab.c:123)
-==942960==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942960==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942960==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942960==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942960==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942960==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942960==    by 0x10C2A8: parse_par (parsing.c:68)
-==942960==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942960==  Block was alloc'd at
-==942960==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942960==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==942960==    by 0x10EAA1: search_var (path.c:92)
-==942960==    by 0x10E1ED: build_token_and_merge (dollar_expansion.c:84)
-==942960==    by 0x10E1ED: rebuild_dollar_str (dollar_expansion.c:116)
-==942960==    by 0x10DF2C: leaf_tree (leaf.c:56)
-==942960==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942960==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942960==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942960==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942960==    by 0x10C3DB: parse (parsing.c:90)
-==942960==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==942960==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942960==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942960==    by 0x10C2A8: parse_par (parsing.c:68)
-==942960==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942960== 
-==942960== 
-==942960== HEAP SUMMARY:
-==942960==     in use at exit: 208,321 bytes in 225 blocks
-==942960==   total heap usage: 702 allocs, 478 frees, 246,557 bytes allocated
-==942960== 
-==942960== LEAK SUMMARY:
-==942960==    definitely lost: 0 bytes in 0 blocks
-==942960==    indirectly lost: 0 bytes in 0 blocks
-==942960==      possibly lost: 0 bytes in 0 blocks
-==942960==    still reachable: 0 bytes in 0 blocks
-==942960==         suppressed: 208,321 bytes in 225 blocks
-==942960== 
-==942960== For lists of detected and suppressed errors, rerun with: -s
-==942960== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
-
-Commande: (( echo ggg && true || echo bbb && echo $? ) || echo zzz)
-Sortie Valgrind:
-==942991== Memcheck, a memory error detector
-==942991== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==942991== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==942991== Command: ../minishell
-==942991== 
-==943000== Memcheck, a memory error detector
-==943000== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==943000== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==943000== Command: /usr/bin/true
-==943000== 
-==943000== 
-==943000== HEAP SUMMARY:
-==943000==     in use at exit: 0 bytes in 0 blocks
-==943000==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
-==943000== 
-==943000== All heap blocks were freed -- no leaks are possible
-==943000== 
-==943000== For lists of detected and suppressed errors, rerun with: -s
-==943000== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==942991== Invalid read of size 1
-==942991==    at 0x10F77A: replace_exit_status (launch_command_tab.c:59)
-==942991==    by 0x10FA50: build_command_tab_node (launch_command_tab.c:89)
-==942991==    by 0x10FA50: launch_command_tab (launch_command_tab.c:117)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==  Address 0x4b6a860 is 0 bytes inside a block of size 4 free'd
-==942991==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:27)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:17)
-==942991==    by 0x10FA16: launch_command_tab (launch_command_tab.c:119)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==  Block was alloc'd at
-==942991==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==942991==    by 0x10EAA1: search_var (path.c:92)
-==942991==    by 0x10E1ED: build_token_and_merge (dollar_expansion.c:84)
-==942991==    by 0x10E1ED: rebuild_dollar_str (dollar_expansion.c:116)
-==942991==    by 0x10DF2C: leaf_tree (leaf.c:56)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10C3DB: parse (parsing.c:90)
-==942991==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991== 
-==942991== Invalid read of size 1
-==942991==    at 0x10F788: replace_exit_status (launch_command_tab.c:63)
-==942991==    by 0x10FA50: build_command_tab_node (launch_command_tab.c:89)
-==942991==    by 0x10FA50: launch_command_tab (launch_command_tab.c:117)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==  Address 0x4b6a860 is 0 bytes inside a block of size 4 free'd
-==942991==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:27)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:17)
-==942991==    by 0x10FA16: launch_command_tab (launch_command_tab.c:119)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==  Block was alloc'd at
-==942991==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==942991==    by 0x10EAA1: search_var (path.c:92)
-==942991==    by 0x10E1ED: build_token_and_merge (dollar_expansion.c:84)
-==942991==    by 0x10E1ED: rebuild_dollar_str (dollar_expansion.c:116)
-==942991==    by 0x10DF2C: leaf_tree (leaf.c:56)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10C3DB: parse (parsing.c:90)
-==942991==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991== 
-==942991== Invalid read of size 1
-==942991==    at 0x10F78B: replace_exit_status (launch_command_tab.c:63)
-==942991==    by 0x10FA50: build_command_tab_node (launch_command_tab.c:89)
-==942991==    by 0x10FA50: launch_command_tab (launch_command_tab.c:117)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==  Address 0x4b6a861 is 1 bytes inside a block of size 4 free'd
-==942991==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:27)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:17)
-==942991==    by 0x10FA16: launch_command_tab (launch_command_tab.c:119)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==  Block was alloc'd at
-==942991==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==942991==    by 0x10EAA1: search_var (path.c:92)
-==942991==    by 0x10E1ED: build_token_and_merge (dollar_expansion.c:84)
-==942991==    by 0x10E1ED: rebuild_dollar_str (dollar_expansion.c:116)
-==942991==    by 0x10DF2C: leaf_tree (leaf.c:56)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10C3DB: parse (parsing.c:90)
-==942991==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991== 
-==942991== Invalid read of size 1
-==942991==    at 0x10F7B5: replace_exit_status (launch_command_tab.c:63)
-==942991==    by 0x10FA50: build_command_tab_node (launch_command_tab.c:89)
-==942991==    by 0x10FA50: launch_command_tab (launch_command_tab.c:117)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==  Address 0x4b6a862 is 2 bytes inside a block of size 4 free'd
-==942991==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:27)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:17)
-==942991==    by 0x10FA16: launch_command_tab (launch_command_tab.c:119)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==  Block was alloc'd at
-==942991==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==942991==    by 0x10EAA1: search_var (path.c:92)
-==942991==    by 0x10E1ED: build_token_and_merge (dollar_expansion.c:84)
-==942991==    by 0x10E1ED: rebuild_dollar_str (dollar_expansion.c:116)
-==942991==    by 0x10DF2C: leaf_tree (leaf.c:56)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10C3DB: parse (parsing.c:90)
-==942991==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991== 
-==942991== Invalid write of size 1
-==942991==    at 0x10F7DD: replace_exit_status (launch_command_tab.c:68)
-==942991==    by 0x10FA50: build_command_tab_node (launch_command_tab.c:89)
-==942991==    by 0x10FA50: launch_command_tab (launch_command_tab.c:117)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==  Address 0x4b6a860 is 0 bytes inside a block of size 4 free'd
-==942991==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:27)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:17)
-==942991==    by 0x10FA16: launch_command_tab (launch_command_tab.c:119)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==  Block was alloc'd at
-==942991==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==942991==    by 0x10EAA1: search_var (path.c:92)
-==942991==    by 0x10E1ED: build_token_and_merge (dollar_expansion.c:84)
-==942991==    by 0x10E1ED: rebuild_dollar_str (dollar_expansion.c:116)
-==942991==    by 0x10DF2C: leaf_tree (leaf.c:56)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10C3DB: parse (parsing.c:90)
-==942991==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991== 
-==942991== Invalid read of size 1
-==942991==    at 0x10F7E0: replace_exit_status (launch_command_tab.c:66)
-==942991==    by 0x10FA50: build_command_tab_node (launch_command_tab.c:89)
-==942991==    by 0x10FA50: launch_command_tab (launch_command_tab.c:117)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==  Address 0x4b6a861 is 1 bytes inside a block of size 4 free'd
-==942991==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:27)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:17)
-==942991==    by 0x10FA16: launch_command_tab (launch_command_tab.c:119)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==  Block was alloc'd at
-==942991==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==942991==    by 0x10EAA1: search_var (path.c:92)
-==942991==    by 0x10E1ED: build_token_and_merge (dollar_expansion.c:84)
-==942991==    by 0x10E1ED: rebuild_dollar_str (dollar_expansion.c:116)
-==942991==    by 0x10DF2C: leaf_tree (leaf.c:56)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10C3DB: parse (parsing.c:90)
-==942991==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991== 
-==942991== Invalid read of size 1
-==942991==    at 0x10F818: ft_delchar (launch_command_tab.c:44)
-==942991==    by 0x10F818: replace_exit_status (launch_command_tab.c:74)
-==942991==    by 0x10FA50: build_command_tab_node (launch_command_tab.c:89)
-==942991==    by 0x10FA50: launch_command_tab (launch_command_tab.c:117)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==  Address 0x4b6a862 is 2 bytes inside a block of size 4 free'd
-==942991==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:27)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:17)
-==942991==    by 0x10FA16: launch_command_tab (launch_command_tab.c:119)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==  Block was alloc'd at
-==942991==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==942991==    by 0x10EAA1: search_var (path.c:92)
-==942991==    by 0x10E1ED: build_token_and_merge (dollar_expansion.c:84)
-==942991==    by 0x10E1ED: rebuild_dollar_str (dollar_expansion.c:116)
-==942991==    by 0x10DF2C: leaf_tree (leaf.c:56)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10C3DB: parse (parsing.c:90)
-==942991==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991== 
-==942991== Invalid write of size 1
-==942991==    at 0x10F820: ft_delchar (launch_command_tab.c:44)
-==942991==    by 0x10F820: replace_exit_status (launch_command_tab.c:74)
-==942991==    by 0x10FA50: build_command_tab_node (launch_command_tab.c:89)
-==942991==    by 0x10FA50: launch_command_tab (launch_command_tab.c:117)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==  Address 0x4b6a861 is 1 bytes inside a block of size 4 free'd
-==942991==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:27)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:17)
-==942991==    by 0x10FA16: launch_command_tab (launch_command_tab.c:119)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==  Block was alloc'd at
-==942991==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==942991==    by 0x10EAA1: search_var (path.c:92)
-==942991==    by 0x10E1ED: build_token_and_merge (dollar_expansion.c:84)
-==942991==    by 0x10E1ED: rebuild_dollar_str (dollar_expansion.c:116)
-==942991==    by 0x10DF2C: leaf_tree (leaf.c:56)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10C3DB: parse (parsing.c:90)
-==942991==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991== 
-==942991== Invalid read of size 1
-==942991==    at 0x10F827: replace_exit_status (launch_command_tab.c:73)
-==942991==    by 0x10FA50: build_command_tab_node (launch_command_tab.c:89)
-==942991==    by 0x10FA50: launch_command_tab (launch_command_tab.c:117)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==  Address 0x4b6a861 is 1 bytes inside a block of size 4 free'd
-==942991==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:27)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:17)
-==942991==    by 0x10FA16: launch_command_tab (launch_command_tab.c:119)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==  Block was alloc'd at
-==942991==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==942991==    by 0x10EAA1: search_var (path.c:92)
-==942991==    by 0x10E1ED: build_token_and_merge (dollar_expansion.c:84)
-==942991==    by 0x10E1ED: rebuild_dollar_str (dollar_expansion.c:116)
-==942991==    by 0x10DF2C: leaf_tree (leaf.c:56)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10C3DB: parse (parsing.c:90)
-==942991==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991== 
-==942991== Invalid read of size 1
-==942991==    at 0x10F837: replace_exit_status (launch_command_tab.c:59)
-==942991==    by 0x10FA50: build_command_tab_node (launch_command_tab.c:89)
-==942991==    by 0x10FA50: launch_command_tab (launch_command_tab.c:117)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==  Address 0x4b6a860 is 0 bytes inside a block of size 4 free'd
-==942991==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:27)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:17)
-==942991==    by 0x10FA16: launch_command_tab (launch_command_tab.c:119)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==  Block was alloc'd at
-==942991==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==942991==    by 0x10EAA1: search_var (path.c:92)
-==942991==    by 0x10E1ED: build_token_and_merge (dollar_expansion.c:84)
-==942991==    by 0x10E1ED: rebuild_dollar_str (dollar_expansion.c:116)
-==942991==    by 0x10DF2C: leaf_tree (leaf.c:56)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10C3DB: parse (parsing.c:90)
-==942991==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991== 
-==942991== Invalid read of size 1
-==942991==    at 0x110CA3: ft_memcpy (in /home/dan/42/minishell_common/minishell)
-==942991==    by 0x10F5E9: get_node_str (create_command_tab_utils.c:57)
-==942991==    by 0x11071A: handle_joker (fill_command_tab_utils.c:78)
-==942991==    by 0x11081A: add_remaining_tabs (fill_command_tab_utils.c:96)
-==942991==    by 0x1103AC: add_remaining_tabs_loop (fill_command_tab.c:94)
-==942991==    by 0x1103AC: add_remaining_tabs_loop (fill_command_tab.c:89)
-==942991==    by 0x1103AC: fill_command_tab (fill_command_tab.c:37)
-==942991==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
-==942991==    by 0x10F90C: build_command_tab (launch_command_tab.c:151)
-==942991==    by 0x10FB72: launch_command_tab (launch_command_tab.c:123)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==  Address 0x4b6a860 is 0 bytes inside a block of size 4 free'd
-==942991==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:27)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:17)
-==942991==    by 0x10FA16: launch_command_tab (launch_command_tab.c:119)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==  Block was alloc'd at
-==942991==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==942991==    by 0x10EAA1: search_var (path.c:92)
-==942991==    by 0x10E1ED: build_token_and_merge (dollar_expansion.c:84)
-==942991==    by 0x10E1ED: rebuild_dollar_str (dollar_expansion.c:116)
-==942991==    by 0x10DF2C: leaf_tree (leaf.c:56)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10C3DB: parse (parsing.c:90)
-==942991==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991== 
-==942991== Invalid free() / delete / delete[] / realloc()
-==942991==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x1103CB: fill_command_tab (fill_command_tab.c:40)
-==942991==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
-==942991==    by 0x10F90C: build_command_tab (launch_command_tab.c:151)
-==942991==    by 0x10FB72: launch_command_tab (launch_command_tab.c:123)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==  Address 0x4b6a860 is 0 bytes inside a block of size 4 free'd
-==942991==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:27)
-==942991==    by 0x10FA16: store_and_free_exit_status_var (launch_command_tab.c:17)
-==942991==    by 0x10FA16: launch_command_tab (launch_command_tab.c:119)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10FB0F: launch_command_tab (launch_command_tab.c:128)
-==942991==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991==    by 0x10E3DB: token_zone (leaf_par.c:37)
-==942991==    by 0x10E3DB: leaf_tree_par (leaf_par.c:72)
-==942991==  Block was alloc'd at
-==942991==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==942991==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==942991==    by 0x10EAA1: search_var (path.c:92)
-==942991==    by 0x10E1ED: build_token_and_merge (dollar_expansion.c:84)
-==942991==    by 0x10E1ED: rebuild_dollar_str (dollar_expansion.c:116)
-==942991==    by 0x10DF2C: leaf_tree (leaf.c:56)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==942991==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==942991==    by 0x10C3DB: parse (parsing.c:90)
-==942991==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==942991==    by 0x10E46E: no_token_zone (leaf_par.c:57)
-==942991==    by 0x10E46E: leaf_tree_par (leaf_par.c:74)
-==942991==    by 0x10C2A8: parse_par (parsing.c:68)
-==942991==    by 0x10E59C: middle_area (leaf_par_raw.c:60)
-==942991== 
-==942991== 
-==942991== HEAP SUMMARY:
-==942991==     in use at exit: 208,320 bytes in 225 blocks
-==942991==   total heap usage: 694 allocs, 470 frees, 245,550 bytes allocated
-==942991== 
-==942991== LEAK SUMMARY:
-==942991==    definitely lost: 0 bytes in 0 blocks
-==942991==    indirectly lost: 0 bytes in 0 blocks
-==942991==      possibly lost: 0 bytes in 0 blocks
-==942991==    still reachable: 0 bytes in 0 blocks
-==942991==         suppressed: 208,320 bytes in 225 blocks
-==942991== 
-==942991== For lists of detected and suppressed errors, rerun with: -s
-==942991== ERROR SUMMARY: 21 errors from 12 contexts (suppressed: 0 from 0)
-
 Commande: ls | <infile <infile2 rev | cat >outfile76 > outfile77 -n >outfile78| rev
 Sortie Valgrind:
-==943156== Memcheck, a memory error detector
-==943156== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==943156== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==943156== Command: ../minishell
-==943156== 
+==955650== Memcheck, a memory error detector
+==955650== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==955650== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==955650== Command: ../minishell
+==955650== 
 infile: No such file or directory
-==943165== Memcheck, a memory error detector
-==943165== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==943165== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==943165== Command: /usr/bin/ls
-==943165== 
-==943166== 
-==943166== HEAP SUMMARY:
-==943166==     in use at exit: 208,410 bytes in 226 blocks
-==943166==   total heap usage: 738 allocs, 512 frees, 247,719 bytes allocated
-==943166== 
-==943166== LEAK SUMMARY:
-==943166==    definitely lost: 0 bytes in 0 blocks
-==943166==    indirectly lost: 0 bytes in 0 blocks
-==943166==      possibly lost: 0 bytes in 0 blocks
-==943166==    still reachable: 0 bytes in 0 blocks
-==943166==         suppressed: 208,410 bytes in 226 blocks
-==943166== 
-==943166== For lists of detected and suppressed errors, rerun with: -s
-==943166== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==943168== Memcheck, a memory error detector
-==943168== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==943168== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==943168== Command: /usr/bin/rev
-==943168== 
-==943167== Memcheck, a memory error detector
-==943167== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==943167== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==943167== Command: /usr/bin/cat -n
-==943167== 
-==943167== 
-==943167== HEAP SUMMARY:
-==943167==     in use at exit: 0 bytes in 0 blocks
-==943167==   total heap usage: 47 allocs, 47 frees, 802,841 bytes allocated
-==943167== 
-==943167== All heap blocks were freed -- no leaks are possible
-==943167== 
-==943167== For lists of detected and suppressed errors, rerun with: -s
-==943167== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==943168== 
-==943168== HEAP SUMMARY:
-==943168==     in use at exit: 0 bytes in 0 blocks
-==943168==   total heap usage: 51 allocs, 51 frees, 61,897 bytes allocated
-==943168== 
-==943168== All heap blocks were freed -- no leaks are possible
-==943168== 
-==943168== For lists of detected and suppressed errors, rerun with: -s
-==943168== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==943165== 
-==943165== Process terminating with default action of signal 13 (SIGPIPE)
-==943165==    at 0x49B4887: write (write.c:26)
-==943165==    by 0x492AEEC: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
-==943165==    by 0x492C9E0: new_do_write (fileops.c:448)
-==943165==    by 0x492C9E0: _IO_new_do_write (fileops.c:425)
-==943165==    by 0x492C9E0: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
-==943165==    by 0x492A4D7: _IO_file_sync@@GLIBC_2.2.5 (fileops.c:798)
-==943165==    by 0x491F1A9: fflush (iofflush.c:40)
-==943165==    by 0x113968: ??? (in /usr/bin/ls)
-==943165==    by 0x113A94: ??? (in /usr/bin/ls)
-==943165==    by 0x48E5494: __run_exit_handlers (exit.c:113)
-==943165==    by 0x48E560F: exit (exit.c:143)
-==943165==    by 0x48C9D96: (below main) (libc_start_call_main.h:74)
-==943165== 
-==943165== HEAP SUMMARY:
-==943165==     in use at exit: 33,396 bytes in 74 blocks
-==943165==   total heap usage: 82 allocs, 8 frees, 67,872 bytes allocated
-==943165== 
-==943165== LEAK SUMMARY:
-==943165==    definitely lost: 0 bytes in 0 blocks
-==943165==    indirectly lost: 0 bytes in 0 blocks
-==943165==      possibly lost: 0 bytes in 0 blocks
-==943165==    still reachable: 0 bytes in 0 blocks
-==943165==         suppressed: 33,396 bytes in 74 blocks
-==943165== 
-==943165== For lists of detected and suppressed errors, rerun with: -s
-==943165== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==943156== 
-==943156== HEAP SUMMARY:
-==943156==     in use at exit: 208,336 bytes in 225 blocks
-==943156==   total heap usage: 737 allocs, 512 frees, 247,698 bytes allocated
-==943156== 
-==943156== LEAK SUMMARY:
-==943156==    definitely lost: 0 bytes in 0 blocks
-==943156==    indirectly lost: 0 bytes in 0 blocks
-==943156==      possibly lost: 0 bytes in 0 blocks
-==943156==    still reachable: 0 bytes in 0 blocks
-==943156==         suppressed: 208,336 bytes in 225 blocks
-==943156== 
-==943156== For lists of detected and suppressed errors, rerun with: -s
-==943156== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955651== Memcheck, a memory error detector
+==955651== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==955651== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==955651== Command: /usr/bin/ls
+==955651== 
+==955654== Memcheck, a memory error detector
+==955654== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==955654== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==955654== Command: /usr/bin/rev
+==955654== 
+==955653== Memcheck, a memory error detector
+==955653== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==955653== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==955653== Command: /usr/bin/cat -n
+==955653== 
+==955652== 
+==955652== HEAP SUMMARY:
+==955652==     in use at exit: 208,410 bytes in 226 blocks
+==955652==   total heap usage: 738 allocs, 512 frees, 247,719 bytes allocated
+==955652== 
+==955652== LEAK SUMMARY:
+==955652==    definitely lost: 0 bytes in 0 blocks
+==955652==    indirectly lost: 0 bytes in 0 blocks
+==955652==      possibly lost: 0 bytes in 0 blocks
+==955652==    still reachable: 0 bytes in 0 blocks
+==955652==         suppressed: 208,410 bytes in 226 blocks
+==955652== 
+==955652== For lists of detected and suppressed errors, rerun with: -s
+==955652== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955653== 
+==955653== HEAP SUMMARY:
+==955653==     in use at exit: 0 bytes in 0 blocks
+==955653==   total heap usage: 47 allocs, 47 frees, 802,841 bytes allocated
+==955653== 
+==955653== All heap blocks were freed -- no leaks are possible
+==955653== 
+==955653== For lists of detected and suppressed errors, rerun with: -s
+==955653== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955651== 
+==955651== Process terminating with default action of signal 13 (SIGPIPE)
+==955651==    at 0x49B4887: write (write.c:26)
+==955651==    by 0x492AEEC: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==955651==    by 0x492C9E0: new_do_write (fileops.c:448)
+==955651==    by 0x492C9E0: _IO_new_do_write (fileops.c:425)
+==955651==    by 0x492C9E0: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==955651==    by 0x492A4D7: _IO_file_sync@@GLIBC_2.2.5 (fileops.c:798)
+==955651==    by 0x491F1A9: fflush (iofflush.c:40)
+==955651==    by 0x113968: ??? (in /usr/bin/ls)
+==955651==    by 0x113A94: ??? (in /usr/bin/ls)
+==955651==    by 0x48E5494: __run_exit_handlers (exit.c:113)
+==955651==    by 0x48E560F: exit (exit.c:143)
+==955651==    by 0x48C9D96: (below main) (libc_start_call_main.h:74)
+==955651== 
+==955651== HEAP SUMMARY:
+==955651==     in use at exit: 33,396 bytes in 74 blocks
+==955651==   total heap usage: 82 allocs, 8 frees, 67,872 bytes allocated
+==955651== 
+==955651== LEAK SUMMARY:
+==955651==    definitely lost: 0 bytes in 0 blocks
+==955651==    indirectly lost: 0 bytes in 0 blocks
+==955651==      possibly lost: 0 bytes in 0 blocks
+==955651==    still reachable: 0 bytes in 0 blocks
+==955651==         suppressed: 33,396 bytes in 74 blocks
+==955651== 
+==955651== For lists of detected and suppressed errors, rerun with: -s
+==955651== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955654== 
+==955654== HEAP SUMMARY:
+==955654==     in use at exit: 0 bytes in 0 blocks
+==955654==   total heap usage: 51 allocs, 51 frees, 61,897 bytes allocated
+==955654== 
+==955654== All heap blocks were freed -- no leaks are possible
+==955654== 
+==955654== For lists of detected and suppressed errors, rerun with: -s
+==955654== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955650== 
+==955650== HEAP SUMMARY:
+==955650==     in use at exit: 208,336 bytes in 225 blocks
+==955650==   total heap usage: 737 allocs, 512 frees, 247,698 bytes allocated
+==955650== 
+==955650== LEAK SUMMARY:
+==955650==    definitely lost: 0 bytes in 0 blocks
+==955650==    indirectly lost: 0 bytes in 0 blocks
+==955650==      possibly lost: 0 bytes in 0 blocks
+==955650==    still reachable: 0 bytes in 0 blocks
+==955650==         suppressed: 208,336 bytes in 225 blocks
+==955650== 
+==955650== For lists of detected and suppressed errors, rerun with: -s
+==955650== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 
 Commande: ls |  rev |>outfile76 > outfile77 <infile <infile2 cat  -n >outfile78| rev
 Sortie Valgrind:
-==943181== Memcheck, a memory error detector
-==943181== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==943181== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==943181== Command: ../minishell
-==943181== 
-==943193== Memcheck, a memory error detector
-==943193== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==943193== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==943193== Command: /usr/bin/rev
-==943193== 
+==955658== Memcheck, a memory error detector
+==955658== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==955658== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==955658== Command: ../minishell
+==955658== 
 infile: No such file or directory
-==943190== Memcheck, a memory error detector
-==943190== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==943190== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==943190== Command: /usr/bin/ls
-==943190== 
-==943191== Memcheck, a memory error detector
-==943191== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==943191== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==943191== Command: /usr/bin/rev
-==943191== 
-==943192== 
-==943192== HEAP SUMMARY:
-==943192==     in use at exit: 208,412 bytes in 226 blocks
-==943192==   total heap usage: 731 allocs, 505 frees, 247,472 bytes allocated
-==943192== 
-==943192== LEAK SUMMARY:
-==943192==    definitely lost: 0 bytes in 0 blocks
-==943192==    indirectly lost: 0 bytes in 0 blocks
-==943192==      possibly lost: 0 bytes in 0 blocks
-==943192==    still reachable: 0 bytes in 0 blocks
-==943192==         suppressed: 208,412 bytes in 226 blocks
-==943192== 
-==943192== For lists of detected and suppressed errors, rerun with: -s
-==943192== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==943190== 
-==943190== HEAP SUMMARY:
-==943190==     in use at exit: 21,111 bytes in 30 blocks
-==943190==   total heap usage: 82 allocs, 52 frees, 67,872 bytes allocated
-==943190== 
-==943190== LEAK SUMMARY:
-==943190==    definitely lost: 0 bytes in 0 blocks
-==943190==    indirectly lost: 0 bytes in 0 blocks
-==943190==      possibly lost: 0 bytes in 0 blocks
-==943190==    still reachable: 0 bytes in 0 blocks
-==943190==         suppressed: 21,111 bytes in 30 blocks
-==943190== 
-==943190== For lists of detected and suppressed errors, rerun with: -s
-==943190== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==943191== 
-==943191== Process terminating with default action of signal 13 (SIGPIPE)
-==943191==    at 0x4988887: write (write.c:26)
-==943191==    by 0x48FEEEC: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
-==943191==    by 0x49009E0: new_do_write (fileops.c:448)
-==943191==    by 0x49009E0: _IO_new_do_write (fileops.c:425)
-==943191==    by 0x49009E0: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
-==943191==    by 0x48FA255: _IO_wdo_write (wfileops.c:80)
-==943191==    by 0x48FA6DE: _IO_wfile_sync (wfileops.c:486)
-==943191==    by 0x48F31A9: fflush (iofflush.c:40)
-==943191==    by 0x109B77: ??? (in /usr/bin/rev)
-==943191==    by 0x48B9494: __run_exit_handlers (exit.c:113)
-==943191==    by 0x48B960F: exit (exit.c:143)
-==943191==    by 0x489DD96: (below main) (libc_start_call_main.h:74)
-==943191== 
-==943191== HEAP SUMMARY:
-==943191==     in use at exit: 49,599 bytes in 50 blocks
-==943191==   total heap usage: 53 allocs, 3 frees, 82,377 bytes allocated
-==943191== 
-==943191== 11 bytes in 1 blocks are still reachable in loss record 1 of 14
-==943191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943191==    by 0x491C58E: strdup (strdup.c:42)
-==943191==    by 0x48B1D57: __textdomain (textdomain.c:94)
-==943191==    by 0x48B1D57: textdomain (textdomain.c:64)
-==943191==    by 0x109486: ??? (in /usr/bin/rev)
-==943191==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
-==943191== 
-==943191== 24 bytes in 2 blocks are still reachable in loss record 2 of 14
-==943191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943191==    by 0x491C58E: strdup (strdup.c:42)
-==943191==    by 0x48AC31A: _nl_load_locale_from_archive (loadarchive.c:464)
-==943191==    by 0x48AB0DF: _nl_find_locale (findlocale.c:152)
-==943191==    by 0x48AA856: setlocale (setlocale.c:337)
-==943191==    by 0x48AA856: setlocale (setlocale.c:217)
-==943191==    by 0x109468: ??? (in /usr/bin/rev)
-==943191==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
-==943191== 
-==943191== 32 bytes in 1 blocks are still reachable in loss record 3 of 14
-==943191==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943191==    by 0x4946C1F: __wcsmbs_load_conv (wcsmbsload.c:167)
-==943191==    by 0x494703A: get_gconv_fcts (wcsmbsload.h:73)
-==943191==    by 0x494703A: __wcsmbs_clone_conv (wcsmbsload.c:221)
-==943191==    by 0x48FAB28: _IO_fwide (iofwide.c:79)
-==943191==    by 0x48F64A8: _IO_getwline_info (iogetwline.c:54)
-==943191==    by 0x49A9D58: __fgetws_chk (fgetws_chk.c:37)
-==943191==    by 0x1095FE: ??? (in /usr/bin/rev)
-==943191==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
-==943191== 
-==943191== 35 bytes in 1 blocks are still reachable in loss record 4 of 14
-==943191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943191==    by 0x48AE5DE: set_binding_values.part.0 (bindtextdom.c:203)
-==943191==    by 0x48AE89B: set_binding_values (bindtextdom.c:322)
-==943191==    by 0x48AE89B: bindtextdomain (bindtextdom.c:320)
-==943191==    by 0x109477: ??? (in /usr/bin/rev)
-==943191==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
-==943191== 
-==943191== 144 bytes in 12 blocks are still reachable in loss record 5 of 14
-==943191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943191==    by 0x491C58E: strdup (strdup.c:42)
-==943191==    by 0x48AAC84: setlocale (setlocale.c:366)
-==943191==    by 0x48AAC84: setlocale (setlocale.c:217)
-==943191==    by 0x109468: ??? (in /usr/bin/rev)
-==943191==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
-==943191== 
-==943191== 208 bytes in 1 blocks are still reachable in loss record 6 of 14
-==943191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943191==    by 0x48A99D6: __gconv_lookup_cache (gconv_cache.c:365)
-==943191==    by 0x489FB6E: __gconv_find_transform (gconv_db.c:732)
-==943191==    by 0x4946D4A: __wcsmbs_getfct (wcsmbsload.c:91)
-==943191==    by 0x4946D4A: __wcsmbs_load_conv (wcsmbsload.c:185)
-==943191==    by 0x494703A: get_gconv_fcts (wcsmbsload.h:73)
-==943191==    by 0x494703A: __wcsmbs_clone_conv (wcsmbsload.c:221)
-==943191==    by 0x48FAB28: _IO_fwide (iofwide.c:79)
-==943191==    by 0x48F64A8: _IO_getwline_info (iogetwline.c:54)
-==943191==    by 0x49A9D58: __fgetws_chk (fgetws_chk.c:37)
-==943191==    by 0x1095FE: ??? (in /usr/bin/rev)
-==943191==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
-==943191== 
-==943191== 208 bytes in 1 blocks are still reachable in loss record 7 of 14
-==943191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943191==    by 0x48A9AC0: __gconv_lookup_cache (gconv_cache.c:365)
-==943191==    by 0x489FB6E: __gconv_find_transform (gconv_db.c:732)
-==943191==    by 0x4946D8B: __wcsmbs_getfct (wcsmbsload.c:91)
-==943191==    by 0x4946D8B: __wcsmbs_load_conv (wcsmbsload.c:188)
-==943191==    by 0x494703A: get_gconv_fcts (wcsmbsload.h:73)
-==943191==    by 0x494703A: __wcsmbs_clone_conv (wcsmbsload.c:221)
-==943191==    by 0x48FAB28: _IO_fwide (iofwide.c:79)
-==943191==    by 0x48F64A8: _IO_getwline_info (iogetwline.c:54)
-==943191==    by 0x49A9D58: __fgetws_chk (fgetws_chk.c:37)
-==943191==    by 0x1095FE: ??? (in /usr/bin/rev)
-==943191==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
-==943191== 
-==943191== 240 bytes in 2 blocks are still reachable in loss record 8 of 14
-==943191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943191==    by 0x48AC2FF: _nl_load_locale_from_archive (loadarchive.c:460)
-==943191==    by 0x48AB0DF: _nl_find_locale (findlocale.c:152)
-==943191==    by 0x48AA856: setlocale (setlocale.c:337)
-==943191==    by 0x48AA856: setlocale (setlocale.c:217)
-==943191==    by 0x109468: ??? (in /usr/bin/rev)
-==943191==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
-==943191== 
-==943191== 281 bytes in 1 blocks are still reachable in loss record 9 of 14
-==943191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943191==    by 0x48AA607: new_composite_name (setlocale.c:170)
-==943191==    by 0x48AABAA: setlocale (setlocale.c:375)
-==943191==    by 0x48AABAA: setlocale (setlocale.c:217)
-==943191==    by 0x109468: ??? (in /usr/bin/rev)
-==943191==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
-==943191== 
-==943191== 4,096 bytes in 1 blocks are still reachable in loss record 10 of 14
-==943191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943191==    by 0x48F2BA3: _IO_file_doallocate (filedoalloc.c:101)
-==943191==    by 0x48F3EFC: _IO_wfile_doallocate (wfiledoalloc.c:70)
-==943191==    by 0x4901CDF: _IO_doallocbuf (genops.c:347)
-==943191==    by 0x48F9563: _IO_wfile_underflow (wfileops.c:181)
-==943191==    by 0x48F7875: _IO_wdefault_uflow (wgenops.c:202)
-==943191==    by 0x48F63B6: _IO_getwline_info (iogetwline.c:61)
-==943191==    by 0x49A9D58: __fgetws_chk (fgetws_chk.c:37)
-==943191==    by 0x1095FE: ??? (in /usr/bin/rev)
-==943191==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
-==943191== 
-==943191== 4,096 bytes in 1 blocks are still reachable in loss record 11 of 14
-==943191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943191==    by 0x48F2BA3: _IO_file_doallocate (filedoalloc.c:101)
-==943191==    by 0x48F3EFC: _IO_wfile_doallocate (wfiledoalloc.c:70)
-==943191==    by 0x48F7B9D: _IO_wdoallocbuf (wgenops.c:369)
-==943191==    by 0x48FA5F4: _IO_wfile_overflow (wfileops.c:420)
-==943191==    by 0x48F798E: __woverflow (wgenops.c:215)
-==943191==    by 0x48F798E: _IO_wdefault_xsputn (wgenops.c:315)
-==943191==    by 0x48F798E: _IO_wdefault_xsputn (wgenops.c:282)
-==943191==    by 0x48FA8A8: _IO_wfile_xsputn (wfileops.c:1009)
-==943191==    by 0x48FA8A8: _IO_wfile_xsputn (wfileops.c:955)
-==943191==    by 0x48F620F: fputws (iofputws.c:38)
-==943191==    by 0x109718: ??? (in /usr/bin/rev)
-==943191==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
-==943191== 
-==943191== 7,456 bytes in 24 blocks are still reachable in loss record 12 of 14
-==943191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943191==    by 0x48AB96E: _nl_intern_locale_data (loadlocale.c:97)
-==943191==    by 0x48AC370: _nl_load_locale_from_archive (loadarchive.c:477)
-==943191==    by 0x48AB0DF: _nl_find_locale (findlocale.c:152)
-==943191==    by 0x48AA856: setlocale (setlocale.c:337)
-==943191==    by 0x48AA856: setlocale (setlocale.c:217)
-==943191==    by 0x109468: ??? (in /usr/bin/rev)
-==943191==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
-==943191== 
-==943191== 16,384 bytes in 1 blocks are still reachable in loss record 13 of 14
-==943191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943191==    by 0x48F3ECC: _IO_wfile_doallocate (wfiledoalloc.c:79)
-==943191==    by 0x4901CDF: _IO_doallocbuf (genops.c:347)
-==943191==    by 0x48F9563: _IO_wfile_underflow (wfileops.c:181)
-==943191==    by 0x48F7875: _IO_wdefault_uflow (wgenops.c:202)
-==943191==    by 0x48F63B6: _IO_getwline_info (iogetwline.c:61)
-==943191==    by 0x49A9D58: __fgetws_chk (fgetws_chk.c:37)
-==943191==    by 0x1095FE: ??? (in /usr/bin/rev)
-==943191==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
-==943191== 
-==943191== 16,384 bytes in 1 blocks are still reachable in loss record 14 of 14
-==943191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943191==    by 0x48F3ECC: _IO_wfile_doallocate (wfiledoalloc.c:79)
-==943191==    by 0x48F7B9D: _IO_wdoallocbuf (wgenops.c:369)
-==943191==    by 0x48FA5F4: _IO_wfile_overflow (wfileops.c:420)
-==943191==    by 0x48F798E: __woverflow (wgenops.c:215)
-==943191==    by 0x48F798E: _IO_wdefault_xsputn (wgenops.c:315)
-==943191==    by 0x48F798E: _IO_wdefault_xsputn (wgenops.c:282)
-==943191==    by 0x48FA8A8: _IO_wfile_xsputn (wfileops.c:1009)
-==943191==    by 0x48FA8A8: _IO_wfile_xsputn (wfileops.c:955)
-==943191==    by 0x48F620F: fputws (iofputws.c:38)
-==943191==    by 0x109718: ??? (in /usr/bin/rev)
-==943191==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
-==943191== 
-==943191== LEAK SUMMARY:
-==943191==    definitely lost: 0 bytes in 0 blocks
-==943191==    indirectly lost: 0 bytes in 0 blocks
-==943191==      possibly lost: 0 bytes in 0 blocks
-==943191==    still reachable: 49,599 bytes in 50 blocks
-==943191==         suppressed: 0 bytes in 0 blocks
-==943191== 
-==943191== For lists of detected and suppressed errors, rerun with: -s
-==943191== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==943193== 
-==943193== HEAP SUMMARY:
-==943193==     in use at exit: 0 bytes in 0 blocks
-==943193==   total heap usage: 51 allocs, 51 frees, 61,897 bytes allocated
-==943193== 
-==943193== All heap blocks were freed -- no leaks are possible
-==943193== 
-==943193== For lists of detected and suppressed errors, rerun with: -s
-==943193== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==943181== 
-==943181== HEAP SUMMARY:
-==943181==     in use at exit: 208,337 bytes in 225 blocks
-==943181==   total heap usage: 730 allocs, 505 frees, 247,451 bytes allocated
-==943181== 
-==943181== LEAK SUMMARY:
-==943181==    definitely lost: 0 bytes in 0 blocks
-==943181==    indirectly lost: 0 bytes in 0 blocks
-==943181==      possibly lost: 0 bytes in 0 blocks
-==943181==    still reachable: 0 bytes in 0 blocks
-==943181==         suppressed: 208,337 bytes in 225 blocks
-==943181== 
-==943181== For lists of detected and suppressed errors, rerun with: -s
-==943181== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955659== Memcheck, a memory error detector
+==955659== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==955659== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==955659== Command: /usr/bin/ls
+==955659== 
+==955660== Memcheck, a memory error detector
+==955660== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==955660== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==955660== Command: /usr/bin/rev
+==955660== 
+==955662== Memcheck, a memory error detector
+==955662== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==955662== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==955662== Command: /usr/bin/rev
+==955662== 
+==955661== 
+==955661== HEAP SUMMARY:
+==955661==     in use at exit: 208,412 bytes in 226 blocks
+==955661==   total heap usage: 731 allocs, 505 frees, 247,472 bytes allocated
+==955661== 
+==955661== LEAK SUMMARY:
+==955661==    definitely lost: 0 bytes in 0 blocks
+==955661==    indirectly lost: 0 bytes in 0 blocks
+==955661==      possibly lost: 0 bytes in 0 blocks
+==955661==    still reachable: 0 bytes in 0 blocks
+==955661==         suppressed: 208,412 bytes in 226 blocks
+==955661== 
+==955661== For lists of detected and suppressed errors, rerun with: -s
+==955661== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955662== 
+==955662== HEAP SUMMARY:
+==955662==     in use at exit: 0 bytes in 0 blocks
+==955662==   total heap usage: 51 allocs, 51 frees, 61,897 bytes allocated
+==955662== 
+==955662== All heap blocks were freed -- no leaks are possible
+==955662== 
+==955662== For lists of detected and suppressed errors, rerun with: -s
+==955662== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955660== 
+==955660== Process terminating with default action of signal 13 (SIGPIPE)
+==955660==    at 0x4988887: write (write.c:26)
+==955660==    by 0x48FEEEC: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==955660==    by 0x49009E0: new_do_write (fileops.c:448)
+==955660==    by 0x49009E0: _IO_new_do_write (fileops.c:425)
+==955660==    by 0x49009E0: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==955660==    by 0x48FA255: _IO_wdo_write (wfileops.c:80)
+==955660==    by 0x48FA6DE: _IO_wfile_sync (wfileops.c:486)
+==955660==    by 0x48F31A9: fflush (iofflush.c:40)
+==955660==    by 0x109B77: ??? (in /usr/bin/rev)
+==955660==    by 0x48B9494: __run_exit_handlers (exit.c:113)
+==955660==    by 0x48B960F: exit (exit.c:143)
+==955660==    by 0x489DD96: (below main) (libc_start_call_main.h:74)
+==955660== 
+==955660== HEAP SUMMARY:
+==955660==     in use at exit: 49,599 bytes in 50 blocks
+==955660==   total heap usage: 53 allocs, 3 frees, 82,377 bytes allocated
+==955660== 
+==955660== 11 bytes in 1 blocks are still reachable in loss record 1 of 14
+==955660==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955660==    by 0x491C58E: strdup (strdup.c:42)
+==955660==    by 0x48B1D57: __textdomain (textdomain.c:94)
+==955660==    by 0x48B1D57: textdomain (textdomain.c:64)
+==955660==    by 0x109486: ??? (in /usr/bin/rev)
+==955660==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
+==955660== 
+==955660== 24 bytes in 2 blocks are still reachable in loss record 2 of 14
+==955660==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955660==    by 0x491C58E: strdup (strdup.c:42)
+==955660==    by 0x48AC31A: _nl_load_locale_from_archive (loadarchive.c:464)
+==955660==    by 0x48AB0DF: _nl_find_locale (findlocale.c:152)
+==955660==    by 0x48AA856: setlocale (setlocale.c:337)
+==955660==    by 0x48AA856: setlocale (setlocale.c:217)
+==955660==    by 0x109468: ??? (in /usr/bin/rev)
+==955660==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
+==955660== 
+==955660== 32 bytes in 1 blocks are still reachable in loss record 3 of 14
+==955660==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955660==    by 0x4946C1F: __wcsmbs_load_conv (wcsmbsload.c:167)
+==955660==    by 0x494703A: get_gconv_fcts (wcsmbsload.h:73)
+==955660==    by 0x494703A: __wcsmbs_clone_conv (wcsmbsload.c:221)
+==955660==    by 0x48FAB28: _IO_fwide (iofwide.c:79)
+==955660==    by 0x48F64A8: _IO_getwline_info (iogetwline.c:54)
+==955660==    by 0x49A9D58: __fgetws_chk (fgetws_chk.c:37)
+==955660==    by 0x1095FE: ??? (in /usr/bin/rev)
+==955660==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
+==955660== 
+==955660== 35 bytes in 1 blocks are still reachable in loss record 4 of 14
+==955660==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955660==    by 0x48AE5DE: set_binding_values.part.0 (bindtextdom.c:203)
+==955660==    by 0x48AE89B: set_binding_values (bindtextdom.c:322)
+==955660==    by 0x48AE89B: bindtextdomain (bindtextdom.c:320)
+==955660==    by 0x109477: ??? (in /usr/bin/rev)
+==955660==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
+==955660== 
+==955660== 144 bytes in 12 blocks are still reachable in loss record 5 of 14
+==955660==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955660==    by 0x491C58E: strdup (strdup.c:42)
+==955660==    by 0x48AAC84: setlocale (setlocale.c:366)
+==955660==    by 0x48AAC84: setlocale (setlocale.c:217)
+==955660==    by 0x109468: ??? (in /usr/bin/rev)
+==955660==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
+==955660== 
+==955660== 208 bytes in 1 blocks are still reachable in loss record 6 of 14
+==955660==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955660==    by 0x48A99D6: __gconv_lookup_cache (gconv_cache.c:365)
+==955660==    by 0x489FB6E: __gconv_find_transform (gconv_db.c:732)
+==955660==    by 0x4946D4A: __wcsmbs_getfct (wcsmbsload.c:91)
+==955660==    by 0x4946D4A: __wcsmbs_load_conv (wcsmbsload.c:185)
+==955660==    by 0x494703A: get_gconv_fcts (wcsmbsload.h:73)
+==955660==    by 0x494703A: __wcsmbs_clone_conv (wcsmbsload.c:221)
+==955660==    by 0x48FAB28: _IO_fwide (iofwide.c:79)
+==955660==    by 0x48F64A8: _IO_getwline_info (iogetwline.c:54)
+==955660==    by 0x49A9D58: __fgetws_chk (fgetws_chk.c:37)
+==955660==    by 0x1095FE: ??? (in /usr/bin/rev)
+==955660==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
+==955660== 
+==955660== 208 bytes in 1 blocks are still reachable in loss record 7 of 14
+==955660==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955660==    by 0x48A9AC0: __gconv_lookup_cache (gconv_cache.c:365)
+==955660==    by 0x489FB6E: __gconv_find_transform (gconv_db.c:732)
+==955660==    by 0x4946D8B: __wcsmbs_getfct (wcsmbsload.c:91)
+==955660==    by 0x4946D8B: __wcsmbs_load_conv (wcsmbsload.c:188)
+==955660==    by 0x494703A: get_gconv_fcts (wcsmbsload.h:73)
+==955660==    by 0x494703A: __wcsmbs_clone_conv (wcsmbsload.c:221)
+==955660==    by 0x48FAB28: _IO_fwide (iofwide.c:79)
+==955660==    by 0x48F64A8: _IO_getwline_info (iogetwline.c:54)
+==955660==    by 0x49A9D58: __fgetws_chk (fgetws_chk.c:37)
+==955660==    by 0x1095FE: ??? (in /usr/bin/rev)
+==955660==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
+==955660== 
+==955660== 240 bytes in 2 blocks are still reachable in loss record 8 of 14
+==955660==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955660==    by 0x48AC2FF: _nl_load_locale_from_archive (loadarchive.c:460)
+==955660==    by 0x48AB0DF: _nl_find_locale (findlocale.c:152)
+==955660==    by 0x48AA856: setlocale (setlocale.c:337)
+==955660==    by 0x48AA856: setlocale (setlocale.c:217)
+==955660==    by 0x109468: ??? (in /usr/bin/rev)
+==955660==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
+==955660== 
+==955660== 281 bytes in 1 blocks are still reachable in loss record 9 of 14
+==955660==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955660==    by 0x48AA607: new_composite_name (setlocale.c:170)
+==955660==    by 0x48AABAA: setlocale (setlocale.c:375)
+==955660==    by 0x48AABAA: setlocale (setlocale.c:217)
+==955660==    by 0x109468: ??? (in /usr/bin/rev)
+==955660==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
+==955660== 
+==955660== 4,096 bytes in 1 blocks are still reachable in loss record 10 of 14
+==955660==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955660==    by 0x48F2BA3: _IO_file_doallocate (filedoalloc.c:101)
+==955660==    by 0x48F3EFC: _IO_wfile_doallocate (wfiledoalloc.c:70)
+==955660==    by 0x4901CDF: _IO_doallocbuf (genops.c:347)
+==955660==    by 0x48F9563: _IO_wfile_underflow (wfileops.c:181)
+==955660==    by 0x48F7875: _IO_wdefault_uflow (wgenops.c:202)
+==955660==    by 0x48F63B6: _IO_getwline_info (iogetwline.c:61)
+==955660==    by 0x49A9D58: __fgetws_chk (fgetws_chk.c:37)
+==955660==    by 0x1095FE: ??? (in /usr/bin/rev)
+==955660==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
+==955660== 
+==955660== 4,096 bytes in 1 blocks are still reachable in loss record 11 of 14
+==955660==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955660==    by 0x48F2BA3: _IO_file_doallocate (filedoalloc.c:101)
+==955660==    by 0x48F3EFC: _IO_wfile_doallocate (wfiledoalloc.c:70)
+==955660==    by 0x48F7B9D: _IO_wdoallocbuf (wgenops.c:369)
+==955660==    by 0x48FA5F4: _IO_wfile_overflow (wfileops.c:420)
+==955660==    by 0x48F798E: __woverflow (wgenops.c:215)
+==955660==    by 0x48F798E: _IO_wdefault_xsputn (wgenops.c:315)
+==955660==    by 0x48F798E: _IO_wdefault_xsputn (wgenops.c:282)
+==955660==    by 0x48FA8A8: _IO_wfile_xsputn (wfileops.c:1009)
+==955660==    by 0x48FA8A8: _IO_wfile_xsputn (wfileops.c:955)
+==955660==    by 0x48F620F: fputws (iofputws.c:38)
+==955660==    by 0x109718: ??? (in /usr/bin/rev)
+==955660==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
+==955660== 
+==955660== 7,456 bytes in 24 blocks are still reachable in loss record 12 of 14
+==955660==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955660==    by 0x48AB96E: _nl_intern_locale_data (loadlocale.c:97)
+==955660==    by 0x48AC370: _nl_load_locale_from_archive (loadarchive.c:477)
+==955660==    by 0x48AB0DF: _nl_find_locale (findlocale.c:152)
+==955660==    by 0x48AA856: setlocale (setlocale.c:337)
+==955660==    by 0x48AA856: setlocale (setlocale.c:217)
+==955660==    by 0x109468: ??? (in /usr/bin/rev)
+==955660==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
+==955660== 
+==955660== 16,384 bytes in 1 blocks are still reachable in loss record 13 of 14
+==955660==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955660==    by 0x48F3ECC: _IO_wfile_doallocate (wfiledoalloc.c:79)
+==955660==    by 0x4901CDF: _IO_doallocbuf (genops.c:347)
+==955660==    by 0x48F9563: _IO_wfile_underflow (wfileops.c:181)
+==955660==    by 0x48F7875: _IO_wdefault_uflow (wgenops.c:202)
+==955660==    by 0x48F63B6: _IO_getwline_info (iogetwline.c:61)
+==955660==    by 0x49A9D58: __fgetws_chk (fgetws_chk.c:37)
+==955660==    by 0x1095FE: ??? (in /usr/bin/rev)
+==955660==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
+==955660== 
+==955660== 16,384 bytes in 1 blocks are still reachable in loss record 14 of 14
+==955660==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955660==    by 0x48F3ECC: _IO_wfile_doallocate (wfiledoalloc.c:79)
+==955660==    by 0x48F7B9D: _IO_wdoallocbuf (wgenops.c:369)
+==955660==    by 0x48FA5F4: _IO_wfile_overflow (wfileops.c:420)
+==955660==    by 0x48F798E: __woverflow (wgenops.c:215)
+==955660==    by 0x48F798E: _IO_wdefault_xsputn (wgenops.c:315)
+==955660==    by 0x48F798E: _IO_wdefault_xsputn (wgenops.c:282)
+==955660==    by 0x48FA8A8: _IO_wfile_xsputn (wfileops.c:1009)
+==955660==    by 0x48FA8A8: _IO_wfile_xsputn (wfileops.c:955)
+==955660==    by 0x48F620F: fputws (iofputws.c:38)
+==955660==    by 0x109718: ??? (in /usr/bin/rev)
+==955660==    by 0x489DD8F: (below main) (libc_start_call_main.h:58)
+==955660== 
+==955660== LEAK SUMMARY:
+==955660==    definitely lost: 0 bytes in 0 blocks
+==955660==    indirectly lost: 0 bytes in 0 blocks
+==955660==      possibly lost: 0 bytes in 0 blocks
+==955660==    still reachable: 49,599 bytes in 50 blocks
+==955660==         suppressed: 0 bytes in 0 blocks
+==955660== 
+==955660== For lists of detected and suppressed errors, rerun with: -s
+==955660== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955659== 
+==955659== HEAP SUMMARY:
+==955659==     in use at exit: 21,111 bytes in 30 blocks
+==955659==   total heap usage: 82 allocs, 52 frees, 67,872 bytes allocated
+==955659== 
+==955659== LEAK SUMMARY:
+==955659==    definitely lost: 0 bytes in 0 blocks
+==955659==    indirectly lost: 0 bytes in 0 blocks
+==955659==      possibly lost: 0 bytes in 0 blocks
+==955659==    still reachable: 0 bytes in 0 blocks
+==955659==         suppressed: 21,111 bytes in 30 blocks
+==955659== 
+==955659== For lists of detected and suppressed errors, rerun with: -s
+==955659== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955658== 
+==955658== HEAP SUMMARY:
+==955658==     in use at exit: 208,337 bytes in 225 blocks
+==955658==   total heap usage: 730 allocs, 505 frees, 247,451 bytes allocated
+==955658== 
+==955658== LEAK SUMMARY:
+==955658==    definitely lost: 0 bytes in 0 blocks
+==955658==    indirectly lost: 0 bytes in 0 blocks
+==955658==      possibly lost: 0 bytes in 0 blocks
+==955658==    still reachable: 0 bytes in 0 blocks
+==955658==         suppressed: 208,337 bytes in 225 blocks
+==955658== 
+==955658== For lists of detected and suppressed errors, rerun with: -s
+==955658== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 
 Commande: ls | <infile2 rev | > outfile77 <infile  >outfile76 cat  -n >outfile78| rev
 Sortie Valgrind:
-==943203== Memcheck, a memory error detector
-==943203== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==943203== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==943203== Command: ../minishell
-==943203== 
-==943215== Memcheck, a memory error detector
-==943215== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==943215== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==943215== Command: /usr/bin/rev
-==943215== 
+==955690== Memcheck, a memory error detector
+==955690== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==955690== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==955690== Command: ../minishell
+==955690== 
 infile2: No such file or directory
+==955698== Memcheck, a memory error detector
+==955698== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==955698== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==955698== Command: /usr/bin/rev
+==955698== 
 infile: No such file or directory
-==943212== Memcheck, a memory error detector
-==943212== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==943212== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==943212== Command: /usr/bin/ls
-==943212== 
-==943214== 
-==943214== HEAP SUMMARY:
-==943214==     in use at exit: 208,414 bytes in 226 blocks
-==943214==   total heap usage: 740 allocs, 514 frees, 247,775 bytes allocated
-==943214== 
-==943214== LEAK SUMMARY:
-==943214==    definitely lost: 0 bytes in 0 blocks
-==943214==    indirectly lost: 0 bytes in 0 blocks
-==943214==      possibly lost: 0 bytes in 0 blocks
-==943214==    still reachable: 0 bytes in 0 blocks
-==943214==         suppressed: 208,414 bytes in 226 blocks
-==943214== 
-==943214== For lists of detected and suppressed errors, rerun with: -s
-==943214== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==943213== 
-==943213== HEAP SUMMARY:
-==943213==     in use at exit: 208,414 bytes in 226 blocks
-==943213==   total heap usage: 740 allocs, 514 frees, 247,779 bytes allocated
-==943213== 
-==943213== LEAK SUMMARY:
-==943213==    definitely lost: 0 bytes in 0 blocks
-==943213==    indirectly lost: 0 bytes in 0 blocks
-==943213==      possibly lost: 0 bytes in 0 blocks
-==943213==    still reachable: 0 bytes in 0 blocks
-==943213==         suppressed: 208,414 bytes in 226 blocks
-==943213== 
-==943213== For lists of detected and suppressed errors, rerun with: -s
-==943213== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==943212== 
-==943212== Process terminating with default action of signal 13 (SIGPIPE)
-==943212==    at 0x49B4887: write (write.c:26)
-==943212==    by 0x492AEEC: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
-==943212==    by 0x492C9E0: new_do_write (fileops.c:448)
-==943212==    by 0x492C9E0: _IO_new_do_write (fileops.c:425)
-==943212==    by 0x492C9E0: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
-==943212==    by 0x492A4D7: _IO_file_sync@@GLIBC_2.2.5 (fileops.c:798)
-==943212==    by 0x491F1A9: fflush (iofflush.c:40)
-==943212==    by 0x113968: ??? (in /usr/bin/ls)
-==943212==    by 0x113A94: ??? (in /usr/bin/ls)
-==943212==    by 0x48E5494: __run_exit_handlers (exit.c:113)
-==943212==    by 0x48E560F: exit (exit.c:143)
-==943212==    by 0x48C9D96: (below main) (libc_start_call_main.h:74)
-==943212== 
-==943212== HEAP SUMMARY:
-==943212==     in use at exit: 33,396 bytes in 74 blocks
-==943212==   total heap usage: 82 allocs, 8 frees, 67,872 bytes allocated
-==943212== 
-==943212== LEAK SUMMARY:
-==943212==    definitely lost: 0 bytes in 0 blocks
-==943212==    indirectly lost: 0 bytes in 0 blocks
-==943212==      possibly lost: 0 bytes in 0 blocks
-==943212==    still reachable: 0 bytes in 0 blocks
-==943212==         suppressed: 33,396 bytes in 74 blocks
-==943212== 
-==943212== For lists of detected and suppressed errors, rerun with: -s
-==943212== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==943215== 
-==943215== HEAP SUMMARY:
-==943215==     in use at exit: 0 bytes in 0 blocks
-==943215==   total heap usage: 51 allocs, 51 frees, 61,897 bytes allocated
-==943215== 
-==943215== All heap blocks were freed -- no leaks are possible
-==943215== 
-==943215== For lists of detected and suppressed errors, rerun with: -s
-==943215== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==943203== 
-==943203== HEAP SUMMARY:
-==943203==     in use at exit: 208,338 bytes in 225 blocks
-==943203==   total heap usage: 739 allocs, 514 frees, 247,754 bytes allocated
-==943203== 
-==943203== LEAK SUMMARY:
-==943203==    definitely lost: 0 bytes in 0 blocks
-==943203==    indirectly lost: 0 bytes in 0 blocks
-==943203==      possibly lost: 0 bytes in 0 blocks
-==943203==    still reachable: 0 bytes in 0 blocks
-==943203==         suppressed: 208,338 bytes in 225 blocks
-==943203== 
-==943203== For lists of detected and suppressed errors, rerun with: -s
-==943203== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955696== 
+==955696== HEAP SUMMARY:
+==955696==     in use at exit: 208,414 bytes in 226 blocks
+==955696==   total heap usage: 740 allocs, 514 frees, 247,779 bytes allocated
+==955696== 
+==955696== LEAK SUMMARY:
+==955696==    definitely lost: 0 bytes in 0 blocks
+==955696==    indirectly lost: 0 bytes in 0 blocks
+==955696==      possibly lost: 0 bytes in 0 blocks
+==955696==    still reachable: 0 bytes in 0 blocks
+==955696==         suppressed: 208,414 bytes in 226 blocks
+==955696== 
+==955696== For lists of detected and suppressed errors, rerun with: -s
+==955696== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955695== Memcheck, a memory error detector
+==955695== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==955695== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==955695== Command: /usr/bin/ls
+==955695== 
+==955697== 
+==955697== HEAP SUMMARY:
+==955697==     in use at exit: 208,414 bytes in 226 blocks
+==955697==   total heap usage: 740 allocs, 514 frees, 247,775 bytes allocated
+==955697== 
+==955697== LEAK SUMMARY:
+==955697==    definitely lost: 0 bytes in 0 blocks
+==955697==    indirectly lost: 0 bytes in 0 blocks
+==955697==      possibly lost: 0 bytes in 0 blocks
+==955697==    still reachable: 0 bytes in 0 blocks
+==955697==         suppressed: 208,414 bytes in 226 blocks
+==955697== 
+==955697== For lists of detected and suppressed errors, rerun with: -s
+==955697== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955698== 
+==955698== HEAP SUMMARY:
+==955698==     in use at exit: 0 bytes in 0 blocks
+==955698==   total heap usage: 51 allocs, 51 frees, 61,897 bytes allocated
+==955698== 
+==955698== All heap blocks were freed -- no leaks are possible
+==955698== 
+==955698== For lists of detected and suppressed errors, rerun with: -s
+==955698== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955695== 
+==955695== Process terminating with default action of signal 13 (SIGPIPE)
+==955695==    at 0x49B4887: write (write.c:26)
+==955695==    by 0x492AEEC: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==955695==    by 0x492C9E0: new_do_write (fileops.c:448)
+==955695==    by 0x492C9E0: _IO_new_do_write (fileops.c:425)
+==955695==    by 0x492C9E0: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==955695==    by 0x492A4D7: _IO_file_sync@@GLIBC_2.2.5 (fileops.c:798)
+==955695==    by 0x491F1A9: fflush (iofflush.c:40)
+==955695==    by 0x113968: ??? (in /usr/bin/ls)
+==955695==    by 0x113A94: ??? (in /usr/bin/ls)
+==955695==    by 0x48E5494: __run_exit_handlers (exit.c:113)
+==955695==    by 0x48E560F: exit (exit.c:143)
+==955695==    by 0x48C9D96: (below main) (libc_start_call_main.h:74)
+==955695== 
+==955695== HEAP SUMMARY:
+==955695==     in use at exit: 33,396 bytes in 74 blocks
+==955695==   total heap usage: 82 allocs, 8 frees, 67,872 bytes allocated
+==955695== 
+==955695== LEAK SUMMARY:
+==955695==    definitely lost: 0 bytes in 0 blocks
+==955695==    indirectly lost: 0 bytes in 0 blocks
+==955695==      possibly lost: 0 bytes in 0 blocks
+==955695==    still reachable: 0 bytes in 0 blocks
+==955695==         suppressed: 33,396 bytes in 74 blocks
+==955695== 
+==955695== For lists of detected and suppressed errors, rerun with: -s
+==955695== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==955690== 
+==955690== HEAP SUMMARY:
+==955690==     in use at exit: 208,338 bytes in 225 blocks
+==955690==   total heap usage: 739 allocs, 514 frees, 247,754 bytes allocated
+==955690== 
+==955690== LEAK SUMMARY:
+==955690==    definitely lost: 0 bytes in 0 blocks
+==955690==    indirectly lost: 0 bytes in 0 blocks
+==955690==      possibly lost: 0 bytes in 0 blocks
+==955690==    still reachable: 0 bytes in 0 blocks
+==955690==         suppressed: 208,338 bytes in 225 blocks
+==955690== 
+==955690== For lists of detected and suppressed errors, rerun with: -s
+==955690== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 
 Commande: cat | cat | ( rev | cat ) //seg
 Sortie Valgrind:
-==943237== Memcheck, a memory error detector
-==943237== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==943237== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==943237== Command: ../minishell
-==943237== 
-==943237== Invalid read of size 4
-==943237==    at 0x1103B0: fill_command_tab (fill_command_tab.c:38)
-==943237==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
-==943237==    by 0x10F90C: build_command_tab (launch_command_tab.c:151)
-==943237==    by 0x10FB72: launch_command_tab (launch_command_tab.c:123)
-==943237==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==943237==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237==    by 0x10C2EA: parse_par (parsing.c:68)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==943237== 
-==943237== 
-==943237== Process terminating with default action of signal 11 (SIGSEGV)
-==943237==  Access not within mapped region at address 0x0
-==943237==    at 0x1103B0: fill_command_tab (fill_command_tab.c:38)
-==943237==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
-==943237==    by 0x10F90C: build_command_tab (launch_command_tab.c:151)
-==943237==    by 0x10FB72: launch_command_tab (launch_command_tab.c:123)
-==943237==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==943237==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237==    by 0x10C2EA: parse_par (parsing.c:68)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237==  If you believe this happened as a result of a stack
-==943237==  overflow in your program's main thread (unlikely but
-==943237==  possible), you can try to increase the size of the
-==943237==  main thread stack using the --main-stacksize= flag.
-==943237==  The main thread stack size used in this run was 8388608.
-==943237== 
-==943237== HEAP SUMMARY:
-==943237==     in use at exit: 225,241 bytes in 357 blocks
-==943237==   total heap usage: 577 allocs, 220 frees, 240,976 bytes allocated
-==943237== 
-==943237== 4 bytes in 2 blocks are still reachable in loss record 1 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x1105E7: add_sep_tab (fill_command_tab_utils.c:30)
-==943237==    by 0x11033F: add_sep_tab_loop (fill_command_tab.c:108)
-==943237==    by 0x11033F: fill_command_tab (fill_command_tab.c:32)
-==943237==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
-==943237==    by 0x10F90C: build_command_tab (launch_command_tab.c:151)
-==943237==    by 0x10FB72: launch_command_tab (launch_command_tab.c:123)
-==943237==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==943237==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237==    by 0x10C2EA: parse_par (parsing.c:68)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237== 
-==943237== 8 bytes in 2 blocks are still reachable in loss record 4 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x110F89: ft_strdup (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10F5AA: get_node_str (create_command_tab_utils.c:62)
-==943237==    by 0x11071A: handle_joker (fill_command_tab_utils.c:78)
-==943237==    by 0x11081A: add_remaining_tabs (fill_command_tab_utils.c:96)
-==943237==    by 0x1103AC: add_remaining_tabs_loop (fill_command_tab.c:94)
-==943237==    by 0x1103AC: add_remaining_tabs_loop (fill_command_tab.c:89)
-==943237==    by 0x1103AC: fill_command_tab (fill_command_tab.c:37)
-==943237==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
-==943237==    by 0x10F90C: build_command_tab (launch_command_tab.c:151)
-==943237==    by 0x10FB72: launch_command_tab (launch_command_tab.c:123)
-==943237==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==943237==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237== 
-==943237== 13 bytes in 1 blocks are still reachable in loss record 12 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x11100F: ft_strndup (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10E4D5: raw_left_area (leaf_par_raw.c:40)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237==    by 0x10C2EA: parse_par (parsing.c:68)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 16 bytes in 1 blocks are still reachable in loss record 15 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10A121: get_data (main.c:55)
-==943237==    by 0x10948A: main (main.c:35)
-==943237== 
-==943237== 32 bytes in 2 blocks are still reachable in loss record 26 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x1105DC: add_sep_tab (fill_command_tab_utils.c:29)
-==943237==    by 0x11033F: add_sep_tab_loop (fill_command_tab.c:108)
-==943237==    by 0x11033F: fill_command_tab (fill_command_tab.c:32)
-==943237==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
-==943237==    by 0x10F90C: build_command_tab (launch_command_tab.c:151)
-==943237==    by 0x10FB72: launch_command_tab (launch_command_tab.c:123)
-==943237==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==943237==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237==    by 0x10C2EA: parse_par (parsing.c:68)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 27 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C955: create_node (utils.c:19)
-==943237==    by 0x10C15A: set_root (parsing.c:26)
-==943237==    by 0x10C15A: first_init_root (parsing.c:38)
-==943237==    by 0x10C2C1: parse_par (parsing.c:64)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 28 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C9B4: create_node (utils.c:19)
-==943237==    by 0x10C9B4: copy_node (utils.c:51)
-==943237==    by 0x10C17E: set_root (parsing.c:29)
-==943237==    by 0x10C17E: first_init_root (parsing.c:38)
-==943237==    by 0x10C2C1: parse_par (parsing.c:64)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 29 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C9B4: create_node (utils.c:19)
-==943237==    by 0x10C9B4: copy_node (utils.c:51)
-==943237==    by 0x10C18F: set_root (parsing.c:30)
-==943237==    by 0x10C18F: first_init_root (parsing.c:38)
-==943237==    by 0x10C2C1: parse_par (parsing.c:64)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 30 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C955: create_node (utils.c:19)
-==943237==    by 0x10D623: create_raw_node (quote.c:68)
-==943237==    by 0x10D623: set_qute_sib (quote.c:95)
-==943237==    by 0x10C19C: first_init_root (parsing.c:39)
-==943237==    by 0x10C2C1: parse_par (parsing.c:64)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 31 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C955: create_node (utils.c:19)
-==943237==    by 0x10DBD1: open_par (search_par.c:35)
-==943237==    by 0x10DBD1: search_token (search_par.c:50)
-==943237==    by 0x10DBD1: search_token (search_par.c:41)
-==943237==    by 0x10DBD1: create_token_node (search_par.c:84)
-==943237==    by 0x10D074: set_parenthesis (parenthesis.c:68)
-==943237==    by 0x10C2DB: parse_par (parsing.c:66)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 32 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C955: create_node (utils.c:19)
-==943237==    by 0x10CECC: create_token_child_par (parenthesis.c:21)
-==943237==    by 0x10CECC: token_child_handle.part.0 (parenthesis.c:46)
-==943237==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
-==943237==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
-==943237==    by 0x10C2DB: parse_par (parsing.c:66)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 33 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C9B4: create_node (utils.c:19)
-==943237==    by 0x10C9B4: copy_node (utils.c:51)
-==943237==    by 0x10CEF1: create_token_child_par (parenthesis.c:25)
-==943237==    by 0x10CEF1: token_child_handle.part.0 (parenthesis.c:46)
-==943237==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
-==943237==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
-==943237==    by 0x10C2DB: parse_par (parsing.c:66)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 34 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C955: create_node (utils.c:19)
-==943237==    by 0x10CEFC: create_token_child_par (parenthesis.c:26)
-==943237==    by 0x10CEFC: token_child_handle.part.0 (parenthesis.c:46)
-==943237==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
-==943237==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
-==943237==    by 0x10C2DB: parse_par (parsing.c:66)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 35 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C9B4: create_node (utils.c:19)
-==943237==    by 0x10C9B4: copy_node (utils.c:51)
-==943237==    by 0x10CF29: create_token_child_par (parenthesis.c:30)
-==943237==    by 0x10CF29: token_child_handle.part.0 (parenthesis.c:46)
-==943237==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
-==943237==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
-==943237==    by 0x10C2DB: parse_par (parsing.c:66)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 36 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C9B4: create_node (utils.c:19)
-==943237==    by 0x10C9B4: copy_node (utils.c:51)
-==943237==    by 0x10CF35: create_token_child_par (parenthesis.c:31)
-==943237==    by 0x10CF35: token_child_handle.part.0 (parenthesis.c:46)
-==943237==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
-==943237==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
-==943237==    by 0x10C2DB: parse_par (parsing.c:66)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 37 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C9B4: create_node (utils.c:19)
-==943237==    by 0x10C9B4: copy_node (utils.c:51)
-==943237==    by 0x10CF44: create_token_child_par (parenthesis.c:32)
-==943237==    by 0x10CF44: token_child_handle.part.0 (parenthesis.c:46)
-==943237==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
-==943237==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
-==943237==    by 0x10C2DB: parse_par (parsing.c:66)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 38 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C9B4: create_node (utils.c:19)
-==943237==    by 0x10C9B4: copy_node (utils.c:51)
-==943237==    by 0x10DD7F: fill_child_overlap_par (fill_child_par.c:36)
-==943237==    by 0x10DD7F: fill_child_par (fill_child_par.c:72)
-==943237==    by 0x10CF84: token_child_handle.part.0 (parenthesis.c:49)
-==943237==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
-==943237==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
-==943237==    by 0x10C2DB: parse_par (parsing.c:66)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 39 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C9B4: create_node (utils.c:19)
-==943237==    by 0x10C9B4: copy_node (utils.c:51)
-==943237==    by 0x10DDD7: fill_child_overlap_par (fill_child_par.c:42)
-==943237==    by 0x10DDD7: fill_child_par (fill_child_par.c:72)
-==943237==    by 0x10CF84: token_child_handle.part.0 (parenthesis.c:49)
-==943237==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
-==943237==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
-==943237==    by 0x10C2DB: parse_par (parsing.c:66)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 40 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C9B4: create_node (utils.c:19)
-==943237==    by 0x10C9B4: copy_node (utils.c:51)
-==943237==    by 0x10DCBB: fill_child_overlap_par (fill_child_par.c:48)
-==943237==    by 0x10DCBB: fill_child_par (fill_child_par.c:72)
-==943237==    by 0x10CF84: token_child_handle.part.0 (parenthesis.c:49)
-==943237==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
-==943237==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
-==943237==    by 0x10C2DB: parse_par (parsing.c:66)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 41 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C955: create_node (utils.c:19)
-==943237==    by 0x10C818: store_or_free_cmd (free_utils.c:63)
-==943237==    by 0x10E4E0: raw_left_area (leaf_par_raw.c:41)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237==    by 0x10C2EA: parse_par (parsing.c:68)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 40 bytes in 1 blocks are still reachable in loss record 42 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10E6C7: alloc_memory_for_pipe_parts (create_command_tab_allocation.c:53)
-==943237==    by 0x10FC98: create_command_tab (create_command_tab.c:62)
-==943237==    by 0x10F90C: build_command_tab (launch_command_tab.c:151)
-==943237==    by 0x10FB72: launch_command_tab (launch_command_tab.c:123)
-==943237==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==943237==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237==    by 0x10C2EA: parse_par (parsing.c:68)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 80 bytes in 2 blocks are still reachable in loss record 49 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10CA80: create_node (utils.c:19)
-==943237==    by 0x10CA80: copy_node (utils.c:51)
-==943237==    by 0x10CA80: copy_node_and_child (utils.c:91)
-==943237==    by 0x10DF4C: leaf_raw_lft (leaf.c:23)
-==943237==    by 0x10DF4C: leaf_tree (leaf.c:60)
-==943237==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==943237==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==943237==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==943237==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==943237==    by 0x10C3DB: parse (parsing.c:90)
-==943237==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==943237==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237==    by 0x10C2EA: parse_par (parsing.c:68)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237== 
-==943237== 80 bytes in 2 blocks are still reachable in loss record 50 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10CAB7: create_node (utils.c:19)
-==943237==    by 0x10CAB7: copy_node (utils.c:51)
-==943237==    by 0x10CAB7: copy_node_and_child (utils.c:95)
-==943237==    by 0x10DF4C: leaf_raw_lft (leaf.c:23)
-==943237==    by 0x10DF4C: leaf_tree (leaf.c:60)
-==943237==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==943237==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==943237==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==943237==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==943237==    by 0x10C3DB: parse (parsing.c:90)
-==943237==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==943237==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237==    by 0x10C2EA: parse_par (parsing.c:68)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237== 
-==943237== 80 bytes in 2 blocks are still reachable in loss record 51 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C9B4: create_node (utils.c:19)
-==943237==    by 0x10C9B4: copy_node (utils.c:51)
-==943237==    by 0x10DED7: leaf_tree (leaf.c:63)
-==943237==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==943237==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==943237==    by 0x10C3DB: parse (parsing.c:90)
-==943237==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==943237==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237==    by 0x10C2EA: parse_par (parsing.c:68)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 80 bytes in 2 blocks are still reachable in loss record 52 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10C9B4: create_node (utils.c:19)
-==943237==    by 0x10C9B4: copy_node (utils.c:51)
-==943237==    by 0x10DEE2: leaf_tree (leaf.c:64)
-==943237==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
-==943237==    by 0x10DE7D: leaf_tree (leaf.c:60)
-==943237==    by 0x10C3DB: parse (parsing.c:90)
-==943237==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
-==943237==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237==    by 0x10C2EA: parse_par (parsing.c:68)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 160 bytes in 4 blocks are still reachable in loss record 58 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10CA80: create_node (utils.c:19)
-==943237==    by 0x10CA80: copy_node (utils.c:51)
-==943237==    by 0x10CA80: copy_node_and_child (utils.c:91)
-==943237==    by 0x10FA68: build_command_tab_node (launch_command_tab.c:97)
-==943237==    by 0x10FA68: launch_command_tab (launch_command_tab.c:117)
-==943237==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==943237==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237==    by 0x10C2EA: parse_par (parsing.c:68)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 160 bytes in 4 blocks are still reachable in loss record 59 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10CAB7: create_node (utils.c:19)
-==943237==    by 0x10CAB7: copy_node (utils.c:51)
-==943237==    by 0x10CAB7: copy_node_and_child (utils.c:95)
-==943237==    by 0x10FA68: build_command_tab_node (launch_command_tab.c:97)
-==943237==    by 0x10FA68: launch_command_tab (launch_command_tab.c:117)
-==943237==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==943237==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237==    by 0x10C2EA: parse_par (parsing.c:68)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237==    by 0x1094AC: main (main.c:40)
-==943237== 
-==943237== 504 bytes in 1 blocks are still reachable in loss record 65 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10A9BD: duplicate_envp (utils_3.c:28)
-==943237==    by 0x10A13B: get_data (main.c:58)
-==943237==    by 0x10948A: main (main.c:35)
-==943237== 
-==943237== 2,416 bytes in 3 blocks are still reachable in loss record 83 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x1107F8: add_remaining_tabs (fill_command_tab_utils.c:93)
-==943237==    by 0x1103AC: add_remaining_tabs_loop (fill_command_tab.c:94)
-==943237==    by 0x1103AC: add_remaining_tabs_loop (fill_command_tab.c:89)
-==943237==    by 0x1103AC: fill_command_tab (fill_command_tab.c:37)
-==943237==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
-==943237==    by 0x10F90C: build_command_tab (launch_command_tab.c:151)
-==943237==    by 0x10FB72: launch_command_tab (launch_command_tab.c:123)
-==943237==    by 0x10F661: exec_pipex (exec_pipex.c:34)
-==943237==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
-==943237==    by 0x10E3C3: token_zone (leaf_par.c:33)
-==943237==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
-==943237==    by 0x10C2EA: parse_par (parsing.c:68)
-==943237==    by 0x10A291: prompt_loop (main.c:87)
-==943237== 
-==943237== 3,467 bytes in 62 blocks are still reachable in loss record 84 of 111
-==943237==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==943237==    by 0x1109F8: ft_calloc (in /home/dan/42/minishell_common/minishell)
-==943237==    by 0x10AA24: duplicate_envp (utils_3.c:34)
-==943237==    by 0x10A13B: get_data (main.c:58)
-==943237==    by 0x10948A: main (main.c:35)
-==943237== 
-==943237== LEAK SUMMARY:
-==943237==    definitely lost: 0 bytes in 0 blocks
-==943237==    indirectly lost: 0 bytes in 0 blocks
-==943237==      possibly lost: 0 bytes in 0 blocks
-==943237==    still reachable: 7,740 bytes in 106 blocks
-==943237==         suppressed: 217,501 bytes in 251 blocks
-==943237== 
-==943237== For lists of detected and suppressed errors, rerun with: -s
-==943237== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==955706== Memcheck, a memory error detector
+==955706== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==955706== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==955706== Command: ../minishell
+==955706== 
+==955706== Invalid read of size 4
+==955706==    at 0x1103BD: add_remaining_tabs_loop (fill_command_tab.c:100)
+==955706==    by 0x1103BD: add_remaining_tabs_loop (fill_command_tab.c:93)
+==955706==    by 0x1103BD: fill_command_tab (fill_command_tab.c:37)
+==955706==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
+==955706==    by 0x10F90C: build_command_tab (launch_command_tab.c:154)
+==955706==    by 0x10FB2A: launch_command_tab (launch_command_tab.c:126)
+==955706==    by 0x10F661: exec_pipex (exec_pipex.c:34)
+==955706==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706==    by 0x10C2EA: parse_par (parsing.c:68)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==955706== 
+==955706== 
+==955706== Process terminating with default action of signal 11 (SIGSEGV)
+==955706==  Access not within mapped region at address 0x0
+==955706==    at 0x1103BD: add_remaining_tabs_loop (fill_command_tab.c:100)
+==955706==    by 0x1103BD: add_remaining_tabs_loop (fill_command_tab.c:93)
+==955706==    by 0x1103BD: fill_command_tab (fill_command_tab.c:37)
+==955706==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
+==955706==    by 0x10F90C: build_command_tab (launch_command_tab.c:154)
+==955706==    by 0x10FB2A: launch_command_tab (launch_command_tab.c:126)
+==955706==    by 0x10F661: exec_pipex (exec_pipex.c:34)
+==955706==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706==    by 0x10C2EA: parse_par (parsing.c:68)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706==  If you believe this happened as a result of a stack
+==955706==  overflow in your program's main thread (unlikely but
+==955706==  possible), you can try to increase the size of the
+==955706==  main thread stack using the --main-stacksize= flag.
+==955706==  The main thread stack size used in this run was 8388608.
+==955706== 
+==955706== HEAP SUMMARY:
+==955706==     in use at exit: 225,241 bytes in 357 blocks
+==955706==   total heap usage: 577 allocs, 220 frees, 240,976 bytes allocated
+==955706== 
+==955706== 4 bytes in 2 blocks are still reachable in loss record 1 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x110F79: ft_strdup (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x1105D7: add_sep_tab (fill_command_tab_utils.c:30)
+==955706==    by 0x110349: add_sep_tab_loop (fill_command_tab.c:112)
+==955706==    by 0x110349: fill_command_tab (fill_command_tab.c:32)
+==955706==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
+==955706==    by 0x10F90C: build_command_tab (launch_command_tab.c:154)
+==955706==    by 0x10FB2A: launch_command_tab (launch_command_tab.c:126)
+==955706==    by 0x10F661: exec_pipex (exec_pipex.c:34)
+==955706==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706==    by 0x10C2EA: parse_par (parsing.c:68)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706== 
+==955706== 8 bytes in 2 blocks are still reachable in loss record 4 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x110F79: ft_strdup (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10F5AA: get_node_str (create_command_tab_utils.c:62)
+==955706==    by 0x11070A: handle_joker (fill_command_tab_utils.c:78)
+==955706==    by 0x11080A: add_remaining_tabs (fill_command_tab_utils.c:96)
+==955706==    by 0x1103B4: add_remaining_tabs_loop (fill_command_tab.c:98)
+==955706==    by 0x1103B4: add_remaining_tabs_loop (fill_command_tab.c:93)
+==955706==    by 0x1103B4: fill_command_tab (fill_command_tab.c:37)
+==955706==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
+==955706==    by 0x10F90C: build_command_tab (launch_command_tab.c:154)
+==955706==    by 0x10FB2A: launch_command_tab (launch_command_tab.c:126)
+==955706==    by 0x10F661: exec_pipex (exec_pipex.c:34)
+==955706==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706== 
+==955706== 13 bytes in 1 blocks are still reachable in loss record 12 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x110FFF: ft_strndup (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10E4D5: raw_left_area (leaf_par_raw.c:40)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706==    by 0x10C2EA: parse_par (parsing.c:68)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 16 bytes in 1 blocks are still reachable in loss record 15 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10A121: get_data (main.c:55)
+==955706==    by 0x10948A: main (main.c:35)
+==955706== 
+==955706== 32 bytes in 2 blocks are still reachable in loss record 26 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x1105CC: add_sep_tab (fill_command_tab_utils.c:29)
+==955706==    by 0x110349: add_sep_tab_loop (fill_command_tab.c:112)
+==955706==    by 0x110349: fill_command_tab (fill_command_tab.c:32)
+==955706==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
+==955706==    by 0x10F90C: build_command_tab (launch_command_tab.c:154)
+==955706==    by 0x10FB2A: launch_command_tab (launch_command_tab.c:126)
+==955706==    by 0x10F661: exec_pipex (exec_pipex.c:34)
+==955706==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706==    by 0x10C2EA: parse_par (parsing.c:68)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 27 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C955: create_node (utils.c:19)
+==955706==    by 0x10C15A: set_root (parsing.c:26)
+==955706==    by 0x10C15A: first_init_root (parsing.c:38)
+==955706==    by 0x10C2C1: parse_par (parsing.c:64)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 28 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C9B4: create_node (utils.c:19)
+==955706==    by 0x10C9B4: copy_node (utils.c:51)
+==955706==    by 0x10C17E: set_root (parsing.c:29)
+==955706==    by 0x10C17E: first_init_root (parsing.c:38)
+==955706==    by 0x10C2C1: parse_par (parsing.c:64)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 29 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C9B4: create_node (utils.c:19)
+==955706==    by 0x10C9B4: copy_node (utils.c:51)
+==955706==    by 0x10C18F: set_root (parsing.c:30)
+==955706==    by 0x10C18F: first_init_root (parsing.c:38)
+==955706==    by 0x10C2C1: parse_par (parsing.c:64)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 30 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C955: create_node (utils.c:19)
+==955706==    by 0x10D623: create_raw_node (quote.c:68)
+==955706==    by 0x10D623: set_qute_sib (quote.c:95)
+==955706==    by 0x10C19C: first_init_root (parsing.c:39)
+==955706==    by 0x10C2C1: parse_par (parsing.c:64)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 31 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C955: create_node (utils.c:19)
+==955706==    by 0x10DBD1: open_par (search_par.c:35)
+==955706==    by 0x10DBD1: search_token (search_par.c:50)
+==955706==    by 0x10DBD1: search_token (search_par.c:41)
+==955706==    by 0x10DBD1: create_token_node (search_par.c:84)
+==955706==    by 0x10D074: set_parenthesis (parenthesis.c:68)
+==955706==    by 0x10C2DB: parse_par (parsing.c:66)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 32 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C955: create_node (utils.c:19)
+==955706==    by 0x10CECC: create_token_child_par (parenthesis.c:21)
+==955706==    by 0x10CECC: token_child_handle.part.0 (parenthesis.c:46)
+==955706==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
+==955706==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
+==955706==    by 0x10C2DB: parse_par (parsing.c:66)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 33 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C9B4: create_node (utils.c:19)
+==955706==    by 0x10C9B4: copy_node (utils.c:51)
+==955706==    by 0x10CEF1: create_token_child_par (parenthesis.c:25)
+==955706==    by 0x10CEF1: token_child_handle.part.0 (parenthesis.c:46)
+==955706==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
+==955706==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
+==955706==    by 0x10C2DB: parse_par (parsing.c:66)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 34 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C955: create_node (utils.c:19)
+==955706==    by 0x10CEFC: create_token_child_par (parenthesis.c:26)
+==955706==    by 0x10CEFC: token_child_handle.part.0 (parenthesis.c:46)
+==955706==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
+==955706==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
+==955706==    by 0x10C2DB: parse_par (parsing.c:66)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 35 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C9B4: create_node (utils.c:19)
+==955706==    by 0x10C9B4: copy_node (utils.c:51)
+==955706==    by 0x10CF29: create_token_child_par (parenthesis.c:30)
+==955706==    by 0x10CF29: token_child_handle.part.0 (parenthesis.c:46)
+==955706==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
+==955706==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
+==955706==    by 0x10C2DB: parse_par (parsing.c:66)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 36 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C9B4: create_node (utils.c:19)
+==955706==    by 0x10C9B4: copy_node (utils.c:51)
+==955706==    by 0x10CF35: create_token_child_par (parenthesis.c:31)
+==955706==    by 0x10CF35: token_child_handle.part.0 (parenthesis.c:46)
+==955706==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
+==955706==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
+==955706==    by 0x10C2DB: parse_par (parsing.c:66)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 37 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C9B4: create_node (utils.c:19)
+==955706==    by 0x10C9B4: copy_node (utils.c:51)
+==955706==    by 0x10CF44: create_token_child_par (parenthesis.c:32)
+==955706==    by 0x10CF44: token_child_handle.part.0 (parenthesis.c:46)
+==955706==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
+==955706==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
+==955706==    by 0x10C2DB: parse_par (parsing.c:66)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 38 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C9B4: create_node (utils.c:19)
+==955706==    by 0x10C9B4: copy_node (utils.c:51)
+==955706==    by 0x10DD7F: fill_child_overlap_par (fill_child_par.c:36)
+==955706==    by 0x10DD7F: fill_child_par (fill_child_par.c:72)
+==955706==    by 0x10CF84: token_child_handle.part.0 (parenthesis.c:49)
+==955706==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
+==955706==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
+==955706==    by 0x10C2DB: parse_par (parsing.c:66)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 39 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C9B4: create_node (utils.c:19)
+==955706==    by 0x10C9B4: copy_node (utils.c:51)
+==955706==    by 0x10DDD7: fill_child_overlap_par (fill_child_par.c:42)
+==955706==    by 0x10DDD7: fill_child_par (fill_child_par.c:72)
+==955706==    by 0x10CF84: token_child_handle.part.0 (parenthesis.c:49)
+==955706==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
+==955706==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
+==955706==    by 0x10C2DB: parse_par (parsing.c:66)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 40 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C9B4: create_node (utils.c:19)
+==955706==    by 0x10C9B4: copy_node (utils.c:51)
+==955706==    by 0x10DCBB: fill_child_overlap_par (fill_child_par.c:48)
+==955706==    by 0x10DCBB: fill_child_par (fill_child_par.c:72)
+==955706==    by 0x10CF84: token_child_handle.part.0 (parenthesis.c:49)
+==955706==    by 0x10D0B7: token_child_handle (parenthesis.c:43)
+==955706==    by 0x10D0B7: set_parenthesis (parenthesis.c:73)
+==955706==    by 0x10C2DB: parse_par (parsing.c:66)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 41 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C955: create_node (utils.c:19)
+==955706==    by 0x10C818: store_or_free_cmd (free_utils.c:63)
+==955706==    by 0x10E4E0: raw_left_area (leaf_par_raw.c:41)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706==    by 0x10C2EA: parse_par (parsing.c:68)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 40 bytes in 1 blocks are still reachable in loss record 42 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10E6C7: alloc_memory_for_pipe_parts (create_command_tab_allocation.c:53)
+==955706==    by 0x10FC98: create_command_tab (create_command_tab.c:62)
+==955706==    by 0x10F90C: build_command_tab (launch_command_tab.c:154)
+==955706==    by 0x10FB2A: launch_command_tab (launch_command_tab.c:126)
+==955706==    by 0x10F661: exec_pipex (exec_pipex.c:34)
+==955706==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706==    by 0x10C2EA: parse_par (parsing.c:68)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 80 bytes in 2 blocks are still reachable in loss record 49 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10CA80: create_node (utils.c:19)
+==955706==    by 0x10CA80: copy_node (utils.c:51)
+==955706==    by 0x10CA80: copy_node_and_child (utils.c:91)
+==955706==    by 0x10DF4C: leaf_raw_lft (leaf.c:23)
+==955706==    by 0x10DF4C: leaf_tree (leaf.c:60)
+==955706==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
+==955706==    by 0x10DE7D: leaf_tree (leaf.c:60)
+==955706==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
+==955706==    by 0x10DE7D: leaf_tree (leaf.c:60)
+==955706==    by 0x10C3DB: parse (parsing.c:90)
+==955706==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
+==955706==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706==    by 0x10C2EA: parse_par (parsing.c:68)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706== 
+==955706== 80 bytes in 2 blocks are still reachable in loss record 50 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10CAB7: create_node (utils.c:19)
+==955706==    by 0x10CAB7: copy_node (utils.c:51)
+==955706==    by 0x10CAB7: copy_node_and_child (utils.c:95)
+==955706==    by 0x10DF4C: leaf_raw_lft (leaf.c:23)
+==955706==    by 0x10DF4C: leaf_tree (leaf.c:60)
+==955706==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
+==955706==    by 0x10DE7D: leaf_tree (leaf.c:60)
+==955706==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
+==955706==    by 0x10DE7D: leaf_tree (leaf.c:60)
+==955706==    by 0x10C3DB: parse (parsing.c:90)
+==955706==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
+==955706==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706==    by 0x10C2EA: parse_par (parsing.c:68)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706== 
+==955706== 80 bytes in 2 blocks are still reachable in loss record 51 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C9B4: create_node (utils.c:19)
+==955706==    by 0x10C9B4: copy_node (utils.c:51)
+==955706==    by 0x10DED7: leaf_tree (leaf.c:63)
+==955706==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
+==955706==    by 0x10DE7D: leaf_tree (leaf.c:60)
+==955706==    by 0x10C3DB: parse (parsing.c:90)
+==955706==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
+==955706==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706==    by 0x10C2EA: parse_par (parsing.c:68)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 80 bytes in 2 blocks are still reachable in loss record 52 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10C9B4: create_node (utils.c:19)
+==955706==    by 0x10C9B4: copy_node (utils.c:51)
+==955706==    by 0x10DEE2: leaf_tree (leaf.c:64)
+==955706==    by 0x10DE7D: leaf_raw_lft (leaf.c:21)
+==955706==    by 0x10DE7D: leaf_tree (leaf.c:60)
+==955706==    by 0x10C3DB: parse (parsing.c:90)
+==955706==    by 0x10F63F: exec_pipex (exec_pipex.c:30)
+==955706==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706==    by 0x10C2EA: parse_par (parsing.c:68)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 160 bytes in 4 blocks are still reachable in loss record 58 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10CA80: create_node (utils.c:19)
+==955706==    by 0x10CA80: copy_node (utils.c:51)
+==955706==    by 0x10CA80: copy_node_and_child (utils.c:91)
+==955706==    by 0x10FA73: build_command_tab_node (launch_command_tab.c:100)
+==955706==    by 0x10FA73: launch_command_tab (launch_command_tab.c:120)
+==955706==    by 0x10F661: exec_pipex (exec_pipex.c:34)
+==955706==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706==    by 0x10C2EA: parse_par (parsing.c:68)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 160 bytes in 4 blocks are still reachable in loss record 59 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10CAB7: create_node (utils.c:19)
+==955706==    by 0x10CAB7: copy_node (utils.c:51)
+==955706==    by 0x10CAB7: copy_node_and_child (utils.c:95)
+==955706==    by 0x10FA73: build_command_tab_node (launch_command_tab.c:100)
+==955706==    by 0x10FA73: launch_command_tab (launch_command_tab.c:120)
+==955706==    by 0x10F661: exec_pipex (exec_pipex.c:34)
+==955706==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706==    by 0x10C2EA: parse_par (parsing.c:68)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706==    by 0x1094AC: main (main.c:40)
+==955706== 
+==955706== 504 bytes in 1 blocks are still reachable in loss record 65 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10A9BD: duplicate_envp (utils_3.c:28)
+==955706==    by 0x10A13B: get_data (main.c:58)
+==955706==    by 0x10948A: main (main.c:35)
+==955706== 
+==955706== 2,416 bytes in 3 blocks are still reachable in loss record 83 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x1107E8: add_remaining_tabs (fill_command_tab_utils.c:93)
+==955706==    by 0x1103B4: add_remaining_tabs_loop (fill_command_tab.c:98)
+==955706==    by 0x1103B4: add_remaining_tabs_loop (fill_command_tab.c:93)
+==955706==    by 0x1103B4: fill_command_tab (fill_command_tab.c:37)
+==955706==    by 0x10FCBE: create_command_tab (create_command_tab.c:74)
+==955706==    by 0x10F90C: build_command_tab (launch_command_tab.c:154)
+==955706==    by 0x10FB2A: launch_command_tab (launch_command_tab.c:126)
+==955706==    by 0x10F661: exec_pipex (exec_pipex.c:34)
+==955706==    by 0x10E4F1: raw_left_area (leaf_par_raw.c:42)
+==955706==    by 0x10E3C3: token_zone (leaf_par.c:33)
+==955706==    by 0x10E3C3: leaf_tree_par (leaf_par.c:72)
+==955706==    by 0x10C2EA: parse_par (parsing.c:68)
+==955706==    by 0x10A291: prompt_loop (main.c:87)
+==955706== 
+==955706== 3,467 bytes in 62 blocks are still reachable in loss record 84 of 111
+==955706==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==955706==    by 0x1109E8: ft_calloc (in /home/dan/42/minishell_common/minishell)
+==955706==    by 0x10AA24: duplicate_envp (utils_3.c:34)
+==955706==    by 0x10A13B: get_data (main.c:58)
+==955706==    by 0x10948A: main (main.c:35)
+==955706== 
+==955706== LEAK SUMMARY:
+==955706==    definitely lost: 0 bytes in 0 blocks
+==955706==    indirectly lost: 0 bytes in 0 blocks
+==955706==      possibly lost: 0 bytes in 0 blocks
+==955706==    still reachable: 7,740 bytes in 106 blocks
+==955706==         suppressed: 217,501 bytes in 251 blocks
+==955706== 
+==955706== For lists of detected and suppressed errors, rerun with: -s
+==955706== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 
