@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:43:52 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/18 15:10:07 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:28:33 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	*get_err_policy(void)
 {
-	static int policy_flags[3] = {0, 1, 0};	
+	static int	policy_flags[3] = {0, 1, 0};
+
 	return (policy_flags);
 }
 
@@ -46,7 +47,7 @@ int	error_policy_and_forwarding(t_ast_nde *raw_lft, t_ast_nde *raw_rght,
 	t_ast_nde *token)
 {
 	int	*policy;
-	
+
 	policy = get_err_policy();
 	if (!policy[0])
 	{
@@ -68,7 +69,7 @@ int	error_policy_and_forwarding_2(t_ast_nde *raw_lft, t_ast_nde *raw_rght,
 	t_ast_nde *token)
 {
 	int	*policy;
-	
+
 	policy = get_err_policy();
 	if (policy[0] == 1)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   leaf.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:01:47 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/18 10:25:50 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 17:21:08 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ static void	leaf_raw_rght(t_ast_nde	*raw_rght, t_ast_nde **rslt,
 		add_sibling(copy_node_and_child(raw_rght->child), rslt, rslt_sav);
 }
 
+static void	rebuild_expansion(t_ast_nde *operator, t_ast_nde **rslt,
+		t_ast_nde **rslt_sav, t_Data *data)
+{
+	t_ast_nde	*rb_nde;
+	char		*rb_str;
+
+	rb_str = rebuild_dollar_str(operator, NULL, data);
+	rb_nde = rebuild_dollar_str_node(rb_str, operator->token);
+	add_sibling(rb_nde, rslt, rslt_sav);
+}
+
 void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt,
 		t_ast_nde **rslt_sav, t_Data *data)
 {
@@ -51,12 +62,9 @@ void	leaf_tree(t_ast_nde *operator, t_ast_nde **rslt,
 		raw_lft = operator->child;
 	if (raw_lft)
 		raw_rght = raw_lft->sibling;
-	if (operator && (operator->token == DOLL || operator->token == JOKER ||operator->token == STAT))
-	{
-		char *s = rebuild_dollar_str(operator, NULL, data);
-		t_ast_nde	*n = rebuild_dollar_str_node(s, operator->token);		
-		return (add_sibling(n, rslt, rslt_sav));
-	}
+	if (operator && (operator->token == DOLL || operator->token == JOKER
+			|| operator->token == STAT))
+		return (rebuild_expansion(operator, rslt, rslt_sav, data));
 	leaf_raw_lft(raw_lft, rslt, rslt_sav, data);
 	if (operator && operator->token != SPCE && operator->token != RAW)
 	{

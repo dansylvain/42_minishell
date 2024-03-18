@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:30:00 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/18 15:31:23 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:27:10 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ void		display_error_free(char *str);
 char		*translate_enum(t_tok token);
 int			is_chevron(t_ast_nde *node);
 int			*get_err_policy(void);
+int			exec_pipex(t_Data *data, char *cmd, char *envp[], int reset);
+int			leaf_tree_par(t_ast_nde	*raw, t_Data *data);
 
 #endif

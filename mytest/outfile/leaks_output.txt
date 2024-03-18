@@ -1,58 +1,1047 @@
-Commande: echo aa || echo $? || echo *.txt || echo *.txt
+Commande: ls | <infile <infile2 rev | cat >outfile76 > outfile77 -n >outfile78| rev
 Sortie Valgrind:
-==18504== Memcheck, a memory error detector
-==18504== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==18504== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==18504== Command: ../minishell
-==18504== 
-==18504== 
-==18504== HEAP SUMMARY:
-==18504==     in use at exit: 208,706 bytes in 227 blocks
-==18504==   total heap usage: 637 allocs, 410 frees, 314,341 bytes allocated
-==18504== 
-==18504== 198 bytes in 1 blocks are definitely lost in loss record 25 of 68
-==18504==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18504==    by 0x1109B8: ft_calloc (in /home/seblin/42/42_minishell/minishell)
-==18504==    by 0x10FF7C: wildcard_func (wildcard_expansion.c:31)
-==18504==    by 0x10E24E: build_token_and_merge (dollar_expansion.c:86)
-==18504==    by 0x10E24E: rebuild_dollar_str (dollar_expansion.c:116)
-==18504==    by 0x10DF3C: leaf_tree (leaf.c:56)
-==18504==    by 0x10DE8D: leaf_raw_lft (leaf.c:21)
-==18504==    by 0x10DE8D: leaf_tree (leaf.c:60)
-==18504==    by 0x10DE8D: leaf_raw_lft (leaf.c:21)
-==18504==    by 0x10DE8D: leaf_tree (leaf.c:60)
-==18504==    by 0x10DE8D: leaf_raw_lft (leaf.c:21)
-==18504==    by 0x10DE8D: leaf_tree (leaf.c:60)
-==18504==    by 0x10C3DB: parse (parsing.c:90)
-==18504==    by 0x10F66F: exec_pipex (exec_pipex.c:30)
-==18504==    by 0x10E473: no_token_zone (leaf_par.c:56)
-==18504==    by 0x10E473: leaf_tree_par (leaf_par.c:73)
-==18504==    by 0x10C2F2: parse_par (parsing.c:68)
-==18504== 
-==18504== 198 bytes in 1 blocks are definitely lost in loss record 26 of 68
-==18504==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18504==    by 0x1109B8: ft_calloc (in /home/seblin/42/42_minishell/minishell)
-==18504==    by 0x10FF7C: wildcard_func (wildcard_expansion.c:31)
-==18504==    by 0x10E24E: build_token_and_merge (dollar_expansion.c:86)
-==18504==    by 0x10E24E: rebuild_dollar_str (dollar_expansion.c:116)
-==18504==    by 0x10DF3C: leaf_tree (leaf.c:56)
-==18504==    by 0x10DE8D: leaf_raw_lft (leaf.c:21)
-==18504==    by 0x10DE8D: leaf_tree (leaf.c:60)
-==18504==    by 0x10C3DB: parse (parsing.c:90)
-==18504==    by 0x10F66F: exec_pipex (exec_pipex.c:30)
-==18504==    by 0x10E473: no_token_zone (leaf_par.c:56)
-==18504==    by 0x10E473: leaf_tree_par (leaf_par.c:73)
-==18504==    by 0x10C2F2: parse_par (parsing.c:68)
-==18504==    by 0x10A291: prompt_loop (main.c:83)
-==18504==    by 0x1094AC: main (main.c:40)
-==18504== 
-==18504== LEAK SUMMARY:
-==18504==    definitely lost: 396 bytes in 2 blocks
-==18504==    indirectly lost: 0 bytes in 0 blocks
-==18504==      possibly lost: 0 bytes in 0 blocks
-==18504==    still reachable: 0 bytes in 0 blocks
-==18504==         suppressed: 208,310 bytes in 225 blocks
-==18504== 
-==18504== For lists of detected and suppressed errors, rerun with: -s
-==18504== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==3672== Memcheck, a memory error detector
+==3672== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3672== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3672== Command: ../minishell
+==3672== 
+==3676== Memcheck, a memory error detector
+infile: No such file or directory
+==3673== Memcheck, a memory error detector
+==3676== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3676== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3676== Command: /usr/bin/rev
+==3676== 
+==3675== Memcheck, a memory error detector
+==3673== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3675== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3675== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3675== Command: /usr/bin/cat -n
+==3675== 
+==3673== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3673== Command: /usr/bin/ls
+==3673== 
+==3674== 
+==3674== HEAP SUMMARY:
+==3674==     in use at exit: 208,411 bytes in 226 blocks
+==3674==   total heap usage: 712 allocs, 486 frees, 253,645 bytes allocated
+==3674== 
+==3674== LEAK SUMMARY:
+==3674==    definitely lost: 0 bytes in 0 blocks
+==3674==    indirectly lost: 0 bytes in 0 blocks
+==3674==      possibly lost: 0 bytes in 0 blocks
+==3674==    still reachable: 0 bytes in 0 blocks
+==3674==         suppressed: 208,411 bytes in 226 blocks
+==3674== 
+==3674== For lists of detected and suppressed errors, rerun with: -s
+==3674== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3675== 
+==3675== HEAP SUMMARY:
+==3675==     in use at exit: 0 bytes in 0 blocks
+==3675==   total heap usage: 229 allocs, 229 frees, 815,801 bytes allocated
+==3675== 
+==3675== All heap blocks were freed -- no leaks are possible
+==3675== 
+==3675== For lists of detected and suppressed errors, rerun with: -s
+==3675== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3673== 
+==3673== Process terminating with default action of signal 13 (SIGPIPE)
+==3673==    at 0x49A6697: write (write.c:26)
+==3673==    by 0x491CEEC: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==3673==    by 0x491E9E0: new_do_write (fileops.c:448)
+==3673==    by 0x491E9E0: _IO_new_do_write (fileops.c:425)
+==3673==    by 0x491E9E0: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==3673==    by 0x491C4D7: _IO_file_sync@@GLIBC_2.2.5 (fileops.c:798)
+==3673==    by 0x49111A9: fflush (iofflush.c:40)
+==3673==    by 0x1139C8: ??? (in /usr/bin/ls)
+==3673==    by 0x113AF4: ??? (in /usr/bin/ls)
+==3673==    by 0x48D7494: __run_exit_handlers (exit.c:113)
+==3673==    by 0x48D760F: exit (exit.c:143)
+==3673==    by 0x48BBD96: (below main) (libc_start_call_main.h:74)
+==3673== 
+==3673== HEAP SUMMARY:
+==3673==     in use at exit: 38,714 bytes in 178 blocks
+==3673==   total heap usage: 266 allocs, 88 frees, 80,917 bytes allocated
+==3673== 
+==3673== LEAK SUMMARY:
+==3673==    definitely lost: 0 bytes in 0 blocks
+==3673==    indirectly lost: 0 bytes in 0 blocks
+==3673==      possibly lost: 0 bytes in 0 blocks
+==3673==    still reachable: 0 bytes in 0 blocks
+==3673==         suppressed: 38,714 bytes in 178 blocks
+==3673== 
+==3673== For lists of detected and suppressed errors, rerun with: -s
+==3673== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3676== 
+==3676== HEAP SUMMARY:
+==3676==     in use at exit: 0 bytes in 0 blocks
+==3676==   total heap usage: 233 allocs, 233 frees, 74,857 bytes allocated
+==3676== 
+==3676== All heap blocks were freed -- no leaks are possible
+==3676== 
+==3676== For lists of detected and suppressed errors, rerun with: -s
+==3676== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3672== 
+==3672== HEAP SUMMARY:
+==3672==     in use at exit: 208,337 bytes in 225 blocks
+==3672==   total heap usage: 711 allocs, 486 frees, 253,616 bytes allocated
+==3672== 
+==3672== LEAK SUMMARY:
+==3672==    definitely lost: 0 bytes in 0 blocks
+==3672==    indirectly lost: 0 bytes in 0 blocks
+==3672==      possibly lost: 0 bytes in 0 blocks
+==3672==    still reachable: 0 bytes in 0 blocks
+==3672==         suppressed: 208,337 bytes in 225 blocks
+==3672== 
+==3672== For lists of detected and suppressed errors, rerun with: -s
+==3672== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+Commande: ls |  rev |>outfile76 > outfile77 <infile <infile2 cat  -n >outfile78| rev
+Sortie Valgrind:
+==3680== Memcheck, a memory error detector
+==3680== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3680== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3680== Command: ../minishell
+==3680== 
+==3684== Memcheck, a memory error detector
+==3684== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3684== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3684== Command: /usr/bin/rev
+==3684== 
+i==3681== Memcheck, a memory error detector
+==3681== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3681== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3681== Command: /usr/bin/ls
+==3681== 
+n==3682== Memcheck, a memory error detector
+file: No such file or directory
+==3682== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3682== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3682== Command: /usr/bin/rev
+==3682== 
+==3683== 
+==3683== HEAP SUMMARY:
+==3683==     in use at exit: 208,413 bytes in 226 blocks
+==3683==   total heap usage: 705 allocs, 479 frees, 253,398 bytes allocated
+==3683== 
+==3683== LEAK SUMMARY:
+==3683==    definitely lost: 0 bytes in 0 blocks
+==3683==    indirectly lost: 0 bytes in 0 blocks
+==3683==      possibly lost: 0 bytes in 0 blocks
+==3683==    still reachable: 0 bytes in 0 blocks
+==3683==         suppressed: 208,413 bytes in 226 blocks
+==3683== 
+==3683== For lists of detected and suppressed errors, rerun with: -s
+==3683== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3684== 
+==3684== HEAP SUMMARY:
+==3684==     in use at exit: 0 bytes in 0 blocks
+==3684==   total heap usage: 233 allocs, 233 frees, 74,857 bytes allocated
+==3684== 
+==3684== All heap blocks were freed -- no leaks are possible
+==3684== 
+==3684== For lists of detected and suppressed errors, rerun with: -s
+==3684== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3682== 
+==3682== Process terminating with default action of signal 13 (SIGPIPE)
+==3682==    at 0x497A697: write (write.c:26)
+==3682==    by 0x48F0EEC: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==3682==    by 0x48F29E0: new_do_write (fileops.c:448)
+==3682==    by 0x48F29E0: _IO_new_do_write (fileops.c:425)
+==3682==    by 0x48F29E0: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==3682==    by 0x48EC255: _IO_wdo_write (wfileops.c:80)
+==3682==    by 0x48EC6DE: _IO_wfile_sync (wfileops.c:486)
+==3682==    by 0x48E51A9: fflush (iofflush.c:40)
+==3682==    by 0x109B77: ??? (in /usr/bin/rev)
+==3682==    by 0x48AB494: __run_exit_handlers (exit.c:113)
+==3682==    by 0x48AB60F: exit (exit.c:143)
+==3682==    by 0x488FD96: (below main) (libc_start_call_main.h:74)
+==3682== 
+==3682== HEAP SUMMARY:
+==3682==     in use at exit: 54,832 bytes in 152 blocks
+==3682==   total heap usage: 235 allocs, 83 frees, 95,337 bytes allocated
+==3682== 
+==3682== 8 bytes in 1 blocks are still reachable in loss record 1 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x489C6EB: new_composite_name (setlocale.c:165)
+==3682==    by 0x489CBAA: setlocale (setlocale.c:375)
+==3682==    by 0x489CBAA: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 11 bytes in 1 blocks are still reachable in loss record 2 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x490E58E: strdup (strdup.c:42)
+==3682==    by 0x48A3D57: __textdomain (textdomain.c:94)
+==3682==    by 0x48A3D57: textdomain (textdomain.c:64)
+==3682==    by 0x109486: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 32 bytes in 1 blocks are still reachable in loss record 3 of 27
+==3682==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x4938C1F: __wcsmbs_load_conv (wcsmbsload.c:167)
+==3682==    by 0x493903A: get_gconv_fcts (wcsmbsload.h:73)
+==3682==    by 0x493903A: __wcsmbs_clone_conv (wcsmbsload.c:221)
+==3682==    by 0x48ECB28: _IO_fwide (iofwide.c:79)
+==3682==    by 0x48E84A8: _IO_getwline_info (iogetwline.c:54)
+==3682==    by 0x499BB68: __fgetws_chk (fgetws_chk.c:37)
+==3682==    by 0x1095FE: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 35 bytes in 1 blocks are still reachable in loss record 4 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A05DE: set_binding_values.part.0 (bindtextdom.c:203)
+==3682==    by 0x48A089B: set_binding_values (bindtextdom.c:322)
+==3682==    by 0x48A089B: bindtextdomain (bindtextdom.c:320)
+==3682==    by 0x109477: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 41 bytes in 1 blocks are still reachable in loss record 5 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A3E4C: _nl_make_l10nflist (l10nflist.c:166)
+==3682==    by 0x48A418F: _nl_make_l10nflist (l10nflist.c:295)
+==3682==    by 0x48A4211: _nl_make_l10nflist (l10nflist.c:285)
+==3682==    by 0x48A4211: _nl_make_l10nflist (l10nflist.c:285)
+==3682==    by 0x489D747: _nl_find_locale (findlocale.c:214)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 52 bytes in 1 blocks are still reachable in loss record 6 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A3E4C: _nl_make_l10nflist (l10nflist.c:166)
+==3682==    by 0x48A418F: _nl_make_l10nflist (l10nflist.c:295)
+==3682==    by 0x489D747: _nl_find_locale (findlocale.c:214)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 56 bytes in 1 blocks are still reachable in loss record 7 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A3FDC: _nl_make_l10nflist (l10nflist.c:242)
+==3682==    by 0x48A418F: _nl_make_l10nflist (l10nflist.c:295)
+==3682==    by 0x48A4211: _nl_make_l10nflist (l10nflist.c:285)
+==3682==    by 0x48A4211: _nl_make_l10nflist (l10nflist.c:285)
+==3682==    by 0x489D747: _nl_find_locale (findlocale.c:214)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 84 bytes in 12 blocks are still reachable in loss record 8 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x490E5CE: strndup (strndup.c:43)
+==3682==    by 0x489D814: _nl_find_locale (findlocale.c:310)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 93 bytes in 2 blocks are still reachable in loss record 9 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A3E4C: _nl_make_l10nflist (l10nflist.c:166)
+==3682==    by 0x48A418F: _nl_make_l10nflist (l10nflist.c:295)
+==3682==    by 0x48A4211: _nl_make_l10nflist (l10nflist.c:285)
+==3682==    by 0x489D747: _nl_find_locale (findlocale.c:214)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 96 bytes in 12 blocks are still reachable in loss record 10 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x490E58E: strdup (strdup.c:42)
+==3682==    by 0x489CC84: setlocale (setlocale.c:366)
+==3682==    by 0x489CC84: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 104 bytes in 1 blocks are still reachable in loss record 11 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A3FDC: _nl_make_l10nflist (l10nflist.c:242)
+==3682==    by 0x48A418F: _nl_make_l10nflist (l10nflist.c:295)
+==3682==    by 0x489D747: _nl_find_locale (findlocale.c:214)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 144 bytes in 2 blocks are still reachable in loss record 12 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A3FDC: _nl_make_l10nflist (l10nflist.c:242)
+==3682==    by 0x48A418F: _nl_make_l10nflist (l10nflist.c:295)
+==3682==    by 0x48A4211: _nl_make_l10nflist (l10nflist.c:285)
+==3682==    by 0x489D747: _nl_find_locale (findlocale.c:214)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 208 bytes in 1 blocks are still reachable in loss record 13 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x489B9D6: __gconv_lookup_cache (gconv_cache.c:365)
+==3682==    by 0x4891B6E: __gconv_find_transform (gconv_db.c:732)
+==3682==    by 0x4938D4A: __wcsmbs_getfct (wcsmbsload.c:91)
+==3682==    by 0x4938D4A: __wcsmbs_load_conv (wcsmbsload.c:185)
+==3682==    by 0x493903A: get_gconv_fcts (wcsmbsload.h:73)
+==3682==    by 0x493903A: __wcsmbs_clone_conv (wcsmbsload.c:221)
+==3682==    by 0x48ECB28: _IO_fwide (iofwide.c:79)
+==3682==    by 0x48E84A8: _IO_getwline_info (iogetwline.c:54)
+==3682==    by 0x499BB68: __fgetws_chk (fgetws_chk.c:37)
+==3682==    by 0x1095FE: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 208 bytes in 1 blocks are still reachable in loss record 14 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x489BAC0: __gconv_lookup_cache (gconv_cache.c:365)
+==3682==    by 0x4891B6E: __gconv_find_transform (gconv_db.c:732)
+==3682==    by 0x4938D8B: __wcsmbs_getfct (wcsmbsload.c:91)
+==3682==    by 0x4938D8B: __wcsmbs_load_conv (wcsmbsload.c:188)
+==3682==    by 0x493903A: get_gconv_fcts (wcsmbsload.h:73)
+==3682==    by 0x493903A: __wcsmbs_clone_conv (wcsmbsload.c:221)
+==3682==    by 0x48ECB28: _IO_fwide (iofwide.c:79)
+==3682==    by 0x48E84A8: _IO_getwline_info (iogetwline.c:54)
+==3682==    by 0x499BB68: __fgetws_chk (fgetws_chk.c:37)
+==3682==    by 0x1095FE: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 353 bytes in 12 blocks are still reachable in loss record 15 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A3E4C: _nl_make_l10nflist (l10nflist.c:166)
+==3682==    by 0x48A4211: _nl_make_l10nflist (l10nflist.c:285)
+==3682==    by 0x48A4211: _nl_make_l10nflist (l10nflist.c:285)
+==3682==    by 0x489D747: _nl_find_locale (findlocale.c:214)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 485 bytes in 12 blocks are still reachable in loss record 16 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A3E4C: _nl_make_l10nflist (l10nflist.c:166)
+==3682==    by 0x489D747: _nl_find_locale (findlocale.c:214)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 672 bytes in 12 blocks are still reachable in loss record 17 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A3FDC: _nl_make_l10nflist (l10nflist.c:242)
+==3682==    by 0x48A4211: _nl_make_l10nflist (l10nflist.c:285)
+==3682==    by 0x48A4211: _nl_make_l10nflist (l10nflist.c:285)
+==3681== 
+==3681== HEAP SUMMARY:
+==3681==     in use at exit: 21,196 bytes in 32 blocks
+==3681==   total heap usage: 266 allocs, 234 frees, 80,917 bytes allocated
+==3681== 
+==3682==    by 0x489D747: _nl_find_locale (findlocale.c:214)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 838 bytes in 24 blocks are still reachable in loss record 18 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A3E4C: _nl_make_l10nflist (l10nflist.c:166)
+==3682==    by 0x48A4211: _nl_make_l10nflist (l10nflist.c:285)
+==3682==    by 0x489D747: _nl_find_locale (findlocale.c:214)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 1,248 bytes in 12 blocks are still reachable in loss record 19 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A3FDC: _nl_make_l10nflist (l10nflist.c:242)
+==3682==    by 0x489D747: _nl_find_locale (findlocale.c:214)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 1,600 bytes in 1 blocks are still reachable in loss record 20 of 27
+==3682==    at 0x48487A9: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A3A3E: extend_alias_table (localealias.c:401)
+==3682==    by 0x48A3A3E: read_alias_file (localealias.c:313)
+==3682==    by 0x48A3BB2: _nl_expand_alias (localealias.c:198)
+==3682==    by 0x489D477: _nl_find_locale (findlocale.c:158)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 1,728 bytes in 24 blocks are still reachable in loss record 21 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A3FDC: _nl_make_l10nflist (l10nflist.c:242)
+==3682==    by 0x48A4211: _nl_make_l10nflist (l10nflist.c:285)
+==3682==    by 0x489D747: _nl_find_locale (findlocale.c:214)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 2,048 bytes in 1 blocks are still reachable in loss record 22 of 27
+==3682==    at 0x484DCD3: realloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48A393D: read_alias_file (localealias.c:333)
+==3682==    by 0x48A3BB2: _nl_expand_alias (localealias.c:198)
+==3682==    by 0x489D477: _nl_find_locale (findlocale.c:158)
+==3681== LEAK SUMMARY:
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3681==    definitely lost: 0 bytes in 0 blocks
+==3681==    indirectly lost: 0 bytes in 0 blocks
+==3681==      possibly lost: 0 bytes in 0 blocks
+==3681==    still reachable: 0 bytes in 0 blocks
+==3681==         suppressed: 21,196 bytes in 32 blocks
+==3681== 
+==3681== For lists of detected and suppressed errors, rerun with: -s
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3681== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 3,728 bytes in 12 blocks are still reachable in loss record 23 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x489D96E: _nl_intern_locale_data (loadlocale.c:97)
+==3682==    by 0x489DC28: _nl_load_locale (loadlocale.c:266)
+==3682==    by 0x489D7D0: _nl_find_locale (findlocale.c:237)
+==3682==    by 0x489C856: setlocale (setlocale.c:337)
+==3682==    by 0x489C856: setlocale (setlocale.c:217)
+==3682==    by 0x109468: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 4,096 bytes in 1 blocks are still reachable in loss record 24 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48E4BA3: _IO_file_doallocate (filedoalloc.c:101)
+==3682==    by 0x48E5EFC: _IO_wfile_doallocate (wfiledoalloc.c:70)
+==3682==    by 0x48F3CDF: _IO_doallocbuf (genops.c:347)
+==3682==    by 0x48EB563: _IO_wfile_underflow (wfileops.c:181)
+==3682==    by 0x48E9875: _IO_wdefault_uflow (wgenops.c:202)
+==3682==    by 0x48E83B6: _IO_getwline_info (iogetwline.c:61)
+==3682==    by 0x499BB68: __fgetws_chk (fgetws_chk.c:37)
+==3682==    by 0x1095FE: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 4,096 bytes in 1 blocks are still reachable in loss record 25 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48E4BA3: _IO_file_doallocate (filedoalloc.c:101)
+==3682==    by 0x48E5EFC: _IO_wfile_doallocate (wfiledoalloc.c:70)
+==3682==    by 0x48E9B9D: _IO_wdoallocbuf (wgenops.c:369)
+==3682==    by 0x48EC5F4: _IO_wfile_overflow (wfileops.c:420)
+==3682==    by 0x48E998E: __woverflow (wgenops.c:215)
+==3682==    by 0x48E998E: _IO_wdefault_xsputn (wgenops.c:315)
+==3682==    by 0x48E998E: _IO_wdefault_xsputn (wgenops.c:282)
+==3682==    by 0x48EC8A8: _IO_wfile_xsputn (wfileops.c:1009)
+==3682==    by 0x48EC8A8: _IO_wfile_xsputn (wfileops.c:955)
+==3682==    by 0x48E820F: fputws (iofputws.c:38)
+==3682==    by 0x109718: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 16,384 bytes in 1 blocks are still reachable in loss record 26 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48E5ECC: _IO_wfile_doallocate (wfiledoalloc.c:79)
+==3682==    by 0x48F3CDF: _IO_doallocbuf (genops.c:347)
+==3682==    by 0x48EB563: _IO_wfile_underflow (wfileops.c:181)
+==3682==    by 0x48E9875: _IO_wdefault_uflow (wgenops.c:202)
+==3682==    by 0x48E83B6: _IO_getwline_info (iogetwline.c:61)
+==3682==    by 0x499BB68: __fgetws_chk (fgetws_chk.c:37)
+==3682==    by 0x1095FE: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== 16,384 bytes in 1 blocks are still reachable in loss record 27 of 27
+==3682==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3682==    by 0x48E5ECC: _IO_wfile_doallocate (wfiledoalloc.c:79)
+==3682==    by 0x48E9B9D: _IO_wdoallocbuf (wgenops.c:369)
+==3682==    by 0x48EC5F4: _IO_wfile_overflow (wfileops.c:420)
+==3682==    by 0x48E998E: __woverflow (wgenops.c:215)
+==3682==    by 0x48E998E: _IO_wdefault_xsputn (wgenops.c:315)
+==3682==    by 0x48E998E: _IO_wdefault_xsputn (wgenops.c:282)
+==3682==    by 0x48EC8A8: _IO_wfile_xsputn (wfileops.c:1009)
+==3682==    by 0x48EC8A8: _IO_wfile_xsputn (wfileops.c:955)
+==3682==    by 0x48E820F: fputws (iofputws.c:38)
+==3682==    by 0x109718: ??? (in /usr/bin/rev)
+==3682==    by 0x488FD8F: (below main) (libc_start_call_main.h:58)
+==3682== 
+==3682== LEAK SUMMARY:
+==3682==    definitely lost: 0 bytes in 0 blocks
+==3682==    indirectly lost: 0 bytes in 0 blocks
+==3682==      possibly lost: 0 bytes in 0 blocks
+==3682==    still reachable: 54,832 bytes in 152 blocks
+==3682==         suppressed: 0 bytes in 0 blocks
+==3682== 
+==3682== For lists of detected and suppressed errors, rerun with: -s
+==3682== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3680== 
+==3680== HEAP SUMMARY:
+==3680==     in use at exit: 208,338 bytes in 225 blocks
+==3680==   total heap usage: 704 allocs, 479 frees, 253,369 bytes allocated
+==3680== 
+==3680== LEAK SUMMARY:
+==3680==    definitely lost: 0 bytes in 0 blocks
+==3680==    indirectly lost: 0 bytes in 0 blocks
+==3680==      possibly lost: 0 bytes in 0 blocks
+==3680==    still reachable: 0 bytes in 0 blocks
+==3680==         suppressed: 208,338 bytes in 225 blocks
+==3680== 
+==3680== For lists of detected and suppressed errors, rerun with: -s
+==3680== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+Commande: ls | <infile2 rev | > outfile77 <infile  >outfile76 cat  -n >outfile78| rev
+Sortie Valgrind:
+==3688== Memcheck, a memory error detector
+==3688== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3688== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3688== Command: ../minishell
+==3688== 
+==3692== Memcheck, a memory error detector
+==3692== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3692== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3692== Command: /usr/bin/rev
+==3692== 
+infile2: No such file or directory
+infile: No such file or directory
+==3691== 
+==3691== HEAP SUMMARY:
+==3691==     in use at exit: 208,415 bytes in 226 blocks
+==3691==   total heap usage: 714 allocs, 488 frees, 253,701 bytes allocated
+==3691== 
+==3691== LEAK SUMMARY:
+==3691==    definitely lost: 0 bytes in 0 blocks
+==3691==    indirectly lost: 0 bytes in 0 blocks
+==3691==      possibly lost: 0 bytes in 0 blocks
+==3691==    still reachable: 0 bytes in 0 blocks
+==3691==         suppressed: 208,415 bytes in 226 blocks
+==3691== 
+==3691== For lists of detected and suppressed errors, rerun with: -s
+==3691== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3689== Memcheck, a memory error detector
+==3690== 
+==3690== HEAP SUMMARY:
+==3690==     in use at exit: 208,415 bytes in 226 blocks
+==3690==   total heap usage: 714 allocs, 488 frees, 253,705 bytes allocated
+==3690== 
+==3690== LEAK SUMMARY:
+==3690==    definitely lost: 0 bytes in 0 blocks
+==3690==    indirectly lost: 0 bytes in 0 blocks
+==3690==      possibly lost: 0 bytes in 0 blocks
+==3690==    still reachable: 0 bytes in 0 blocks
+==3690==         suppressed: 208,415 bytes in 226 blocks
+==3690== 
+==3690== For lists of detected and suppressed errors, rerun with: -s
+==3690== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3689== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3689== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3689== Command: /usr/bin/ls
+==3689== 
+==3692== 
+==3692== HEAP SUMMARY:
+==3692==     in use at exit: 0 bytes in 0 blocks
+==3692==   total heap usage: 233 allocs, 233 frees, 74,857 bytes allocated
+==3692== 
+==3692== All heap blocks were freed -- no leaks are possible
+==3692== 
+==3692== For lists of detected and suppressed errors, rerun with: -s
+==3692== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3689== 
+==3689== Process terminating with default action of signal 13 (SIGPIPE)
+==3689==    at 0x49A6697: write (write.c:26)
+==3689==    by 0x491CEEC: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==3689==    by 0x491E9E0: new_do_write (fileops.c:448)
+==3689==    by 0x491E9E0: _IO_new_do_write (fileops.c:425)
+==3689==    by 0x491E9E0: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==3689==    by 0x491C4D7: _IO_file_sync@@GLIBC_2.2.5 (fileops.c:798)
+==3689==    by 0x49111A9: fflush (iofflush.c:40)
+==3689==    by 0x1139C8: ??? (in /usr/bin/ls)
+==3689==    by 0x113AF4: ??? (in /usr/bin/ls)
+==3689==    by 0x48D7494: __run_exit_handlers (exit.c:113)
+==3689==    by 0x48D760F: exit (exit.c:143)
+==3689==    by 0x48BBD96: (below main) (libc_start_call_main.h:74)
+==3689== 
+==3689== HEAP SUMMARY:
+==3689==     in use at exit: 38,714 bytes in 178 blocks
+==3689==   total heap usage: 266 allocs, 88 frees, 80,917 bytes allocated
+==3689== 
+==3689== LEAK SUMMARY:
+==3689==    definitely lost: 0 bytes in 0 blocks
+==3689==    indirectly lost: 0 bytes in 0 blocks
+==3689==      possibly lost: 0 bytes in 0 blocks
+==3689==    still reachable: 0 bytes in 0 blocks
+==3689==         suppressed: 38,714 bytes in 178 blocks
+==3689== 
+==3689== For lists of detected and suppressed errors, rerun with: -s
+==3689== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==3688== 
+==3688== HEAP SUMMARY:
+==3688==     in use at exit: 208,339 bytes in 225 blocks
+==3688==   total heap usage: 713 allocs, 488 frees, 253,672 bytes allocated
+==3688== 
+==3688== LEAK SUMMARY:
+==3688==    definitely lost: 0 bytes in 0 blocks
+==3688==    indirectly lost: 0 bytes in 0 blocks
+==3688==      possibly lost: 0 bytes in 0 blocks
+==3688==    still reachable: 0 bytes in 0 blocks
+==3688==         suppressed: 208,339 bytes in 225 blocks
+==3688== 
+==3688== For lists of detected and suppressed errors, rerun with: -s
+==3688== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+Commande: cat | cat | ( rev | cat ) //seg
+Sortie Valgrind:
+==3703== Memcheck, a memory error detector
+==3703== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3703== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3703== Command: ../minishell
+==3703== 
+==3703== Invalid read of size 4
+==3703==    at 0x110340: fill_command_tab (fill_command_tab.c:38)
+==3703==    by 0x10FC4E: create_command_tab (create_command_tab.c:74)
+==3703==    by 0x10F8AC: build_command_tab (launch_command_tab.c:110)
+==3703==    by 0x10FA9A: launch_command_tab (launch_command_tab.c:82)
+==3703==    by 0x10F691: exec_pipex (exec_pipex.c:34)
+==3703==    by 0x10E505: raw_left_area (leaf_par_raw.c:35)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703==    by 0x10C2F2: parse_par (parsing.c:63)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==3703== 
+==3703== 
+==3703== Process terminating with default action of signal 11 (SIGSEGV)
+==3703==  Access not within mapped region at address 0x0
+==3703==    at 0x110340: fill_command_tab (fill_command_tab.c:38)
+==3703==    by 0x10FC4E: create_command_tab (create_command_tab.c:74)
+==3703==    by 0x10F8AC: build_command_tab (launch_command_tab.c:110)
+==3703==    by 0x10FA9A: launch_command_tab (launch_command_tab.c:82)
+==3703==    by 0x10F691: exec_pipex (exec_pipex.c:34)
+==3703==    by 0x10E505: raw_left_area (leaf_par_raw.c:35)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703==    by 0x10C2F2: parse_par (parsing.c:63)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703==  If you believe this happened as a result of a stack
+==3703==  overflow in your program's main thread (unlikely but
+==3703==  possible), you can try to increase the size of the
+==3703==  main thread stack using the --main-stacksize= flag.
+==3703==  The main thread stack size used in this run was 8388608.
+==3703== 
+==3703== HEAP SUMMARY:
+==3703==     in use at exit: 225,720 bytes in 324 blocks
+==3703==   total heap usage: 551 allocs, 227 frees, 246,902 bytes allocated
+==3703== 
+==3703== 4 bytes in 2 blocks are still reachable in loss record 1 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110F29: ft_strdup (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x110587: add_sep_tab (fill_command_tab_utils.c:30)
+==3703==    by 0x1102CF: add_sep_tab_loop (fill_command_tab.c:109)
+==3703==    by 0x1102CF: fill_command_tab (fill_command_tab.c:32)
+==3703==    by 0x10FC4E: create_command_tab (create_command_tab.c:74)
+==3703==    by 0x10F8AC: build_command_tab (launch_command_tab.c:110)
+==3703==    by 0x10FA9A: launch_command_tab (launch_command_tab.c:82)
+==3703==    by 0x10F691: exec_pipex (exec_pipex.c:34)
+==3703==    by 0x10E505: raw_left_area (leaf_par_raw.c:35)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703==    by 0x10C2F2: parse_par (parsing.c:63)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703== 
+==3703== 8 bytes in 2 blocks are still reachable in loss record 6 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110F29: ft_strdup (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10F5DA: get_node_str (create_command_tab_utils.c:62)
+==3703==    by 0x1106BA: handle_joker (fill_command_tab_utils.c:78)
+==3703==    by 0x1107BA: add_remaining_tabs (fill_command_tab_utils.c:96)
+==3703==    by 0x11033C: add_remaining_tabs_loop (fill_command_tab.c:95)
+==3703==    by 0x11033C: add_remaining_tabs_loop (fill_command_tab.c:90)
+==3703==    by 0x11033C: fill_command_tab (fill_command_tab.c:37)
+==3703==    by 0x10FC4E: create_command_tab (create_command_tab.c:74)
+==3703==    by 0x10F8AC: build_command_tab (launch_command_tab.c:110)
+==3703==    by 0x10FA9A: launch_command_tab (launch_command_tab.c:82)
+==3703==    by 0x10F691: exec_pipex (exec_pipex.c:34)
+==3703==    by 0x10E505: raw_left_area (leaf_par_raw.c:35)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703== 
+==3703== 13 bytes in 1 blocks are still reachable in loss record 12 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110FAF: ft_strndup (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10E4E9: raw_left_area (leaf_par_raw.c:33)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703==    by 0x10C2F2: parse_par (parsing.c:63)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 16 bytes in 1 blocks are still reachable in loss record 15 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10A121: get_data (main.c:55)
+==3703==    by 0x10948A: main (main.c:35)
+==3703== 
+==3703== 32 bytes in 2 blocks are still reachable in loss record 27 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x11057C: add_sep_tab (fill_command_tab_utils.c:29)
+==3703==    by 0x1102CF: add_sep_tab_loop (fill_command_tab.c:109)
+==3703==    by 0x1102CF: fill_command_tab (fill_command_tab.c:32)
+==3703==    by 0x10FC4E: create_command_tab (create_command_tab.c:74)
+==3703==    by 0x10F8AC: build_command_tab (launch_command_tab.c:110)
+==3703==    by 0x10FA9A: launch_command_tab (launch_command_tab.c:82)
+==3703==    by 0x10F691: exec_pipex (exec_pipex.c:34)
+==3703==    by 0x10E505: raw_left_area (leaf_par_raw.c:35)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703==    by 0x10C2F2: parse_par (parsing.c:63)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 31 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C955: create_node (utils.c:19)
+==3703==    by 0x10C15A: set_root (parsing.c:18)
+==3703==    by 0x10C15A: first_init_root (parsing.c:30)
+==3703==    by 0x10C2C9: parse_par (parsing.c:59)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 32 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C9B4: create_node (utils.c:19)
+==3703==    by 0x10C9B4: copy_node (utils.c:51)
+==3703==    by 0x10C17E: set_root (parsing.c:21)
+==3703==    by 0x10C17E: first_init_root (parsing.c:30)
+==3703==    by 0x10C2C9: parse_par (parsing.c:59)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 33 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C9B4: create_node (utils.c:19)
+==3703==    by 0x10C9B4: copy_node (utils.c:51)
+==3703==    by 0x10C18F: set_root (parsing.c:22)
+==3703==    by 0x10C18F: first_init_root (parsing.c:30)
+==3703==    by 0x10C2C9: parse_par (parsing.c:59)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 34 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C955: create_node (utils.c:19)
+==3703==    by 0x10D633: create_raw_node (quote.c:68)
+==3703==    by 0x10D633: set_qute_sib (quote.c:95)
+==3703==    by 0x10C19C: first_init_root (parsing.c:31)
+==3703==    by 0x10C2C9: parse_par (parsing.c:59)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 35 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C955: create_node (utils.c:19)
+==3703==    by 0x10DBE1: open_par (search_par.c:35)
+==3703==    by 0x10DBE1: search_token (search_par.c:50)
+==3703==    by 0x10DBE1: search_token (search_par.c:41)
+==3703==    by 0x10DBE1: create_token_node (search_par.c:84)
+==3703==    by 0x10D084: set_parenthesis (parenthesis.c:68)
+==3703==    by 0x10C2E3: parse_par (parsing.c:61)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 36 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C955: create_node (utils.c:19)
+==3703==    by 0x10CEDC: create_token_child_par (parenthesis.c:21)
+==3703==    by 0x10CEDC: token_child_handle.part.0 (parenthesis.c:46)
+==3703==    by 0x10D0C7: token_child_handle (parenthesis.c:43)
+==3703==    by 0x10D0C7: set_parenthesis (parenthesis.c:73)
+==3703==    by 0x10C2E3: parse_par (parsing.c:61)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 37 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C9B4: create_node (utils.c:19)
+==3703==    by 0x10C9B4: copy_node (utils.c:51)
+==3703==    by 0x10CF01: create_token_child_par (parenthesis.c:25)
+==3703==    by 0x10CF01: token_child_handle.part.0 (parenthesis.c:46)
+==3703==    by 0x10D0C7: token_child_handle (parenthesis.c:43)
+==3703==    by 0x10D0C7: set_parenthesis (parenthesis.c:73)
+==3703==    by 0x10C2E3: parse_par (parsing.c:61)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 38 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C955: create_node (utils.c:19)
+==3703==    by 0x10CF0C: create_token_child_par (parenthesis.c:26)
+==3703==    by 0x10CF0C: token_child_handle.part.0 (parenthesis.c:46)
+==3703==    by 0x10D0C7: token_child_handle (parenthesis.c:43)
+==3703==    by 0x10D0C7: set_parenthesis (parenthesis.c:73)
+==3703==    by 0x10C2E3: parse_par (parsing.c:61)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 39 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C9B4: create_node (utils.c:19)
+==3703==    by 0x10C9B4: copy_node (utils.c:51)
+==3703==    by 0x10CF39: create_token_child_par (parenthesis.c:30)
+==3703==    by 0x10CF39: token_child_handle.part.0 (parenthesis.c:46)
+==3703==    by 0x10D0C7: token_child_handle (parenthesis.c:43)
+==3703==    by 0x10D0C7: set_parenthesis (parenthesis.c:73)
+==3703==    by 0x10C2E3: parse_par (parsing.c:61)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 40 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C9B4: create_node (utils.c:19)
+==3703==    by 0x10C9B4: copy_node (utils.c:51)
+==3703==    by 0x10CF45: create_token_child_par (parenthesis.c:31)
+==3703==    by 0x10CF45: token_child_handle.part.0 (parenthesis.c:46)
+==3703==    by 0x10D0C7: token_child_handle (parenthesis.c:43)
+==3703==    by 0x10D0C7: set_parenthesis (parenthesis.c:73)
+==3703==    by 0x10C2E3: parse_par (parsing.c:61)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 41 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C9B4: create_node (utils.c:19)
+==3703==    by 0x10C9B4: copy_node (utils.c:51)
+==3703==    by 0x10CF54: create_token_child_par (parenthesis.c:32)
+==3703==    by 0x10CF54: token_child_handle.part.0 (parenthesis.c:46)
+==3703==    by 0x10D0C7: token_child_handle (parenthesis.c:43)
+==3703==    by 0x10D0C7: set_parenthesis (parenthesis.c:73)
+==3703==    by 0x10C2E3: parse_par (parsing.c:61)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 42 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C9B4: create_node (utils.c:19)
+==3703==    by 0x10C9B4: copy_node (utils.c:51)
+==3703==    by 0x10DD8F: fill_child_overlap_par (fill_child_par.c:36)
+==3703==    by 0x10DD8F: fill_child_par (fill_child_par.c:72)
+==3703==    by 0x10CF94: token_child_handle.part.0 (parenthesis.c:49)
+==3703==    by 0x10D0C7: token_child_handle (parenthesis.c:43)
+==3703==    by 0x10D0C7: set_parenthesis (parenthesis.c:73)
+==3703==    by 0x10C2E3: parse_par (parsing.c:61)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 43 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C9B4: create_node (utils.c:19)
+==3703==    by 0x10C9B4: copy_node (utils.c:51)
+==3703==    by 0x10DDE7: fill_child_overlap_par (fill_child_par.c:42)
+==3703==    by 0x10DDE7: fill_child_par (fill_child_par.c:72)
+==3703==    by 0x10CF94: token_child_handle.part.0 (parenthesis.c:49)
+==3703==    by 0x10D0C7: token_child_handle (parenthesis.c:43)
+==3703==    by 0x10D0C7: set_parenthesis (parenthesis.c:73)
+==3703==    by 0x10C2E3: parse_par (parsing.c:61)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 44 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C9B4: create_node (utils.c:19)
+==3703==    by 0x10C9B4: copy_node (utils.c:51)
+==3703==    by 0x10DCCB: fill_child_overlap_par (fill_child_par.c:48)
+==3703==    by 0x10DCCB: fill_child_par (fill_child_par.c:72)
+==3703==    by 0x10CF94: token_child_handle.part.0 (parenthesis.c:49)
+==3703==    by 0x10D0C7: token_child_handle (parenthesis.c:43)
+==3703==    by 0x10D0C7: set_parenthesis (parenthesis.c:73)
+==3703==    by 0x10C2E3: parse_par (parsing.c:61)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 45 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C955: create_node (utils.c:19)
+==3703==    by 0x10C818: store_or_free_cmd (free_utils.c:63)
+==3703==    by 0x10E4F4: raw_left_area (leaf_par_raw.c:34)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703==    by 0x10C2F2: parse_par (parsing.c:63)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 40 bytes in 1 blocks are still reachable in loss record 46 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10E6F7: alloc_memory_for_pipe_parts (create_command_tab_allocation.c:53)
+==3703==    by 0x10FC28: create_command_tab (create_command_tab.c:62)
+==3703==    by 0x10F8AC: build_command_tab (launch_command_tab.c:110)
+==3703==    by 0x10FA9A: launch_command_tab (launch_command_tab.c:82)
+==3703==    by 0x10F691: exec_pipex (exec_pipex.c:34)
+==3703==    by 0x10E505: raw_left_area (leaf_par_raw.c:35)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703==    by 0x10C2F2: parse_par (parsing.c:63)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 80 bytes in 2 blocks are still reachable in loss record 53 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10CA80: create_node (utils.c:19)
+==3703==    by 0x10CA80: copy_node (utils.c:51)
+==3703==    by 0x10CA80: copy_node_and_child (utils.c:91)
+==3703==    by 0x10DF5C: leaf_raw_lft (leaf.c:23)
+==3703==    by 0x10DF5C: leaf_tree (leaf.c:68)
+==3703==    by 0x10DE8D: leaf_raw_lft (leaf.c:21)
+==3703==    by 0x10DE8D: leaf_tree (leaf.c:68)
+==3703==    by 0x10DE8D: leaf_raw_lft (leaf.c:21)
+==3703==    by 0x10DE8D: leaf_tree (leaf.c:68)
+==3703==    by 0x10C3DB: parse (parsing.c:85)
+==3703==    by 0x10F66F: exec_pipex (exec_pipex.c:30)
+==3703==    by 0x10E505: raw_left_area (leaf_par_raw.c:35)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703==    by 0x10C2F2: parse_par (parsing.c:63)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703== 
+==3703== 80 bytes in 2 blocks are still reachable in loss record 54 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10CAB7: create_node (utils.c:19)
+==3703==    by 0x10CAB7: copy_node (utils.c:51)
+==3703==    by 0x10CAB7: copy_node_and_child (utils.c:95)
+==3703==    by 0x10DF5C: leaf_raw_lft (leaf.c:23)
+==3703==    by 0x10DF5C: leaf_tree (leaf.c:68)
+==3703==    by 0x10DE8D: leaf_raw_lft (leaf.c:21)
+==3703==    by 0x10DE8D: leaf_tree (leaf.c:68)
+==3703==    by 0x10DE8D: leaf_raw_lft (leaf.c:21)
+==3703==    by 0x10DE8D: leaf_tree (leaf.c:68)
+==3703==    by 0x10C3DB: parse (parsing.c:85)
+==3703==    by 0x10F66F: exec_pipex (exec_pipex.c:30)
+==3703==    by 0x10E505: raw_left_area (leaf_par_raw.c:35)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703==    by 0x10C2F2: parse_par (parsing.c:63)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703== 
+==3703== 80 bytes in 2 blocks are still reachable in loss record 55 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C9B4: create_node (utils.c:19)
+==3703==    by 0x10C9B4: copy_node (utils.c:51)
+==3703==    by 0x10DEE7: leaf_tree (leaf.c:71)
+==3703==    by 0x10DE8D: leaf_raw_lft (leaf.c:21)
+==3703==    by 0x10DE8D: leaf_tree (leaf.c:68)
+==3703==    by 0x10C3DB: parse (parsing.c:85)
+==3703==    by 0x10F66F: exec_pipex (exec_pipex.c:30)
+==3703==    by 0x10E505: raw_left_area (leaf_par_raw.c:35)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703==    by 0x10C2F2: parse_par (parsing.c:63)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 80 bytes in 2 blocks are still reachable in loss record 56 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10C9B4: create_node (utils.c:19)
+==3703==    by 0x10C9B4: copy_node (utils.c:51)
+==3703==    by 0x10DEF2: leaf_tree (leaf.c:72)
+==3703==    by 0x10DE8D: leaf_raw_lft (leaf.c:21)
+==3703==    by 0x10DE8D: leaf_tree (leaf.c:68)
+==3703==    by 0x10C3DB: parse (parsing.c:85)
+==3703==    by 0x10F66F: exec_pipex (exec_pipex.c:30)
+==3703==    by 0x10E505: raw_left_area (leaf_par_raw.c:35)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703==    by 0x10C2F2: parse_par (parsing.c:63)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 160 bytes in 4 blocks are still reachable in loss record 63 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10CA80: create_node (utils.c:19)
+==3703==    by 0x10CA80: copy_node (utils.c:51)
+==3703==    by 0x10CA80: copy_node_and_child (utils.c:91)
+==3703==    by 0x10F9C3: build_command_tab_node (launch_command_tab.c:56)
+==3703==    by 0x10F9C3: launch_command_tab (launch_command_tab.c:76)
+==3703==    by 0x10F691: exec_pipex (exec_pipex.c:34)
+==3703==    by 0x10E505: raw_left_area (leaf_par_raw.c:35)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703==    by 0x10C2F2: parse_par (parsing.c:63)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 160 bytes in 4 blocks are still reachable in loss record 64 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10CAB7: create_node (utils.c:19)
+==3703==    by 0x10CAB7: copy_node (utils.c:51)
+==3703==    by 0x10CAB7: copy_node_and_child (utils.c:95)
+==3703==    by 0x10F9C3: build_command_tab_node (launch_command_tab.c:56)
+==3703==    by 0x10F9C3: launch_command_tab (launch_command_tab.c:76)
+==3703==    by 0x10F691: exec_pipex (exec_pipex.c:34)
+==3703==    by 0x10E505: raw_left_area (leaf_par_raw.c:35)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703==    by 0x10C2F2: parse_par (parsing.c:63)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703==    by 0x1094AC: main (main.c:40)
+==3703== 
+==3703== 256 bytes in 1 blocks are still reachable in loss record 69 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10A9BD: duplicate_envp (utils_3.c:28)
+==3703==    by 0x10A13B: get_data (main.c:58)
+==3703==    by 0x10948A: main (main.c:35)
+==3703== 
+==3703== 2,416 bytes in 3 blocks are still reachable in loss record 91 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x110798: add_remaining_tabs (fill_command_tab_utils.c:93)
+==3703==    by 0x11033C: add_remaining_tabs_loop (fill_command_tab.c:95)
+==3703==    by 0x11033C: add_remaining_tabs_loop (fill_command_tab.c:90)
+==3703==    by 0x11033C: fill_command_tab (fill_command_tab.c:37)
+==3703==    by 0x10FC4E: create_command_tab (create_command_tab.c:74)
+==3703==    by 0x10F8AC: build_command_tab (launch_command_tab.c:110)
+==3703==    by 0x10FA9A: launch_command_tab (launch_command_tab.c:82)
+==3703==    by 0x10F691: exec_pipex (exec_pipex.c:34)
+==3703==    by 0x10E505: raw_left_area (leaf_par_raw.c:35)
+==3703==    by 0x10E3D6: token_zone (leaf_par.c:28)
+==3703==    by 0x10E3D6: leaf_tree_par (leaf_par.c:67)
+==3703==    by 0x10C2F2: parse_par (parsing.c:63)
+==3703==    by 0x10A291: prompt_loop (main.c:83)
+==3703== 
+==3703== 3,444 bytes in 31 blocks are still reachable in loss record 92 of 118
+==3703==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3703==    by 0x110998: ft_calloc (in /home/seblin/42/42_minishell/minishell)
+==3703==    by 0x10AA24: duplicate_envp (utils_3.c:34)
+==3703==    by 0x10A13B: get_data (main.c:58)
+==3703==    by 0x10948A: main (main.c:35)
+==3703== 
+==3703== LEAK SUMMARY:
+==3703==    definitely lost: 0 bytes in 0 blocks
+==3703==    indirectly lost: 0 bytes in 0 blocks
+==3703==      possibly lost: 0 bytes in 0 blocks
+==3703==    still reachable: 7,469 bytes in 75 blocks
+==3703==         suppressed: 218,251 bytes in 249 blocks
+==3703== 
+==3703== For lists of detected and suppressed errors, rerun with: -s
+==3703== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 

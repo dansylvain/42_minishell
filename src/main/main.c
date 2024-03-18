@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/18 14:33:45 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:14:53 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	prompt_loop(t_Data *data, char *envp[])
 			add_history(cmd);
 		if (cmd == NULL)
 			return (ft_printf("exit\n"), 0);
-		parse_par(cmd, data, NULL);		
+		parse_par(cmd, data, NULL);
 		free(cmd);
 	}
 	return (1);

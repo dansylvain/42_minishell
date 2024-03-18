@@ -6,12 +6,11 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/18 12:35:33 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:15:20 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "path.h"
-void	store_and_free_exit_status_var(char *var_exit_status);
 
 static char	*try_paths(char **argv, char *env_find)
 {
@@ -89,8 +88,7 @@ char	*search_var(t_ast_nde *node, t_Data *data)
 	if (*(str + 1) == '?')
 	{
 		node->token = STAT;
-		var =  ft_strdup("$$$");//ft_itoa(get_data(NULL)->exit_status);// ft_strdup("$?");
-		//store_and_free_exit_status_var(var);
+		var = ft_strdup("$$$");
 	}
 	else
 	{

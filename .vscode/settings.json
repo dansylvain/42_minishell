@@ -36,6 +36,7 @@
 		"utils2.h": "c",
 		"error_policy_and_fwrd.h": "c",
 		"path.h": "c",
-		"leaf_par_raw.h": "c"
+		"leaf_par_raw.h": "c",
+		"exec_exit.h": "c"
 	}
 }

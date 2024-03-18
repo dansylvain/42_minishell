@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/18 07:24:19 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 16:22:50 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,13 @@ static void	build_token_and_merge(const t_ast_nde *operator,
 
 char	*rebuild_dollar_str(t_ast_nde *operator, char *str, t_Data *data)
 {
-	t_ast_nde	*sibling_lft = NULL;
-	t_ast_nde	*sibling_rght = NULL;
-	t_ast_nde	*next_operator = NULL;
+	t_ast_nde	*sibling_lft;
+	t_ast_nde	*sibling_rght;
+	t_ast_nde	*next_operator;
 
+	sibling_lft = NULL;
+	sibling_rght = NULL;
+	next_operator = NULL;
 	if (operator && operator->child)
 	{
 		if (operator->child->child)
