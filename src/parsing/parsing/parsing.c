@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/18 16:27:32 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 19:36:39 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "test.h"//!
 
 static void	set_root(t_ast_nde **root, char *str)
 {
@@ -60,9 +59,9 @@ int	parse_par(char *str, t_Data *data, t_ast_nde *root)
 		return (1);
 	if (set_parenthesis(root) < 0)
 		return (clean_par(first_rec, 1));
-	if (leaf_tree_par(root, data))
-		return (clean_par(first_rec, 1));
+	leaf_tree_par(root, data);
 	clean_par(first_rec, 0);
+	return (0);
 }
 
 t_ast_nde	*parse(char *str, t_Data *data)

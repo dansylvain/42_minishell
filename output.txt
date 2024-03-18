@@ -1,5 +1,0 @@
-Commande: true || echo aaa && echo bbb
-[1;33mminishell:[1;37m/42/42_minishell[0m[1;36m $[0m true || echo aaa && echo bbb
-malloc(): unaligned fastbin chunk detected 2
------------------------
-

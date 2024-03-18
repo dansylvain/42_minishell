@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parenthesis.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:52:11 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/16 14:41:56 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 19:01:34 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	token_child_handle(t_ast_nde *sib_cont,
 			raw_lft->sibling->child, raw_rght->child}, token);
 		return (set_parenthesis(raw_rght));
 	}
+	return (0);
 }
 
 int	set_parenthesis(t_ast_nde *node)

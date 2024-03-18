@@ -3,25 +3,25 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seblin <seblin@student.42.fr>              +#+  +:+       +#+         #
+#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/18 16:55:48 by seblin           ###   ########.fr        #
+#    Updated: 2024/03/18 19:30:41 by dan              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CC = gcc
+CC = cc
 
 RLFLAGS = -lreadline -lhistory -I/usr/include/readline
 
-CFLAGS = -g -Iincludes -Iincludes/main -Iincludes/parsing/parsing \
+CFLAGS = -Iincludes -Iincludes/main -Iincludes/parsing/parsing \
 -Iincludes/parsing/create_tree \
 -Iincludes/parsing/leaf_tree -Iincludes/pipex \
 -Iincludes/exec_files -Iincludes/wildcard -Iincludes/builtins \
 -Iincludes/post_parsing \
-#-Wall -Wextra -Werror \
+-Wall -Wextra -Werror \
 
 # Directories
 LIBFT_DIR = lib/libft
@@ -35,8 +35,7 @@ FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 LIBS = -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
 
 # Source files
-SRC =	test.c \
-		src/main/main.c \
+SRC =	src/main/main.c \
 		src/main/utils.c \
 		src/main/utils_2.c \
 		src/main/utils_3.c \

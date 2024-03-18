@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   leaf_par_raw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:12:01 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/18 16:18:25 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 19:32:18 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "leaf_par_raw.h"
-#include "test.h"
 
 static int	is_next_middle(t_ast_nde *raw_lft)
 {
 	return (raw_lft && raw_lft->sibling && raw_lft->sibling->child);
 }
 
-int	raw_left_area(t_ast_nde *raw_lft, t_Data *data, int *or_flag)
+void	raw_left_area(t_ast_nde *raw_lft, t_Data *data, int *or_flag)
 {
 	char	*tmp_str;
 	int		*policy;
@@ -37,7 +36,7 @@ int	raw_left_area(t_ast_nde *raw_lft, t_Data *data, int *or_flag)
 	}
 }
 
-int	middle_area(t_ast_nde *middle, t_Data *data, int or_flag)
+void	middle_area(t_ast_nde *middle, t_Data *data, int or_flag)
 {
 	char	*tmp_str;
 	int		*policy;
@@ -56,13 +55,13 @@ int	middle_area(t_ast_nde *middle, t_Data *data, int or_flag)
 		{
 			store_or_free_cmd_par(NULL);
 			policy[1] = 0;
-			return (1);
+			return ;
 		}
 		store_or_free_cmd_par(NULL);
 	}
 }
 
-int	raw_right_area(t_ast_nde *raw_rght, t_Data *data)
+void	raw_right_area(t_ast_nde *raw_rght, t_Data *data)
 {
 	int	*policy;
 
@@ -70,10 +69,7 @@ int	raw_right_area(t_ast_nde *raw_rght, t_Data *data)
 	if (raw_rght && raw_rght->child)
 	{
 		policy[2] = 1;
-		if (leaf_tree_par(raw_rght, data))
-		{
-			policy[1] = 0;
-			return (1);
-		}
+		leaf_tree_par(raw_rght, data);
+		policy[1] = 0;
 	}
 }

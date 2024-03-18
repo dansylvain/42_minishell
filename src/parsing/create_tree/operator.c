@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   operator.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/17 18:11:17 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 19:26:24 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operator.h"
-#include "test.h"
 
 static t_ast_nde	*create_token(t_tok simpl_tok, t_tok doubl_tok,
 	char *actual, char char_tok)

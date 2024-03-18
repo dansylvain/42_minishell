@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   leaf_par.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:10:42 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/18 16:17:27 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 19:25:30 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "leaf_par.h"
 
-int	token_zone(t_ast_nde *token, t_Data *data)
+static void	token_zone(t_ast_nde *token, t_Data *data)
 {
 	t_ast_nde	*raw_lft;
 	t_ast_nde	*middle;
@@ -38,7 +38,7 @@ int	token_zone(t_ast_nde *token, t_Data *data)
 	}
 }
 
-int	no_token_zone(t_ast_nde *raw, t_Data *data)
+static void	no_token_zone(t_ast_nde *raw, t_Data *data)
 {
 	char	*tmp_str;
 	int		*policy;
@@ -53,10 +53,9 @@ int	no_token_zone(t_ast_nde *raw, t_Data *data)
 	store_or_free_cmd(tmp_str);
 	exec_pipex(data, tmp_str, data->envp_tab, 0);
 	store_or_free_cmd(NULL);
-	return (0);
 }
 
-int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
+void	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 {
 	t_ast_nde	*token;
 
@@ -68,5 +67,4 @@ int	leaf_tree_par(t_ast_nde	*raw, t_Data *data)
 		else
 			no_token_zone(raw, data);
 	}
-	return (0);
 }
