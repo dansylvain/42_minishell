@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Commande: ls | <infile <infile2 rev | cat >outfile76 > outfile77 -n >outfile78| rev
 Sortie Valgrind:
 ==955650== Memcheck, a memory error detector
@@ -912,3 +913,5 @@ Sortie Valgrind:
 ==955706== For lists of detected and suppressed errors, rerun with: -s
 ==955706== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 
+=======
+>>>>>>> 13a23e8bf289ae47af690c751e3238d3b2b66c6f

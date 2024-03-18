@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:06:02 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/18 10:31:11 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 12:35:33 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*search_var(t_ast_nde *node, t_Data *data)
 	{
 		node->token = STAT;
 		var =  ft_strdup("$$$");//ft_itoa(get_data(NULL)->exit_status);// ft_strdup("$?");
-		store_and_free_exit_status_var(var);
+		//store_and_free_exit_status_var(var);
 	}
 	else
 	{
