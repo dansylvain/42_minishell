@@ -3,15 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   exec_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 17:43:09 by dan               #+#    #+#             */
-/*   Updated: 2024/03/17 11:22:06 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/18 05:29:05 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_echo.h"
-t_Data	*get_data(char *envp[]);
+
+void	initial_conditions(char **command_tab, int *i)
+{
+	if (!command_tab[1] || is_only_space(command_tab[1]))
+	{
+		ft_printf("\n");
+		return ;
+	}
+	if (command_tab[*i] && !ft_strncmp(command_tab[*i], "-n", 3))
+	{
+		while (command_tab[*i] && !ft_strncmp(command_tab[*i], "-n", 3))
+			(*i)++;
+	}
+}
+
 /**========================================================================
  *                           exec_echo
  *========================================================================**/
@@ -21,16 +35,7 @@ void	exec_echo(t_Data *data, char **command_tab)
 	int	j;
 
 	i = 1;
-	if (!command_tab[1] || is_only_space(command_tab[1]))
-	{
-		ft_printf("\n");
-		return ;
-	}
-	if (command_tab[i] && !ft_strncmp(command_tab[i], "-n", 3))
-	{
-		while (command_tab[i] && !ft_strncmp(command_tab[i], "-n", 3))
-			i++;
-	}
+	initial_conditions(command_tab, &i);
 	j = i;
 	while (command_tab[i])
 	{
@@ -42,11 +47,7 @@ void	exec_echo(t_Data *data, char **command_tab)
 		ft_printf("\n");
 	data = get_data(NULL);
 	if (data)
-	{
-		// ft_printf("je suis ds echo builtin je vais mettre data_status a zero: %d", get_data(NULL)->exit_status)	;
-		data->exit_status = 0;		
-		// ft_printf("je suis ds echo builtin je vais mettre data_status a zero: %d", get_data(NULL)->exit_status)	;
-	}
+		data->exit_status = 0;
 }
 
 /**========================================================================

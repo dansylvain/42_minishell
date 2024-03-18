@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:40:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/17 17:21:44 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 05:42:51 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ char	***fill_command_tab(char ***cmd_tab, t_ast_nde *node)
 	int			cmd_was_added;
 	int			jok_flag;
 
-	jok_flag = 0;
-	cmd_was_added = 0;
-	redir_were_added = 0;
-	i = 0;
+	i = intitialize_variables(&jok_flag, &cmd_was_added, &redir_were_added);
 	start = node;
 	while (node)
 	{
@@ -39,12 +36,25 @@ char	***fill_command_tab(char ***cmd_tab, t_ast_nde *node)
 		cmd_tab = add_redir_tabs_loop(cmd_tab, &node, &redir_were_added, &i);
 		cmd_tab = add_remaining_tabs_loop(cmd_tab, node, &cmd_was_added, &i);
 		if (node->token == DOLL || node->token == JOKER)
-		{
 			free(node->start);
-		}
 		node = node->sibling;
 	}
 	return (cmd_tab);
+}
+
+/**========================================================================
+ *                           intitialize_variables
+ *========================================================================**/
+int	intitialize_variables(int *jok_flag, int *cmd_was_added,
+	int *redir_were_added)
+{
+	int	i;
+
+	*jok_flag = 0;
+	*cmd_was_added = 0;
+	*redir_were_added = 0;
+	i = 0;
+	return (i);
 }
 
 /**========================================================================
