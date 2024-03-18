@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_command_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 12:43:46 by dan               #+#    #+#             */
-/*   Updated: 2024/03/18 10:48:39 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 12:31:20 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	store_and_free_exit_status_var(char *var_exit_status)
 	static char	*var_exit_status_lcl = NULL;
 
 	// ft_printf("var: %s\n", var);
+	if (var_exit_status)
+		var_exit_status_lcl = var_exit_status;
 	if (var_exit_status)
 		var_exit_status_lcl = var_exit_status;
 	else if (var_exit_status_lcl)
@@ -115,8 +117,8 @@ int	launch_command_tab(t_Data *data, t_ast_nde *node,
 	{
 		if (!flag)
 			build_command_tab_node(node, &cmd_tab_node, &cmd_tab_node_sav);
-		else
-			store_and_free_exit_status_var(NULL);
+		else if (node->token == STAT || node->token == DOLL)
+			free(node->start);//store_and_free_exit_status_var(NULL);
 		node = node->sibling;
 	}
 	if (cmd_tab_node_sav)

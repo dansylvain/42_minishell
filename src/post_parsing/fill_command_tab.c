@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_command_tab.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:40:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/18 10:48:50 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 12:33:37 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	***fill_command_tab(char ***cmd_tab, t_ast_nde *node)
 		if (node->token == DOLL || node->token == JOKER || node->token == STAT)
 		{
 			free(node->start);
+			node->start = NULL;
 		}
 		node = node->sibling;
 	}

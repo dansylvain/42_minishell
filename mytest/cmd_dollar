@@ -49,4 +49,8 @@ $LOGNAME $LOGNAME
 echo $?
 false || echo $?ki
 echo $?
+(( echo ggg && true || echo $? || echo bbb && echo $? ) || echo $?)
+echo $?
+(( echo ggg && true || echo $LOGNAME || echo bbb && echo $LOGNAME ) || echo $LOGNAME)
+echo $?
 
