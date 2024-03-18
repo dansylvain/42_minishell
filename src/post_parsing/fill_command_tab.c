@@ -6,7 +6,7 @@
 /*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:40:57 by dan               #+#    #+#             */
-/*   Updated: 2024/03/18 12:55:23 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/18 16:19:19 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char	***add_remaining_tabs_loop(char ***cmd_tab, t_ast_nde *node,
  *========================================================================**/
 char	***add_sep_tab_loop(char ****cmd_tab, t_ast_nde **node, int *i)
 {
-	if (is_separator(*node))
+	if (is_separator(*node) && (*node)->sibling)
 	{
 		(*cmd_tab)[*i] = add_sep_tab((*cmd_tab)[*i], *node);
 		*node = (*node)->sibling;
