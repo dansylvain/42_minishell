@@ -6,14 +6,14 @@
 #    By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/19 11:45:29 by dsylvain         ###   ########.fr        #
+#    Updated: 2024/03/19 12:05:29 by dsylvain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
+NAME_BONUS = minishell_bonus
 NAME = minishell
 
-NAME_BONUS = bonus/minishell
 CC = cc
 
 RLFLAGS = -lreadline -lhistory -I/usr/include/readline
@@ -188,6 +188,6 @@ fclean: clean
 	@make -s -C $(LIBFT_DIR) fclean
 	@make -s -C $(FT_PRINTF_DIR) fclean 
 
-re:	fclean	all	
+re:	fclean	all
 
 .PHONY: all clean fclean re
