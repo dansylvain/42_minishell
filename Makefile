@@ -6,7 +6,7 @@
 #    By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/19 11:39:00 by dsylvain         ###   ########.fr        #
+#    Updated: 2024/03/19 11:45:29 by dsylvain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -135,7 +135,15 @@ SRC_BONUS =	bonus/src/main/main.c \
 			bonus/src/wildcard/wildcard_expansion_2.c \
 			bonus/src/post_parsing/fill_command_tab.c \
 			bonus/src/post_parsing/fill_command_tab_utils.c \
-		
+			bonus/src/parsing/parsing/free_utils.c \
+			bonus/src/parsing/create_tree/error_policy_and_fwrd.c \
+			bonus/src/parsing/create_tree/parenthesis.c \
+			bonus/src/parsing/create_tree/search_par.c \
+			bonus/src/parsing/create_tree/fill_child_par.c \
+			bonus/src/parsing/leaf_tree/leaf_par.c \
+			bonus/src/parsing/leaf_tree/leaf_par_raw.c \
+			bonus/src/post_parsing/post_parsing_utils.c \
+
 		
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
