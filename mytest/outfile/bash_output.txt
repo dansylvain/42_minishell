@@ -1,0 +1,375 @@
+Commande: echo aaa && echo bbb || echo ccc
+aaa
+bbb
+
+Commande: echo $?
+0
+
+Commande: echo aaa || echo bbb || echo ccc
+aaa
+
+Commande: echo $?
+0
+
+Commande: echo $?
+0
+
+Commande: false && echo bbb || echo ccc
+ccc
+
+Commande: echo $?
+0
+
+Commande: false || echo bbb || echo ccc
+bbb
+
+Commande: echo $?
+0
+
+Commande: false && echo bbb && echo ccc
+
+
+Commande: echo $?
+0
+
+Commande: echo aaa && false && echo ccc
+aaa
+
+Commande: echo $?
+0
+
+Commande: false || (echo aaa && false) || echo cc
+aaa
+cc
+
+Commande: echo $?
+0
+
+Commande: echo xxx || (echo aaa || false) && echo cc
+xxx
+cc
+
+Commande: echo $?
+0
+
+Commande: false || (echo aaa && false) || echo $?
+aaa
+1
+
+Commande: echo $?
+0
+
+Commande: false || (echo aaa && true) || echo $?
+aaa
+
+Commande: echo $?
+0
+
+Commande: false || (echo aaa && false) && echo $?
+aaa
+
+Commande: echo $?
+0
+
+Commande: false || (echo aaa && echo $?) && echo $? //pb
+aaa
+0
+0 //pb
+
+Commande: echo $?
+0
+
+Commande: false || (false || echo $?) && echo $?
+1
+0
+
+Commande: echo $?
+0
+
+Commande: false || echo aaa && echo $?
+aaa
+0
+
+Commande: echo $?
+0
+
+Commande: false || (echo aaa && false) && echo zzz
+aaa
+
+Commande: echo $?
+0
+
+Commande: false || (echo aaa && true) && echo zzz
+aaa
+zzz
+
+Commande: echo $?
+0
+
+Commande: false || (echo aaa && false && true) && echo zzz
+aaa
+
+Commande: echo $?
+0
+
+Commande: (( false || echo bbb ) || echo zzz)
+bbb
+
+Commande: echo $?
+0
+
+Commande: (( false || (echo bbb || echo xxx ) || echo zzz) 
+./mytest/compare_bash_and_minishell.sh: eval: line 23: syntax error: unexpected end of file
+
+Commande: echo $?
+0
+
+Commande:  (( false || (echo bbb || echo xxx )) || echo zzz)
+bbb
+
+Commande: echo $?
+0
+
+Commande:  (( true || (echo bbb || echo xxx )) || echo zzz)
+
+
+Commande: echo $?
+0
+
+Commande:  (( false || (echo bbb || echo xxx) ) || echo zzz)
+bbb
+
+Commande: echo $?
+0
+
+Commande: (( false || echo bbb && echo xxx ) || echo zzz)
+bbb
+xxx
+
+Commande: echo $?
+0
+
+Commande: (( false || echo bbb && echo $? ) || echo zzz)
+bbb
+0
+
+Commande: echo $?
+0
+
+Commande: (( echo ggg && false && (echo bbb && echo $?) ) || echo zzz)
+ggg
+zzz
+
+Commande: echo $?
+0
+
+Commande: (( echo ggg && false || echo bbb && echo $? ) || echo zzz)
+ggg
+bbb
+0
+
+Commande: echo $?
+0
+
+Commande: (( echo ggg && true || echo bbb && echo $? ) || echo zzz)
+ggg
+0
+
+Commande: echo $?
+0
+
+Commande: (( echo ggg && true || (echo bbb && echo $?) ) || echo zzz)
+ggg
+
+Commande: echo $?
+0
+
+Commande: (echo "houhou" -n  | rev >myout && echo zzz ) && echo go
+zzz
+go
+
+Commande: echo $?
+0
+
+Commande: (echo "houhou" -n  | rev >myout && echo zzz  && echo go)
+zzz
+go
+
+Commande: echo $?
+0
+
+Commande: (echo aaa && echo bbb) || echo zzz)
+./mytest/compare_bash_and_minishell.sh: eval: line 22: syntax error near unexpected token `)'
+./mytest/compare_bash_and_minishell.sh: eval: line 22: `(echo aaa && echo bbb) || echo zzz)'
+
+Commande: echo $?
+0
+
+Commande: (fghf
+./mytest/compare_bash_and_minishell.sh: eval: line 23: syntax error: unexpected end of file
+
+Commande: echo $?
+0
+
+Commande: (echo aaa && (echo bbb && (echo ccc)
+./mytest/compare_bash_and_minishell.sh: eval: line 23: syntax error: unexpected end of file
+
+Commande: echo $?
+0
+
+Commande: (echo test && false || echo$?)
+test
+echo1: command not found
+
+Commande: echo $?
+0
+
+Commande: (echo aaa && (echdqfdqf dk))
+aaa
+echdqfdqf: command not found
+
+Commande: echo $?
+0
+
+Commande: (( false || (echo bbb || echfo xxx) ) || echo zzz)
+bbb
+
+Commande: echo $?
+0
+
+Commande: echo truc &&(echo troc)
+truc
+troc
+
+Commande: echo $?
+0
+
+Commande: (echo aaa && echo bbb && (echo zzz | echo iii)) && echo$?
+aaa
+bbb
+iii
+echo0: command not found
+
+Commande: echo $?
+0
+
+Commande: (echo aaa && echo bbb && (echo zzz | echo iii)) && echo $?
+aaa
+bbb
+iii
+0
+
+Commande: echo $?
+0
+
+Commande: (echo ttt) || (echo kkk)
+ttt
+
+Commande: echo $?
+0
+
+Commande: ( false ) || (echo zz &&( echo kk )&&  echo hhh  )
+zz
+kk
+hhh
+
+Commande: echo $?
+0
+
+Commande: ( false ) || (echo zz &&( echo kk )  echo hhh && )
+./mytest/compare_bash_and_minishell.sh: eval: line 22: syntax error near unexpected token `echo'
+./mytest/compare_bash_and_minishell.sh: eval: line 22: `( false ) || (echo zz &&( echo kk )  echo hhh && )'
+
+Commande: echo $?
+0
+
+Commande: ( false ) || (echo zz &&( echo kk )  echo hhh && ) &&
+./mytest/compare_bash_and_minishell.sh: eval: line 22: syntax error near unexpected token `echo'
+./mytest/compare_bash_and_minishell.sh: eval: line 22: `( false ) || (echo zz &&( echo kk )  echo hhh && ) &&'
+
+Commande: echo $?
+0
+
+Commande: ( false ) || (echo zz &&( echo kk )  echo hhh&& )
+./mytest/compare_bash_and_minishell.sh: eval: line 22: syntax error near unexpected token `echo'
+./mytest/compare_bash_and_minishell.sh: eval: line 22: `( false ) || (echo zz &&( echo kk )  echo hhh&& )'
+
+Commande: echo $?
+0
+
+Commande: ( false ) || (echo zz &&( echo kk ) && echo hhh )
+zz
+kk
+hhh
+
+Commande: echo $?
+0
+
+Commande: ( false ) || (echo zz &&( echo kk )&& echo hhh )
+zz
+kk
+hhh
+
+Commande: echo $?
+0
+
+Commande: ( false ) || (echo zz &&( echo kk ) )&&
+./mytest/compare_bash_and_minishell.sh: eval: line 23: syntax error: unexpected end of file
+
+Commande: echo $?
+0
+
+Commande: ( false ) || (echo zz &&( echo kk ) &&)
+./mytest/compare_bash_and_minishell.sh: eval: line 22: syntax error near unexpected token `)'
+./mytest/compare_bash_and_minishell.sh: eval: line 22: `( false ) || (echo zz &&( echo kk ) &&)'
+
+Commande: echo $?
+0
+
+Commande: ( false ) || (echo zz &&( echo kk )  echo hhh && )
+./mytest/compare_bash_and_minishell.sh: eval: line 22: syntax error near unexpected token `echo'
+./mytest/compare_bash_and_minishell.sh: eval: line 22: `( false ) || (echo zz &&( echo kk )  echo hhh && )'
+
+Commande: echo $?
+0
+
+Commande: ( ( echo bb && echo bb ) && (echo hhh) )&&(echo hh)&& echo truc
+bb
+bb
+hhh
+hh
+truc
+
+Commande: echo $?
+0
+
+Commande: ( (&& echo bb && echo bb ) && (echo hhh) )&&(echo hh)&& echo truc
+./mytest/compare_bash_and_minishell.sh: eval: line 22: syntax error near unexpected token `&&'
+./mytest/compare_bash_and_minishell.sh: eval: line 22: `( (&& echo bb && echo bb ) && (echo hhh) )&&(echo hh)&& echo truc'
+
+Commande: echo $?
+0
+
+Commande: (( true || (echo bbb || echo xxx )) || echo zzz)
+
+
+Commande: echo $?
+0
+
+Commande: && echo aa && echo kk
+./mytest/compare_bash_and_minishell.sh: eval: line 22: syntax error near unexpected token `&&'
+./mytest/compare_bash_and_minishell.sh: eval: line 22: `&& echo aa && echo kk'
+
+Commande: echo $?
+0
+
+Commande: && echo aa && echo kk &&
+./mytest/compare_bash_and_minishell.sh: eval: line 22: syntax error near unexpected token `&&'
+./mytest/compare_bash_and_minishell.sh: eval: line 22: `&& echo aa && echo kk &&'
+
+Commande: echo $?
+0
+
+Commande: echo aa && echo kk &&
+./mytest/compare_bash_and_minishell.sh: eval: line 23: syntax error: unexpected end of file
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_command_tab_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:50:04 by dan               #+#    #+#             */
-/*   Updated: 2024/03/19 15:51:42 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:17:17 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,7 @@ char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
 	{
 		if (!is_chevron(node) && node->token != CMD)
 		{
-			str = get_node_str(node->child);
-			if (!is_only_space(str))
-				cmd_tab_tab[i++] = str;
+			cmd_tab_tab[i++] = get_node_str(node->child);
 		}
 		node = node->sibling;
 	}
