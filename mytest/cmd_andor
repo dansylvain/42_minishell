@@ -1,0 +1,111 @@
+echo aaa && echo bbb || echo ccc
+echo $?
+echo aaa || echo bbb || echo ccc
+echo $?
+echo $?
+false && echo bbb || echo ccc
+echo $?
+false || echo bbb || echo ccc
+echo $?
+false && echo bbb && echo ccc
+echo $?
+echo aaa && false && echo ccc
+echo $?
+false || (echo aaa && false) || echo cc
+echo $?
+echo xxx || (echo aaa || false) && echo cc
+echo $?
+false || (echo aaa && false) || echo $?
+echo $?
+false || (echo aaa && true) || echo $?
+echo $?
+false || (echo aaa && false) && echo $?
+echo $?
+false || (echo aaa && echo $?) && echo $? //pb
+echo $?
+false || (false || echo $?) && echo $?
+echo $?
+false || echo aaa && echo $?
+echo $?
+false || (echo aaa && false) && echo zzz
+echo $?
+false || (echo aaa && true) && echo zzz
+echo $?
+false || (echo aaa && false && true) && echo zzz
+echo $?
+(( false || echo bbb ) || echo zzz)
+echo $?
+(( false || (echo bbb || echo xxx ) || echo zzz) 
+echo $?
+ (( false || (echo bbb || echo xxx )) || echo zzz)
+echo $?
+ (( true || (echo bbb || echo xxx )) || echo zzz)
+echo $?
+ (( false || (echo bbb || echo xxx) ) || echo zzz)
+echo $?
+(( false || echo bbb && echo xxx ) || echo zzz)
+echo $?
+(( false || echo bbb && echo $? ) || echo zzz)
+echo $?
+(( echo ggg && false && (echo bbb && echo $?) ) || echo zzz)
+echo $?
+(( echo ggg && false || echo bbb && echo $? ) || echo zzz)
+echo $?
+(( echo ggg && true || echo bbb && echo $? ) || echo zzz)
+echo $?
+(( echo ggg && true || (echo bbb && echo $?) ) || echo zzz)
+echo $?
+(echo "houhou" -n  | rev >myout && echo zzz ) && echo go
+echo $?
+(echo "houhou" -n  | rev >myout && echo zzz  && echo go)
+echo $?
+(echo aaa && echo bbb) || echo zzz)
+echo $?
+(fghf
+echo $?
+(echo aaa && (echo bbb && (echo ccc)
+echo $?
+(echo test && false || echo$?)
+echo $?
+(echo aaa && (echdqfdqf dk))
+echo $?
+(( false || (echo bbb || echfo xxx) ) || echo zzz)
+echo $?
+echo truc &&(echo troc)
+echo $?
+(echo aaa && echo bbb && (echo zzz | echo iii)) && echo$?
+echo $?
+(echo aaa && echo bbb && (echo zzz | echo iii)) && echo $?
+echo $?
+(echo ttt) || (echo kkk)
+echo $?
+( false ) || (echo zz &&( echo kk )&&  echo hhh  )
+echo $?
+( false ) || (echo zz &&( echo kk )  echo hhh && )
+echo $?
+( false ) || (echo zz &&( echo kk )  echo hhh && ) &&
+echo $?
+( false ) || (echo zz &&( echo kk )  echo hhh&& )
+echo $?
+( false ) || (echo zz &&( echo kk ) && echo hhh )
+echo $?
+( false ) || (echo zz &&( echo kk )&& echo hhh )
+echo $?
+( false ) || (echo zz &&( echo kk ) )&&
+echo $?
+( false ) || (echo zz &&( echo kk ) &&)
+echo $?
+( false ) || (echo zz &&( echo kk )  echo hhh && )
+echo $?
+( ( echo bb && echo bb ) && (echo hhh) )&&(echo hh)&& echo truc
+echo $?
+( (&& echo bb && echo bb ) && (echo hhh) )&&(echo hh)&& echo truc
+echo $?
+(( true || (echo bbb || echo xxx )) || echo zzz)
+echo $?
+&& echo aa && echo kk
+echo $?
+&& echo aa && echo kk &&
+echo $?
+echo aa && echo kk &&
+echo $?

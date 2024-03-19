@@ -1,7 +1,5 @@
 echo papa >> file1
 echo $?
-echo maman >>
-echo $?
 echo maman >> file1
 echo $?
 cat file1
@@ -34,7 +32,6 @@ echo $?
 cat <testfile
 echo $?
 
-<testfile cat | | rev > outfile
 <testfile cat | rev > outfile
 echo $? 
 <outfile cat
@@ -82,6 +79,9 @@ echo $?
 
 ls | rev | cat >outfile76 > outfile77 -n >outfile78| rev
 ls | <infile <infile2 rev | cat >outfile76 > outfile77 -n >outfile78| rev
-ls |<infile <infile2 rev | cat >outfile76 > outfile77 -n >outfile78| rev
 ls |  rev |>outfile76 > outfile77 <infile <infile2 cat  -n >outfile78| rev
 ls | <infile2 rev | > outfile77 <infile  >outfile76 cat  -n >outfile78| rev
+
+cat | cat | ( rev | cat ) //seg
+cat || (rev |cat )
+cat && (rev |cat )

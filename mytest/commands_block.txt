@@ -1,0 +1,20 @@
+
+/bin/wc
+echo $?
+/bin/grep tata
+echo $?
+/bin/cut
+echo $?
+/bin/cat file
+echo $?
+
+/b'in/'wc
+echo $?
+/"bin"/gr'ep ta'ta
+echo $?
+/bi"n/cu"t
+echo $?
+/bin"/cat file"
+echo $?
+/"bin"/gr'ep ta'ta
+/bin"/cat file"
