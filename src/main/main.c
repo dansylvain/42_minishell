@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/18 16:14:53 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/19 10:09:43 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
  *? signal info at the end of a function's comment block 
 *? signal info in the main comment bloc
 *---
-*!create_command_tab.c : function (display) to remove by end of project
 *========================================================================**/
 
 /**========================================================================
@@ -34,7 +33,7 @@ int	main(int argc, char **argv, char *envp[])
 		return (display_error("Usage: ./minishell\n"), 255);
 	data = get_data(envp);
 	if (data == NULL)
-		return (free_data(data), display_error("Error\n"), 255);
+		return (display_error("Error\n"), 255);
 	handle_signals();
 	rl_catch_signals = 0;
 	if (prompt_loop(data, envp) == 0)
