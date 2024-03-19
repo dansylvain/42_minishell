@@ -1,0 +1,121 @@
+exit
+exit 42
+exit iugef
+exit 42 test
+echo $?
+/bin/ls fichiernul
+echo $? + $?
+cat lol.c | cat > lol.c
+ls 'includes/' | rev
+echo '$USER'
+env
+export SHELL
+export DISPLAY=toto LOGNAME= SHELL
+unset SHELL DISPLAY PATH
+env jnzf
+cd
+cd ../../42/minishell_common/includes
+cd .
+pwd
+pwd ../..
+# "./../../42/minishell_common/minishell"
+echo test >file1 >> file2
+cat file | grep bla | more
+ls fichiernul | grep bla | more
+# "cat | cat | ls"
+echo -n -n $USER$LOGNAME
+echo -n -n "$USER$LOGNAME"
+echo "$USER"
+$USER
+
+ls *le* *.txt | rev >> file_fion.txt
+/usr/bin/ls
+echo $?
+
+# COMMANDES VIDES!!!
+
+""
+echo $?
+/usr/bin/ls -al
+echo $?
+grep -i 'return' src/main.c
+echo $?
+/usr/bin/cat testfile
+echo $?
+/bin/grep -i motif /testfile
+echo $?
+/bin/chmod 755 /testfile
+echo $?
+/bin/cp /testfile /includes/mon_fichier.txt
+echo $?
+/bin/mv /testfile /includes/mon_fichier.txt
+echo $?
+echo bonjour
+echo $?
+echo
+echo $?
+echo
+echo $?
+echo -n au revoir
+echo $?
+ls -a | rev
+echo $?
+exit 42
+echo $?
+exit 42hgzef
+echo $?
+exit 42 jhgzegf
+echo $?
+exit jhzef
+echo $?
+ls -a
+echo $?
+<noexist cat
+echo $?
+/bin/ls fichiernulachier
+echo $?
+echo $? + $?
+echo $?
+ls includes
+echo $?
+echo "cat lol.c | cat > lol.c"
+echo $?
+ls inclu"des"
+echo $?
+l's' '-'l"
+echo $?
+ls ""
+echo '$USER'
+echo $?
+
+export VAR=tamaman
+echo $?
+echo $VAR
+echo $?
+echo $VAR
+unset VAR
+echo $?
+echo $VAR
+echo $?
+unset PATH
+echo $?
+ls
+echo $?
+cd ..
+pwd
+echo $?
+cd
+echo $?
+pwd
+echo $?
+pwd kzbgkbzekgb	
+echo $?
+pwd kzbg  kbzekgb	
+echo $?
+pwd 42 bzekgb	
+echo $?
+# cat includes/minishell.h
+echo $?
+# cat ../../42/minishell_common/includes/minishell.h
+echo $?
+
