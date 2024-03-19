@@ -6,7 +6,7 @@
 #    By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/19 11:16:27 by dsylvain         ###   ########.fr        #
+#    Updated: 2024/03/19 11:39:00 by dsylvain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,8 +88,6 @@ SRC =		src/main/main.c \
 			src/post_parsing/exec_pipex.c \
 			src/post_parsing/launch_command_tab.c \
 			src/post_parsing/create_command_tab.c \
-			src/wildcard/wildcard_expansion.c \
-			src/wildcard/wildcard_expansion_2.c \
 			src/post_parsing/fill_command_tab.c \
 			src/post_parsing/fill_command_tab_utils.c \
 
@@ -146,15 +144,14 @@ all: $(NAME)
 
 bonus: $(NAME_BONUS)
 
-$(NAME_BONUS): $(OBJ_BONUS) $(LIBFT) $(FT_PRINTF)
-	@$(CC) -o $(NAME_BONUS) $(OBJ_BONUS) $(CFLAGS_BONUS) $(RLFLAGS) $(LIBS)
-	@echo "\033[0;32mCompilation successful\033[0m"
-
 $(NAME): $(OBJ) $(LIBFT) $(FT_PRINTF)
 	@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(RLFLAGS) $(LIBS)
 	@echo "\033[0;32mCompilation successful\033[0m"
 
-
+$(NAME_BONUS): $(OBJ_BONUS) $(LIBFT) $(FT_PRINTF)
+	@$(CC) -o $(NAME_BONUS) $(OBJ_BONUS) $(CFLAGS_BONUS) $(RLFLAGS) $(LIBS)
+	@echo "\033[0;32mCompilation successful\033[0m"
+	
 $(LIBFT):
 	@make -s -C $(LIBFT_DIR)
 
@@ -166,9 +163,12 @@ $(FT_PRINTF):
 	@{ $(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I/usr/include -O3 -c $< -o $@; } 2>&1 || \
 		(echo "\033[0;31mCompilation of $< failed\033[0m"; exit 1)
 	@echo "\033[0;32mcompiled\033[0m"
-
-bonus:
-
+	
+bonus/%.o: bonus/%.c
+	@printf "%-80s" $<
+	@{ $(CC) $(CFLAGS_BONUS) -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I/usr/include -O3 -c $< -o $@; } 2>&1 || \
+		(echo "\033[0;31mCompilation of $< failed\033[0m"; exit 1)
+	@echo "\033[0;32mcompiled\033[0m"
 
 clean:
 	@rm	-f	$(OBJ) $(OBJ_BONUS)
