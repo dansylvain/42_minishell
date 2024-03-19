@@ -1,0 +1,117 @@
+Commande: echo $"LOGNAME"
+LOGNAME
+
+Commande: echo $?
+0
+
+Commande: echo $'L'OGNAME
+LOGNAME
+
+Commande: echo $?
+0
+
+Commande: echo $"L"OGNAME
+LOGNAME
+
+Commande: echo $?
+0
+
+Commande: echo $LOGNAMEGNAME
+
+
+Commande: echo $?
+0
+
+Commande: echo $SHELL
+/bin/bash
+
+Commande: echo $?
+0
+
+Commande: echo $LOGNAMESHELL$
+$
+
+Commande: echo $?
+0
+
+Commande: echo $LOGNAMESHELL$ju
+
+
+Commande: echo $?
+0
+
+Commande: echo $LOGNAME$SHELL$
+seblin/bin/bash$
+
+Commande: echo $?
+0
+
+Commande: echo $LOGNAME$SHELL$tr
+seblin/bin/bash
+
+Commande: echo $?
+0
+
+Commande: echo $"$LOGNAME$SHELL$"
+seblin/bin/bash$
+
+Commande: echo $?
+0
+
+Commande: echo $"$LOGNAME$  SHELL $"
+seblin$  SHELL $
+
+Commande: echo $?
+0
+
+Commande: echo $"trrt$LOGNAME$  $SHELLtruc SHELL $ $thu"
+trrtseblin$   SHELL $ 
+
+Commande: echo $?
+0
+
+Commande: echo $"trrt$LOGNAME$hyu  $SHELLtruc SHELL $ $thu"
+trrtseblin   SHELL $ 
+
+Commande: echo $?
+0
+
+Commande: echo $"trrt$LOGNAME$hyufr$SHELLtruc SHELL $ $thu"
+trrtseblin SHELL $ 
+
+Commande: echo $?
+0
+
+Commande: echo trrt$LOGNAME$  $SHELLtruc SHELL $ $thu
+trrtseblin$ SHELL $
+
+Commande: echo $?
+0
+
+Commande: echo $"trrt$LOGNAME'Mach' $'LOGNAME' $SHELLtruc SHELL $ $thu"
+trrtseblin'Mach' $'LOGNAME'  SHELL $ 
+
+Commande: echo $?
+0
+
+Commande: echo $"trrt$LOGNA'Mach' $LOGNAME'Mach'$LOG $'LOGNA'M''E' $SHELLtruc SHELL $ $thu"
+trrt'Mach' seblin'Mach' $'LOGNA'M''E'  SHELL $ 
+
+Commande: echo $?
+0
+
+Commande: echo $"trrt$LOGNA'Mach'p lou$LOGNAME'Mach'$LOG $'LOGNA'M''E'42 $SHELLtruc SHELL $ $thu"
+trrt'Mach'p louseblin'Mach' $'LOGNA'M''E'42  SHELL $ 
+
+Commande: echo $?
+0
+
+Commande: echo $USER
+seblin
+
+Commande: echo $?
+0
+
+Commande: echo $USER
+seblin
+

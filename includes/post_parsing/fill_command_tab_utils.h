@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_command_tab_utils.h                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 07:54:13 by dan               #+#    #+#             */
-/*   Updated: 2024/03/13 07:55:36 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/19 15:51:59 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ char	**add_sep_tab(char **cmd_tab_sep, t_ast_nde *node);
 char	***add_redir_tabs(char ***cmd_tab, t_ast_nde **node, int *i);
 char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node);
 int		get_cmd_nbr(t_ast_nde *node);
+int		is_only_space(char *str);
 
 #endif
