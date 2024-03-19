@@ -119,4 +119,10 @@ echo $?
 echo $?
 # cat ../../42/minishell_common/includes/minishell.h
 echo $?
-
+false || (echo aaa && false) || echo $?
+false || (false || echo $?) && echo $?
+false || (echo aaa && echo $?) && echo $?
+false || (echo aaa && false) && echo $?
+(echo test && false || echo$?)
+(( echo ggg && true || echo bbb && echo $? ) || echo zzz)
+(( echo ggg && false && (echo bbb && echo $?) ) || echo zzz)

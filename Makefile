@@ -3,21 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dan <dan@student.42.fr>                    +#+  +:+       +#+         #
+#    By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/18 08:45:17 by dan              ###   ########.fr        #
+#    Updated: 2024/03/19 08:36:43 by dsylvain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = minishell
 
-CC = gcc
+CC = cc
 
 RLFLAGS = -lreadline -lhistory -I/usr/include/readline
 
-CFLAGS = -g -Iincludes -Iincludes/main -Iincludes/parsing/parsing \
+CFLAGS = -Iincludes -Iincludes/main -Iincludes/parsing/parsing \
 -Iincludes/parsing/create_tree \
 -Iincludes/parsing/leaf_tree -Iincludes/pipex \
 -Iincludes/exec_files -Iincludes/wildcard -Iincludes/builtins \

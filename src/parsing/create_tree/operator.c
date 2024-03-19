@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operator.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/15 11:34:24 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/19 08:39:53 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int	set_operator(t_ast_nde *node)
 	t_ast_nde	*raw_lft;
 	t_ast_nde	*raw_rght;
 
+	raw_lft = NULL;
+	raw_rght = NULL;
 	sib_cont = node->child;
 	sib = sib_cont->child;
 	token = create_token_node(sib);
