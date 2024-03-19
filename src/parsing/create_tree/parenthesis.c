@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parenthesis.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:52:11 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/18 19:01:34 by dan              ###   ########.fr       */
+/*   Updated: 2024/03/19 08:45:43 by svidot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	set_parenthesis(t_ast_nde *node)
 	t_ast_nde	*raw_lft;
 	int			is_token;
 
+	raw_lft = NULL;
 	token = NULL;
 	if (node && node->child && node->child->child)
 	{
