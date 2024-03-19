@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operator.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:29:44 by svidot            #+#    #+#             */
-/*   Updated: 2024/03/19 08:39:53 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:17:49 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,18 @@ static int	token_child_handle(t_ast_nde *sib_cont,
 	raw_rght = raw_lft->sibling;
 	token->child = raw_lft;
 	fill_child(sib, raw_lft->child, raw_rght->child, token);
-	if (raw_lft->child && raw_lft->child->child
-		&& !is_sibling_only_space(raw_lft->child))
-		set_space(raw_lft);
-	else if (token->token == AND || token->token == OR || token->token == PIPE)
+	if ((raw_lft && !raw_lft->child && (token->token == AND
+				|| token->token == OR || token->token == PIPE))
+		|| (raw_lft && raw_lft->child && raw_lft->child->child
+			&& (token->token == AND || token->token == OR
+				|| token->token == PIPE)
+			&& is_sibling_only_space(raw_lft->child->child)))
 		return (display_error_free(ft_strjoin("minishell: syntax error near \
 unexpected token ", translate_enum(token->token))), 1);
-	if (raw_rght->child && raw_rght->child->child
-		&& !is_sibling_only_space(raw_rght->child))
+	else if (raw_lft->child && raw_lft->child->child)
+		set_space(raw_lft);
+	if (raw_rght && raw_rght->child && raw_rght->child->child
+		&& !is_sibling_only_space(raw_rght->child->child))
 		return ((set_operator(raw_rght)));
 	else if (token->token == AND || token->token == OR || token->token == PIPE
 		|| is_chevron(token))

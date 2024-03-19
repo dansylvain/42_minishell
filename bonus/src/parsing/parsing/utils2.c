@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 20:57:31 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/17 18:08:57 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/19 18:27:17 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	is_sibling_only_space(t_ast_nde *sib)
 {
 	while (sib)
 	{
-		if (sib->start && !is_only_space_op(sib->start, sib->end))
+		if (sib->start && sib->end
+			&& !is_only_space_op(sib->start, sib->end))
 			return (0);
 		sib = sib->sibling;
 	}

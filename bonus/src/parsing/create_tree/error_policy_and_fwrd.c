@@ -6,7 +6,7 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:43:52 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/18 16:28:33 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/19 18:29:15 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,16 @@ int	*get_err_policy(void)
 
 static int	protected_left(t_ast_nde *raw_lft, t_ast_nde *token)
 {
-	if (raw_lft && raw_lft->child && raw_lft->child->child
-		&& !is_sibling_only_space(raw_lft->child->child))
-		set_space(raw_lft);
-	else if (token && (token->token == AND || token->token == OR
-			|| token->token == PIPE))
+	if ((raw_lft && !raw_lft->child && (token->token == AND
+				|| token->token == OR || token->token == PIPE))
+		|| (raw_lft && raw_lft->child && raw_lft->child->child
+			&& (token->token == AND || token->token == OR
+				|| token->token == PIPE)
+			&& is_sibling_only_space(raw_lft->child->child)))
 		return (display_error_free(ft_strjoin("minishell: syntax error near \
 unexpected token ", translate_enum(token->token))), 1);
+	else if (raw_lft->child && raw_lft->child->child)
+		set_space(raw_lft);
 	return (0);
 }
 
