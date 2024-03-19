@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/19 08:45:37 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:54:14 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv, char *envp[])
 		return (display_error("Usage: ./minishell\n"), 255);
 	data = get_data(envp);
 	if (data == NULL)
-		return (free_data(data), display_error("Error\n"), 255);
+		return (display_error("Error\n"), 255);
 	handle_signals();
 	rl_catch_signals = 0;
 	if (prompt_loop(data, envp) == 0)
@@ -56,7 +56,7 @@ t_Data	*get_data(char *envp[])
 			return (NULL);
 		data->envp_tab = duplicate_envp(data, envp);
 		if (!data->envp_tab)
-			return (NULL);
+			return (free(data), NULL);
 	}
 	return (data);
 }
