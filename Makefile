@@ -6,7 +6,7 @@
 #    By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/03/19 12:05:29 by dsylvain         ###   ########.fr        #
+#    Updated: 2024/03/19 14:12:48 by dsylvain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -189,5 +189,7 @@ fclean: clean
 	@make -s -C $(FT_PRINTF_DIR) fclean 
 
 re:	fclean	all
+
+rebonus: fclean bonus
 
 .PHONY: all clean fclean re
