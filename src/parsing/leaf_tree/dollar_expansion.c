@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expansion.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: svidot <svidot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 18:14:09 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 10:45:44 by svidot           ###   ########.fr       */
+/*   Updated: 2024/03/15 12:06:46 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ t_ast_nde	*rebuild_dollar_str_node(char *str, t_tok token)
 	str_node = NULL;
 	if (str)
 	{
-		if (token == JOKER)
-			str_node = create_node(JOKER);
-		else if (token == DOLL)
+		if (token == DOLL)
 			str_node = create_node(DOLL);
 		else
 			str_node = create_node(RAW);
@@ -80,9 +78,6 @@ static void	build_token_and_merge(const t_ast_nde *operator,
 	{
 		if (operator->token == DOLL)
 			str_tok = search_var(operator, data);
-		else if (operator->token == JOKER)
-			str_tok = wilcard_func(ft_strndup(operator->start,
-						operator->end - operator->start + 1));
 		if (str_tok)
 		{
 			if (str && *str)

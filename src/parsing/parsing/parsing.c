@@ -6,12 +6,11 @@
 /*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:18:58 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/11 14:00:25 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/19 18:16:18 by seblin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "test.h"
 
 static int	is_double_token(t_ast_nde *node)
 {
@@ -20,7 +19,8 @@ static int	is_double_token(t_ast_nde *node)
 	d_tok = RAW;
 	while (node)
 	{
-		if (node->token != RAW && !is_chevron(node))
+		if (node->token != RAW && !is_chevron(node)
+			&& node->token != DOLL)
 		{
 			if (node->token == d_tok)
 				return (display_error_free(ft_strjoin("minishell: syntax \

@@ -3,85 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   fill_command_tab_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/02 17:38:25 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/10 17:08:12 by seblin           ###   ########.fr       */
+/*   Created: 2024/03/13 07:50:04 by dan               #+#    #+#             */
+/*   Updated: 2024/03/19 19:17:17 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fill_command_tab_utils.h"
 
-int	is_raw(t_ast_nde *node)
+/**========================================================================
+ *                           add_sep_tab
+ *========================================================================**/
+char	**add_sep_tab(char **cmd_tab_sep, t_ast_nde *node)
 {
-	if (node->token == RAW)
-		return (1);
-	return (0);
+	char	*sep;
+
+	if (node->token == PIPE)
+		sep = "|";
+	if (node->token == AND)
+		sep = "&&";
+	if (node->token == OR)
+		sep = "||";
+	cmd_tab_sep = ft_calloc(2, sizeof(char *));
+	cmd_tab_sep[0] = ft_strdup(sep);
+	cmd_tab_sep[1] = NULL;
+	return (cmd_tab_sep);
 }
 
-void	add_pipe_tab_to_tab(char ****cmd_tab, int *i)
-{
-	int	j;
-	j = 0;
-	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
-		j++;
-	(*cmd_tab)[*i][j] = NULL;
-//printf("hello im add pipe to tab and looking for my segfaut did you see?\n");
-	if (cmd_tab && i && (*cmd_tab)[*i] && (*cmd_tab)[*i][0] && (*cmd_tab)[*i][0][0])
-		(*i)++;
-//printf("hello im after add pipe to tab and looking for my segfaut did you see?\n");
-	if ((cmd_tab && i && (*cmd_tab)[*i] && (*cmd_tab)[*i][0]))
-	{			
-		(*cmd_tab)[*i][0][0] = '|';
-		(*cmd_tab)[*i][0][1] = '\0';
-		(*cmd_tab)[*i][1] = NULL;
-		(*i)++;
-	}
-}
-
-void	create_chev_tab(char ****cmd_tab, t_ast_nde **current, int *i)
+/**========================================================================
+ *                           add_redir_tabs
+ *========================================================================**/
+char	***add_redir_tabs(char ***cmd_tab, t_ast_nde **node, int *i)
 {
 	char	*chev;
 
-	if ((*cmd_tab)[*i][0][0])
-		(*i)++;
-	if ((*current)->token == SCHEV_LFT)
+	if ((*node)->token == SCHEV_LFT)
 		chev = "<";
-	if ((*current)->token == SCHEV_RGTH)
+	if ((*node)->token == SCHEV_RGTH)
 		chev = ">";
-	if ((*current)->token == DCHEV_LFT)
+	if ((*node)->token == DCHEV_LFT)
 		chev = "<<";
-	if ((*current)->token == DCHEV_RGTH)
+	if ((*node)->token == DCHEV_RGTH)
 		chev = ">>";
-	(*current)->sibling->token = CHEV_FILE;
-	ft_memcpy(&(*cmd_tab)[*i][0][0], chev, ft_strlen(chev));
-	ft_memcpy(&(*cmd_tab)[*i][1][0], (*current)->sibling->child->start,
-		(*current)->sibling->child->end
-		- (*current)->sibling->child->start + 1);
-	(*cmd_tab)[*i][2] = NULL;
+	cmd_tab[*i] = ft_calloc(3, sizeof(char *));
+	cmd_tab[*i][0] = ft_strdup(chev);
+	cmd_tab[*i][1] = get_node_str((*node)->sibling->child);
+	cmd_tab[*i][2] = NULL;
+	(*node)->sibling->token = CMD;
 	(*i)++;
+	return (cmd_tab);
 }
 
-void	add_raw_to_cmd_tab(t_Data *data, char ****cmd_tab,
-		t_ast_nde *current, int *i)
+/**========================================================================
+ *                           add_remaining_tabs
+ *========================================================================**/
+char	**add_remaining_tabs(char **cmd_tab_tab, t_ast_nde *node)
 {
-	int	j;
+	int		nbr;
+	int		i;
+	char	*str;
 
-	j = 0;
-	while ((*cmd_tab)[*i][j] && (*cmd_tab)[*i][j][0])
-		j++;
-	(*cmd_tab)[*i][j] = get_node_str(data, current->child);
-}
-
-void	complete_raw_tab(t_Data *data, char ****cmd_tab,
-		t_ast_nde *node, int *i)
-{
-	t_ast_nde	*current;
-	int			j;
-
-	j = 0;
-	while ((*cmd_tab)[*i - 1][j] && (*cmd_tab)[*i - 1][j][0])
-		j++;
-	current = node->child->sibling;
-	ft_strcat((*cmd_tab)[*i - 1][j - 1], get_node_str(data, current));
+	nbr = get_cmd_nbr(node);
+	cmd_tab_tab = ft_calloc(nbr + 1, sizeof(char *));
+	cmd_tab_tab[nbr] = NULL;
+	i = 0;
+	while (!is_separator(node))
+	{
+		if (!is_chevron(node) && node->token != CMD)
+		{
+			cmd_tab_tab[i++] = get_node_str(node->child);
+		}
+		node = node->sibling;
+	}
+	return (cmd_tab_tab);
 }

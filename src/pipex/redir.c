@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seblin <seblin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dan <dan@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:05 by seblin            #+#    #+#             */
-/*   Updated: 2024/03/08 21:24:51 by seblin           ###   ########.fr       */
+/*   Updated: 2024/03/13 10:42:38 by dan              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static int	set_redir_in(char **argv, t_redir *redir)
 		redir->redir[0] = 1;
 		if (!ft_strcmp(*argv, "<<"))
 		{
+			if (redir->delim)
+				free(redir->delim);
 			redir->delim = ft_strjoin(argv[1], "\n");
 			redir->redir[0] = 2;
 			close_fds(redir->pipe_hd);
@@ -58,12 +60,12 @@ static int	set_redir_in(char **argv, t_redir *redir)
 
 int	set_redir_io(char **argv[], t_redir *redir)
 {
-	while (*argv && ***argv != '|')
+	while (*argv && **argv && ***argv != '|')
 	{
 		if (set_redir_in(*argv, redir))
-			exit (1);
+			return (1);
 		if (set_redir_out(*argv, redir))
-			exit (1);
+			return (1);
 		argv++;
 	}
 	return (0);

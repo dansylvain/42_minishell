@@ -6,7 +6,7 @@
 /*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:04:56 by dan               #+#    #+#             */
-/*   Updated: 2024/03/09 14:23:16 by dsylvain         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:54:14 by dsylvain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv, char *envp[])
 		return (display_error("Usage: ./minishell\n"), 255);
 	data = get_data(envp);
 	if (data == NULL)
-		return (free_data(data), display_error("Error\n"), 255);
+		return (display_error("Error\n"), 255);
 	handle_signals();
 	rl_catch_signals = 0;
 	if (prompt_loop(data, envp) == 0)
@@ -56,7 +56,7 @@ t_Data	*get_data(char *envp[])
 			return (NULL);
 		data->envp_tab = duplicate_envp(data, envp);
 		if (!data->envp_tab)
-			return (NULL);
+			return (free(data), NULL);
 	}
 	return (data);
 }
@@ -78,13 +78,6 @@ int	prompt_loop(t_Data *data, char *envp[])
 			add_history(cmd);
 		if (cmd == NULL)
 			return (ft_printf("exit\n"), 0);
-		if (is_not_empty_prompt(cmd))
-		{
-			display_error_detail("", cmd, " : command not found\n");
-			free(cmd);
-			cmd = NULL;
-			continue ;
-		}
 		exec_pipex(data, cmd, data->envp_tab);
 		free(cmd);
 	}
@@ -94,7 +87,6 @@ int	prompt_loop(t_Data *data, char *envp[])
 
 /**========================================================================
  *                           build_prompt
- *!!! strstr a changer!!! 
  *========================================================================**/
 void	build_prompt(char prompt[])
 {
@@ -103,22 +95,20 @@ void	build_prompt(char prompt[])
 	char	*shortened_cwd;
 
 	home = getenv("HOME");
-	ft_strlcpy(prompt, "\033[1;33mminishell: \033[0m", 18);
+	ft_strlcpy(prompt, "minishell: ", 18);
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
-		shortened_cwd = strstr(cwd, home);
+		shortened_cwd = ft_strstr(cwd, home);
 		if (shortened_cwd != NULL)
 		{
-			ft_strcat(prompt, "\033[1;37m");
 			ft_strcat(prompt, shortened_cwd + ft_strlen(home));
-			ft_strcat(prompt, "\033[0m");
 		}
 		else
 			ft_strcat(prompt, cwd);
 	}
 	else
 		perror("getcwd");
-	ft_strcat(prompt, "\033[1;36m $\033[0m ");
+	ft_strcat(prompt, " $ ");
 }
 
 /**========================================================================
@@ -137,8 +127,6 @@ int	command_is_builtin(char	**cmd_tab, t_Data *data)
 		return (free_command_tab(&cmd_tab), 1);
 	if (len >= 2 && !ft_strncmp(&(cmd_tab[0][len - 2]), "cd", 3))
 		return (exec_cd(data, cmd_tab), 1);
-	// if (len >= 2 && !ft_strncmp(&(cmd_tab[0][len - 2]), "$?", 3))
-	// 	return (ft_printf("HOLLY COW : %s\n", cmd_tab[0]), 1);
 	if (len >= 3 && !ft_strncmp(&(cmd_tab[0][len - 3]), "env", 4))
 		return (exec_env(data, cmd_tab), 1);
 	if (len >= 3 && !ft_strncmp(&(cmd_tab[0][len - 3]), "pwd", 4))

@@ -1,0 +1,124 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expansion.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dsylvain <dsylvain@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/15 07:42:44 by seblin            #+#    #+#             */
+/*   Updated: 2024/03/19 10:10:01 by dsylvain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "expansion.h"
+
+/**========================================================================
+ *                           search_token_joker
+ *? flag added to avoid excessive allocation in case of multiple '*' in node 
+ *========================================================================**/
+static t_ast_nde	*search_token_joker(t_ast_nde *sib, char *actual)
+{
+	t_ast_nde	*token_nde;
+	char		*start;
+	int			flag;
+
+	flag = 0;
+	start = actual;
+	token_nde = NULL;
+	while (actual <= sib->end)
+	{
+		if (*actual == '*' && flag == 0)
+		{
+			flag = 1;
+			token_nde = create_node(JOKER);
+			token_nde->start = start;
+		}
+		if (token_nde)
+			token_nde->end = actual;
+		actual++;
+	}
+	return (token_nde);
+}
+
+static t_ast_nde	*search_token_dollar(t_ast_nde *sib, char *actual)
+{
+	t_ast_nde	*token_nde;
+
+	if ((*actual == '$' && actual + 1 <= sib->end
+			&& *(actual + 1) != ' ' && *(actual + 1) != '\''
+			&& *(actual + 1) != '*' && *(actual + 1) != '.')
+		|| (*actual == '$' && actual == sib->end && sib->sibling
+			&& (sib->sibling->token == IN_DQUTE
+				|| sib->sibling->token == IN_SQUTE)
+		))
+	{
+		token_nde = create_node(DOLL);
+		token_nde->start = actual;
+		token_nde->end = actual;
+		if (*++actual == '?')
+		{
+			token_nde->end = actual;
+			return (token_nde);
+		}
+		while (actual <= sib->end && *actual != '$' && *actual != ' '
+			&& *actual != '\'' && *actual != '*' && *actual != '?'
+			&& *actual != '.')
+			token_nde->end = actual++;
+		return (token_nde);
+	}
+	return (NULL);
+}
+
+static t_ast_nde	*create_token_node(t_ast_nde *sib)
+{
+	char		*actual;
+	t_ast_nde	*token_nde;
+
+	while (sib)
+	{
+		actual = sib->start;
+		while (actual <= sib->end)
+		{
+			if (sib->token == IN_DQUTE || sib->token == RAW)
+			{
+				token_nde = search_token_dollar(sib, actual);
+				if (token_nde)
+					return (token_nde);
+			}
+			if (sib->token == RAW)
+			{
+				token_nde = search_token_joker(sib, actual);
+				if (token_nde)
+					return (token_nde);
+			}
+			actual++;
+		}
+		sib = sib->sibling;
+	}
+	return (NULL);
+}
+
+int	set_dollar(t_ast_nde *node)
+{
+	t_ast_nde	*sib;
+	t_ast_nde	*sib_cont;
+	t_ast_nde	*token;
+	t_ast_nde	*raw_lft;
+	t_ast_nde	*raw_rght;
+
+	sib_cont = node->child;
+	sib = sib_cont->child;
+	token = create_token_node(sib);
+	sib_cont->sibling = token;
+	if (token)
+	{
+		raw_lft = create_token_child(sib_cont, token);
+		raw_rght = raw_lft->sibling;
+		token->child = raw_lft;
+		fill_child(sib, raw_lft->child, raw_rght->child, token);
+		if (raw_rght->child)
+			set_dollar(raw_rght);
+		return (1);
+	}
+	return (0);
+}
