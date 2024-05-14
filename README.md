@@ -8,6 +8,8 @@ A minimalist Unix shell project aimed at providing a basic command-line interfac
 
 ## Introduction
 
+bonjour,
+
 Minishell is a simple Unix shell implementation, developed as part of the curriculum at 42 School of Perpignan. It provides a command-line interface for users to interact with their operating system, execute commands, and manage processes.
 
 The primary goal of Minishell is to provide a basic understanding of how shells work in Unix-like operating systems, including concepts such as command execution, input/output redirection, pipelines, and job control.
